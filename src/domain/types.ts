@@ -284,4 +284,6 @@ export interface Settings {
   defaultTargetRadius: number
   /** Version der zuletzt eingespielten Uebungssammlung. */
   seededVersion: number
+  /** Version des zuletzt angewandten Farbschemas. */
+  themeVersion: number
 }

@@ -3,7 +3,7 @@
 import { db } from './db'
 import { seedShots } from './seed/drills'
 import { PLAYER_COLORS } from './repositories/players'
-import { getSettings, updateSettings } from './repositories/settings'
+import { DEFAULT_SETTINGS, getSettings, updateSettings } from './repositories/settings'
 import { newId } from '@/domain/shot'
 
 /** Version der Uebungssammlung. Erhoehen, wenn neue Uebungen dazukommen. */
@@ -54,4 +54,35 @@ async function run(): Promise<void> {
     await db.shots.bulkPut(seedShots())
     await updateSettings({ seededVersion: SEED_VERSION })
   }
+
+  await migrateTheme()
+}
+
+/** Version des Farbschemas. Erhoehen, wenn die Standardfarben wechseln. */
+export const THEME_VERSION = 1
+
+/** Farben, die vor dem Wechsel auf das helle Design Standard waren. */
+const PREVIOUS_DEFAULTS = { clothColor: '#1f6b52', railColor: '#5b3a22' }
+
+/**
+ * Stellt vorhandene Geraete einmalig auf das neue Farbschema um.
+ *
+ * Nur wer die Farben nie angefasst hat, wird umgestellt: eine bewusst
+ * gewaehlte Tuchfarbe soll ein Update nicht ueberschreiben. Die Version wird
+ * in jedem Fall hochgesetzt, damit das genau einmal geschieht.
+ */
+async function migrateTheme(): Promise<void> {
+  const settings = await getSettings()
+  if (settings.themeVersion >= THEME_VERSION) return
+
+  const untouched =
+    settings.clothColor === PREVIOUS_DEFAULTS.clothColor &&
+    settings.railColor === PREVIOUS_DEFAULTS.railColor
+
+  await updateSettings({
+    themeVersion: THEME_VERSION,
+    ...(untouched
+      ? { clothColor: DEFAULT_SETTINGS.clothColor, railColor: DEFAULT_SETTINGS.railColor }
+      : {}),
+  })
 }

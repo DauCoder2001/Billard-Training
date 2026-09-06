@@ -11,8 +11,8 @@ import { TABLE } from '@/domain/geometry'
 import { downloadText } from '@/features/share/exportImage'
 import { useDialogs } from '@/ui/Dialogs'
 
-const CLOTH_COLORS = ['#1f6b52', '#1c5f7a', '#2b6b2f', '#7a2f3a', '#4a4a52', '#1d1f24']
-const RAIL_COLORS = ['#5b3a22', '#3d2a1c', '#6b4a2e', '#2f3640']
+const CLOTH_COLORS = ['#3f92d2', '#1f6b52', '#2b6b2f', '#1c5f7a', '#7a2f3a', '#4a4a52']
+const RAIL_COLORS = ['#e7eaee', '#d8d2c6', '#5b3a22', '#2f3640', '#1d1f24']
 
 export function SettingsPage() {
   const settings = useApp((s) => s.settings)
@@ -183,18 +183,21 @@ export function SettingsPage() {
         </div>
 
         <div className="field">
-          <label>Bandenfarbe</label>
+          <label>Rahmenfarbe</label>
           <div className="row row--tight">
             {RAIL_COLORS.map((c) => (
               <button
                 key={c}
                 className="swatch"
-                aria-label={`Bandenfarbe ${c}`}
+                aria-label={`Rahmenfarbe ${c}`}
                 style={{ background: c, outline: settings.railColor === c ? '2px solid var(--accent)' : 'none' }}
                 onClick={() => void patchSettings({ railColor: c })}
               />
             ))}
           </div>
+          <span className="small muted">
+            Bandenkante, Kopflinie und die Markierungen richten sich nach der Tuchfarbe.
+          </span>
         </div>
 
         <div className="field">

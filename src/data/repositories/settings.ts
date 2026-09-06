@@ -5,14 +5,15 @@ import type { Settings } from '@/domain/types'
 export const DEFAULT_SETTINGS: Settings = {
   id: 'settings',
   activePlayerId: null,
-  clothColor: '#1f6b52',
-  railColor: '#5b3a22',
+  clothColor: '#3f92d2',
+  railColor: '#e7eaee',
   orientation: 'landscape',
   snapToGrid: true,
   snapStep: 3.125,
   defaultThresholds: { ...DEFAULT_THRESHOLDS },
   defaultTargetRadius: 6,
   seededVersion: 0,
+  themeVersion: 0,
 }
 
 export async function getSettings(): Promise<Settings> {
