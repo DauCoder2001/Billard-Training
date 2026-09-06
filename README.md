@@ -135,3 +135,7 @@ Alles liegt im Browser des jeweiligen Geräts. Ein Tablet, das seinen Speicher
 leert, verliert seine Trainingshistorie. Die Sicherung unter *Einstellungen →
 Daten* ist die einzige Kopie und lässt sich auf einem anderen Gerät wieder
 einspielen.
+
+## Lizenz
+
+[MIT](LICENSE) — Copyright (c) 2026 Matthias Haas.
