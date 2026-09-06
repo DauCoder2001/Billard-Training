@@ -6,4 +6,3 @@ dist-ssr/
 .DS_Store
 Thumbs.db
 *.tsbuildinfo
-deploy/

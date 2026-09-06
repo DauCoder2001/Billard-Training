@@ -54,10 +54,10 @@ allen Netzwerkadressen, die Tablets im WLAN erreichen ihn also unter
 
 ### Wichtig: nicht die `index.html` im Projektordner öffnen
 
-Anders als das Turnier-Projekt ist das hier **kein statisches HTML**. Die
-`index.html` im Projektordner ist nur die Vorlage für Vite; sie lädt
-`/src/main.tsx`, und TSX kann kein Browser ausführen. Direkt geöffnet — per
-Doppelklick oder mit Live Server — bleibt die Seite deshalb weiß.
+Das Projekt ist **kein statisches HTML**. Die `index.html` im Projektordner
+ist nur die Vorlage für Vite; sie lädt `/src/main.tsx`, und TSX kann kein
+Browser ausführen. Direkt geöffnet — per Doppelklick oder mit Live Server —
+bleibt die Seite deshalb weiß.
 
 | Was du öffnest | Ergebnis |
 |---|---|
@@ -68,7 +68,7 @@ Doppelklick oder mit Live Server — bleibt die Seite deshalb weiß.
 
 Mit dem Live Server aus VS Code lässt sich weiterarbeiten: erst
 `npm run build`, dann `dist/index.html` mit Live Server öffnen. Das ist
-derselbe Stand, der auch auf den Pi kommt.
+derselbe Stand, der auch veröffentlicht wird.
 
 | Befehl | Wirkung |
 |---|---|
@@ -119,19 +119,15 @@ Die App nutzt relative Pfade und einen Hash-Router und läuft daher auch unter
 einem Unterpfad wie `https://<name>.github.io/Billard-Training/`. Da Pages
 über HTTPS ausliefert, greift dort auch der Offline-Modus.
 
-## Auf dem Raspberry Pi ausliefern
+### Anderswo ausliefern
 
-```powershell
-.\Deploy_Pi_vorbereiten.ps1
-```
-
-Das Skript baut die App und legt das Ergebnis unter `deploy\` ab. Der Inhalt
-dieses Ordners kommt in das Web-Verzeichnis des Pi. Die App nutzt relative
-Pfade und einen Hash-Router, funktioniert also in jedem Unterverzeichnis.
+`npm run build` erzeugt in `dist/` reine statische Dateien. Die App nutzt
+relative Pfade und einen Hash-Router und läuft deshalb auf jedem Webserver,
+auch in einem Unterverzeichnis.
 
 Ein Service Worker macht die App nach dem ersten Aufruf offline nutzbar. Das
-verlangt HTTPS oder `localhost`; über eine reine `http://`-Adresse im WLAN
-registriert der Browser keinen Service Worker, die App läuft dann nur online.
+verlangt HTTPS oder `localhost`; über eine reine `http://`-Adresse registriert
+der Browser keinen Service Worker, die App läuft dann nur online.
 
 ## Daten
 
