@@ -48,6 +48,29 @@ npm install
 npm run dev
 ```
 
+Danach `http://localhost:5173` öffnen. Der Entwicklungsserver übersetzt die
+TypeScript-Dateien beim Laden und aktualisiert bei jeder Änderung. Er hört auf
+allen Netzwerkadressen, die Tablets im WLAN erreichen ihn also unter
+`http://<IP-des-Notebooks>:5173`.
+
+### Wichtig: nicht die `index.html` im Projektordner öffnen
+
+Anders als das Turnier-Projekt ist das hier **kein statisches HTML**. Die
+`index.html` im Projektordner ist nur die Vorlage für Vite; sie lädt
+`/src/main.tsx`, und TSX kann kein Browser ausführen. Direkt geöffnet — per
+Doppelklick oder mit Live Server — bleibt die Seite deshalb weiß.
+
+| Was du öffnest | Ergebnis |
+|---|---|
+| `npm run dev`, dann `localhost:5173` | läuft, mit automatischem Neuladen |
+| `dist/index.html` nach `npm run build`, über einen Server | läuft |
+| `index.html` im Projektordner | leer |
+| irgendeine Datei per `file://` (Doppelklick) | leer, Chrome blockiert ES-Module |
+
+Mit dem Live Server aus VS Code lässt sich weiterarbeiten: erst
+`npm run build`, dann `dist/index.html` mit Live Server öffnen. Das ist
+derselbe Stand, der auch auf den Pi kommt.
+
 | Befehl | Wirkung |
 |---|---|
 | `npm run dev` | Entwicklungsserver auf Port 5173 |
