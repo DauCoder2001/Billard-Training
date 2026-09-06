@@ -91,6 +91,10 @@ export function BallLayer({
             {selected && (
               <circle cx={cx} cy={cy} r={r + 1} fill="none" stroke="var(--accent)" strokeWidth={0.4} />
             )}
+            {/* Ein Ball ist auf dem Tablet nur wenige Pixel gross. Die
+                unsichtbare Flaeche darueber macht ihn mit dem Finger
+                greifbar, ohne das Diagramm zu veraendern. */}
+            {onBallPointerDown && <circle cx={cx} cy={cy} r={r * 2.4} fill="transparent" />}
           </g>
         )
       })}

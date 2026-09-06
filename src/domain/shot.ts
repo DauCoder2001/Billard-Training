@@ -19,7 +19,7 @@ export function newId(): string {
 export function createShot(partial: Partial<Shot> = {}): Shot {
   const now = Date.now()
   const cue: Ball = { id: newId(), kind: 'cue', x: 25, y: 25 }
-  const object: Ball = { id: newId(), kind: 'object', number: 1, x: 62.5, y: 25 }
+  const object: Ball = { id: newId(), kind: 'object', number: 1, x: 62.5, y: 25, order: 1 }
   return {
     id: newId(),
     name: 'Neuer Stoss',
