@@ -2,6 +2,7 @@
 
 import { forwardRef, type PointerEvent as ReactPointerEvent, type ReactNode } from 'react'
 import { DIAGRAM, POCKETS, POCKET_BY_ID, TABLE, diamonds } from '@/domain/geometry'
+import type { Pocket } from '@/domain/geometry'
 import type { Point } from '@/domain/types'
 import { contrastInk, shade } from './colors'
 import { OrientationContext, flipY, rotationFor, viewBoxFor, type Orientation } from './space'
@@ -138,6 +139,21 @@ export const TableSvg = forwardRef<SVGGElement, TableSvgProps>(function TableSvg
           <g ref={ref} transform={`translate(${DIAGRAM.offset} ${DIAGRAM.offset})`}>
             <rect x={0} y={0} width={TABLE.length} height={TABLE.width} fill={clothColor} />
 
+            {/* Taschen liegen unter der Bande: die Ecktasche reicht ein Stueck
+                ueber die Muendungslinie ins Tuch, und erst die darueber
+                liegende Bande formt daraus die Backe. Der Rand macht die
+                Tasche auch auf einem dunklen Rahmen sichtbar; auf einem
+                hellen faellt er mit der Lochfarbe zusammen. */}
+            <g fill="#1c2126" stroke={pocketRim} strokeWidth={0.28}>
+              {POCKETS.map((p) =>
+                p.kind === 'corner' ? (
+                  <CornerPocket key={p.id} pocket={p} />
+                ) : (
+                  <circle key={p.id} cx={p.hole.x} cy={flipY(p.hole.y)} r={p.holeRadius} />
+                ),
+              )}
+            </g>
+
             {/* Bandenkante entlang der Spielflaeche, an den Taschen auf Gehrung. */}
             <g fill={cushionColor}>
               {CUSHIONS.map((seg, i) => (
@@ -164,16 +180,6 @@ export const TableSvg = forwardRef<SVGGElement, TableSvgProps>(function TableSvg
               </>
             )}
 
-            {/* Taschen. Die Muendung zeigt sich als Luecke zwischen zwei
-                Bandenstuecken, dazu das Loch auf dem Rahmen. Der Rand macht
-                das Loch auch auf einem dunklen Rahmen sichtbar; auf einem
-                hellen faellt er mit der Lochfarbe zusammen. */}
-            <g fill="#1c2126" stroke={pocketRim} strokeWidth={0.28}>
-              {POCKETS.map((p) => (
-                <circle key={p.id} cx={p.hole.x} cy={flipY(p.hole.y)} r={p.holeRadius} />
-              ))}
-            </g>
-
             {children}
           </g>
         </g>
@@ -181,6 +187,30 @@ export const TableSvg = forwardRef<SVGGElement, TableSvgProps>(function TableSvg
     </OrientationContext.Provider>
   )
 })
+
+/**
+ * Ecktasche als gerundete Raute: ein um 45 Grad gedrehtes Quadrat um den
+ * Tischeckpunkt. Seine dem Tisch zugewandte Seite liegt parallel zur
+ * Muendung und ragt eine halbe Zoll darueber hinaus, damit die Tasche
+ * zwischen den Backen offen wirkt statt buendig abzuschliessen.
+ */
+function CornerPocket({ pocket }: { pocket: Pocket }) {
+  // jaws[0] liegt auf der Laengsbande, jaws[1] auf der Querbande - ihr
+  // Schnittpunkt ist die Tischecke.
+  const cx = pocket.jaws[1].x
+  const cy = flipY(pocket.jaws[0].y)
+  const size = TABLE.cornerMouth + 0.5
+  return (
+    <rect
+      x={cx - size / 2}
+      y={cy - size / 2}
+      width={size}
+      height={size}
+      rx={1.2}
+      transform={`rotate(45 ${cx} ${cy})`}
+    />
+  )
+}
 
 /** Kopf- oder Fusspunkt: heller Punkt mit feiner Kontur, auf jedem Tuch sichtbar. */
 function Spot({ at, r, ink }: { at: Point; r: number; ink: string }) {
