@@ -209,7 +209,9 @@ export function TargetZoneLayer({ zone }: { zone: TargetZone | null }) {
   const cy = flipY(zone.y)
   return (
     <g pointerEvents="none">
-      {[4, 3, 2, 1.5, 1].map((f) => (
+      {/* Die Ringe zeigen die Punktstufen. Nach aussen werden sie blasser,
+          damit die weiten Stufen das Diagramm nicht dominieren. */}
+      {([[4, 0.08], [3, 0.12], [2, 0.18], [1.5, 0.24], [1, 0.32]] as const).map(([f, o]) => (
         <circle
           key={f}
           cx={zone.x}
@@ -218,7 +220,7 @@ export function TargetZoneLayer({ zone }: { zone: TargetZone | null }) {
           fill="none"
           stroke="#e8b530"
           strokeWidth={0.16}
-          opacity={0.28}
+          opacity={o}
         />
       ))}
       <circle cx={zone.x} cy={cy} r={zone.r} fill="#e8b530" opacity={0.14} />

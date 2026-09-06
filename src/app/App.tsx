@@ -58,12 +58,12 @@ export function App() {
             <Route path="/achievements" element={<AchievementsPage />} />
             <Route path="/settings" element={<SettingsPage />} />
             <Route path="/import" element={<ImportPage />} />
+            <Route path="/session/:id" element={<SessionSummaryPage />} />
           </Route>
           {/* Builder und Training laufen ohne Rahmen, um Platz zu haben. */}
           <Route path="/builder" element={<BuilderPage />} />
           <Route path="/builder/:id" element={<BuilderPage />} />
           <Route path="/train/:id" element={<TrainPage />} />
-          <Route path="/session/:id" element={<SessionSummaryPage />} />
           <Route path="/workout/:id/run" element={<WorkoutRunPage />} />
           <Route path="*" element={<Navigate to="/" replace />} />
         </Routes>

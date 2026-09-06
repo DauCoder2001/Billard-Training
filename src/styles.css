@@ -732,3 +732,103 @@ textarea {
     max-height: 46vh;
   }
 }
+
+/* ---------------------------------------------------------- Detailseite */
+
+.detail {
+  display: grid;
+  gap: 20px;
+  grid-template-columns: minmax(320px, 1.15fr) minmax(280px, 1fr);
+  align-items: start;
+}
+
+@media (max-width: 900px) {
+  .detail {
+    grid-template-columns: 1fr;
+  }
+}
+
+/* -------------------------------------------------------------- Training */
+
+.attempts {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 5px;
+  align-items: center;
+}
+
+.attempts__dot {
+  width: 11px;
+  height: 11px;
+  border-radius: 50%;
+  border: 1px solid var(--line);
+  background: transparent;
+}
+
+.attempts--large .attempts__dot {
+  width: 15px;
+  height: 15px;
+}
+
+.attempts__dot.is-good {
+  background: var(--ok);
+  border-color: var(--ok);
+}
+
+.attempts__dot.is-ok {
+  background: color-mix(in srgb, var(--warn) 60%, transparent);
+  border-color: var(--warn);
+}
+
+.attempts__dot.is-miss {
+  background: var(--surface-3);
+  border-color: var(--danger);
+}
+
+.train__buttons {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 10px;
+  padding: 10px 14px calc(14px + env(safe-area-inset-bottom));
+  border-top: 1px solid var(--line);
+  background: var(--surface);
+}
+
+.train__buttons .btn {
+  min-height: 58px;
+  font-size: 16px;
+}
+
+.train__hint {
+  grid-column: 1 / -1;
+  text-align: center;
+}
+
+/* -------------------------------------------------------------- Balken */
+
+.bars {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.bars__row {
+  display: grid;
+  grid-template-columns: minmax(90px, 130px) 1fr 46px;
+  align-items: center;
+  gap: 10px;
+}
+
+.bars__label {
+  font-size: 13px;
+  color: var(--muted);
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.bars__value {
+  font-size: 13px;
+  font-weight: 650;
+  text-align: right;
+}
