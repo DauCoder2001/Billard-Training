@@ -102,6 +102,23 @@ ohne die Oberfläche anzufassen.
 **Dialoge:** Die App verwendet kein natives `alert` / `confirm` / `prompt`.
 Stattdessen `useDialogs()` aus `ui/Dialogs.tsx`.
 
+## Über GitHub Pages veröffentlichen
+
+Der Workflow `.github/workflows/pages.yml` baut die App bei jedem Push auf
+`main` und veröffentlicht das Ergebnis. Einmalig nötig: im Repository unter
+*Settings → Pages* als **Source** `GitHub Actions` wählen (nicht „Deploy from
+a branch").
+
+Wichtig: Pages liefert nur Dateien aus und baut nichts. Steht die Source auf
+„Deploy from a branch / root", wird die `index.html` aus dem Projektordner
+ausgeliefert — und die Seite bleibt weiß, weil sie `/src/main.tsx` lädt.
+Deshalb kommt das gebaute `dist/` über den Workflow ins Netz und nicht ins
+Repository.
+
+Die App nutzt relative Pfade und einen Hash-Router und läuft daher auch unter
+einem Unterpfad wie `https://<name>.github.io/Billard-Training/`. Da Pages
+über HTTPS ausliefert, greift dort auch der Offline-Modus.
+
 ## Auf dem Raspberry Pi ausliefern
 
 ```powershell

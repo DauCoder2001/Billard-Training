@@ -14,6 +14,7 @@ export default defineConfig({
         name: 'Billard Training',
         short_name: 'Billard',
         description: 'Eigene Poolbillard-Stoesse bauen, trainieren und auswerten.',
+        lang: 'de',
         theme_color: '#0d1f17',
         background_color: '#0d1f17',
         display: 'standalone',
