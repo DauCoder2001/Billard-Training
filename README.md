@@ -8,11 +8,10 @@ Die App läuft vollständig im Browser. Es gibt keinen Server, kein Konto und
 keine Cloud — alle Daten liegen in der lokalen Datenbank des Browsers
 (IndexedDB) und lassen sich als JSON-Datei sichern.
 
-Als Vorbild diente das Video *„Create & Practice Any Pool Shot"* des Kanals
-*Bullseye Billiards*. Nachgebaut ist die Funktionalität, nicht die App:
-Katalog, Texte, Grafiken und Name von Bullseye Billiards sind nicht
-übernommen. Die mitgelieferten Übungen sind eigene, aus der Geometrie
-berechnete Standard-Drills.
+Die mitgelieferten Übungen sind Standard-Drills, deren Ballpositionen aus der
+Tischgeometrie berechnet werden — aus Objektball, Zieltasche und gewünschtem
+Schnittwinkel folgt die Lage des Weißen. Dadurch stimmen die Winkel exakt und
+bleiben beim Anpassen nachvollziehbar.
 
 ## Was die App kann
 
