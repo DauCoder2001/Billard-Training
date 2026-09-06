@@ -35,6 +35,11 @@ export default defineConfig({
   resolve: {
     alias: { '@': fileURLToPath(new URL('./src', import.meta.url)) },
   },
+  // Vites Standardziel waere Safari 14. Aeltere iPads bleiben damit weiss,
+  // weil sie schon ?. und ?? nicht kennen - ein Syntaxfehler im Modul zeigt
+  // gar nichts an. Der niedrigere Wert kostet ein paar Kilobyte.
+  build: { target: ['es2019', 'safari13', 'chrome80', 'firefox78', 'edge88'] },
+
   server: { host: true, port: 5173 },
   test: {
     environment: 'node',

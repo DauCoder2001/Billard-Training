@@ -10,6 +10,57 @@
   </head>
   <body>
     <div id="root"></div>
+    <noscript>Diese App braucht JavaScript.</noscript>
+    <!--
+      Faengt Fehler ab, die auftreten, bevor React etwas anzeigen kann - etwa
+      wenn ein Browser das Bundle nicht versteht. Ohne das bliebe die Seite
+      einfach weiss, und auf einem Tablet ohne Entwicklerkonsole waere nicht
+      herauszufinden, woran es liegt. Bewusst klassisches ES5, damit es auch
+      in alten Browsern laeuft, und bewusst vor dem Modul eingebunden.
+    -->
+    <script>
+      (function () {
+        var shown = false
+        function show(detail) {
+          var root = document.getElementById('root')
+          // Nur einspringen, solange die App noch nichts angezeigt hat.
+          if (shown || !root || root.childElementCount > 0) return
+          shown = true
+          var box = document.createElement('div')
+          box.setAttribute(
+            'style',
+            'font:14px/1.55 -apple-system,system-ui,sans-serif;color:#e9f1ec;' +
+              'background:#16211c;border:1px solid #2f4139;border-radius:12px;' +
+              'margin:16px;padding:16px;white-space:pre-wrap;word-break:break-word'
+          )
+          var head = document.createElement('strong')
+          head.appendChild(document.createTextNode('Die App konnte nicht starten.'))
+          box.appendChild(head)
+          box.appendChild(document.createElement('br'))
+          box.appendChild(document.createElement('br'))
+          box.appendChild(document.createTextNode(detail))
+          box.appendChild(document.createElement('br'))
+          box.appendChild(document.createElement('br'))
+          box.appendChild(document.createTextNode(navigator.userAgent))
+          root.appendChild(box)
+        }
+        // Ein fehlgeschlagener Service Worker ist kein Grund zur Meldung: die
+        // App laeuft dann einfach ohne Offline-Modus weiter.
+        function harmless(text) {
+          return text.indexOf('ServiceWorker') !== -1 || text.indexOf('sw.js') !== -1
+        }
+        window.addEventListener('error', function (e) {
+          var where = e.filename ? '\n' + e.filename + ':' + e.lineno + ':' + e.colno : ''
+          var text = (e.message || 'Unbekannter Fehler') + where
+          if (!harmless(text)) show(text)
+        })
+        window.addEventListener('unhandledrejection', function (e) {
+          var r = e.reason
+          var text = 'Unbehandelte Zusage: ' + ((r && (r.message || r.toString())) || r)
+          if (!harmless(text)) show(text)
+        })
+      })()
+    </script>
     <script type="module" src="/src/main.tsx"></script>
   </body>
 </html>
