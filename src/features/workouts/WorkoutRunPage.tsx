@@ -107,6 +107,7 @@ export function WorkoutRunPage() {
           ? `${recorded} erfasste Versuche dieses Abschnitts werden verworfen. Bereits beendete Abschnitte bleiben gespeichert.`
           : 'Bereits beendete Abschnitte bleiben gespeichert.',
       confirmLabel: 'Abbrechen',
+      cancelLabel: 'Fortsetzen',
       danger: true,
     })
     if (ok) navigate('/workouts')

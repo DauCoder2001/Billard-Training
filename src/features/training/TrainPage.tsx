@@ -50,6 +50,7 @@ export function TrainPage() {
         title: 'Training abbrechen?',
         message: `${recorded} erfasste Versuche werden verworfen.`,
         confirmLabel: 'Abbrechen',
+        cancelLabel: 'Fortsetzen',
         danger: true,
       })
       if (!ok) return
