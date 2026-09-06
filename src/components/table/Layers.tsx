@@ -4,7 +4,7 @@ import { useId, type PointerEvent as ReactPointerEvent } from 'react'
 import { TABLE, controlThrough, ghostBall } from '@/domain/geometry'
 import type { Ball, BallPath, Point, TargetZone } from '@/domain/types'
 import { CUE_FILL, GHOST_STROKE, ballStyle } from './balls'
-import { flipY } from './space'
+import { flipY, uprightTransform, useTableOrientation } from './space'
 
 // ------------------------------------------------------------------ Baelle
 
@@ -23,6 +23,7 @@ export function BallLayer({
 }: BallLayerProps) {
   // React-Ids enthalten Doppelpunkte; die stoeren in url(#...).
   const uid = useId().replace(/:/g, '')
+  const orientation = useTableOrientation()
   const r = TABLE.ballRadius
   return (
     <g>
@@ -79,7 +80,13 @@ export function BallLayer({
             {showNumbers && ball.number && !isGhost && (
               <>
                 <circle cx={cx} cy={cy} r={r * 0.52} fill="#f7f4ea" opacity={style.striped ? 1 : 0.95} />
-                <text className="ball-label" x={cx} y={cy} fill="#20241f">
+                <text
+                  className="ball-label"
+                  x={cx}
+                  y={cy}
+                  fill="#20241f"
+                  transform={uprightTransform(orientation, cx, cy)}
+                >
                   {ball.number}
                 </text>
               </>

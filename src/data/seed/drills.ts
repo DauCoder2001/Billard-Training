@@ -85,7 +85,17 @@ interface DrillSpec {
   bankRail?: RailSide
   /** Bande, ueber die der Weisse zum Objektball laeuft (Kick). */
   kickRail?: RailSide
-  /** Weitere Baelle, etwa fuer Kombination, Karambolage oder Cluster. */
+  /**
+   * Kombination: Lage des zweiten Objektballs. Der erste Ball zielt dann
+   * nicht auf die Tasche, sondern auf den Kontaktpunkt am zweiten Ball.
+   */
+  combo?: Point
+  /**
+   * Karambolage: Abstand des zweiten Balls auf der Abgangslinie des Weissen.
+   * Der Ball wird daraus berechnet, damit der Stoss wirklich aufgeht.
+   */
+  carom?: number
+  /** Weitere Baelle, etwa als Stoerball oder Cluster. */
   extras?: { number: number; x: number; y: number; kind?: 'object' | 'obstacle' }[]
   /** Zielzone fuer den Weissen. */
   zone?: { x: number; y: number; r: number } | null
@@ -103,10 +113,18 @@ function buildDrill(spec: DrillSpec): Shot {
   const pocketAim = pocketAimPoint(pocket, 0)
   const side = spec.side ?? 1
 
-  // Bei einem Bandenball zielt der Objektball nicht auf die Tasche, sondern
-  // auf deren Spiegelbild hinter der Bande.
-  const objectAim = spec.bankRail ? mirrorAcross(pocketAim, spec.bankRail) : pocketAim
   const object = clampBall(spec.object)
+
+  // Bei einem Bandenball zielt der Objektball nicht auf die Tasche, sondern
+  // auf deren Spiegelbild hinter der Bande. Bei einer Kombination zielt er
+  // auf den Kontaktpunkt am zweiten Ball.
+  const second = spec.combo ? clampBall(spec.combo) : null
+  const objectAim = second
+    ? ghostBall(second, pocketAim)
+    : spec.bankRail
+      ? mirrorAcross(pocketAim, spec.bankRail)
+      : pocketAim
+
   const directCue = cuePosition(object, objectAim, spec.cut, spec.dist, side)
 
   const balls: Ball[] = []
@@ -138,6 +156,40 @@ function buildDrill(spec: DrillSpec): Shot {
   balls.push({ id: cueId, kind: 'cue', x: cue.x, y: cue.y })
   balls.push({ id: objectId, kind: 'object', number: 1, x: object.x, y: object.y, order: 1 })
 
+  if (second) {
+    balls.push({ id: 'obj2', kind: 'object', number: 2, x: second.x, y: second.y, order: 2 })
+    paths.push({
+      id: 'path-object2',
+      ballId: 'obj2',
+      role: 'secondary',
+      segments: [{ to: pocketAim }],
+    })
+  }
+
+  if (spec.carom !== undefined) {
+    // Bei Stun laeuft der Weisse nach dem Treffer auf der Tangente weiter.
+    // Der zweite Ball wird genau dorthin gelegt.
+    const ghost = ghostBall(object, objectAim)
+    const travel = norm({ x: objectAim.x - object.x, y: objectAim.y - object.y })
+    const approach = norm({ x: ghost.x - cue.x, y: ghost.y - cue.y })
+    const along = approach.x * travel.x + approach.y * travel.y
+    const tangent = norm({
+      x: approach.x - travel.x * along,
+      y: approach.y - travel.y * along,
+    })
+    const target = clampBall({
+      x: ghost.x + tangent.x * spec.carom,
+      y: ghost.y + tangent.y * spec.carom,
+    })
+    balls.push({ id: 'carom', kind: 'obstacle', number: 3, x: target.x, y: target.y })
+    paths.push({
+      id: 'path-cue',
+      ballId: cueId,
+      role: 'cue',
+      segments: [{ to: ghost }, { to: target }],
+    })
+  }
+
   for (const [i, extra] of (spec.extras ?? []).entries()) {
     const pos = clampBall({ x: extra.x, y: extra.y })
     balls.push({
@@ -150,13 +202,14 @@ function buildDrill(spec: DrillSpec): Shot {
     })
   }
 
-  // Weg des Objektballs: bei einem Bandenball ueber den Auftreffpunkt.
+  // Weg des Objektballs: bei einem Bandenball ueber den Auftreffpunkt, bei
+  // einer Kombination nur bis zum zweiten Ball.
   const objectSegments = []
   if (spec.bankRail) {
     const hit = castToRail(object, { x: objectAim.x - object.x, y: objectAim.y - object.y })
     if (hit) objectSegments.push({ to: hit.point, rail: true })
   }
-  objectSegments.push({ to: pocketAim })
+  objectSegments.push({ to: second ? objectAim : pocketAim })
   paths.push({ id: 'path-object', ballId: objectId, role: 'object', segments: objectSegments })
 
   const base = createShot()
@@ -436,11 +489,11 @@ const SPECS: DrillSpec[] = [
     slug: 'kombination-zwei',
     name: 'Kombination aus zwei Baellen',
     description: 'Der erste Ball schiebt den zweiten in die Ecke.',
-    object: { x: 62, y: 25 },
+    object: { x: 52, y: 30 },
     pocket: 'br',
     cut: 0,
     dist: 22,
-    extras: [{ number: 2, x: 74, y: 25, kind: 'object' }],
+    combo: { x: 72, y: 18 },
     zone: null,
     skills: ['combination'],
     shotType: 'combination',
@@ -457,7 +510,7 @@ const SPECS: DrillSpec[] = [
     pocket: 'tr',
     cut: 40,
     dist: 24,
-    extras: [{ number: 3, x: 72, y: 34, kind: 'obstacle' }],
+    carom: 22,
     zone: null,
     skills: ['carom'],
     shotType: 'carom',

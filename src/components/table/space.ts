@@ -5,6 +5,7 @@
  *  Transformationsmatrix des SVG.
  */
 
+import { createContext, useContext } from 'react'
 import { DIAGRAM, TABLE } from '@/domain/geometry'
 import type { Point } from '@/domain/types'
 
@@ -50,4 +51,19 @@ export function clientToTable(
   pt.y = clientY
   const local = pt.matrixTransform(matrix.inverse())
   return { x: local.x, y: flipY(local.y) }
+}
+
+/**
+ * Ausrichtung des umgebenden Diagramms. Beschriftungen im Diagramm drehen
+ * sich sonst im Hochformat mit und stehen quer.
+ */
+export const OrientationContext = createContext<Orientation>('landscape')
+
+export function useTableOrientation(): Orientation {
+  return useContext(OrientationContext)
+}
+
+/** Gegendrehung, damit ein Text an der Stelle aufrecht bleibt. */
+export function uprightTransform(orientation: Orientation, x: number, y: number): string | undefined {
+  return orientation === 'portrait' ? `rotate(-90 ${x} ${y})` : undefined
 }
