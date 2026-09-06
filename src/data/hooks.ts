@@ -4,7 +4,7 @@
 import { useLiveQuery } from 'dexie-react-hooks'
 import { db } from './db'
 import { statsByShot } from '@/domain/coach'
-import type { Session, Shot, Workout } from '@/domain/types'
+import type { Player, Session, Shot, Workout } from '@/domain/types'
 
 export function useShots(): Shot[] | undefined {
   return useLiveQuery(async () => {
@@ -43,4 +43,11 @@ export function useWorkout(id: string | undefined): Workout | undefined | null {
 
 export function useSession(id: string | undefined): Session | undefined | null {
   return useLiveQuery(async () => (id ? ((await db.sessions.get(id)) ?? null) : null), [id])
+}
+
+export function usePlayers(): Player[] | undefined {
+  return useLiveQuery(async () => {
+    const rows = await db.players.toArray()
+    return rows.sort((a, b) => a.createdAt - b.createdAt)
+  }, [])
 }

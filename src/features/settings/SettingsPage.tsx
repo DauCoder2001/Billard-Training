@@ -2,6 +2,7 @@ import { useRef } from 'react'
 import { useNavigate } from 'react-router-dom'
 import { useActivePlayer, useApp } from '@/app/store'
 import { db } from '@/data/db'
+import { usePlayers } from '@/data/hooks'
 import { SEED_VERSION } from '@/data/bootstrap'
 import { seedShots } from '@/data/seed/drills'
 import { exportBackup, importBackup } from '@/data/repositories/backup'
@@ -15,9 +16,8 @@ const RAIL_COLORS = ['#5b3a22', '#3d2a1c', '#6b4a2e', '#2f3640']
 
 export function SettingsPage() {
   const settings = useApp((s) => s.settings)
-  const players = useApp((s) => s.players)
+  const players = usePlayers() ?? []
   const patchSettings = useApp((s) => s.patchSettings)
-  const refreshPlayers = useApp((s) => s.refreshPlayers)
   const setActivePlayer = useApp((s) => s.setActivePlayer)
   const active = useActivePlayer()
   const dialogs = useDialogs()
@@ -28,7 +28,6 @@ export function SettingsPage() {
     const name = await dialogs.prompt({ title: 'Neuer Spieler', label: 'Name', initial: '' })
     if (name === null) return
     const player = await createPlayer(name)
-    await refreshPlayers()
     await setActivePlayer(player.id)
   }
 
@@ -38,7 +37,6 @@ export function SettingsPage() {
     const name = await dialogs.prompt({ title: 'Spieler umbenennen', label: 'Name', initial: player.name })
     if (name === null || !name.trim()) return
     await updatePlayer({ ...player, name: name.trim() })
-    await refreshPlayers()
   }
 
   const removePlayer = async (id: string) => {
@@ -59,7 +57,6 @@ export function SettingsPage() {
     })
     if (!ok) return
     await deletePlayer(id)
-    await refreshPlayers()
     const rest = players.filter((p) => p.id !== id)
     if (rest[0]) await setActivePlayer(rest[0].id)
   }
@@ -89,7 +86,6 @@ export function SettingsPage() {
     })
     try {
       const result = await importBackup(parsed, replace ? 'replace' : 'merge')
-      await refreshPlayers()
       await dialogs.alert({
         title: 'Sicherung eingespielt',
         message: `${result.shots} Stoesse, ${result.players} Spieler, ${result.sessions} Sessions, ${result.workouts} Workouts.`,

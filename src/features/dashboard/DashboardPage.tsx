@@ -2,7 +2,7 @@ import { useMemo } from 'react'
 import { Link, useNavigate } from 'react-router-dom'
 import { useActivePlayer, useApp } from '@/app/store'
 import { ShotDiagram } from '@/components/table/ShotDiagram'
-import { useSessions, useShots } from '@/data/hooks'
+import { usePlayers, useSessions, useShots } from '@/data/hooks'
 import { recommend } from '@/domain/coach'
 import { evaluateAchievements } from '@/domain/achievements'
 import { overallRating, rankedSkills } from '@/domain/skills'
@@ -15,7 +15,7 @@ const DAY = 24 * 60 * 60 * 1000
 export function DashboardPage() {
   const navigate = useNavigate()
   const player = useActivePlayer()
-  const players = useApp((s) => s.players)
+  const players = usePlayers() ?? []
   const setActivePlayer = useApp((s) => s.setActivePlayer)
   const settings = useApp((s) => s.settings)
   const shots = useShots()

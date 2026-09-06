@@ -142,7 +142,13 @@ export function TrainerView({ shot, planned, subtitle, onQuit, onComplete }: Tra
               : 'Auf den Tisch tippen, wo der Weisse liegen geblieben ist.'}
           </span>
         )}
-        <button className="btn btn--wide btn--primary" disabled={busy || done} onClick={() => void record(true, false)}>
+        {/* Zaehlt die Position mit, waere ein Treffer ohne erfasste Position
+            automatisch nur halb so viel wert. Lieber erst danach fragen. */}
+        <button
+          className="btn btn--wide btn--primary"
+          disabled={busy || done || (needsPosition && !end)}
+          onClick={() => void record(true, false)}
+        >
           Eingelocht
         </button>
         <button className="btn btn--wide" disabled={busy || done} onClick={() => void record(false, false)}>
