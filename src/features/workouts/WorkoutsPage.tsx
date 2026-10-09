@@ -5,6 +5,7 @@ import { createWorkout, deleteWorkout, saveWorkout } from '@/data/repositories/w
 import type { Workout } from '@/domain/types'
 import { EmptyState } from '@/ui/bits'
 import { useDialogs } from '@/ui/Dialogs'
+import { Modal } from '@/ui/Modal'
 
 export function WorkoutsPage() {
   const workouts = useWorkouts()
@@ -126,110 +127,108 @@ function WorkoutEditor({ workout, onClose, onSave }: EditorProps) {
   }
 
   return (
-    <div className="overlay" onPointerDown={(e) => e.target === e.currentTarget && onClose()}>
-      <div className="modal modal--wide">
-        <div className="modal__head">
-          <h2>Workout bearbeiten</h2>
+    <Modal onClose={onClose} wide label="Workout bearbeiten">
+      <div className="modal__head">
+        <h2>Workout bearbeiten</h2>
+      </div>
+      <div className="modal__body stack">
+        <div className="field">
+          <label htmlFor="w-name">Name</label>
+          <input
+            id="w-name"
+            className="input"
+            value={draft.name}
+            onChange={(e) => setDraft({ ...draft, name: e.target.value })}
+          />
         </div>
-        <div className="modal__body stack">
-          <div className="field">
-            <label htmlFor="w-name">Name</label>
-            <input
-              id="w-name"
-              className="input"
-              value={draft.name}
-              onChange={(e) => setDraft({ ...draft, name: e.target.value })}
-            />
-          </div>
-          <div className="field">
-            <label htmlFor="w-desc">Beschreibung</label>
-            <input
-              id="w-desc"
-              className="input"
-              value={draft.description}
-              onChange={(e) => setDraft({ ...draft, description: e.target.value })}
-            />
-          </div>
+        <div className="field">
+          <label htmlFor="w-desc">Beschreibung</label>
+          <input
+            id="w-desc"
+            className="input"
+            value={draft.description}
+            onChange={(e) => setDraft({ ...draft, description: e.target.value })}
+          />
+        </div>
 
-          <div className="stack" style={{ gap: 8 }}>
-            <span className="tiny">Stoesse in dieser Reihenfolge</span>
-            {draft.entries.length === 0 && (
-              <span className="small muted">Noch kein Stoss hinzugefuegt.</span>
-            )}
-            {draft.entries.map((entry, i) => (
-              <div key={i} className="row row--tight">
-                <span style={{ flex: 1 }}>
-                  {i + 1}. {shots?.find((s) => s.id === entry.shotId)?.name ?? 'Unbekannt'}
-                </span>
-                <input
-                  className="input"
-                  style={{ width: 78 }}
-                  type="number"
-                  min={1}
-                  max={100}
-                  value={entry.attempts}
-                  onChange={(e) => {
-                    const attempts = Math.max(1, Math.min(100, Number(e.target.value) || 1))
-                    setDraft({
-                      ...draft,
-                      entries: draft.entries.map((x, j) => (j === i ? { ...x, attempts } : x)),
-                    })
-                  }}
-                />
-                <button className="btn btn--sm btn--icon" onClick={() => move(i, -1)} title="Nach oben">
-                  ↑
-                </button>
-                <button className="btn btn--sm btn--icon" onClick={() => move(i, 1)} title="Nach unten">
-                  ↓
-                </button>
-                <button
-                  className="btn btn--sm btn--icon btn--danger"
-                  title="Entfernen"
-                  onClick={() =>
-                    setDraft({ ...draft, entries: draft.entries.filter((_, j) => j !== i) })
-                  }
-                >
-                  ✕
-                </button>
-              </div>
+        <div className="stack" style={{ gap: 8 }}>
+          <span className="tiny">Stoesse in dieser Reihenfolge</span>
+          {draft.entries.length === 0 && (
+            <span className="small muted">Noch kein Stoss hinzugefuegt.</span>
+          )}
+          {draft.entries.map((entry, i) => (
+            <div key={i} className="row row--tight">
+              <span style={{ flex: 1 }}>
+                {i + 1}. {shots?.find((s) => s.id === entry.shotId)?.name ?? 'Unbekannt'}
+              </span>
+              <input
+                className="input"
+                style={{ width: 78 }}
+                type="number"
+                min={1}
+                max={100}
+                value={entry.attempts}
+                onChange={(e) => {
+                  const attempts = Math.max(1, Math.min(100, Number(e.target.value) || 1))
+                  setDraft({
+                    ...draft,
+                    entries: draft.entries.map((x, j) => (j === i ? { ...x, attempts } : x)),
+                  })
+                }}
+              />
+              <button className="btn btn--sm btn--icon" onClick={() => move(i, -1)} title="Nach oben">
+                ↑
+              </button>
+              <button className="btn btn--sm btn--icon" onClick={() => move(i, 1)} title="Nach unten">
+                ↓
+              </button>
+              <button
+                className="btn btn--sm btn--icon btn--danger"
+                title="Entfernen"
+                onClick={() =>
+                  setDraft({ ...draft, entries: draft.entries.filter((_, j) => j !== i) })
+                }
+              >
+                ✕
+              </button>
+            </div>
+          ))}
+        </div>
+
+        <div className="row">
+          <select
+            className="select"
+            style={{ flex: 1 }}
+            value={pick}
+            onChange={(e) => setPick(e.target.value)}
+          >
+            <option value="">Stoss auswaehlen …</option>
+            {(shots ?? []).map((s) => (
+              <option key={s.id} value={s.id}>
+                {s.name}
+              </option>
             ))}
-          </div>
-
-          <div className="row">
-            <select
-              className="select"
-              style={{ flex: 1 }}
-              value={pick}
-              onChange={(e) => setPick(e.target.value)}
-            >
-              <option value="">Stoss auswaehlen …</option>
-              {(shots ?? []).map((s) => (
-                <option key={s.id} value={s.id}>
-                  {s.name}
-                </option>
-              ))}
-            </select>
-            <button
-              className="btn"
-              disabled={!pick}
-              onClick={() => {
-                setDraft({ ...draft, entries: [...draft.entries, { shotId: pick, attempts: 10 }] })
-                setPick('')
-              }}
-            >
-              Hinzufuegen
-            </button>
-          </div>
-        </div>
-        <div className="modal__foot">
-          <button className="btn" onClick={onClose}>
-            Abbrechen
-          </button>
-          <button className="btn btn--primary" onClick={() => void onSave(draft)}>
-            Speichern
+          </select>
+          <button
+            className="btn"
+            disabled={!pick}
+            onClick={() => {
+              setDraft({ ...draft, entries: [...draft.entries, { shotId: pick, attempts: 10 }] })
+              setPick('')
+            }}
+          >
+            Hinzufuegen
           </button>
         </div>
       </div>
-    </div>
+      <div className="modal__foot">
+        <button className="btn" onClick={onClose}>
+          Abbrechen
+        </button>
+        <button className="btn btn--primary" onClick={() => void onSave(draft)}>
+          Speichern
+        </button>
+      </div>
+    </Modal>
   )
 }

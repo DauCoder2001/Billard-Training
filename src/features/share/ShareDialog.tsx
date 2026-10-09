@@ -7,6 +7,7 @@ import { shareUrl } from '@/domain/share'
 import type { Shot } from '@/domain/types'
 import { useApp } from '@/app/store'
 import { useDialogs } from '@/ui/Dialogs'
+import { Modal } from '@/ui/Modal'
 import { downloadText, safeFilename, svgToPngBlob, downloadBlob } from './exportImage'
 
 export function ShareDialog({ shot, onClose }: { shot: Shot; onClose: () => void }) {
@@ -57,59 +58,57 @@ export function ShareDialog({ shot, onClose }: { shot: Shot; onClose: () => void
   }
 
   return (
-    <div className="overlay" onPointerDown={(e) => e.target === e.currentTarget && onClose()}>
-      <div className="modal modal--wide">
-        <div className="modal__head">
-          <h2>Stoss teilen</h2>
+    <Modal onClose={onClose} wide label="Stoss teilen">
+      <div className="modal__head">
+        <h2>Stoss teilen</h2>
+      </div>
+      <div className="modal__body stack">
+        <div ref={diagramRef}>
+          <ShotDiagram shot={shot} clothColor={settings.clothColor} railColor={settings.railColor} />
         </div>
-        <div className="modal__body stack">
-          <div ref={diagramRef}>
-            <ShotDiagram shot={shot} clothColor={settings.clothColor} railColor={settings.railColor} />
-          </div>
 
-          <div className="row" style={{ alignItems: 'flex-start' }}>
-            {qr && (
-              <img
-                src={qr}
-                alt="QR-Code mit dem Stoss"
-                width={168}
-                height={168}
-                style={{ borderRadius: 8 }}
-              />
+        <div className="row" style={{ alignItems: 'flex-start' }}>
+          {qr && (
+            <img
+              src={qr}
+              alt="QR-Code mit dem Stoss"
+              width={168}
+              height={168}
+              style={{ borderRadius: 8 }}
+            />
+          )}
+          <div className="stack" style={{ flex: '1 1 240px' }}>
+            {tooLong ? (
+              <p className="small muted">
+                Dieser Stoss ist zu umfangreich fuer einen QR-Code. Der Link funktioniert
+                trotzdem, ebenso der Export als Datei.
+              </p>
+            ) : (
+              <p className="small muted">
+                Der Stoss steckt vollstaendig im Link. Wer ihn oeffnet, bekommt ihn zum
+                Uebernehmen angeboten &ndash; ohne Server, ohne Konto.
+              </p>
             )}
-            <div className="stack" style={{ flex: '1 1 240px' }}>
-              {tooLong ? (
-                <p className="small muted">
-                  Dieser Stoss ist zu umfangreich fuer einen QR-Code. Der Link funktioniert
-                  trotzdem, ebenso der Export als Datei.
-                </p>
-              ) : (
-                <p className="small muted">
-                  Der Stoss steckt vollstaendig im Link. Wer ihn oeffnet, bekommt ihn zum
-                  Uebernehmen angeboten &ndash; ohne Server, ohne Konto.
-                </p>
-              )}
-              <textarea className="textarea" readOnly value={url} style={{ minHeight: 64, fontSize: 12 }} />
-              <div className="row row--tight">
-                <button className="btn btn--sm" onClick={() => void copy()}>
-                  Link kopieren
-                </button>
-                <button className="btn btn--sm" onClick={() => void savePng()}>
-                  Als PNG
-                </button>
-                <button className="btn btn--sm" onClick={saveJson}>
-                  Als JSON
-                </button>
-              </div>
+            <textarea className="textarea" readOnly value={url} style={{ minHeight: 64, fontSize: 12 }} />
+            <div className="row row--tight">
+              <button className="btn btn--sm" onClick={() => void copy()}>
+                Link kopieren
+              </button>
+              <button className="btn btn--sm" onClick={() => void savePng()}>
+                Als PNG
+              </button>
+              <button className="btn btn--sm" onClick={saveJson}>
+                Als JSON
+              </button>
             </div>
           </div>
         </div>
-        <div className="modal__foot">
-          <button className="btn btn--primary" onClick={onClose}>
-            Fertig
-          </button>
-        </div>
       </div>
-    </div>
+      <div className="modal__foot">
+        <button className="btn btn--primary" onClick={onClose}>
+          Fertig
+        </button>
+      </div>
+    </Modal>
   )
 }

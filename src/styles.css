@@ -443,15 +443,25 @@ textarea {
 
 /* --------------------------------------------------------------- Dialoge */
 
-.overlay {
-  position: fixed;
-  inset: 0;
+/* Natives <dialog> (src/ui/Modal.tsx) in der obersten Ebene. Der Rahmen
+   ist unsichtbar und gibt nur die Breite vor, das Aussehen kommt von .modal */
+.modal-host {
+  padding: 0;
+  border: none;
+  background: transparent;
+  color: inherit;
+  width: min(520px, calc(100% - 40px));
+  max-width: none;
+  max-height: none;
+  overflow: visible;
+}
+
+.modal-host--wide {
+  width: min(760px, calc(100% - 40px));
+}
+
+.modal-host::backdrop {
   background: rgba(4, 8, 6, 0.62);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  padding: 20px;
-  z-index: 60;
 }
 
 .modal {
@@ -498,6 +508,18 @@ textarea {
   gap: 8px;
   z-index: 80;
   pointer-events: none;
+}
+
+/* Als Popover (Dialogs.tsx) bringt der Browser Rahmen, Hintergrund und
+   Zentrierung mit; die Position oben bleibt massgeblich */
+.toasts[popover] {
+  margin: 0;
+  padding: 0;
+  border: none;
+  background: transparent;
+  color: inherit;
+  overflow: visible;
+  inset: auto auto 24px 50%;
 }
 
 .toast {

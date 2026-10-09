@@ -10,11 +10,13 @@ import {
   useCallback,
   useContext,
   useEffect,
+  useLayoutEffect,
   useMemo,
   useRef,
   useState,
   type ReactNode,
 } from 'react'
+import { Modal } from './Modal'
 
 interface ConfirmOptions {
   title: string
@@ -92,12 +94,24 @@ export function DialogsProvider({ children }: { children: ReactNode }) {
 
   const close = useCallback(() => setPending(null), [])
 
+  // Meldungen als Popover in der obersten Ebene, sonst laegen sie hinter
+  // einem offenen Dialog. Bei jeder neuen Meldung neu einblenden, damit sie
+  // auch ueber einem spaeter geoeffneten Dialog liegt.
+  const toastsRef = useRef<HTMLDivElement>(null)
+  useLayoutEffect(() => {
+    const el = toastsRef.current
+    if (!el || !('showPopover' in el)) return
+    el.setAttribute('popover', 'manual')
+    if (el.matches(':popover-open')) el.hidePopover()
+    el.showPopover()
+  }, [toasts])
+
   return (
     <DialogsContext.Provider value={api}>
       {children}
       {pending && <DialogHost pending={pending} onClose={close} />}
       {toasts.length > 0 && (
-        <div className="toasts" role="status" aria-live="polite">
+        <div ref={toastsRef} className="toasts" role="status" aria-live="polite">
           {toasts.map((t) => (
             <div key={t.id} className={`toast${t.kind === 'info' ? '' : ` toast--${t.kind}`}`}>
               {t.text}
@@ -114,11 +128,20 @@ function DialogHost({ pending, onClose }: { pending: Pending; onClose: () => voi
     pending.kind === 'prompt' ? (pending.options.initial ?? '') : '',
   )
   const inputRef = useRef<HTMLInputElement | HTMLTextAreaElement>(null)
+  const acceptRef = useRef<HTMLButtonElement>(null)
+  const cancelRef = useRef<HTMLButtonElement>(null)
+  const danger = pending.kind === 'confirm' && pending.options.danger
 
+  // Startfokus (laeuft nach showModal): das Eingabefeld, bei einer
+  // gefaehrlichen Rueckfrage "Abbrechen", sonst der Bestaetigen-Knopf.
+  // Enter drueckt dann den Knopf mit dem Fokus - nie ungefragt "Loeschen".
   useEffect(() => {
-    inputRef.current?.focus()
-    inputRef.current?.select()
-  }, [])
+    if (inputRef.current) {
+      inputRef.current.focus()
+      inputRef.current.select()
+    } else if (danger) cancelRef.current?.focus()
+    else acceptRef.current?.focus()
+  }, [danger])
 
   const cancel = useCallback(() => {
     if (pending.kind === 'confirm') pending.resolve(false)
@@ -134,63 +157,51 @@ function DialogHost({ pending, onClose }: { pending: Pending; onClose: () => voi
     onClose()
   }, [pending, value, onClose])
 
-  useEffect(() => {
-    const onKey = (e: KeyboardEvent) => {
-      if (e.key === 'Escape') cancel()
-      if (e.key === 'Enter' && pending.kind !== 'prompt') accept()
-    }
-    window.addEventListener('keydown', onKey)
-    return () => window.removeEventListener('keydown', onKey)
-  }, [cancel, accept, pending.kind])
-
   const o = pending.options
-  const danger = pending.kind === 'confirm' && pending.options.danger
 
   return (
-    <div className="overlay" onPointerDown={(e) => e.target === e.currentTarget && cancel()}>
-      <div className="modal" role="dialog" aria-modal="true" aria-label={o.title}>
-        <div className="modal__head">
-          <h2>{o.title}</h2>
-        </div>
-        <div className="modal__body stack">
-          {o.message && <div className="muted">{o.message}</div>}
-          {pending.kind === 'prompt' && (
-            <div className="field">
-              {pending.options.label && <label htmlFor="dlg-input">{pending.options.label}</label>}
-              {pending.options.multiline ? (
-                <textarea
-                  id="dlg-input"
-                  ref={inputRef as React.RefObject<HTMLTextAreaElement>}
-                  className="textarea"
-                  value={value}
-                  placeholder={pending.options.placeholder}
-                  onChange={(e) => setValue(e.target.value)}
-                />
-              ) : (
-                <input
-                  id="dlg-input"
-                  ref={inputRef as React.RefObject<HTMLInputElement>}
-                  className="input"
-                  value={value}
-                  placeholder={pending.options.placeholder}
-                  onChange={(e) => setValue(e.target.value)}
-                  onKeyDown={(e) => e.key === 'Enter' && accept()}
-                />
-              )}
-            </div>
-          )}
-        </div>
-        <div className="modal__foot">
-          {pending.kind !== 'alert' && (
-            <button className="btn" onClick={cancel}>
-              {(pending.kind === 'confirm' && pending.options.cancelLabel) || 'Abbrechen'}
-            </button>
-          )}
-          <button className={`btn ${danger ? 'btn--danger' : 'btn--primary'}`} onClick={accept}>
-            {('confirmLabel' in o && o.confirmLabel) || 'OK'}
-          </button>
-        </div>
+    <Modal onClose={cancel} label={o.title}>
+      <div className="modal__head">
+        <h2>{o.title}</h2>
       </div>
-    </div>
+      <div className="modal__body stack">
+        {o.message && <div className="muted">{o.message}</div>}
+        {pending.kind === 'prompt' && (
+          <div className="field">
+            {pending.options.label && <label htmlFor="dlg-input">{pending.options.label}</label>}
+            {pending.options.multiline ? (
+              <textarea
+                id="dlg-input"
+                ref={inputRef as React.RefObject<HTMLTextAreaElement>}
+                className="textarea"
+                value={value}
+                placeholder={pending.options.placeholder}
+                onChange={(e) => setValue(e.target.value)}
+              />
+            ) : (
+              <input
+                id="dlg-input"
+                ref={inputRef as React.RefObject<HTMLInputElement>}
+                className="input"
+                value={value}
+                placeholder={pending.options.placeholder}
+                onChange={(e) => setValue(e.target.value)}
+                onKeyDown={(e) => e.key === 'Enter' && accept()}
+              />
+            )}
+          </div>
+        )}
+      </div>
+      <div className="modal__foot">
+        {pending.kind !== 'alert' && (
+          <button ref={cancelRef} className="btn" onClick={cancel}>
+            {(pending.kind === 'confirm' && pending.options.cancelLabel) || 'Abbrechen'}
+          </button>
+        )}
+        <button ref={acceptRef} className={`btn ${danger ? 'btn--danger' : 'btn--primary'}`} onClick={accept}>
+          {('confirmLabel' in o && o.confirmLabel) || 'OK'}
+        </button>
+      </div>
+    </Modal>
   )
 }
