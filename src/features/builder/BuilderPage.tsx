@@ -77,6 +77,9 @@ export function BuilderPage() {
     const onKey = (e: KeyboardEvent) => {
       const target = e.target as HTMLElement | null
       if (target && /^(INPUT|TEXTAREA|SELECT)$/.test(target.tagName)) return
+      // Offener Dialog (Modal): Tasten gehoeren ihm, sonst loescht Entf
+      // hinter einer Rueckfrage den gewaehlten Ball
+      if (document.querySelector('dialog[open]')) return
       const store = useBuilder.getState()
       if ((e.ctrlKey || e.metaKey) && e.key.toLowerCase() === 'z') {
         e.preventDefault()
