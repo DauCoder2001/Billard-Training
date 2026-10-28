@@ -5,6 +5,8 @@ import { seedShots } from './seed/drills'
 import { PLAYER_COLORS } from './repositories/players'
 import { DEFAULT_SETTINGS, getSettings, updateSettings } from './repositories/settings'
 import { newId } from '@/domain/shot'
+import type { Shot } from '@/domain/types'
+import { transliterate } from '@/domain/text'
 
 /** Version der Uebungssammlung. Erhoehen, wenn neue Uebungen dazukommen. */
 export const SEED_VERSION = 1
@@ -56,6 +58,39 @@ async function run(): Promise<void> {
   }
 
   await migrateTheme()
+  await migrateDrillTexts()
+}
+
+/**
+ * Holt die Umlaute in den Texten der mitgelieferten Stoesse nach.
+ *
+ * Geaendert wird nur, wo der gespeicherte Text noch genau die alte
+ * Umschreibung des neuen ist. Wer einen Stoss selbst umbenannt hat, behaelt
+ * seinen Namen, und Favoriten bleiben erhalten - anders als beim vollen
+ * Wiederherstellen ueber die Einstellungen. Dadurch braucht es auch keinen
+ * Versionszaehler: nach dem ersten Lauf passt keine Zeile mehr.
+ */
+async function migrateDrillTexts(): Promise<void> {
+  const fresh = seedShots()
+  const stored = await db.shots.bulkGet(fresh.map((s) => s.id))
+
+  const updates = fresh.flatMap((neu, i) => {
+    const alt = stored[i]
+    if (!alt) return []
+    const patch: Partial<Shot> = {}
+    if (alt.name !== neu.name && alt.name === transliterate(neu.name)) patch.name = neu.name
+    if (alt.description !== neu.description && alt.description === transliterate(neu.description)) {
+      patch.description = neu.description
+    }
+    if (alt.coachNotes !== neu.coachNotes && alt.coachNotes === transliterate(neu.coachNotes)) {
+      patch.coachNotes = neu.coachNotes
+    }
+    const tags = alt.tags.join('|')
+    if (tags !== neu.tags.join('|') && tags === transliterate(neu.tags.join('|'))) patch.tags = neu.tags
+    return Object.keys(patch).length > 0 ? [{ ...alt, ...patch }] : []
+  })
+
+  if (updates.length > 0) await db.shots.bulkPut(updates)
 }
 
 /** Version des Farbschemas. Erhoehen, wenn die Standardfarben wechseln. */

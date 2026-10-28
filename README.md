@@ -8,7 +8,7 @@ Die App läuft vollständig im Browser. Es gibt keinen Server, kein Konto und
 keine Cloud — alle Daten liegen in der lokalen Datenbank des Browsers
 (IndexedDB) und lassen sich als JSON-Datei sichern.
 
-Die mitgelieferten Übungen sind Standard-Drills, deren Ballpositionen aus der
+Die mitgelieferten Stöße sind Standard-Drills, deren Ballpositionen aus der
 Tischgeometrie berechnet werden — aus Objektball, Zieltasche und gewünschtem
 Schnittwinkel folgt die Lage des Weißen. Dadurch stimmen die Winkel exakt und
 bleiben beim Anpassen nachvollziehbar.
@@ -26,7 +26,7 @@ Undo/Redo über den gesamten Editor, Spiegeln, Duplizieren.
 Ruheposition des Weißen angetippt und dann *Eingelocht*, *Verfehlt* oder
 *Kratzer* gewählt. Bewertet wird nach Treffer und Nähe zur Zielzone.
 
-**Auswertung** — Verlauf je Stoß, Fähigkeitsprofil als Netz, Tabelle aller
+**Statistik** — Verlauf je Stoß, Fähigkeitsprofil als Netz, Tabelle aller
 Stöße mit dem schwächsten zuerst, Treffer- und Kratzerquote.
 
 **Coach** — schlägt Stöße vor, die gerade am meisten bringen: nie geübte,
@@ -83,9 +83,9 @@ derselbe Stand, der auch veröffentlicht wird.
 ```
 src/
   domain/      Geometrie, Bewertung, Skill-Ratings, Coach, Erfolge, Teilen
-  data/        Dexie-Schema, Repositories, mitgelieferte Übungen
+  data/        Dexie-Schema, Repositories, mitgelieferte Stöße
   components/  Tischdiagramm als SVG
-  features/    Seiten: Start, Bibliothek, Builder, Training, Statistik, …
+  features/    Seiten: Start, Stöße, Builder, Training, Statistik, …
   ui/          Dialoge und kleine Anzeigebausteine
 ```
 

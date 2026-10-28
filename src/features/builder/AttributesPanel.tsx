@@ -16,7 +16,7 @@ import { SpinPicker, spinLabel } from './SpinPicker'
 type Tab = 'shot' | 'scoring' | 'coach' | 'advanced'
 
 const TABS: { id: Tab; label: string }[] = [
-  { id: 'shot', label: 'Stoss' },
+  { id: 'shot', label: 'Stoß' },
   { id: 'scoring', label: 'Bewertung' },
   { id: 'coach', label: 'Coach' },
   { id: 'advanced', label: 'Erweitert' },
@@ -24,7 +24,7 @@ const TABS: { id: Tab; label: string }[] = [
 
 const SCORING_LABELS: Record<ScoringMode, string> = {
   pocket: 'Nur Einlochen',
-  position: 'Nur Position des Weissen',
+  position: 'Nur Position des Weißen',
   'pocket+position': 'Einlochen und Position',
 }
 
@@ -72,7 +72,7 @@ export function AttributesPanel() {
           <div className="builder__cols">
             <div className="stack">
               <div className="field">
-                <label htmlFor="a-type">Stossart</label>
+                <label htmlFor="a-type">Stoßart</label>
                 <select
                   id="a-type"
                   className="select"
@@ -99,7 +99,7 @@ export function AttributesPanel() {
                 onChange={(v) => setAttr('difficulty', v)}
               />
               <Range
-                label={`Geschwindigkeit ${attrs.speed}`}
+                label={`Tempo ${attrs.speed}`}
                 value={attrs.speed}
                 min={1}
                 max={10}
@@ -109,7 +109,7 @@ export function AttributesPanel() {
             </div>
 
             <div className="stack">
-              <span className="tiny">Treffpunkt auf dem Weissen</span>
+              <span className="tiny">Treffpunkt auf dem Weißen</span>
               <div className="row">
                 <SpinPicker
                   value={attrs.spin}
@@ -135,13 +135,13 @@ export function AttributesPanel() {
                 <span className="tiny">Schnittwinkel</span>
                 <strong>{computeCutAngle(shot).toFixed(1)}°</strong>
                 <span className="small muted">
-                  Ergibt sich aus der Lage von Weissem, Objektball und Tasche.
+                  Ergibt sich aus der Lage von Weißem, Objektball und Tasche.
                 </span>
               </div>
             </div>
 
             <div className="stack" style={{ gap: 6 }}>
-              <span className="tiny">Faehigkeiten</span>
+              <span className="tiny">Fähigkeiten</span>
               <div className="row row--tight">
                 {SKILL_TAGS.map((s) => (
                   <button
@@ -154,7 +154,7 @@ export function AttributesPanel() {
                 ))}
               </div>
               <span className="small muted">
-                Faehigkeiten steuern, welche Bewertungen der Coach fortschreibt.
+                Fähigkeiten steuern, welche Bewertungen der Coach fortschreibt.
               </span>
             </div>
           </div>
@@ -164,7 +164,7 @@ export function AttributesPanel() {
           <div className="builder__cols">
             <div className="stack">
               <div className="field">
-                <label htmlFor="a-mode">Was zaehlt als Treffer</label>
+                <label htmlFor="a-mode">Was zählt als Treffer</label>
                 <select
                   id="a-mode"
                   className="select"
@@ -214,7 +214,7 @@ export function AttributesPanel() {
                 </>
               ) : (
                 <p className="small muted">
-                  Ohne Zielzone zaehlt nur das Einlochen. Zielzone im Werkzeug links setzen.
+                  Ohne Zielzone zählt nur das Einlochen. Zielzone im Werkzeug links setzen.
                 </p>
               )}
 
@@ -229,12 +229,12 @@ export function AttributesPanel() {
                     }))
                   }
                 />
-                <span className="small">Erhoehtes Kratzerrisiko</span>
+                <span className="small">Erhöhtes Kratzerrisiko</span>
               </label>
             </div>
 
             <div className="stack">
-              <span className="tiny">Schwellen fuer die Einstufung</span>
+              <span className="tiny">Schwellen für die Einstufung</span>
               {(
                 [
                   ['developing', 'Im Aufbau ab'],
@@ -271,7 +271,7 @@ export function AttributesPanel() {
                 id="a-desc"
                 className="input"
                 value={shot.description}
-                placeholder="Worum geht es bei diesem Stoss?"
+                placeholder="Worum geht es bei diesem Stoß?"
                 onChange={(e) => apply((s) => ({ ...s, description: e.target.value }))}
               />
             </div>
@@ -292,7 +292,7 @@ export function AttributesPanel() {
           <div className="builder__cols">
             <div className="stack">
               <Range
-                label={`Queue-Erhoehung ${attrs.elevation}°`}
+                label={`Queue-Erhöhung ${attrs.elevation}°`}
                 value={attrs.elevation}
                 min={0}
                 max={45}
@@ -312,8 +312,8 @@ export function AttributesPanel() {
               )}
               <span className="small muted">
                 {pocket
-                  ? `Zieltasche: ${pocket.label}. Anschneiden verschiebt den Zielpunkt in der Muendung.`
-                  : 'Noch keine Zieltasche gewaehlt. Tippe im Diagramm auf eine Tasche.'}
+                  ? `Zieltasche: ${pocket.label}. Anschneiden verschiebt den Zielpunkt in der Mündung.`
+                  : 'Noch keine Zieltasche gewählt. Tippe im Diagramm auf eine Tasche.'}
               </span>
             </div>
 

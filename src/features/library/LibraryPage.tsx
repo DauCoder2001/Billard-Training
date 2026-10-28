@@ -74,7 +74,7 @@ export function LibraryPage() {
     <div className="page page--wide stack">
       <div className="page__head">
         <div>
-          <h1>Stoesse</h1>
+          <h1>Stöße</h1>
           <p className="page__sub">
             {shots ? `${filtered.length} von ${shots.length}` : 'Wird geladen …'}
           </p>
@@ -84,7 +84,7 @@ export function LibraryPage() {
             Filter{activeFilters > 0 ? ` (${activeFilters})` : ''}
           </button>
           <button className="btn btn--primary" onClick={() => navigate('/builder')}>
-            Neuer Stoss
+            Neuer Stoß
           </button>
         </div>
       </div>
@@ -100,8 +100,8 @@ export function LibraryPage() {
         <select className="select" style={{ width: 180 }} value={sort} onChange={(e) => setSort(e.target.value as Sort)}>
           <option value="name">Name</option>
           <option value="difficulty">Schwierigkeit</option>
-          <option value="recent">Zuletzt geuebt</option>
-          <option value="weakest">Schwaechstes zuerst</option>
+          <option value="recent">Zuletzt geübt</option>
+          <option value="weakest">Schwächstes zuerst</option>
         </select>
       </div>
 
@@ -120,7 +120,7 @@ export function LibraryPage() {
               value={type}
               onChange={(e) => setType(e.target.value as ShotType | 'all')}
             >
-              <option value="all">Alle Stossarten</option>
+              <option value="all">Alle Stoßarten</option>
               {SHOT_TYPES.map((t) => (
                 <option key={t} value={t}>
                   {SHOT_TYPE_LABELS[t]}
@@ -143,7 +143,7 @@ export function LibraryPage() {
           </div>
 
           <div className="stack" style={{ gap: 6 }}>
-            <span className="tiny">Faehigkeiten</span>
+            <span className="tiny">Fähigkeiten</span>
             <div className="row row--tight">
               {SKILL_TAGS.map((s) => (
                 <button
@@ -168,7 +168,7 @@ export function LibraryPage() {
                   setMaxDifficulty(10)
                 }}
               >
-                Filter zuruecksetzen
+                Filter zurücksetzen
               </button>
             </div>
           )}
@@ -176,8 +176,8 @@ export function LibraryPage() {
       )}
 
       {shots && filtered.length === 0 ? (
-        <EmptyState title="Kein Stoss passt zu den Filtern">
-          <span className="muted small">Filter lockern oder einen neuen Stoss bauen.</span>
+        <EmptyState title="Kein Stoß passt zu den Filtern">
+          <span className="muted small">Filter lockern oder einen neuen Stoß bauen.</span>
         </EmptyState>
       ) : (
         <div className="grid">
@@ -205,7 +205,7 @@ export function LibraryPage() {
                   {st?.lastScore != null ? (
                     <ProficiencyBadge value={proficiencyFor(st.lastScore, shot.scoring.thresholds)} />
                   ) : (
-                    <span>noch nicht geuebt</span>
+                    <span>noch nicht geübt</span>
                   )}
                 </div>
               </Link>

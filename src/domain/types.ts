@@ -84,16 +84,16 @@ export type SkillTag = (typeof SKILL_TAGS)[number]
 export const SKILL_LABELS: Record<SkillTag, string> = {
   stun: 'Stun',
   follow: 'Nachlauf',
-  draw: 'Rueckzieher',
+  draw: 'Rückzieher',
   sidespin: 'Seiteneffet',
   cut: 'Schnittball',
-  thinCut: 'Duenner Schnitt',
-  bank: 'Bande',
+  thinCut: 'Dünner Schnitt',
+  bank: 'Bandenspiel',
   kick: 'Kick',
   combination: 'Kombination',
   carom: 'Karambolage',
-  rail: 'Bandenball',
-  breakout: 'Cluster oeffnen',
+  rail: 'Ball an der Bande',
+  breakout: 'Cluster öffnen',
   safety: 'Safe',
   position: 'Position',
 }
@@ -118,7 +118,7 @@ export const SHOT_TYPE_LABELS: Record<ShotType, string> = {
   combination: 'Kombination',
   carom: 'Karambolage',
   safety: 'Safe',
-  break: 'Anstoss',
+  break: 'Anstoß',
   position: 'Positionsspiel',
 }
 

@@ -34,7 +34,7 @@ export class ErrorBoundary extends Component<Props, State> {
       <div className="page stack">
         <h1>Da ist etwas schiefgegangen</h1>
         <p className="muted">
-          Die Ansicht liess sich nicht darstellen. Deine gespeicherten Stoesse und
+          Die Ansicht ließ sich nicht darstellen. Deine gespeicherten Stöße und
           Ergebnisse sind davon nicht betroffen.
         </p>
         <pre
@@ -64,7 +64,7 @@ export class ErrorBoundary extends Component<Props, State> {
               window.location.reload()
             }}
           >
-            Zur Startseite
+            Zum Start
           </button>
         </div>
       </div>

@@ -46,13 +46,13 @@ export function decodeShot(payload: string): Shot {
   try {
     envelope = JSON.parse(strFromU8(inflateSync(fromBase64Url(payload)))) as Envelope
   } catch {
-    throw new Error('Der geteilte Stoss liess sich nicht lesen.')
+    throw new Error('Der geteilte Stoß ließ sich nicht lesen.')
   }
   if (!envelope || typeof envelope !== 'object' || !envelope.shot) {
-    throw new Error('Der geteilte Stoss liess sich nicht lesen.')
+    throw new Error('Der geteilte Stoß ließ sich nicht lesen.')
   }
   if (envelope.v > SHARE_VERSION) {
-    throw new Error('Dieser Stoss stammt aus einer neueren Version der App.')
+    throw new Error('Dieser Stoß stammt aus einer neueren Version der App.')
   }
   const now = Date.now()
   // Ueber createShot laufen lassen, damit fehlende Felder Standardwerte bekommen.

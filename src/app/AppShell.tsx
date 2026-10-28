@@ -2,7 +2,7 @@ import { NavLink, Outlet } from 'react-router-dom'
 
 const NAV = [
   { to: '/', icon: '◎', label: 'Start', end: true },
-  { to: '/library', icon: '▦', label: 'Stoesse' },
+  { to: '/library', icon: '▦', label: 'Stöße' },
   { to: '/workouts', icon: '≡', label: 'Workouts' },
   { to: '/stats', icon: '↗', label: 'Statistik' },
   { to: '/achievements', icon: '★', label: 'Erfolge' },

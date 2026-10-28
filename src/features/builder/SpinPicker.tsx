@@ -60,7 +60,7 @@ export function SpinPicker({ value, onChange, size = 108 }: SpinPickerProps) {
 export function spinLabel(spin: Point): string {
   const parts: string[] = []
   if (spin.y > 0.15) parts.push('Nachlauf')
-  else if (spin.y < -0.15) parts.push('Rueckzieher')
+  else if (spin.y < -0.15) parts.push('Rückzieher')
   if (spin.x > 0.15) parts.push('rechts')
   else if (spin.x < -0.15) parts.push('links')
   return parts.length > 0 ? parts.join(' / ') : 'mittig'

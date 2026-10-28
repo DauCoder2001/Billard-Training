@@ -36,9 +36,9 @@ export function WorkoutRunPage() {
     return (
       <div className="page stack">
         <h1>{workout.name}</h1>
-        <p className="muted">Dieses Workout enthaelt keine vorhandenen Stoesse mehr.</p>
+        <p className="muted">Dieses Workout enthält keine vorhandenen Stöße mehr.</p>
         <button className="btn" onClick={() => navigate('/workouts')}>
-          Zurueck
+          Zurück
         </button>
       </div>
     )
@@ -58,7 +58,7 @@ export function WorkoutRunPage() {
         </div>
 
         <div className="grid" style={{ gridTemplateColumns: 'repeat(auto-fit, minmax(140px, 1fr))' }}>
-          <Stat label="Schnitt" value={`${total.toFixed(0)} %`} />
+          <Stat label="Mittel" value={`${total.toFixed(0)} %`} />
           <Stat label="Abschnitte" value={done.length} />
           <Stat label="Versuche" value={done.reduce((a, s) => a + s.results.length, 0)} />
         </div>
@@ -77,7 +77,16 @@ export function WorkoutRunPage() {
         </div>
 
         <div className="row">
-          <button className="btn btn--primary" onClick={() => navigate('/workouts')}>
+          <button
+            className="btn btn--primary"
+            onClick={() => {
+              setDone([])
+              setStep(0)
+            }}
+          >
+            Nochmal
+          </button>
+          <button className="btn" onClick={() => navigate('/workouts')}>
             Zu den Workouts
           </button>
           <button className="btn" onClick={() => navigate('/stats')}>

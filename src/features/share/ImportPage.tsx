@@ -37,7 +37,7 @@ export function ImportPage() {
   const readManual = () => {
     const extracted = payloadFromInput(manual)
     if (!extracted) {
-      setError('In der Eingabe steckt kein geteilter Stoss.')
+      setError('In der Eingabe steckt kein geteilter Stoß.')
       return
     }
     try {
@@ -52,7 +52,7 @@ export function ImportPage() {
   const take = async () => {
     if (!shot) return
     const saved = await saveShot(shot)
-    dialogs.toast('Stoss uebernommen', 'ok')
+    dialogs.toast('Stoß übernommen', 'ok')
     navigate(`/shot/${saved.id}`, { replace: true })
   }
 
@@ -60,10 +60,10 @@ export function ImportPage() {
     <div className="page stack">
       <div className="page__head">
         <div>
-          <h1>Geteilten Stoss uebernehmen</h1>
+          <h1>Geteilten Stoß übernehmen</h1>
           <p className="page__sub">
-            Der Stoss steckt vollstaendig im Link. Er wird erst gespeichert, wenn du ihn
-            uebernimmst.
+            Der Stoß steckt vollständig im Link. Er wird erst gespeichert, wenn du ihn
+            übernimmst.
           </p>
         </div>
       </div>
@@ -71,7 +71,7 @@ export function ImportPage() {
       {!payload && (
         <div className="card stack">
           <div className="field">
-            <label htmlFor="imp">Link oder Code einfuegen</label>
+            <label htmlFor="imp">Link oder Code einfügen</label>
             <textarea
               id="imp"
               className="textarea"
@@ -92,7 +92,7 @@ export function ImportPage() {
         <div className="card stack">
           <strong style={{ color: 'var(--danger)' }}>{error}</strong>
           <span className="small muted">
-            Womoeglich wurde der Link beim Kopieren abgeschnitten.
+            Womöglich wurde der Link beim Kopieren abgeschnitten.
           </span>
         </div>
       )}
@@ -119,7 +119,7 @@ export function ImportPage() {
             {shot.coachNotes && <p className="small">{shot.coachNotes}</p>}
             <div className="row">
               <button className="btn btn--primary" onClick={() => void take()}>
-                Uebernehmen
+                Übernehmen
               </button>
               <button className="btn" onClick={() => navigate('/library')}>
                 Verwerfen

@@ -49,7 +49,7 @@ export async function svgToPngBlob(svg: SVGSVGElement, width = 1600): Promise<Bl
   const image = await new Promise<HTMLImageElement>((resolve, reject) => {
     const img = new Image()
     img.onload = () => resolve(img)
-    img.onerror = () => reject(new Error('Das Diagramm liess sich nicht umwandeln.'))
+    img.onerror = () => reject(new Error('Das Diagramm ließ sich nicht umwandeln.'))
     img.src = url
   })
 
@@ -57,7 +57,7 @@ export async function svgToPngBlob(svg: SVGSVGElement, width = 1600): Promise<Bl
   canvas.width = width
   canvas.height = height
   const ctx = canvas.getContext('2d')
-  if (!ctx) throw new Error('Canvas nicht verfuegbar.')
+  if (!ctx) throw new Error('Canvas nicht verfügbar.')
   ctx.drawImage(image, 0, 0, width, height)
 
   return await new Promise<Blob>((resolve, reject) => {

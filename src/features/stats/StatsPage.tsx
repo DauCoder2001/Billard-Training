@@ -85,7 +85,7 @@ export function StatsPage() {
       </div>
 
       {finished.length === 0 ? (
-        <EmptyState title="Noch keine Daten im gewaehlten Zeitraum">
+        <EmptyState title="Noch keine Daten im gewählten Zeitraum">
           <Link className="btn btn--sm" to="/library">
             Eine Einheit trainieren
           </Link>
@@ -93,8 +93,8 @@ export function StatsPage() {
       ) : (
         <>
           <div className="grid" style={{ gridTemplateColumns: 'repeat(auto-fit, minmax(140px, 1fr))' }}>
-            <Stat label="Gesamtrating" value={rating.toFixed(0)} />
-            <Stat label="Sessions" value={finished.length} />
+            <Stat label="Gesamtniveau" value={rating.toFixed(0)} />
+            <Stat label="Einheiten" value={finished.length} />
             <Stat label="Versuche" value={allAttempts.length} />
             <Stat
               label="Trefferquote"
@@ -108,19 +108,19 @@ export function StatsPage() {
               <h2>Ergebnisse im Verlauf</h2>
               <Sparkline values={finished.map((s) => s.score)} />
               <span className="small muted">
-                Jeder Punkt eine Einheit, aelteste links. Aktueller Schnitt{' '}
+                Jeder Punkt eine Einheit, älteste links. Aktuelles Mittel{' '}
                 {(finished.reduce((a, s) => a + s.score, 0) / finished.length).toFixed(0)} %.
               </span>
             </div>
 
             <div className="card stack" style={{ alignItems: 'center' }}>
-              <h2 style={{ alignSelf: 'flex-start' }}>Faehigkeitsprofil</h2>
+              <h2 style={{ alignSelf: 'flex-start' }}>Fähigkeitsprofil</h2>
               <SkillRadar values={radar} />
             </div>
           </div>
 
           <div className="card stack">
-            <h2>Faehigkeiten im Einzelnen</h2>
+            <h2>Fähigkeiten im Einzelnen</h2>
             <Bars
               items={skills.map((s) => ({
                 label: SKILL_LABELS[s.skill],
@@ -132,16 +132,16 @@ export function StatsPage() {
           </div>
 
           <div className="card stack">
-            <h2>Stoesse, schwaechste zuerst</h2>
+            <h2>Stöße, schwächste zuerst</h2>
             <div className="table-scroll">
               <table className="table">
                 <thead>
                   <tr>
-                    <th>Stoss</th>
-                    <th>Sessions</th>
+                    <th>Stoß</th>
+                    <th>Einheiten</th>
                     <th>Letztes</th>
                     <th>Bestes</th>
-                    <th>Schnitt</th>
+                    <th>Mittel</th>
                     <th>Einstufung</th>
                   </tr>
                 </thead>

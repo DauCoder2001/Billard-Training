@@ -57,10 +57,10 @@ export function SessionSummaryPage() {
           value={`${session.score.toFixed(0)} %`}
           hint={
             delta === null
-              ? 'erste Session'
+              ? 'erste Einheit'
               : delta >= 0
-                ? `+${delta.toFixed(0)} gegenueber der letzten`
-                : `${delta.toFixed(0)} gegenueber der letzten`
+                ? `+${delta.toFixed(0)} gegenüber der letzten`
+                : `${delta.toFixed(0)} gegenüber der letzten`
           }
         />
         <Stat label="Punkte" value={`${points} / ${session.results.length * MAX_POINTS}`} />
@@ -82,13 +82,13 @@ export function SessionSummaryPage() {
           ))}
         </div>
         <span className="small muted">
-          Gefuellt = starker Versuch, blass = teilweise, dunkel = daneben oder Kratzer.
+          Gefüllt = starker Versuch, blass = teilweise, dunkel = daneben oder Kratzer.
         </span>
       </div>
 
       {history.length > 1 && (
         <div className="card stack">
-          <h3>Verlauf dieses Stosses</h3>
+          <h3>Verlauf dieses Stoßes</h3>
           <Sparkline values={history.map((s) => s.score)} />
         </div>
       )}
@@ -106,10 +106,10 @@ export function SessionSummaryPage() {
           Nochmal
         </button>
         <button className="btn" onClick={() => navigate(`/shot/${shot.id}`)}>
-          Zum Stoss
+          Zum Stoß
         </button>
         <button className="btn" onClick={() => navigate('/')}>
-          Zur Startseite
+          Zum Start
         </button>
       </div>
     </div>

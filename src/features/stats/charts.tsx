@@ -87,7 +87,7 @@ interface RadarProps {
 
 /** Netzdiagramm ueber die Faehigkeiten. */
 export function SkillRadar({ values, size = 280 }: RadarProps) {
-  if (values.length < 3) return <p className="small muted">Zu wenige Werte fuer ein Netz.</p>
+  if (values.length < 3) return <p className="small muted">Zu wenige Werte für ein Netz.</p>
   const r = 40
   const cx = 50
   const cy = 50
@@ -101,7 +101,7 @@ export function SkillRadar({ values, size = 280 }: RadarProps) {
   const polygon = values.map((v, i) => point(i, v.rating).join(',')).join(' ')
 
   return (
-    <svg viewBox="0 0 100 100" width={size} height={size} role="img" aria-label="Faehigkeitsprofil">
+    <svg viewBox="0 0 100 100" width={size} height={size} role="img" aria-label="Fähigkeitsprofil">
       {[0.25, 0.5, 0.75, 1].map((f) => (
         <polygon
           key={f}

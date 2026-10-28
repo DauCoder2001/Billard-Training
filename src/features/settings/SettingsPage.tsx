@@ -50,9 +50,9 @@ export function SettingsPage() {
       return
     }
     const ok = await dialogs.confirm({
-      title: `"${player.name}" loeschen?`,
+      title: `"${player.name}" löschen?`,
       message: 'Alle Trainingsergebnisse dieses Profils werden entfernt.',
-      confirmLabel: 'Loeschen',
+      confirmLabel: 'Löschen',
       danger: true,
     })
     if (!ok) return
@@ -73,22 +73,22 @@ export function SettingsPage() {
     try {
       parsed = JSON.parse(await file.text())
     } catch {
-      dialogs.toast('Die Datei liess sich nicht lesen', 'error')
+      dialogs.toast('Die Datei ließ sich nicht lesen', 'error')
       return
     }
     const replace = await dialogs.confirm({
       title: 'Sicherung einspielen',
       message:
-        'Vorhandene Daten ersetzen? "Abbrechen" fuegt die Sicherung zum vorhandenen Bestand hinzu.',
+        'Vorhandene Daten ersetzen? "Abbrechen" fügt die Sicherung zum vorhandenen Bestand hinzu.',
       confirmLabel: 'Ersetzen',
-      cancelLabel: 'Hinzufuegen',
+      cancelLabel: 'Hinzufügen',
       danger: true,
     })
     try {
       const result = await importBackup(parsed, replace ? 'replace' : 'merge')
       await dialogs.alert({
         title: 'Sicherung eingespielt',
-        message: `${result.shots} Stoesse, ${result.players} Spieler, ${result.sessions} Sessions, ${result.workouts} Workouts.`,
+        message: `${result.shots} Stöße, ${result.players} Spieler, ${result.sessions} Einheiten, ${result.workouts} Workouts.`,
       })
     } catch (err) {
       dialogs.toast(err instanceof Error ? err.message : 'Import fehlgeschlagen', 'error')
@@ -97,30 +97,31 @@ export function SettingsPage() {
 
   const restoreDrills = async () => {
     const ok = await dialogs.confirm({
-      title: 'Uebungen wiederherstellen',
-      message: 'Die mitgelieferten Uebungen werden neu eingespielt. Eigene Stoesse bleiben unberuehrt.',
+      title: 'Mitgelieferte Stöße wiederherstellen',
+      message:
+        'Die mitgelieferten Stöße werden neu eingespielt. Selbst gebaute Stöße bleiben unberührt.',
       confirmLabel: 'Einspielen',
     })
     if (!ok) return
     await db.shots.bulkPut(seedShots())
     await patchSettings({ seededVersion: SEED_VERSION })
-    dialogs.toast('Uebungen wiederhergestellt', 'ok')
+    dialogs.toast('Stöße wiederhergestellt', 'ok')
   }
 
   const wipe = async () => {
     const ok = await dialogs.confirm({
-      title: 'Alle Daten loeschen?',
-      message: 'Stoesse, Spieler, Sessions und Workouts werden entfernt. Das laesst sich nicht rueckgaengig machen.',
-      confirmLabel: 'Alles loeschen',
+      title: 'Alle Daten löschen?',
+      message: 'Stöße, Spieler, Einheiten und Workouts werden entfernt. Das lässt sich nicht rückgängig machen.',
+      confirmLabel: 'Alles löschen',
       danger: true,
     })
     if (!ok) return
     const typed = await dialogs.prompt({
       title: 'Sicher?',
-      message: 'Zum Bestaetigen LOESCHEN eingeben.',
-      label: 'Bestaetigung',
+      message: 'Zum Bestätigen LÖSCHEN eingeben.',
+      label: 'Bestätigung',
     })
-    if (typed?.trim().toUpperCase() !== 'LOESCHEN') {
+    if (typed?.trim().toUpperCase() !== 'LÖSCHEN') {
       dialogs.toast('Abgebrochen', 'error')
       return
     }
@@ -153,13 +154,13 @@ export function SettingsPage() {
               Umbenennen
             </button>
             <button className="btn btn--sm btn--danger" onClick={() => void removePlayer(p.id)}>
-              Loeschen
+              Löschen
             </button>
           </div>
         ))}
         <div className="row">
           <button className="btn" onClick={() => void addPlayer()}>
-            Spieler hinzufuegen
+            Spieler hinzufügen
           </button>
         </div>
       </section>
@@ -210,8 +211,8 @@ export function SettingsPage() {
               void patchSettings({ orientation: e.target.value as 'landscape' | 'portrait' })
             }
           >
-            <option value="landscape">Quer (Laengsachse waagerecht)</option>
-            <option value="portrait">Hoch (Laengsachse senkrecht)</option>
+            <option value="landscape">Quer (Längsachse waagerecht)</option>
+            <option value="portrait">Hoch (Längsachse senkrecht)</option>
           </select>
         </div>
 
@@ -221,7 +222,7 @@ export function SettingsPage() {
             checked={settings.snapToGrid}
             onChange={(e) => void patchSettings({ snapToGrid: e.target.checked })}
           />
-          <span>Baelle auf das Diamantenraster einrasten</span>
+          <span>Bälle auf das Diamantenraster einrasten</span>
         </label>
 
         <div className="field">
@@ -245,7 +246,7 @@ export function SettingsPage() {
       </section>
 
       <section className="card stack">
-        <h2>Standardwerte fuer neue Stoesse</h2>
+        <h2>Standardwerte für neue Stöße</h2>
         <div className="field">
           <label htmlFor="s-radius">Radius der Zielzone {settings.defaultTargetRadius} Zoll</label>
           <input
@@ -317,15 +318,21 @@ export function SettingsPage() {
             }}
           />
           <button className="btn" onClick={() => void restoreDrills()}>
-            Uebungen wiederherstellen
+            Mitgelieferte Stöße wiederherstellen
           </button>
           <button className="btn" onClick={() => navigate('/import')}>
-            Geteilten Stoss uebernehmen
+            Geteilten Stoß übernehmen
           </button>
-          <span className="spacer" />
+        </div>
+
+        <div className="danger-zone">
           <button className="btn btn--danger" onClick={() => void wipe()}>
-            Alle Daten loeschen
+            Alle Daten löschen
           </button>
+          <span className="small muted">
+            Entfernt Stöße, Spieler, Einheiten und Workouts von diesem Gerät. Das lässt sich
+            nicht rückgängig machen.
+          </span>
         </div>
       </section>
     </div>

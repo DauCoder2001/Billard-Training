@@ -77,7 +77,7 @@ describe('Empfehlungen', () => {
     const sessions = [session('frisch', 70, 0), session('alt', 70, 20)]
     const result = recommend({ shots, sessions, player: player({ draw: 60 }), now: NOW }, 2)
     expect(result[0].shot.id).toBe('alt')
-    expect(result[0].reason).toContain('Tagen nicht geuebt')
+    expect(result[0].reason).toContain('Tagen nicht geübt')
   })
 
   it('bevorzugt Stoesse zur schwaechsten Faehigkeit', () => {

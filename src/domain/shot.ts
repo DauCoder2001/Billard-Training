@@ -22,7 +22,7 @@ export function createShot(partial: Partial<Shot> = {}): Shot {
   const object: Ball = { id: newId(), kind: 'object', number: 1, x: 62.5, y: 25, order: 1 }
   return {
     id: newId(),
-    name: 'Neuer Stoss',
+    name: 'Neuer Stoß',
     description: '',
     balls: [cue, object],
     target: { pocketId: 'br', cheat: 0 },

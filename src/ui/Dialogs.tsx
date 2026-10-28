@@ -61,7 +61,7 @@ const DialogsContext = createContext<DialogsApi | null>(null)
 
 export function useDialogs(): DialogsApi {
   const ctx = useContext(DialogsContext)
-  if (!ctx) throw new Error('useDialogs ausserhalb von DialogsProvider verwendet')
+  if (!ctx) throw new Error('useDialogs außerhalb von DialogsProvider verwendet')
   return ctx
 }
 

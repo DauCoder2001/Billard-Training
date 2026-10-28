@@ -55,7 +55,7 @@ export function DashboardPage() {
     <div className="page stack">
       <div className="page__head">
         <div>
-          <h1>Training</h1>
+          <h1>Start</h1>
           <p className="page__sub">
             {player ? `Profil: ${player.name}` : 'Kein Spielerprofil vorhanden'}
           </p>
@@ -76,8 +76,8 @@ export function DashboardPage() {
       </div>
 
       <div className="grid" style={{ gridTemplateColumns: 'repeat(auto-fit, minmax(140px, 1fr))' }}>
-        <Stat label="Gesamtrating" value={rating.toFixed(0)} hint="Mittel ueber alle Faehigkeiten" />
-        <Stat label="Sessions" value={finished.length} hint={`${lastWeek.length} in den letzten 7 Tagen`} />
+        <Stat label="Gesamtniveau" value={rating.toFixed(0)} hint="Mittel über alle Fähigkeiten" />
+        <Stat label="Einheiten" value={finished.length} hint={`${lastWeek.length} in den letzten 7 Tagen`} />
         <Stat label="Versuche diese Woche" value={attemptsWeek} />
         <Stat label="Erfolge" value={unlocked} hint="freigeschaltet" />
       </div>
@@ -87,7 +87,7 @@ export function DashboardPage() {
           <h2>Der Coach empfiehlt</h2>
           <span className="spacer" />
           <Link className="btn btn--sm btn--ghost" to="/library">
-            Alle Stoesse
+            Alle Stöße
           </Link>
         </div>
 
@@ -123,7 +123,7 @@ export function DashboardPage() {
       </section>
 
       <section className="card stack">
-        <h2>Schwaechste Faehigkeiten</h2>
+        <h2>Schwächste Fähigkeiten</h2>
         <Bars items={weakest} unit="" />
         <Link className="btn btn--sm btn--ghost" to="/stats">
           Zur Statistik

@@ -111,8 +111,8 @@ export function BuilderPage() {
   const leave = async (to: string) => {
     if (dirty) {
       const ok = await dialogs.confirm({
-        title: 'Aenderungen verwerfen?',
-        message: 'Der Stoss wurde noch nicht gespeichert.',
+        title: 'Änderungen verwerfen?',
+        message: 'Der Stoß wurde noch nicht gespeichert.',
         confirmLabel: 'Verwerfen',
         danger: true,
       })
@@ -123,7 +123,7 @@ export function BuilderPage() {
 
   const rename = async () => {
     const name = await dialogs.prompt({
-      title: 'Stoss benennen',
+      title: 'Stoß benennen',
       label: 'Name',
       initial: shot.name,
     })
@@ -184,9 +184,9 @@ export function BuilderPage() {
 
   const resetShot = async () => {
     const ok = await dialogs.confirm({
-      title: 'Alles zuruecksetzen?',
-      message: 'Baelle, Wege und Zielzone werden auf den Ausgangszustand gesetzt.',
-      confirmLabel: 'Zuruecksetzen',
+      title: 'Alles zurücksetzen?',
+      message: 'Bälle, Wege und Zielzone werden auf den Ausgangszustand gesetzt.',
+      confirmLabel: 'Zurücksetzen',
       danger: true,
     })
     if (!ok) return
@@ -204,9 +204,9 @@ export function BuilderPage() {
 
   const remove = async () => {
     const ok = await dialogs.confirm({
-      title: `"${shot.name}" loeschen?`,
-      message: 'Der Stoss und seine Trainingshistorie werden entfernt.',
-      confirmLabel: 'Loeschen',
+      title: `"${shot.name}" löschen?`,
+      message: 'Der Stoß und seine Trainingshistorie werden entfernt.',
+      confirmLabel: 'Löschen',
       danger: true,
     })
     if (!ok) return
@@ -222,7 +222,7 @@ export function BuilderPage() {
   if (!loaded) {
     return (
       <div className="page">
-        <p className="muted">Stoss wird geladen …</p>
+        <p className="muted">Wird geladen …</p>
       </div>
     )
   }
@@ -233,14 +233,14 @@ export function BuilderPage() {
     <div className="builder">
       <header className="builder__head">
         <button className="btn btn--ghost btn--sm" onClick={() => void leave('/library')}>
-          ← Stoesse
+          ← Stöße
         </button>
         <button className="btn btn--ghost" onClick={() => void rename()} title="Umbenennen">
           <strong>{shot.name}</strong>
           {dirty && <span className="muted small"> • ungespeichert</span>}
         </button>
         <span className="spacer" />
-        <button className="btn btn--sm btn--icon" disabled={!canUndo} title="Rueckgaengig" onClick={() => useBuilder.getState().undo()}>
+        <button className="btn btn--sm btn--icon" disabled={!canUndo} title="Rückgängig" onClick={() => useBuilder.getState().undo()}>
           ↶
         </button>
         <button className="btn btn--sm btn--icon" disabled={!canRedo} title="Wiederholen" onClick={() => useBuilder.getState().redo()}>
@@ -272,7 +272,7 @@ export function BuilderPage() {
         <div className="builder__tools">
           <Tool active={mode === 'select'} label="Auswahl" icon="↖" onClick={() => useBuilder.getState().setMode('select')} />
           <Tool active={mode === 'addObject'} label="Objektball" icon="●" onClick={() => useBuilder.getState().setMode('addObject')} />
-          <Tool active={mode === 'addObstacle'} label="Stoerball" icon="◍" onClick={() => useBuilder.getState().setMode('addObstacle')} />
+          <Tool active={mode === 'addObstacle'} label="Störball" icon="◍" onClick={() => useBuilder.getState().setMode('addObstacle')} />
           <Tool active={mode === 'addGhost'} label="Geisterball" icon="○" onClick={() => useBuilder.getState().setMode('addGhost')} />
           <Tool active={mode === 'path'} label="Weg" icon="↗" onClick={() => useBuilder.getState().setMode('path')} />
           <Tool active={mode === 'zone'} label="Zielzone" icon="◎" onClick={() => useBuilder.getState().setMode('zone')} />
@@ -281,7 +281,8 @@ export function BuilderPage() {
           <Tool active={showAim} label="Ziellinie" icon="⌖" onClick={() => setShowAim((v) => !v)} />
           <div className="builder__sep" />
           <Tool
-            label="Loeschen"
+            label="Entfernen"
+            title="Markiertes entfernen (erst einen Ball oder Weg antippen)"
             icon="✕"
             disabled={!selectedBallId && !selectedPathId}
             onClick={removeSelected}
@@ -308,12 +309,12 @@ export function BuilderPage() {
               value={useBuilder.getState().pathRole}
               onChange={(e) => useBuilder.getState().setPathRole(e.target.value as BallPath['role'])}
             >
-              <option value="cue">Weg des Weissen</option>
+              <option value="cue">Weg des Weißen</option>
               <option value="object">Weg des Objektballs</option>
               <option value="secondary">Weiterer Weg</option>
             </select>
             <button className="btn btn--sm" onClick={addRailBounce}>
-              Bande anhaengen
+              Bande anhängen
             </button>
             <button
               className="btn btn--sm btn--primary"
@@ -334,7 +335,7 @@ export function BuilderPage() {
               Spiegeln ↔
             </button>
             <button className="btn btn--sm" onClick={() => void resetShot()}>
-              Zuruecksetzen
+              Zurücksetzen
             </button>
             <span className="spacer" />
             {!isNew && (
@@ -342,8 +343,9 @@ export function BuilderPage() {
                 <button className="btn btn--sm" onClick={() => void duplicate()}>
                   Duplizieren
                 </button>
+                <div className="builder__sep builder__sep--v" />
                 <button className="btn btn--sm btn--danger" onClick={() => void remove()}>
-                  Loeschen
+                  Stoß löschen
                 </button>
               </>
             )}
@@ -372,18 +374,20 @@ function startOf(path: BallPath, balls: { id: string; x: number; y: number }[]):
 interface ToolProps {
   label: string
   icon: string
+  /** Laengerer Text fuer die Kurzhilfe, wenn die Beschriftung knapp ist. */
+  title?: string
   active?: boolean
   disabled?: boolean
   onClick: () => void
 }
 
-function Tool({ label, icon, active, disabled, onClick }: ToolProps) {
+function Tool({ label, icon, title, active, disabled, onClick }: ToolProps) {
   return (
     <button
       className={`builder__tool${active ? ' is-on' : ''}`}
       onClick={onClick}
       disabled={disabled}
-      title={label}
+      title={title ?? label}
     >
       <span aria-hidden style={{ fontSize: 18 }}>
         {icon}

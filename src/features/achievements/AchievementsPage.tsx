@@ -40,7 +40,7 @@ export function AchievementsPage() {
                 {achievement.icon}
               </span>
               <strong style={{ flex: 1 }}>{achievement.name}</strong>
-              {done && <span className="prof prof--exemplary">Erreicht</span>}
+              {done && <span className="prof prof--done">Erreicht</span>}
             </div>
             <span className="small muted">{achievement.description}</span>
             {!done && (

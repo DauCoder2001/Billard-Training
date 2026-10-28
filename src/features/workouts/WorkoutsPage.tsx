@@ -18,7 +18,7 @@ export function WorkoutsPage() {
     const name = await dialogs.prompt({
       title: 'Neues Workout',
       label: 'Name',
-      initial: 'Aufwaermen',
+      initial: 'Aufwärmen',
     })
     if (name === null) return
     setEditing({ ...createWorkout(name.trim() || 'Neues Workout') })
@@ -26,8 +26,8 @@ export function WorkoutsPage() {
 
   const remove = async (workout: Workout) => {
     const ok = await dialogs.confirm({
-      title: `"${workout.name}" loeschen?`,
-      confirmLabel: 'Loeschen',
+      title: `"${workout.name}" löschen?`,
+      confirmLabel: 'Löschen',
       danger: true,
     })
     if (ok) await deleteWorkout(workout.id)
@@ -38,7 +38,7 @@ export function WorkoutsPage() {
       <div className="page__head">
         <div>
           <h1>Workouts</h1>
-          <p className="page__sub">Mehrere Stoesse hintereinander als eine Einheit.</p>
+          <p className="page__sub">Mehrere Stöße hintereinander als eine Einheit.</p>
         </div>
         <button className="btn btn--primary" onClick={() => void add()}>
           Neues Workout
@@ -48,7 +48,7 @@ export function WorkoutsPage() {
       {workouts && workouts.length === 0 ? (
         <EmptyState title="Noch kein Workout angelegt">
           <span className="small muted">
-            Ein Workout bündelt Stoesse in fester Reihenfolge, etwa zum Aufwaermen.
+            Ein Workout bündelt Stöße in fester Reihenfolge, etwa zum Aufwärmen.
           </span>
         </EmptyState>
       ) : (
@@ -59,18 +59,23 @@ export function WorkoutsPage() {
               <div key={workout.id} className="card stack">
                 <strong>{workout.name}</strong>
                 <span className="small muted">
-                  {workout.entries.length} Stoesse · {total} Versuche
+                  {workout.entries.length} Stöße · {total} Versuche
                 </span>
                 {workout.description && <span className="small">{workout.description}</span>}
                 <ol className="small muted" style={{ margin: 0, paddingLeft: 18 }}>
                   {workout.entries.slice(0, 4).map((entry, i) => (
                     <li key={i}>
-                      {shots?.find((s) => s.id === entry.shotId)?.name ?? 'Unbekannter Stoss'} ·{' '}
+                      {shots?.find((s) => s.id === entry.shotId)?.name ?? 'Unbekannter Stoß'} ·{' '}
                       {entry.attempts}
                     </li>
                   ))}
                   {workout.entries.length > 4 && <li>…</li>}
                 </ol>
+                {workout.entries.length === 0 && (
+                  <span className="small muted">
+                    Noch kein Stoß hinzugefügt – über „Bearbeiten“ einen auswählen.
+                  </span>
+                )}
                 <div className="row row--tight">
                   <button
                     className="btn btn--sm btn--primary"
@@ -83,7 +88,7 @@ export function WorkoutsPage() {
                     Bearbeiten
                   </button>
                   <button className="btn btn--sm btn--danger" onClick={() => void remove(workout)}>
-                    Loeschen
+                    Löschen
                   </button>
                 </div>
               </div>
@@ -152,9 +157,9 @@ function WorkoutEditor({ workout, onClose, onSave }: EditorProps) {
         </div>
 
         <div className="stack" style={{ gap: 8 }}>
-          <span className="tiny">Stoesse in dieser Reihenfolge</span>
+          <span className="tiny">Stöße in dieser Reihenfolge</span>
           {draft.entries.length === 0 && (
-            <span className="small muted">Noch kein Stoss hinzugefuegt.</span>
+            <span className="small muted">Noch kein Stoß hinzugefügt.</span>
           )}
           {draft.entries.map((entry, i) => (
             <div key={i} className="row row--tight">
@@ -202,7 +207,7 @@ function WorkoutEditor({ workout, onClose, onSave }: EditorProps) {
             value={pick}
             onChange={(e) => setPick(e.target.value)}
           >
-            <option value="">Stoss auswaehlen …</option>
+            <option value="">Stoß auswählen …</option>
             {(shots ?? []).map((s) => (
               <option key={s.id} value={s.id}>
                 {s.name}
@@ -217,7 +222,7 @@ function WorkoutEditor({ workout, onClose, onSave }: EditorProps) {
               setPick('')
             }}
           >
-            Hinzufuegen
+            Hinzufügen
           </button>
         </div>
       </div>

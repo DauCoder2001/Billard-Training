@@ -51,9 +51,9 @@ export function ShotDetailPage() {
   if (shot === null) {
     return (
       <div className="page">
-        <h1>Stoss nicht gefunden</h1>
+        <h1>Stoß nicht gefunden</h1>
         <Link className="btn" to="/library">
-          Zur Bibliothek
+          Zu den Stößen
         </Link>
       </div>
     )
@@ -81,9 +81,9 @@ export function ShotDetailPage() {
 
   const remove = async () => {
     const ok = await dialogs.confirm({
-      title: `"${shot.name}" loeschen?`,
-      message: 'Der Stoss und seine Trainingshistorie werden entfernt.',
-      confirmLabel: 'Loeschen',
+      title: `"${shot.name}" löschen?`,
+      message: 'Der Stoß und seine Trainingshistorie werden entfernt.',
+      confirmLabel: 'Löschen',
       danger: true,
     })
     if (!ok) return
@@ -96,14 +96,14 @@ export function ShotDetailPage() {
       <div className="page__head">
         <div>
           <Link className="btn btn--sm btn--ghost" to="/library">
-            ← Stoesse
+            ← Stöße
           </Link>
           <h1 style={{ marginTop: 6 }}>{shot.name}</h1>
           {shot.description && <p className="page__sub">{shot.description}</p>}
         </div>
         <div className="row row--tight">
           <button
-            className={`btn btn--sm${shot.favorite ? ' is-on' : ''}`}
+            className={`chip${shot.favorite ? ' is-on' : ''}`}
             onClick={() => void toggleFavorite(shot.id)}
           >
             ★ Favorit
@@ -127,9 +127,9 @@ export function ShotDetailPage() {
             showAim
           />
           <div className="row row--tight small muted">
-            <span>◍ Weisser</span>
+            <span>◍ Weißer</span>
             <span style={{ color: 'var(--accent)' }}>— Weg des Objektballs</span>
-            <span>--- Weg des Weissen</span>
+            <span>--- Weg des Weißen</span>
             {shot.scoring.targetZone && <span style={{ color: 'var(--accent)' }}>◎ Zielzone</span>}
           </div>
         </div>
@@ -141,7 +141,7 @@ export function ShotDetailPage() {
               {FORMATS.map((f) => (
                 <button
                   key={f.id}
-                  className={`btn${f.id === 'standard' ? ' btn--primary' : ''}`}
+                  className={`btn${f.id === 'standard' ? ' is-on' : ''}`}
                   onClick={() => void startTraining(f.id)}
                 >
                   {f.label}
@@ -151,10 +151,10 @@ export function ShotDetailPage() {
             </div>
             <span className="small muted">
               {shot.scoring.mode === 'pocket'
-                ? 'Gewertet wird nur, ob der Ball faellt.'
+                ? 'Gewertet wird nur, ob der Ball fällt.'
                 : shot.scoring.mode === 'position'
-                  ? 'Gewertet wird nur, wo der Weisse liegen bleibt.'
-                  : 'Gewertet werden Treffer und die Lage des Weissen.'}
+                  ? 'Gewertet wird nur, wo der Weiße liegen bleibt.'
+                  : 'Gewertet werden Treffer und die Lage des Weißen.'}
             </span>
           </div>
 
@@ -162,10 +162,10 @@ export function ShotDetailPage() {
             <Stat
               label="Letztes Ergebnis"
               value={last ? `${last.score.toFixed(0)} %` : '–'}
-              hint={last ? new Date(last.finishedAt ?? 0).toLocaleDateString('de-DE') : 'noch nie geuebt'}
+              hint={last ? new Date(last.finishedAt ?? 0).toLocaleDateString('de-DE') : 'noch nie geübt'}
             />
             <Stat label="Bestwert" value={history.length ? `${best.toFixed(0)} %` : '–'} />
-            <Stat label="Sessions" value={history.length} />
+            <Stat label="Einheiten" value={history.length} />
             <Stat
               label="Trefferquote"
               value={allAttempts.length ? `${pocketRate(allAttempts).toFixed(0)} %` : '–'}
@@ -177,7 +177,7 @@ export function ShotDetailPage() {
             <div className="card stack">
               <h3>Verlauf</h3>
               <Sparkline values={history.map((s) => s.score)} />
-              <span className="small muted">{history.length} Sessions, aelteste links.</span>
+              <span className="small muted">{history.length} Einheiten, älteste links.</span>
             </div>
           )}
 
@@ -190,7 +190,7 @@ export function ShotDetailPage() {
               <strong>{shot.attributes.difficulty}/10</strong>
               <span className="muted">Tempo</span>
               <strong>{shot.attributes.speed}/10</strong>
-              <span className="muted">Schnitt</span>
+              <span className="muted">Schnittwinkel</span>
               <strong>{shot.attributes.cutAngle.toFixed(1)}°</strong>
             </div>
             {pocket && <div className="small muted">Zieltasche: {pocket.label}</div>}
@@ -213,7 +213,7 @@ export function ShotDetailPage() {
           {!shot.builtIn && (
             <div className="row">
               <button className="btn btn--sm btn--danger" onClick={() => void remove()}>
-                Stoss loeschen
+                Stoß löschen
               </button>
             </div>
           )}

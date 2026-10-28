@@ -38,7 +38,7 @@ export function ShareDialog({ shot, onClose }: { shot: Shot; onClose: () => void
       await navigator.clipboard.writeText(url)
       dialogs.toast('Link kopiert', 'ok')
     } catch {
-      dialogs.toast('Kopieren nicht moeglich, Link bitte markieren', 'error')
+      dialogs.toast('Kopieren nicht möglich, Link bitte markieren', 'error')
     }
   }
 
@@ -58,9 +58,9 @@ export function ShareDialog({ shot, onClose }: { shot: Shot; onClose: () => void
   }
 
   return (
-    <Modal onClose={onClose} wide label="Stoss teilen">
+    <Modal onClose={onClose} wide label="Stoß teilen">
       <div className="modal__head">
-        <h2>Stoss teilen</h2>
+        <h2>Stoß teilen</h2>
       </div>
       <div className="modal__body stack">
         <div ref={diagramRef}>
@@ -71,7 +71,7 @@ export function ShareDialog({ shot, onClose }: { shot: Shot; onClose: () => void
           {qr && (
             <img
               src={qr}
-              alt="QR-Code mit dem Stoss"
+              alt="QR-Code mit dem Stoß"
               width={168}
               height={168}
               style={{ borderRadius: 8 }}
@@ -80,13 +80,13 @@ export function ShareDialog({ shot, onClose }: { shot: Shot; onClose: () => void
           <div className="stack" style={{ flex: '1 1 240px' }}>
             {tooLong ? (
               <p className="small muted">
-                Dieser Stoss ist zu umfangreich fuer einen QR-Code. Der Link funktioniert
+                Dieser Stoß ist zu umfangreich für einen QR-Code. Der Link funktioniert
                 trotzdem, ebenso der Export als Datei.
               </p>
             ) : (
               <p className="small muted">
-                Der Stoss steckt vollstaendig im Link. Wer ihn oeffnet, bekommt ihn zum
-                Uebernehmen angeboten &ndash; ohne Server, ohne Konto.
+                Der Stoß steckt vollständig im Link. Wer ihn öffnet, bekommt ihn zum
+                Übernehmen angeboten &ndash; ohne Server, ohne Konto.
               </p>
             )}
             <textarea className="textarea" readOnly value={url} style={{ minHeight: 64, fontSize: 12 }} />
@@ -95,17 +95,17 @@ export function ShareDialog({ shot, onClose }: { shot: Shot; onClose: () => void
                 Link kopieren
               </button>
               <button className="btn btn--sm" onClick={() => void savePng()}>
-                Als PNG
+                Als Bild
               </button>
               <button className="btn btn--sm" onClick={saveJson}>
-                Als JSON
+                Als Datei
               </button>
             </div>
           </div>
         </div>
       </div>
       <div className="modal__foot">
-        <button className="btn btn--primary" onClick={onClose}>
+        <button className="btn" onClick={onClose}>
           Fertig
         </button>
       </div>

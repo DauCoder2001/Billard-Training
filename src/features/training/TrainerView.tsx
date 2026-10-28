@@ -59,7 +59,7 @@ export function TrainerView({ shot, planned, subtitle, onQuit, onComplete }: Tra
     <div className="builder">
       <header className="builder__head">
         <button className="btn btn--ghost btn--sm" onClick={() => onQuit(results.length)}>
-          ← Beenden
+          ← Abbrechen
         </button>
         <strong>{shot.name}</strong>
         {subtitle && <span className="muted small">{subtitle}</span>}
@@ -129,7 +129,7 @@ export function TrainerView({ shot, planned, subtitle, onQuit, onComplete }: Tra
               setEnd(null)
             }}
           >
-            Letzten zuruecknehmen
+            Letzten zurücknehmen
           </button>
         )}
       </div>
@@ -138,8 +138,8 @@ export function TrainerView({ shot, planned, subtitle, onQuit, onComplete }: Tra
         {needsPosition && (
           <span className="small muted train__hint">
             {end
-              ? 'Position erfasst. Jetzt das Ergebnis waehlen.'
-              : 'Auf den Tisch tippen, wo der Weisse liegen geblieben ist.'}
+              ? 'Position erfasst. Jetzt das Ergebnis wählen.'
+              : 'Auf den Tisch tippen, wo der Weiße liegen geblieben ist.'}
           </span>
         )}
         {/* Zaehlt die Position mit, waere ein Treffer ohne erfasste Position
@@ -154,7 +154,7 @@ export function TrainerView({ shot, planned, subtitle, onQuit, onComplete }: Tra
         <button className="btn btn--wide" disabled={busy || done} onClick={() => void record(false, false)}>
           Verfehlt
         </button>
-        <button className="btn btn--wide btn--danger" disabled={busy || done} onClick={() => void record(false, true)}>
+        <button className="btn btn--wide btn--scratch" disabled={busy || done} onClick={() => void record(false, true)}>
           Kratzer
         </button>
       </div>

@@ -30,9 +30,9 @@ export function TrainPage() {
   if (shot === null) {
     return (
       <div className="page">
-        <h1>Stoss nicht gefunden</h1>
+        <h1>Stoß nicht gefunden</h1>
         <button className="btn" onClick={() => navigate('/library')}>
-          Zur Bibliothek
+          Zu den Stößen
         </button>
       </div>
     )

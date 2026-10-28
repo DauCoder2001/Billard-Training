@@ -91,14 +91,14 @@ export const ACHIEVEMENTS: Achievement[] = [
   {
     id: 'exemplary',
     name: 'Meisterlich',
-    description: 'Eine Einheit in der hoechsten Stufe beendet.',
+    description: 'Eine Einheit in der höchsten Stufe beendet.',
     icon: '🏆',
     progress: (ctx) => (finished(ctx).some((s) => s.proficiency === 'exemplary') ? 1 : 0),
   },
   {
     id: 'clean-20',
     name: 'Saubere Hand',
-    description: '20 Versuche am Stueck ohne einen Kratzer.',
+    description: '20 Versuche am Stück ohne einen Kratzer.',
     icon: '🧤',
     progress: (ctx) =>
       finished(ctx).some((s) => s.results.length >= 20 && s.results.every((r) => !r.scratch))
@@ -107,7 +107,7 @@ export const ACHIEVEMENTS: Achievement[] = [
   },
   {
     id: 'streak-3',
-    name: 'Drei Tage am Stueck',
+    name: 'Drei Tage am Stück',
     description: 'An drei aufeinanderfolgenden Tagen trainiert.',
     icon: '🔥',
     progress: (ctx) => ratio(longestStreak(ctx), 3),
@@ -122,21 +122,21 @@ export const ACHIEVEMENTS: Achievement[] = [
   {
     id: 'builder-1',
     name: 'Eigenbau',
-    description: 'Einen eigenen Stoss gebaut.',
+    description: 'Einen eigenen Stoß gebaut.',
     icon: '🛠️',
     progress: (ctx) => ratio(ctx.shots.filter((s) => !s.builtIn).length, 1),
   },
   {
     id: 'builder-10',
     name: 'Eigene Sammlung',
-    description: 'Zehn eigene Stoesse gebaut.',
+    description: 'Zehn eigene Stöße gebaut.',
     icon: '🗂️',
     progress: (ctx) => ratio(ctx.shots.filter((s) => !s.builtIn).length, 10),
   },
   {
     id: 'allrounder',
     name: 'Allrounder',
-    description: 'Jede Faehigkeit mindestens einmal trainiert.',
+    description: 'Jede Fähigkeit mindestens einmal trainiert.',
     icon: '🧭',
     progress: (ctx) =>
       ratio(
@@ -147,21 +147,21 @@ export const ACHIEVEMENTS: Achievement[] = [
   {
     id: 'rating-50',
     name: 'Solide Basis',
-    description: 'Ein Gesamtrating von 50 erreicht.',
+    description: 'Ein Gesamtniveau von 50 erreicht.',
     icon: '📈',
     progress: (ctx) => ratio(overallRating(ctx.player.skillRatings), 50),
   },
   {
     id: 'rating-75',
     name: 'Starkes Profil',
-    description: 'Ein Gesamtrating von 75 erreicht.',
+    description: 'Ein Gesamtniveau von 75 erreicht.',
     icon: '🥇',
     progress: (ctx) => ratio(overallRating(ctx.player.skillRatings), 75),
   },
   {
     id: 'hard-advanced',
     name: 'Schweres Kaliber',
-    description: 'Einen Stoss der Schwierigkeit 8 oder hoeher auf mindestens 80 Prozent gebracht.',
+    description: 'Einen Stoß der Schwierigkeit 8 oder höher auf mindestens 80 Prozent gebracht.',
     icon: '⛰️',
     progress: (ctx) => {
       const byId = new Map(ctx.shots.map((s) => [s.id, s]))

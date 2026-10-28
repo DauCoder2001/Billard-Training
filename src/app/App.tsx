@@ -39,7 +39,7 @@ export function App() {
         <h1>Start fehlgeschlagen</h1>
         <p className="muted">{error}</p>
         <p className="small muted">
-          Haeufigste Ursache: der Browser laesst im privaten Modus keine lokale Datenbank zu.
+          Häufigste Ursache: der Browser lässt im privaten Modus keine lokale Datenbank zu.
         </p>
       </div>
     )

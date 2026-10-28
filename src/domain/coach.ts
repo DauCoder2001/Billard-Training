@@ -109,7 +109,7 @@ export function recommend(input: CoachInput, count = 5): Recommendation[] {
       if (days >= 3) {
         factors.push({
           weight: Math.min(28, days * 1.6),
-          text: `Seit ${Math.round(days)} Tagen nicht geuebt`,
+          text: `Seit ${Math.round(days)} Tagen nicht geübt`,
         })
       }
       if (st.lastScore !== null && st.lastScore < shot.scoring.thresholds.proficient) {

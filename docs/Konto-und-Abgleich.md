@@ -22,7 +22,7 @@ Ohne Anmeldung bleibt alles wie heute, nur auf dem Gerät.
 
 | Bereich | Abgleich | Bemerkung |
 |---|---|---|
-| Übungen (`shots`) | ja | auch die mitgelieferten, damit Favoriten, Änderungen und Löschungen überall gleich sind |
+| Stöße (`shots`) | ja | auch die mitgelieferten, damit Favoriten, Änderungen und Löschungen überall gleich sind |
 | Spielerprofile (`players`) | ja | mit Fähigkeitswerten und Erfolgen |
 | Trainingseinheiten (`sessions`) | ja | mit jedem Versuch |
 | Trainingspläne (`workouts`) | ja | |
