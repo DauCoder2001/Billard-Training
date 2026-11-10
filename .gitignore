@@ -6,3 +6,5 @@ dist-ssr/
 .DS_Store
 Thumbs.db
 *.tsbuildinfo
+# Claude Code: freigegebene Befehle (koennen Zugangsdaten enthalten) nie ins Repository
+.claude/settings.local.json
