@@ -22,6 +22,18 @@ export interface Achievement {
 
 const DAY_MS = 24 * 60 * 60 * 1000
 
+/**
+ * Tagesnummer in der Zeitzone des Geraets.
+ *
+ * Der Nutzer zaehlt nach seinem Kalender, nicht nach Weltzeit: eine Einheit,
+ * die um 00:30 endet, gehoert zum angefangenen Tag. Ohne den Versatz faellt
+ * sie oestlich von Greenwich auf den Vortag - zwei Trainingstage wuerden zu
+ * einem, und die Versuche einer langen Nacht landeten auf demselben Tag.
+ */
+function dayNumber(at: number): number {
+  return Math.floor((at - new Date(at).getTimezoneOffset() * 60_000) / DAY_MS)
+}
+
 function finished(ctx: AchievementContext): Session[] {
   return ctx.sessions.filter((s) => s.finishedAt !== null)
 }
@@ -34,7 +46,7 @@ function ratio(value: number, target: number): number {
 function trainingDays(ctx: AchievementContext): number[] {
   const days = new Set<number>()
   for (const s of finished(ctx)) {
-    days.add(Math.floor((s.finishedAt ?? 0) / DAY_MS))
+    days.add(dayNumber(s.finishedAt ?? 0))
   }
   return [...days].sort((a, b) => a - b)
 }
@@ -180,7 +192,7 @@ export const ACHIEVEMENTS: Achievement[] = [
     progress: (ctx) => {
       const perDay = new Map<number, number>()
       for (const s of finished(ctx)) {
-        const day = Math.floor((s.finishedAt ?? 0) / DAY_MS)
+        const day = dayNumber(s.finishedAt ?? 0)
         perDay.set(day, (perDay.get(day) ?? 0) + s.results.length)
       }
       return ratio(Math.max(0, ...perDay.values()), 100)

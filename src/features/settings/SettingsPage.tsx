@@ -99,11 +99,17 @@ export function SettingsPage() {
     const ok = await dialogs.confirm({
       title: 'Mitgelieferte Stöße wiederherstellen',
       message:
-        'Die mitgelieferten Stöße werden neu eingespielt. Selbst gebaute Stöße bleiben unberührt.',
+        'Die mitgelieferten Stöße werden neu eingespielt. Selbst gebaute Stöße bleiben unberührt. ' +
+        'Eigene Änderungen an mitgelieferten Stößen – Name, Notizen, Schwellen – gehen verloren, ' +
+        'Favoriten bleiben markiert.',
       confirmLabel: 'Einspielen',
     })
     if (!ok) return
-    await db.shots.bulkPut(seedShots())
+    const fresh = seedShots()
+    const stored = await db.shots.bulkGet(fresh.map((s) => s.id))
+    // Der Favorit ist eine Entscheidung des Nutzers und steht nicht in der
+    // Vorlage: ohne dieses Mitnehmen setzt das Wiederherstellen ihn zurueck.
+    await db.shots.bulkPut(fresh.map((s, i) => ({ ...s, favorite: stored[i]?.favorite ?? false })))
     await patchSettings({ seededVersion: SEED_VERSION })
     dialogs.toast('Stöße wiederhergestellt', 'ok')
   }

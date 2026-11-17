@@ -197,7 +197,12 @@ export function BuilderPage() {
   }
 
   const duplicate = async () => {
-    const copy = await saveShot(duplicateShot(shot))
+    // Erst das Original sichern - sonst traegt die Kopie die Aenderungen und
+    // das Original faellt beim Wechsel still auf seinen alten Stand zurueck.
+    // Nur bei dirty: einen unberuehrten neuen Stoss ungefragt anzulegen waere
+    // ein zweiter Stoss, den niemand wollte.
+    if (dirty) await save()
+    const copy = await saveShot(duplicateShot(useBuilder.getState().shot))
     dialogs.toast('Kopie angelegt', 'ok')
     navigate(`/builder/${copy.id}`)
   }

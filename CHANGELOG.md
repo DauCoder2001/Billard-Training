@@ -6,6 +6,22 @@ Die Versionsnummer steht an genau einer Stelle — in `package.json` — und ers
 unten auf der Seite **Einstellungen** sowie auf der Fehlerseite. Schema:
 `Hauptversion.Funktion.Korrektur`.
 
+## 0.3.1 – 17.11.2026
+
+### Behoben
+- **Favoriten überleben das Wiederherstellen.** „Mitgelieferte Stöße
+  wiederherstellen“ setzte die Favoritenmarkierung zurück. Der Dialog sagt
+  jetzt außerdem offen, was dabei wirklich verloren geht: eigene Änderungen an
+  mitgelieferten Stößen, nicht aber die Favoriten.
+- **„Duplizieren“ verliert die Änderungen des Originals nicht mehr.** Wer
+  einen Stoß bearbeitete und dann duplizierte, bekam die Änderungen in der
+  Kopie — das Original fiel still auf seinen alten Stand zurück. Es wird jetzt
+  vorher gespeichert.
+- **Erfolge zählen nach dem Kalender statt nach Weltzeit.** Eine Einheit nach
+  Mitternacht zählte zum Vortag. Dadurch rissen Trainingsreihen oder
+  verschmolzen zu einer, und „100 Versuche an einem Tag“ konnte sich durch
+  eine lange Nacht fälschlich freischalten.
+
 ## 0.3.0 – 17.11.2026
 
 ### Neu
