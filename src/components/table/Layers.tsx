@@ -174,7 +174,9 @@ export function PathLayer({ paths, balls, selectedPathId, onPathPointerDown }: P
       {paths.map((path) => {
         const start = pathStart(path, balls)
         if (!start || path.segments.length === 0) return null
-        const style = PATH_STYLE[path.role]
+        // Rueckfallebene fuer Altbestand: eine unbekannte Rolle in der
+        // Datenbank liesse style.stroke sonst auf undefined zugreifen.
+        const style = PATH_STYLE[path.role] ?? PATH_STYLE.cue
         const selected = path.id === selectedPathId
         return (
           <g key={path.id}>

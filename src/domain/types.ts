@@ -12,7 +12,9 @@ export interface Point {
 
 // ---------------------------------------------------------------- Baelle ---
 
-export type BallKind = 'cue' | 'object' | 'obstacle' | 'ghost'
+export const BALL_KINDS = ['cue', 'object', 'obstacle', 'ghost'] as const
+
+export type BallKind = (typeof BALL_KINDS)[number]
 
 export interface Ball {
   id: string
@@ -29,7 +31,9 @@ export interface Ball {
 
 // --------------------------------------------------------------- Taschen ---
 
-export type PocketId = 'tl' | 'tm' | 'tr' | 'bl' | 'bm' | 'br'
+export const POCKET_IDS = ['tl', 'tm', 'tr', 'bl', 'bm', 'br'] as const
+
+export type PocketId = (typeof POCKET_IDS)[number]
 
 export interface ShotTarget {
   pocketId: PocketId | null
@@ -39,7 +43,9 @@ export interface ShotTarget {
 
 // ---------------------------------------------------------------- Pfade ----
 
-export type PathRole = 'cue' | 'object' | 'secondary'
+export const PATH_ROLES = ['cue', 'object', 'secondary'] as const
+
+export type PathRole = (typeof PATH_ROLES)[number]
 
 export interface PathSegment {
   /** Endpunkt des Segments. Der Startpunkt ist der Ball bzw. das Vorgaengersegment. */
@@ -139,7 +145,9 @@ export interface ShotAttributes {
 
 // -------------------------------------------------------------- Bewertung --
 
-export type ScoringMode = 'pocket' | 'position' | 'pocket+position'
+export const SCORING_MODES = ['pocket', 'position', 'pocket+position'] as const
+
+export type ScoringMode = (typeof SCORING_MODES)[number]
 
 export interface TargetZone {
   x: number

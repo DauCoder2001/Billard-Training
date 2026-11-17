@@ -20,9 +20,18 @@ interface TrainerViewProps {
   subtitle?: string
   onQuit: (recorded: number) => void
   onComplete: (results: Attempt[]) => Promise<void> | void
+  /** Scheitert das Abschliessen, bleibt die Erfassung sonst stumm gesperrt. */
+  onError?: (error: unknown) => void
 }
 
-export function TrainerView({ shot, planned, subtitle, onQuit, onComplete }: TrainerViewProps) {
+export function TrainerView({
+  shot,
+  planned,
+  subtitle,
+  onQuit,
+  onComplete,
+  onError,
+}: TrainerViewProps) {
   const settings = useApp((s) => s.settings)
   const spaceRef = useRef<SVGGElement>(null)
   const [results, setResults] = useState<Attempt[]>([])
@@ -48,7 +57,17 @@ export function TrainerView({ shot, planned, subtitle, onQuit, onComplete }: Tra
     setEnd(null)
     if (next.length >= planned) {
       setBusy(true)
-      await onComplete(next)
+      try {
+        await onComplete(next)
+      } catch (err) {
+        // Den letzten Versuch zuruecknehmen und wieder freigeben: so steht
+        // der Knopf erneut bereit, statt nach 20 Versuchen am Tisch grau
+        // zu bleiben. Ohne das waere die Einheit verloren.
+        setResults(results)
+        setEnd(end)
+        setBusy(false)
+        onError?.(err)
+      }
     }
   }
 

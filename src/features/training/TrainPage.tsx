@@ -64,6 +64,14 @@ export function TrainPage() {
       planned={planned}
       onQuit={(n) => void quit(n)}
       onComplete={complete}
+      onError={(err) =>
+        dialogs.toast(
+          err instanceof Error
+            ? `Nicht gespeichert: ${err.message}`
+            : 'Die Einheit ließ sich nicht speichern',
+          'error',
+        )
+      }
     />
   )
 }

@@ -130,6 +130,14 @@ export function WorkoutRunPage() {
       subtitle={`Workout ${step + 1} von ${entries.length}`}
       onQuit={(n) => void quit(n)}
       onComplete={complete}
+      onError={(err) =>
+        dialogs.toast(
+          err instanceof Error
+            ? `Nicht gespeichert: ${err.message}`
+            : 'Der Abschnitt ließ sich nicht speichern',
+          'error',
+        )
+      }
     />
   )
 }

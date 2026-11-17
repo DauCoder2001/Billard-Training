@@ -1,7 +1,21 @@
 import { describe, expect, it } from 'vitest'
+import { deflateSync, strToU8 } from 'fflate'
 import { decodeShot, encodeShot, payloadFromInput, shareUrl } from './share'
 import { createShot, mirrorShot } from './shot'
 import { computeCutAngle, duplicateShot } from './shot'
+import { DEFAULT_THRESHOLDS } from './types'
+
+/**
+ * Nutzlast von Hand bauen - auch fuer Inhalte, die encodeShot nie erzeugen
+ * wuerde. Genau die muss decodeShot ueberleben: ein geteilter Link kommt
+ * aus fremder Hand.
+ */
+function payloadOf(value: unknown): string {
+  const bytes = deflateSync(strToU8(JSON.stringify(value)), { level: 9 })
+  let bin = ''
+  for (const b of bytes) bin += String.fromCharCode(b)
+  return btoa(bin).replace(/\+/g, '-').replace(/\//g, '_').replace(/=+$/, '')
+}
 
 describe('Teilen', () => {
   it('liefert nach Codieren und Decodieren denselben Aufbau', () => {
@@ -45,6 +59,96 @@ describe('Teilen', () => {
     expect(payloadFromInput(`  ${payload}  `)).toBe(payload)
     expect(payloadFromInput('kein code!')).toBeNull()
     expect(payloadFromInput('')).toBeNull()
+  })
+
+  it('nimmt Wege mit und haengt sie wieder an denselben Ball', () => {
+    const original = createShot()
+    const cue = original.balls[0]
+    original.paths = [
+      { id: 'p1', ballId: cue.id, role: 'cue', segments: [{ to: { x: 40, y: 30 } }] },
+    ]
+    const back = decodeShot(encodeShot(original))
+    expect(back.paths).toHaveLength(1)
+    // Neue Ids, aber dieselbe Zuordnung Weg -> Ball.
+    expect(back.paths[0].ballId).toBe(back.balls[0].id)
+    expect(back.paths[0].ballId).not.toBe(cue.id)
+    expect(back.paths[0].segments[0].to).toEqual({ x: 40, y: 30 })
+  })
+})
+
+describe('Fremde Nutzlast pruefen', () => {
+  it('ueberlebt leere Teilobjekte statt beim Zeichnen abzustuerzen', () => {
+    const shot = decodeShot(payloadOf({ v: 1, shot: { attributes: {}, scoring: {}, target: {} } }))
+    expect(shot.attributes.skills).toEqual([])
+    expect(shot.attributes.spin).toEqual({ x: 0, y: 0 })
+    expect(shot.attributes.difficulty).toBeGreaterThanOrEqual(1)
+    expect(shot.scoring.thresholds).toEqual(DEFAULT_THRESHOLDS)
+    expect(shot.target.pocketId).toBeNull()
+    expect(shot.balls.length).toBeGreaterThan(0)
+  })
+
+  it('ersetzt erfundene Aufzaehlungswerte und wirft leere Wege weg', () => {
+    const shot = decodeShot(
+      payloadOf({
+        v: 1,
+        shot: {
+          attributes: { shotType: 'teleport', skills: ['draw', 'fliegen', 7] },
+          target: { pocketId: 'nirgendwo', cheat: 99 },
+          paths: [
+            { id: 'a', ballId: null, role: 'boese', from: { x: 10, y: 10 }, segments: [{ to: { x: 20, y: 20 } }] },
+            { id: 'b', ballId: null, role: 'cue', segments: [] },
+          ],
+        },
+      }),
+    )
+    expect(shot.attributes.shotType).toBe('cut')
+    expect(shot.attributes.skills).toEqual(['draw'])
+    expect(shot.target.pocketId).toBeNull()
+    expect(shot.target.cheat).toBe(1)
+    expect(shot.paths).toHaveLength(1)
+    expect(shot.paths[0].role).toBe('cue')
+  })
+
+  it('holt Baelle auf die Spielflaeche und vergibt neue Ids', () => {
+    const shot = decodeShot(
+      payloadOf({ v: 1, shot: { balls: [{ id: 'x")>&', kind: 'cue', x: 1e9, y: -50 }] } }),
+    )
+    expect(shot.balls).toHaveLength(1)
+    // Fremde Ids landen sonst in url(#...) und zerlegen das SVG.
+    expect(shot.balls[0].id).not.toBe('x")>&')
+    expect(shot.balls[0].x).toBeLessThanOrEqual(100)
+    expect(shot.balls[0].y).toBeGreaterThanOrEqual(0)
+  })
+
+  it('kuerzt Texte und wirft Fremdes aus Listen', () => {
+    const shot = decodeShot(
+      payloadOf({ v: 1, shot: { name: 'N'.repeat(500), tags: ['gut', 5, null, 'auch gut'] } }),
+    )
+    expect(shot.name).toHaveLength(120)
+    expect(shot.tags).toEqual(['gut', 'auch gut'])
+  })
+
+  it('behaelt die Reihenfolge der Faehigkeiten und entdoppelt sie', () => {
+    const original = createShot()
+    // Die Marken stehen in der Reihenfolge des Absenders am Stoss; die
+    // Pruefung darf sie nicht umsortieren.
+    original.attributes.skills = ['rail', 'cut', 'rail']
+    expect(decodeShot(encodeShot(original)).attributes.skills).toEqual(['rail', 'cut'])
+  })
+
+  it('meldet eine Nutzlast ohne Stoss verstaendlich', () => {
+    expect(() => decodeShot(payloadOf({ v: 1 }))).toThrow(/nicht lesen/)
+  })
+
+  it('weist eine Nutzlast ab, die sich auf Megabyte aufblaeht', () => {
+    const bombe = payloadOf({ v: 1, shot: { name: 'a'.repeat(2 * 1024 * 1024) } })
+    // Kurzer Link, riesiger Inhalt - genau das soll die Grenze abfangen.
+    expect(bombe.length).toBeLessThan(4000)
+    expect(() => decodeShot(bombe)).toThrow(/zu gro/)
+  })
+
+  it('weist eine ueberlange Nutzlast ab, ohne sie zu entpacken', () => {
+    expect(() => decodeShot('A'.repeat(49 * 1024))).toThrow(/zu gro/)
   })
 })
 
