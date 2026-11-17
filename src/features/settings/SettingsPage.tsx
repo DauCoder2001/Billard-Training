@@ -2,6 +2,7 @@ import { useRef } from 'react'
 import { useNavigate } from 'react-router-dom'
 import { useActivePlayer, useApp } from '@/app/store'
 import { db } from '@/data/db'
+import { storageErrorText } from '@/data/errors'
 import { usePlayers } from '@/data/hooks'
 import { SEED_VERSION } from '@/data/bootstrap'
 import { seedShots } from '@/data/seed/drills'
@@ -96,7 +97,7 @@ export function SettingsPage() {
           `${plural(result.workouts, 'Workout', 'Workouts')}.`,
       })
     } catch (err) {
-      dialogs.toast(err instanceof Error ? err.message : 'Import fehlgeschlagen', 'error')
+      dialogs.toast(storageErrorText(err), 'error')
     }
   }
 

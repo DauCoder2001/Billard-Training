@@ -2,6 +2,7 @@
 
 import { create } from 'zustand'
 import { bootstrap } from '@/data/bootstrap'
+import { storageErrorText } from '@/data/errors'
 import { usePlayers } from '@/data/hooks'
 import { DEFAULT_SETTINGS, getSettings, updateSettings } from '@/data/repositories/settings'
 import type { Player, Settings } from '@/domain/types'
@@ -25,7 +26,7 @@ export const useApp = create<AppState>((set) => ({
       await bootstrap()
       set({ settings: await getSettings(), ready: true, error: null })
     } catch (err) {
-      set({ ready: true, error: err instanceof Error ? err.message : String(err) })
+      set({ ready: true, error: storageErrorText(err) })
     }
   },
 

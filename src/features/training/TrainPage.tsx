@@ -3,6 +3,7 @@
 import { useNavigate, useParams, useSearchParams } from 'react-router-dom'
 import { useActivePlayer } from '@/app/store'
 import { useShot } from '@/data/hooks'
+import { storageErrorText } from '@/data/errors'
 import { finishSession, startSession } from '@/data/repositories/sessions'
 import { plural } from '@/domain/text'
 import { SESSION_ATTEMPTS } from '@/domain/types'
@@ -65,14 +66,7 @@ export function TrainPage() {
       planned={planned}
       onQuit={(n) => void quit(n)}
       onComplete={complete}
-      onError={(err) =>
-        dialogs.toast(
-          err instanceof Error
-            ? `Nicht gespeichert: ${err.message}`
-            : 'Die Einheit ließ sich nicht speichern',
-          'error',
-        )
-      }
+      onError={(err) => dialogs.toast(`Nicht gespeichert: ${storageErrorText(err)}`, 'error')}
     />
   )
 }

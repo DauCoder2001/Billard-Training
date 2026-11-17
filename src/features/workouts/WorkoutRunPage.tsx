@@ -4,6 +4,7 @@ import { useState } from 'react'
 import { useNavigate, useParams } from 'react-router-dom'
 import { useActivePlayer } from '@/app/store'
 import { useShots, useWorkout } from '@/data/hooks'
+import { storageErrorText } from '@/data/errors'
 import { finishSession, startSession } from '@/data/repositories/sessions'
 import { proficiencyFor } from '@/domain/scoring'
 import { plural } from '@/domain/text'
@@ -135,14 +136,7 @@ export function WorkoutRunPage() {
       subtitle={`Workout ${step + 1} von ${entries.length}`}
       onQuit={(n) => void quit(n)}
       onComplete={complete}
-      onError={(err) =>
-        dialogs.toast(
-          err instanceof Error
-            ? `Nicht gespeichert: ${err.message}`
-            : 'Der Abschnitt ließ sich nicht speichern',
-          'error',
-        )
-      }
+      onError={(err) => dialogs.toast(`Nicht gespeichert: ${storageErrorText(err)}`, 'error')}
     />
   )
 }

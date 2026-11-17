@@ -6,6 +6,23 @@ Die Versionsnummer steht an genau einer Stelle — in `package.json` — und ers
 unten auf der Seite **Einstellungen** sowie auf der Fehlerseite. Schema:
 `Hauptversion.Funktion.Korrektur`.
 
+## 0.4.0 – 17.11.2026
+
+### Geändert
+- **Die App startet leichter.** Bisher lud der erste Aufruf alles auf einmal,
+  auch den Shot Builder und den Teilen-Dialog. Beides kommt jetzt erst beim
+  Öffnen nach. Der erste Aufruf überträgt 120 statt 147 Kilobyte; der Builder
+  lädt dann 8 Kilobyte nach. Offline bleibt alles verfügbar — der Vorrat des
+  Browsers enthält weiterhin jeden Teil.
+
+### Behoben
+- **Fehlermeldungen beim Speichern sind auf Deutsch.** Statt „Nicht
+  gespeichert: DatabaseClosedError Database has been closed“ steht dort jetzt,
+  was los ist und was zu tun ist. Betroffen sind das Training, das Workout,
+  das Einspielen einer Sicherung und die Seite, die beim Start erscheint, wenn
+  der Browser keinen Speicher zulässt. Ein unbekannter Fehler behält seinen
+  technischen Text — der nennt wenigstens die Ursache.
+
 ## 0.3.6 – 17.11.2026
 
 ### Behoben

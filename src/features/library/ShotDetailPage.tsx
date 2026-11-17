@@ -1,4 +1,4 @@
-import { useMemo, useState } from 'react'
+import { lazy, Suspense, useMemo, useState } from 'react'
 import { Link, useNavigate, useParams } from 'react-router-dom'
 import { useActivePlayer, useApp } from '@/app/store'
 import { ShotDiagram } from '@/components/table/ShotDiagram'
@@ -11,7 +11,6 @@ import {
   SHOT_TYPE_LABELS,
   type SessionFormat,
 } from '@/domain/types'
-import { ShareDialog } from '@/features/share/ShareDialog'
 import { ProficiencyBadge, SkillChips, Stat } from '@/ui/bits'
 import { useDialogs } from '@/ui/Dialogs'
 import { Sparkline } from '@/features/stats/charts'
@@ -22,6 +21,12 @@ const FORMATS: { id: SessionFormat; label: string; attempts: number | null }[] =
   { id: 'deep', label: 'Intensiv', attempts: SESSION_ATTEMPTS.deep },
   { id: 'custom', label: 'Frei', attempts: null },
 ]
+
+// Der Teilen-Dialog bringt den QR-Code-Erzeuger mit und wird nur auf Druck
+// geoeffnet: er kommt als eigenes Buendel nach.
+const ShareDialog = lazy(() =>
+  import('@/features/share/ShareDialog').then((m) => ({ default: m.ShareDialog })),
+)
 
 export function ShotDetailPage() {
   const { id } = useParams()
@@ -220,7 +225,11 @@ export function ShotDetailPage() {
         </div>
       </div>
 
-      {shareOpen && <ShareDialog shot={shot} onClose={() => setShareOpen(false)} />}
+      {shareOpen && (
+        <Suspense fallback={null}>
+          <ShareDialog shot={shot} onClose={() => setShareOpen(false)} />
+        </Suspense>
+      )}
     </div>
   )
 }

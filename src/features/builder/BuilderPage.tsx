@@ -1,6 +1,6 @@
 /** Der Shot Builder: Stoesse aufbauen, formen und speichern. */
 
-import { useEffect, useState } from 'react'
+import { lazy, Suspense, useEffect, useState } from 'react'
 import { useLocation, useNavigate, useParams } from 'react-router-dom'
 import { useApp } from '@/app/store'
 import { db } from '@/data/db'
@@ -11,8 +11,13 @@ import type { BallPath, Point } from '@/domain/types'
 import { useDialogs } from '@/ui/Dialogs'
 import { AttributesPanel } from './AttributesPanel'
 import { BuilderCanvas } from './BuilderCanvas'
-import { ShareDialog } from '@/features/share/ShareDialog'
 import { useBuilder } from './store'
+
+// Der Teilen-Dialog bringt den QR-Code-Erzeuger mit und wird nur auf Druck
+// geoeffnet: er kommt als eigenes Buendel nach.
+const ShareDialog = lazy(() =>
+  import('@/features/share/ShareDialog').then((m) => ({ default: m.ShareDialog })),
+)
 
 export function BuilderPage() {
   const { id } = useParams()
@@ -380,7 +385,11 @@ export function BuilderPage() {
 
       {panelOpen && <AttributesPanel />}
 
-      {shareOpen && <ShareDialog shot={shot} onClose={() => setShareOpen(false)} />}
+      {shareOpen && (
+        <Suspense fallback={null}>
+          <ShareDialog shot={shot} onClose={() => setShareOpen(false)} />
+        </Suspense>
+      )}
     </div>
   )
 }
