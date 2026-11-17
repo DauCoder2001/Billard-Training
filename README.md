@@ -42,6 +42,11 @@ zum Übernehmen angeboten. Dazu QR-Code, PNG-Export des Diagramms und JSON.
 
 ## Entwicklung
 
+Die Versionsnummer steht an genau einer Stelle, in `package.json`, und wird
+beim Bauen eingesetzt. Sichtbar ist sie unten in den **Einstellungen** und auf
+der Fehlerseite. Was sich wann geändert hat, steht in
+[CHANGELOG.md](CHANGELOG.md).
+
 ```bash
 npm install
 npm run dev

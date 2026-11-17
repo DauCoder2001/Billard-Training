@@ -335,6 +335,13 @@ export function SettingsPage() {
           </span>
         </div>
       </section>
+
+      {/* Nach einer Veroeffentlichung liefert der Service Worker beim ersten
+          Laden noch die alte Fassung aus. Hieran ist zu erkennen, welche
+          gerade im Browser liegt. */}
+      <p className="small muted" style={{ textAlign: 'center', margin: 0 }}>
+        Billard Training {__APP_VERSION__}
+      </p>
     </div>
   )
 }

@@ -1,7 +1,13 @@
 import { defineConfig } from 'vitest/config'
 import react from '@vitejs/plugin-react'
 import { VitePWA } from 'vite-plugin-pwa'
+import { createRequire } from 'node:module'
 import { fileURLToPath, URL } from 'node:url'
+
+// Die Versionsnummer steht an genau einer Stelle: package.json. Gelesen wird
+// sie ueber createRequire statt ueber process.env.npm_package_version, damit
+// auch ein direkter Aufruf von vite build die richtige Nummer bekommt.
+const { version } = createRequire(import.meta.url)('./package.json') as { version: string }
 
 export default defineConfig({
   base: './',
@@ -35,6 +41,8 @@ export default defineConfig({
   resolve: {
     alias: { '@': fileURLToPath(new URL('./src', import.meta.url)) },
   },
+
+  define: { __APP_VERSION__: JSON.stringify(version) },
   // Vites Standardziel waere Safari 14. Aeltere iPads bleiben damit weiss,
   // weil sie schon ?. und ?? nicht kennen - ein Syntaxfehler im Modul zeigt
   // gar nichts an. Der niedrigere Wert kostet ein paar Kilobyte.

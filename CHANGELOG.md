@@ -1,0 +1,81 @@
+# Änderungen
+
+Alle nennenswerten Änderungen an Billard Training.
+
+Die Versionsnummer steht an genau einer Stelle — in `package.json` — und erscheint
+unten auf der Seite **Einstellungen** sowie auf der Fehlerseite. Schema:
+`Hauptversion.Funktion.Korrektur`.
+
+## 0.3.0 – 17.11.2026
+
+### Neu
+- Die Version ist sichtbar: unten in den Einstellungen und auf der Fehlerseite.
+  Nach einer Veröffentlichung liefert der Service Worker beim ersten Laden noch
+  die alte Fassung aus — daran ist zu erkennen, welche gerade im Browser liegt.
+- Dieses Änderungsverzeichnis.
+
+### Behoben
+- **Geteilte Links werden geprüft, bevor sie in die App dürfen.** Ein
+  mutwillig gebauter Link konnte die Anzeige zum Absturz bringen oder einen
+  Stoß mit unsinnigen Werten hinterlassen, der die Bewertung verfälscht.
+  Jetzt wird jeder Wert einzeln geprüft: unbekannte Angaben fallen weg,
+  Zahlen bleiben in ihren Grenzen, Texte und Listen werden gekürzt. Ehrlich
+  geteilte Stöße kommen unverändert an.
+- **Ein Link kann die App nicht mehr lahmlegen.** Ein kurzer Link konnte sich
+  beim Entpacken auf Hunderte Megabyte aufblähen und den Browser einfrieren.
+  Zu große Nutzlasten werden jetzt abgewiesen, bevor etwas entpackt wird.
+- **Eine Trainingseinheit geht nicht mehr verloren, wenn das Speichern
+  scheitert.** Bisher blieben nach einem Fehlschlag alle drei Ergebnisknöpfe
+  grau, ohne Meldung — die erfassten Versuche waren weg. Jetzt erscheint eine
+  Meldung, der letzte Versuch wird zurückgenommen, und ein zweiter Druck
+  speichert.
+
+## 0.2.0 – 28.10.2026
+
+### Geändert
+- **Eine Farbe, eine Bedeutung.** „Kratzer“ ist orange statt rot, denn er
+  löscht nichts; Rot bleibt dem Löschen vorbehalten. Bernstein trägt nur noch
+  die eine Hauptaktion je Abschnitt.
+- **Ein Wort, eine Sache.** „Schnitt“ hieß Winkel und Mittelwert zugleich,
+  „Bandenball“ Stoßart und Fähigkeit, die Startseite an drei Stellen anders.
+  Jetzt: Schnittwinkel und Mittel, Bandenspiel und Ball an der Bande, Start.
+  Dazu Einheit statt Session, Tempo statt Geschwindigkeit, Gesamtniveau statt
+  Gesamtrating, Als Bild und Als Datei statt PNG und JSON.
+- **Anzeigetexte in echtem Deutsch**, mit Umlauten. Bereits gespeicherte
+  mitgelieferte Stöße werden beim Start nachgezogen — eigene Umbenennungen
+  und Favoriten bleiben.
+- **Gefährliche Knöpfe stehen abgesetzt**, nicht mehr in einer Reihe mit
+  harmlosen. Im Builder entfernt „Entfernen“ das Markierte und „Stoß löschen“
+  den ganzen Stoß; vorher hieß beides „Löschen“.
+- Gesperrte Knöpfe nennen ihren Grund sichtbar.
+
+### Behoben
+- Die Werkzeugleiste des Builders lief über; das letzte Werkzeug war nur durch
+  Scrollen erreichbar. Jetzt passen alle neun.
+
+## 0.1.1 – 09.10.2026
+
+### Behoben
+- Dialoge sind native `dialog`-Elemente: Der Fokus bleibt im Dialog, Escape
+  schließt, und Enter löscht nie ungefragt.
+- Im Builder ruhen die Tastenkürzel, solange ein Dialog offen ist — vorher
+  konnte Entf hinter einer Rückfrage den gewählten Ball entfernen.
+
+## 0.1.0 – 06.09.2026
+
+Erste Fassung.
+
+- Shot Builder: Bälle, Wege, Zieltasche und Zielzone auf einem 9-Fuß-Tisch,
+  mit Rückgängig und Spiegeln.
+- Training: Einheiten erfassen, Versuche bewerten, Ruheposition des Weißen
+  aufnehmen.
+- Auswertung: Verlauf je Stoß, Fähigkeitsprofil, Trainingsvorschläge, Erfolge.
+- Workouts: mehrere Stöße am Stück.
+- Teilen: ein Stoß steckt vollständig im Link, dazu QR-Code und Bild-Export.
+- Alles bleibt auf dem Gerät (IndexedDB), Sicherung als Datei.
+- Veröffentlichung über GitHub Pages, nutzbar als installierbare Web-App.
+
+---
+
+Die Stände vor 0.3.0 sind nachträglich aus der Versionsgeschichte zugeordnet;
+gezählt wurde damals noch nicht.

@@ -51,6 +51,8 @@ export class ErrorBoundary extends Component<Props, State> {
         >
           {error.message}
           {'\n\n'}
+          {`Billard Training ${__APP_VERSION__}`}
+          {'\n'}
           {navigator.userAgent}
         </pre>
         <div className="row">
