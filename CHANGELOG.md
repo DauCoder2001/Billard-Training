@@ -6,6 +6,19 @@ Die Versionsnummer steht an genau einer Stelle — in `package.json` — und ers
 unten auf der Seite **Einstellungen** sowie auf der Fehlerseite. Schema:
 `Hauptversion.Funktion.Korrektur`.
 
+## 0.3.3 – 17.11.2026
+
+### Geändert
+- **Der Entwicklungsserver hört nur noch auf diesem Rechner.** Bisher war er
+  für jedes Gerät im WLAN erreichbar, und die bekannten Pfadlücken des
+  Entwicklungsservers standen damit offen. Für die Probe auf dem Tablet:
+  `npm run dev -- --host`. Die veröffentlichte App war davon nie betroffen.
+
+### Behoben
+- **Die letzte Schwachstelle in der ausgelieferten App ist weg.**
+  react-router hatte zwei offene Meldungen; die Fassung 7 behebt beide.
+  An der Bedienung ändert sich nichts.
+
 ## 0.3.2 – 17.11.2026
 
 ### Behoben

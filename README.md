@@ -53,9 +53,18 @@ npm run dev
 ```
 
 Danach `http://localhost:5173` öffnen. Der Entwicklungsserver übersetzt die
-TypeScript-Dateien beim Laden und aktualisiert bei jeder Änderung. Er hört auf
-allen Netzwerkadressen, die Tablets im WLAN erreichen ihn also unter
-`http://<IP-des-Notebooks>:5173`.
+TypeScript-Dateien beim Laden und aktualisiert bei jeder Änderung. Er hört nur
+auf diesem Rechner.
+
+Für die Probe auf dem Tablet muss er erst ans Netz gelassen werden:
+
+```bash
+npm run dev -- --host
+```
+
+Dann erreichen Geräte im WLAN ihn unter `http://<IP-des-Notebooks>:5173`.
+Das gilt in beide Richtungen: Solange er läuft, kann jedes Gerät im selben
+Netz ihn ansprechen. Deshalb ist es nicht die Voreinstellung.
 
 ### Wichtig: nicht die `index.html` im Projektordner öffnen
 
@@ -77,7 +86,8 @@ derselbe Stand, der auch veröffentlicht wird.
 
 | Befehl | Wirkung |
 |---|---|
-| `npm run dev` | Entwicklungsserver auf Port 5173 |
+| `npm run dev` | Entwicklungsserver auf Port 5173, nur lokal |
+| `npm run dev -- --host` | derselbe Server, auch für Geräte im WLAN |
 | `npm run build` | Produktionsbuild nach `dist/` |
 | `npm run preview` | den Produktionsbuild lokal ausliefern |
 | `npm run test` | Tests der Rechenkerne |

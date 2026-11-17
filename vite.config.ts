@@ -48,7 +48,11 @@ export default defineConfig({
   // gar nichts an. Der niedrigere Wert kostet ein paar Kilobyte.
   build: { target: ['es2019', 'safari13', 'chrome80', 'firefox78', 'edge88'] },
 
-  server: { host: true, port: 5173 },
+  // Nur auf Wunsch ans Netz. Dauerhaft offen heisst: jedes Geraet im WLAN
+  // erreicht den Server, und die Pfadluecken des Entwicklungsservers stehen
+  // ihm offen. Fuer die Probe auf dem iPad: VITE_HOST=1 npm run dev
+  // oder npm run dev -- --host
+  server: { host: process.env.VITE_HOST === '1', port: 5173 },
   test: {
     environment: 'node',
     globals: true,
