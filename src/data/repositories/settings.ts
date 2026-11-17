@@ -22,7 +22,14 @@ export async function getSettings(): Promise<Settings> {
 }
 
 export async function updateSettings(patch: Partial<Settings>): Promise<Settings> {
-  const next = { ...(await getSettings()), ...patch, id: 'settings' as const }
-  await db.settings.put(next)
-  return next
+  // Lesen, zusammenfuehren und Schreiben gehoeren zusammen. Ohne Klammer
+  // lesen zwei schnell aufeinander folgende Aenderungen denselben
+  // Ausgangsstand und die zweite ueberschreibt die erste - die Schieberegler
+  // der Einstellungen loesen beim Ziehen viele Aenderungen kurz hintereinander
+  // aus.
+  return db.transaction('rw', db.settings, async () => {
+    const next = { ...(await getSettings()), ...patch, id: 'settings' as const }
+    await db.settings.put(next)
+    return next
+  })
 }

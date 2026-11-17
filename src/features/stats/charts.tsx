@@ -86,22 +86,36 @@ interface RadarProps {
 }
 
 /** Netzdiagramm ueber die Faehigkeiten. */
-export function SkillRadar({ values, size = 280 }: RadarProps) {
+export function SkillRadar({ values, size = 400 }: RadarProps) {
   if (values.length < 3) return <p className="small muted">Zu wenige Werte für ein Netz.</p>
   const r = 40
   const cx = 50
   const cy = 50
   const n = values.length
   const angle = (i: number) => (i / n) * Math.PI * 2 - Math.PI / 2
-  const point = (i: number, value: number) => {
-    const rad = (Math.max(0, Math.min(100, value)) / 100) * r
-    return [cx + Math.cos(angle(i)) * rad, cy + Math.sin(angle(i)) * rad]
-  }
+  /** Punkt auf dem Strahl i, in beliebigem Abstand - auch ausserhalb des Netzes. */
+  const at = (i: number, radius: number) => [
+    cx + Math.cos(angle(i)) * radius,
+    cy + Math.sin(angle(i)) * radius,
+  ]
+  /** Punkt fuer einen Messwert: null bis hundert Prozent des Netzradius. */
+  const point = (i: number, value: number) => at(i, (Math.max(0, Math.min(100, value)) / 100) * r)
 
   const polygon = values.map((v, i) => point(i, v.rating).join(',')).join(' ')
 
   return (
-    <svg viewBox="0 0 100 100" width={size} height={size} role="img" aria-label="Fähigkeitsprofil">
+    // Das Netz steht in 0..100, die Beschriftungen liegen davor und dahinter:
+    // "Ball an der Bande" reicht links bis -19. Der Rand im viewBox gibt ihnen
+    // Platz, statt sie abzuschneiden. Die Breite waechst entsprechend mit, damit
+    // Netz und Schrift so gross bleiben wie zuvor; auf schmalen Geraeten
+    // schrumpft das Bild auf die Kartenbreite.
+    <svg
+      viewBox="-22 -22 144 144"
+      width="100%"
+      style={{ maxWidth: size, height: 'auto' }}
+      role="img"
+      aria-label="Fähigkeitsprofil"
+    >
       {[0.25, 0.5, 0.75, 1].map((f) => (
         <polygon
           key={f}
@@ -117,7 +131,7 @@ export function SkillRadar({ values, size = 280 }: RadarProps) {
       })}
       <polygon points={polygon} fill="var(--accent)" fillOpacity={0.22} stroke="var(--accent)" strokeWidth={0.9} />
       {values.map((v, i) => {
-        const [x, y] = point(i, 108)
+        const [x, y] = at(i, r + 6)
         return (
           <text
             key={v.skill}

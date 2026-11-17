@@ -6,6 +6,20 @@ Die Versionsnummer steht an genau einer Stelle — in `package.json` — und ers
 unten auf der Seite **Einstellungen** sowie auf der Fehlerseite. Schema:
 `Hauptversion.Funktion.Korrektur`.
 
+## 0.3.5 – 17.11.2026
+
+### Behoben
+- **Einstellungen gehen nicht mehr verloren, wenn sie schnell hintereinander
+  geändert werden.** Beim Ziehen eines Schiebereglers lösen viele Änderungen
+  kurz nacheinander aus; sie lasen denselben Ausgangsstand und überschrieben
+  sich gegenseitig. Nachgemessen gingen von sieben gleichzeitigen Änderungen
+  sechs verloren, jetzt keine.
+- **Das Fähigkeitsprofil zeigt alle Beschriftungen vollständig.** Sie lagen
+  auf dem äußersten Ring des Netzes und fünf von vierzehn waren am Rand
+  abgeschnitten („Schnittb“, „Dünner Schni“). Jetzt stehen sie außerhalb des
+  Netzes und vollständig im Bild; auf schmalen Geräten verkleinert sich das
+  Bild mit.
+
 ## 0.3.4 – 17.11.2026
 
 ### Behoben
