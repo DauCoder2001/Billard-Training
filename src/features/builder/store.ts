@@ -143,19 +143,25 @@ export const useBuilder = create<BuilderState>((set, get) => ({
 
   markSaved: (shot) => set({ shot, dirty: false, isNew: false }),
 
+  // Die Werkzeuge legen Objekt-, Stoer- und Geisterbaelle an. Der Weisse
+  // gehoert zu jedem Stoss und wird nur verschoben, nie hinzugefuegt. Hier
+  // stand eine Absicherung, die einen vorhandenen Weissen ersetzt haette;
+  // sie konnte nie greifen und war unvollstaendig: die Wege des alten
+  // Weissen behielten seine Id und waeren still unsichtbar geworden. Gaebe
+  // es einmal ein Werkzeug dafuer, gehoert deren Bereinigung dazu.
   addBall: (kind, at) => {
     const id = newId()
     get().change((shot) => {
-      const balls = shot.balls.filter((b) => !(kind === 'cue' && b.kind === 'cue'))
       const ball: Ball = {
         id,
         kind,
         x: at.x,
         y: at.y,
-        number: kind === 'object' || kind === 'obstacle' ? nextNumber(balls) : undefined,
-        order: kind === 'object' ? balls.filter((b) => b.kind === 'object').length + 1 : undefined,
+        number: kind === 'object' || kind === 'obstacle' ? nextNumber(shot.balls) : undefined,
+        order:
+          kind === 'object' ? shot.balls.filter((b) => b.kind === 'object').length + 1 : undefined,
       }
-      return { ...shot, balls: [...balls, ball] }
+      return { ...shot, balls: [...shot.balls, ball] }
     })
     set({ selectedBallId: id, mode: 'select' })
   },

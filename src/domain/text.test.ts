@@ -1,5 +1,5 @@
 import { describe, expect, it } from 'vitest'
-import { transliterate } from './text'
+import { plural, transliterate } from './text'
 import { seedShots } from '@/data/seed/drills'
 
 /** Namen der mitgelieferten Stoesse, wie sie vor der Umstellung gespeichert
@@ -44,5 +44,28 @@ describe('transliterate', () => {
     for (const name of seedShots().map((s) => s.name)) {
       if (/[ÄÖÜäöüß]/.test(name)) expect(transliterate(name)).not.toBe(name)
     }
+  })
+})
+
+describe('plural', () => {
+  it('nimmt bei genau eins die Einzahl', () => {
+    expect(plural(1, 'Versuch', 'Versuche')).toBe('1 Versuch')
+    expect(plural(1, 'Stoß', 'Stöße')).toBe('1 Stoß')
+  })
+
+  it('nimmt sonst die Mehrzahl, auch bei null', () => {
+    expect(plural(0, 'Versuch', 'Versuche')).toBe('0 Versuche')
+    expect(plural(2, 'Versuch', 'Versuche')).toBe('2 Versuche')
+    expect(plural(17, 'Einheit', 'Einheiten')).toBe('17 Einheiten')
+  })
+
+  it('traegt ganze Satzteile, nicht nur Hauptwoerter', () => {
+    // So stehen die Abbruchmeldungen im Training: das Zeitwort wechselt mit.
+    expect(plural(1, 'erfasster Versuch wird', 'erfasste Versuche werden')).toBe(
+      '1 erfasster Versuch wird',
+    )
+    expect(plural(3, 'erfasster Versuch wird', 'erfasste Versuche werden')).toBe(
+      '3 erfasste Versuche werden',
+    )
   })
 })

@@ -6,6 +6,7 @@ import { useActivePlayer } from '@/app/store'
 import { useShots, useWorkout } from '@/data/hooks'
 import { finishSession, startSession } from '@/data/repositories/sessions'
 import { proficiencyFor } from '@/domain/scoring'
+import { plural } from '@/domain/text'
 import type { Attempt, Session } from '@/domain/types'
 import { useDialogs } from '@/ui/Dialogs'
 import { ProficiencyBadge, Stat } from '@/ui/bits'
@@ -113,7 +114,11 @@ export function WorkoutRunPage() {
       title: 'Workout abbrechen?',
       message:
         recorded > 0
-          ? `${recorded} erfasste Versuche dieses Abschnitts werden verworfen. Bereits beendete Abschnitte bleiben gespeichert.`
+          ? `${plural(
+              recorded,
+              'erfasster Versuch dieses Abschnitts wird',
+              'erfasste Versuche dieses Abschnitts werden',
+            )} verworfen. Bereits beendete Abschnitte bleiben gespeichert.`
           : 'Bereits beendete Abschnitte bleiben gespeichert.',
       confirmLabel: 'Abbrechen',
       cancelLabel: 'Fortsetzen',

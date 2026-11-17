@@ -5,6 +5,7 @@ import { useNavigate, useParams } from 'react-router-dom'
 import { useActivePlayer } from '@/app/store'
 import { useSession, useSessions, useShot } from '@/data/hooks'
 import { MAX_POINTS, pocketRate, scratchRate } from '@/domain/scoring'
+import { plural } from '@/domain/text'
 import { SESSION_ATTEMPTS } from '@/domain/types'
 import { ProficiencyBadge, Stat } from '@/ui/bits'
 import { Sparkline } from '@/features/stats/charts'
@@ -44,7 +45,7 @@ export function SessionSummaryPage() {
           <span className="tiny">Ergebnis</span>
           <h1>{shot.name}</h1>
           <p className="page__sub">
-            {session.results.length} Versuche ·{' '}
+            {plural(session.results.length, 'Versuch', 'Versuche')} ·{' '}
             {new Date(session.finishedAt ?? session.startedAt).toLocaleString('de-DE')}
           </p>
         </div>

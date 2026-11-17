@@ -8,6 +8,7 @@ import { seedShots } from '@/data/seed/drills'
 import { exportBackup, importBackup } from '@/data/repositories/backup'
 import { createPlayer, deletePlayer, updatePlayer } from '@/data/repositories/players'
 import { TABLE } from '@/domain/geometry'
+import { plural } from '@/domain/text'
 import { downloadText } from '@/features/share/exportImage'
 import { useDialogs } from '@/ui/Dialogs'
 
@@ -88,7 +89,11 @@ export function SettingsPage() {
       const result = await importBackup(parsed, replace ? 'replace' : 'merge')
       await dialogs.alert({
         title: 'Sicherung eingespielt',
-        message: `${result.shots} Stöße, ${result.players} Spieler, ${result.sessions} Einheiten, ${result.workouts} Workouts.`,
+        message:
+          `${plural(result.shots, 'Stoß', 'Stöße')}, ` +
+          `${plural(result.players, 'Spieler', 'Spieler')}, ` +
+          `${plural(result.sessions, 'Einheit', 'Einheiten')}, ` +
+          `${plural(result.workouts, 'Workout', 'Workouts')}.`,
       })
     } catch (err) {
       dialogs.toast(err instanceof Error ? err.message : 'Import fehlgeschlagen', 'error')

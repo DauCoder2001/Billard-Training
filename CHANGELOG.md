@@ -6,6 +6,14 @@ Die Versionsnummer steht an genau einer Stelle — in `package.json` — und ers
 unten auf der Seite **Einstellungen** sowie auf der Fehlerseite. Schema:
 `Hauptversion.Funktion.Korrektur`.
 
+## 0.3.4 – 17.11.2026
+
+### Behoben
+- **„1 erfasste Versuche“ heißt jetzt „1 erfasster Versuch“.** Zahlwörter
+  bekommen die richtige Zahlform: in den Abbruchfragen von Training und
+  Workout, in der Meldung nach dem Einspielen einer Sicherung, in der
+  Workout-Liste und über der Zusammenfassung einer Einheit.
+
 ## 0.3.3 – 17.11.2026
 
 ### Geändert

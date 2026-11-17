@@ -4,6 +4,7 @@ import { useNavigate, useParams, useSearchParams } from 'react-router-dom'
 import { useActivePlayer } from '@/app/store'
 import { useShot } from '@/data/hooks'
 import { finishSession, startSession } from '@/data/repositories/sessions'
+import { plural } from '@/domain/text'
 import { SESSION_ATTEMPTS } from '@/domain/types'
 import type { Attempt, SessionFormat } from '@/domain/types'
 import { useDialogs } from '@/ui/Dialogs'
@@ -48,7 +49,7 @@ export function TrainPage() {
     if (recorded > 0) {
       const ok = await dialogs.confirm({
         title: 'Training abbrechen?',
-        message: `${recorded} erfasste Versuche werden verworfen.`,
+        message: `${plural(recorded, 'erfasster Versuch wird', 'erfasste Versuche werden')} verworfen.`,
         confirmLabel: 'Abbrechen',
         cancelLabel: 'Fortsetzen',
         danger: true,

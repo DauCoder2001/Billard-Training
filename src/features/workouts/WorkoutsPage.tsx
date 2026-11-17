@@ -2,6 +2,7 @@ import { useState } from 'react'
 import { useNavigate } from 'react-router-dom'
 import { useShots, useWorkouts } from '@/data/hooks'
 import { createWorkout, deleteWorkout, saveWorkout } from '@/data/repositories/workouts'
+import { plural } from '@/domain/text'
 import type { Workout } from '@/domain/types'
 import { EmptyState } from '@/ui/bits'
 import { useDialogs } from '@/ui/Dialogs'
@@ -59,7 +60,8 @@ export function WorkoutsPage() {
               <div key={workout.id} className="card stack">
                 <strong>{workout.name}</strong>
                 <span className="small muted">
-                  {workout.entries.length} Stöße · {total} Versuche
+                  {plural(workout.entries.length, 'Stoß', 'Stöße')} ·{' '}
+                  {plural(total, 'Versuch', 'Versuche')}
                 </span>
                 {workout.description && <span className="small">{workout.description}</span>}
                 <ol className="small muted" style={{ margin: 0, paddingLeft: 18 }}>
