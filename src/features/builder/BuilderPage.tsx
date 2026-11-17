@@ -185,14 +185,30 @@ export function BuilderPage() {
   const resetShot = async () => {
     const ok = await dialogs.confirm({
       title: 'Alles zurücksetzen?',
-      message: 'Bälle, Wege und Zielzone werden auf den Ausgangszustand gesetzt.',
+      message: 'Bälle, Wege, Zieltasche und Zielzone werden auf den Ausgangszustand gesetzt.',
       confirmLabel: 'Zurücksetzen',
       danger: true,
     })
     if (!ok) return
     useBuilder.getState().change((s) => {
       const fresh = createShot()
-      return { ...s, balls: fresh.balls, paths: [], target: fresh.target }
+      return {
+        ...s,
+        balls: fresh.balls,
+        paths: [],
+        target: fresh.target,
+        // Die Zone stand im Dialog, blieb aber unberuehrt. Sie wird nur
+        // zurueckgesetzt, wenn der Stoss ueberhaupt eine hat - ein reiner
+        // Lochstoss bekommt durch das Zuruecksetzen keine dazu. Der Radius
+        // kommt wie beim neuen Stoss aus den Einstellungen.
+        scoring:
+          s.scoring.targetZone && fresh.scoring.targetZone
+            ? {
+                ...s.scoring,
+                targetZone: { ...fresh.scoring.targetZone, r: settings.defaultTargetRadius },
+              }
+            : s.scoring,
+      }
     })
   }
 

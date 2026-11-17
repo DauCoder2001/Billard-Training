@@ -45,6 +45,25 @@ export interface ImportResult {
 }
 
 /**
+ * Holt eine Liste aus der Sicherung.
+ *
+ * Fehlt das Feld, war die Sicherung an der Stelle leer oder stammt aus einer
+ * aelteren Fassung - das ist in Ordnung. Steht dort aber etwas anderes als
+ * eine Liste, bricht der Import ab, und zwar vor der Transaktion: im Modus
+ * "replace" wuerde ein stillschweigendes [] den vorhandenen Bestand loeschen
+ * und nur einen Teil der Sicherung zuruecklassen.
+ */
+function list<T>(value: unknown, label: string): T[] {
+  if (value === undefined || value === null) return []
+  if (!Array.isArray(value)) {
+    throw new Error(
+      `Die Sicherung ist beschädigt und wurde nicht eingespielt: ${label} liegen nicht als Liste vor.`,
+    )
+  }
+  return value as T[]
+}
+
+/**
  * Spielt eine Sicherung ein. Im Modus "replace" wird der Bestand vorher
  * geleert, im Modus "merge" bleiben vorhandene Eintraege erhalten und
  * gleichnamige Ids werden ueberschrieben.
@@ -61,10 +80,24 @@ export async function importBackup(
     throw new Error('Die Sicherung stammt aus einer neueren Version der App.')
   }
 
-  const shots = backup.shots ?? []
-  const players = backup.players ?? []
-  const sessions = backup.sessions ?? []
-  const workouts = backup.workouts ?? []
+  const shots = list<Shot>(backup.shots, 'Die Stöße')
+  const players = list<Player>(backup.players, 'Die Spieler')
+  const sessions = list<Session>(backup.sessions, 'Die Einheiten')
+  const workouts = list<Workout>(backup.workouts, 'Die Workouts')
+
+  // Dasselbe fuer die Einstellungen: ein Text an dieser Stelle wuerde sich
+  // beim Spreizen ueber die Standardwerte streuen und unsinnige Felder
+  // hinterlassen.
+  const settings = backup.settings
+  if (
+    settings !== undefined &&
+    settings !== null &&
+    (typeof settings !== 'object' || Array.isArray(settings))
+  ) {
+    throw new Error(
+      'Die Sicherung ist beschädigt und wurde nicht eingespielt: Die Einstellungen liegen nicht als Datensatz vor.',
+    )
+  }
 
   await db.transaction(
     'rw',
@@ -86,8 +119,8 @@ export async function importBackup(
       await db.players.bulkPut(players)
       await db.sessions.bulkPut(sessions)
       await db.workouts.bulkPut(workouts)
-      if (backup.settings) {
-        await db.settings.put({ ...DEFAULT_SETTINGS, ...backup.settings, id: 'settings' })
+      if (settings) {
+        await db.settings.put({ ...DEFAULT_SETTINGS, ...settings, id: 'settings' })
       }
     },
   )

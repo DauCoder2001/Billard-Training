@@ -6,6 +6,20 @@ Die Versionsnummer steht an genau einer Stelle — in `package.json` — und ers
 unten auf der Seite **Einstellungen** sowie auf der Fehlerseite. Schema:
 `Hauptversion.Funktion.Korrektur`.
 
+## 0.3.2 – 17.11.2026
+
+### Behoben
+- **Eine beschädigte Sicherung wird abgewiesen, statt halb eingespielt zu
+  werden.** Geprüft wurde bisher nur die Liste der Stöße. War ein anderer
+  Teil der Datei verdorben, brach das Einspielen mitten im Lauf mit einer
+  unverständlichen Meldung ab. Jetzt wird die ganze Datei geprüft, bevor
+  etwas geschrieben wird, und die Meldung sagt, welcher Teil nicht stimmt
+  und dass nichts eingespielt wurde. Ältere Sicherungen ohne Spieler,
+  Einheiten oder Workouts bleiben einspielbar.
+- **„Zurücksetzen“ setzt die Zielzone wirklich zurück.** Der Dialog
+  versprach sie, die Zone blieb aber stehen, wo sie war. Ein reiner
+  Lochstoß bekommt dabei weiterhin keine Zone.
+
 ## 0.3.1 – 17.11.2026
 
 ### Behoben
