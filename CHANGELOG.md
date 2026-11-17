@@ -6,6 +6,19 @@ Die Versionsnummer steht an genau einer Stelle — in `package.json` — und ers
 unten auf der Seite **Einstellungen** sowie auf der Fehlerseite. Schema:
 `Hauptversion.Funktion.Korrektur`.
 
+## 0.3.6 – 17.11.2026
+
+### Behoben
+- **Auf schmalen Telefonen lässt sich die Seite nicht mehr seitlich
+  verschieben.** Die Leiste am unteren Rand war breiter als das Fenster und
+  schob die ganze Seite mit. Auf einem 375 Punkte breiten Gerät passt sie
+  jetzt vollständig; auf noch schmaleren rollt nur noch die Leiste selbst.
+
+### Innen
+- Ein Kommentar verwies auf eine Regel eines Linters, den es im Projekt nicht
+  gibt. Der erklärende Text bleibt, die Anweisung ist weg.
+- `jsdom` stand unbenutzt in den Entwicklungsabhängigkeiten und ist gestrichen.
+
 ## 0.3.5 – 17.11.2026
 
 ### Behoben

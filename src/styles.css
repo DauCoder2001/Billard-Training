@@ -177,6 +177,11 @@ textarea {
     border-right: 0;
     border-top: 1px solid var(--line);
     padding-bottom: env(safe-area-inset-bottom);
+    /* Ohne das ist die Mindestbreite der Navigationsreihe die Untergrenze
+       der Gitterspalte: auf einem 375 Punkte breiten Telefon schob die
+       Leiste die ganze Seite auf 381 Punkte, und alles liess sich seitlich
+       verschieben. Die Knoepfe schrumpfen stattdessen in ihre Polsterung. */
+    min-width: 0;
   }
   .sidebar__brand {
     display: none;
