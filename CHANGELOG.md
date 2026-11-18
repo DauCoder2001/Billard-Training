@@ -6,6 +6,24 @@ Die Versionsnummer steht an genau einer Stelle — in `package.json` — und ers
 unten auf der Seite **Einstellungen** sowie auf der Fehlerseite. Schema:
 `Hauptversion.Funktion.Korrektur`.
 
+## 0.5.0 – 18.11.2026
+
+### Behoben
+- **Die Zurück-Taste verliert keine Arbeit mehr.** Baukasten, Training und
+  Workout fragten nach, bevor man sie verließ — aber nur auf ihrem eigenen
+  Knopf. Die Zurück-Taste des Browsers und die Wischbewegung von links auf dem
+  iPad gingen daran vorbei: der angefangene Stoß und die schon erfassten
+  Versuche waren still weg. Jetzt läuft jeder Weg hinaus in dieselbe
+  Rückfrage.
+- **Training und Workout warnen auch beim Neuladen.** Was der Baukasten seit
+  0.4.7 kann, können die beiden Trainingsseiten jetzt ebenso: Wer die Seite
+  mit erfassten Versuchen neu lädt oder schließt, wird vom Browser gefragt.
+
+### Geändert
+- Die Seitenverwaltung läuft jetzt über einen Daten-Router. Die Adressen
+  bleiben dieselben, auch die gespeicherten und geteilten Links. Die App wird
+  dadurch beim ersten Laden um rund 17 kB (gepackt) größer.
+
 ## 0.4.7 – 18.11.2026
 
 ### Behoben

@@ -3,7 +3,7 @@
  *  Wird sowohl von der einzelnen Einheit als auch vom Workout benutzt, damit
  *  die Bedienung am Tisch in beiden Faellen dieselbe ist. */
 
-import { useRef, useState } from 'react'
+import { useEffect, useRef, useState } from 'react'
 import { useApp } from '@/app/store'
 import { AimLayer, BallLayer, PathLayer, TargetZoneLayer } from '@/components/table/Layers'
 import { TableSvg } from '@/components/table/TableSvg'
@@ -19,6 +19,12 @@ interface TrainerViewProps {
   /** Zusatz in der Kopfzeile, etwa die Position im Workout. */
   subtitle?: string
   onQuit: (recorded: number) => void
+  /**
+   * Meldet laufend, wie viele Versuche schon erfasst sind. Die Seite
+   * darueber braucht die Zahl, um beim Verlassen zu wissen, was verloren
+   * ginge - sie steht sonst nur hier drin.
+   */
+  onProgress?: (recorded: number) => void
   onComplete: (results: Attempt[]) => Promise<void> | void
   /** Scheitert das Abschliessen, bleibt die Erfassung sonst stumm gesperrt. */
   onError?: (error: unknown) => void
@@ -29,6 +35,7 @@ export function TrainerView({
   planned,
   subtitle,
   onQuit,
+  onProgress,
   onComplete,
   onError,
 }: TrainerViewProps) {
@@ -43,6 +50,10 @@ export function TrainerView({
   // Ansicht damit neu auf, und der Zustand beginnt von selbst von vorn.
 
   const needsPosition = effectiveMode(shot.scoring) !== 'pocket'
+  useEffect(() => {
+    onProgress?.(results.length)
+  }, [results.length, onProgress])
+
   const index = results.length
   const done = index >= planned
   const running = sessionScore(results, Math.max(index, 1))

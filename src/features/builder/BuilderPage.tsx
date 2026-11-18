@@ -1,8 +1,9 @@
 /** Der Shot Builder: Stoesse aufbauen, formen und speichern. */
 
-import { lazy, Suspense, useEffect, useState } from 'react'
+import { lazy, Suspense, useCallback, useEffect, useState } from 'react'
 import { useLocation, useNavigate, useParams } from 'react-router-dom'
 import { useApp } from '@/app/store'
+import { useLeaveGuard } from '@/app/useLeaveGuard'
 import { db } from '@/data/db'
 import { deleteShot, saveShot } from '@/data/repositories/shots'
 import { castToRail } from '@/domain/geometry'
@@ -106,21 +107,22 @@ export function BuilderPage() {
     return () => window.removeEventListener('keydown', onKey)
   }, [])
 
-  // Neu laden und Schliessen abfangen. Die App-eigenen Wege gehen weiter
-  // ueber leave(); hier geht es um die Wege daran vorbei - Neu laden, Tab
-  // schliessen, Fenster schliessen. Den Text bestimmt der Browser selbst.
-  useEffect(() => {
-    if (!dirty) return
-    const warnen = (e: BeforeUnloadEvent) => {
-      e.preventDefault()
-      // Aeltere Browser - und darunter das Safari der alten iPads, auf die
-      // diese App zielt - horchen nicht auf preventDefault, sondern auf
-      // returnValue. Beides zu setzen schadet nirgends.
-      e.returnValue = ''
-    }
-    window.addEventListener('beforeunload', warnen)
-    return () => window.removeEventListener('beforeunload', warnen)
-  }, [dirty])
+  // Fragt auf jedem Weg hinaus nach, solange etwas Ungespeichertes
+  // offensteht - auch bei der Zurueck-Taste und beim Neuladen.
+  const { ohneNachfrage } = useLeaveGuard(
+    useCallback(
+      () =>
+        useBuilder.getState().dirty
+          ? {
+              title: 'Änderungen verwerfen?',
+              message: 'Der Stoß wurde noch nicht gespeichert.',
+              confirmLabel: 'Verwerfen',
+              danger: true,
+            }
+          : null,
+      [],
+    ),
+  )
 
   const save = async () => {
     const saved = await saveShot(shot)
@@ -128,19 +130,6 @@ export function BuilderPage() {
     dialogs.toast('Gespeichert', 'ok')
     if (isNew) navigate(`/builder/${saved.id}`, { replace: true })
     return saved
-  }
-
-  const leave = async (to: string) => {
-    if (dirty) {
-      const ok = await dialogs.confirm({
-        title: 'Änderungen verwerfen?',
-        message: 'Der Stoß wurde noch nicht gespeichert.',
-        confirmLabel: 'Verwerfen',
-        danger: true,
-      })
-      if (!ok) return
-    }
-    navigate(to)
   }
 
   const rename = async () => {
@@ -254,7 +243,8 @@ export function BuilderPage() {
     })
     if (!ok) return
     await deleteShot(shot.id)
-    navigate('/library', { replace: true })
+    // Der Stoss ist weg - eine Frage nach seinen Aenderungen waere unsinnig.
+    ohneNachfrage(() => navigate('/library', { replace: true }))
   }
 
   const train = async () => {
@@ -275,7 +265,7 @@ export function BuilderPage() {
   return (
     <div className="builder">
       <header className="builder__head">
-        <button className="btn btn--ghost btn--sm" onClick={() => void leave('/library')}>
+        <button className="btn btn--ghost btn--sm" onClick={() => navigate('/library')}>
           ← Stöße
         </button>
         <button className="btn btn--ghost" onClick={() => void rename()} title="Umbenennen">

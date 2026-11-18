@@ -1,5 +1,5 @@
 import { lazy, Suspense, useEffect } from 'react'
-import { HashRouter, Navigate, Route, Routes } from 'react-router-dom'
+import { createHashRouter, Navigate, Outlet, RouterProvider } from 'react-router-dom'
 import { DialogsProvider } from '@/ui/Dialogs'
 import { AppShell } from './AppShell'
 import { useApp } from './store'
@@ -30,6 +30,52 @@ const WorkoutRunPage = lazy(() =>
 const ImportPage = lazy(() =>
   import('@/features/share/ImportPage').then((m) => ({ default: m.ImportPage })),
 )
+
+/** Wartet auf die nachgeladenen Buendel; liegt ueber allen Seiten. */
+function Laderahmen() {
+  return (
+    <Suspense
+      fallback={
+        <div className="page">
+          <p className="muted">Wird geladen …</p>
+        </div>
+      }
+    >
+      <Outlet />
+    </Suspense>
+  )
+}
+
+// Ein Daten-Router, kein <HashRouter>: nur er kennt useBlocker, und nur
+// damit laeuft die Zurueck-Taste in die Rueckfrage der Seite, statt still
+// an ihr vorbei. Die Adressen bleiben dieselben.
+const router = createHashRouter([
+  {
+    element: <Laderahmen />,
+    children: [
+      {
+        element: <AppShell />,
+        children: [
+          { index: true, element: <DashboardPage /> },
+          { path: 'library', element: <LibraryPage /> },
+          { path: 'shot/:id', element: <ShotDetailPage /> },
+          { path: 'workouts', element: <WorkoutsPage /> },
+          { path: 'stats', element: <StatsPage /> },
+          { path: 'achievements', element: <AchievementsPage /> },
+          { path: 'settings', element: <SettingsPage /> },
+          { path: 'import', element: <ImportPage /> },
+          { path: 'session/:id', element: <SessionSummaryPage /> },
+        ],
+      },
+      // Builder und Training laufen ohne Rahmen, um Platz zu haben.
+      { path: 'builder', element: <BuilderPage /> },
+      { path: 'builder/:id', element: <BuilderPage /> },
+      { path: 'train/:id', element: <TrainPage /> },
+      { path: 'workout/:id/run', element: <WorkoutRunPage /> },
+      { path: '*', element: <Navigate to="/" replace /> },
+    ],
+  },
+])
 
 export function App() {
   const ready = useApp((s) => s.ready)
@@ -62,35 +108,7 @@ export function App() {
 
   return (
     <DialogsProvider>
-      <HashRouter>
-        <Suspense
-          fallback={
-            <div className="page">
-              <p className="muted">Wird geladen …</p>
-            </div>
-          }
-        >
-          <Routes>
-            <Route element={<AppShell />}>
-              <Route path="/" element={<DashboardPage />} />
-              <Route path="/library" element={<LibraryPage />} />
-              <Route path="/shot/:id" element={<ShotDetailPage />} />
-              <Route path="/workouts" element={<WorkoutsPage />} />
-              <Route path="/stats" element={<StatsPage />} />
-              <Route path="/achievements" element={<AchievementsPage />} />
-              <Route path="/settings" element={<SettingsPage />} />
-              <Route path="/import" element={<ImportPage />} />
-              <Route path="/session/:id" element={<SessionSummaryPage />} />
-            </Route>
-            {/* Builder und Training laufen ohne Rahmen, um Platz zu haben. */}
-            <Route path="/builder" element={<BuilderPage />} />
-            <Route path="/builder/:id" element={<BuilderPage />} />
-            <Route path="/train/:id" element={<TrainPage />} />
-            <Route path="/workout/:id/run" element={<WorkoutRunPage />} />
-            <Route path="*" element={<Navigate to="/" replace />} />
-          </Routes>
-        </Suspense>
-      </HashRouter>
+      <RouterProvider router={router} />
     </DialogsProvider>
   )
 }

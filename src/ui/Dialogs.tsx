@@ -18,7 +18,7 @@ import {
 } from 'react'
 import { Modal } from './Modal'
 
-interface ConfirmOptions {
+export interface ConfirmOptions {
   title: string
   message?: ReactNode
   confirmLabel?: string

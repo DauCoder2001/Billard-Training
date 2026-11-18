@@ -1,8 +1,9 @@
 /** Ein Workout am Stueck durchlaufen. */
 
-import { useState } from 'react'
+import { useCallback, useMemo, useRef, useState } from 'react'
 import { useNavigate, useParams } from 'react-router-dom'
 import { useActivePlayer } from '@/app/store'
+import { useLeaveGuard } from '@/app/useLeaveGuard'
 import { useShots, useWorkout } from '@/data/hooks'
 import { storageErrorText } from '@/data/errors'
 import { finishSession, startSession } from '@/data/repositories/sessions'
@@ -24,6 +25,43 @@ export function WorkoutRunPage() {
   const [step, setStep] = useState(0)
   const [done, setDone] = useState<Session[]>([])
 
+  const entries = useMemo(
+    () =>
+      workout && shots
+        ? workout.entries.filter((e) => shots.some((s) => s.id === e.shotId))
+        : [],
+    [workout, shots],
+  )
+
+  // Der Stand des Trainers, gemeldet von unten.
+  const erfasst = useRef(0)
+  const meldeStand = useCallback((n: number) => {
+    erfasst.current = n
+  }, [])
+
+  // Solange ein Abschnitt laeuft, fragt jeder Weg hinaus nach. Auf der
+  // Schlussuebersicht steht nichts mehr offen - dort ist der Weg frei.
+  useLeaveGuard(
+    useCallback(() => {
+      if (entries.length === 0 || step >= entries.length) return null
+      const n = erfasst.current
+      return {
+        title: 'Workout abbrechen?',
+        message:
+          n > 0
+            ? `${plural(
+                n,
+                'erfasster Versuch dieses Abschnitts wird',
+                'erfasste Versuche dieses Abschnitts werden',
+              )} verworfen. Bereits beendete Abschnitte bleiben gespeichert.`
+            : 'Bereits beendete Abschnitte bleiben gespeichert.',
+        confirmLabel: 'Abbrechen',
+        cancelLabel: 'Fortsetzen',
+        danger: true,
+      }
+    }, [entries.length, step]),
+  )
+
   if (!workout || !shots || !player) {
     return (
       <div className="page">
@@ -31,8 +69,6 @@ export function WorkoutRunPage() {
       </div>
     )
   }
-
-  const entries = workout.entries.filter((e) => shots.some((s) => s.id === e.shotId))
 
   if (entries.length === 0) {
     return (
@@ -110,23 +146,8 @@ export function WorkoutRunPage() {
     setStep((s) => s + 1)
   }
 
-  const quit = async (recorded: number) => {
-    const ok = await dialogs.confirm({
-      title: 'Workout abbrechen?',
-      message:
-        recorded > 0
-          ? `${plural(
-              recorded,
-              'erfasster Versuch dieses Abschnitts wird',
-              'erfasste Versuche dieses Abschnitts werden',
-            )} verworfen. Bereits beendete Abschnitte bleiben gespeichert.`
-          : 'Bereits beendete Abschnitte bleiben gespeichert.',
-      confirmLabel: 'Abbrechen',
-      cancelLabel: 'Fortsetzen',
-      danger: true,
-    })
-    if (ok) navigate('/workouts')
-  }
+  // Die Rueckfrage stellt der Waechter - hier bleibt nur der Weg.
+  const quit = () => navigate('/workouts')
 
   return (
     <TrainerView
@@ -134,7 +155,8 @@ export function WorkoutRunPage() {
       shot={shot}
       planned={entry.attempts}
       subtitle={`Workout ${step + 1} von ${entries.length}`}
-      onQuit={(n) => void quit(n)}
+      onQuit={quit}
+      onProgress={meldeStand}
       onComplete={complete}
       onError={(err) => dialogs.toast(`Nicht gespeichert: ${storageErrorText(err)}`, 'error')}
     />

@@ -1,7 +1,9 @@
 /** Eine einzelne Trainingseinheit zu einem Stoss. */
 
+import { useCallback, useRef } from 'react'
 import { useNavigate, useParams, useSearchParams } from 'react-router-dom'
 import { useActivePlayer } from '@/app/store'
+import { useLeaveGuard } from '@/app/useLeaveGuard'
 import { useShot } from '@/data/hooks'
 import { storageErrorText } from '@/data/errors'
 import { finishSession, startSession } from '@/data/repositories/sessions'
@@ -22,6 +24,30 @@ export function TrainPage() {
   // Geprueft, nicht zugesichert: siehe params.ts.
   const format = sessionFormat(params.get('format'))
   const planned = plannedAttempts(params.get('attempts'))
+
+  // Der Stand des Trainers, gemeldet von unten. Ein Ref, damit das Zaehlen
+  // die Seite nicht bei jedem Versuch neu zeichnet.
+  const erfasst = useRef(0)
+  const meldeStand = useCallback((n: number) => {
+    erfasst.current = n
+  }, [])
+
+  // Erfasste Versuche sind nirgends gespeichert, bis die Einheit fertig
+  // ist. Jeder Weg hinaus fragt deshalb nach - der eigene Knopf, die
+  // Zurueck-Taste, die Wischbewegung und das Neuladen.
+  const { ohneNachfrage } = useLeaveGuard(
+    useCallback(() => {
+      const n = erfasst.current
+      if (n === 0) return null
+      return {
+        title: 'Training abbrechen?',
+        message: `${plural(n, 'erfasster Versuch wird', 'erfasste Versuche werden')} verworfen.`,
+        confirmLabel: 'Abbrechen',
+        cancelLabel: 'Fortsetzen',
+        danger: true,
+      }
+    }, []),
+  )
 
   if (shot === undefined || player === null) {
     return (
@@ -44,29 +70,20 @@ export function TrainPage() {
   const complete = async (results: Attempt[]) => {
     const session = startSession(shot, player.id, format, planned)
     const finished = await finishSession(session, shot, results)
-    navigate(`/session/${finished.id}`, { replace: true })
+    // Die Einheit steht in der Datenbank; es gibt nichts mehr zu verwerfen.
+    ohneNachfrage(() => navigate(`/session/${finished.id}`, { replace: true }))
   }
 
-  const quit = async (recorded: number) => {
-    if (recorded > 0) {
-      const ok = await dialogs.confirm({
-        title: 'Training abbrechen?',
-        message: `${plural(recorded, 'erfasster Versuch wird', 'erfasste Versuche werden')} verworfen.`,
-        confirmLabel: 'Abbrechen',
-        cancelLabel: 'Fortsetzen',
-        danger: true,
-      })
-      if (!ok) return
-    }
-    navigate(`/shot/${shot.id}`)
-  }
+  // Die Rueckfrage stellt der Waechter - hier bleibt nur der Weg.
+  const quit = () => navigate(`/shot/${shot.id}`)
 
   return (
     <TrainerView
       key={`${shot.id}-${planned}`}
       shot={shot}
       planned={planned}
-      onQuit={(n) => void quit(n)}
+      onQuit={quit}
+      onProgress={meldeStand}
       onComplete={complete}
       onError={(err) => dialogs.toast(`Nicht gespeichert: ${storageErrorText(err)}`, 'error')}
     />
