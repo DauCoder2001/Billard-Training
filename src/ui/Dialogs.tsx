@@ -186,7 +186,15 @@ function DialogHost({ pending, onClose }: { pending: Pending; onClose: () => voi
                 value={value}
                 placeholder={pending.options.placeholder}
                 onChange={(e) => setValue(e.target.value)}
-                onKeyDown={(e) => e.key === 'Enter' && accept()}
+                onKeyDown={(e) => {
+                  if (e.key !== 'Enter') return
+                  // Die Taste hier aufbrauchen. Sonst laeuft ihre
+                  // Standardwirkung weiter, waehrend der Dialog schon
+                  // geschlossen und der Fokus zurueck auf dem ausloesenden
+                  // Knopf ist - der bekommt dann einen zweiten Druck.
+                  e.preventDefault()
+                  accept()
+                }}
               />
             )}
           </div>

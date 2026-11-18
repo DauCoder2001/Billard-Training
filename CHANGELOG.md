@@ -6,6 +6,15 @@ Die Versionsnummer steht an genau einer Stelle — in `package.json` — und ers
 unten auf der Seite **Einstellungen** sowie auf der Fehlerseite. Schema:
 `Hauptversion.Funktion.Korrektur`.
 
+## 0.4.3 – 18.11.2026
+
+### Behoben
+- **Die Eingabetaste löst eine Frage nicht mehr zweimal aus.** Wer eine
+  Eingabefrage mit Enter bestätigte — Anzahl der Versuche, Spielername,
+  Name eines Workouts —, bekam die Antwort übernommen und dieselbe Frage
+  gleich noch einmal vorgesetzt: die Taste wirkte nach dem Schließen auf dem
+  Knopf weiter, der die Frage geöffnet hatte. Mit der Maus trat das nie auf.
+
 ## 0.4.2 – 18.11.2026
 
 ### Behoben
