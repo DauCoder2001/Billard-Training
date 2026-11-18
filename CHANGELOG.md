@@ -6,6 +6,21 @@ Die Versionsnummer steht an genau einer Stelle — in `package.json` — und ers
 unten auf der Seite **Einstellungen** sowie auf der Fehlerseite. Schema:
 `Hauptversion.Funktion.Korrektur`.
 
+## 0.4.4 – 18.11.2026
+
+### Behoben
+- **Der Zeitraum der Statistik wandert mit.** „7 Tage“ und „30 Tage“ standen
+  ab dem Aufbau der Seite fest. Wer die Statistik offen liegen ließ und später
+  wieder hinsah, bekam das Fenster von vorhin — über Mitternacht also das von
+  gestern. Jetzt wird neu gerechnet, sobald die Seite wieder in den Blick kommt.
+
+### Innen
+- **Drei abgeleitete Werte leben nicht mehr als Zustand.** Der geteilte Stoß
+  auf der Übernahmeseite, Link und Länge im Teilen-Dialog und das Zurücksetzen
+  beim Stoßwechsel im Training folgen jetzt aus dem, was hereinkommt, statt
+  nachträglich gesetzt zu werden. An der Bedienung ändert sich nichts. Nebenbei
+  kann ein spät eintreffender QR-Code nicht mehr zum vorigen Link gehören.
+
 ## 0.4.3 – 18.11.2026
 
 ### Behoben

@@ -3,7 +3,7 @@
  *  Wird sowohl von der einzelnen Einheit als auch vom Workout benutzt, damit
  *  die Bedienung am Tisch in beiden Faellen dieselbe ist. */
 
-import { useEffect, useRef, useState } from 'react'
+import { useRef, useState } from 'react'
 import { useApp } from '@/app/store'
 import { AimLayer, BallLayer, PathLayer, TargetZoneLayer } from '@/components/table/Layers'
 import { TableSvg } from '@/components/table/TableSvg'
@@ -38,15 +38,9 @@ export function TrainerView({
   const [end, setEnd] = useState<Point | null>(null)
   const [busy, setBusy] = useState(false)
 
-  // Beim Wechsel auf einen anderen Stoss von vorn beginnen. Der uebliche Weg
-  // dafuer ist ein key am Bauteil; den muesste jede aufrufende Seite setzen,
-  // und das Workout wechselt den Stoss mitten im Lauf.
-  useEffect(() => {
-    // eslint-disable-next-line react-hooks/set-state-in-effect -- siehe oben
-    setResults([])
-    setEnd(null)
-    setBusy(false)
-  }, [shot.id, planned])
+  // Zum Zuruecksetzen beim Wechsel auf einen anderen Stoss steht ein key am
+  // Bauteil - beide aufrufenden Seiten setzen ihn. Ein Wechsel baut die
+  // Ansicht damit neu auf, und der Zustand beginnt von selbst von vorn.
 
   const needsPosition = effectiveMode(shot.scoring) !== 'pocket'
   const index = results.length

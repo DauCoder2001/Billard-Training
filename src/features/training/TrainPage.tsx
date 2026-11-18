@@ -63,6 +63,7 @@ export function TrainPage() {
 
   return (
     <TrainerView
+      key={`${shot.id}-${planned}`}
       shot={shot}
       planned={planned}
       onQuit={(n) => void quit(n)}

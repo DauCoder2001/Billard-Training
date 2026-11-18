@@ -1,6 +1,6 @@
 /** Einen geteilten Stoss uebernehmen. */
 
-import { useEffect, useState } from 'react'
+import { useMemo, useState } from 'react'
 import { useNavigate, useSearchParams } from 'react-router-dom'
 import { useApp } from '@/app/store'
 import { ShotDiagram } from '@/components/table/ShotDiagram'
@@ -11,47 +11,44 @@ import type { Shot } from '@/domain/types'
 import { SkillChips } from '@/ui/bits'
 import { useDialogs } from '@/ui/Dialogs'
 
+/** Was beim Lesen einer Nutzlast herauskommt: ein Stoss oder ein Grund. */
+type Gelesen = { shot: Shot; error: null } | { shot: null; error: string }
+
+function lesen(payload: string): Gelesen {
+  try {
+    return { shot: decodeShot(payload), error: null }
+  } catch (err) {
+    return { shot: null, error: err instanceof Error ? err.message : 'Unbekannter Fehler' }
+  }
+}
+
 export function ImportPage() {
   const [params] = useSearchParams()
   const navigate = useNavigate()
   const dialogs = useDialogs()
   const settings = useApp((s) => s.settings)
 
-  const [shot, setShot] = useState<Shot | null>(null)
-  const [error, setError] = useState<string | null>(null)
   const [manual, setManual] = useState('')
+  const [vonHand, setVonHand] = useState<Gelesen | null>(null)
 
   const payload = params.get('d')
 
-  // Der Stoss ist aus der Adresse abgeleitet und gehoerte darum ins Rendern.
-  // Er teilt sich den Zustand aber mit dem Feld "von Hand einfuegen", das
-  // denselben Stoss setzt - zwei Quellen fuer einen Wert, und nur eine davon
-  // ist ableitbar.
-  useEffect(() => {
-    if (!payload) return
-    try {
-      // eslint-disable-next-line react-hooks/set-state-in-effect -- siehe oben
-      setShot(decodeShot(payload))
-      setError(null)
-    } catch (err) {
-      setShot(null)
-      setError(err instanceof Error ? err.message : 'Unbekannter Fehler')
-    }
-  }, [payload])
+  // Traegt die Adresse eine Nutzlast, ist der Stoss aus ihr abgeleitet und
+  // braucht keinen eigenen Zustand. Das Feld "von Hand einfuegen" erscheint
+  // nur ohne Nutzlast in der Adresse - die beiden Wege kommen sich nicht in
+  // die Quere.
+  const ausAdresse = useMemo(() => (payload ? lesen(payload) : null), [payload])
+  const gelesen = ausAdresse ?? vonHand
+  const shot = gelesen?.shot ?? null
+  const error = gelesen?.error ?? null
 
   const readManual = () => {
     const extracted = payloadFromInput(manual)
-    if (!extracted) {
-      setError('In der Eingabe steckt kein geteilter Stoß.')
-      return
-    }
-    try {
-      setShot(decodeShot(extracted))
-      setError(null)
-    } catch (err) {
-      setShot(null)
-      setError(err instanceof Error ? err.message : 'Unbekannter Fehler')
-    }
+    setVonHand(
+      extracted
+        ? lesen(extracted)
+        : { shot: null, error: 'In der Eingabe steckt kein geteilter Stoß.' },
+    )
   }
 
   const take = async () => {

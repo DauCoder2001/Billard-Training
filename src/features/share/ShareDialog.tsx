@@ -1,6 +1,6 @@
 /** Stoss weitergeben: Link, QR-Code, PNG oder JSON. */
 
-import { useEffect, useRef, useState } from 'react'
+import { useEffect, useMemo, useRef, useState } from 'react'
 import QRCode from 'qrcode'
 import { ShotDiagram } from '@/components/table/ShotDiagram'
 import { shareUrl } from '@/domain/share'
@@ -10,32 +10,35 @@ import { useDialogs } from '@/ui/Dialogs'
 import { Modal } from '@/ui/Modal'
 import { downloadText, safeFilename, svgToPngBlob, downloadBlob } from './exportImage'
 
+/** Mehr Zeichen nimmt ein QR-Code in dieser Groesse nicht auf. */
+const QR_MAX = 2200
+
 export function ShareDialog({ shot, onClose }: { shot: Shot; onClose: () => void }) {
   const settings = useApp((s) => s.settings)
   const dialogs = useDialogs()
   const [qr, setQr] = useState<string | null>(null)
-  const [url, setUrl] = useState('')
-  const [tooLong, setTooLong] = useState(false)
   const diagramRef = useRef<HTMLDivElement>(null)
 
-  // Der Link und seine Laenge waeren ableitbar, der QR-Code daneben nicht -
-  // der entsteht asynchron und braucht den Effekt. Beides zusammen in einem
-  // Durchgang zu halten ist uebersichtlicher als zwei Wege nebeneinander.
+  // Link und Laenge folgen aus dem Stoss. Nur der QR-Code entsteht
+  // asynchron - er allein bleibt Zustand und braucht den Effekt.
+  const url = useMemo(() => shareUrl(shot), [shot])
+  const tooLong = url.length > QR_MAX
+
   useEffect(() => {
-    const link = shareUrl(shot)
-    // eslint-disable-next-line react-hooks/set-state-in-effect -- siehe oben
-    setUrl(link)
-    // Sehr grosse Stoesse passen nicht mehr in einen QR-Code.
-    if (link.length > 2200) {
-      setTooLong(true)
-      setQr(null)
-      return
+    if (tooLong) return
+    let verworfen = false
+    QRCode.toDataURL(url, { margin: 1, width: 320, color: { dark: '#0d1512', light: '#f4f1e8' } })
+      .then((bild) => {
+        if (!verworfen) setQr(bild)
+      })
+      .catch(() => {
+        if (!verworfen) setQr(null)
+      })
+    // Ein spaet eintreffender Code gehoert sonst zum vorigen Link.
+    return () => {
+      verworfen = true
     }
-    setTooLong(false)
-    QRCode.toDataURL(link, { margin: 1, width: 320, color: { dark: '#0d1512', light: '#f4f1e8' } })
-      .then(setQr)
-      .catch(() => setQr(null))
-  }, [shot])
+  }, [url, tooLong])
 
   const copy = async () => {
     try {

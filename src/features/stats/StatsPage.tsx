@@ -1,4 +1,4 @@
-import { useMemo, useState } from 'react'
+import { useEffect, useMemo, useState } from 'react'
 import { Link } from 'react-router-dom'
 import { useActivePlayer } from '@/app/store'
 import { useSessions, useShots } from '@/data/hooks'
@@ -13,24 +13,45 @@ const DAY = 24 * 60 * 60 * 1000
 
 type Range = 7 | 30 | 0
 
+/**
+ * Der Zeitpunkt, von dem aus "7 Tage" und "30 Tage" zurueckgerechnet werden.
+ *
+ * Die Uhr einfach beim Rechnen zu lesen hiesse: der Zeitraum steht ab dem
+ * Aufbau der Seite fest. Wer die Statistik ueber Mitternacht offen laesst,
+ * bekommt beim Hinsehen noch das Fenster von gestern. Aufgefrischt wird
+ * darum, wenn die Seite wieder in den Blick kommt - das ist genau der
+ * Moment, in dem jemand sie erneut liest. Ein Taktgeber im Hintergrund
+ * waere Arbeit fuer nichts.
+ */
+function useNow(): number {
+  const [jetzt, setJetzt] = useState(() => Date.now())
+  useEffect(() => {
+    const auffrischen = () => setJetzt(Date.now())
+    window.addEventListener('focus', auffrischen)
+    document.addEventListener('visibilitychange', auffrischen)
+    return () => {
+      window.removeEventListener('focus', auffrischen)
+      document.removeEventListener('visibilitychange', auffrischen)
+    }
+  }, [])
+  return jetzt
+}
+
 export function StatsPage() {
   const player = useActivePlayer()
   const shots = useShots()
   const sessions = useSessions(player?.id ?? null)
   const [range, setRange] = useState<Range>(30)
+  const jetzt = useNow()
 
   const finished = useMemo(() => {
     const all = (sessions ?? [])
       .filter((s) => s.finishedAt !== null)
       .sort((a, b) => (a.finishedAt ?? 0) - (b.finishedAt ?? 0))
     if (range === 0) return all
-    // Der Zeitraum steht ab dem Aufbau der Seite fest und wandert nicht mit
-    // der Uhr weiter. Wer die Statistik stundenlang offen laesst, sieht das
-    // Fenster von vorhin.
-    // eslint-disable-next-line react-hooks/purity -- siehe oben
-    const since = Date.now() - range * DAY
+    const since = jetzt - range * DAY
     return all.filter((s) => (s.finishedAt ?? 0) >= since)
-  }, [sessions, range])
+  }, [sessions, range, jetzt])
 
   const perShot = useMemo(() => statsByShot(sessions ?? []), [sessions])
 
