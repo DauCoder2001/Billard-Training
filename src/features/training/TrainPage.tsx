@@ -6,9 +6,9 @@ import { useShot } from '@/data/hooks'
 import { storageErrorText } from '@/data/errors'
 import { finishSession, startSession } from '@/data/repositories/sessions'
 import { plural } from '@/domain/text'
-import { SESSION_ATTEMPTS } from '@/domain/types'
-import type { Attempt, SessionFormat } from '@/domain/types'
+import type { Attempt } from '@/domain/types'
 import { useDialogs } from '@/ui/Dialogs'
+import { plannedAttempts, sessionFormat } from './params'
 import { TrainerView } from './TrainerView'
 
 export function TrainPage() {
@@ -19,8 +19,9 @@ export function TrainPage() {
   const shot = useShot(id)
   const player = useActivePlayer()
 
-  const format = (params.get('format') ?? 'standard') as SessionFormat
-  const planned = Number(params.get('attempts')) || SESSION_ATTEMPTS.standard
+  // Geprueft, nicht zugesichert: siehe params.ts.
+  const format = sessionFormat(params.get('format'))
+  const planned = plannedAttempts(params.get('attempts'))
 
   if (shot === undefined || player === null) {
     return (

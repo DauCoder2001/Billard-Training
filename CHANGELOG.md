@@ -6,6 +6,24 @@ Die Versionsnummer steht an genau einer Stelle — in `package.json` — und ers
 unten auf der Seite **Einstellungen** sowie auf der Fehlerseite. Schema:
 `Hauptversion.Funktion.Korrektur`.
 
+## 0.4.1 – 18.11.2026
+
+### Behoben
+- **Eine von Hand geänderte Adresse kann das Training nicht mehr lahmlegen.**
+  `?attempts=1000000000` ließ den Tab am Speicher sterben, `?attempts=-5`
+  zeigte eine Einheit, die fertig war, bevor der erste Versuch erfasst werden
+  konnte, und eine erfundene Form stand hinterher in der gespeicherten Einheit.
+  Beide Angaben werden jetzt geprüft: die Anzahl bleibt zwischen 1 und 200,
+  eine unbekannte Form gilt als „Standard“.
+
+### Innen
+- **Die Bauwerkzeuge sind auf dem aktuellen Stand** — Vite 8, Vitest 5 und die
+  beiden Zusätze dazu. Das räumt die Hälfte der gemeldeten Schwachstellen im
+  Werkzeugkasten ab, darunter beide kritischen; der Rest hängt an einer
+  Bibliothek, für die es noch keine fehlerfreie Fassung gibt. An der App ändert
+  sich nichts: Der Bau liefert dieselben Dateien, und alte Geräte bekommen
+  weiterhin die ältere Schreibweise. Gebraucht wird jetzt Node 22.12 oder neuer.
+
 ## 0.4.0 – 17.11.2026
 
 ### Geändert

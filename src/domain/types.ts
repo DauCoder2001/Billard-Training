@@ -227,13 +227,23 @@ export interface Player {
 
 // -------------------------------------------------------------- Sessions ---
 
-export type SessionFormat = 'quick' | 'standard' | 'deep' | 'custom'
+export const SESSION_FORMATS = ['quick', 'standard', 'deep', 'custom'] as const
+
+export type SessionFormat = (typeof SESSION_FORMATS)[number]
 
 export const SESSION_ATTEMPTS: Record<Exclude<SessionFormat, 'custom'>, number> = {
   quick: 10,
   standard: 20,
   deep: 30,
 }
+
+/**
+ * Grenzen fuer die Anzahl geplanter Versuche einer Einheit. Weniger als einer
+ * ist keine Einheit, mehr als zweihundert steht niemand am Tisch durch - und
+ * die Zahl bestimmt die Laenge einer Liste in der Anzeige.
+ */
+export const MIN_ATTEMPTS = 1
+export const MAX_ATTEMPTS = 200
 
 export interface Attempt {
   index: number

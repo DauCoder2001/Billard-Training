@@ -52,6 +52,7 @@ npm install
 npm run dev
 ```
 
+Gebraucht wird Node 22.12 oder neuer; ältere Fassungen lehnen die Werkzeuge ab.
 Danach `http://localhost:5173` öffnen. Der Entwicklungsserver übersetzt die
 TypeScript-Dateien beim Laden und aktualisiert bei jeder Änderung. Er hört nur
 auf diesem Rechner.

@@ -7,6 +7,8 @@ import { deleteShot, toggleFavorite } from '@/data/repositories/shots'
 import { POCKET_BY_ID } from '@/domain/geometry'
 import { pocketRate, proficiencyFor, scratchRate } from '@/domain/scoring'
 import {
+  MAX_ATTEMPTS,
+  MIN_ATTEMPTS,
   SESSION_ATTEMPTS,
   SHOT_TYPE_LABELS,
   type SessionFormat,
@@ -78,7 +80,7 @@ export function ShotDetailPage() {
         initial: '15',
       })
       if (answer === null) return
-      attempts = Math.max(1, Math.min(200, Number(answer) || 0))
+      attempts = Math.max(MIN_ATTEMPTS, Math.min(MAX_ATTEMPTS, Number(answer) || 0))
       if (!attempts) return
     }
     navigate(`/train/${shot.id}?format=${format}&attempts=${attempts}`)
