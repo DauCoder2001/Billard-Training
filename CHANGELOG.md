@@ -6,6 +6,17 @@ Die Versionsnummer steht an genau einer Stelle — in `package.json` — und ers
 unten auf der Seite **Einstellungen** sowie auf der Fehlerseite. Schema:
 `Hauptversion.Funktion.Korrektur`.
 
+## 0.4.5 – 18.11.2026
+
+### Behoben
+- **Escape spielt eine Sicherung nicht mehr ein.** Die Frage „Vorhandene Daten
+  ersetzen?“ hatte drei Antworten, aber nur zwei Knöpfe: „Abbrechen“ bedeutete
+  in Wahrheit „Hinzufügen“. Wer die falsche Datei erwischt hatte und floh —
+  mit Escape, einem Tipp neben den Dialog oder dem Abbrechen-Knopf —, spielte
+  sie damit ein. Die Frage hat jetzt drei eigene Antworten: **Abbrechen**,
+  **Hinzufügen**, **Ersetzen**. Jede Flucht bedeutet: nichts tun. Der Dateiname
+  steht in der Frage, damit zu sehen ist, worum es geht.
+
 ## 0.4.4 – 18.11.2026
 
 ### Behoben

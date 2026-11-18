@@ -42,6 +42,35 @@ interface AlertOptions {
   confirmLabel?: string
 }
 
+/**
+ * Eine Antwort in einer Frage mit mehreren Moeglichkeiten.
+ *
+ * `tone` bestimmt die Farbe und damit die Bedeutung: "primary" traegt die
+ * eine Hauptaktion, "danger" eine, die etwas wegnimmt. Ohne `tone` ist der
+ * Knopf unauffaellig.
+ */
+interface ChooseAction<Id extends string = string> {
+  id: Id
+  label: string
+  tone?: 'primary' | 'danger'
+}
+
+/**
+ * Eine Frage mit mehr als zwei Antworten.
+ *
+ * Der Unterschied zu confirm ist nicht nur die Anzahl: Abbrechen liefert
+ * `null` und damit "nichts tun". Eine Frage mit drei Moeglichkeiten auf
+ * confirm abzubilden hiesse, dass Escape, ein Tipp neben den Dialog und eine
+ * der echten Antworten dasselbe bedeuten - und damit laesst sich aus Versehen
+ * ausloesen, was niemand wollte.
+ */
+interface ChooseOptions<Id extends string = string> {
+  title: string
+  message?: ReactNode
+  actions: ChooseAction<Id>[]
+  cancelLabel?: string
+}
+
 type ToastKind = 'info' | 'ok' | 'error'
 
 interface Toast {
@@ -52,6 +81,8 @@ interface Toast {
 
 interface DialogsApi {
   confirm: (options: ConfirmOptions) => Promise<boolean>
+  /** Mehrere Antworten; null heisst abgebrochen und also: nichts tun. */
+  choose: <Id extends string>(options: ChooseOptions<Id>) => Promise<Id | null>
   prompt: (options: PromptOptions) => Promise<string | null>
   alert: (options: AlertOptions) => Promise<void>
   toast: (text: string, kind?: ToastKind) => void
@@ -67,6 +98,7 @@ export function useDialogs(): DialogsApi {
 
 type Pending =
   | { kind: 'confirm'; options: ConfirmOptions; resolve: (v: boolean) => void }
+  | { kind: 'choose'; options: ChooseOptions; resolve: (v: string | null) => void }
   | { kind: 'prompt'; options: PromptOptions; resolve: (v: string | null) => void }
   | { kind: 'alert'; options: AlertOptions; resolve: () => void }
 
@@ -79,6 +111,14 @@ export function DialogsProvider({ children }: { children: ReactNode }) {
     () => ({
       confirm: (options) =>
         new Promise<boolean>((resolve) => setPending({ kind: 'confirm', options, resolve })),
+      choose: <Id extends string>(options: ChooseOptions<Id>) =>
+        new Promise<Id | null>((resolve) =>
+          setPending({
+            kind: 'choose',
+            options: options as ChooseOptions,
+            resolve: resolve as (v: string | null) => void,
+          }),
+        ),
       prompt: (options) =>
         new Promise<string | null>((resolve) => setPending({ kind: 'prompt', options, resolve })),
       alert: (options) =>
@@ -130,7 +170,12 @@ function DialogHost({ pending, onClose }: { pending: Pending; onClose: () => voi
   const inputRef = useRef<HTMLInputElement | HTMLTextAreaElement>(null)
   const acceptRef = useRef<HTMLButtonElement>(null)
   const cancelRef = useRef<HTMLButtonElement>(null)
-  const danger = pending.kind === 'confirm' && pending.options.danger
+  // Eine Frage, bei der etwas wegfallen kann: dann liegt der Startfokus auf
+  // "Abbrechen", damit ein unbedachtes Enter nichts wegnimmt.
+  const danger =
+    pending.kind === 'confirm'
+      ? pending.options.danger
+      : pending.kind === 'choose' && pending.options.actions.some((a) => a.tone === 'danger')
 
   // Startfokus (laeuft nach showModal): das Eingabefeld, bei einer
   // gefaehrlichen Rueckfrage "Abbrechen", sonst der Bestaetigen-Knopf.
@@ -145,12 +190,15 @@ function DialogHost({ pending, onClose }: { pending: Pending; onClose: () => voi
 
   const cancel = useCallback(() => {
     if (pending.kind === 'confirm') pending.resolve(false)
-    else if (pending.kind === 'prompt') pending.resolve(null)
+    else if (pending.kind === 'prompt' || pending.kind === 'choose') pending.resolve(null)
     else pending.resolve()
     onClose()
   }, [pending, onClose])
 
   const accept = useCallback(() => {
+    // Eine Frage mit mehreren Antworten hat keinen allgemeinen
+    // Bestaetigen-Knopf: dort loest jede Antwort selbst auf.
+    if (pending.kind === 'choose') return
     if (pending.kind === 'confirm') pending.resolve(true)
     else if (pending.kind === 'prompt') pending.resolve(value)
     else pending.resolve()
@@ -203,12 +251,28 @@ function DialogHost({ pending, onClose }: { pending: Pending; onClose: () => voi
       <div className="modal__foot">
         {pending.kind !== 'alert' && (
           <button ref={cancelRef} className="btn" onClick={cancel}>
-            {(pending.kind === 'confirm' && pending.options.cancelLabel) || 'Abbrechen'}
+            {('cancelLabel' in o && o.cancelLabel) || 'Abbrechen'}
           </button>
         )}
-        <button ref={acceptRef} className={`btn ${danger ? 'btn--danger' : 'btn--primary'}`} onClick={accept}>
-          {('confirmLabel' in o && o.confirmLabel) || 'OK'}
-        </button>
+        {pending.kind === 'choose' ? (
+          pending.options.actions.map((action) => (
+            <button
+              key={action.id}
+              ref={action.tone === 'primary' ? acceptRef : undefined}
+              className={`btn${action.tone ? ` btn--${action.tone}` : ''}`}
+              onClick={() => {
+                pending.resolve(action.id)
+                onClose()
+              }}
+            >
+              {action.label}
+            </button>
+          ))
+        ) : (
+          <button ref={acceptRef} className={`btn ${danger ? 'btn--danger' : 'btn--primary'}`} onClick={accept}>
+            {('confirmLabel' in o && o.confirmLabel) || 'OK'}
+          </button>
+        )}
       </div>
     </Modal>
   )

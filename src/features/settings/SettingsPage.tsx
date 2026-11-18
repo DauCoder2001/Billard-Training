@@ -78,16 +78,19 @@ export function SettingsPage() {
       dialogs.toast('Die Datei ließ sich nicht lesen', 'error')
       return
     }
-    const replace = await dialogs.confirm({
+    // Drei Antworten, keine zwei: "Abbrechen" hiess hier frueher
+    // "Hinzufuegen", und damit spielte auch Escape die Sicherung ein.
+    const mode = await dialogs.choose({
       title: 'Sicherung einspielen',
-      message:
-        'Vorhandene Daten ersetzen? "Abbrechen" fügt die Sicherung zum vorhandenen Bestand hinzu.',
-      confirmLabel: 'Ersetzen',
-      cancelLabel: 'Hinzufügen',
-      danger: true,
+      message: `${file.name} wird eingespielt. Soll der vorhandene Bestand ersetzt werden, oder soll die Sicherung dazukommen?`,
+      actions: [
+        { id: 'merge', label: 'Hinzufügen', tone: 'primary' },
+        { id: 'replace', label: 'Ersetzen', tone: 'danger' },
+      ],
     })
+    if (mode === null) return
     try {
-      const result = await importBackup(parsed, replace ? 'replace' : 'merge')
+      const result = await importBackup(parsed, mode)
       await dialogs.alert({
         title: 'Sicherung eingespielt',
         message:
