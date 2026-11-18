@@ -1,6 +1,6 @@
 /** Einen geteilten Stoss uebernehmen. */
 
-import { useMemo, useState } from 'react'
+import { useMemo, useRef, useState } from 'react'
 import { useNavigate, useSearchParams } from 'react-router-dom'
 import { useApp } from '@/app/store'
 import { ShotDiagram } from '@/components/table/ShotDiagram'
@@ -30,6 +30,7 @@ export function ImportPage() {
 
   const [manual, setManual] = useState('')
   const [vonHand, setVonHand] = useState<Gelesen | null>(null)
+  const fileRef = useRef<HTMLInputElement>(null)
 
   const payload = params.get('d')
 
@@ -48,6 +49,22 @@ export function ImportPage() {
       extracted
         ? lesen(extracted)
         : { shot: null, error: 'In der Eingabe steckt kein geteilter Stoß.' },
+    )
+  }
+
+  const readFile = async (file: File) => {
+    let text: string
+    try {
+      text = await file.text()
+    } catch {
+      setVonHand({ shot: null, error: 'Die Datei ließ sich nicht lesen.' })
+      return
+    }
+    const extracted = payloadFromInput(text)
+    setVonHand(
+      extracted
+        ? lesen(extracted)
+        : { shot: null, error: `In "${file.name}" steckt kein geteilter Stoß.` },
     )
   }
 
@@ -86,7 +103,26 @@ export function ImportPage() {
             <button className="btn btn--primary" disabled={!manual.trim()} onClick={readManual}>
               Lesen
             </button>
+            <button className="btn" onClick={() => fileRef.current?.click()}>
+              Datei wählen …
+            </button>
+            <input
+              ref={fileRef}
+              type="file"
+              accept="application/json,.json"
+              hidden
+              onChange={(e) => {
+                const file = e.target.files?.[0]
+                // Zuruecksetzen, damit dieselbe Datei ein zweites Mal
+                // dasselbe Ereignis ausloest.
+                e.target.value = ''
+                if (file) void readFile(file)
+              }}
+            />
           </div>
+          <span className="small muted">
+            Eine Datei, die „Als Datei“ beim Teilen geschrieben hat.
+          </span>
         </div>
       )}
 

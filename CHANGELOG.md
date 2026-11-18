@@ -6,6 +6,26 @@ Die Versionsnummer steht an genau einer Stelle — in `package.json` — und ers
 unten auf der Seite **Einstellungen** sowie auf der Fehlerseite. Schema:
 `Hauptversion.Funktion.Korrektur`.
 
+## 0.4.6 – 18.11.2026
+
+### Behoben
+- **„Als Datei“ schreibt jetzt eine Datei, die sich auch wieder einlesen lässt.**
+  Bisher kam dabei die rohe interne Form eines Stoßes heraus. Weder
+  *Geteilten Stoß übernehmen* noch *Sicherung einspielen* nahm sie an — die
+  Datei war ein Weg, der nirgendwohin führte. Sie enthält jetzt denselben Code
+  wie der Link, in einer Hülle, an der die App sie wiedererkennt.
+
+### Neu
+- **Datei wählen beim Übernehmen.** Unter *Geteilten Stoß übernehmen* steht
+  neben *Lesen* ein Knopf **Datei wählen …**. Er liest eine Datei ein, die
+  *Als Datei* beim Teilen geschrieben hat — ohne Umweg über Öffnen und
+  Hineinkopieren.
+
+### Geändert
+- Wer einen einzelnen geteilten Stoß versehentlich unter *Sicherung
+  einspielen* wählt, liest nicht mehr „Das ist keine Sicherung dieser App“,
+  sondern erfährt, dass die Datei aus dieser App stammt und wo sie hingehört.
+
 ## 0.4.5 – 18.11.2026
 
 ### Behoben

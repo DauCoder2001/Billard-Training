@@ -3,7 +3,7 @@
 import { useEffect, useMemo, useRef, useState } from 'react'
 import QRCode from 'qrcode'
 import { ShotDiagram } from '@/components/table/ShotDiagram'
-import { shareUrl } from '@/domain/share'
+import { shareUrl, shotFileText } from '@/domain/share'
 import type { Shot } from '@/domain/types'
 import { useApp } from '@/app/store'
 import { useDialogs } from '@/ui/Dialogs'
@@ -61,7 +61,7 @@ export function ShareDialog({ shot, onClose }: { shot: Shot; onClose: () => void
   }
 
   const saveJson = () => {
-    downloadText(JSON.stringify(shot, null, 2), `${safeFilename(shot.name)}.json`)
+    downloadText(shotFileText(shot), `${safeFilename(shot.name)}.json`)
   }
 
   return (

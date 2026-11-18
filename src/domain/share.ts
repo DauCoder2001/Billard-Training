@@ -323,10 +323,55 @@ export function shareUrl(shot: Shot, origin?: string): string {
   return `${base}#/import?d=${encodeShot(shot)}`
 }
 
-/** Liest die Nutzlast aus einem Link oder aus einer eingefuegten Zeichenkette. */
+/**
+ * Ein einzelner Stoss als Datei.
+ *
+ * Dieselbe Nutzlast wie im Link, nur in einer Huelle, an der die App die
+ * Datei wiedererkennt: `app` wie bei einer Sicherung, `kind` zur
+ * Unterscheidung von ihr. Ohne diese Huelle waere die Datei eine
+ * Einbahnstrasse - geschrieben, aber von keinem der beiden Einlesewege
+ * angenommen.
+ */
+export interface ShotFile {
+  app: 'billard-training'
+  kind: 'shot'
+  v: number
+  d: string
+}
+
+/** Inhalt der Datei, die "Als Datei" schreibt. */
+export function shotFileText(shot: Shot): string {
+  const file: ShotFile = {
+    app: 'billard-training',
+    kind: 'shot',
+    v: SHARE_VERSION,
+    d: encodeShot(shot),
+  }
+  return JSON.stringify(file, null, 2)
+}
+
+/**
+ * Liest die Nutzlast aus einem Link, aus einer eingefuegten Zeichenkette oder
+ * aus dem Inhalt einer Stossdatei.
+ */
 export function payloadFromInput(input: string): string | null {
   const trimmed = input.trim()
   if (!trimmed) return null
+
+  // Ganzer Dateiinhalt. Nur die eigene Huelle wird angenommen; was darin
+  // steht, prueft danach wie immer decodeShot.
+  if (trimmed.startsWith('{')) {
+    try {
+      const file = JSON.parse(trimmed) as Partial<ShotFile>
+      if (file.app === 'billard-training' && file.kind === 'shot' && typeof file.d === 'string') {
+        return payloadFromInput(file.d)
+      }
+    } catch {
+      // Kein lesbares JSON - dann eben nicht.
+    }
+    return null
+  }
+
   const match = trimmed.match(/[?&]d=([A-Za-z0-9_-]+)/)
   if (match) return match[1]
   return /^[A-Za-z0-9_-]+$/.test(trimmed) ? trimmed : null

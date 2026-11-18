@@ -38,7 +38,8 @@ Niveau. Jeder Vorschlag nennt seinen Grund.
 **Erfolge** — 16 Meilensteine, aus der Historie berechnet.
 
 **Teilen** — ein Stoß steckt komprimiert im Link. Wer ihn öffnet, bekommt ihn
-zum Übernehmen angeboten. Dazu QR-Code, PNG-Export des Diagramms und JSON.
+zum Übernehmen angeboten. Dazu ein QR-Code, das Diagramm als Bild und der Stoß
+als Datei, die sich unter *Geteilten Stoß übernehmen* wieder einlesen lässt.
 
 ## Entwicklung
 

@@ -72,7 +72,15 @@ export async function importBackup(
   raw: unknown,
   mode: 'merge' | 'replace' = 'merge',
 ): Promise<ImportResult> {
-  const backup = raw as Partial<Backup>
+  const backup = raw as Partial<Backup> & { kind?: unknown }
+  // Ein einzelner geteilter Stoss traegt dieselbe app-Marke. Ohne diesen
+  // Hinweis stuende dort "keine Sicherung dieser App", obwohl die Datei aus
+  // genau dieser App stammt - nur vom anderen Weg.
+  if (backup && backup.app === 'billard-training' && backup.kind === 'shot') {
+    throw new Error(
+      'Das ist ein einzelner geteilter Stoß, keine Sicherung. Einzelne Stöße werden unter "Geteilten Stoß übernehmen" eingelesen.',
+    )
+  }
   if (!backup || backup.app !== 'billard-training' || !Array.isArray(backup.shots)) {
     throw new Error('Das ist keine Sicherung dieser App.')
   }

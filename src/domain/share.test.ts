@@ -1,6 +1,6 @@
 import { describe, expect, it } from 'vitest'
 import { deflateSync, strToU8 } from 'fflate'
-import { decodeShot, encodeShot, payloadFromInput, shareUrl } from './share'
+import { decodeShot, encodeShot, payloadFromInput, shareUrl, shotFileText } from './share'
 import { createShot, mirrorShot } from './shot'
 import { computeCutAngle, duplicateShot } from './shot'
 import { DEFAULT_THRESHOLDS } from './types'
@@ -59,6 +59,35 @@ describe('Teilen', () => {
     expect(payloadFromInput(`  ${payload}  `)).toBe(payload)
     expect(payloadFromInput('kein code!')).toBeNull()
     expect(payloadFromInput('')).toBeNull()
+  })
+
+  it('schreibt eine Datei, die sich wieder einlesen laesst', () => {
+    const original = createShot({ name: 'Rückzieher über zwei Banden' })
+    const datei = shotFileText(original)
+
+    const huelle = JSON.parse(datei) as Record<string, unknown>
+    expect(huelle.app).toBe('billard-training')
+    expect(huelle.kind).toBe('shot')
+    expect(typeof huelle.d).toBe('string')
+
+    const payload = payloadFromInput(datei)
+    expect(payload).not.toBeNull()
+    const zurueck = decodeShot(payload as string)
+    expect(zurueck.name).toBe(original.name)
+    expect(zurueck.balls.length).toBe(original.balls.length)
+    expect(zurueck.attributes.shotType).toBe(original.attributes.shotType)
+  })
+
+  it('nimmt als Datei nur die eigene Huelle an', () => {
+    const payload = encodeShot(createShot())
+    // Die rohe Form, die "Als Datei" frueher geschrieben hat: ein Stoss ohne
+    // Huelle. Sie war von keinem Einleseweg zu gebrauchen und bleibt es.
+    expect(payloadFromInput(JSON.stringify(createShot()))).toBeNull()
+    expect(payloadFromInput(JSON.stringify({ app: 'etwas-anderes', kind: 'shot', d: payload }))).toBeNull()
+    expect(payloadFromInput(JSON.stringify({ app: 'billard-training', kind: 'backup', d: payload }))).toBeNull()
+    expect(payloadFromInput(JSON.stringify({ app: 'billard-training', kind: 'shot' }))).toBeNull()
+    expect(payloadFromInput(JSON.stringify({ app: 'billard-training', kind: 'shot', d: 'kein code!' }))).toBeNull()
+    expect(payloadFromInput('{ das ist kein JSON')).toBeNull()
   })
 
   it('nimmt Wege mit und haengt sie wieder an denselben Ball', () => {
