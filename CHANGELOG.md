@@ -6,6 +6,22 @@ Die Versionsnummer steht an genau einer Stelle — in `package.json` — und ers
 unten auf der Seite **Einstellungen** sowie auf der Fehlerseite. Schema:
 `Hauptversion.Funktion.Korrektur`.
 
+## 0.4.2 – 18.11.2026
+
+### Behoben
+- **„Frei“ fragt noch einmal, statt eine Zahl zu erraten.** Wer bei „Wie viele
+  Versuche?“ etwas eintippte, das keine Zahl ist, bekam wortlos eine Einheit
+  mit einem einzigen Versuch. Jetzt steht der erlaubte Bereich in der Frage,
+  und bei einer unlesbaren Eingabe wird sie wiederholt — mit dem, was schon
+  dasteht, zum Berichtigen.
+
+### Innen
+- **Eine statische Prüfung kommt dazu: `npm run lint`.** Sie findet, was der
+  Typprüfer nicht sehen kann — unvollständige Abhängigkeitslisten, Hooks an
+  der falschen Stelle, übrig gebliebene Zuweisungen. Sechs Stellen im
+  vorhandenen Quelltext verstoßen bewusst gegen eine Regel; jede trägt die
+  Ausnahme mit Begründung an Ort und Stelle.
+
 ## 0.4.1 – 18.11.2026
 
 ### Behoben

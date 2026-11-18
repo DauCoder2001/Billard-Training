@@ -73,15 +73,26 @@ export function ShotDetailPage() {
 
   const startTraining = async (format: SessionFormat) => {
     let attempts = FORMATS.find((f) => f.id === format)?.attempts ?? null
-    if (attempts === null) {
+    // Solange fragen, bis eine lesbare Zahl dasteht oder abgebrochen wird.
+    // Eine Eingabe zu deuten, die keine Zahl ist, waere geraten: "abc" ergab
+    // frueher stillschweigend eine Einheit mit einem einzigen Versuch.
+    let eingabe = '15'
+    let hinweis = `Eine Zahl zwischen ${MIN_ATTEMPTS} und ${MAX_ATTEMPTS}.`
+    while (attempts === null) {
       const answer = await dialogs.prompt({
         title: 'Wie viele Versuche?',
+        message: hinweis,
         label: 'Anzahl',
-        initial: '15',
+        initial: eingabe,
       })
       if (answer === null) return
-      attempts = Math.max(MIN_ATTEMPTS, Math.min(MAX_ATTEMPTS, Number(answer) || 0))
-      if (!attempts) return
+      eingabe = answer
+      const n = Math.round(Number(answer.trim()))
+      if (answer.trim() && Number.isFinite(n) && n >= MIN_ATTEMPTS && n <= MAX_ATTEMPTS) {
+        attempts = n
+      } else {
+        hinweis = `Das ist keine Zahl zwischen ${MIN_ATTEMPTS} und ${MAX_ATTEMPTS}.`
+      }
     }
     navigate(`/train/${shot.id}?format=${format}&attempts=${attempts}`)
   }

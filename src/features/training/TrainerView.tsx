@@ -38,8 +38,11 @@ export function TrainerView({
   const [end, setEnd] = useState<Point | null>(null)
   const [busy, setBusy] = useState(false)
 
-  // Beim Wechsel auf einen anderen Stoss von vorn beginnen.
+  // Beim Wechsel auf einen anderen Stoss von vorn beginnen. Der uebliche Weg
+  // dafuer ist ein key am Bauteil; den muesste jede aufrufende Seite setzen,
+  // und das Workout wechselt den Stoss mitten im Lauf.
   useEffect(() => {
+    // eslint-disable-next-line react-hooks/set-state-in-effect -- siehe oben
     setResults([])
     setEnd(null)
     setBusy(false)

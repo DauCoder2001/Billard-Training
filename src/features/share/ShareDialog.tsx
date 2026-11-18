@@ -18,8 +18,12 @@ export function ShareDialog({ shot, onClose }: { shot: Shot; onClose: () => void
   const [tooLong, setTooLong] = useState(false)
   const diagramRef = useRef<HTMLDivElement>(null)
 
+  // Der Link und seine Laenge waeren ableitbar, der QR-Code daneben nicht -
+  // der entsteht asynchron und braucht den Effekt. Beides zusammen in einem
+  // Durchgang zu halten ist uebersichtlicher als zwei Wege nebeneinander.
   useEffect(() => {
     const link = shareUrl(shot)
+    // eslint-disable-next-line react-hooks/set-state-in-effect -- siehe oben
     setUrl(link)
     // Sehr grosse Stoesse passen nicht mehr in einen QR-Code.
     if (link.length > 2200) {

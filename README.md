@@ -91,6 +91,7 @@ derselbe Stand, der auch veröffentlicht wird.
 | `npm run dev -- --host` | derselbe Server, auch für Geräte im WLAN |
 | `npm run build` | Produktionsbuild nach `dist/` |
 | `npm run preview` | den Produktionsbuild lokal ausliefern |
+| `npm run lint` | statische Pruefung von `src` |
 | `npm run test` | Tests der Rechenkerne |
 | `npm run icons` | App-Icons neu erzeugen |
 

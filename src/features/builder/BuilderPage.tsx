@@ -74,8 +74,8 @@ export function BuilderPage() {
     // An Id und Navigationsschluessel haengen: die Einstellungen liefern nur
     // Startwerte und duerfen den Editor nicht mitten in der Arbeit
     // zuruecksetzen, ein erneutes Oeffnen von /builder aber schon. Die Liste
-    // ist deshalb absichtlich unvollstaendig - settings fehlt darin. Einen
-    // Linter, der das anmerken koennte, gibt es im Projekt nicht.
+    // ist deshalb absichtlich unvollstaendig - settings fehlt darin.
+    // eslint-disable-next-line react-hooks/exhaustive-deps -- siehe oben
   }, [id, location.key])
 
   // Tastenkuerzel fuer die Arbeit am Notebook.

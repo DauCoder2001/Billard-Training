@@ -31,6 +31,9 @@ export function DashboardPage() {
     [sessions],
   )
 
+  // Die Uhr beim Rendern zu lesen ist hier gewollt: "in den letzten 7 Tagen"
+  // soll bei jedem Rendern stimmen, nicht ab dem Aufbau der Seite feststehen.
+  // eslint-disable-next-line react-hooks/purity -- siehe oben
   const lastWeek = finished.filter((s) => (s.finishedAt ?? 0) > Date.now() - 7 * DAY)
   const attemptsWeek = lastWeek.reduce((a, s) => a + s.results.length, 0)
   const rating = player ? overallRating(player.skillRatings) : 0

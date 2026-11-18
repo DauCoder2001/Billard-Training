@@ -24,6 +24,10 @@ export function StatsPage() {
       .filter((s) => s.finishedAt !== null)
       .sort((a, b) => (a.finishedAt ?? 0) - (b.finishedAt ?? 0))
     if (range === 0) return all
+    // Der Zeitraum steht ab dem Aufbau der Seite fest und wandert nicht mit
+    // der Uhr weiter. Wer die Statistik stundenlang offen laesst, sieht das
+    // Fenster von vorhin.
+    // eslint-disable-next-line react-hooks/purity -- siehe oben
     const since = Date.now() - range * DAY
     return all.filter((s) => (s.finishedAt ?? 0) >= since)
   }, [sessions, range])

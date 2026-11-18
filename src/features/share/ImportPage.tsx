@@ -23,9 +23,14 @@ export function ImportPage() {
 
   const payload = params.get('d')
 
+  // Der Stoss ist aus der Adresse abgeleitet und gehoerte darum ins Rendern.
+  // Er teilt sich den Zustand aber mit dem Feld "von Hand einfuegen", das
+  // denselben Stoss setzt - zwei Quellen fuer einen Wert, und nur eine davon
+  // ist ableitbar.
   useEffect(() => {
     if (!payload) return
     try {
+      // eslint-disable-next-line react-hooks/set-state-in-effect -- siehe oben
       setShot(decodeShot(payload))
       setError(null)
     } catch (err) {
