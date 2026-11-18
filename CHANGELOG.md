@@ -6,6 +6,18 @@ Die Versionsnummer steht an genau einer Stelle — in `package.json` — und ers
 unten auf der Seite **Einstellungen** sowie auf der Fehlerseite. Schema:
 `Hauptversion.Funktion.Korrektur`.
 
+## 0.4.7 – 18.11.2026
+
+### Behoben
+- **Nicht gespeicherte Arbeit am Stoß geht beim Neuladen nicht mehr still
+  verloren.** Die Rückfrage „Änderungen verwerfen?“ kam bisher nur, wer den
+  Baukasten über den eigenen Knopf *← Stöße* verließ. Neu laden, den Tab oder
+  das Fenster schließen ging daran vorbei — der angefangene Stoß war weg, ohne
+  dass etwas gefragt wurde. Jetzt fragt der Browser in diesen Fällen nach,
+  solange etwas Ungespeichertes offen ist.
+  *Nicht erfasst:* die Zurück-Taste des Browsers und die Wischbewegung auf dem
+  iPad. Dafür wäre ein Umbau der Seitenverwaltung nötig; das bleibt offen.
+
 ## 0.4.6 – 18.11.2026
 
 ### Behoben

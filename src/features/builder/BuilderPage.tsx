@@ -106,6 +106,22 @@ export function BuilderPage() {
     return () => window.removeEventListener('keydown', onKey)
   }, [])
 
+  // Neu laden und Schliessen abfangen. Die App-eigenen Wege gehen weiter
+  // ueber leave(); hier geht es um die Wege daran vorbei - Neu laden, Tab
+  // schliessen, Fenster schliessen. Den Text bestimmt der Browser selbst.
+  useEffect(() => {
+    if (!dirty) return
+    const warnen = (e: BeforeUnloadEvent) => {
+      e.preventDefault()
+      // Aeltere Browser - und darunter das Safari der alten iPads, auf die
+      // diese App zielt - horchen nicht auf preventDefault, sondern auf
+      // returnValue. Beides zu setzen schadet nirgends.
+      e.returnValue = ''
+    }
+    window.addEventListener('beforeunload', warnen)
+    return () => window.removeEventListener('beforeunload', warnen)
+  }, [dirty])
+
   const save = async () => {
     const saved = await saveShot(shot)
     useBuilder.getState().markSaved(saved)
