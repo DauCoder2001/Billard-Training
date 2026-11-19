@@ -53,8 +53,59 @@ function mirrorAcross(p: Point, rail: RailSide): Point {
 }
 
 /**
+ * Wie weit man von einem Punkt aus in eine Richtung gehen kann, ohne die
+ * Spielflaeche zu verlassen - gemessen bis dorthin, wo der Ballmittelpunkt
+ * noch einen Radius Abstand zur Bande hat.
+ */
+function reichweite(from: Point, dir: Point): number {
+  const r = TABLE.ballRadius
+  let t = Number.POSITIVE_INFINITY
+  if (dir.x > 1e-9) t = Math.min(t, (TABLE.length - r - from.x) / dir.x)
+  if (dir.x < -1e-9) t = Math.min(t, (r - from.x) / dir.x)
+  if (dir.y > 1e-9) t = Math.min(t, (TABLE.width - r - from.y) / dir.y)
+  if (dir.y < -1e-9) t = Math.min(t, (r - from.y) / dir.y)
+  return Number.isFinite(t) ? Math.max(0, t) : 0
+}
+
+/** Weg bis zu einer bestimmten Bande, oder null, wenn sie nicht vorauskommt. */
+function bisBande(from: Point, dir: Point, rail: RailSide): number | null {
+  const t =
+    rail === 'left'
+      ? -from.x / dir.x
+      : rail === 'right'
+        ? (TABLE.length - from.x) / dir.x
+        : rail === 'bottom'
+          ? -from.y / dir.y
+          : (TABLE.width - from.y) / dir.y
+  return Number.isFinite(t) && t > 1e-9 ? t : null
+}
+
+/** Richtung nach der Reflexion an einer Bande. */
+function spiegelRichtung(d: Point, rail: RailSide): Point {
+  return rail === 'left' || rail === 'right' ? { x: -d.x, y: d.y } : { x: d.x, y: -d.y }
+}
+
+/** Anspiellinie: Richtung, aus der der Weisse auf den Geisterball zulaeuft. */
+function anspiellinie(
+  object: Point,
+  aim: Point,
+  cutDeg: number,
+  side: 1 | -1,
+): { ghost: Point; approach: Point; zurueck: Point } {
+  const ghost = ghostBall(object, aim)
+  const travel = norm({ x: object.x - ghost.x, y: object.y - ghost.y })
+  const approach = rotate(travel, side * cutDeg)
+  return { ghost, approach, zurueck: { x: -approach.x, y: -approach.y } }
+}
+
+/**
  * Lage des Weissen aus Objektball, Zielpunkt, Schnittwinkel und Abstand.
  * side = 1 legt den Weissen auf die eine, -1 auf die andere Seite der Linie.
+ *
+ * Reicht der gewuenschte Abstand ueber den Tisch hinaus, wird die Strecke
+ * gekuerzt - nicht der Punkt an die Bande geschoben. Ein geklemmter Punkt
+ * laege neben der Anspiellinie und machte aus einem geraden Ball einen
+ * Schnitt: der Stoss sagte dann etwas anderes als seine Beschriftung.
  */
 function cuePosition(
   object: Point,
@@ -63,10 +114,40 @@ function cuePosition(
   dist: number,
   side: 1 | -1,
 ): Point {
-  const ghost = ghostBall(object, aim)
-  const travel = norm({ x: object.x - ghost.x, y: object.y - ghost.y })
-  const approach = rotate(travel, side * cutDeg)
-  return clampBall({ x: ghost.x - approach.x * dist, y: ghost.y - approach.y * dist })
+  const { ghost, zurueck } = anspiellinie(object, aim, cutDeg, side)
+  const weit = Math.min(dist, reichweite(ghost, zurueck))
+  return clampBall({ x: ghost.x + zurueck.x * weit, y: ghost.y + zurueck.y * weit })
+}
+
+/**
+ * Lage des Weissen fuer einen Kick und sein Weg dorthin.
+ *
+ * Der Weisse soll den Objektball im gewuenschten Winkel treffen, aber erst
+ * nach einer Bande. Also rueckwaerts gerechnet: von der Anspiellinie bis zur
+ * Kickbande, dort die Richtung spiegeln und `dist` weitergehen. `dist` ist
+ * hier der Abstand von der Bande, nicht vom Geisterball - der Weg bis zur
+ * Bande ergibt sich aus der Geometrie und ist nicht frei waehlbar.
+ */
+function kickPosition(
+  object: Point,
+  aim: Point,
+  cutDeg: number,
+  dist: number,
+  side: 1 | -1,
+  rail: RailSide,
+): { cue: Point; hit: Point; ghost: Point } | null {
+  const { ghost, zurueck } = anspiellinie(object, aim, cutDeg, side)
+  const bis = bisBande(ghost, zurueck, rail)
+  if (bis === null) return null
+  const hit = { x: ghost.x + zurueck.x * bis, y: ghost.y + zurueck.y * bis }
+  const weiter = spiegelRichtung(zurueck, rail)
+  const rest = Math.min(dist, reichweite(hit, weiter))
+  if (rest < TABLE.ballDiameter) return null
+  return {
+    cue: clampBall({ x: hit.x + weiter.x * rest, y: hit.y + weiter.y * rest }),
+    hit,
+    ghost,
+  }
 }
 
 interface DrillSpec {
@@ -133,21 +214,21 @@ function buildDrill(spec: DrillSpec): Shot {
   const cueId = 'cue'
   const objectId = 'obj'
 
-  // Beim Kick laeuft der Weisse zuerst gegen eine Bande. Er wird dorthin
-  // gelegt, wo er ueber das Spiegelbild des Objektballs anspielt.
+  // Beim Kick laeuft der Weisse zuerst gegen eine Bande. Seine Lage wird
+  // rueckwaerts aus der Anspiellinie gerechnet, damit der Schnittwinkel am
+  // Objektball derselbe ist wie bei einem direkten Stoss.
   let cue = directCue
   if (spec.kickRail) {
-    cue = clampBall({ x: TABLE.length - directCue.x, y: directCue.y })
-    const mirroredObject = mirrorAcross(object, spec.kickRail)
-    const hit = castToRail(cue, { x: mirroredObject.x - cue.x, y: mirroredObject.y - cue.y })
-    if (hit) {
+    const kick = kickPosition(object, objectAim, spec.cut, spec.dist, side, spec.kickRail)
+    if (kick) {
+      cue = kick.cue
       paths.push({
         id: 'path-cue',
         ballId: cueId,
         role: 'cue',
         segments: [
-          { to: hit.point, rail: true },
-          { to: object },
+          { to: kick.hit, rail: true },
+          { to: kick.ghost },
         ],
       })
     }
@@ -265,12 +346,14 @@ const SPECS: DrillSpec[] = [
   {
     slug: 'stop-lang',
     name: 'Stop-Shot lang',
-    description: 'Derselbe Ball über die halbe Tischlänge.',
-    object: { x: 80, y: 25 },
+    description: 'Derselbe gerade Ball, aber über die lange Diagonale.',
+    // Auf der Diagonalen zur Ecke unten rechts: nur dort ist hinter dem
+    // Geisterball noch Platz fuer einen langen geraden Stoss.
+    object: { x: 76, y: 12.6 },
     pocket: 'br',
     cut: 0,
     dist: 55,
-    zone: { x: 77.7, y: 25, r: 5 },
+    zone: { x: 74, y: 13.6, r: 5 },
     skills: ['stun', 'position'],
     shotType: 'cut',
     difficulty: 6,
@@ -314,11 +397,12 @@ const SPECS: DrillSpec[] = [
     slug: 'rueckzieher-lang',
     name: 'Rückzieher lang',
     description: 'Rückzieher über große Distanz. Der Klassiker zum Verzweifeln.',
-    object: { x: 82, y: 25 },
+    object: { x: 73.3, y: 14 },
     pocket: 'br',
     cut: 0,
     dist: 50,
-    zone: { x: 45, y: 25, r: 9 },
+    // Der Weisse kommt auf der Anspiellinie zurueck, etwa 35 Zoll weit.
+    zone: { x: 39.9, y: 30.3, r: 9 },
     spin: { x: 0, y: -0.8 },
     skills: ['draw'],
     shotType: 'position',
@@ -640,12 +724,12 @@ const SPECS: DrillSpec[] = [
   {
     slug: 'lange-gerade',
     name: 'Lange Gerade',
-    description: 'Über die volle Tischlänge in die Ecke.',
-    object: { x: 88, y: 25 },
+    description: 'Über die lange Diagonale in die Ecke.',
+    object: { x: 78.7, y: 11.3 },
     pocket: 'br',
     cut: 0,
     dist: 70,
-    zone: { x: 85.7, y: 25, r: 6 },
+    zone: { x: 76.6, y: 12.3, r: 6 },
     skills: ['stun', 'position'],
     shotType: 'cut',
     difficulty: 7,

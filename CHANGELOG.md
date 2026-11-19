@@ -6,6 +6,33 @@ Die Versionsnummer steht an genau einer Stelle — in `package.json` — und ers
 unten auf der Seite **Einstellungen** sowie auf der Fehlerseite. Schema:
 `Hauptversion.Funktion.Korrektur`.
 
+## 0.5.1 – 19.11.2026
+
+### Behoben
+- **Drei „gerade" Übungen waren in Wahrheit Schnittbälle.** Bei *Stop-Shot
+  lang*, *Rückzieher lang* und *Lange Gerade* lag der Weiße so weit hinter
+  dem Ball, dass er rechnerisch neben dem Tisch landete — und an die Bande
+  geschoben wurde. Aus dem angesagten geraden Ball wurde dabei ein Schnitt
+  von 17 bis 29 Grad, und der Weiße klebte an der Bande. Die drei Übungen
+  liegen jetzt auf der langen Diagonalen, wo ein gerader Stoß dieser Länge
+  auch hinpasst.
+- **Der Kick über eine Bande traf mit 12 statt 20 Grad.** Der Weiße wurde für
+  den Kick einfach auf die andere Tischhälfte gespiegelt. Seine Lage wird
+  jetzt rückwärts aus der Anspiellinie gerechnet: über die Bande kommt er im
+  angesagten Winkel an.
+
+### Neu
+- **Die mitgelieferten Übungen werden jetzt geprüft.** Zwölf Prüfungen rechnen
+  jede der 25 Übungen gegen die Tischgeometrie: kein Ball in der Bande, keine
+  zwei Bälle ineinander, kein Weißer an der Bande festgeklemmt, Schnittwinkel
+  wie angesagt, Bandenwege mit stimmendem Ein- und Ausfallswinkel, erreichbare
+  Zielzonen. Genau so sind die beiden Fehler oben aufgefallen.
+
+### Geändert
+- Die Übungssammlung trägt Version 2. Die berichtigten Übungen kommen damit
+  auch auf Geräte, die die App schon haben; als Favorit markierte Übungen
+  bleiben markiert.
+
 ## 0.5.0 – 18.11.2026
 
 ### Behoben

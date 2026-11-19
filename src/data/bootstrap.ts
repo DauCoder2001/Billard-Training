@@ -8,8 +8,16 @@ import { newId } from '@/domain/shot'
 import type { Shot } from '@/domain/types'
 import { transliterate } from '@/domain/text'
 
-/** Version der Uebungssammlung. Erhoehen, wenn neue Uebungen dazukommen. */
-export const SEED_VERSION = 1
+/**
+ * Version der Uebungssammlung. Erhoehen, wenn neue Uebungen dazukommen oder
+ * sich der Aufbau vorhandener aendert - sonst bleiben auf vorhandenen
+ * Geraeten die alten stehen.
+ *
+ * 2: Drei gerade Stoesse lagen so, dass der Weisse an die Bande geklemmt
+ *    wurde und aus dem geraden Ball ein Schnitt von 17 bis 29 Grad wurde.
+ *    Dazu der Kick, dessen Weisser gespiegelt statt gerechnet wurde.
+ */
+export const SEED_VERSION = 2
 
 let running: Promise<void> | null = null
 
@@ -53,7 +61,11 @@ async function run(): Promise<void> {
 
   const settings = await getSettings()
   if (settings.seededVersion < SEED_VERSION) {
-    await db.shots.bulkPut(seedShots())
+    const fresh = seedShots()
+    const stored = await db.shots.bulkGet(fresh.map((s) => s.id))
+    // Wie beim Wiederherstellen ueber die Einstellungen: der Favorit ist eine
+    // Entscheidung des Nutzers und steht nicht in der Vorlage.
+    await db.shots.bulkPut(fresh.map((s, i) => ({ ...s, favorite: stored[i]?.favorite ?? false })))
     await updateSettings({ seededVersion: SEED_VERSION })
   }
 
