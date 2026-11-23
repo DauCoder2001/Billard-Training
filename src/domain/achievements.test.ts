@@ -47,7 +47,6 @@ const spieler: Player = {
   name: 'Test',
   color: '#fff',
   skillRatings: {},
-  achievements: [],
   createdAt: 0,
 }
 

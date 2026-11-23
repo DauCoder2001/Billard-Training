@@ -221,7 +221,8 @@ export interface Player {
   color: string
   /** 0..100 je Skill, undefined = noch nie geuebt. */
   skillRatings: Partial<Record<SkillTag, number>>
-  achievements: string[]
+  // Erfolge stehen hier bewusst nicht: sie werden aus der Historie gerechnet
+  // (domain/achievements.ts) und sind damit auch nach einem Import richtig.
   createdAt: number
 }
 

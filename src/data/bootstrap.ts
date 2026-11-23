@@ -45,7 +45,6 @@ async function run(): Promise<void> {
         name: 'Spieler 1',
         color: PLAYER_COLORS[0],
         skillRatings: {},
-        achievements: [],
         createdAt: Date.now(),
       }
       await db.players.add(player)

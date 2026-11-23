@@ -5,6 +5,7 @@ import { useLocation, useNavigate, useParams } from 'react-router-dom'
 import { useApp } from '@/app/store'
 import { useLeaveGuard } from '@/app/useLeaveGuard'
 import { db } from '@/data/db'
+import { storageErrorText } from '@/data/errors'
 import { deleteShot, saveShot } from '@/data/repositories/shots'
 import { castToRail } from '@/domain/geometry'
 import { createShot, duplicateShot, mirrorShot } from '@/domain/shot'
@@ -124,12 +125,25 @@ export function BuilderPage() {
     ),
   )
 
+  /**
+   * Speichert den Stoss. null heisst: der Browserspeicher hat abgelehnt.
+   *
+   * Ohne diese Klammer blieb ein voller Speicher stumm - der Druck auf
+   * "Speichern" sah aus wie nichts. Die Arbeit ist dabei nicht verloren: der
+   * Stoss bleibt offen, die Marke "ungespeichert" stehen, und der Waechter
+   * fragt beim Verlassen weiter nach.
+   */
   const save = async () => {
-    const saved = await saveShot(shot)
-    useBuilder.getState().markSaved(saved)
-    dialogs.toast('Gespeichert', 'ok')
-    if (isNew) navigate(`/builder/${saved.id}`, { replace: true })
-    return saved
+    try {
+      const saved = await saveShot(shot)
+      useBuilder.getState().markSaved(saved)
+      dialogs.toast('Gespeichert', 'ok')
+      if (isNew) navigate(`/builder/${saved.id}`, { replace: true })
+      return saved
+    } catch (err) {
+      dialogs.toast(`Nicht gespeichert: ${storageErrorText(err)}`, 'error')
+      return null
+    }
   }
 
   const rename = async () => {
@@ -232,10 +246,14 @@ export function BuilderPage() {
     // das Original faellt beim Wechsel still auf seinen alten Stand zurueck.
     // Nur bei dirty: einen unberuehrten neuen Stoss ungefragt anzulegen waere
     // ein zweiter Stoss, den niemand wollte.
-    if (dirty) await save()
-    const copy = await saveShot(duplicateShot(useBuilder.getState().shot))
-    dialogs.toast('Kopie angelegt', 'ok')
-    navigate(`/builder/${copy.id}`)
+    if (dirty && !(await save())) return
+    try {
+      const copy = await saveShot(duplicateShot(useBuilder.getState().shot))
+      dialogs.toast('Kopie angelegt', 'ok')
+      navigate(`/builder/${copy.id}`)
+    } catch (err) {
+      dialogs.toast(`Nicht gespeichert: ${storageErrorText(err)}`, 'error')
+    }
   }
 
   const remove = async () => {
@@ -246,13 +264,21 @@ export function BuilderPage() {
       danger: true,
     })
     if (!ok) return
-    await deleteShot(shot.id)
+    try {
+      await deleteShot(shot.id)
+    } catch (err) {
+      dialogs.toast(`Nicht gelöscht: ${storageErrorText(err)}`, 'error')
+      return
+    }
     // Der Stoss ist weg - eine Frage nach seinen Aenderungen waere unsinnig.
     ohneNachfrage(() => navigate('/library', { replace: true }))
   }
 
   const train = async () => {
     const saved = dirty || isNew ? await save() : shot
+    // Nicht gespeichert heisst: nicht trainieren. Sonst liefe die Einheit auf
+    // einem Stand, den es nirgends gibt.
+    if (!saved) return
     navigate(`/train/${saved.id}`)
   }
 

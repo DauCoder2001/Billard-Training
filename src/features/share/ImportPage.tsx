@@ -4,6 +4,7 @@ import { useMemo, useRef, useState } from 'react'
 import { useNavigate, useSearchParams } from 'react-router-dom'
 import { useApp } from '@/app/store'
 import { ShotDiagram } from '@/components/table/ShotDiagram'
+import { storageErrorText } from '@/data/errors'
 import { saveShot } from '@/data/repositories/shots'
 import { decodeShot, payloadFromInput } from '@/domain/share'
 import { SHOT_TYPE_LABELS } from '@/domain/types'
@@ -70,9 +71,15 @@ export function ImportPage() {
 
   const take = async () => {
     if (!shot) return
-    const saved = await saveShot(shot)
-    dialogs.toast('Stoß übernommen', 'ok')
-    navigate(`/shot/${saved.id}`, { replace: true })
+    try {
+      const saved = await saveShot(shot)
+      dialogs.toast('Stoß übernommen', 'ok')
+      navigate(`/shot/${saved.id}`, { replace: true })
+    } catch (err) {
+      // Der Stoss steckt im Link und ist nicht verloren: die Seite bleibt
+      // stehen, "Übernehmen" laesst sich erneut druecken.
+      dialogs.toast(`Nicht gespeichert: ${storageErrorText(err)}`, 'error')
+    }
   }
 
   return (

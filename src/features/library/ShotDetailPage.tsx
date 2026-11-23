@@ -2,10 +2,11 @@ import { lazy, Suspense, useMemo, useState } from 'react'
 import { Link, useNavigate, useParams } from 'react-router-dom'
 import { useActivePlayer, useApp } from '@/app/store'
 import { ShotDiagram } from '@/components/table/ShotDiagram'
+import { storageErrorText } from '@/data/errors'
 import { useSessions, useShot } from '@/data/hooks'
 import { deleteShot, toggleFavorite } from '@/data/repositories/shots'
 import { POCKET_BY_ID } from '@/domain/geometry'
-import { pocketRate, proficiencyFor, scratchRate } from '@/domain/scoring'
+import { hasObjectBall, pocketRate, proficiencyFor, scratchRate } from '@/domain/scoring'
 import {
   MAX_ATTEMPTS,
   MIN_ATTEMPTS,
@@ -69,6 +70,8 @@ export function ShotDetailPage() {
   const last = history[history.length - 1]
   const best = history.reduce((a, s) => Math.max(a, s.score), 0)
   const allAttempts = history.flatMap((s) => s.results)
+  // Siehe Trefferquote weiter unten: ohne Objektball ist nichts einzulochen.
+  const mitObjektball = hasObjectBall(shot)
   const pocket = shot.target.pocketId ? POCKET_BY_ID[shot.target.pocketId] : null
 
   const startTraining = async (format: SessionFormat) => {
@@ -105,8 +108,21 @@ export function ShotDetailPage() {
       danger: true,
     })
     if (!ok) return
-    await deleteShot(shot.id)
+    try {
+      await deleteShot(shot.id)
+    } catch (err) {
+      dialogs.toast(`Nicht gelöscht: ${storageErrorText(err)}`, 'error')
+      return
+    }
     navigate('/library', { replace: true })
+  }
+
+  const markieren = async () => {
+    try {
+      await toggleFavorite(shot.id)
+    } catch (err) {
+      dialogs.toast(`Nicht gespeichert: ${storageErrorText(err)}`, 'error')
+    }
   }
 
   return (
@@ -122,7 +138,7 @@ export function ShotDetailPage() {
         <div className="row row--tight">
           <button
             className={`chip${shot.favorite ? ' is-on' : ''}`}
-            onClick={() => void toggleFavorite(shot.id)}
+            onClick={() => void markieren()}
           >
             ★ Favorit
           </button>
@@ -186,8 +202,20 @@ export function ShotDetailPage() {
             <Stat label="Einheiten" value={history.length} />
             <Stat
               label="Trefferquote"
-              value={allAttempts.length ? `${pocketRate(allAttempts).toFixed(0)} %` : '–'}
-              hint={allAttempts.length ? `Kratzer ${scratchRate(allAttempts).toFixed(0)} %` : undefined}
+              value={
+                mitObjektball && allAttempts.length
+                  ? `${pocketRate(allAttempts).toFixed(0)} %`
+                  : '–'
+              }
+              hint={
+                allAttempts.length
+                  ? `${mitObjektball ? '' : 'nichts einzulochen · '}Kratzer ${scratchRate(
+                      allAttempts,
+                    ).toFixed(0)} %`
+                  : mitObjektball
+                    ? undefined
+                    : 'nichts einzulochen'
+              }
             />
           </div>
 

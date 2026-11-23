@@ -11,7 +11,8 @@
  */
 
 import { deflateSync, inflateSync, strFromU8, strToU8 } from 'fflate'
-import { TABLE, clamp, clampBall } from './geometry'
+import { TABLE, clampBall } from './geometry'
+import { bool, fields, num, oneOf, str } from './sanitize'
 import { createShot, newId } from './shot'
 import {
   BALL_KINDS,
@@ -85,27 +86,8 @@ export function encodeShot(shot: Shot): string {
 
 // ------------------------------------------------------------ Pruefhelfer --
 
-/** Felder eines fremden Wertes, ohne Annahme darueber, was darin steht. */
-function fields(v: unknown): Record<string, unknown> {
-  return v !== null && typeof v === 'object' ? (v as Record<string, unknown>) : {}
-}
-
-function str(v: unknown, max: number, fallback = ''): string {
-  return typeof v === 'string' ? v.slice(0, max) : fallback
-}
-
-function num(v: unknown, min: number, max: number, fallback: number): number {
-  return typeof v === 'number' && Number.isFinite(v) ? clamp(v, min, max) : fallback
-}
-
-function bool(v: unknown, fallback: boolean): boolean {
-  return typeof v === 'boolean' ? v : fallback
-}
-
-/** Einer der erlaubten Werte, sonst der Rueckfallwert. */
-function oneOf<T extends string>(v: unknown, allowed: readonly T[], fallback: T): T {
-  return typeof v === 'string' && (allowed as readonly string[]).includes(v) ? (v as T) : fallback
-}
+// Die allgemeinen Helfer (fields, str, num, bool, oneOf) stehen in
+// domain/sanitize.ts: die eingelesene Sicherung prueft mit denselben.
 
 /** Punkt im Diagramm. Wege darf man bis auf die Bande zeichnen, deshalb ist
  *  der erlaubte Rahmen etwas groesser als die Spielflaeche. */
@@ -208,7 +190,8 @@ function sanitizeAttributes(raw: unknown, fallback: ShotAttributes): ShotAttribu
   }
 }
 
-function sanitizeThresholds(raw: unknown): Thresholds {
+/** Schwellen einer Bewertung. Auch die Einstellungen bringen welche mit. */
+export function sanitizeThresholds(raw: unknown): Thresholds {
   const t = fields(raw)
   return {
     developing: num(t.developing, 0, 100, DEFAULT_THRESHOLDS.developing),

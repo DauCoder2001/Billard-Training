@@ -4,7 +4,7 @@ import { useMemo } from 'react'
 import { useNavigate, useParams } from 'react-router-dom'
 import { useActivePlayer } from '@/app/store'
 import { useSession, useSessions, useShot } from '@/data/hooks'
-import { MAX_POINTS, pocketRate, scratchRate } from '@/domain/scoring'
+import { MAX_POINTS, hasObjectBall, pocketRate, scratchRate } from '@/domain/scoring'
 import { plural } from '@/domain/text'
 import { SESSION_ATTEMPTS } from '@/domain/types'
 import { ProficiencyBadge, Stat } from '@/ui/bits'
@@ -34,6 +34,10 @@ export function SessionSummaryPage() {
     )
   }
 
+  // Ohne Objektball gibt es nichts einzulochen: eine Trefferquote von
+  // 0 Prozent saehe aus wie ein schlechtes Ergebnis, obwohl nichts zu treffen
+  // war. Dann steht dort ein Strich.
+  const mitObjektball = hasObjectBall(shot)
   const previous = history.filter((s) => s.id !== session.id).slice(-1)[0]
   const delta = previous ? session.score - previous.score : null
   const points = session.results.reduce((a, r) => a + r.points, 0)
@@ -65,7 +69,11 @@ export function SessionSummaryPage() {
           }
         />
         <Stat label="Punkte" value={`${points} / ${session.results.length * MAX_POINTS}`} />
-        <Stat label="Trefferquote" value={`${pocketRate(session.results).toFixed(0)} %`} />
+        <Stat
+          label="Trefferquote"
+          value={mitObjektball ? `${pocketRate(session.results).toFixed(0)} %` : '–'}
+          hint={mitObjektball ? undefined : 'nichts einzulochen'}
+        />
         <Stat label="Kratzer" value={`${scratchRate(session.results).toFixed(0)} %`} />
       </div>
 

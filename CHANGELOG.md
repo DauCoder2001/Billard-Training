@@ -6,6 +6,33 @@ Die Versionsnummer steht an genau einer Stelle — in `package.json` — und ers
 unten auf der Seite **Einstellungen** sowie auf der Fehlerseite. Schema:
 `Hauptversion.Funktion.Korrektur`.
 
+## 0.6.2 – 23.11.2026
+
+### Behoben
+- **Eine Sicherung wird jetzt geprüft, bevor sie gespeichert wird.** Bisher ging
+  ihr Inhalt ungeprüft in die Datenbank — anders als ein geteilter Stoß, der
+  Feld für Feld geprüft wird. Eine beschädigte oder von Hand bearbeitete Datei
+  konnte die App dadurch dauerhaft lahmlegen: die fehlerhaften Daten blieben
+  gespeichert und brachten bei jedem Start dieselbe Ansicht zu Fall. Jetzt wird
+  jeder Wert einzeln geprüft; Einträge ohne Kennung werden weggelassen, und die
+  Meldung am Ende nennt, wie viele es waren.
+- **Ein voller Speicher bleibt nicht mehr stumm.** „Speichern" im Baukasten sah
+  aus wie nichts, wenn der Browser das Schreiben ablehnte — kein Hinweis, keine
+  Meldung. Jetzt sagt eine Kurzmeldung, was los ist, und der Stoß bleibt offen,
+  statt verloren zu gehen. Dasselbe beim Duplizieren, Löschen, Übernehmen eines
+  geteilten Stoßes, bei Workouts, Spielerprofilen und der Sicherung.
+- **„Trainieren" startet nicht mehr, wenn das Speichern scheitert.** Sonst liefe
+  die Einheit auf einem Stand, den es nirgends gibt.
+- **Die Trefferquote zeigt einen Strich, wo nichts einzulochen ist.** Bei Stößen
+  ohne Objektball stand dort 0 %, was wie ein schlechtes Ergebnis aussah. In der
+  Statistik über alle Stöße zählen solche Versuche gar nicht mehr mit; die
+  Kratzerquote bleibt unverändert, denn ein Kratzer ist auch dort einer.
+
+### Geändert
+- Spielerprofile tragen kein leeres Erfolgsfeld mehr mit sich herum. Die Erfolge
+  werden ohnehin aus der Trainingshistorie gerechnet und sind damit auch nach
+  einem Import richtig.
+
 ## 0.6.1 – 23.11.2026
 
 ### Behoben

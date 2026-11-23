@@ -33,7 +33,7 @@ function session(shotId: string, score: number, daysAgo: number, id = `${shotId}
 }
 
 function player(ratings: Partial<Record<SkillTag, number>> = {}): Player {
-  return { id: 'p1', name: 'Test', color: '#fff', skillRatings: ratings, achievements: [], createdAt: 0 }
+  return { id: 'p1', name: 'Test', color: '#fff', skillRatings: ratings, createdAt: 0 }
 }
 
 describe('Kennzahlen je Stoss', () => {

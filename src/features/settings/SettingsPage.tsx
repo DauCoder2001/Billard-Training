@@ -29,8 +29,12 @@ export function SettingsPage() {
   const addPlayer = async () => {
     const name = await dialogs.prompt({ title: 'Neuer Spieler', label: 'Name', initial: '' })
     if (name === null) return
-    const player = await createPlayer(name)
-    await setActivePlayer(player.id)
+    try {
+      const player = await createPlayer(name)
+      await setActivePlayer(player.id)
+    } catch (err) {
+      dialogs.toast(`Nicht gespeichert: ${storageErrorText(err)}`, 'error')
+    }
   }
 
   const renamePlayer = async (id: string) => {
@@ -38,7 +42,11 @@ export function SettingsPage() {
     if (!player) return
     const name = await dialogs.prompt({ title: 'Spieler umbenennen', label: 'Name', initial: player.name })
     if (name === null || !name.trim()) return
-    await updatePlayer({ ...player, name: name.trim() })
+    try {
+      await updatePlayer({ ...player, name: name.trim() })
+    } catch (err) {
+      dialogs.toast(`Nicht gespeichert: ${storageErrorText(err)}`, 'error')
+    }
   }
 
   const removePlayer = async (id: string) => {
@@ -58,16 +66,24 @@ export function SettingsPage() {
       danger: true,
     })
     if (!ok) return
-    await deletePlayer(id)
-    const rest = players.filter((p) => p.id !== id)
-    if (rest[0]) await setActivePlayer(rest[0].id)
+    try {
+      await deletePlayer(id)
+      const rest = players.filter((p) => p.id !== id)
+      if (rest[0]) await setActivePlayer(rest[0].id)
+    } catch (err) {
+      dialogs.toast(`Nicht gelöscht: ${storageErrorText(err)}`, 'error')
+    }
   }
 
   const exportAll = async () => {
-    const backup = await exportBackup()
-    const stamp = new Date().toISOString().slice(0, 10)
-    downloadText(JSON.stringify(backup, null, 2), `billard-training-${stamp}.json`)
-    dialogs.toast('Sicherung gespeichert', 'ok')
+    try {
+      const backup = await exportBackup()
+      const stamp = new Date().toISOString().slice(0, 10)
+      downloadText(JSON.stringify(backup, null, 2), `billard-training-${stamp}.json`)
+      dialogs.toast('Sicherung gespeichert', 'ok')
+    } catch (err) {
+      dialogs.toast(`Keine Sicherung angelegt: ${storageErrorText(err)}`, 'error')
+    }
   }
 
   const importFile = async (file: File) => {
@@ -97,7 +113,11 @@ export function SettingsPage() {
           `${plural(result.shots, 'Stoß', 'Stöße')}, ` +
           `${plural(result.players, 'Spieler', 'Spieler')}, ` +
           `${plural(result.sessions, 'Einheit', 'Einheiten')}, ` +
-          `${plural(result.workouts, 'Workout', 'Workouts')}.`,
+          `${plural(result.workouts, 'Workout', 'Workouts')}.` +
+          (result.dropped > 0
+            ? ` ${plural(result.dropped, 'Eintrag war', 'Einträge waren')} unbrauchbar ` +
+              'und wurde weggelassen.'
+            : ''),
       })
     } catch (err) {
       dialogs.toast(storageErrorText(err), 'error')
@@ -114,13 +134,19 @@ export function SettingsPage() {
       confirmLabel: 'Einspielen',
     })
     if (!ok) return
-    const fresh = seedShots()
-    const stored = await db.shots.bulkGet(fresh.map((s) => s.id))
-    // Der Favorit ist eine Entscheidung des Nutzers und steht nicht in der
-    // Vorlage: ohne dieses Mitnehmen setzt das Wiederherstellen ihn zurueck.
-    await db.shots.bulkPut(fresh.map((s, i) => ({ ...s, favorite: stored[i]?.favorite ?? false })))
-    await patchSettings({ seededVersion: SEED_VERSION })
-    dialogs.toast('Stöße wiederhergestellt', 'ok')
+    try {
+      const fresh = seedShots()
+      const stored = await db.shots.bulkGet(fresh.map((s) => s.id))
+      // Der Favorit ist eine Entscheidung des Nutzers und steht nicht in der
+      // Vorlage: ohne dieses Mitnehmen setzt das Wiederherstellen ihn zurueck.
+      await db.shots.bulkPut(
+        fresh.map((s, i) => ({ ...s, favorite: stored[i]?.favorite ?? false })),
+      )
+      await patchSettings({ seededVersion: SEED_VERSION })
+      dialogs.toast('Stöße wiederhergestellt', 'ok')
+    } catch (err) {
+      dialogs.toast(`Nicht gespeichert: ${storageErrorText(err)}`, 'error')
+    }
   }
 
   const wipe = async () => {

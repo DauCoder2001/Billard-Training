@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom'
 import { useActivePlayer } from '@/app/store'
 import { useSessions, useShots } from '@/data/hooks'
 import { statsByShot } from '@/domain/coach'
-import { pocketRate, proficiencyFor, scratchRate } from '@/domain/scoring'
+import { hasObjectBall, pocketRate, proficiencyFor, scratchRate } from '@/domain/scoring'
 import { overallRating, rankedSkills } from '@/domain/skills'
 import { SKILL_LABELS, SKILL_TAGS } from '@/domain/types'
 import { EmptyState, ProficiencyBadge, Stat } from '@/ui/bits'
@@ -64,6 +64,20 @@ export function StatsPage() {
   }, [shots, perShot])
 
   const allAttempts = finished.flatMap((s) => s.results)
+
+  // Stoesse ohne Objektball koennen nichts einlochen. Ihre Versuche gehoeren
+  // nicht in die Trefferquote, sonst zoege jede Einheit an einem solchen
+  // Stoss die Quote ueber alle Stoesse nach unten. Ein geloeschter Stoss
+  // laesst sich nicht beurteilen und zaehlt wie bisher mit.
+  const einlochbar = useMemo(() => {
+    const byId = new Map((shots ?? []).map((s) => [s.id, s]))
+    return finished
+      .filter((s) => {
+        const shot = byId.get(s.shotId)
+        return !shot || hasObjectBall(shot)
+      })
+      .flatMap((s) => s.results)
+  }, [finished, shots])
   const rating = player ? overallRating(player.skillRatings) : 0
   const skills = player ? rankedSkills(player.skillRatings) : []
   const radar = useMemo(
@@ -123,7 +137,7 @@ export function StatsPage() {
             <Stat label="Versuche" value={allAttempts.length} />
             <Stat
               label="Trefferquote"
-              value={`${pocketRate(allAttempts).toFixed(0)} %`}
+              value={einlochbar.length ? `${pocketRate(einlochbar).toFixed(0)} %` : '–'}
               hint={`Kratzer ${scratchRate(allAttempts).toFixed(0)} %`}
             />
           </div>

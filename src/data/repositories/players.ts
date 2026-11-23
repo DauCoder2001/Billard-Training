@@ -27,7 +27,6 @@ export async function createPlayer(name: string): Promise<Player> {
     name: name.trim() || `Spieler ${existing + 1}`,
     color: PLAYER_COLORS[existing % PLAYER_COLORS.length],
     skillRatings: {},
-    achievements: [],
     createdAt: Date.now(),
   }
   await db.players.put(player)

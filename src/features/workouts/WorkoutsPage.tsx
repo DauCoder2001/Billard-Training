@@ -1,5 +1,6 @@
 import { useState } from 'react'
 import { useNavigate } from 'react-router-dom'
+import { storageErrorText } from '@/data/errors'
 import { useShots, useWorkouts } from '@/data/hooks'
 import { createWorkout, deleteWorkout, saveWorkout } from '@/data/repositories/workouts'
 import { plural } from '@/domain/text'
@@ -31,7 +32,12 @@ export function WorkoutsPage() {
       confirmLabel: 'Löschen',
       danger: true,
     })
-    if (ok) await deleteWorkout(workout.id)
+    if (!ok) return
+    try {
+      await deleteWorkout(workout.id)
+    } catch (err) {
+      dialogs.toast(`Nicht gelöscht: ${storageErrorText(err)}`, 'error')
+    }
   }
 
   return (
@@ -104,7 +110,14 @@ export function WorkoutsPage() {
           workout={editing}
           onClose={() => setEditing(null)}
           onSave={async (w) => {
-            await saveWorkout(w)
+            try {
+              await saveWorkout(w)
+            } catch (err) {
+              // Das Fenster bleibt offen: die Zusammenstellung steht sonst
+              // nirgends und waere mit dem Schliessen weg.
+              dialogs.toast(`Nicht gespeichert: ${storageErrorText(err)}`, 'error')
+              return
+            }
             setEditing(null)
             dialogs.toast('Workout gespeichert', 'ok')
           }}

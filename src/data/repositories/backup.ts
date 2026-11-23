@@ -1,7 +1,14 @@
 /** Vollstaendige Sicherung als JSON-Datei. */
 
 import { db } from '../db'
-import { DEFAULT_SETTINGS, getSettings } from './settings'
+import {
+  restorePlayers,
+  restoreSessions,
+  restoreSettings,
+  restoreShots,
+  restoreWorkouts,
+} from './restore'
+import { getSettings } from './settings'
 import type { Player, Session, Settings, Shot, Workout } from '@/domain/types'
 
 export const BACKUP_VERSION = 1
@@ -42,6 +49,8 @@ export interface ImportResult {
   players: number
   sessions: number
   workouts: number
+  /** Eintraege, die unbrauchbar waren und weggelassen wurden. */
+  dropped: number
 }
 
 /**
@@ -67,6 +76,11 @@ function list<T>(value: unknown, label: string): T[] {
  * Spielt eine Sicherung ein. Im Modus "replace" wird der Bestand vorher
  * geleert, im Modus "merge" bleiben vorhandene Eintraege erhalten und
  * gleichnamige Ids werden ueberschrieben.
+ *
+ * Der Inhalt wird dabei Feld fuer Feld geprueft (siehe restore.ts). Eine
+ * Sicherung ist eine fremde Datei wie jede andere, und was hier hineinkommt,
+ * bleibt gespeichert: ungeprueft uebernommen wuerde ein beschaedigter
+ * Eintrag die Ansicht bei jedem Start erneut zu Fall bringen.
  */
 export async function importBackup(
   raw: unknown,
@@ -88,24 +102,40 @@ export async function importBackup(
     throw new Error('Die Sicherung stammt aus einer neueren Version der App.')
   }
 
-  const shots = list<Shot>(backup.shots, 'Die Stöße')
-  const players = list<Player>(backup.players, 'Die Spieler')
-  const sessions = list<Session>(backup.sessions, 'Die Einheiten')
-  const workouts = list<Workout>(backup.workouts, 'Die Workouts')
+  const rohShots = list<unknown>(backup.shots, 'Die Stöße')
+  const rohPlayers = list<unknown>(backup.players, 'Die Spieler')
+  const rohSessions = list<unknown>(backup.sessions, 'Die Einheiten')
+  const rohWorkouts = list<unknown>(backup.workouts, 'Die Workouts')
+
+  const shots = restoreShots(rohShots)
+  const players = restorePlayers(rohPlayers)
+  const sessions = restoreSessions(rohSessions)
+  const workouts = restoreWorkouts(rohWorkouts)
+
+  // Weggelassen wird nur, was keine Id hat und damit zu nichts gehoert. Still
+  // verschwinden soll es trotzdem nicht - die Meldung am Ende nennt die Zahl.
+  const dropped =
+    rohShots.length -
+    shots.length +
+    (rohPlayers.length - players.length) +
+    (rohSessions.length - sessions.length) +
+    (rohWorkouts.length - workouts.length)
 
   // Dasselbe fuer die Einstellungen: ein Text an dieser Stelle wuerde sich
   // beim Spreizen ueber die Standardwerte streuen und unsinnige Felder
   // hinterlassen.
-  const settings = backup.settings
+  const rohSettings = backup.settings
   if (
-    settings !== undefined &&
-    settings !== null &&
-    (typeof settings !== 'object' || Array.isArray(settings))
+    rohSettings !== undefined &&
+    rohSettings !== null &&
+    (typeof rohSettings !== 'object' || Array.isArray(rohSettings))
   ) {
     throw new Error(
       'Die Sicherung ist beschädigt und wurde nicht eingespielt: Die Einstellungen liegen nicht als Datensatz vor.',
     )
   }
+  const settings =
+    rohSettings === undefined || rohSettings === null ? null : restoreSettings(rohSettings)
 
   await db.transaction(
     'rw',
@@ -127,9 +157,7 @@ export async function importBackup(
       await db.players.bulkPut(players)
       await db.sessions.bulkPut(sessions)
       await db.workouts.bulkPut(workouts)
-      if (settings) {
-        await db.settings.put({ ...DEFAULT_SETTINGS, ...settings, id: 'settings' })
-      }
+      if (settings) await db.settings.put(settings)
     },
   )
 
@@ -138,5 +166,6 @@ export async function importBackup(
     players: players.length,
     sessions: sessions.length,
     workouts: workouts.length,
+    dropped,
   }
 }
