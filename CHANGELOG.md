@@ -6,6 +6,28 @@ Die Versionsnummer steht an genau einer Stelle — in `package.json` — und ers
 unten auf der Seite **Einstellungen** sowie auf der Fehlerseite. Schema:
 `Hauptversion.Funktion.Korrektur`.
 
+## 0.6.1 – 23.11.2026
+
+### Behoben
+- **Ein Stoß ohne Objektball und ohne Zielzone gab für jeden Versuch die volle
+  Punktzahl.** Weil es nichts einzulochen gab, zählte die Bewertung den Druck auf
+  „Erfassen" als Treffer: zehn von zehn Punkten, 100 Prozent für eine ganze
+  Einheit — und das Ergebnis landete im Profil des Spielers. Solche Stöße nimmt
+  das Training jetzt gar nicht erst an und sagt, was fehlt: eine Zielzone oder ein
+  Objektball. Im Workout lässt sich der betroffene Abschnitt überspringen, die
+  übrigen laufen normal weiter.
+- **Die Trefferquote zählte Übungen ohne Objektball als lauter Treffer.** Ein
+  erfasster Versuch wird nicht mehr als eingelocht gemeldet. An den Punkten ändert
+  das nichts — dort zählt die Lage des Weißen —, wohl aber an der Trefferquote in
+  der Zusammenfassung, auf der Stoßseite und in der Statistik über alle Stöße.
+- **„Als Bild" verlor die Ballnummern.** Das ausgegebene PNG holte Größe und
+  Ausrichtung der Ziffern aus der Formatvorlage der Seite, die einem einzeln
+  geladenen Bild nicht mitgegeben wird. Die Nummern standen dadurch riesig neben
+  dem Ball oder ganz außerhalb des Bildes. Sie tragen ihre Maße jetzt selbst.
+- **Eine verdrängte Rückfrage bleibt nicht mehr unbeantwortet.** Öffnete sich eine
+  zweite Frage, während die erste noch offen war, wartete der Aufrufer der ersten
+  für immer. Eine verdrängte Frage gilt jetzt als abgebrochen — also: nichts tun.
+
 ## 0.6.0 – 23.11.2026
 
 ### Neu

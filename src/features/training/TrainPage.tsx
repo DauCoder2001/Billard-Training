@@ -7,6 +7,7 @@ import { useLeaveGuard } from '@/app/useLeaveGuard'
 import { useShot } from '@/data/hooks'
 import { storageErrorText } from '@/data/errors'
 import { finishSession, startSession } from '@/data/repositories/sessions'
+import { isScorable } from '@/domain/scoring'
 import { plural } from '@/domain/text'
 import type { Attempt } from '@/domain/types'
 import { useDialogs } from '@/ui/Dialogs'
@@ -63,6 +64,32 @@ export function TrainPage() {
         <button className="btn" onClick={() => navigate('/library')}>
           Zu den Stößen
         </button>
+      </div>
+    )
+  }
+
+  // Ein Stoss ohne Objektball und ohne Zielzone hat keinen Massstab. Lieber
+  // hier sagen, was fehlt, als zwanzig Versuche lang dieselbe Punktzahl
+  // verteilen und das Ergebnis ins Profil schreiben.
+  if (!isScorable(shot)) {
+    return (
+      <div className="page stack">
+        <h1>Dieser Stoß lässt sich nicht bewerten</h1>
+        <p className="muted">
+          „{shot.name}" hat weder einen Objektball noch eine Zielzone. Ohne Objektball
+          gibt es nichts einzulochen, ohne Zielzone nichts zu messen.
+        </p>
+        <p className="muted">
+          Setz im Baukasten eine Zielzone – oder einen Objektball.
+        </p>
+        <div className="row">
+          <button className="btn btn--primary" onClick={() => navigate(`/builder/${shot.id}`)}>
+            Im Baukasten öffnen
+          </button>
+          <button className="btn" onClick={() => navigate(`/shot/${shot.id}`)}>
+            Zurück zum Stoß
+          </button>
+        </div>
       </div>
     )
   }

@@ -80,11 +80,20 @@ export function BallLayer({
             {showNumbers && ball.number && !isGhost && (
               <>
                 <circle cx={cx} cy={cy} r={r * 0.52} fill="#f7f4ea" opacity={style.striped ? 1 : 0.95} />
+                {/* Groesse und Ausrichtung stehen am Element selbst, nicht in
+                    styles.css: "Als Bild" serialisiert dieses SVG und laedt es
+                    einzeln: dort gilt keine Formatvorlage der Seite, und die
+                    Nummer landete in Standardgroesse neben dem Ball. */}
                 <text
-                  className="ball-label"
                   x={cx}
                   y={cy}
                   fill="#20241f"
+                  fontFamily="system-ui, -apple-system, Segoe UI, sans-serif"
+                  fontSize={1.5}
+                  fontWeight={700}
+                  textAnchor="middle"
+                  dominantBaseline="central"
+                  pointerEvents="none"
                   transform={uprightTransform(orientation, cx, cy)}
                 >
                   {ball.number}

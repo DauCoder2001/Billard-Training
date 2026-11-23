@@ -107,32 +107,52 @@ export function DialogsProvider({ children }: { children: ReactNode }) {
   const [toasts, setToasts] = useState<Toast[]>([])
   const nextToastId = useRef(1)
 
+  // Was gerade gefragt wird, auch ausserhalb des Zeichnens. Nur so laesst
+  // sich eine verdraengte Frage noch beantworten.
+  const offen = useRef<Pending | null>(null)
+
+  /**
+   * Zeigt eine Frage. Steht schon eine offen, wird sie verdraengt - und
+   * vorher als abgebrochen beantwortet. Ohne das wartet ihr Aufrufer fuer
+   * immer: sein Versprechen wuerde nie eingeloest und seine Funktion nie zu
+   * Ende laufen. Abgebrochen heisst ueberall "nichts tun", das ist in diesem
+   * Augenblick die einzig richtige Antwort.
+   */
+  const zeigen = useCallback((next: Pending) => {
+    if (offen.current) abbrechen(offen.current)
+    offen.current = next
+    setPending(next)
+  }, [])
+
   const api = useMemo<DialogsApi>(
     () => ({
       confirm: (options) =>
-        new Promise<boolean>((resolve) => setPending({ kind: 'confirm', options, resolve })),
+        new Promise<boolean>((resolve) => zeigen({ kind: 'confirm', options, resolve })),
       choose: <Id extends string>(options: ChooseOptions<Id>) =>
         new Promise<Id | null>((resolve) =>
-          setPending({
+          zeigen({
             kind: 'choose',
             options: options as ChooseOptions,
             resolve: resolve as (v: string | null) => void,
           }),
         ),
       prompt: (options) =>
-        new Promise<string | null>((resolve) => setPending({ kind: 'prompt', options, resolve })),
+        new Promise<string | null>((resolve) => zeigen({ kind: 'prompt', options, resolve })),
       alert: (options) =>
-        new Promise<void>((resolve) => setPending({ kind: 'alert', options, resolve })),
+        new Promise<void>((resolve) => zeigen({ kind: 'alert', options, resolve })),
       toast: (text, kind = 'info') => {
         const id = nextToastId.current++
         setToasts((all) => [...all, { id, kind, text }])
         window.setTimeout(() => setToasts((all) => all.filter((t) => t.id !== id)), 3200)
       },
     }),
-    [],
+    [zeigen],
   )
 
-  const close = useCallback(() => setPending(null), [])
+  const close = useCallback(() => {
+    offen.current = null
+    setPending(null)
+  }, [])
 
   // Meldungen als Popover in der obersten Ebene, sonst laegen sie hinter
   // einem offenen Dialog. Bei jeder neuen Meldung neu einblenden, damit sie
@@ -163,6 +183,13 @@ export function DialogsProvider({ children }: { children: ReactNode }) {
   )
 }
 
+/** Beantwortet eine Frage so, wie es "Abbrechen" taete. */
+function abbrechen(p: Pending): void {
+  if (p.kind === 'confirm') p.resolve(false)
+  else if (p.kind === 'prompt' || p.kind === 'choose') p.resolve(null)
+  else p.resolve()
+}
+
 function DialogHost({ pending, onClose }: { pending: Pending; onClose: () => void }) {
   const [value, setValue] = useState(
     pending.kind === 'prompt' ? (pending.options.initial ?? '') : '',
@@ -189,9 +216,7 @@ function DialogHost({ pending, onClose }: { pending: Pending; onClose: () => voi
   }, [danger])
 
   const cancel = useCallback(() => {
-    if (pending.kind === 'confirm') pending.resolve(false)
-    else if (pending.kind === 'prompt' || pending.kind === 'choose') pending.resolve(null)
-    else pending.resolve()
+    abbrechen(pending)
     onClose()
   }, [pending, onClose])
 

@@ -111,11 +111,24 @@ export function scratchRate(results: Attempt[]): number {
   return Math.round((n / results.length) * 1000) / 10
 }
 
-/** Fertiger Versuch inklusive berechneter Punkte. */
 /** Hat der Stoss ueberhaupt einen Ball zum Einlochen? */
 export function hasObjectBall(shot: Shot): boolean {
   return shot.balls.some((b) => b.kind === 'object')
 }
+
+/**
+ * Laesst sich dieser Stoss ueberhaupt bewerten?
+ *
+ * Ohne Objektball gibt es nichts einzulochen, ohne Zielzone nichts zu messen.
+ * Beides zusammen heisst: kein Massstab. Ein solcher Stoss darf nicht ins
+ * Training - sonst bekaeme jeder Versuch dieselbe Punktzahl, und die stuende
+ * hinterher im Profil des Spielers.
+ */
+export function isScorable(shot: Shot): boolean {
+  return hasObjectBall(shot) || shot.scoring.targetZone !== null
+}
+
+/** Fertiger Versuch inklusive berechneter Punkte. */
 
 export function buildAttempt(
   shot: Shot,

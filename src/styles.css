@@ -582,14 +582,6 @@ textarea {
   cursor: crosshair;
 }
 
-.ball-label {
-  font-size: 1.5px;
-  font-weight: 700;
-  text-anchor: middle;
-  dominant-baseline: central;
-  pointer-events: none;
-}
-
 /* ------------------------------------------------------------- Fortschritt */
 
 .bar {

@@ -7,7 +7,7 @@ import { useLeaveGuard } from '@/app/useLeaveGuard'
 import { useShots, useWorkout } from '@/data/hooks'
 import { storageErrorText } from '@/data/errors'
 import { finishSession, startSession } from '@/data/repositories/sessions'
-import { proficiencyFor } from '@/domain/scoring'
+import { isScorable, proficiencyFor } from '@/domain/scoring'
 import { plural } from '@/domain/text'
 import type { Attempt, Session } from '@/domain/types'
 import { useDialogs } from '@/ui/Dialogs'
@@ -143,11 +143,39 @@ export function WorkoutRunPage() {
     const session = startSession(shot, player.id, 'custom', entry.attempts, workout.id)
     const finished = await finishSession(session, shot, results)
     setDone((d) => [...d, finished])
+    // Der Abschnitt steht in der Datenbank; es gibt nichts mehr zu verwerfen.
+    // Sonst traegt der Zaehler seinen Stand in einen Abschnitt hinueber, in
+    // dem die Erfassung gar nicht erst aufgebaut wird.
+    erfasst.current = 0
     setStep((s) => s + 1)
   }
 
   // Die Rueckfrage stellt der Waechter - hier bleibt nur der Weg.
   const quit = () => navigate('/workouts')
+
+  // Ein Abschnitt ohne Massstab (kein Objektball, keine Zielzone) wird nicht
+  // stillschweigend uebersprungen: sonst stuende im Ergebnis ein Abschnitt
+  // weniger, ohne dass jemand wuesste, warum.
+  if (!isScorable(shot)) {
+    return (
+      <div className="page stack">
+        <h1>Abschnitt {step + 1} lässt sich nicht bewerten</h1>
+        <p className="muted">
+          „{shot.name}" hat weder einen Objektball noch eine Zielzone. Ohne Objektball
+          gibt es nichts einzulochen, ohne Zielzone nichts zu messen. Im Baukasten lässt
+          sich das nachholen; die übrigen Abschnitte sind davon nicht betroffen.
+        </p>
+        <div className="row">
+          <button className="btn btn--primary" onClick={() => setStep((s) => s + 1)}>
+            Abschnitt überspringen
+          </button>
+          <button className="btn" onClick={quit}>
+            Workout verlassen
+          </button>
+        </div>
+      </div>
+    )
+  }
 
   return (
     <TrainerView

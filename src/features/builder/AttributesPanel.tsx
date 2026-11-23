@@ -2,6 +2,7 @@
 
 import { useState } from 'react'
 import { POCKET_BY_ID } from '@/domain/geometry'
+import { hasObjectBall } from '@/domain/scoring'
 import { computeCutAngle } from '@/domain/shot'
 import {
   SHOT_TYPES,
@@ -37,6 +38,7 @@ export function AttributesPanel() {
 
   const attrs = shot.attributes
   const scoring = shot.scoring
+  const hatObjektball = hasObjectBall(shot)
   const pocket = shot.target.pocketId ? POCKET_BY_ID[shot.target.pocketId] : null
 
   const setAttr = <K extends keyof typeof attrs>(key: K, value: (typeof attrs)[K]) =>
@@ -214,7 +216,9 @@ export function AttributesPanel() {
                 </>
               ) : (
                 <p className="small muted">
-                  Ohne Zielzone zählt nur das Einlochen. Zielzone im Werkzeug links setzen.
+                  {hatObjektball
+                    ? 'Ohne Zielzone zählt nur das Einlochen. Zielzone im Werkzeug links setzen.'
+                    : 'Ohne Objektball und ohne Zielzone gibt es nichts zu bewerten – das Training nimmt diesen Stoß nicht an. Zielzone im Werkzeug links setzen.'}
                 </p>
               )}
 

@@ -181,10 +181,14 @@ export function TrainerView({
         )}
         {/* Zaehlt die Position mit, waere ein Treffer ohne erfasste Position
             automatisch nur halb so viel wert. Lieber erst danach fragen. */}
+        {/* Ohne Objektball wurde nichts eingelocht: pocketed bleibt falsch,
+            sonst zaehlte die Trefferquote jeden erfassten Versuch als
+            Treffer - auch in der Statistik ueber alle Stoesse. Auf die
+            Punkte wirkt es sich nicht aus, dort zaehlt dann die Lage. */}
         <button
           className="btn btn--wide btn--primary"
           disabled={busy || done || (needsPosition && !end)}
-          onClick={() => void record(true, false)}
+          onClick={() => void record(mitObjektball, false)}
         >
           {mitObjektball ? 'Eingelocht' : 'Erfassen'}
         </button>

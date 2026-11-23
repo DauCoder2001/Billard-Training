@@ -144,12 +144,11 @@ export const useBuilder = create<BuilderState>((set, get) => ({
 
   markSaved: (shot) => set({ shot, dirty: false, isNew: false }),
 
-  // Die Werkzeuge legen Objekt-, Stoer- und Geisterbaelle an. Der Weisse
-  // gehoert zu jedem Stoss und wird nur verschoben, nie hinzugefuegt. Hier
-  // stand eine Absicherung, die einen vorhandenen Weissen ersetzt haette;
-  // sie konnte nie greifen und war unvollstaendig: die Wege des alten
-  // Weissen behielten seine Id und waeren still unsichtbar geworden. Gaebe
-  // es einmal ein Werkzeug dafuer, gehoert deren Bereinigung dazu.
+  // Legt einen Ball an, gleich welcher Art - den Weissen eingeschlossen.
+  // Dass es nur einen Weissen geben darf, haelt die Leinwand fest, bevor
+  // sie hierher ruft; ein Ersetzen findet nicht statt. Wege eines
+  // entfernten Balls raeumt removeBall mit weg, sie koennen also nicht auf
+  // eine tote Id zeigen.
   addBall: (kind, at) => {
     const id = newId()
     get().change((shot) => {

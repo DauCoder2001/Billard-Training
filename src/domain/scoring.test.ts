@@ -2,15 +2,24 @@ import { describe, expect, it } from 'vitest'
 import {
   MAX_POINTS,
   attemptPoints,
+  buildAttempt,
   effectiveMode,
+  isScorable,
   pocketRate,
   positionPoints,
   proficiencyFor,
   scratchRate,
   sessionScore,
 } from './scoring'
+import { createShot } from './shot'
 import { DEFAULT_THRESHOLDS } from './types'
-import type { Attempt, ShotScoring } from './types'
+import type { Attempt, Shot, ShotScoring } from './types'
+
+/** Ein Stoss aus nur dem Weissen - der gerade Stoss ohne Ball zum Einlochen. */
+function nurWeisser(partial: Partial<Shot> = {}): Shot {
+  const basis = createShot()
+  return { ...basis, balls: basis.balls.filter((b) => b.kind === 'cue'), ...partial }
+}
 
 const zone = { x: 50, y: 25, r: 5 }
 
@@ -47,7 +56,40 @@ describe('Positionspunkte', () => {
   })
 })
 
+describe('Bewertbarkeit', () => {
+  it('nimmt einen Stoss mit Objektball an - auch ohne Zielzone', () => {
+    const s = createShot()
+    expect(isScorable({ ...s, scoring: { ...s.scoring, targetZone: null } })).toBe(true)
+  })
+
+  it('nimmt einen Stoss ohne Objektball an, solange eine Zielzone da ist', () => {
+    expect(isScorable(nurWeisser())).toBe(true)
+  })
+
+  it('lehnt einen Stoss ohne Objektball und ohne Zielzone ab', () => {
+    // Ohne beides gaebe es fuer jeden Versuch dieselbe Punktzahl, gleich was
+    // am Tisch passiert - und die stuende hinterher im Profil des Spielers.
+    const s = nurWeisser()
+    expect(isScorable({ ...s, scoring: { ...s.scoring, targetZone: null } })).toBe(false)
+  })
+})
+
 describe('Uebung ohne Objektball', () => {
+  it('zaehlt einen erfassten Versuch nicht als Treffer', () => {
+    // Der Trainer meldet pocketed: false, wenn nichts einzulochen war. Die
+    // Punkte kommen trotzdem aus der Lage - nur die Trefferquote bleibt bei
+    // null, statt jeden erfassten Versuch als Treffer zu zaehlen.
+    const s = nurWeisser()
+    const mitte = s.scoring.targetZone!
+    const versuch = buildAttempt(s, 0, {
+      pocketed: false,
+      scratch: false,
+      cueBallEnd: { x: mitte.x, y: mitte.y },
+    })
+    expect(versuch.points).toBe(MAX_POINTS)
+    expect(pocketRate([versuch])).toBe(0)
+  })
+
   // Der gerade Stoss, bei dem nur der Weisse laeuft und zurueckkommen soll:
   // Es gibt nichts einzulochen, also darf die Wertung nicht daran haengen.
   const ohneBall = false
