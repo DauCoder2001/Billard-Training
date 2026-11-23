@@ -135,7 +135,11 @@ export function BuilderPage() {
    */
   const save = async () => {
     try {
-      const saved = await saveShot(shot)
+      // Ein mitgelieferter Stoss, den der Nutzer hier speichert, ist ab jetzt
+      // seine Fassung: builtIn faellt weg. Sonst ueberschrieb die naechste
+      // Aktualisierung der Sammlung seine Aenderungen (siehe bootstrap.ts),
+      // und geloescht werden durfte er trotzdem nur hier.
+      const saved = await saveShot({ ...shot, builtIn: false })
       useBuilder.getState().markSaved(saved)
       dialogs.toast('Gespeichert', 'ok')
       if (isNew) navigate(`/builder/${saved.id}`, { replace: true })
@@ -421,10 +425,19 @@ export function BuilderPage() {
                 <button className="btn btn--sm" onClick={() => void duplicate()}>
                   Duplizieren
                 </button>
-                <div className="builder__sep builder__sep--v" />
-                <button className="btn btn--sm btn--danger" onClick={() => void remove()}>
-                  Stoß löschen
-                </button>
+                {/* Ein unberuehrter mitgelieferter Stoss wird hier nicht
+                    geloescht: die Stossseite bot das schon nie an, und die
+                    naechste Aktualisierung der Sammlung holte ihn ohnehin
+                    wieder. Wer ihn aendert und speichert, hat seine eigene
+                    Fassung (siehe save) - dann steht der Knopf da. */}
+                {shot.builtIn !== true && (
+                  <>
+                    <div className="builder__sep builder__sep--v" />
+                    <button className="btn btn--sm btn--danger" onClick={() => void remove()}>
+                      Stoß löschen
+                    </button>
+                  </>
+                )}
               </>
             )}
             <button className="btn btn--sm" onClick={() => setPanelOpen((v) => !v)}>

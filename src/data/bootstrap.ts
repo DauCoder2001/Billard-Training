@@ -22,8 +22,11 @@ export const SEED_VERSION = 2
 let running: Promise<void> | null = null
 
 /**
- * Legt Standardspieler und Uebungen an. Bereits geloeschte Uebungen kommen
- * nicht zurueck, weil der Stand ueber seededVersion gemerkt wird.
+ * Legt Standardspieler und Uebungen an.
+ *
+ * Geloeschte Uebungen kommen nicht zurueck, und eine eigene Fassung einer
+ * mitgelieferten Uebung bleibt stehen - auch wenn die Sammlung aktualisiert
+ * wird. Siehe die Regel beim Einspielen weiter unten.
  *
  * Mehrfachaufrufe sind ungefaehrlich: parallele Aufrufe teilen sich denselben
  * Lauf, und das Anlegen des ersten Spielers passiert in einer Transaktion.
@@ -62,14 +65,54 @@ async function run(): Promise<void> {
   if (settings.seededVersion < SEED_VERSION) {
     const fresh = seedShots()
     const stored = await db.shots.bulkGet(fresh.map((s) => s.id))
-    // Wie beim Wiederherstellen ueber die Einstellungen: der Favorit ist eine
-    // Entscheidung des Nutzers und steht nicht in der Vorlage.
-    await db.shots.bulkPut(fresh.map((s, i) => ({ ...s, favorite: stored[i]?.favorite ?? false })))
+    const updates = seedUpdates(fresh, stored, settings.seededVersion === 0)
+    if (updates.length > 0) await db.shots.bulkPut(updates)
     await updateSettings({ seededVersion: SEED_VERSION })
   }
 
   await migrateTheme()
   await migrateDrillTexts()
+}
+
+/**
+ * Was eine Einspielung der Sammlung schreiben darf.
+ *
+ * Beim ersten Lauf kommt die ganze Sammlung ins Haus. Jeder spaetere Lauf -
+ * eine Auslieferung mit erhoehter SEED_VERSION - fasst nur an, was noch da und
+ * noch mitgeliefert ist:
+ *
+ * - Ein geloeschter Stoss fehlt im Bestand und bleibt geloescht. Vorher
+ *   schrieb bulkPut die ganze Sammlung zurueck und holte ihn wieder.
+ * - Ein Stoss, den der Baukasten gespeichert hat, traegt builtIn === false und
+ *   ist damit die Fassung des Nutzers. Vorher gingen Name, Notizen und Aufbau
+ *   beim naechsten Update verloren; nur der Favorit blieb stehen.
+ *
+ * Der Preis: eine Korrektur der Vorlage - wie die gerechnete Geometrie in
+ * 0.5.1 - erreicht einen uebernommenen Stoss nicht mehr. Eigene Arbeit wiegt
+ * schwerer. Wer die Vorlage zurueckholen will, nimmt den ausdruecklichen Weg
+ * "Mitgelieferte Stoesse wiederherstellen" in den Einstellungen; dort steht
+ * vorher, was dabei verloren geht.
+ *
+ * Reine Funktion ueber Vorlage und Bestand, damit sich die Regel ohne
+ * Datenbank pruefen laesst - sie entscheidet ueber eigene Arbeit.
+ *
+ * @param fresh Die Stoesse der Vorlage.
+ * @param stored Der gespeicherte Stand zu denselben Ids, in derselben Folge.
+ * @param erstlauf true, wenn auf diesem Geraet noch nie eingespielt wurde.
+ */
+export function seedUpdates(
+  fresh: Shot[],
+  stored: (Shot | undefined)[],
+  erstlauf: boolean,
+): Shot[] {
+  return fresh.flatMap((neu, i) => {
+    const alt = stored[i]
+    // Der Favorit ist eine Entscheidung des Nutzers und steht nicht in der
+    // Vorlage.
+    if (erstlauf) return [{ ...neu, favorite: alt?.favorite ?? false }]
+    if (!alt || alt.builtIn !== true) return []
+    return [{ ...neu, favorite: alt.favorite }]
+  })
 }
 
 /**

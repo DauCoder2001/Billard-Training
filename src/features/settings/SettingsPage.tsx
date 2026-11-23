@@ -22,6 +22,7 @@ export function SettingsPage() {
   const players = usePlayers() ?? []
   const patchSettings = useApp((s) => s.patchSettings)
   const setActivePlayer = useApp((s) => s.setActivePlayer)
+  const load = useApp((s) => s.load)
   const active = useActivePlayer()
   const dialogs = useDialogs()
   const navigate = useNavigate()
@@ -120,6 +121,15 @@ export function SettingsPage() {
     if (mode === null) return
     try {
       const result = await importBackup(parsed, mode)
+      // Stoesse, Spieler, Einheiten und Workouts kommen reaktiv aus der
+      // Datenbank und sind sofort da. Die Einstellungen nicht: sie stehen im
+      // App-Zustand und wurden einmal beim Start gelesen. Ohne dieses
+      // Nachziehen zeichnete die App weiter mit den alten Farben, und die
+      // eingespielten Werte sprangen erst bei der naechsten beliebigen
+      // Aenderung hervor. load() liest sie neu und laesst bootstrap laufen:
+      // das legt nach "Ersetzen" ein fehlendes Profil an und zieht einen
+      // activePlayerId gerade, den es nicht mehr gibt.
+      await load()
       await dialogs.alert({
         title: 'Sicherung eingespielt',
         message:

@@ -53,7 +53,12 @@ export function StatsPage() {
     return all.filter((s) => (s.finishedAt ?? 0) >= since)
   }, [sessions, range, jetzt])
 
-  const perShot = useMemo(() => statsByShot(sessions ?? []), [sessions])
+  // Dieselbe Auswahl wie die Kennzahlen darueber. Aus allen Einheiten
+  // gerechnet standen in einer Ansicht Zahlen aus zwei Zeitraeumen: wer
+  // "7 Tage" gewaehlt hatte, las in der Tabelle Einheiten, Letztes, Bestes
+  // und Mittel aus einem halben Jahr. statsByShot laesst unfertige Einheiten
+  // selbst weg.
+  const perShot = useMemo(() => statsByShot(finished), [finished])
 
   const rows = useMemo(() => {
     if (!shots) return []
@@ -132,7 +137,8 @@ export function StatsPage() {
       ) : (
         <>
           <div className="grid" style={{ gridTemplateColumns: 'repeat(auto-fit, minmax(140px, 1fr))' }}>
-            <Stat label="Gesamtniveau" value={rating.toFixed(0)} />
+            {/* Das Niveau steht im Profil und kennt keinen Zeitraum. */}
+            <Stat label="Gesamtniveau" value={rating.toFixed(0)} hint="über alle Einheiten" />
             <Stat label="Einheiten" value={finished.length} />
             <Stat label="Versuche" value={allAttempts.length} />
             <Stat

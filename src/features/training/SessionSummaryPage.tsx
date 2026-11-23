@@ -26,11 +26,32 @@ export function SessionSummaryPage() {
     [allSessions, session?.shotId],
   )
 
-  if (!session || !shot) {
+  // Vier Faelle, nicht zwei: undefined heisst "wird noch gelesen", null
+  // heisst "gibt es nicht". Zusammengefasst stand auf der Seite einer
+  // unbekannten Einheit fuer immer "Wird geladen ..." - etwa nach der
+  // Zurueck-Taste, wenn der Stoss samt seiner Historie geloescht wurde.
+  //
+  // Die Reihenfolge ist wichtig: solange die Einheit fehlt, kennt useShot
+  // keine Id und liefert null. Zuerst nach shot zu fragen hiesse, beim Lesen
+  // "nicht gefunden" anzuzeigen.
+  if (session === undefined) return <Laedt />
+  if (session === null) {
     return (
-      <div className="page">
-        <p className="muted">Wird geladen …</p>
-      </div>
+      <Fehlt
+        titel="Einheit nicht gefunden"
+        text="Diese Einheit gibt es nicht mehr. Wird ein Stoß gelöscht, geht seine Trainingshistorie mit ihm."
+        onBack={() => navigate('/library')}
+      />
+    )
+  }
+  if (shot === undefined) return <Laedt />
+  if (shot === null) {
+    return (
+      <Fehlt
+        titel="Stoß nicht gefunden"
+        text="Der Stoß dieser Einheit wurde gelöscht."
+        onBack={() => navigate('/library')}
+      />
     )
   }
 
@@ -119,6 +140,37 @@ export function SessionSummaryPage() {
         </button>
         <button className="btn" onClick={() => navigate('/')}>
           Zum Start
+        </button>
+      </div>
+    </div>
+  )
+}
+
+function Laedt() {
+  return (
+    <div className="page">
+      <p className="muted">Wird geladen …</p>
+    </div>
+  )
+}
+
+/** Keine Sackgasse: sagen, was fehlt, und einen Weg zurueck anbieten. */
+function Fehlt({
+  titel,
+  text,
+  onBack,
+}: {
+  titel: string
+  text: string
+  onBack: () => void
+}) {
+  return (
+    <div className="page stack">
+      <h1>{titel}</h1>
+      <p className="muted">{text}</p>
+      <div className="row">
+        <button className="btn" onClick={onBack}>
+          Zu den Stößen
         </button>
       </div>
     </div>

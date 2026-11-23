@@ -6,6 +6,41 @@ Die Versionsnummer steht an genau einer Stelle — in `package.json` — und ers
 unten auf der Seite **Einstellungen** sowie auf der Fehlerseite. Schema:
 `Hauptversion.Funktion.Korrektur`.
 
+## 0.7.0 – 23.11.2026
+
+### Geändert
+- **Ein geänderter mitgelieferter Stoß gehört jetzt dir.** Wer eine mitgelieferte
+  Übung im Baukasten speichert, bekommt damit seine eigene Fassung. Eine spätere
+  Aktualisierung der Übungssammlung geht daran vorbei, statt Name, Notizen und
+  Aufbau stillschweigend zu überschreiben. Auch ein gelöschter mitgelieferter
+  Stoß bleibt gelöscht – bisher kam er beim nächsten Update zurück. Wer die
+  Vorlage zurückhaben will, nimmt weiterhin *Einstellungen → Mitgelieferte Stöße
+  wiederherstellen*; dort steht vorher, was dabei verloren geht.
+- **„Stoß löschen" steht im Baukasten nicht mehr an unberührten mitgelieferten
+  Stößen.** Die Stoßseite hat das nie angeboten – jetzt gilt an beiden Orten
+  dieselbe Regel. „Duplizieren" bleibt überall. Sobald ein mitgelieferter Stoß
+  gespeichert und damit übernommen wurde, lässt er sich wie jeder eigene löschen.
+
+### Behoben
+- **Eine eingespielte Sicherung wirkt sofort.** Farben, Ausrichtung, Raster und
+  Standardwerte aus der Sicherung landeten zwar in der Datenbank, die Anzeige
+  arbeitete aber mit den alten weiter – bis zum nächsten Neuladen oder bis
+  irgendeine Einstellung angefasst wurde und alles auf einmal umsprang. Nach dem
+  Einspielen wird jetzt dasselbe nachgezogen wie beim Start; fehlt nach
+  „Ersetzen" ein Spielerprofil, wird es gleich angelegt.
+- **Eine Einheit, die es nicht mehr gibt, sagt das.** Bisher stand auf ihrer
+  Seite für immer „Wird geladen …" – etwa wenn man nach dem Löschen eines Stoßes
+  über die Zurück-Taste auf seinem Ergebnis landete. Jetzt steht dort, was fehlt,
+  und ein Knopf führt zurück zu den Stößen.
+- **Die Tabelle der Statistik hält sich an den gewählten Zeitraum.** „7 Tage"
+  oben und Zahlen aus einem halben Jahr in der Tabelle darunter passten nicht
+  zusammen. Das Gesamtniveau kommt aus dem Profil und kennt keinen Zeitraum –
+  das steht jetzt dabei.
+- **Das Ziehen im Baukasten ruckelt nicht mehr am Raster.** Die Rasterpunkte
+  wurden bei jeder Fingerbewegung neu erzeugt – 465 Stück in der Standardweite,
+  1953 bei Achtel-Diamanten. Gemessen kostete ein Bild dadurch 4,5 bzw. 14,3
+  Millisekunden; jetzt sind es 1,6, unabhängig von der Rasterweite.
+
 ## 0.6.3 – 23.11.2026
 
 ### Behoben
