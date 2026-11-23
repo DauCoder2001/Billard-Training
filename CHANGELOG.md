@@ -6,6 +6,19 @@ Die Versionsnummer steht an genau einer Stelle — in `package.json` — und ers
 unten auf der Seite **Einstellungen** sowie auf der Fehlerseite. Schema:
 `Hauptversion.Funktion.Korrektur`.
 
+## 0.6.3 – 23.11.2026
+
+### Behoben
+- **Die Einstellungen sagen jetzt, wenn der Browser das Speichern ablehnt.** Tuchfarbe,
+  Bandenfarbe, Ausrichtung, Raster, Rasterweite, Standardradius und die Schwellen für
+  die Wertung wurden bisher stillschweigend verworfen, wenn der Speicher voll war: die
+  Anzeige sprang auf den alten Wert zurück, als hätte der Regler geklemmt. Dasselbe
+  beim Wechsel des Spielerprofils auf der Startseite und in den Einstellungen und beim
+  Drehen des Tisches im Baukasten. Jetzt erscheint eine Kurzmeldung mit dem Grund.
+- **Dieselbe Kurzmeldung erscheint nicht mehrfach übereinander.** Ein Regler löst beim
+  Ziehen viele Änderungen hintereinander aus; sonst hätte jede einzelne ihre eigene
+  Meldung aufgestapelt.
+
 ## 0.6.2 – 23.11.2026
 
 ### Behoben

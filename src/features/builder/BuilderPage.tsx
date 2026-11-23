@@ -274,6 +274,13 @@ export function BuilderPage() {
     ohneNachfrage(() => navigate('/library', { replace: true }))
   }
 
+  const ausrichten = async () => {
+    const fehler = await patchSettings({
+      orientation: settings.orientation === 'landscape' ? 'portrait' : 'landscape',
+    })
+    if (fehler) dialogs.toast(`Nicht gespeichert: ${fehler}`, 'error')
+  }
+
   const train = async () => {
     const saved = dirty || isNew ? await save() : shot
     // Nicht gespeichert heisst: nicht trainieren. Sonst liefe die Einheit auf
@@ -312,11 +319,7 @@ export function BuilderPage() {
         <button
           className="btn btn--sm"
           title="Ausrichtung wechseln"
-          onClick={() =>
-            void patchSettings({
-              orientation: orientation === 'landscape' ? 'portrait' : 'landscape',
-            })
-          }
+          onClick={() => void ausrichten()}
         >
           {orientation === 'landscape' ? '▭' : '▯'}
         </button>

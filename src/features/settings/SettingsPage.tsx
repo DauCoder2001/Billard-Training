@@ -10,6 +10,7 @@ import { exportBackup, importBackup } from '@/data/repositories/backup'
 import { createPlayer, deletePlayer, updatePlayer } from '@/data/repositories/players'
 import { TABLE } from '@/domain/geometry'
 import { plural } from '@/domain/text'
+import type { Settings } from '@/domain/types'
 import { downloadText } from '@/features/share/exportImage'
 import { useDialogs } from '@/ui/Dialogs'
 
@@ -26,12 +27,24 @@ export function SettingsPage() {
   const navigate = useNavigate()
   const fileRef = useRef<HTMLInputElement>(null)
 
+  // Eine Einstellung aendern und sagen, wenn der Browserspeicher ablehnt.
+  // Ohne die Meldung springt der Regler stumm zurueck.
+  const einstellen = async (patch: Partial<Settings>) => {
+    const fehler = await patchSettings(patch)
+    if (fehler) dialogs.toast(`Nicht gespeichert: ${fehler}`, 'error')
+  }
+
+  const spielerWaehlen = async (id: string) => {
+    const fehler = await setActivePlayer(id)
+    if (fehler) dialogs.toast(`Nicht gespeichert: ${fehler}`, 'error')
+  }
+
   const addPlayer = async () => {
     const name = await dialogs.prompt({ title: 'Neuer Spieler', label: 'Name', initial: '' })
     if (name === null) return
     try {
       const player = await createPlayer(name)
-      await setActivePlayer(player.id)
+      await spielerWaehlen(player.id)
     } catch (err) {
       dialogs.toast(`Nicht gespeichert: ${storageErrorText(err)}`, 'error')
     }
@@ -69,7 +82,7 @@ export function SettingsPage() {
     try {
       await deletePlayer(id)
       const rest = players.filter((p) => p.id !== id)
-      if (rest[0]) await setActivePlayer(rest[0].id)
+      if (rest[0]) await spielerWaehlen(rest[0].id)
     } catch (err) {
       dialogs.toast(`Nicht gelöscht: ${storageErrorText(err)}`, 'error')
     }
@@ -142,7 +155,11 @@ export function SettingsPage() {
       await db.shots.bulkPut(
         fresh.map((s, i) => ({ ...s, favorite: stored[i]?.favorite ?? false })),
       )
-      await patchSettings({ seededVersion: SEED_VERSION })
+      const fehler = await patchSettings({ seededVersion: SEED_VERSION })
+      if (fehler) {
+        dialogs.toast(`Nicht gespeichert: ${fehler}`, 'error')
+        return
+      }
       dialogs.toast('Stöße wiederhergestellt', 'ok')
     } catch (err) {
       dialogs.toast(`Nicht gespeichert: ${storageErrorText(err)}`, 'error')
@@ -185,7 +202,7 @@ export function SettingsPage() {
           <div key={p.id} className="row">
             <button
               className={`chip${p.id === active?.id ? ' is-on' : ''}`}
-              onClick={() => void setActivePlayer(p.id)}
+              onClick={() => void spielerWaehlen(p.id)}
             >
               {p.id === active?.id ? '● ' : ''}
               {p.name}
@@ -218,7 +235,7 @@ export function SettingsPage() {
                 className="swatch"
                 aria-label={`Tuchfarbe ${c}`}
                 style={{ background: c, outline: settings.clothColor === c ? '2px solid var(--accent)' : 'none' }}
-                onClick={() => void patchSettings({ clothColor: c })}
+                onClick={() => void einstellen({ clothColor: c })}
               />
             ))}
           </div>
@@ -233,7 +250,7 @@ export function SettingsPage() {
                 className="swatch"
                 aria-label={`Rahmenfarbe ${c}`}
                 style={{ background: c, outline: settings.railColor === c ? '2px solid var(--accent)' : 'none' }}
-                onClick={() => void patchSettings({ railColor: c })}
+                onClick={() => void einstellen({ railColor: c })}
               />
             ))}
           </div>
@@ -249,7 +266,7 @@ export function SettingsPage() {
             className="select"
             value={settings.orientation}
             onChange={(e) =>
-              void patchSettings({ orientation: e.target.value as 'landscape' | 'portrait' })
+              void einstellen({ orientation: e.target.value as 'landscape' | 'portrait' })
             }
           >
             <option value="landscape">Quer (Längsachse waagerecht)</option>
@@ -261,7 +278,7 @@ export function SettingsPage() {
           <input
             type="checkbox"
             checked={settings.snapToGrid}
-            onChange={(e) => void patchSettings({ snapToGrid: e.target.checked })}
+            onChange={(e) => void einstellen({ snapToGrid: e.target.checked })}
           />
           <span>Bälle auf das Diamantenraster einrasten</span>
         </label>
@@ -276,7 +293,7 @@ export function SettingsPage() {
             className="select"
             value={settings.snapStep}
             disabled={!settings.snapToGrid}
-            onChange={(e) => void patchSettings({ snapStep: Number(e.target.value) })}
+            onChange={(e) => void einstellen({ snapStep: Number(e.target.value) })}
           >
             <option value={TABLE.diamondSpacing}>Ganze Diamanten</option>
             <option value={TABLE.diamondSpacing / 2}>Halbe Diamanten</option>
@@ -298,7 +315,7 @@ export function SettingsPage() {
             max={20}
             step={0.5}
             value={settings.defaultTargetRadius}
-            onChange={(e) => void patchSettings({ defaultTargetRadius: Number(e.target.value) })}
+            onChange={(e) => void einstellen({ defaultTargetRadius: Number(e.target.value) })}
           />
         </div>
         {(
@@ -322,7 +339,7 @@ export function SettingsPage() {
               step={5}
               value={settings.defaultThresholds[key]}
               onChange={(e) =>
-                void patchSettings({
+                void einstellen({
                   defaultThresholds: {
                     ...settings.defaultThresholds,
                     [key]: Number(e.target.value),

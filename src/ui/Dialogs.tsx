@@ -142,7 +142,12 @@ export function DialogsProvider({ children }: { children: ReactNode }) {
         new Promise<void>((resolve) => zeigen({ kind: 'alert', options, resolve })),
       toast: (text, kind = 'info') => {
         const id = nextToastId.current++
-        setToasts((all) => [...all, { id, kind, text }])
+        // Dieselbe Meldung nicht zweimal uebereinander: ein Regler loest beim
+        // Ziehen viele Aenderungen hintereinander aus, und wenn der Speicher
+        // ablehnt, haette sonst jede einzelne ihre eigene Meldung.
+        setToasts((all) =>
+          all.some((t) => t.text === text && t.kind === kind) ? all : [...all, { id, kind, text }],
+        )
         window.setTimeout(() => setToasts((all) => all.filter((t) => t.id !== id)), 3200)
       },
     }),

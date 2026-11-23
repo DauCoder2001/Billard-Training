@@ -9,6 +9,7 @@ import { overallRating, rankedSkills } from '@/domain/skills'
 import { SKILL_LABELS } from '@/domain/types'
 import { Bars } from '@/features/stats/charts'
 import { EmptyState, Stat } from '@/ui/bits'
+import { useDialogs } from '@/ui/Dialogs'
 
 const DAY = 24 * 60 * 60 * 1000
 
@@ -17,9 +18,17 @@ export function DashboardPage() {
   const player = useActivePlayer()
   const players = usePlayers() ?? []
   const setActivePlayer = useApp((s) => s.setActivePlayer)
+  const dialogs = useDialogs()
   const settings = useApp((s) => s.settings)
   const shots = useShots()
   const sessions = useSessions(player?.id ?? null)
+
+  // Der Profilwechsel wird gespeichert. Lehnt der Browserspeicher ab, bliebe
+  // sonst einfach das alte Profil stehen, ohne dass jemand erfaehrt, warum.
+  const spielerWaehlen = async (id: string) => {
+    const fehler = await setActivePlayer(id)
+    if (fehler) dialogs.toast(`Nicht gespeichert: ${fehler}`, 'error')
+  }
 
   const recommendations = useMemo(() => {
     if (!player || !shots || !sessions) return []
@@ -69,7 +78,7 @@ export function DashboardPage() {
               <button
                 key={p.id}
                 className={`chip${p.id === player?.id ? ' is-on' : ''}`}
-                onClick={() => void setActivePlayer(p.id)}
+                onClick={() => void spielerWaehlen(p.id)}
               >
                 {p.name}
               </button>

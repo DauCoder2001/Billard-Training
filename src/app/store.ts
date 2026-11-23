@@ -12,32 +12,50 @@ interface AppState {
   error: string | null
   settings: Settings
   load: () => Promise<void>
-  setActivePlayer: (id: string) => Promise<void>
-  patchSettings: (patch: Partial<Settings>) => Promise<void>
+  /** Liefert null, wenn gespeichert wurde - sonst den Grund. */
+  setActivePlayer: (id: string) => Promise<string | null>
+  /** Liefert null, wenn gespeichert wurde - sonst den Grund. */
+  patchSettings: (patch: Partial<Settings>) => Promise<string | null>
 }
 
-export const useApp = create<AppState>((set) => ({
-  ready: false,
-  error: null,
-  settings: DEFAULT_SETTINGS,
-
-  load: async () => {
+export const useApp = create<AppState>((set) => {
+  /**
+   * Schreibt die Einstellungen und zieht den Zustand nach.
+   *
+   * Geworfen wird nichts: Farbfelder, Schalter und Regler rufen ohne Klammer
+   * auf, ein Fehler landete dort als abgewiesenes Versprechen in der Konsole
+   * und sonst nirgends - die Anzeige sprang stumm auf den alten Wert zurueck,
+   * als haette der Regler geklemmt. Stattdessen kommt der fertige Satz
+   * zurueck, und wer eine Meldung zeigen kann, zeigt sie.
+   */
+  const schreiben = async (patch: Partial<Settings>): Promise<string | null> => {
     try {
-      await bootstrap()
-      set({ settings: await getSettings(), ready: true, error: null })
+      set({ settings: await updateSettings(patch) })
+      return null
     } catch (err) {
-      set({ ready: true, error: storageErrorText(err) })
+      return storageErrorText(err)
     }
-  },
+  }
 
-  setActivePlayer: async (id) => {
-    set({ settings: await updateSettings({ activePlayerId: id }) })
-  },
+  return {
+    ready: false,
+    error: null,
+    settings: DEFAULT_SETTINGS,
 
-  patchSettings: async (patch) => {
-    set({ settings: await updateSettings(patch) })
-  },
-}))
+    load: async () => {
+      try {
+        await bootstrap()
+        set({ settings: await getSettings(), ready: true, error: null })
+      } catch (err) {
+        set({ ready: true, error: storageErrorText(err) })
+      }
+    },
+
+    setActivePlayer: (id) => schreiben({ activePlayerId: id }),
+
+    patchSettings: (patch) => schreiben(patch),
+  }
+})
 
 /**
  * Der aktive Spieler, oder der erste vorhandene als Rueckfallebene.
