@@ -6,6 +6,25 @@ Die Versionsnummer steht an genau einer Stelle — in `package.json` — und ers
 unten auf der Seite **Einstellungen** sowie auf der Fehlerseite. Schema:
 `Hauptversion.Funktion.Korrektur`.
 
+## 0.6.0 – 23.11.2026
+
+### Neu
+- **Der Weiße lässt sich wieder aufs Tuch setzen.** Im Baukasten gab es Werkzeuge
+  für Objektball, Störball und Geisterball — nur nicht für den Weißen. Wer ihn
+  gelöscht hatte, bekam ihn nicht zurück. Jetzt steht „◉ Weißer" in der Leiste.
+  Solange schon einer liegt, ist das Werkzeug grau und sagt im Tooltip, dass man
+  den vorhandenen zum Verschieben antippt und zieht.
+- **Übungen ohne Weißen und Übungen ohne Objektball sind erlaubt.** Es gibt
+  einfache Übungen, die aus einer einzigen Kugel bestehen — ein gerader Stoß, bei
+  dem nur der Weiße läuft. Der Baukasten lässt das zu.
+
+### Behoben
+- **Eine Übung ohne Objektball war nicht zu bewerten.** Die Wertung hing immer am
+  Einlochen: ohne Ball zum Einlochen gab es nie Punkte, und das Training bot
+  „Eingelocht" und „Verfehlt" an, obwohl es nichts einzulochen gab. Bei solchen
+  Übungen zählt jetzt allein, wo der Weiße liegen bleibt; der Knopf heißt
+  „Erfassen", „Verfehlt" entfällt. „Kratzer" bleibt ein Fehlversuch.
+
 ## 0.5.1 – 19.11.2026
 
 ### Behoben

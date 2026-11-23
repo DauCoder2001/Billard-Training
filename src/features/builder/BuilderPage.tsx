@@ -187,6 +187,10 @@ export function BuilderPage() {
     }))
   }
 
+  // Ein Stoss darf ohne Weissen sein - es gibt Uebungen, die aus nur einer
+  // Kugel bestehen. Nur zwei duerfen es nicht werden.
+  const hatWeissen = shot.balls.some((b) => b.kind === 'cue')
+
   const removeSelected = () => {
     const store = useBuilder.getState()
     if (store.selectedBallId) store.removeBall(store.selectedBallId)
@@ -304,6 +308,18 @@ export function BuilderPage() {
       <div className="builder__body">
         <div className="builder__tools">
           <Tool active={mode === 'select'} label="Auswahl" icon="↖" onClick={() => useBuilder.getState().setMode('select')} />
+          <Tool
+            active={mode === 'addCue'}
+            label="Weißer"
+            icon="◉"
+            title={
+              hatWeissen
+                ? 'Es gibt schon einen Weißen. Zum Verschieben antippen und ziehen.'
+                : 'Den Weißen aufs Tuch setzen'
+            }
+            disabled={hatWeissen}
+            onClick={() => useBuilder.getState().setMode('addCue')}
+          />
           <Tool active={mode === 'addObject'} label="Objektball" icon="●" onClick={() => useBuilder.getState().setMode('addObject')} />
           <Tool active={mode === 'addObstacle'} label="Störball" icon="◍" onClick={() => useBuilder.getState().setMode('addObstacle')} />
           <Tool active={mode === 'addGhost'} label="Geisterball" icon="○" onClick={() => useBuilder.getState().setMode('addGhost')} />

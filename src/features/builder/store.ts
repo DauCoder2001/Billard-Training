@@ -13,6 +13,7 @@ const HISTORY_LIMIT = 60
 
 export type BuilderMode =
   | 'select'
+  | 'addCue'
   | 'addObject'
   | 'addObstacle'
   | 'addGhost'

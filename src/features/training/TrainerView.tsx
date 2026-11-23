@@ -9,7 +9,13 @@ import { AimLayer, BallLayer, PathLayer, TargetZoneLayer } from '@/components/ta
 import { TableSvg } from '@/components/table/TableSvg'
 import { clientToTable, flipY } from '@/components/table/space'
 import { clampBall } from '@/domain/geometry'
-import { MAX_POINTS, buildAttempt, effectiveMode, sessionScore } from '@/domain/scoring'
+import {
+  MAX_POINTS,
+  buildAttempt,
+  effectiveMode,
+  hasObjectBall,
+  sessionScore,
+} from '@/domain/scoring'
 import { aimPoint, cueBall, objectBalls } from '@/domain/shot'
 import type { Attempt, Point, Shot } from '@/domain/types'
 
@@ -49,7 +55,11 @@ export function TrainerView({
   // Bauteil - beide aufrufenden Seiten setzen ihn. Ein Wechsel baut die
   // Ansicht damit neu auf, und der Zustand beginnt von selbst von vorn.
 
-  const needsPosition = effectiveMode(shot.scoring) !== 'pocket'
+  // Eine Uebung aus nur dem Weissen hat nichts einzulochen: dann gibt es
+  // kein "Eingelocht" und kein "Verfehlt", sondern nur den erfassten
+  // Versuch - und den Kratzer, der auch hier ein Fehlversuch bleibt.
+  const mitObjektball = hasObjectBall(shot)
+  const needsPosition = effectiveMode(shot.scoring, mitObjektball) !== 'pocket'
   useEffect(() => {
     onProgress?.(results.length)
   }, [results.length, onProgress])
@@ -176,11 +186,13 @@ export function TrainerView({
           disabled={busy || done || (needsPosition && !end)}
           onClick={() => void record(true, false)}
         >
-          Eingelocht
+          {mitObjektball ? 'Eingelocht' : 'Erfassen'}
         </button>
-        <button className="btn btn--wide" disabled={busy || done} onClick={() => void record(false, false)}>
-          Verfehlt
-        </button>
+        {mitObjektball && (
+          <button className="btn btn--wide" disabled={busy || done} onClick={() => void record(false, false)}>
+            Verfehlt
+          </button>
+        )}
         <button className="btn btn--wide btn--scratch" disabled={busy || done} onClick={() => void record(false, true)}>
           Kratzer
         </button>

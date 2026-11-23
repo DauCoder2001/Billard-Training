@@ -52,6 +52,12 @@ export function BuilderCanvas({ orientation, showGrid, showAim }: BuilderCanvasP
     if (!p) return
 
     switch (mode) {
+      case 'addCue':
+        // Nur einer: cueBall() nimmt den ersten, ein zweiter waere da und
+        // taete doch nichts.
+        if (shot.balls.some((b) => b.kind === 'cue')) return
+        addBall('cue', clampBall(snap(p)))
+        return
       case 'addObject':
         addBall('object', clampBall(snap(p)))
         return

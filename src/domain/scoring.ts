@@ -32,28 +32,45 @@ export function positionPoints(end: Point | null, zone: { x: number; y: number; 
 /**
  * Effektiver Bewertungsmodus. Ohne definierte Zielzone kann die Position
  * nicht bewertet werden, dann zaehlt nur das Einlochen.
+ *
+ * Und ohne Objektball gibt es nichts einzulochen: dann zaehlt nur die Lage
+ * des Weissen - sofern eine Zielzone da ist, an der sie sich messen laesst.
  */
-export function effectiveMode(scoring: ShotScoring): ShotScoring['mode'] {
+export function effectiveMode(
+  scoring: ShotScoring,
+  hasObjectBall = true,
+): ShotScoring['mode'] {
+  if (!hasObjectBall) return scoring.targetZone ? 'position' : 'pocket'
   if (scoring.mode === 'pocket') return 'pocket'
   if (!scoring.targetZone) return 'pocket'
   return scoring.mode
 }
 
-/** Punkte eines einzelnen Versuchs, 0..MAX_POINTS. */
+/**
+ * Punkte eines einzelnen Versuchs, 0..MAX_POINTS.
+ *
+ * `hasObjectBall` sagt, ob es ueberhaupt einen Ball zum Einlochen gibt. Eine
+ * Uebung aus nur dem Weissen - der gerade Stoss, der zurueckkommen soll -
+ * hat keinen, und dann darf die Wertung nicht am Einlochen haengen.
+ */
 export function attemptPoints(
   scoring: ShotScoring,
   result: Pick<Attempt, 'pocketed' | 'scratch' | 'cueBallEnd'>,
+  hasObjectBall = true,
 ): number {
   if (result.scratch) return 0
 
-  const mode = effectiveMode(scoring)
+  const mode = effectiveMode(scoring, hasObjectBall)
   const pos = positionPoints(result.cueBallEnd, scoring.targetZone)
 
   switch (mode) {
     case 'pocket':
       return result.pocketed ? MAX_POINTS : 0
     case 'position':
-      // Ohne Treffer laeuft der Weisse nicht dorthin, wo er soll.
+      // Mit Objektball haengt die Lage am Treffer: ohne ihn laeuft der
+      // Weisse nicht dorthin, wo er soll. Ohne Objektball gibt es nichts
+      // einzulochen - dann zaehlt allein, wo der Weisse liegen bleibt.
+      if (!hasObjectBall) return pos * 2
       return result.pocketed ? pos * 2 : 0
     case 'pocket+position':
       return result.pocketed ? 5 + pos : 0
@@ -95,6 +112,11 @@ export function scratchRate(results: Attempt[]): number {
 }
 
 /** Fertiger Versuch inklusive berechneter Punkte. */
+/** Hat der Stoss ueberhaupt einen Ball zum Einlochen? */
+export function hasObjectBall(shot: Shot): boolean {
+  return shot.balls.some((b) => b.kind === 'object')
+}
+
 export function buildAttempt(
   shot: Shot,
   index: number,
@@ -105,6 +127,6 @@ export function buildAttempt(
     pocketed: input.pocketed,
     scratch: input.scratch,
     cueBallEnd: input.cueBallEnd,
-    points: attemptPoints(shot.scoring, input),
+    points: attemptPoints(shot.scoring, input, hasObjectBall(shot)),
   }
 }

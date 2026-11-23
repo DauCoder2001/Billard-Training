@@ -47,6 +47,46 @@ describe('Positionspunkte', () => {
   })
 })
 
+describe('Uebung ohne Objektball', () => {
+  // Der gerade Stoss, bei dem nur der Weisse laeuft und zurueckkommen soll:
+  // Es gibt nichts einzulochen, also darf die Wertung nicht daran haengen.
+  const ohneBall = false
+
+  it('wertet allein die Lage des Weissen', () => {
+    const s = scoring({ mode: 'position' })
+    expect(attemptPoints(s, { pocketed: false, scratch: false, cueBallEnd: { x: 50, y: 25 } }, ohneBall)).toBe(10)
+    expect(attemptPoints(s, { pocketed: false, scratch: false, cueBallEnd: { x: 57, y: 25 } }, ohneBall)).toBe(8)
+    expect(attemptPoints(s, { pocketed: false, scratch: false, cueBallEnd: { x: 90, y: 25 } }, ohneBall)).toBe(0)
+  })
+
+  it('zaehlt den Kratzer weiterhin als Fehlversuch', () => {
+    const s = scoring({ mode: 'position' })
+    expect(attemptPoints(s, { pocketed: false, scratch: true, cueBallEnd: { x: 50, y: 25 } }, ohneBall)).toBe(0)
+  })
+
+  it('wertet auch die anderen Arten ueber die Lage', () => {
+    // Wer die Art nicht umstellt, soll trotzdem Punkte bekommen koennen:
+    // einzulochen gibt es so oder so nichts.
+    for (const mode of ['pocket+position', 'position'] as const) {
+      expect(effectiveMode(scoring({ mode }), ohneBall)).toBe('position')
+      expect(
+        attemptPoints(scoring({ mode }), { pocketed: false, scratch: false, cueBallEnd: { x: 50, y: 25 } }, ohneBall),
+      ).toBe(10)
+    }
+  })
+
+  it('bleibt ohne Zielzone beim Einlochen - dort ist nichts zu messen', () => {
+    const s = scoring({ mode: 'position', targetZone: null })
+    expect(effectiveMode(s, ohneBall)).toBe('pocket')
+  })
+
+  it('aendert nichts an Uebungen mit Objektball', () => {
+    const s = scoring({ mode: 'position' })
+    expect(attemptPoints(s, { pocketed: false, scratch: false, cueBallEnd: { x: 50, y: 25 } })).toBe(0)
+    expect(attemptPoints(s, { pocketed: true, scratch: false, cueBallEnd: { x: 50, y: 25 } })).toBe(10)
+  })
+})
+
 describe('Versuchsbewertung', () => {
   it('wertet einen Kratzer immer mit null', () => {
     expect(attemptPoints(scoring(), { pocketed: true, scratch: true, cueBallEnd: { x: 50, y: 25 } })).toBe(0)
