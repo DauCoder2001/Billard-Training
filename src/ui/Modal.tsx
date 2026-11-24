@@ -11,6 +11,23 @@
  */
 
 import { useLayoutEffect, useRef, type ReactNode } from 'react'
+import { focusPageHeading } from './focus'
+
+/**
+ * Gibt den Fokus zurueck, nachdem der Dialog geschlossen ist.
+ *
+ * Der Regelfall ist der Ausloeser. War er schon weg, als der Dialog
+ * schloss - oder gab es keinen -, uebernimmt die Ueberschrift der Seite.
+ * Verschwindet er erst danach, weil die Aktion ihn wegraeumt, sagt das die
+ * handelnde Seite selbst (siehe ui/focus.ts).
+ */
+function fokusZurueck(ausloeser: Element | null): void {
+  if (ausloeser instanceof HTMLElement && ausloeser.isConnected && ausloeser !== document.body) {
+    ausloeser.focus()
+    return
+  }
+  focusPageHeading()
+}
 
 interface ModalProps {
   onClose: () => void
@@ -23,7 +40,8 @@ export function Modal({ onClose, wide, label, children }: ModalProps) {
   const ref = useRef<HTMLDialogElement>(null)
 
   // Layout-Effekt: oeffnen vor dem ersten Bild, schliessen bevor React das
-  // Element entfernt - nur close() gibt den Fokus an den Ausloeser zurueck
+  // Element entfernt - nur close() gibt den Fokus an den Ausloeser zurueck,
+  // und nur hier ist noch bekannt, wer der Ausloeser war
   useLayoutEffect(() => {
     const dialog = ref.current
     if (!dialog) return
@@ -31,7 +49,7 @@ export function Modal({ onClose, wide, label, children }: ModalProps) {
     if (!dialog.open) dialog.showModal()
     return () => {
       dialog.close()
-      if (before instanceof HTMLElement && before.isConnected) before.focus()
+      fokusZurueck(before)
     }
   }, [])
 

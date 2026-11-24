@@ -176,6 +176,33 @@ describe('Stossseite: ueberarbeitete Vorlage', () => {
     expect(gespeichert?.seedStamp).toBe(seedShotById(VORLAGE_ID)?.seedStamp)
   })
 
+  it('laesst den Fokus nicht ins Leere laufen', async () => {
+    // Beide Wege raeumen den Knopf weg, auf den gerade gedrueckt wurde.
+    // Ohne Weiterreichen landet der Fokus auf dem Seitenkoerper, und der
+    // Weg mit der Tastatur beginnt wieder ganz vorn.
+    await db.shots.add(uebernommen('alt'))
+    zeige(<ShotDetailPage />, AM_STOSS)
+
+    await userEvent.click(await screen.findByRole('button', { name: 'Meine Fassung behalten' }))
+
+    await waitFor(() => expect(screen.queryByText(HINWEIS)).toBeNull())
+    expect(document.activeElement).toBe(screen.getByRole('heading', { level: 1 }))
+  })
+
+  it('laesst den Fokus auch nach dem Zuruecksetzen nicht ins Leere laufen', async () => {
+    await db.shots.add(uebernommen('alt'))
+    zeige(<ShotDetailPage />, AM_STOSS)
+
+    await userEvent.click(await screen.findByRole('button', { name: 'Vorlage ansehen' }))
+    const dialog = await screen.findByRole('dialog', { name: 'Überarbeitete Vorlage' })
+    await userEvent.click(
+      within(dialog).getByRole('button', { name: 'Auf Vorlage zurücksetzen' }),
+    )
+
+    await waitFor(() => expect(screen.queryByText(HINWEIS)).toBeNull())
+    expect(document.activeElement).toBe(screen.getByRole('heading', { level: 1 }))
+  })
+
   it('aendert nichts, wer spaeter entscheiden will', async () => {
     await db.shots.add(uebernommen('alt'))
     zeige(<ShotDetailPage />, AM_STOSS)

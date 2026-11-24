@@ -23,6 +23,7 @@ import {
 } from '@/domain/types'
 import { ProficiencyBadge, SkillChips, Stat } from '@/ui/bits'
 import { useDialogs } from '@/ui/Dialogs'
+import { focusPageHeading } from '@/ui/focus'
 import { Sparkline } from '@/features/stats/charts'
 import { TemplateDialog } from './TemplateDialog'
 
@@ -139,6 +140,11 @@ export function ShotDetailPage() {
     }
   }
 
+  // Beide Wege raeumen den Hinweis weg, aus dem heraus sie angestossen
+  // wurden - der Knopf unter dem Finger verschwindet also. Ohne das
+  // Weiterreichen des Fokus bliebe er auf dem Seitenkoerper haengen, und wer
+  // mit der Tastatur arbeitet, faengt wieder ganz vorn an.
+  //
   // Keine eigene Rueckfrage mehr: der Vergleich im Dialog zeigt beide
   // Fassungen nebeneinander und sagt darueber, was verloren geht.
   const zuruecksetzen = async () => {
@@ -149,6 +155,7 @@ export function ShotDetailPage() {
       dialogs.toast(`Nicht zurückgesetzt: ${storageErrorText(err)}`, 'error')
       return
     }
+    focusPageHeading()
     dialogs.toast('Auf Vorlage zurückgesetzt', 'ok')
   }
 
@@ -158,7 +165,9 @@ export function ShotDetailPage() {
       await keepOwnVersion(shot.id)
     } catch (err) {
       dialogs.toast(`Nicht gespeichert: ${storageErrorText(err)}`, 'error')
+      return
     }
+    focusPageHeading()
   }
 
   return (

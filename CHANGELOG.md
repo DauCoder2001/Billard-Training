@@ -6,6 +6,18 @@ Die Versionsnummer steht an genau einer Stelle — in `package.json` — und ers
 unten auf der Seite **Einstellungen** sowie auf der Fehlerseite. Schema:
 `Hauptversion.Funktion.Korrektur`.
 
+## 0.9.3 – 24.11.2026
+
+### Behoben
+- **Der Tastaturfokus läuft nicht mehr ins Leere** (Befund 64). Wer eine Übung
+  auf die Vorlage zurücksetzt oder seine Fassung behält, lässt damit den
+  Hinweis verschwinden – samt dem Knopf, auf den er gerade gedrückt hat. Der
+  Fokus fiel dann auf den Seitenanfang zurück, und wer mit der Tastatur
+  arbeitet, musste sich wieder durch die ganze Seite tasten. Jetzt übernimmt
+  die Überschrift der Seite, und die Tabulatortaste führt von dort zum nächsten
+  Knopf. Dasselbe gilt für jeden Dialog, dessen Auslöser verschwindet, während
+  er offen ist.
+
 ## 0.9.2 – 24.11.2026
 
 ### Innen
