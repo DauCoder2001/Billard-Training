@@ -1,4 +1,4 @@
-/** Das Attribut-Panel unter dem Diagramm. */
+/** Die Angaben zum Stoss, aufklappbar unter dem Tischbild. */
 
 import { useRef, useState } from 'react'
 import { POCKET_BY_ID } from '@/domain/geometry'

@@ -6,6 +6,16 @@ Die Versionsnummer steht an genau einer Stelle — in `package.json` — und ers
 unten auf der Seite **Einstellungen** sowie auf der Fehlerseite. Schema:
 `Hauptversion.Funktion.Korrektur`.
 
+## 0.13.3 – 24.11.2026
+
+### Geändert
+- **Der Knopf „Attribute" heißt jetzt „Angaben ausblenden" bzw. „Angaben
+  einblenden"** (Befund 68). Er klappt den Bereich unter dem Tischbild auf und
+  zu – die vier Reiter Stoß, Bewertung, Coach und Erweitert. „Attribute" war
+  Fachsprache und benannte obendrein einen Inhalt, während der Knopf eine
+  Handlung auslöst. Der neue Text wechselt mit dem Zustand und sagt damit
+  jeweils, was der nächste Klick tut.
+
 ## 0.13.2 – 24.11.2026
 
 ### Geändert

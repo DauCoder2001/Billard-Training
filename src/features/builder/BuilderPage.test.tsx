@@ -176,6 +176,27 @@ describe('Baukasten an einem eigenen Stoss', () => {
   })
 })
 
+describe('Die Angaben unter dem Tischbild', () => {
+  it('klappen zu und wieder auf, und der Knopf sagt jeweils, was er tut', async () => {
+    await db.shots.add(createShot({ id: 's1', name: 'Mein Stoß' }))
+    zeige(<BuilderPage />, ORT)
+
+    // Offen beim Betreten: der Reiter "Bewertung" ist da, der Knopf bietet
+    // das Ausblenden an.
+    const zuKlappen = await screen.findByRole('button', { name: 'Angaben ausblenden ▾' })
+    expect(screen.getByRole('button', { name: 'Bewertung' })).toBeTruthy()
+
+    await userEvent.click(zuKlappen)
+
+    expect(screen.queryByRole('button', { name: 'Bewertung' })).toBeNull()
+
+    await userEvent.click(screen.getByRole('button', { name: 'Angaben einblenden ▴' }))
+
+    expect(screen.getByRole('button', { name: 'Bewertung' })).toBeTruthy()
+    expect(screen.getByRole('button', { name: 'Angaben ausblenden ▾' })).toBeTruthy()
+  })
+})
+
 describe('Die Sperrzone im Baukasten', () => {
   it('zeigt Radius und Entfernen, sobald der Stoss eine hat', async () => {
     const basis = createShot({ id: 's1', name: 'Mein Stoß' })
@@ -184,7 +205,7 @@ describe('Die Sperrzone im Baukasten', () => {
       scoring: { ...basis.scoring, avoidZone: { x: 20, y: 20, r: 6 } },
     })
     zeige(<BuilderPage />, ORT)
-    // Die Regeln stehen im Reiter "Bewertung" des Attributfelds.
+    // Die Regeln stehen im Reiter "Bewertung" der Angaben.
     await userEvent.click(await screen.findByRole('button', { name: 'Bewertung' }))
 
     expect(screen.getByText(/Radius der Sperrzone 6.0 Zoll/)).toBeTruthy()
