@@ -13,6 +13,7 @@ import { applyRack, shuffleObjectBalls } from '@/domain/rack'
 import { createShot, duplicateShot, mirrorShot } from '@/domain/shot'
 import type { BallPath, Markings, Point } from '@/domain/types'
 import { useDialogs } from '@/ui/Dialogs'
+import { useToolFit } from '@/ui/toolFit'
 import { AttributesPanel } from './AttributesPanel'
 import { BuilderCanvas } from './BuilderCanvas'
 import { useBuilder } from './store'
@@ -44,6 +45,9 @@ export function BuilderPage() {
   const [showAim, setShowAim] = useState(true)
   const [shareOpen, setShareOpen] = useState(false)
   const [panelOpen, setPanelOpen] = useState(true)
+
+  // Haelt die Werkzeugleiste auf ganzen Knoepfen - siehe ui/toolFit.ts.
+  const werkzeugliste = useToolFit()
 
   // Laden bzw. neuen Stoss anlegen.
   useEffect(() => {
@@ -364,55 +368,57 @@ export function BuilderPage() {
 
       <div className="builder__body">
         <div className="builder__tools">
-          <Tool active={mode === 'select'} label="Auswahl" icon="↖" onClick={() => useBuilder.getState().setMode('select')} />
-          <Tool
-            active={mode === 'addCue'}
-            label="Weißer"
-            icon="◉"
-            title={
-              hatWeissen
-                ? 'Es gibt schon einen Weißen. Zum Verschieben antippen und ziehen.'
-                : 'Den Weißen aufs Tuch setzen'
-            }
-            disabled={hatWeissen}
-            onClick={() => useBuilder.getState().setMode('addCue')}
-          />
-          <Tool active={mode === 'addObject'} label="Objektball" icon="●" onClick={() => useBuilder.getState().setMode('addObject')} />
-          <Tool active={mode === 'addObstacle'} label="Störball" icon="◍" onClick={() => useBuilder.getState().setMode('addObstacle')} />
-          <Tool active={mode === 'addGhost'} label="Geisterball" icon="○" onClick={() => useBuilder.getState().setMode('addGhost')} />
-          <Tool active={mode === 'path'} label="Weg" icon="↗" onClick={() => useBuilder.getState().setMode('path')} />
-          <Tool active={mode === 'zone'} label="Zielzone" icon="◎" onClick={() => useBuilder.getState().setMode('zone')} />
-          <Tool
-            active={mode === 'avoid'}
-            label="Sperrzone"
-            icon="⊘"
-            title="Bereich, in dem der Weiße nicht liegenbleiben darf"
-            onClick={() => useBuilder.getState().setMode('avoid')}
-          />
-          <div className="builder__sep" />
-          <Tool
-            active={settings.markings.guides}
-            label="Hilfslinien"
-            icon="⊞"
-            title="Linien von Diamant zu Diamant. Weitere Markierungen in den Einstellungen."
-            onClick={() => void markierung('guides', !settings.markings.guides)}
-          />
-          <Tool
-            active={settings.markings.grid}
-            label="Raster"
-            icon="⋯"
-            title="Feines Punkteraster im Abstand des Einrastens"
-            onClick={() => void markierung('grid', !settings.markings.grid)}
-          />
-          <Tool active={showAim} label="Ziellinie" icon="⌖" onClick={() => setShowAim((v) => !v)} />
-          <div className="builder__sep" />
-          <Tool
-            label="Entfernen"
-            title="Markiertes entfernen (erst einen Ball oder Weg antippen)"
-            icon="✕"
-            disabled={!selectedBallId && !selectedPathId}
-            onClick={removeSelected}
-          />
+          <div className="builder__tool-list" ref={werkzeugliste}>
+            <Tool active={mode === 'select'} label="Auswahl" icon="↖" onClick={() => useBuilder.getState().setMode('select')} />
+            <Tool
+              active={mode === 'addCue'}
+              label="Weißer"
+              icon="◉"
+              title={
+                hatWeissen
+                  ? 'Es gibt schon einen Weißen. Zum Verschieben antippen und ziehen.'
+                  : 'Den Weißen aufs Tuch setzen'
+              }
+              disabled={hatWeissen}
+              onClick={() => useBuilder.getState().setMode('addCue')}
+            />
+            <Tool active={mode === 'addObject'} label="Objektball" icon="●" onClick={() => useBuilder.getState().setMode('addObject')} />
+            <Tool active={mode === 'addObstacle'} label="Störball" icon="◍" onClick={() => useBuilder.getState().setMode('addObstacle')} />
+            <Tool active={mode === 'addGhost'} label="Geisterball" icon="○" onClick={() => useBuilder.getState().setMode('addGhost')} />
+            <Tool active={mode === 'path'} label="Weg" icon="↗" onClick={() => useBuilder.getState().setMode('path')} />
+            <Tool active={mode === 'zone'} label="Zielzone" icon="◎" onClick={() => useBuilder.getState().setMode('zone')} />
+            <Tool
+              active={mode === 'avoid'}
+              label="Sperrzone"
+              icon="⊘"
+              title="Bereich, in dem der Weiße nicht liegenbleiben darf"
+              onClick={() => useBuilder.getState().setMode('avoid')}
+            />
+            <div className="builder__sep" />
+            <Tool
+              active={settings.markings.guides}
+              label="Hilfslinien"
+              icon="⊞"
+              title="Linien von Diamant zu Diamant. Weitere Markierungen in den Einstellungen."
+              onClick={() => void markierung('guides', !settings.markings.guides)}
+            />
+            <Tool
+              active={settings.markings.grid}
+              label="Raster"
+              icon="⋯"
+              title="Feines Punkteraster im Abstand des Einrastens"
+              onClick={() => void markierung('grid', !settings.markings.grid)}
+            />
+            <Tool active={showAim} label="Ziellinie" icon="⌖" onClick={() => setShowAim((v) => !v)} />
+            <div className="builder__sep" />
+            <Tool
+              label="Entfernen"
+              title="Markiertes entfernen (erst einen Ball oder Weg antippen)"
+              icon="✕"
+              disabled={!selectedBallId && !selectedPathId}
+              onClick={removeSelected}
+            />
+          </div>
         </div>
 
         <div className="builder__stage">

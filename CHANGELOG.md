@@ -6,6 +6,21 @@ Die Versionsnummer steht an genau einer Stelle — in `package.json` — und ers
 unten auf der Seite **Einstellungen** sowie auf der Fehlerseite. Schema:
 `Hauptversion.Funktion.Korrektur`.
 
+## 0.13.2 – 24.11.2026
+
+### Geändert
+- **Die Werkzeugleiste im Baukasten schneidet kein Werkzeug mehr an**
+  (Befunde 66 und 67). Passten die zwölf Werkzeuge nicht ins Fenster, lugte
+  unten ein halbes Werkzeug herein, noch bevor jemand gerollt hatte – ein
+  rollender Bereich endet an seiner Polsterkante, nicht an der Unterkante des
+  letzten ganzen Knopfes. Die Leiste misst jetzt selbst nach, welcher Knopf als
+  letzter vollständig passt, und hört genau dort auf. Beim Rollen darf ein
+  Werkzeug weiterhin angeschnitten sein; das ist gewollt. Nachgemessen bei
+  Fensterhöhen von 560 bis 1100 px und in der schmalen Darstellung (unter
+  760 px Breite, Leiste quer): kein angeschnittenes Werkzeug. Die eine Grenze:
+  bei 480 px Fensterhöhe bleiben der Leiste 28 px – weniger als ein Knopf hoch
+  ist –, dort hilft nur ein kleinerer Tisch.
+
 ## 0.13.1 – 24.11.2026
 
 ### Innen
