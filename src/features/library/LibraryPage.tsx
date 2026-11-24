@@ -80,7 +80,13 @@ export function LibraryPage() {
           </p>
         </div>
         <div className="row">
-          <button className="btn" onClick={() => setFiltersOpen((v) => !v)}>
+          {/* Ein Knopf, der einen Bereich klappt, sagt Vorleseprogrammen
+              ueber aria-expanded, ob er gerade offen ist. */}
+          <button
+            className="btn"
+            aria-expanded={filtersOpen}
+            onClick={() => setFiltersOpen((v) => !v)}
+          >
             Filter{activeFilters > 0 ? ` (${activeFilters})` : ''}
           </button>
           <button className="btn btn--primary" onClick={() => navigate('/builder')}>

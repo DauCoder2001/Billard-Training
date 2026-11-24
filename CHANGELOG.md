@@ -6,6 +6,14 @@ Die Versionsnummer steht an genau einer Stelle — in `package.json` — und ers
 unten auf der Seite **Einstellungen** sowie auf der Fehlerseite. Schema:
 `Hauptversion.Funktion.Korrektur`.
 
+## 0.13.4 – 24.11.2026
+
+### Innen
+- **Klappknöpfe sagen Vorleseprogrammen, ob ihr Bereich offen ist**
+  (Befund 69). Die beiden Knöpfe, die einen Bereich auf- und zuklappen –
+  „Angaben" im Baukasten und „Filter" auf der Seite Stöße – tragen jetzt
+  `aria-expanded`. Am Bild ändert sich nichts.
+
 ## 0.13.3 – 24.11.2026
 
 ### Geändert

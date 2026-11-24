@@ -519,7 +519,11 @@ export function BuilderPage() {
             )}
             {/* Der Knopf benennt die Handlung, nicht den Inhalt: "Attribute"
                 war Fachsprache und sagte nicht, dass er den Bereich klappt. */}
-            <button className="btn btn--sm" onClick={() => setPanelOpen((v) => !v)}>
+            <button
+              className="btn btn--sm"
+              aria-expanded={panelOpen}
+              onClick={() => setPanelOpen((v) => !v)}
+            >
               {panelOpen ? 'Angaben ausblenden ▾' : 'Angaben einblenden ▴'}
             </button>
           </>

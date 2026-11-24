@@ -185,15 +185,21 @@ describe('Die Angaben unter dem Tischbild', () => {
     // das Ausblenden an.
     const zuKlappen = await screen.findByRole('button', { name: 'Angaben ausblenden ▾' })
     expect(screen.getByRole('button', { name: 'Bewertung' })).toBeTruthy()
+    // aria-expanded sagt Vorleseprogrammen, ob der Bereich offen ist.
+    expect(zuKlappen.getAttribute('aria-expanded')).toBe('true')
 
     await userEvent.click(zuKlappen)
 
     expect(screen.queryByRole('button', { name: 'Bewertung' })).toBeNull()
+    const aufKlappen = screen.getByRole('button', { name: 'Angaben einblenden ▴' })
+    expect(aufKlappen.getAttribute('aria-expanded')).toBe('false')
 
-    await userEvent.click(screen.getByRole('button', { name: 'Angaben einblenden ▴' }))
+    await userEvent.click(aufKlappen)
 
     expect(screen.getByRole('button', { name: 'Bewertung' })).toBeTruthy()
-    expect(screen.getByRole('button', { name: 'Angaben ausblenden ▾' })).toBeTruthy()
+    expect(
+      screen.getByRole('button', { name: 'Angaben ausblenden ▾' }).getAttribute('aria-expanded'),
+    ).toBe('true')
   })
 })
 
