@@ -1,7 +1,7 @@
 {
   "name": "billard-training",
   "private": true,
-  "version": "0.9.1",
+  "version": "0.9.2",
   "license": "MIT",
   "author": "Matthias Haas",
   "type": "module",
@@ -13,6 +13,7 @@
     "build": "tsc -b && vite build",
     "preview": "vite preview",
     "lint": "eslint src",
+    "typecheck": "tsc -b",
     "test": "vitest run",
     "test:watch": "vitest",
     "icons": "node scripts/make-icons.mjs"

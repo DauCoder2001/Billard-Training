@@ -6,6 +6,20 @@ Die Versionsnummer steht an genau einer Stelle — in `package.json` — und ers
 unten auf der Seite **Einstellungen** sowie auf der Fehlerseite. Schema:
 `Hauptversion.Funktion.Korrektur`.
 
+## 0.9.2 – 24.11.2026
+
+### Innen
+- **Drei weitere ungenutzte Funktionen entfernt** (Befund 62). Sie lagen in der
+  Datenschicht und wurden von keiner Seite aufgerufen – die Seiten lesen
+  unmittelbar aus der Datenbank mit und werden dadurch von selbst neu
+  gezeichnet. Am Programm ändert sich nichts.
+- **Ein Prüfbefehl, der wirklich prüft** (Befund 63): `npm run typecheck`. Der
+  naheliegende Aufruf `npx tsc --noEmit` übersetzte in diesem Projekt ein
+  leeres Programm und meldete deshalb nie etwas – die Hauptkonfiguration
+  enthält nur Verweise auf die beiden Teilkonfigurationen. Geprüft wurde
+  trotzdem immer, denn der Bau ruft dieselbe Prüfung auf; nur der zusätzliche
+  Handgriff lief ins Leere.
+
 ## 0.9.1 – 24.11.2026
 
 ### Neu

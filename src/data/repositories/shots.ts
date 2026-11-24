@@ -3,23 +3,10 @@ import { seedShotById } from '../seed/drills'
 import { touchShot } from '@/domain/shot'
 import type { Shot } from '@/domain/types'
 
-export async function allShots(): Promise<Shot[]> {
-  const shots = await db.shots.toArray()
-  return shots.sort((a, b) => a.name.localeCompare(b.name, 'de'))
-}
-
-export function getShot(id: string): Promise<Shot | undefined> {
-  return db.shots.get(id)
-}
-
 export async function saveShot(shot: Shot): Promise<Shot> {
   const next = touchShot(shot)
   await db.shots.put(next)
   return next
-}
-
-export async function saveShots(shots: Shot[]): Promise<void> {
-  await db.shots.bulkPut(shots)
 }
 
 /** Loescht den Stoss samt seiner Trainingshistorie. */
