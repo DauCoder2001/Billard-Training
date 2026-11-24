@@ -6,6 +6,16 @@ Die Versionsnummer steht an genau einer Stelle — in `package.json` — und ers
 unten auf der Seite **Einstellungen** sowie auf der Fehlerseite. Schema:
 `Hauptversion.Funktion.Korrektur`.
 
+## 0.13.1 – 24.11.2026
+
+### Innen
+- **Die Versionsnummer in `package-lock.json` wird jetzt mitgeführt**
+  (Befund 65). Sie stand dort noch auf 0.8.4, während das Programm bei 0.13.0
+  war – npm schreibt diese Kopie nur bei einem `npm install` fort. Am Programm
+  ändert sich nichts; die Nummer wird weiterhin ausschließlich aus
+  `package.json` gelesen. Damit die beiden nicht wieder auseinanderlaufen,
+  prüft das ein Test bei jedem Testlauf.
+
 ## 0.13.0 – 24.11.2026
 
 ### Neu
