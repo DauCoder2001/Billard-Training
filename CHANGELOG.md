@@ -6,6 +6,17 @@ Die Versionsnummer steht an genau einer Stelle — in `package.json` — und ers
 unten auf der Seite **Einstellungen** sowie auf der Fehlerseite. Schema:
 `Hauptversion.Funktion.Korrektur`.
 
+## 0.8.4 – 24.11.2026
+
+### Innen
+- **Die vier Sicherheitsmeldungen aus der Baukette sind weg.** Sie kamen von einem
+  Hilfspaket zum Suchen von Dateien, das das Werkzeug für den Offline-Vorrat
+  mitbringt. Statt dieses Werkzeug auf eine ältere Fassung zurückzudrehen, ist nun
+  im Projekt festgelegt, dass überall die bereinigte Fassung des Hilfspakets
+  verwendet wird. Der erzeugte Offline-Vorrat ist danach Zeichen für Zeichen
+  derselbe wie vorher (18 Dateien, 621,55 KiB), und acht Pakete weniger werden
+  überhaupt installiert. `npm audit` meldet jetzt nichts mehr.
+
 ## 0.8.3 – 24.11.2026
 
 ### Innen
