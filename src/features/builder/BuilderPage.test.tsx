@@ -17,6 +17,7 @@ import { DEFAULT_SETTINGS } from '@/data/repositories/settings'
 import { createShot } from '@/domain/shot'
 import { frischeDatenbank, zeige } from '@/test/zeige'
 import { BuilderPage } from './BuilderPage'
+import { useBuilder } from './store'
 
 const ORT = { pfad: '/builder/s1', muster: '/builder/:id' }
 
@@ -46,6 +47,57 @@ describe('Baukasten an einem mitgelieferten Stoss', () => {
     const gespeichert = await db.shots.get('s1')
     expect(gespeichert?.builtIn).toBe(false)
     expect(gespeichert?.name).toBe('Bandenball')
+  })
+})
+
+describe('Aufbauen mit einem Griff', () => {
+  const objektbaelle = () => useBuilder.getState().shot.balls.filter((b) => b.kind === 'object')
+
+  it('stellt mit "Rack 8" das volle Dreieck auf und nimmt es wieder zurueck', async () => {
+    await db.shots.add(createShot({ id: 's1', name: 'Mein Stoß' }))
+    zeige(<BuilderPage />, ORT)
+
+    await userEvent.click(await screen.findByRole('button', { name: 'Rack 8' }))
+
+    expect(objektbaelle()).toHaveLength(15)
+    // Der Weisse bleibt stehen, der Aufbau ersetzt nur die Objektbaelle.
+    expect(useBuilder.getState().shot.balls.filter((b) => b.kind === 'cue')).toHaveLength(1)
+
+    await userEvent.click(screen.getByTitle('Rückgängig'))
+    expect(objektbaelle()).toHaveLength(1)
+  })
+
+  it('stellt mit "Rack 9" neun Kugeln auf', async () => {
+    await db.shots.add(createShot({ id: 's1', name: 'Mein Stoß' }))
+    zeige(<BuilderPage />, ORT)
+
+    await userEvent.click(await screen.findByRole('button', { name: 'Rack 9' }))
+
+    expect(objektbaelle()).toHaveLength(9)
+  })
+
+  it('verteilt die Objektbaelle mit "Mischen" neu, ohne sie zu vertauschen', async () => {
+    await db.shots.add(createShot({ id: 's1', name: 'Mein Stoß' }))
+    zeige(<BuilderPage />, ORT)
+    await screen.findByRole('button', { name: 'Mischen' })
+    const vorher = objektbaelle()[0]
+
+    await userEvent.click(screen.getByRole('button', { name: 'Mischen' }))
+
+    const nachher = objektbaelle()[0]
+    expect(nachher.id).toBe(vorher.id)
+    expect(nachher.number).toBe(vorher.number)
+    expect(nachher.x !== vorher.x || nachher.y !== vorher.y).toBe(true)
+  })
+
+  it('sperrt "Mischen" sichtbar, solange es keine Objektbaelle gibt', async () => {
+    const ohne = createShot({ id: 's1', name: 'Mein Stoß' })
+    await db.shots.add({ ...ohne, balls: ohne.balls.filter((b) => b.kind === 'cue') })
+    zeige(<BuilderPage />, ORT)
+
+    const knopf = (await screen.findByRole('button', { name: 'Mischen' })) as HTMLButtonElement
+    expect(knopf.disabled).toBe(true)
+    expect(knopf.title).toBe('Dieser Stoß hat keine Objektbälle')
   })
 })
 

@@ -6,6 +6,23 @@ Die Versionsnummer steht an genau einer Stelle — in `package.json` — und ers
 unten auf der Seite **Einstellungen** sowie auf der Fehlerseite. Schema:
 `Hauptversion.Funktion.Korrektur`.
 
+## 0.10.0 – 24.11.2026
+
+### Neu
+- **Ein Aufbau mit einem Griff.** Im Baukasten stehen jetzt drei neue Knöpfe:
+  **Rack 8** stellt das volle Dreieck auf den Fußpunkt – regelgerecht, mit der
+  Eins an der Spitze, der Acht in der Mitte und hinten je einmal voll und halb.
+  **Rack 9** stellt die Neuner-Raute auf, Eins vorn, Neun in der Mitte. Statt
+  fünfzehn Kugeln einzeln zu setzen, genügt ein Druck.
+- **Mischen** verteilt die vorhandenen Objektbälle zufällig über den Tisch:
+  ohne Überschneidung, mit Abstand zu den Taschen und zu allem, was stehen
+  bleibt. Gedacht für Ausspiel- und Laufübungen – so lange drücken, bis die
+  Lage interessant aussieht. Nummer und Reihenfolge behält dabei jede Kugel,
+  nur ihr Platz ändert sich.
+- Alle drei Knöpfe lassen den Weißen sowie Stör- und Geisterbälle stehen und
+  sind durch **Rückgängig** gedeckt. Gibt es keine Objektbälle, bleibt
+  „Mischen" sichtbar stehen und nennt den Grund.
+
 ## 0.9.3 – 24.11.2026
 
 ### Behoben

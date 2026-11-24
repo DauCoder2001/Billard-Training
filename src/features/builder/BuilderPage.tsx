@@ -9,6 +9,7 @@ import { db } from '@/data/db'
 import { storageErrorText } from '@/data/errors'
 import { deleteShot, saveShot } from '@/data/repositories/shots'
 import { castToRail } from '@/domain/geometry'
+import { applyRack, shuffleObjectBalls } from '@/domain/rack'
 import { createShot, duplicateShot, mirrorShot } from '@/domain/shot'
 import type { BallPath, Point } from '@/domain/types'
 import { useDialogs } from '@/ui/Dialogs'
@@ -219,6 +220,10 @@ export function BuilderPage() {
   // Kugel bestehen. Nur zwei duerfen es nicht werden.
   const hatWeissen = shot.balls.some((b) => b.kind === 'cue')
 
+  // Ohne Objektbaelle gaebe es nichts zu mischen. Der Knopf bleibt trotzdem
+  // stehen und nennt den Grund - ausgeblendete Knoepfe sucht man sonst.
+  const hatObjektbaelle = shot.balls.some((b) => b.kind === 'object')
+
   const removeSelected = () => {
     const store = useBuilder.getState()
     if (store.selectedBallId) store.removeBall(store.selectedBallId)
@@ -420,6 +425,33 @@ export function BuilderPage() {
           </>
         ) : (
           <>
+            <button
+              className="btn btn--sm"
+              title="Volles Dreieck auf den Fußpunkt stellen"
+              onClick={() => useBuilder.getState().change((s) => applyRack(s, 'eight'))}
+            >
+              Rack 8
+            </button>
+            <button
+              className="btn btn--sm"
+              title="Neuner-Raute auf den Fußpunkt stellen"
+              onClick={() => useBuilder.getState().change((s) => applyRack(s, 'nine'))}
+            >
+              Rack 9
+            </button>
+            <button
+              className="btn btn--sm"
+              disabled={!hatObjektbaelle}
+              title={
+                hatObjektbaelle
+                  ? 'Objektbälle zufällig über den Tisch verteilen'
+                  : 'Dieser Stoß hat keine Objektbälle'
+              }
+              onClick={() => useBuilder.getState().change((s) => shuffleObjectBalls(s))}
+            >
+              Mischen
+            </button>
+            <div className="builder__sep builder__sep--v" />
             <button className="btn btn--sm" onClick={() => useBuilder.getState().change((s) => mirrorShot(s, 'horizontal'))}>
               Spiegeln ↕
             </button>
