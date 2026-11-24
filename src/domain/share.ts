@@ -80,7 +80,17 @@ function fromBase64Url(text: string): Uint8Array {
 
 /** Komprimierte Nutzlast eines Stosses. */
 export function encodeShot(shot: Shot): string {
-  const { id: _id, createdAt: _c, updatedAt: _u, builtIn: _b, favorite: _f, ...rest } = shot
+  // seedStamp bleibt zu Hause: er sagt etwas ueber die mitgelieferte Vorlage
+  // auf diesem Geraet, nicht ueber den geteilten Stoss.
+  const {
+    id: _id,
+    createdAt: _c,
+    updatedAt: _u,
+    builtIn: _b,
+    favorite: _f,
+    seedStamp: _s,
+    ...rest
+  } = shot
   const envelope: Envelope = { v: SHARE_VERSION, shot: rest }
   return toBase64Url(deflateSync(strToU8(JSON.stringify(envelope)), { level: 9 }))
 }

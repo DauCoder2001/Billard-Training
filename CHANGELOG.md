@@ -6,6 +6,32 @@ Die Versionsnummer steht an genau einer Stelle — in `package.json` — und ers
 unten auf der Seite **Einstellungen** sowie auf der Fehlerseite. Schema:
 `Hauptversion.Funktion.Korrektur`.
 
+## 0.9.0 – 24.11.2026
+
+### Neu
+- **Die App sagt Bescheid, wenn eine mitgelieferte Übung überarbeitet wurde.**
+  Wer eine mitgelieferte Übung im Baukasten speichert, übernimmt sie – eine
+  spätere Korrektur der Vorlage, etwa an den Ballpositionen, ging bisher
+  stillschweigend an ihr vorbei. Jetzt steht auf der Stoßseite dieser einen
+  Übung ein ruhiger Hinweis, und du entscheidest: **Auf Vorlage zurücksetzen**
+  (deine Änderungen gehen verloren, Favorit und Trainingshistorie bleiben) oder
+  **Meine Fassung behalten** (der Hinweis verschwindet und kommt erst wieder,
+  wenn sich die Vorlage das nächste Mal ändert). Der große Weg über die
+  Einstellungen – *Mitgelieferte Stöße wiederherstellen* für alle auf einmal –
+  bleibt unverändert.
+- Der Hinweis erscheint nur dort, wo er etwas bedeutet: nicht bei eigenen
+  Stößen, nicht bei geteilten, nicht bei unveränderten mitgelieferten (die holt
+  die Aktualisierung der Sammlung ohnehin ein).
+
+### Innen
+- Jede mitgelieferte Übung trägt ab jetzt einen kurzen Stand ihrer Vorlage mit,
+  der sich aus ihrem Inhalt selbst ergibt. Dadurch braucht keine Übung eine von
+  Hand gepflegte Versionsnummer, und es kann nicht passieren, dass eine
+  Korrektur vergessen wird mitzuzählen.
+- Übungen, die schon vor dieser Version übernommen wurden, gelten einmalig als
+  aktuell – von welcher Fassung sie abstammen, lässt sich nicht mehr
+  feststellen. Ab der nächsten Überarbeitung einer Vorlage greift der Hinweis.
+
 ## 0.8.5 – 24.11.2026
 
 ### Innen

@@ -8,13 +8,13 @@
  */
 
 import { describe, expect, it } from 'vitest'
-import { seedUpdates } from './bootstrap'
+import { seedStampUpdates, seedUpdates } from './bootstrap'
 import { createShot } from '@/domain/shot'
 import type { Shot } from '@/domain/types'
 
 /** Ein Stoss der Vorlage: feste Id, als mitgeliefert markiert. */
 function vorlage(id: string, name: string): Shot {
-  return { ...createShot({ id, name }), builtIn: true, favorite: false }
+  return { ...createShot({ id, name }), builtIn: true, favorite: false, seedStamp: 'neu' }
 }
 
 const sammlung = [vorlage('a', 'Gerader Stoß'), vorlage('b', 'Bandenball')]
@@ -60,5 +60,44 @@ describe('seedUpdates', () => {
     const alt: Shot = { ...sammlung[0], favorite: true }
     const [update] = seedUpdates([sammlung[0]], [alt], true)
     expect(update.favorite).toBe(true)
+  })
+})
+
+/**
+ * Die einmalige Nachruestung des Vorlagenstands.
+ *
+ * Sie entscheidet, womit Geraete starten, auf denen vor dieser Neuerung schon
+ * eingespielt wurde. Zu viel geschrieben heisst: ein Hinweis auf eine
+ * Ueberarbeitung, die der Nutzer laengst kennt. Zu wenig heisst: der Hinweis
+ * bleibt fuer immer aus.
+ */
+describe('seedStampUpdates', () => {
+  it('haengt den Stand an einen Stoss, der keinen traegt', () => {
+    const ohne: Shot = { ...sammlung[0], seedStamp: undefined }
+    const [update] = seedStampUpdates(sammlung, [ohne, undefined])
+    expect(update.id).toBe('a')
+    expect(update.seedStamp).toBe('neu')
+  })
+
+  it('haakt eine laengst uebernommene Fassung als aktuell ab', () => {
+    // Von welcher Fassung sie abstammt, weiss niemand mehr. Raten waere
+    // schlechter als sie als aktuell zu fuehren - sonst stuende beim ersten
+    // Start ein Hinweis da, den der Nutzer nicht einordnen kann.
+    const eigen: Shot = { ...sammlung[0], builtIn: false, name: 'Meiner', seedStamp: undefined }
+    const [update] = seedStampUpdates(sammlung, [eigen, undefined])
+    expect(update.name).toBe('Meiner')
+    expect(update.builtIn).toBe(false)
+    expect(update.seedStamp).toBe('neu')
+  })
+
+  it('laesst einen vorhandenen Stand stehen', () => {
+    // Sonst wuerde die Nachruestung bei jedem Start jede Ueberarbeitung
+    // abhaken, bevor der Nutzer sie zu sehen bekommt.
+    const alt: Shot = { ...sammlung[0], builtIn: false, seedStamp: 'alt' }
+    expect(seedStampUpdates(sammlung, [alt, undefined])).toEqual([])
+  })
+
+  it('uebergeht einen geloeschten Stoss', () => {
+    expect(seedStampUpdates(sammlung, [undefined, undefined])).toEqual([])
   })
 })

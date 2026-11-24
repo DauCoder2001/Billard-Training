@@ -4,8 +4,15 @@ import { useActivePlayer, useApp } from '@/app/store'
 import { ShotDiagram } from '@/components/table/ShotDiagram'
 import { storageErrorText } from '@/data/errors'
 import { useSessions, useShot } from '@/data/hooks'
-import { deleteShot, toggleFavorite } from '@/data/repositories/shots'
+import {
+  deleteShot,
+  keepOwnVersion,
+  resetToTemplate,
+  toggleFavorite,
+} from '@/data/repositories/shots'
+import { seedShotById } from '@/data/seed/drills'
 import { POCKET_BY_ID } from '@/domain/geometry'
+import { hasNewerTemplate } from '@/domain/seedStamp'
 import { hasObjectBall, pocketRate, proficiencyFor, scratchRate } from '@/domain/scoring'
 import {
   MAX_ATTEMPTS,
@@ -73,6 +80,10 @@ export function ShotDetailPage() {
   // Siehe Trefferquote weiter unten: ohne Objektball ist nichts einzulochen.
   const mitObjektball = hasObjectBall(shot)
   const pocket = shot.target.pocketId ? POCKET_BY_ID[shot.target.pocketId] : null
+  // Eine uebernommene Uebung, deren Vorlage seither ueberarbeitet wurde.
+  // Siehe domain/seedStamp.ts: ohne diesen Hinweis ginge die Korrektur
+  // stillschweigend an ihr vorbei.
+  const ueberarbeitet = hasNewerTemplate(shot, seedShotById(shot.id))
 
   const startTraining = async (format: SessionFormat) => {
     let attempts = FORMATS.find((f) => f.id === format)?.attempts ?? null
@@ -125,6 +136,34 @@ export function ShotDetailPage() {
     }
   }
 
+  const zuruecksetzen = async () => {
+    const ok = await dialogs.confirm({
+      title: 'Auf Vorlage zurücksetzen?',
+      message:
+        'Deine Änderungen an dieser mitgelieferten Übung gehen verloren – Aufbau, ' +
+        'Beschreibung, Hinweis und Schwellen kommen aus der überarbeiteten Vorlage. ' +
+        'Favorit und Trainingshistorie bleiben.',
+      confirmLabel: 'Zurücksetzen',
+      danger: true,
+    })
+    if (!ok) return
+    try {
+      await resetToTemplate(shot.id)
+    } catch (err) {
+      dialogs.toast(`Nicht zurückgesetzt: ${storageErrorText(err)}`, 'error')
+      return
+    }
+    dialogs.toast('Auf Vorlage zurückgesetzt', 'ok')
+  }
+
+  const eigeneBehalten = async () => {
+    try {
+      await keepOwnVersion(shot.id)
+    } catch (err) {
+      dialogs.toast(`Nicht gespeichert: ${storageErrorText(err)}`, 'error')
+    }
+  }
+
   return (
     <div className="page stack">
       <div className="page__head">
@@ -150,6 +189,24 @@ export function ShotDetailPage() {
           </button>
         </div>
       </div>
+
+      {ueberarbeitet && (
+        <div className="card card--flat stack">
+          <strong>Von dieser Übung gibt es eine überarbeitete Vorlage.</strong>
+          <span className="small muted">
+            Du hast diese mitgelieferte Übung einmal gespeichert – seitdem wurde die Vorlage
+            überarbeitet. Deine Fassung bleibt, solange du nichts anderes sagst.
+          </span>
+          <div className="row row--tight">
+            <button className="btn btn--sm btn--danger" onClick={() => void zuruecksetzen()}>
+              Auf Vorlage zurücksetzen
+            </button>
+            <button className="btn btn--sm" onClick={() => void eigeneBehalten()}>
+              Meine Fassung behalten
+            </button>
+          </div>
+        </div>
+      )}
 
       <div className="detail">
         <div className="stack">

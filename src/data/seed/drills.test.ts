@@ -193,6 +193,15 @@ describe('mitgelieferte Uebungen', () => {
     }
   })
 
+  it('gibt jeder Uebung einen eigenen Stand ihrer Vorlage mit', () => {
+    // Daran erkennt die App spaeter, dass eine uebernommene Fassung von einer
+    // aelteren Vorlage abstammt. Zwei gleiche Staende waeren ein Zeichen fuer
+    // zwei gleiche Uebungen - oder fuer einen Fehler in der Rechnung.
+    const staende = shots.map((s) => s.seedStamp)
+    expect(staende.every((s) => typeof s === 'string' && s.length === 8)).toBe(true)
+    expect(new Set(staende).size).toBe(shots.length)
+  })
+
   it('legt keinen Ball in eine Bande', () => {
     for (const shot of shots) {
       for (const ball of shot.balls) {

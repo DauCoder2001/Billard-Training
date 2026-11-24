@@ -72,6 +72,7 @@ async function run(): Promise<void> {
 
   await migrateTheme()
   await migrateDrillTexts()
+  await migrateSeedStamps()
 }
 
 /**
@@ -112,6 +113,44 @@ export function seedUpdates(
     if (erstlauf) return [{ ...neu, favorite: alt?.favorite ?? false }]
     if (!alt || alt.builtIn !== true) return []
     return [{ ...neu, favorite: alt.favorite }]
+  })
+}
+
+/**
+ * Haengt den Stand der Vorlage an Stoesse, die ihn noch nicht tragen.
+ *
+ * Betrifft Geraete, auf denen schon vor dieser Neuerung eingespielt wurde,
+ * und Stoesse aus einer eingelesenen Sicherung: beide bringen keinen Stand
+ * mit. Von welcher Fassung eine laengst uebernommene Uebung abstammt, laesst
+ * sich nicht mehr feststellen - deshalb gelten sie ab hier als aktuell.
+ * Sonst stuenden beim ersten Start auf einen Schlag Hinweise auf
+ * Ueberarbeitungen da, die der Nutzer laengst kennt.
+ *
+ * Daraus folgt eine Bedingung an die Auslieferung: in derselben Version darf
+ * keine Vorlage korrigiert werden, sonst wird genau diese Korrektur
+ * stillschweigend abgehakt.
+ *
+ * Einen Versionszaehler braucht es nicht: nach dem ersten Lauf traegt jeder
+ * betroffene Stoss einen Stand, und die Regel findet nichts mehr.
+ */
+async function migrateSeedStamps(): Promise<void> {
+  const fresh = seedShots()
+  const stored = await db.shots.bulkGet(fresh.map((s) => s.id))
+  const updates = seedStampUpdates(fresh, stored)
+  if (updates.length > 0) await db.shots.bulkPut(updates)
+}
+
+/**
+ * Reine Form derselben Regel - ohne Datenbank pruefbar.
+ *
+ * @param fresh Die Stoesse der Vorlage.
+ * @param stored Der gespeicherte Stand zu denselben Ids, in derselben Folge.
+ */
+export function seedStampUpdates(fresh: Shot[], stored: (Shot | undefined)[]): Shot[] {
+  return fresh.flatMap((neu, i) => {
+    const alt = stored[i]
+    if (!alt || alt.seedStamp) return []
+    return [{ ...alt, seedStamp: neu.seedStamp }]
   })
 }
 

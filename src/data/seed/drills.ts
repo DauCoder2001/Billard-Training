@@ -6,6 +6,7 @@
  *  Anpassen einer Uebung nachvollziehen.
  */
 
+import { seedStamp } from '@/domain/seedStamp'
 import {
   POCKET_BY_ID,
   TABLE,
@@ -740,9 +741,21 @@ const SPECS: DrillSpec[] = [
 ]
 
 let cache: Shot[] | null = null
+let byId: Map<string, Shot> | null = null
 
-/** Die Uebungen. Werden einmal berechnet und danach wiederverwendet. */
+/**
+ * Die Uebungen. Werden einmal berechnet und danach wiederverwendet.
+ *
+ * Jede traegt den Stand ihrer Vorlage mit: daran erkennt die App spaeter,
+ * ob eine uebernommene Fassung von einer aelteren Vorlage abstammt.
+ */
 export function seedShots(): Shot[] {
-  if (!cache) cache = SPECS.map(buildDrill)
+  if (!cache) cache = SPECS.map(buildDrill).map((s) => ({ ...s, seedStamp: seedStamp(s) }))
   return cache
+}
+
+/** Die heutige Vorlage zu einer Id - oder nichts, wenn es keine gibt. */
+export function seedShotById(id: string): Shot | undefined {
+  if (!byId) byId = new Map(seedShots().map((s) => [s.id, s]))
+  return byId.get(id)
 }

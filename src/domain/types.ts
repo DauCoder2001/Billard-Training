@@ -209,6 +209,11 @@ export interface Shot {
   favorite: boolean
   /** true bei den mitgelieferten Uebungen. */
   builtIn?: boolean
+  /**
+   * Stand der mitgelieferten Vorlage, von dem diese Fassung abstammt.
+   * Siehe domain/seedStamp.ts. Fehlt bei eigenen und geteilten Stoessen.
+   */
+  seedStamp?: string
   createdAt: number
   updatedAt: number
 }
