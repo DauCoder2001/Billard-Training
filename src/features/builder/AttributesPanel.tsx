@@ -242,6 +242,43 @@ export function AttributesPanel() {
                 </p>
               )}
 
+              {scoring.avoidZone ? (
+                <>
+                  <Range
+                    label={`Radius der Sperrzone ${scoring.avoidZone.r.toFixed(1)} Zoll`}
+                    value={scoring.avoidZone.r}
+                    min={2}
+                    max={20}
+                    step={0.5}
+                    onStart={beginChange}
+                    onChange={(r) =>
+                      apply((s) => ({
+                        ...s,
+                        scoring: {
+                          ...s.scoring,
+                          avoidZone: s.scoring.avoidZone
+                            ? { ...s.scoring.avoidZone, r }
+                            : undefined,
+                        },
+                      }))
+                    }
+                  />
+                  <button
+                    className="btn btn--sm"
+                    onClick={() =>
+                      change((s) => ({ ...s, scoring: { ...s.scoring, avoidZone: undefined } }))
+                    }
+                  >
+                    Sperrzone entfernen
+                  </button>
+                </>
+              ) : (
+                <p className="small muted">
+                  Eine Sperrzone kostet den ganzen Versuch, wenn der Weiße darin liegen bleibt –
+                  auch bei gefallenem Ball. Im Werkzeug links setzen.
+                </p>
+              )}
+
               <label className="row" style={{ gap: 8 }}>
                 <input
                   type="checkbox"

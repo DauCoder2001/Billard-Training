@@ -4,7 +4,9 @@ import {
   attemptPoints,
   buildAttempt,
   effectiveMode,
+  inAvoidZone,
   isScorable,
+  needsCueBallEnd,
   orderedThresholds,
   pocketRate,
   positionPoints,
@@ -242,5 +244,64 @@ describe('Quoten', () => {
   it('liefert ohne Versuche null', () => {
     expect(pocketRate([])).toBe(0)
     expect(scratchRate([])).toBe(0)
+  })
+})
+
+describe('Die Sperrzone', () => {
+  const sperre = { x: 20, y: 20, r: 6 }
+  const drin = { x: 22, y: 21 }
+  const knappDavor = { x: 20 + 6.2, y: 20 }
+
+  it('erkennt, wer darin liegenbleibt - und wer knapp daneben', () => {
+    expect(inAvoidZone(drin, sperre)).toBe(true)
+    expect(inAvoidZone({ x: 20 + 6, y: 20 }, sperre)).toBe(true)
+    expect(inAvoidZone(knappDavor, sperre)).toBe(false)
+    // Ohne Zone, ohne erfasste Lage und bei Radius null greift sie nicht.
+    expect(inAvoidZone(drin, undefined)).toBe(false)
+    expect(inAvoidZone(null, sperre)).toBe(false)
+    expect(inAvoidZone(drin, { ...sperre, r: 0 })).toBe(false)
+  })
+
+  it('kostet den ganzen Versuch, auch wenn der Ball gefallen ist', () => {
+    for (const mode of ['pocket', 'position', 'pocket+position'] as const) {
+      const regeln = scoring({ mode, avoidZone: sperre })
+      expect(
+        attemptPoints(regeln, { pocketed: true, scratch: false, cueBallEnd: drin }),
+      ).toBe(0)
+    }
+  })
+
+  it('laesst alles beim Alten, solange der Weisse draussen bleibt', () => {
+    const mit = scoring({ avoidZone: sperre })
+    const ohne = scoring()
+    for (const ende of [knappDavor, zone, null]) {
+      const ergebnis = { pocketed: true, scratch: false, cueBallEnd: ende }
+      expect(attemptPoints(mit, ergebnis)).toBe(attemptPoints(ohne, ergebnis))
+    }
+  })
+
+  it('greift auch dort, wo sonst nur das Einlochen zaehlt', () => {
+    const nurLoch = scoring({ mode: 'pocket', targetZone: null, avoidZone: sperre })
+    expect(attemptPoints(nurLoch, { pocketed: true, scratch: false, cueBallEnd: knappDavor })).toBe(
+      MAX_POINTS,
+    )
+    expect(attemptPoints(nurLoch, { pocketed: true, scratch: false, cueBallEnd: drin })).toBe(0)
+  })
+
+  it('laesst den Trainer die Lage des Weissen erfassen', () => {
+    const ohne = createShot({ scoring: scoring({ mode: 'pocket', targetZone: null }) })
+    expect(needsCueBallEnd(ohne)).toBe(false)
+
+    const mit = createShot({
+      scoring: scoring({ mode: 'pocket', targetZone: null, avoidZone: sperre }),
+    })
+    expect(needsCueBallEnd(mit)).toBe(true)
+  })
+
+  it('steht auch im fertigen Versuch', () => {
+    const stoss = createShot({ scoring: scoring({ avoidZone: sperre }) })
+    const versuch = buildAttempt(stoss, 0, { pocketed: true, scratch: false, cueBallEnd: drin })
+    expect(versuch.points).toBe(0)
+    expect(versuch.scratch).toBe(false)
   })
 })

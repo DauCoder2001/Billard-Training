@@ -5,15 +5,21 @@
 
 import { useEffect, useRef, useState } from 'react'
 import { useApp } from '@/app/store'
-import { AimLayer, BallLayer, PathLayer, TargetZoneLayer } from '@/components/table/Layers'
+import {
+  AimLayer,
+  AvoidZoneLayer,
+  BallLayer,
+  PathLayer,
+  TargetZoneLayer,
+} from '@/components/table/Layers'
 import { TableSvg } from '@/components/table/TableSvg'
 import { clientToTable, flipY } from '@/components/table/space'
 import { clampBall } from '@/domain/geometry'
 import {
   MAX_POINTS,
   buildAttempt,
-  effectiveMode,
   hasObjectBall,
+  needsCueBallEnd,
   sessionScore,
 } from '@/domain/scoring'
 import { aimPoint, cueBall, objectBalls } from '@/domain/shot'
@@ -59,7 +65,7 @@ export function TrainerView({
   // kein "Eingelocht" und kein "Verfehlt", sondern nur den erfassten
   // Versuch - und den Kratzer, der auch hier ein Fehlversuch bleibt.
   const mitObjektball = hasObjectBall(shot)
-  const needsPosition = effectiveMode(shot.scoring, mitObjektball) !== 'pocket'
+  const needsPosition = needsCueBallEnd(shot)
   useEffect(() => {
     onProgress?.(results.length)
   }, [results.length, onProgress])
@@ -123,6 +129,7 @@ export function TrainerView({
             }}
           >
             <TargetZoneLayer zone={shot.scoring.targetZone} />
+            <AvoidZoneLayer zone={shot.scoring.avoidZone} />
             <PathLayer paths={shot.paths} balls={shot.balls} />
             <AimLayer
               cue={cue ? { x: cue.x, y: cue.y } : null}

@@ -217,3 +217,35 @@ describe('Stoss umformen', () => {
     )
   })
 })
+
+describe('Die Sperrzone beim Teilen', () => {
+  it('kommt mit und bleibt an ihrem Platz', () => {
+    const original = createShot()
+    original.scoring.avoidZone = { x: 30, y: 12, r: 7 }
+
+    const zurueck = decodeShot(encodeShot(original))
+
+    expect(zurueck.scoring.avoidZone).toEqual({ x: 30, y: 12, r: 7 })
+  })
+
+  it('bleibt weg, wenn der Stoss keine hat - das Feld darf nicht entstehen', () => {
+    // Ein zusaetzliches Feld aenderte den Fingerabdruck jeder mitgelieferten
+    // Uebung (siehe seedStamp.ts). Deshalb null und undefined pruefen.
+    const ohne = decodeShot(encodeShot(createShot()))
+    expect('avoidZone' in ohne.scoring).toBe(false)
+
+    const fremd = decodeShot(payloadOf({ v: 1, shot: { scoring: { avoidZone: null } } }))
+    expect('avoidZone' in fremd.scoring).toBe(false)
+  })
+
+  it('holt eine unsinnige Sperrzone auf den Tisch zurueck', () => {
+    const fremd = decodeShot(
+      payloadOf({ v: 1, shot: { scoring: { avoidZone: { x: 9999, y: -40, r: 500 } } } }),
+    )
+    const sperre = fremd.scoring.avoidZone
+    expect(sperre).toBeTruthy()
+    expect(sperre!.x).toBeLessThanOrEqual(100)
+    expect(sperre!.y).toBeGreaterThanOrEqual(0)
+    expect(sperre!.r).toBeLessThanOrEqual(25)
+  })
+})

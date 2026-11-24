@@ -382,6 +382,13 @@ export function BuilderPage() {
           <Tool active={mode === 'addGhost'} label="Geisterball" icon="○" onClick={() => useBuilder.getState().setMode('addGhost')} />
           <Tool active={mode === 'path'} label="Weg" icon="↗" onClick={() => useBuilder.getState().setMode('path')} />
           <Tool active={mode === 'zone'} label="Zielzone" icon="◎" onClick={() => useBuilder.getState().setMode('zone')} />
+          <Tool
+            active={mode === 'avoid'}
+            label="Sperrzone"
+            icon="⊘"
+            title="Bereich, in dem der Weiße nicht liegenbleiben darf"
+            onClick={() => useBuilder.getState().setMode('avoid')}
+          />
           <div className="builder__sep" />
           <Tool
             active={settings.markings.guides}

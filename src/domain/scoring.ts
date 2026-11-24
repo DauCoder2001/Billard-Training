@@ -7,6 +7,7 @@ import type {
   Proficiency,
   Shot,
   ShotScoring,
+  TargetZone,
   Thresholds,
 } from './types'
 import { DEFAULT_THRESHOLDS } from './types'
@@ -27,6 +28,12 @@ export function positionPoints(end: Point | null, zone: { x: number; y: number; 
   if (d <= zone.r * 3) return 2
   if (d <= zone.r * 4) return 1
   return 0
+}
+
+/** Liegt der Weisse in der Sperrzone? Ohne Zone und ohne Lage: nein. */
+export function inAvoidZone(end: Point | null, zone: TargetZone | undefined): boolean {
+  if (!end || !zone || zone.r <= 0) return false
+  return distance(end, zone) <= zone.r
 }
 
 /**
@@ -59,6 +66,12 @@ export function attemptPoints(
   hasObjectBall = true,
 ): number {
   if (result.scratch) return 0
+
+  // Die Sperrzone ist eine harte Regel: wer dort liegenbleibt, hat den
+  // Versuch vergeben - auch wenn der Ball gefallen ist. Anders als die
+  // Zielzone kennt sie keine Abstufung, das ist der Sinn einer Sperre. Sie
+  // gilt in jedem Bewertungsmodus, auch wenn sonst nur das Einlochen zaehlt.
+  if (inAvoidZone(result.cueBallEnd, scoring.avoidZone)) return 0
 
   const mode = effectiveMode(scoring, hasObjectBall)
   const pos = positionPoints(result.cueBallEnd, scoring.targetZone)
@@ -129,6 +142,18 @@ export function scratchRate(results: Attempt[]): number {
   if (results.length === 0) return 0
   const n = results.filter((r) => r.scratch).length
   return Math.round((n / results.length) * 1000) / 10
+}
+
+/**
+ * Muss beim Training erfasst werden, wo der Weisse liegenbleibt?
+ *
+ * Sonst entscheidet der Bewertungsmodus. Mit Sperrzone immer: ohne die Lage
+ * des Weissen liesse sich die Sperre nicht pruefen, und sie waere eine Regel,
+ * die nie greift.
+ */
+export function needsCueBallEnd(shot: Shot): boolean {
+  if (shot.scoring.avoidZone) return true
+  return effectiveMode(shot.scoring, hasObjectBall(shot)) !== 'pocket'
 }
 
 /** Hat der Stoss ueberhaupt einen Ball zum Einlochen? */

@@ -6,6 +6,26 @@ Die Versionsnummer steht an genau einer Stelle — in `package.json` — und ers
 unten auf der Seite **Einstellungen** sowie auf der Fehlerseite. Schema:
 `Hauptversion.Funktion.Korrektur`.
 
+## 0.13.0 – 24.11.2026
+
+### Neu
+- **Sperrzone:** ein Bereich, in dem der Weiße nicht liegen bleiben darf. Im
+  Baukasten gibt es dafür ein eigenes Werkzeug (⊘) links in der Leiste: auf den
+  Tisch tippen setzt die Zone, ziehen verschiebt sie, der Regler rechts stellt
+  den Radius ein, und "Sperrzone entfernen" nimmt sie wieder weg. Auf dem Tisch
+  steht sie als roter gestrichelter Kreis mit Querbalken – deutlich anders als
+  die grüne Zielzone, damit beide nicht zu verwechseln sind.
+- **Die Regel:** bleibt der Weiße in der Sperrzone liegen, kostet das den ganzen
+  Versuch – **0 Punkte**, in jeder Bewertungsart, auch wenn der Ball gefallen
+  ist. Damit lässt sich zum ersten Mal eine Übung bauen, die nicht nur ein Ziel
+  vorgibt, sondern auch verbietet, wo der Weiße nicht hingehört.
+- **Beim Training** wird die Position des Weißen jetzt auch dann abgefragt, wenn
+  eine Übung sonst nur das Einlochen zählt – ohne die Position wäre die
+  Sperrzone nicht prüfbar.
+- **Mitgeteilte Übungen** nehmen die Sperrzone mit. Bei Übungen ohne Sperrzone
+  bleibt der mitgeteilte Text Zeichen für Zeichen derselbe wie bisher; die
+  Fingerabdrücke aller 25 mitgelieferten Übungen sind nachgemessen unverändert.
+
 ## 0.12.0 – 24.11.2026
 
 ### Neu

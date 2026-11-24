@@ -188,6 +188,15 @@ export const PROFICIENCY_LABELS: Record<Proficiency, string> = {
 export interface ShotScoring {
   mode: ScoringMode
   targetZone: TargetZone | null
+  /**
+   * Sperrzone: der Bereich, in dem der Weisse nicht liegenbleiben darf.
+   *
+   * Fehlt sie, fehlt das Feld - absichtlich nicht null. Ein Feld mehr im
+   * Stoss aenderte den Fingerabdruck jeder mitgelieferten Uebung
+   * (siehe seedStamp.ts), und jede uebernommene Fassung bekaeme den Hinweis
+   * auf eine ueberarbeitete Vorlage, ohne dass sich etwas geaendert haette.
+   */
+  avoidZone?: TargetZone
   thresholds: Thresholds
   /** Markiert Stoesse mit erhoehtem Kratzerrisiko. */
   scratchRisk?: boolean

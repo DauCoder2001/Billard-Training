@@ -19,9 +19,10 @@ export type BuilderMode =
   | 'addGhost'
   | 'path'
   | 'zone'
+  | 'avoid'
 
 export interface Drag {
-  kind: 'ball' | 'pathPoint' | 'pathCurve' | 'zone'
+  kind: 'ball' | 'pathPoint' | 'pathCurve' | 'zone' | 'avoidZone'
   ballId?: string
   pathId?: string
   segmentIndex?: number

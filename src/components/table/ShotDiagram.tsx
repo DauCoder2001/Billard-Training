@@ -3,7 +3,7 @@
 import { POCKET_BY_ID, pocketAimPoint } from '@/domain/geometry'
 import { cueBall, objectBalls } from '@/domain/shot'
 import type { Shot } from '@/domain/types'
-import { AimLayer, BallLayer, PathLayer, TargetZoneLayer } from './Layers'
+import { AimLayer, AvoidZoneLayer, BallLayer, PathLayer, TargetZoneLayer } from './Layers'
 import { TableSvg } from './TableSvg'
 import type { Orientation } from './space'
 
@@ -47,6 +47,7 @@ export function ShotDiagram({
       className={className}
     >
       {showZone && <TargetZoneLayer zone={shot.scoring.targetZone} />}
+      {showZone && <AvoidZoneLayer zone={shot.scoring.avoidZone} />}
       {showPaths && <PathLayer paths={shot.paths} balls={shot.balls} />}
       {showAim && (
         <AimLayer

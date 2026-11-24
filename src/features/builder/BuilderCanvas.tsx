@@ -5,7 +5,14 @@ import { memo, useCallback, useMemo, useRef, type PointerEvent as ReactPointerEv
 import { POCKETS, TABLE, clampBall, midpoint, resolveOverlaps, snapToGrid } from '@/domain/geometry'
 import { aimPoint, cueBall, objectBalls } from '@/domain/shot'
 import type { Ball, Point, Shot } from '@/domain/types'
-import { AimLayer, BallLayer, PathLayer, TargetZoneLayer, pathStart } from '@/components/table/Layers'
+import {
+  AimLayer,
+  AvoidZoneLayer,
+  BallLayer,
+  PathLayer,
+  TargetZoneLayer,
+  pathStart,
+} from '@/components/table/Layers'
 import { TableSvg } from '@/components/table/TableSvg'
 import { clientToTable, flipY, type Orientation } from '@/components/table/space'
 import { useApp } from '@/app/store'
@@ -82,6 +89,19 @@ export function BuilderCanvas({ orientation, showAim }: BuilderCanvasProps) {
         }))
         setMode('select')
         return
+      case 'avoid':
+        change((s) => ({
+          ...s,
+          scoring: {
+            ...s.scoring,
+            avoidZone: {
+              r: s.scoring.avoidZone?.r ?? settings.defaultTargetRadius,
+              ...clampBall(p),
+            },
+          },
+        }))
+        setMode('select')
+        return
       default:
         select(null, null)
     }
@@ -130,6 +150,16 @@ export function BuilderCanvas({ orientation, showAim }: BuilderCanvasProps) {
     capture(e.pointerId)
   }
 
+  const onAvoidDown = (e: ReactPointerEvent<SVGCircleElement>) => {
+    e.stopPropagation()
+    const sperre = shot.scoring.avoidZone
+    const p = pointAt(e)
+    if (!sperre || !p) return
+    beginChange()
+    setDrag({ kind: 'avoidZone', offset: { x: sperre.x - p.x, y: sperre.y - p.y } })
+    capture(e.pointerId)
+  }
+
   // -------------------------------------------------------------- Ziehen
 
   const onMove = (e: ReactPointerEvent<SVGSVGElement>) => {
@@ -156,6 +186,19 @@ export function BuilderCanvas({ orientation, showAim }: BuilderCanvasProps) {
           targetZone: s.scoring.targetZone
             ? { ...s.scoring.targetZone, ...clampBall(target) }
             : null,
+        },
+      }))
+      return
+    }
+
+    if (drag.kind === 'avoidZone') {
+      apply((s) => ({
+        ...s,
+        scoring: {
+          ...s.scoring,
+          avoidZone: s.scoring.avoidZone
+            ? { ...s.scoring.avoidZone, ...clampBall(target) }
+            : undefined,
         },
       }))
       return
@@ -190,6 +233,7 @@ export function BuilderCanvas({ orientation, showAim }: BuilderCanvasProps) {
   const obj = objectBalls(shot)[0]
   const aim = aimPoint(shot)
   const zone = shot.scoring.targetZone
+  const sperre = shot.scoring.avoidZone
   const activePath = shot.paths.find((p) => p.id === selectedPathId) ?? null
 
   return (
@@ -215,6 +259,18 @@ export function BuilderCanvas({ orientation, showAim }: BuilderCanvasProps) {
           r={Math.max(zone.r, 3)}
           fill="transparent"
           onPointerDown={onZoneDown}
+          style={{ cursor: 'move' }}
+        />
+      )}
+
+      <AvoidZoneLayer zone={sperre} />
+      {sperre && mode === 'select' && (
+        <circle
+          cx={sperre.x}
+          cy={flipY(sperre.y)}
+          r={Math.max(sperre.r, 3)}
+          fill="transparent"
+          onPointerDown={onAvoidDown}
           style={{ cursor: 'move' }}
         />
       )}

@@ -112,3 +112,34 @@ describe('Markierungen beim Training', () => {
     expect(document.querySelector('[data-ebene="breakbox"]')).toBeTruthy()
   })
 })
+
+describe('Eine Uebung mit Sperrzone', () => {
+  it('zeigt sie und verlangt die Lage des Weissen, obwohl nur das Einlochen zaehlt', async () => {
+    const mitSperre = stoss()
+    await db.shots.put({
+      ...mitSperre,
+      scoring: { ...mitSperre.scoring, avoidZone: { x: 20, y: 20, r: 6 } },
+    })
+    zeige(<TrainPage />, ORT)
+    await screen.findByText('Gerader Stoß')
+
+    expect(document.querySelector('[data-ebene="sperrzone"]')).toBeTruthy()
+    // Ohne die Lage des Weissen liesse sich die Sperre nicht pruefen.
+    expect(
+      screen.getByText('Auf den Tisch tippen, wo der Weiße liegen geblieben ist.'),
+    ).toBeTruthy()
+    expect((screen.getByRole('button', { name: 'Eingelocht' }) as HTMLButtonElement).disabled).toBe(
+      true,
+    )
+  })
+
+  it('fragt ohne Sperrzone weiterhin nicht nach der Lage', async () => {
+    zeige(<TrainPage />, ORT)
+    await screen.findByText('Gerader Stoß')
+
+    expect(document.querySelector('[data-ebene="sperrzone"]')).toBeNull()
+    expect((screen.getByRole('button', { name: 'Eingelocht' }) as HTMLButtonElement).disabled).toBe(
+      false,
+    )
+  })
+})

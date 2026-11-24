@@ -252,6 +252,38 @@ export function TargetZoneLayer({ zone }: { zone: TargetZone | null }) {
   )
 }
 
+/**
+ * Die Sperrzone: hier darf der Weisse nicht liegenbleiben. Kein Ringmuster
+ * wie bei der Zielzone - eine Sperre kennt keine Abstufung, entweder drin
+ * oder draussen. Der Querstrich ist der eines Verbotsschilds.
+ */
+export function AvoidZoneLayer({ zone }: { zone: TargetZone | undefined }) {
+  if (!zone) return null
+  const cy = flipY(zone.y)
+  const d = zone.r * Math.SQRT1_2
+  return (
+    <g data-ebene="sperrzone" pointerEvents="none">
+      <circle cx={zone.x} cy={cy} r={zone.r} fill="#e5573f" opacity={0.15} />
+      <circle
+        cx={zone.x}
+        cy={cy}
+        r={zone.r}
+        fill="none"
+        stroke="#e5573f"
+        strokeWidth={0.3}
+        strokeDasharray="1.8 1.2"
+        opacity={0.85}
+      />
+      <path
+        d={`M ${zone.x - d} ${cy + d} L ${zone.x + d} ${cy - d}`}
+        stroke="#e5573f"
+        strokeWidth={0.3}
+        opacity={0.85}
+      />
+    </g>
+  )
+}
+
 // -------------------------------------------------------------- Ziellinie
 
 interface AimLayerProps {

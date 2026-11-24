@@ -227,9 +227,21 @@ function sanitizeScoring(raw: unknown, fallback: ShotScoring): ShotScoring {
           ...ballPoint(zone, TABLE.footSpot),
           r: num(zone.r, 0.5, TABLE.width / 2, fallback.targetZone?.r ?? 6),
         }
+  // Die Sperrzone bleibt weg, wenn sie fehlt - nicht null. Siehe den
+  // Kommentar an ShotScoring.avoidZone: ein Feld mehr aenderte den
+  // Fingerabdruck.
+  const sperre = fields(s.avoidZone)
+  const avoidZone: TargetZone | undefined =
+    s.avoidZone === undefined || s.avoidZone === null
+      ? undefined
+      : {
+          ...ballPoint(sperre, TABLE.centerSpot),
+          r: num(sperre.r, 0.5, TABLE.width / 2, fallback.avoidZone?.r ?? 6),
+        }
   return {
     mode: oneOf(s.mode, SCORING_MODES, fallback.mode),
     targetZone,
+    ...(avoidZone ? { avoidZone } : {}),
     thresholds: sanitizeThresholds(s.thresholds),
     scratchRisk: bool(s.scratchRisk, false),
   }

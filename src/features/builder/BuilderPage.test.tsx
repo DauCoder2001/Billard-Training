@@ -175,3 +175,34 @@ describe('Baukasten an einem eigenen Stoss', () => {
     expect(await db.shots.count()).toBe(1)
   })
 })
+
+describe('Die Sperrzone im Baukasten', () => {
+  it('zeigt Radius und Entfernen, sobald der Stoss eine hat', async () => {
+    const basis = createShot({ id: 's1', name: 'Mein Stoß' })
+    await db.shots.add({
+      ...basis,
+      scoring: { ...basis.scoring, avoidZone: { x: 20, y: 20, r: 6 } },
+    })
+    zeige(<BuilderPage />, ORT)
+    // Die Regeln stehen im Reiter "Bewertung" des Attributfelds.
+    await userEvent.click(await screen.findByRole('button', { name: 'Bewertung' }))
+
+    expect(screen.getByText(/Radius der Sperrzone 6.0 Zoll/)).toBeTruthy()
+    expect(document.querySelector('[data-ebene="sperrzone"]')).toBeTruthy()
+
+    await userEvent.click(screen.getByRole('button', { name: 'Sperrzone entfernen' }))
+
+    expect(document.querySelector('[data-ebene="sperrzone"]')).toBeNull()
+    expect(useBuilder.getState().shot.scoring.avoidZone).toBeUndefined()
+  })
+
+  it('bietet das Werkzeug an und erklaert die Regel, solange keine da ist', async () => {
+    await db.shots.add(createShot({ id: 's1', name: 'Mein Stoß' }))
+    zeige(<BuilderPage />, ORT)
+
+    expect(await screen.findByRole('button', { name: 'Sperrzone' })).toBeTruthy()
+    await userEvent.click(screen.getByRole('button', { name: 'Bewertung' }))
+    expect(screen.getByText(/kostet den ganzen Versuch/)).toBeTruthy()
+    expect(document.querySelector('[data-ebene="sperrzone"]')).toBeNull()
+  })
+})
