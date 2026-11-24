@@ -9,12 +9,13 @@
  */
 
 import { beforeEach, describe, expect, it } from 'vitest'
-import { screen } from '@testing-library/react'
+import { screen, waitFor } from '@testing-library/react'
 import userEvent from '@testing-library/user-event'
 import { useApp } from '@/app/store'
 import { db } from '@/data/db'
 import { DEFAULT_SETTINGS } from '@/data/repositories/settings'
 import { createShot } from '@/domain/shot'
+import { DEFAULT_MARKINGS } from '@/domain/types'
 import { frischeDatenbank, zeige } from '@/test/zeige'
 import { BuilderPage } from './BuilderPage'
 import { useBuilder } from './store'
@@ -53,29 +54,50 @@ describe('Baukasten an einem mitgelieferten Stoss', () => {
 describe('Hilfslinien und Raster', () => {
   const ebene = (name: string) => document.querySelector(`[data-ebene="${name}"]`)
 
-  it('zeigt die Hilfslinien von Anfang an, das Punkteraster aber nicht', async () => {
+  it('zeigt die Hilfslinien, die Hilfen zum Bauen aber erst auf Wunsch', async () => {
     await db.shots.add(createShot({ id: 's1', name: 'Mein Stoß' }))
     zeige(<BuilderPage />, ORT)
     await screen.findByRole('button', { name: 'Hilfslinien' })
 
     expect(ebene('hilfslinien')).toBeTruthy()
-    expect(ebene('breakbox')).toBeTruthy()
-    expect(ebene('dreieck')).toBeTruthy()
+    expect(ebene('breakbox')).toBeNull()
+    expect(ebene('dreieck')).toBeNull()
     expect(ebene('raster')).toBeNull()
   })
 
-  it('schaltet beide Ebenen einzeln', async () => {
+  it('zeichnet Anstossfeld und Dreieck, sobald die Einstellung es sagt', async () => {
+    useApp.setState({
+      settings: {
+        ...DEFAULT_SETTINGS,
+        markings: { ...DEFAULT_MARKINGS, breakBox: true, rackOutline: true },
+      },
+    })
+    await db.shots.add(createShot({ id: 's1', name: 'Mein Stoß' }))
+    zeige(<BuilderPage />, ORT)
+    await screen.findByRole('button', { name: 'Hilfslinien' })
+
+    expect(ebene('breakbox')).toBeTruthy()
+    expect(ebene('dreieck')).toBeTruthy()
+  })
+
+  it('merkt sich, was in der Werkzeugleiste umgelegt wird', async () => {
     await db.shots.add(createShot({ id: 's1', name: 'Mein Stoß' }))
     zeige(<BuilderPage />, ORT)
 
     await userEvent.click(await screen.findByRole('button', { name: 'Hilfslinien' }))
-    expect(ebene('hilfslinien')).toBeNull()
-    expect(ebene('breakbox')).toBeNull()
-    expect(ebene('dreieck')).toBeNull()
-
+    await waitFor(() => expect(ebene('hilfslinien')).toBeNull())
     await userEvent.click(screen.getByRole('button', { name: 'Raster' }))
-    expect(ebene('raster')).toBeTruthy()
-    // Das Einrasten haengt an den Einstellungen, nicht an dieser Anzeige.
+    await waitFor(() => expect(ebene('raster')).toBeTruthy())
+
+    // Die Leiste schaltet dieselbe Einstellung wie die Einstellungsseite -
+    // und die steht danach auch in der Datenbank.
+    expect(useApp.getState().settings.markings.guides).toBe(false)
+    expect(useApp.getState().settings.markings.grid).toBe(true)
+    const gespeichert = await db.settings.get('settings')
+    expect(gespeichert?.markings.guides).toBe(false)
+    expect(gespeichert?.markings.grid).toBe(true)
+
+    // Das Einrasten haengt an einer eigenen Einstellung und bleibt, wie es war.
     expect(useApp.getState().settings.snapToGrid).toBe(DEFAULT_SETTINGS.snapToGrid)
   })
 })

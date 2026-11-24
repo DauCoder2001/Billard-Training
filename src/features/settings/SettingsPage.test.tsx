@@ -16,10 +16,11 @@ import { fireEvent, screen, waitFor } from '@testing-library/react'
 import userEvent from '@testing-library/user-event'
 import { useApp } from '@/app/store'
 import { db } from '@/data/db'
-import { DEFAULT_SETTINGS } from '@/data/repositories/settings'
+import { DEFAULT_SETTINGS, getSettings } from '@/data/repositories/settings'
 import { createShot } from '@/domain/shot'
 import { frischeDatenbank, zeige } from '@/test/zeige'
 import type { Backup } from '@/data/repositories/backup'
+import type { Settings } from '@/domain/types'
 import { SettingsPage } from './SettingsPage'
 
 const ORT = { pfad: '/settings' }
@@ -96,6 +97,68 @@ describe('Schwellen fuer die Einstufung', () => {
     // Fortgeschritten steht bei 80 - tiefer kann Meisterlich nicht.
     expect(await screen.findByText('Meisterlich ab 80 %')).toBeTruthy()
     expect(screen.getByText('Im Aufbau ab 40 %')).toBeTruthy()
+  })
+})
+
+describe('Markierungen auf dem Tuch', () => {
+  it('legt ein einzelnes Haekchen um und laesst die uebrigen stehen', async () => {
+    zeige(<SettingsPage />, ORT)
+
+    const anstoss = await screen.findByRole('checkbox', { name: /Anstoßfeld/ })
+    expect((anstoss as HTMLInputElement).checked).toBe(false)
+
+    await userEvent.click(anstoss)
+
+    await waitFor(() => expect(useApp.getState().settings.markings.breakBox).toBe(true))
+    const markings = useApp.getState().settings.markings
+    expect(markings.guides).toBe(DEFAULT_SETTINGS.markings.guides)
+    expect(markings.diamonds).toBe(DEFAULT_SETTINGS.markings.diamonds)
+    expect((await db.settings.get('settings'))?.markings.breakBox).toBe(true)
+  })
+
+  it('zeigt alle sieben Markierungen', async () => {
+    zeige(<SettingsPage />, ORT)
+    await screen.findByRole('heading', { name: 'Markierungen auf dem Tuch' })
+
+    // Am Anfang verankert: "Diamanten" steht auch im Satz ueber das
+    // Einrasten, und der ist ein anderes Haekchen.
+    for (const name of [
+      /^Diamanten /,
+      /^Kopflinie /,
+      /^Kopf- und Fußpunkt /,
+      /^Hilfslinien /,
+      /^Anstoßfeld /,
+      /^Dreieck am Fußpunkt /,
+      /^Punkteraster /,
+    ]) {
+      expect(screen.getByRole('checkbox', { name })).toBeTruthy()
+    }
+  })
+})
+
+/**
+ * Keine Seite, sondern die Datenschicht - der Platz hier hat einen Grund:
+ * die nachgebildete Datenbank steht nur im Profil "oberflaeche".
+ */
+describe('Einstellungen eines aelteren Standes', () => {
+  it('fuellt fehlende Markierungen beim Laden auf', async () => {
+    const alt = { ...DEFAULT_SETTINGS } as Partial<Settings>
+    delete alt.markings
+    await db.settings.put(alt as Settings)
+
+    expect((await getSettings()).markings).toEqual(DEFAULT_SETTINGS.markings)
+  })
+
+  it('ergaenzt einzelne Haekchen, ohne die gesetzten zu verlieren', async () => {
+    await db.settings.put({
+      ...DEFAULT_SETTINGS,
+      markings: { guides: false },
+    } as unknown as Settings)
+
+    const markings = (await getSettings()).markings
+    expect(markings.guides).toBe(false)
+    expect(markings.diamonds).toBe(true)
+    expect(markings.grid).toBe(false)
   })
 })
 

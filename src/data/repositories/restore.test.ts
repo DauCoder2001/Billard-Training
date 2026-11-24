@@ -16,6 +16,7 @@ import {
 } from './restore'
 import { PLAYER_COLORS } from './players'
 import { DEFAULT_SETTINGS } from './settings'
+import { DEFAULT_MARKINGS } from '@/domain/types'
 
 describe('restoreShots', () => {
   it('laesst einen Stoss ohne Id weg', () => {
@@ -99,6 +100,24 @@ describe('restoreWorkouts', () => {
     ])
     expect(workout.entries).toEqual([{ shotId: 'a', attempts: 200 }])
     expect(workout.name).toBe('Workout')
+  })
+})
+
+describe('Markierungen einer Sicherung', () => {
+  it('nimmt jedes Haekchen einzeln und fuellt fehlende auf', () => {
+    const settings = restoreSettings({
+      markings: { guides: false, breakBox: true, grid: 'vielleicht' },
+    })
+    expect(settings.markings.guides).toBe(false)
+    expect(settings.markings.breakBox).toBe(true)
+    // Unlesbar und fehlend enden beide beim Standard.
+    expect(settings.markings.grid).toBe(DEFAULT_MARKINGS.grid)
+    expect(settings.markings.diamonds).toBe(DEFAULT_MARKINGS.diamonds)
+  })
+
+  it('kommt ohne den Abschnitt aus - aeltere Sicherungen kennen ihn nicht', () => {
+    expect(restoreSettings({ snapStep: 6.25 }).markings).toEqual(DEFAULT_MARKINGS)
+    expect(restoreSettings({ markings: 'alles' }).markings).toEqual(DEFAULT_MARKINGS)
   })
 })
 

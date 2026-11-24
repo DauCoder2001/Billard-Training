@@ -6,6 +6,28 @@ Die Versionsnummer steht an genau einer Stelle — in `package.json` — und ers
 unten auf der Seite **Einstellungen** sowie auf der Fehlerseite. Schema:
 `Hauptversion.Funktion.Korrektur`.
 
+## 0.12.0 – 24.11.2026
+
+### Neu
+- **Markierungen auf dem Tuch sind jetzt einstellbar.** Ein eigener Abschnitt
+  in den Einstellungen mit sieben Häkchen: Diamanten, Kopflinie, Kopf- und
+  Fußpunkt, Hilfslinien, Anstoßfeld, Dreieck am Fußpunkt und Punkteraster.
+- **Es gilt dort, wo der Tisch die Arbeitsfläche ist** – im Baukasten und
+  beim Training. Die Vorschaubilder der Sammlung, die Stoßseite und die
+  Bilder zum Teilen behalten ihr ruhiges Bild, unabhängig davon, was
+  eingestellt ist.
+- Die beiden Knöpfe **Hilfslinien** und **Raster** in der Werkzeugleiste des
+  Baukastens schalten dieselben Einstellungen. Was dort umgelegt wird, bleibt
+  umgelegt – genau wie der Knopf für die Ausrichtung.
+
+### Geändert
+- **Anstoßfeld und Dreieck haben eigene Häkchen** und sind zunächst **aus**.
+  In Version 0.11.0 kamen sie zusammen mit den Hilfslinien; getrennt
+  geschaltet sind sie dort, wo sie gebraucht werden, und stören sonst nicht.
+  Ein Klick in den Einstellungen holt sie zurück.
+- Eine **eingespielte Sicherung** ohne diesen Abschnitt verliert nichts: jedes
+  fehlende oder unlesbare Häkchen fällt auf seinen Standard zurück.
+
 ## 0.11.0 – 24.11.2026
 
 ### Neu

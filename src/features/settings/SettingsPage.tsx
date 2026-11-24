@@ -11,9 +11,36 @@ import { createPlayer, deletePlayer, updatePlayer } from '@/data/repositories/pl
 import { TABLE } from '@/domain/geometry'
 import { orderedThresholds } from '@/domain/scoring'
 import { plural } from '@/domain/text'
-import type { Settings } from '@/domain/types'
+import type { Markings, Settings } from '@/domain/types'
 import { downloadText } from '@/features/share/exportImage'
 import { useDialogs } from '@/ui/Dialogs'
+
+/** Die Markierungen in der Reihenfolge, in der sie auf dem Tuch auffallen. */
+const MARKIERUNGEN: { feld: keyof Markings; text: string; hinweis: string }[] = [
+  { feld: 'diamonds', text: 'Diamanten', hinweis: 'die Punkte auf der Bande' },
+  { feld: 'headString', text: 'Kopflinie', hinweis: 'die Grenze des Kopffelds' },
+  { feld: 'spots', text: 'Kopf- und Fußpunkt', hinweis: 'die beiden Punkte auf dem Tuch' },
+  {
+    feld: 'guides',
+    text: 'Hilfslinien',
+    hinweis: 'von Diamant zu Diamant, längs und quer',
+  },
+  {
+    feld: 'breakBox',
+    text: 'Anstoßfeld',
+    hinweis: 'wo der Weiße beim Anstoß liegen darf',
+  },
+  {
+    feld: 'rackOutline',
+    text: 'Dreieck am Fußpunkt',
+    hinweis: 'der Platz des vollen Aufbaus',
+  },
+  {
+    feld: 'grid',
+    text: 'Punkteraster',
+    hinweis: 'nur im Baukasten, im Abstand des Einrastens',
+  },
+]
 
 const CLOTH_COLORS = ['#3f92d2', '#1f6b52', '#2b6b2f', '#1c5f7a', '#7a2f3a', '#4a4a52']
 const RAIL_COLORS = ['#e7eaee', '#d8d2c6', '#5b3a22', '#2f3640', '#1d1f24']
@@ -35,6 +62,11 @@ export function SettingsPage() {
     const fehler = await patchSettings(patch)
     if (fehler) dialogs.toast(`Nicht gespeichert: ${fehler}`, 'error')
   }
+
+  // Die Markierungen stehen zusammen in einem Feld: immer das ganze
+  // schreiben, sonst verliert der Patch die uebrigen Haekchen.
+  const markierung = (feld: keyof Markings, an: boolean) =>
+    einstellen({ markings: { ...settings.markings, [feld]: an } })
 
   const spielerWaehlen = async (id: string) => {
     const fehler = await setActivePlayer(id)
@@ -323,6 +355,26 @@ export function SettingsPage() {
             <option value={TABLE.diamondSpacing / 8}>Achtel Diamanten</option>
           </select>
         </div>
+      </section>
+
+      <section className="card stack">
+        <h2>Markierungen auf dem Tuch</h2>
+        <span className="small muted">
+          Gilt dort, wo der Tisch die Arbeitsfläche ist: im Baukasten und beim Training. Die
+          Vorschaubilder der Sammlung behalten ihr ruhiges Bild.
+        </span>
+        {MARKIERUNGEN.map(({ feld, text, hinweis }) => (
+          <label key={feld} className="row" style={{ gap: 8 }}>
+            <input
+              type="checkbox"
+              checked={settings.markings[feld]}
+              onChange={(e) => void markierung(feld, e.target.checked)}
+            />
+            <span>
+              {text} <span className="small muted">— {hinweis}</span>
+            </span>
+          </label>
+        ))}
       </section>
 
       <section className="card stack">

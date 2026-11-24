@@ -15,6 +15,7 @@ import { db } from '@/data/db'
 import { DEFAULT_SETTINGS } from '@/data/repositories/settings'
 import { seedShotById } from '@/data/seed/drills'
 import { createShot } from '@/domain/shot'
+import { DEFAULT_MARKINGS } from '@/domain/types'
 import { frischeDatenbank, zeige } from '@/test/zeige'
 import { ShotDetailPage } from './ShotDetailPage'
 
@@ -218,5 +219,32 @@ describe('Stossseite: ueberarbeitete Vorlage', () => {
     expect(gespeichert?.name).toBe('Meine Fassung')
     expect(gespeichert?.seedStamp).toBe('alt')
     expect(screen.getByText(HINWEIS)).toBeTruthy()
+  })
+})
+
+describe('Das Bild der Stossseite', () => {
+  it('bleibt ruhig, auch wenn der Baukasten alle Hilfen zeigt', async () => {
+    useApp.setState({
+      settings: {
+        ...DEFAULT_SETTINGS,
+        markings: {
+          ...DEFAULT_MARKINGS,
+          guides: true,
+          breakBox: true,
+          rackOutline: true,
+          grid: true,
+        },
+      },
+    })
+    await db.shots.add(createShot({ id: 's1', name: 'Mein Stoß' }))
+    zeige(<ShotDetailPage />, ORT)
+    await screen.findByRole('heading', { name: 'Mein Stoß' })
+
+    // Die Einstellungen gelten dort, wo der Tisch die Arbeitsflaeche ist -
+    // Baukasten und Training. Feste Diagramme behalten ihr eigenes Bild.
+    expect(document.querySelector('[data-ebene="hilfslinien"]')).toBeNull()
+    expect(document.querySelector('[data-ebene="breakbox"]')).toBeNull()
+    expect(document.querySelector('[data-ebene="dreieck"]')).toBeNull()
+    expect(document.querySelector('[data-ebene="raster"]')).toBeNull()
   })
 })

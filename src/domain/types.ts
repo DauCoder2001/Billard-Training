@@ -295,6 +295,42 @@ export interface Workout {
 
 // ------------------------------------------------------------ Einstellung --
 
+/**
+ * Was auf dem Tuch zu sehen ist. Gilt dort, wo der Tisch die Arbeitsflaeche
+ * ist - im Baukasten und beim Training. Die Vorschaubilder der Sammlung und
+ * die festen Diagramme behalten ihr eigenes, ruhiges Bild.
+ */
+export interface Markings {
+  /** Die Punkte auf der Bande. */
+  diamonds: boolean
+  /** Die Kopflinie. */
+  headString: boolean
+  /** Kopf- und Fusspunkt. */
+  spots: boolean
+  /** Linien von Diamant zu Diamant. */
+  guides: boolean
+  /** Das Feld, in dem der Weisse beim Anstoss liegen darf. */
+  breakBox: boolean
+  /** Der Umriss des Dreiecks am Fusspunkt. */
+  rackOutline: boolean
+  /** Das feine Punkteraster. Nur der Baukasten zeichnet es. */
+  grid: boolean
+}
+
+/**
+ * Ein echter Tisch und die Linien dazu. Anstossfeld, Dreieck und Raster sind
+ * Hilfen zum Bauen und bleiben aus, bis jemand sie holt.
+ */
+export const DEFAULT_MARKINGS: Markings = {
+  diamonds: true,
+  headString: true,
+  spots: true,
+  guides: true,
+  breakBox: false,
+  rackOutline: false,
+  grid: false,
+}
+
 export interface Settings {
   id: 'settings'
   activePlayerId: string | null
@@ -304,6 +340,8 @@ export interface Settings {
   orientation: 'landscape' | 'portrait'
   snapToGrid: boolean
   snapStep: number
+  /** Was auf dem Tuch zu sehen ist. */
+  markings: Markings
   defaultThresholds: Thresholds
   defaultTargetRadius: number
   /** Version der zuletzt eingespielten Uebungssammlung. */

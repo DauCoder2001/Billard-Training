@@ -114,6 +114,7 @@ export function TrainerView({
             orientation={settings.orientation}
             clothColor={settings.clothColor}
             railColor={settings.railColor}
+            markings={settings.markings}
             interactive={needsPosition}
             onPointerDown={(e) => {
               if (!needsPosition) return

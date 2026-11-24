@@ -18,7 +18,7 @@ import { useApp } from '@/app/store'
 import { db } from '@/data/db'
 import { DEFAULT_SETTINGS } from '@/data/repositories/settings'
 import { createShot } from '@/domain/shot'
-import { DEFAULT_THRESHOLDS } from '@/domain/types'
+import { DEFAULT_MARKINGS, DEFAULT_THRESHOLDS } from '@/domain/types'
 import { frischeDatenbank, zeige } from '@/test/zeige'
 import type { Shot } from '@/domain/types'
 import { TrainPage } from './TrainPage'
@@ -93,5 +93,22 @@ describe('Eine Einheit abschliessen', () => {
     await userEvent.click(await screen.findByRole('button', { name: 'Eingelocht' }))
 
     expect(await db.sessions.count()).toBe(0)
+  })
+})
+
+describe('Markierungen beim Training', () => {
+  it('folgt den Einstellungen, nicht einer eigenen Vorgabe', async () => {
+    useApp.setState({
+      settings: {
+        ...DEFAULT_SETTINGS,
+        activePlayerId: 'p1',
+        markings: { ...DEFAULT_MARKINGS, guides: false, breakBox: true },
+      },
+    })
+    zeige(<TrainPage />, ORT)
+    await screen.findByText('Gerader Stoß')
+
+    expect(document.querySelector('[data-ebene="hilfslinien"]')).toBeNull()
+    expect(document.querySelector('[data-ebene="breakbox"]')).toBeTruthy()
   })
 })

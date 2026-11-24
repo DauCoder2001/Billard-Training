@@ -11,7 +11,7 @@ import { deleteShot, saveShot } from '@/data/repositories/shots'
 import { castToRail } from '@/domain/geometry'
 import { applyRack, shuffleObjectBalls } from '@/domain/rack'
 import { createShot, duplicateShot, mirrorShot } from '@/domain/shot'
-import type { BallPath, Point } from '@/domain/types'
+import type { BallPath, Markings, Point } from '@/domain/types'
 import { useDialogs } from '@/ui/Dialogs'
 import { AttributesPanel } from './AttributesPanel'
 import { BuilderCanvas } from './BuilderCanvas'
@@ -41,10 +41,6 @@ export function BuilderPage() {
   const canRedo = useBuilder((s) => s.future.length > 0)
 
   const [loaded, setLoaded] = useState(false)
-  // Die Hilfslinien sind der Normalfall, das Punkteraster der Zusatz: am
-  // Tisch wird nach Diamanten gerechnet, nicht nach Millimeterpapier.
-  const [showGuides, setShowGuides] = useState(true)
-  const [showGrid, setShowGrid] = useState(false)
   const [showAim, setShowAim] = useState(true)
   const [shareOpen, setShareOpen] = useState(false)
   const [panelOpen, setPanelOpen] = useState(true)
@@ -296,6 +292,16 @@ export function BuilderPage() {
     ohneNachfrage(() => navigate('/library', { replace: true }))
   }
 
+  /**
+   * Die beiden Schalter der Werkzeugleiste sind dieselben wie in den
+   * Einstellungen - was hier umgelegt wird, bleibt umgelegt. Dasselbe tut
+   * der Knopf fuer die Ausrichtung schon lange.
+   */
+  const markierung = async (feld: keyof Markings, an: boolean) => {
+    const fehler = await patchSettings({ markings: { ...settings.markings, [feld]: an } })
+    if (fehler) dialogs.toast(`Nicht gespeichert: ${fehler}`, 'error')
+  }
+
   const ausrichten = async () => {
     const fehler = await patchSettings({
       orientation: settings.orientation === 'landscape' ? 'portrait' : 'landscape',
@@ -378,18 +384,18 @@ export function BuilderPage() {
           <Tool active={mode === 'zone'} label="Zielzone" icon="◎" onClick={() => useBuilder.getState().setMode('zone')} />
           <div className="builder__sep" />
           <Tool
-            active={showGuides}
+            active={settings.markings.guides}
             label="Hilfslinien"
             icon="⊞"
-            title="Linien von Diamant zu Diamant, Anstoßfeld und Dreieck am Fußpunkt"
-            onClick={() => setShowGuides((v) => !v)}
+            title="Linien von Diamant zu Diamant. Weitere Markierungen in den Einstellungen."
+            onClick={() => void markierung('guides', !settings.markings.guides)}
           />
           <Tool
-            active={showGrid}
+            active={settings.markings.grid}
             label="Raster"
             icon="⋯"
             title="Feines Punkteraster im Abstand des Einrastens"
-            onClick={() => setShowGrid((v) => !v)}
+            onClick={() => void markierung('grid', !settings.markings.grid)}
           />
           <Tool active={showAim} label="Ziellinie" icon="⌖" onClick={() => setShowAim((v) => !v)} />
           <div className="builder__sep" />
@@ -403,12 +409,7 @@ export function BuilderPage() {
         </div>
 
         <div className="builder__stage">
-          <BuilderCanvas
-            orientation={orientation}
-            showGrid={showGrid}
-            showGuides={showGuides}
-            showAim={showAim}
-          />
+          <BuilderCanvas orientation={orientation} showAim={showAim} />
         </div>
       </div>
 

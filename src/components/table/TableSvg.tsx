@@ -4,12 +4,27 @@ import { forwardRef, type PointerEvent as ReactPointerEvent, type ReactNode } fr
 import { BREAK_BOX, DIAGRAM, POCKETS, POCKET_BY_ID, TABLE, diamondLines, diamonds } from '@/domain/geometry'
 import type { Pocket } from '@/domain/geometry'
 import { rackOutline } from '@/domain/rack'
-import type { Point } from '@/domain/types'
+import type { Markings, Point } from '@/domain/types'
 import { contrastInk, shade } from './colors'
 import { OrientationContext, flipY, rotationFor, viewBoxFor, type Orientation } from './space'
 
 /** Breite der sichtbaren Bandenkante am Tuchrand. */
 const CUSHION = 1.35
+
+/**
+ * Das ruhige Bild eines festen Diagramms: ein Tisch mit seinen eigenen
+ * Markierungen, ohne Zeichenhilfen. Wer den Tisch als Arbeitsflaeche nutzt -
+ * Baukasten und Training -, reicht die Einstellungen des Nutzers herein.
+ */
+const DIAGRAMM: Markings = {
+  diamonds: true,
+  headString: true,
+  spots: true,
+  guides: false,
+  breakBox: false,
+  rackOutline: false,
+  grid: false,
+}
 
 interface CushionSegment {
   /** Anfang und Ende auf der Bandenlinie, jeweils eine Taschenbacke. */
@@ -56,14 +71,8 @@ interface TableSvgProps {
   orientation?: Orientation
   clothColor?: string
   railColor?: string
-  showDiamonds?: boolean
-  showMarkings?: boolean
-  /** Linien von Diamant zu Diamant, laengs und quer ueber den Tisch. */
-  showGuides?: boolean
-  /** Das Feld, in dem der Weisse beim Anstoss liegen darf. */
-  showBreakBox?: boolean
-  /** Der Umriss des Dreiecks am Fusspunkt. */
-  showRackOutline?: boolean
+  /** Was zu sehen ist. Fehlendes bleibt beim ruhigen Diagramm. */
+  markings?: Partial<Markings>
   className?: string
   interactive?: boolean
   onPointerDown?: (e: ReactPointerEvent<SVGSVGElement>) => void
@@ -81,11 +90,7 @@ export const TableSvg = forwardRef<SVGGElement, TableSvgProps>(function TableSvg
     orientation = 'landscape',
     clothColor = '#3f92d2',
     railColor = '#e7eaee',
-    showDiamonds = true,
-    showMarkings = true,
-    showGuides = false,
-    showBreakBox = false,
-    showRackOutline = false,
+    markings,
     className,
     interactive = false,
     onPointerDown,
@@ -95,7 +100,8 @@ export const TableSvg = forwardRef<SVGGElement, TableSvgProps>(function TableSvg
   },
   ref,
 ) {
-  const diamondList = showDiamonds ? diamonds() : []
+  const sicht = { ...DIAGRAMM, ...markings }
+  const diamondList = sicht.diamonds ? diamonds() : []
 
   // Alles Weitere folgt aus den beiden gewaehlten Farben, damit das Bild bei
   // jeder Tuch- und Rahmenfarbe stimmig bleibt.
@@ -173,7 +179,7 @@ export const TableSvg = forwardRef<SVGGElement, TableSvgProps>(function TableSvg
 
             {/* Zeichenhilfen liegen unter den Markierungen des Tisches: die
                 Kopflinie bleibt die kraeftigste Linie auf dem Tuch. */}
-            {showGuides && (
+            {sicht.guides && (
               <g
                 data-ebene="hilfslinien"
                 pointerEvents="none"
@@ -186,7 +192,7 @@ export const TableSvg = forwardRef<SVGGElement, TableSvgProps>(function TableSvg
                 ))}
               </g>
             )}
-            {showBreakBox && (
+            {sicht.breakBox && (
               <rect
                 data-ebene="breakbox"
                 pointerEvents="none"
@@ -201,7 +207,7 @@ export const TableSvg = forwardRef<SVGGElement, TableSvgProps>(function TableSvg
                 opacity={0.55}
               />
             )}
-            {showRackOutline && (
+            {sicht.rackOutline && (
               <polygon
                 data-ebene="dreieck"
                 pointerEvents="none"
@@ -215,7 +221,7 @@ export const TableSvg = forwardRef<SVGGElement, TableSvgProps>(function TableSvg
               />
             )}
 
-            {showMarkings && (
+            {sicht.headString && (
               <line
                 x1={TABLE.headString}
                 y1={0}
@@ -226,7 +232,7 @@ export const TableSvg = forwardRef<SVGGElement, TableSvgProps>(function TableSvg
                 opacity={0.5}
               />
             )}
-            {showMarkings && (
+            {sicht.spots && (
               <>
                 <Spot at={TABLE.headSpot} r={0.7} ink={markingColor} />
                 {/* Am Fusspunkt wird aufgebaut, deshalb eine Spur groesser. */}

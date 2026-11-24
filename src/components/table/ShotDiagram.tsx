@@ -43,8 +43,7 @@ export function ShotDiagram({
       orientation={orientation}
       clothColor={clothColor}
       railColor={railColor}
-      showDiamonds={showDiamonds}
-      showMarkings={showMarkings}
+      markings={{ diamonds: showDiamonds, headString: showMarkings, spots: showMarkings }}
       className={className}
     >
       {showZone && <TargetZoneLayer zone={shot.scoring.targetZone} />}

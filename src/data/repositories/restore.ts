@@ -34,6 +34,7 @@ import {
 import { MAX_POINTS } from '@/domain/scoring'
 import { sanitizeShot, sanitizeThresholds } from '@/domain/share'
 import {
+  DEFAULT_MARKINGS,
   MAX_ATTEMPTS,
   MIN_ATTEMPTS,
   PROFICIENCY_LABELS,
@@ -42,6 +43,7 @@ import {
 } from '@/domain/types'
 import type {
   Attempt,
+  Markings,
   Player,
   Proficiency,
   Session,
@@ -191,6 +193,16 @@ export function restoreWorkouts(raw: unknown[]): Workout[] {
   })
 }
 
+/** Die Markierungen einzeln pruefen: fehlt eine, gilt der Standard. */
+export function sanitizeMarkings(raw: unknown): Markings {
+  const m = fields(raw)
+  const out = { ...DEFAULT_MARKINGS }
+  for (const feld of Object.keys(out) as (keyof Markings)[]) {
+    out[feld] = bool(m[feld], DEFAULT_MARKINGS[feld])
+  }
+  return out
+}
+
 /**
  * Einstellungen. Fehlendes bleibt beim Standard - die Einstellungen sind das
  * eine, was auch ohne Sicherung einen gueltigen Stand hat.
@@ -208,6 +220,7 @@ export function restoreSettings(raw: unknown): Settings {
     // 0 heisst: kein Raster. Eine Zahl, die keine ist, ergaebe im Baukasten
     // Koordinaten von NaN und damit ein leeres Diagramm.
     snapStep: num(s.snapStep, 0, TABLE.width, DEFAULT_SETTINGS.snapStep),
+    markings: sanitizeMarkings(s.markings),
     defaultThresholds: sanitizeThresholds(s.defaultThresholds),
     defaultTargetRadius: num(s.defaultTargetRadius, 2, 20, DEFAULT_SETTINGS.defaultTargetRadius),
     seededVersion: int(s.seededVersion, 0, 1_000_000, DEFAULT_SETTINGS.seededVersion),

@@ -13,17 +13,10 @@ import { useBuilder } from './store'
 
 interface BuilderCanvasProps {
   orientation: Orientation
-  showGrid: boolean
-  showGuides: boolean
   showAim: boolean
 }
 
-export function BuilderCanvas({
-  orientation,
-  showGrid,
-  showGuides,
-  showAim,
-}: BuilderCanvasProps) {
+export function BuilderCanvas({ orientation, showAim }: BuilderCanvasProps) {
   const spaceRef = useRef<SVGGElement>(null)
   const settings = useApp((s) => s.settings)
 
@@ -205,15 +198,13 @@ export function BuilderCanvas({
       orientation={orientation}
       clothColor={settings.clothColor}
       railColor={settings.railColor}
-      showGuides={showGuides}
-      showBreakBox={showGuides}
-      showRackOutline={showGuides}
+      markings={settings.markings}
       interactive
       onPointerDown={onSurfaceDown}
       onPointerMove={onMove}
       onPointerUp={onUp}
     >
-      {showGrid && <GridLayer step={settings.snapStep} />}
+      {settings.markings.grid && <GridLayer step={settings.snapStep} />}
       <TargetZoneLayer zone={zone} />
       {/* Die unsichtbaren Ziehflaechen gibt es nur im Auswahlmodus. Sonst
           wuerden sie Tippen zum Setzen von Baellen und Wegpunkten schlucken. */}
