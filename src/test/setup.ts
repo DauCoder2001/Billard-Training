@@ -17,3 +17,27 @@
  */
 
 import 'fake-indexeddb/auto'
+
+/*
+ * <dialog> nachruesten.
+ *
+ * jsdom kennt das Element samt seiner Marke "open" und blendet es ohne sie
+ * aus - nur showModal(), show() und close() fehlen (Stand jsdom 31). Alle
+ * Dialoge der App haengen daran (ui/Modal.tsx). Nachgebaut wird nur, was der
+ * Test braucht: auf- und zuklappen. Die Dinge, fuer die ein echtes <dialog>
+ * da ist - oberste Ebene, Fokusfalle, Escape, die Seite dahinter sperren -,
+ * entstehen im Browser und bleiben hier aussen vor.
+ */
+if (typeof HTMLDialogElement !== 'undefined' && !HTMLDialogElement.prototype.showModal) {
+  const auf = function (this: HTMLDialogElement) {
+    this.open = true
+  }
+  HTMLDialogElement.prototype.showModal = auf
+  HTMLDialogElement.prototype.show = auf
+  HTMLDialogElement.prototype.close = function (this: HTMLDialogElement, wert?: string) {
+    if (!this.open) return
+    this.open = false
+    if (wert !== undefined) this.returnValue = wert
+    this.dispatchEvent(new Event('close'))
+  }
+}

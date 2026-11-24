@@ -6,6 +6,17 @@ Die Versionsnummer steht an genau einer Stelle — in `package.json` — und ers
 unten auf der Seite **Einstellungen** sowie auf der Fehlerseite. Schema:
 `Hauptversion.Funktion.Korrektur`.
 
+## 0.8.2 – 24.11.2026
+
+### Innen
+- **Die vier wichtigsten Abläufe der Oberfläche werden jetzt automatisch
+  geprüft:** eine Sicherung einspielen, einen mitgelieferten Stoß übernehmen und
+  löschen, dieselbe Löschregel auf der Stoßseite, und eine Trainingseinheit von
+  Hand durchspielen und abschließen. Zusammen mit der Ergebnisseite aus 0.8.1
+  sind das 19 Prüfungen an fünf Seiten. Jede davon wurde gegengeprüft: gegen den
+  jeweils alten Stand des Programms fällt sie durch. Am Programm selbst ändert
+  sich nichts.
+
 ## 0.8.1 – 24.11.2026
 
 ### Innen
