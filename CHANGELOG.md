@@ -6,6 +6,16 @@ Die Versionsnummer steht an genau einer Stelle — in `package.json` — und ers
 unten auf der Seite **Einstellungen** sowie auf der Fehlerseite. Schema:
 `Hauptversion.Funktion.Korrektur`.
 
+## 0.8.5 – 24.11.2026
+
+### Innen
+- **Eine ungenutzte Funktion zum Umbenennen entfernt.** Sie stand in der
+  Datenschicht, wurde von nirgends aufgerufen – und hätte, wenn man sie später
+  angeschlossen hätte, die Regel aus 0.7.0 unterlaufen: eine umbenannte
+  mitgelieferte Übung wäre weiterhin als mitgeliefert gezählt worden und hätte
+  beim nächsten Einspielen der Sammlung ihren alten Namen zurückbekommen. Am
+  Programm ändert sich nichts.
+
 ## 0.8.4 – 24.11.2026
 
 ### Innen

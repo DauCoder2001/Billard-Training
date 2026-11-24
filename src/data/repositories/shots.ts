@@ -35,8 +35,3 @@ export async function toggleFavorite(id: string): Promise<void> {
   await db.shots.put({ ...shot, favorite: !shot.favorite })
 }
 
-export async function renameShot(id: string, name: string): Promise<void> {
-  const shot = await db.shots.get(id)
-  if (!shot) return
-  await db.shots.put({ ...shot, name, updatedAt: Date.now() })
-}
