@@ -7,9 +7,9 @@
 
 import { describe, expect, it } from 'vitest'
 import { POCKETS, TABLE, ballsOverlap, distance } from './geometry'
-import { applyRack, rackBalls, shuffleObjectBalls } from './rack'
+import { applyRack, rackBalls, rackOutline, shuffleObjectBalls } from './rack'
 import { createShot, newId } from './shot'
-import type { Ball, Shot } from './types'
+import type { Ball, Point, Shot } from './types'
 
 /** Feste Zufallsfolge, damit der Test immer dieselbe Lage prueft. */
 function folge(saat: number): () => number {
@@ -190,5 +190,43 @@ describe('Die Zufallslage', () => {
     }))
     const gemischt = shuffleObjectBalls({ ...basis, balls: viele }, folge(5))
     expect(gemischt.balls.every(aufDemTisch)).toBe(true)
+  })
+})
+
+describe('Der Umriss des Dreiecks', () => {
+  /** Vorzeichenbehafteter Abstand von der Geraden a->b. */
+  function kantenabstand(p: Point, a: Point, b: Point): number {
+    const dx = b.x - a.x
+    const dy = b.y - a.y
+    return ((p.x - a.x) * dy - (p.y - a.y) * dx) / Math.hypot(dx, dy)
+  }
+
+  it('fasst jede Kugel des vollen Dreiecks ganz ein', () => {
+    const [A, B, C] = rackOutline()
+    const kanten: [Point, Point][] = [
+      [A, B],
+      [B, C],
+      [C, A],
+    ]
+    for (const ball of rackBalls('eight')) {
+      const abstaende = kanten.map(([a, b]) => kantenabstand(ball, a, b))
+      const drin =
+        abstaende.every((d) => d >= TABLE.ballRadius - 1e-9) ||
+        abstaende.every((d) => d <= -TABLE.ballRadius + 1e-9)
+      expect(drin).toBe(true)
+    }
+  })
+
+  it('sitzt mit der Spitze vor dem Fusspunkt und bleibt auf dem Tuch', () => {
+    const ecken = rackOutline()
+    const spitze = ecken.reduce((a, b) => (a.x < b.x ? a : b))
+    expect(spitze.x).toBeLessThan(TABLE.footSpot.x)
+    expect(spitze.y).toBeCloseTo(TABLE.footSpot.y, 6)
+    for (const e of ecken) {
+      expect(e.x).toBeGreaterThan(0)
+      expect(e.x).toBeLessThan(TABLE.length)
+      expect(e.y).toBeGreaterThan(0)
+      expect(e.y).toBeLessThan(TABLE.width)
+    }
   })
 })

@@ -1,8 +1,9 @@
 /** Das Tischdiagramm. Alles darin rechnet in Tischkoordinaten (Zoll). */
 
 import { forwardRef, type PointerEvent as ReactPointerEvent, type ReactNode } from 'react'
-import { DIAGRAM, POCKETS, POCKET_BY_ID, TABLE, diamonds } from '@/domain/geometry'
+import { BREAK_BOX, DIAGRAM, POCKETS, POCKET_BY_ID, TABLE, diamondLines, diamonds } from '@/domain/geometry'
 import type { Pocket } from '@/domain/geometry'
+import { rackOutline } from '@/domain/rack'
 import type { Point } from '@/domain/types'
 import { contrastInk, shade } from './colors'
 import { OrientationContext, flipY, rotationFor, viewBoxFor, type Orientation } from './space'
@@ -57,6 +58,12 @@ interface TableSvgProps {
   railColor?: string
   showDiamonds?: boolean
   showMarkings?: boolean
+  /** Linien von Diamant zu Diamant, laengs und quer ueber den Tisch. */
+  showGuides?: boolean
+  /** Das Feld, in dem der Weisse beim Anstoss liegen darf. */
+  showBreakBox?: boolean
+  /** Der Umriss des Dreiecks am Fusspunkt. */
+  showRackOutline?: boolean
   className?: string
   interactive?: boolean
   onPointerDown?: (e: ReactPointerEvent<SVGSVGElement>) => void
@@ -76,6 +83,9 @@ export const TableSvg = forwardRef<SVGGElement, TableSvgProps>(function TableSvg
     railColor = '#e7eaee',
     showDiamonds = true,
     showMarkings = true,
+    showGuides = false,
+    showBreakBox = false,
+    showRackOutline = false,
     className,
     interactive = false,
     onPointerDown,
@@ -160,6 +170,50 @@ export const TableSvg = forwardRef<SVGGElement, TableSvgProps>(function TableSvg
                 <polygon key={i} points={cushionPoints(seg)} />
               ))}
             </g>
+
+            {/* Zeichenhilfen liegen unter den Markierungen des Tisches: die
+                Kopflinie bleibt die kraeftigste Linie auf dem Tuch. */}
+            {showGuides && (
+              <g
+                data-ebene="hilfslinien"
+                pointerEvents="none"
+                stroke={markingColor}
+                strokeWidth={0.12}
+                opacity={0.4}
+              >
+                {diamondLines().map(([a, b], i) => (
+                  <line key={i} x1={a.x} y1={flipY(a.y)} x2={b.x} y2={flipY(b.y)} />
+                ))}
+              </g>
+            )}
+            {showBreakBox && (
+              <rect
+                data-ebene="breakbox"
+                pointerEvents="none"
+                x={BREAK_BOX.x}
+                y={flipY(BREAK_BOX.y + BREAK_BOX.height)}
+                width={BREAK_BOX.width}
+                height={BREAK_BOX.height}
+                fill="none"
+                stroke={markingColor}
+                strokeWidth={0.22}
+                strokeDasharray="1.6 1.2"
+                opacity={0.55}
+              />
+            )}
+            {showRackOutline && (
+              <polygon
+                data-ebene="dreieck"
+                pointerEvents="none"
+                points={rackOutline()
+                  .map((p) => `${p.x},${flipY(p.y)}`)
+                  .join(' ')}
+                fill="none"
+                stroke={markingColor}
+                strokeWidth={0.22}
+                opacity={0.5}
+              />
+            )}
 
             {showMarkings && (
               <line

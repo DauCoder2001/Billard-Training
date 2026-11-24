@@ -72,6 +72,35 @@ export function applyRack(shot: Shot, kind: RackKind): Shot {
   }
 }
 
+/**
+ * Der Umriss des Dreiecks am Fusspunkt - dort, wo aufgebaut wird. Gemeint
+ * ist immer das volle Dreieck, auch wenn gerade eine Raute auf dem Tisch
+ * steht: der Umriss zeigt den Platz, nicht den Inhalt.
+ *
+ * Die drei Ecken liegen um einen Kugelradius weiter aussen als die Kugeln
+ * selbst. Weil das Dreieck gleichseitig ist, waechst sein Inkreis genau um
+ * diesen Radius - ein Streckfaktor um den Schwerpunkt genuegt dafuer.
+ */
+export function rackOutline(): [Point, Point, Point] {
+  const zeilen = DREIECK.length - 1
+  const halbe = (DREIECK[DREIECK.length - 1].length - 1) / 2
+  const ecken: Point[] = [
+    { x: TABLE.footSpot.x, y: TABLE.footSpot.y },
+    { x: TABLE.footSpot.x + zeilen * REIHE, y: TABLE.footSpot.y - halbe * SCHRITT },
+    { x: TABLE.footSpot.x + zeilen * REIHE, y: TABLE.footSpot.y + halbe * SCHRITT },
+  ]
+  const mitte = {
+    x: (ecken[0].x + ecken[1].x + ecken[2].x) / 3,
+    y: (ecken[0].y + ecken[1].y + ecken[2].y) / 3,
+  }
+  const inkreis = (zeilen * SCHRITT) / (2 * Math.sqrt(3))
+  const faktor = (inkreis + TABLE.ballRadius) / inkreis
+  return ecken.map((e) => ({
+    x: mitte.x + (e.x - mitte.x) * faktor,
+    y: mitte.y + (e.y - mitte.y) * faktor,
+  })) as [Point, Point, Point]
+}
+
 // ------------------------------------------------------------ Zufallslage ---
 
 /** Abstand, den eine Kugel von einer Taschenmitte halten soll. */

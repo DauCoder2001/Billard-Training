@@ -41,7 +41,10 @@ export function BuilderPage() {
   const canRedo = useBuilder((s) => s.future.length > 0)
 
   const [loaded, setLoaded] = useState(false)
-  const [showGrid, setShowGrid] = useState(true)
+  // Die Hilfslinien sind der Normalfall, das Punkteraster der Zusatz: am
+  // Tisch wird nach Diamanten gerechnet, nicht nach Millimeterpapier.
+  const [showGuides, setShowGuides] = useState(true)
+  const [showGrid, setShowGrid] = useState(false)
   const [showAim, setShowAim] = useState(true)
   const [shareOpen, setShareOpen] = useState(false)
   const [panelOpen, setPanelOpen] = useState(true)
@@ -374,7 +377,20 @@ export function BuilderPage() {
           <Tool active={mode === 'path'} label="Weg" icon="↗" onClick={() => useBuilder.getState().setMode('path')} />
           <Tool active={mode === 'zone'} label="Zielzone" icon="◎" onClick={() => useBuilder.getState().setMode('zone')} />
           <div className="builder__sep" />
-          <Tool active={showGrid} label="Raster" icon="⋯" onClick={() => setShowGrid((v) => !v)} />
+          <Tool
+            active={showGuides}
+            label="Hilfslinien"
+            icon="⊞"
+            title="Linien von Diamant zu Diamant, Anstoßfeld und Dreieck am Fußpunkt"
+            onClick={() => setShowGuides((v) => !v)}
+          />
+          <Tool
+            active={showGrid}
+            label="Raster"
+            icon="⋯"
+            title="Feines Punkteraster im Abstand des Einrastens"
+            onClick={() => setShowGrid((v) => !v)}
+          />
           <Tool active={showAim} label="Ziellinie" icon="⌖" onClick={() => setShowAim((v) => !v)} />
           <div className="builder__sep" />
           <Tool
@@ -387,7 +403,12 @@ export function BuilderPage() {
         </div>
 
         <div className="builder__stage">
-          <BuilderCanvas orientation={orientation} showGrid={showGrid} showAim={showAim} />
+          <BuilderCanvas
+            orientation={orientation}
+            showGrid={showGrid}
+            showGuides={showGuides}
+            showAim={showAim}
+          />
         </div>
       </div>
 

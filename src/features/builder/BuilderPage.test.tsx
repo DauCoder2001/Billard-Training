@@ -50,6 +50,36 @@ describe('Baukasten an einem mitgelieferten Stoss', () => {
   })
 })
 
+describe('Hilfslinien und Raster', () => {
+  const ebene = (name: string) => document.querySelector(`[data-ebene="${name}"]`)
+
+  it('zeigt die Hilfslinien von Anfang an, das Punkteraster aber nicht', async () => {
+    await db.shots.add(createShot({ id: 's1', name: 'Mein Stoß' }))
+    zeige(<BuilderPage />, ORT)
+    await screen.findByRole('button', { name: 'Hilfslinien' })
+
+    expect(ebene('hilfslinien')).toBeTruthy()
+    expect(ebene('breakbox')).toBeTruthy()
+    expect(ebene('dreieck')).toBeTruthy()
+    expect(ebene('raster')).toBeNull()
+  })
+
+  it('schaltet beide Ebenen einzeln', async () => {
+    await db.shots.add(createShot({ id: 's1', name: 'Mein Stoß' }))
+    zeige(<BuilderPage />, ORT)
+
+    await userEvent.click(await screen.findByRole('button', { name: 'Hilfslinien' }))
+    expect(ebene('hilfslinien')).toBeNull()
+    expect(ebene('breakbox')).toBeNull()
+    expect(ebene('dreieck')).toBeNull()
+
+    await userEvent.click(screen.getByRole('button', { name: 'Raster' }))
+    expect(ebene('raster')).toBeTruthy()
+    // Das Einrasten haengt an den Einstellungen, nicht an dieser Anzeige.
+    expect(useApp.getState().settings.snapToGrid).toBe(DEFAULT_SETTINGS.snapToGrid)
+  })
+})
+
 describe('Aufbauen mit einem Griff', () => {
   const objektbaelle = () => useBuilder.getState().shot.balls.filter((b) => b.kind === 'object')
 

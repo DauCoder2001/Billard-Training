@@ -1,5 +1,6 @@
 import { describe, expect, it } from 'vitest'
 import {
+  BREAK_BOX,
   POCKET_BY_ID,
   TABLE,
   bankPath,
@@ -7,6 +8,7 @@ import {
   clampBall,
   controlThrough,
   cutAngle,
+  diamondLines,
   diamonds,
   ghostBall,
   maxCheatOffset,
@@ -160,5 +162,43 @@ describe('Kurvengriffe', () => {
     const back = pointOnCurve(p0, control, p1)
     expect(back.x).toBeCloseTo(through.x, 6)
     expect(back.y).toBeCloseTo(through.y, 6)
+  })
+})
+
+describe('Hilfslinien und Anstossfeld', () => {
+  it('zieht die Linien von Diamant zu Diamant, quer wie laengs', () => {
+    const linien = diamondLines()
+    // Sieben laengs (die Mittellinie zaehlt mit), drei quer.
+    expect(linien).toHaveLength(10)
+
+    const laengs = linien.filter(([a, b]) => a.x === b.x)
+    expect(laengs.map(([a]) => a.x)).toEqual([12.5, 25, 37.5, 50, 62.5, 75, 87.5])
+    expect(laengs.every(([a, b]) => a.y === 0 && b.y === TABLE.width)).toBe(true)
+
+    const quer = linien.filter(([a, b]) => a.y === b.y)
+    expect(quer.map(([a]) => a.y)).toEqual([12.5, 25, 37.5])
+    expect(quer.every(([a, b]) => a.x === 0 && b.x === TABLE.length)).toBe(true)
+  })
+
+  it('legt die Linien auf die Diamanten selbst', () => {
+    const punkte = diamonds()
+    for (const [a, b] of diamondLines()) {
+      const treffer =
+        a.x === b.x
+          ? punkte.some((d) => d.rail === 'bottom' && d.x === a.x)
+          : punkte.some((d) => d.rail === 'left' && d.y === a.y)
+      // Ausnahme: an der Mitteltasche sitzt kein Diamant, die Mittellinie
+      // laeuft trotzdem von Tasche zu Tasche.
+      expect(treffer || a.x === TABLE.length / 2).toBe(true)
+    }
+  })
+
+  it('begrenzt das Anstossfeld mit Kopflinie und zweitem Diamanten', () => {
+    expect(BREAK_BOX.x).toBe(0)
+    expect(BREAK_BOX.width).toBe(TABLE.headString)
+    // Oben und unten der jeweils zweite Diamant der Laengsbande.
+    expect(BREAK_BOX.y).toBe(TABLE.diamondSpacing)
+    expect(BREAK_BOX.y + BREAK_BOX.height).toBe(TABLE.width - TABLE.diamondSpacing)
+    expect(BREAK_BOX.height).toBe(25)
   })
 })

@@ -155,6 +155,40 @@ export function diamonds(): Diamond[] {
   return out
 }
 
+/**
+ * Die Linien von Diamant zu Diamant, laengs und quer ueber die Spielflaeche.
+ * Danach rechnet jeder am Tisch - Bandenspiel, Ausspielzonen, Drittel. Die
+ * Linie durch die Mitteltaschen ist dabei, sie ist die Mittellinie.
+ */
+export function diamondLines(): [Point, Point][] {
+  const out: [Point, Point][] = []
+  for (let x = TABLE.diamondSpacing; x < TABLE.length; x += TABLE.diamondSpacing) {
+    out.push([
+      { x, y: 0 },
+      { x, y: TABLE.width },
+    ])
+  }
+  for (let y = TABLE.diamondSpacing; y < TABLE.width; y += TABLE.diamondSpacing) {
+    out.push([
+      { x: 0, y },
+      { x: TABLE.length, y },
+    ])
+  }
+  return out
+}
+
+/**
+ * Die Break Box: das Feld, in dem der Weisse beim Anstoss liegen darf.
+ * Begrenzt von der Kopfbande, der Kopflinie und den jeweils zweiten
+ * Diamanten der beiden Laengsbanden.
+ */
+export const BREAK_BOX = {
+  x: 0,
+  y: TABLE.diamondSpacing,
+  width: TABLE.headString,
+  height: TABLE.width - 2 * TABLE.diamondSpacing,
+} as const
+
 // --------------------------------------------------------------- Helfer ----
 
 export function clamp(v: number, min: number, max: number): number {

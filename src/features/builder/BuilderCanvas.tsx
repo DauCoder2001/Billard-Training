@@ -14,10 +14,16 @@ import { useBuilder } from './store'
 interface BuilderCanvasProps {
   orientation: Orientation
   showGrid: boolean
+  showGuides: boolean
   showAim: boolean
 }
 
-export function BuilderCanvas({ orientation, showGrid, showAim }: BuilderCanvasProps) {
+export function BuilderCanvas({
+  orientation,
+  showGrid,
+  showGuides,
+  showAim,
+}: BuilderCanvasProps) {
   const spaceRef = useRef<SVGGElement>(null)
   const settings = useApp((s) => s.settings)
 
@@ -199,6 +205,9 @@ export function BuilderCanvas({ orientation, showGrid, showAim }: BuilderCanvasP
       orientation={orientation}
       clothColor={settings.clothColor}
       railColor={settings.railColor}
+      showGuides={showGuides}
+      showBreakBox={showGuides}
+      showRackOutline={showGuides}
       interactive
       onPointerDown={onSurfaceDown}
       onPointerMove={onMove}
@@ -277,7 +286,7 @@ const GridLayer = memo(function GridLayer({ step }: { step: number }) {
 
   if (dots.length === 0) return null
   return (
-    <g pointerEvents="none" fill="#ffffff" opacity={0.13}>
+    <g data-ebene="raster" pointerEvents="none" fill="#ffffff" opacity={0.13}>
       {dots.map((d, i) => (
         <circle key={i} cx={d.x} cy={flipY(d.y)} r={0.18} />
       ))}

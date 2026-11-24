@@ -6,6 +6,27 @@ Die Versionsnummer steht an genau einer Stelle — in `package.json` — und ers
 unten auf der Seite **Einstellungen** sowie auf der Fehlerseite. Schema:
 `Hauptversion.Funktion.Korrektur`.
 
+## 0.11.0 – 24.11.2026
+
+### Neu
+- **Linien statt Raster im Baukasten.** Wo bisher eine Punktewolke lag, liegen
+  jetzt dünne Linien von Diamant zu Diamant – sieben längs, drei quer. Das ist
+  das Netz, nach dem am Tisch tatsächlich gerechnet wird: Bandenspiel,
+  Systeme, Ausspielzonen. Die Punkte waren ein Hilfsmittel aus dem
+  Zeichenprogramm, die Linien sind eine Eigenschaft des Tisches.
+- **Anstoßfeld und Dreieck.** Dazu gehören zwei weitere feine Markierungen:
+  das Feld, in dem der Weiße beim Anstoß liegen darf (Kopfbande, Kopflinie und
+  die jeweils zweiten Diamanten), und der Umriss des vollen Dreiecks am
+  Fußpunkt – er zeigt den Platz, auch wenn gerade keine Kugeln darin stehen.
+- Beides schaltet der Knopf **Hilfslinien** in der Werkzeugleiste, und er ist
+  von Anfang an an. Das **Punkteraster** gibt es weiterhin, aber als Zusatz
+  mit eigenem Knopf; es ist jetzt zunächst aus.
+
+### Hinweis
+- Am **Einrasten** ändert sich nichts: es hängt weiter an der Rasterweite in
+  den Einstellungen und wirkt auch dann, wenn die Punkte nicht zu sehen sind.
+  Wer sie sehen will, schaltet „Raster" dazu.
+
 ## 0.10.0 – 24.11.2026
 
 ### Neu
