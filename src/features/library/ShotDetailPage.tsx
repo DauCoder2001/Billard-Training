@@ -24,6 +24,7 @@ import {
 import { ProficiencyBadge, SkillChips, Stat } from '@/ui/bits'
 import { useDialogs } from '@/ui/Dialogs'
 import { Sparkline } from '@/features/stats/charts'
+import { TemplateDialog } from './TemplateDialog'
 
 const FORMATS: { id: SessionFormat; label: string; attempts: number | null }[] = [
   { id: 'quick', label: 'Kurz', attempts: SESSION_ATTEMPTS.quick },
@@ -47,6 +48,7 @@ export function ShotDetailPage() {
   const settings = useApp((s) => s.settings)
   const sessions = useSessions(player?.id ?? null)
   const [shareOpen, setShareOpen] = useState(false)
+  const [vorlageOffen, setVorlageOffen] = useState(false)
 
   const history = useMemo(
     () =>
@@ -83,7 +85,8 @@ export function ShotDetailPage() {
   // Eine uebernommene Uebung, deren Vorlage seither ueberarbeitet wurde.
   // Siehe domain/seedStamp.ts: ohne diesen Hinweis ginge die Korrektur
   // stillschweigend an ihr vorbei.
-  const ueberarbeitet = hasNewerTemplate(shot, seedShotById(shot.id))
+  const vorlage = seedShotById(shot.id)
+  const ueberarbeitet = hasNewerTemplate(shot, vorlage)
 
   const startTraining = async (format: SessionFormat) => {
     let attempts = FORMATS.find((f) => f.id === format)?.attempts ?? null
@@ -136,17 +139,10 @@ export function ShotDetailPage() {
     }
   }
 
+  // Keine eigene Rueckfrage mehr: der Vergleich im Dialog zeigt beide
+  // Fassungen nebeneinander und sagt darueber, was verloren geht.
   const zuruecksetzen = async () => {
-    const ok = await dialogs.confirm({
-      title: 'Auf Vorlage zurücksetzen?',
-      message:
-        'Deine Änderungen an dieser mitgelieferten Übung gehen verloren – Aufbau, ' +
-        'Beschreibung, Hinweis und Schwellen kommen aus der überarbeiteten Vorlage. ' +
-        'Favorit und Trainingshistorie bleiben.',
-      confirmLabel: 'Zurücksetzen',
-      danger: true,
-    })
-    if (!ok) return
+    setVorlageOffen(false)
     try {
       await resetToTemplate(shot.id)
     } catch (err) {
@@ -157,6 +153,7 @@ export function ShotDetailPage() {
   }
 
   const eigeneBehalten = async () => {
+    setVorlageOffen(false)
     try {
       await keepOwnVersion(shot.id)
     } catch (err) {
@@ -198,8 +195,8 @@ export function ShotDetailPage() {
             überarbeitet. Deine Fassung bleibt, solange du nichts anderes sagst.
           </span>
           <div className="row row--tight">
-            <button className="btn btn--sm btn--danger" onClick={() => void zuruecksetzen()}>
-              Auf Vorlage zurücksetzen
+            <button className="btn btn--sm" onClick={() => setVorlageOffen(true)}>
+              Vorlage ansehen
             </button>
             <button className="btn btn--sm" onClick={() => void eigeneBehalten()}>
               Meine Fassung behalten
@@ -327,6 +324,16 @@ export function ShotDetailPage() {
         <Suspense fallback={null}>
           <ShareDialog shot={shot} onClose={() => setShareOpen(false)} />
         </Suspense>
+      )}
+
+      {vorlageOffen && vorlage && (
+        <TemplateDialog
+          shot={shot}
+          template={vorlage}
+          onReset={() => void zuruecksetzen()}
+          onKeep={() => void eigeneBehalten()}
+          onClose={() => setVorlageOffen(false)}
+        />
       )}
     </div>
   )

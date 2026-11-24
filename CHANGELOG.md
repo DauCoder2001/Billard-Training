@@ -6,6 +6,20 @@ Die Versionsnummer steht an genau einer Stelle — in `package.json` — und ers
 unten auf der Seite **Einstellungen** sowie auf der Fehlerseite. Schema:
 `Hauptversion.Funktion.Korrektur`.
 
+## 0.9.1 – 24.11.2026
+
+### Neu
+- **Der Vergleich zur überarbeiteten Vorlage.** Der Hinweis auf der Stoßseite
+  führt jetzt auf *Vorlage ansehen*: ein Fenster zeigt deine Fassung und die
+  Vorlage als zwei Tischbilder nebeneinander und nennt darunter, was anders ist
+  – Ballpositionen und Wege, Name, Beschreibung, Hinweis, Eigenschaften,
+  Bewertung, Schlagwörter. Erst danach kommt die Entscheidung: **Auf Vorlage
+  zurücksetzen**, **Meine Fassung behalten** oder **Später entscheiden**.
+- Die zusätzliche Rückfrage vor dem Zurücksetzen entfällt dadurch: wer die
+  beiden Bilder nebeneinander gesehen hat, weiß besser, was er aufgibt, als
+  jeder Fragetext es sagen könnte. Der Satz, dass Favorit und
+  Trainingshistorie bleiben, steht über den Knöpfen.
+
 ## 0.9.0 – 24.11.2026
 
 ### Neu

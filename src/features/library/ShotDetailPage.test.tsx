@@ -8,7 +8,7 @@
  */
 
 import { beforeEach, describe, expect, it } from 'vitest'
-import { screen, waitFor } from '@testing-library/react'
+import { screen, waitFor, within } from '@testing-library/react'
 import userEvent from '@testing-library/user-event'
 import { useApp } from '@/app/store'
 import { db } from '@/data/db'
@@ -124,12 +124,33 @@ describe('Stossseite: ueberarbeitete Vorlage', () => {
     expect(gespeichert?.seedStamp).toBe(seedShotById(VORLAGE_ID)?.seedStamp)
   })
 
-  it('holt die Vorlage nach Rueckfrage zurueck und behaelt den Favoriten', async () => {
+  it('zeigt beide Fassungen und nennt, was anders ist', async () => {
+    // Die eigene Fassung weicht in Name und Hinweis ab; der Aufbau ist
+    // derselbe. Genau das soll dastehen - nicht mehr und nicht weniger.
+    await db.shots.add(uebernommen('alt'))
+    zeige(<ShotDetailPage />, AM_STOSS)
+
+    await userEvent.click(await screen.findByRole('button', { name: 'Vorlage ansehen' }))
+
+    const dialog = await screen.findByRole('dialog', { name: 'Überarbeitete Vorlage' })
+    expect(within(dialog).getByText('Deine Fassung')).toBeTruthy()
+    expect(within(dialog).getByText('Überarbeitete Vorlage', { selector: 'strong' })).toBeTruthy()
+    // Zwei Tische nebeneinander - das ist der Sinn des Vergleichs.
+    expect(dialog.querySelectorAll('svg').length).toBe(2)
+    expect(within(dialog).getByText('Name')).toBeTruthy()
+    expect(within(dialog).getByText('Hinweis')).toBeTruthy()
+    expect(within(dialog).queryByText('Ballpositionen und Wege')).toBeNull()
+  })
+
+  it('holt die Vorlage aus dem Vergleich zurueck und behaelt den Favoriten', async () => {
     await db.shots.add({ ...uebernommen('alt'), favorite: true })
     zeige(<ShotDetailPage />, AM_STOSS)
 
-    await userEvent.click(await screen.findByRole('button', { name: 'Auf Vorlage zurücksetzen' }))
-    await userEvent.click(await screen.findByRole('button', { name: 'Zurücksetzen' }))
+    await userEvent.click(await screen.findByRole('button', { name: 'Vorlage ansehen' }))
+    const dialog = await screen.findByRole('dialog', { name: 'Überarbeitete Vorlage' })
+    await userEvent.click(
+      within(dialog).getByRole('button', { name: 'Auf Vorlage zurücksetzen' }),
+    )
 
     await waitFor(async () => {
       const gespeichert = await db.shots.get(VORLAGE_ID)
@@ -141,15 +162,34 @@ describe('Stossseite: ueberarbeitete Vorlage', () => {
     expect(gespeichert?.favorite).toBe(true)
   })
 
-  it('setzt bei Abbruch nichts zurueck', async () => {
+  it('behaelt die eigene Fassung auch aus dem Vergleich heraus', async () => {
     await db.shots.add(uebernommen('alt'))
     zeige(<ShotDetailPage />, AM_STOSS)
 
-    await userEvent.click(await screen.findByRole('button', { name: 'Auf Vorlage zurücksetzen' }))
-    await userEvent.click(await screen.findByRole('button', { name: 'Abbrechen' }))
+    await userEvent.click(await screen.findByRole('button', { name: 'Vorlage ansehen' }))
+    const dialog = await screen.findByRole('dialog', { name: 'Überarbeitete Vorlage' })
+    await userEvent.click(within(dialog).getByRole('button', { name: 'Meine Fassung behalten' }))
 
+    await waitFor(() => expect(screen.queryByText(HINWEIS)).toBeNull())
     const gespeichert = await db.shots.get(VORLAGE_ID)
     expect(gespeichert?.name).toBe('Meine Fassung')
+    expect(gespeichert?.seedStamp).toBe(seedShotById(VORLAGE_ID)?.seedStamp)
+  })
+
+  it('aendert nichts, wer spaeter entscheiden will', async () => {
+    await db.shots.add(uebernommen('alt'))
+    zeige(<ShotDetailPage />, AM_STOSS)
+
+    await userEvent.click(await screen.findByRole('button', { name: 'Vorlage ansehen' }))
+    const dialog = await screen.findByRole('dialog', { name: 'Überarbeitete Vorlage' })
+    await userEvent.click(within(dialog).getByRole('button', { name: 'Später entscheiden' }))
+
+    await waitFor(() =>
+      expect(screen.queryByRole('dialog', { name: 'Überarbeitete Vorlage' })).toBeNull(),
+    )
+    const gespeichert = await db.shots.get(VORLAGE_ID)
+    expect(gespeichert?.name).toBe('Meine Fassung')
+    expect(gespeichert?.seedStamp).toBe('alt')
     expect(screen.getByText(HINWEIS)).toBeTruthy()
   })
 })

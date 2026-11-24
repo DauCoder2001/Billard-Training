@@ -84,6 +84,61 @@ export function seedStamp(shot: Shot): string {
 }
 
 /**
+ * Die Bereiche, in denen eine eigene Fassung von ihrer Vorlage abweichen kann.
+ *
+ * In Lesereihenfolge: was auf dem Tisch zu sehen ist, dann die Texte, dann
+ * die Zahlen dahinter. Zusammen decken sie genau die Felder ab, die auch in
+ * den Fingerabdruck eingehen.
+ */
+export const TEMPLATE_AREAS = [
+  'layout',
+  'name',
+  'description',
+  'coachNotes',
+  'attributes',
+  'scoring',
+  'tags',
+] as const
+
+export type TemplateArea = (typeof TEMPLATE_AREAS)[number]
+
+/**
+ * Worin sich die eigene Fassung und die Vorlage unterscheiden.
+ *
+ * Gibt Bereiche zurueck, keine Einzelwerte: "die Ballpositionen sind andere"
+ * hilft beim Entscheiden, eine Liste von Koordinaten nicht. Die Bilder
+ * nebeneinander zeigen den Rest.
+ *
+ * Leer ist das Ergebnis, wenn die eigene Fassung inzwischen wieder genau der
+ * Vorlage entspricht - moeglich, wenn beide Seiten dieselbe Aenderung gemacht
+ * haben. Dann gibt es nichts zu entscheiden.
+ */
+export function templateDifferences(own: Shot, template: Shot): TemplateArea[] {
+  const anders = (a: unknown, b: unknown) => stable(a) !== stable(b)
+  return TEMPLATE_AREAS.filter((bereich) => {
+    switch (bereich) {
+      case 'layout':
+        return anders(
+          [own.balls, own.paths, own.target],
+          [template.balls, template.paths, template.target],
+        )
+      case 'name':
+        return own.name !== template.name
+      case 'description':
+        return own.description !== template.description
+      case 'coachNotes':
+        return own.coachNotes !== template.coachNotes
+      case 'attributes':
+        return anders(own.attributes, template.attributes)
+      case 'scoring':
+        return anders(own.scoring, template.scoring)
+      case 'tags':
+        return anders(own.tags, template.tags)
+    }
+  })
+}
+
+/**
  * Stammt die eigene Fassung von einer aelteren Vorlage ab?
  *
  * Nein, wenn der Stoss noch unveraendert mitgeliefert ist (dann holt ihn die
