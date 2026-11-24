@@ -6,6 +6,15 @@ Die Versionsnummer steht an genau einer Stelle — in `package.json` — und ers
 unten auf der Seite **Einstellungen** sowie auf der Fehlerseite. Schema:
 `Hauptversion.Funktion.Korrektur`.
 
+## 0.13.5 – 24.11.2026
+
+### Innen
+- **Die Seite Stöße hat jetzt eigene Prüfungen** (Befund 70). Sie war die
+  letzte Hauptseite ohne; sieben Prüfungen halten Suchen, Filtern, Zählen,
+  Zurücksetzen, den Klappzustand und beide Sortierungen fest – darunter die
+  Regel, dass nie geübte Stöße bei „Schwächstes zuerst" ans Ende rücken.
+  Am Programm ändert sich nichts.
+
 ## 0.13.4 – 24.11.2026
 
 ### Innen
