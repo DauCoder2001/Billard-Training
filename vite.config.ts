@@ -53,9 +53,37 @@ export default defineConfig({
   // ihm offen. Fuer die Probe auf dem iPad: VITE_HOST=1 npm run dev
   // oder npm run dev -- --host
   server: { host: process.env.VITE_HOST === '1', port: 5173 },
+  /*
+   * Zwei Testprofile nebeneinander, unterschieden an der Dateiendung:
+   *
+   * - .test.ts  rechnet. Reine Funktionen, kein Browser, sehr schnell.
+   * - .test.tsx klickt. Eine Seite wird gezeichnet und bedient; dafuer
+   *   braucht es eine Nachbildung der Browser-Bausteine (jsdom) und eine
+   *   nachgebildete Datenbank (src/test/setup.ts).
+   *
+   * "extends: true" heisst: beide erben den Rest dieser Datei - vor allem
+   * den Kurznamen @ fuer src und den React-Baustein.
+   */
   test: {
-    environment: 'node',
     globals: true,
-    include: ['src/**/*.test.ts'],
+    projects: [
+      {
+        extends: true,
+        test: {
+          name: 'rechnen',
+          environment: 'node',
+          include: ['src/**/*.test.ts'],
+        },
+      },
+      {
+        extends: true,
+        test: {
+          name: 'oberflaeche',
+          environment: 'jsdom',
+          include: ['src/**/*.test.tsx'],
+          setupFiles: ['src/test/setup.ts'],
+        },
+      },
+    ],
   },
 })

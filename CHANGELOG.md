@@ -6,6 +6,16 @@ Die Versionsnummer steht an genau einer Stelle — in `package.json` — und ers
 unten auf der Seite **Einstellungen** sowie auf der Fehlerseite. Schema:
 `Hauptversion.Funktion.Korrektur`.
 
+## 0.8.1 – 24.11.2026
+
+### Innen
+- **Die Bedienoberfläche kann jetzt automatisch geprüft werden.** Bisher prüften
+  die Tests nur den rechnenden Teil – ob eine Seite das Richtige anzeigt, musste
+  von Hand im Browser nachgesehen werden. Neben den bisherigen Tests läuft jetzt
+  ein zweites Profil, das eine Seite zeichnet, bedient und aus einer
+  nachgebildeten Datenbank liest. Den Anfang macht die Ergebnisseite einer
+  Trainingseinheit mit vier Prüfungen. Am Programm selbst ändert sich nichts.
+
 ## 0.8.0 – 24.11.2026
 
 ### Geändert
