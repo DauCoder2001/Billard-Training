@@ -6,6 +6,48 @@ Die Versionsnummer steht an genau einer Stelle — in `package.json` — und ers
 unten auf der Seite **Einstellungen** sowie auf der Fehlerseite. Schema:
 `Hauptversion.Funktion.Korrektur`.
 
+## 0.8.0 – 24.11.2026
+
+### Geändert
+- **Die vier Schwellen der Einstufung bleiben in ihrer Reihenfolge.** Bisher ließen
+  sie sich verdrehen – „Meisterlich ab 50 %" bei „Im Aufbau ab 90 %" –, und dann
+  bekam ein halb geglücktes Ergebnis die höchste Stufe. Jetzt schiebt eine
+  angehobene Schwelle die darüberliegenden mit, und keine rutscht unter die
+  darunter. Das gilt im Baukasten, in den Standardwerten und auch für eine
+  eingelesene Sicherung.
+- **Getippter Text lässt sich zurücknehmen.** Kurzbeschreibung, Hinweis des Coachs,
+  Schlagworte und der Treffpunkt auf dem Weißen landen jetzt in der
+  Rückgängig-Historie – ein Eintrag je Feld, nicht je Tastendruck. Bisher sprang
+  *Rückgängig* nach dem Tippen an den Stand vor der letzten Ballbewegung und nahm
+  den Text wortlos mit.
+- **„Saubere Hand" zählt, was dort steht: 20 Versuche am Stück.** Bisher musste
+  eine ganze Einheit ohne einen einzigen Kratzer bleiben – wer beim zweiten von
+  dreißig Versuchen kratzte und die restlichen 28 sauber spielte, ging leer aus.
+  Der Erfolg zeigt jetzt außerdem den Fortschritt, so wie die Erfolge für
+  aufeinanderfolgende Tage.
+
+### Behoben
+- **Das Teilen-Bild folgt der eingestellten Ausrichtung.** Wer auf Hochformat
+  eingestellt hatte, bekam im Teilen-Dialog und in der gespeicherten Bilddatei
+  trotzdem einen querliegenden Tisch.
+- **„Alle Daten löschen" sagt Bescheid, wenn es nicht klappt.** Bisher blieb der
+  Bildschirm nach zweifacher Bestätigung einfach stehen. Im Fenster davor steht
+  jetzt außerdem der häufigste Grund: weitere offene Fenster dieser App halten die
+  Datenbank fest.
+- **„Bande anhängen" rechnet nicht mehr aus der Tischecke.** Ein Weg ohne Ball und
+  ohne eigenen Anfangspunkt wird nicht gezeichnet – angehängt wurde trotzdem,
+  ausgehend von der Ecke des Tisches. Jetzt sagt die App, dass dieser Weg keinen
+  Anfang hat.
+- **Farbwerte mit Transparenz aus einer bearbeiteten Sicherung zerlegen das
+  Diagramm nicht mehr.** Stand im Tuch etwa `#3f92d2ff`, verschwanden Bandenkante,
+  Kopflinie und Punkte, und die Diamanten wählten immer die helle Farbe.
+
+### Innen
+- Die Schriftfarbe der Ballnummern entfällt – sie wurde seit der weißen Scheibe
+  unter der Nummer nirgends mehr gelesen.
+- Zwei Fassungen der Frage „wo fängt dieser Weg an?" sind wieder eine.
+- Die Zählung der Einheiten je Fähigkeit sagt im Typ nur noch zu, was sie liefert.
+
 ## 0.7.0 – 23.11.2026
 
 ### Geändert

@@ -3,7 +3,7 @@
 
 import { overallRating } from './skills'
 import { SKILL_TAGS } from './types'
-import type { Player, Session, Shot } from './types'
+import type { Attempt, Player, Session, Shot } from './types'
 
 export interface AchievementContext {
   sessions: Session[]
@@ -49,6 +49,23 @@ function trainingDays(ctx: AchievementContext): number[] {
     days.add(dayNumber(s.finishedAt ?? 0))
   }
   return [...days].sort((a, b) => a - b)
+}
+
+/**
+ * Laengste Strecke ohne Kratzer innerhalb einer Einheit.
+ *
+ * "20 Versuche am Stueck" heisst am Stueck, nicht die ganze Einheit: wer beim
+ * zweiten von dreissig Versuchen kratzt und die restlichen 28 sauber spielt,
+ * hat 28 am Stueck.
+ */
+function longestCleanRun(results: Attempt[]): number {
+  let best = 0
+  let current = 0
+  for (const r of results) {
+    current = r.scratch ? 0 : current + 1
+    if (current > best) best = current
+  }
+  return best
 }
 
 function longestStreak(ctx: AchievementContext): number {
@@ -113,9 +130,10 @@ export const ACHIEVEMENTS: Achievement[] = [
     description: '20 Versuche am Stück ohne einen Kratzer.',
     icon: '🧤',
     progress: (ctx) =>
-      finished(ctx).some((s) => s.results.length >= 20 && s.results.every((r) => !r.scratch))
-        ? 1
-        : 0,
+      ratio(
+        Math.max(0, ...finished(ctx).map((s) => longestCleanRun(s.results))),
+        20,
+      ),
   },
   {
     id: 'streak-3',

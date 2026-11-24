@@ -13,6 +13,7 @@
 import { deflateSync, inflateSync, strFromU8, strToU8 } from 'fflate'
 import { TABLE, clampBall } from './geometry'
 import { bool, fields, num, oneOf, str } from './sanitize'
+import { orderedThresholds } from './scoring'
 import { createShot, newId } from './shot'
 import {
   BALL_KINDS,
@@ -190,15 +191,20 @@ function sanitizeAttributes(raw: unknown, fallback: ShotAttributes): ShotAttribu
   }
 }
 
-/** Schwellen einer Bewertung. Auch die Einstellungen bringen welche mit. */
+/**
+ * Schwellen einer Bewertung. Auch die Einstellungen bringen welche mit.
+ *
+ * Geordnet, weil eine fremde Datei sonst umgeht, was die Regler verhindern:
+ * verdrehte Schwellen stufen ein halbes Ergebnis als "Meisterlich" ein.
+ */
 export function sanitizeThresholds(raw: unknown): Thresholds {
   const t = fields(raw)
-  return {
+  return orderedThresholds({
     developing: num(t.developing, 0, 100, DEFAULT_THRESHOLDS.developing),
     proficient: num(t.proficient, 0, 100, DEFAULT_THRESHOLDS.proficient),
     advanced: num(t.advanced, 0, 100, DEFAULT_THRESHOLDS.advanced),
     exemplary: num(t.exemplary, 0, 100, DEFAULT_THRESHOLDS.exemplary),
-  }
+  })
 }
 
 function sanitizeScoring(raw: unknown, fallback: ShotScoring): ShotScoring {

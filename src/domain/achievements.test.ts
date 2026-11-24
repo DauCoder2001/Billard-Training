@@ -84,6 +84,35 @@ describe('Erfolge', () => {
     expect(fortschritt('streak-3', sessions)).toBeCloseTo(2 / 3, 6)
   })
 
+  it('zaehlt die saubere Strecke am Stueck, nicht die ganze Einheit', () => {
+    // Beim zweiten von 30 Versuchen gekratzt, die restlichen 28 sauber: das
+    // sind 28 am Stueck. Vorher verlangte der Erfolg eine Einheit, in der
+    // kein einziger Versuch ein Kratzer war.
+    const results = versuche(30)
+    results[1] = { ...results[1], pocketed: false, scratch: true, points: 0 }
+    expect(fortschritt('clean-20', [einheit(ortszeit(2026, 11, 17, 18), results)])).toBe(1)
+  })
+
+  it('zaehlt die Strecke nicht ueber einen Kratzer hinweg', () => {
+    // 11 Versuche vor und 12 nach dem Kratzer - die laengste saubere Strecke
+    // ist 12, nicht 23.
+    const results = versuche(24)
+    results[11] = { ...results[11], pocketed: false, scratch: true, points: 0 }
+    expect(
+      fortschritt('clean-20', [einheit(ortszeit(2026, 11, 17, 18), results)]),
+    ).toBeCloseTo(0.6, 6)
+  })
+
+  it('zaehlt die saubere Strecke nicht ueber zwei Einheiten hinweg', () => {
+    // Am Stueck heisst: in einer Einheit. Zwei Mal 15 saubere Versuche sind
+    // nicht 30.
+    const sessions = [
+      einheit(ortszeit(2026, 11, 16, 18), versuche(15)),
+      einheit(ortszeit(2026, 11, 17, 18), versuche(15)),
+    ]
+    expect(fortschritt('clean-20', sessions)).toBeCloseTo(0.75, 6)
+  })
+
   it('rechnet die Versuche je Kalendertag zusammen', () => {
     // Spaet am Abend und kurz nach Mitternacht: zwei Tage mit je 60
     // Versuchen, nicht ein Tag mit 120.

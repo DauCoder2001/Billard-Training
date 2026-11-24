@@ -5,6 +5,7 @@ import {
   buildAttempt,
   effectiveMode,
   isScorable,
+  orderedThresholds,
   pocketRate,
   positionPoints,
   proficiencyFor,
@@ -186,6 +187,39 @@ describe('Sessionergebnis', () => {
   it('beachtet eigene Schwellen des Stosses', () => {
     const strict = { developing: 60, proficient: 75, advanced: 90, exemplary: 98 }
     expect(proficiencyFor(80, strict)).toBe('proficient')
+  })
+})
+
+describe('Schwellen in ihrer Reihenfolge', () => {
+  it('laesst geordnete Schwellen unveraendert', () => {
+    expect(orderedThresholds(DEFAULT_THRESHOLDS)).toEqual(DEFAULT_THRESHOLDS)
+  })
+
+  it('nimmt verdrehten Schwellen den Unsinn', () => {
+    // Von Hand verdreht: ohne Ordnen fragt proficiencyFor von oben nach unten
+    // ab, findet "ab 50" als erstes und nennt ein halbes Ergebnis
+    // "Meisterlich".
+    const verdreht = { developing: 90, proficient: 80, advanced: 70, exemplary: 50 }
+    expect(proficiencyFor(50, verdreht)).toBe('exemplary')
+
+    const geordnet = orderedThresholds(verdreht)
+    expect(proficiencyFor(50, geordnet)).toBe('beginning')
+    expect(proficiencyFor(95, geordnet)).toBe('exemplary')
+  })
+
+  it('schiebt die oberen Schwellen mit, wenn eine untere steigt', () => {
+    expect(orderedThresholds({ ...DEFAULT_THRESHOLDS, developing: 95 })).toEqual({
+      developing: 95,
+      proficient: 95,
+      advanced: 95,
+      exemplary: 95,
+    })
+  })
+
+  it('laesst eine obere Schwelle an der darunter stehen', () => {
+    const t = orderedThresholds({ ...DEFAULT_THRESHOLDS, exemplary: 50 })
+    expect(t.exemplary).toBe(DEFAULT_THRESHOLDS.advanced)
+    expect(t.developing).toBe(DEFAULT_THRESHOLDS.developing)
   })
 })
 

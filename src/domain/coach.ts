@@ -62,9 +62,12 @@ export function statsByShot(sessions: Session[]): Map<string, ShotStats> {
 export function sessionsPerSkill(
   sessions: Session[],
   shots: Shot[],
-): Record<SkillTag, number> {
+): Partial<Record<SkillTag, number>> {
   const byId = new Map(shots.map((s) => [s.id, s]))
-  const counts = {} as Record<SkillTag, number>
+  // Partial, nicht Record: gezaehlt wird nur, was vorgekommen ist. Ein voller
+  // Record verspraeche jeder Faehigkeit eine Zahl, und der naechste Aufrufer
+  // muesste das fehlende "?? 0" selbst erraten.
+  const counts: Partial<Record<SkillTag, number>> = {}
   for (const s of sessions) {
     if (s.finishedAt === null) continue
     const shot = byId.get(s.shotId)
@@ -94,7 +97,7 @@ export function recommend(input: CoachInput, count = 5): Recommendation[] {
   const weak = new Set(weakestSkills(input.player.skillRatings, 4))
   const overall = overallRating(input.player.skillRatings)
 
-  const skillCounts = Object.values(perSkill)
+  const skillCounts = Object.values(perSkill).filter((n): n is number => n !== undefined)
   const avgSkillCount =
     skillCounts.length > 0 ? skillCounts.reduce((a, b) => a + b, 0) / skillCounts.length : 0
 

@@ -4,6 +4,7 @@ import { lazy, Suspense, useCallback, useEffect, useState } from 'react'
 import { useLocation, useNavigate, useParams } from 'react-router-dom'
 import { useApp } from '@/app/store'
 import { useLeaveGuard } from '@/app/useLeaveGuard'
+import { pathStart } from '@/components/table/Layers'
 import { db } from '@/data/db'
 import { storageErrorText } from '@/data/errors'
 import { deleteShot, saveShot } from '@/data/repositories/shots'
@@ -169,7 +170,16 @@ export function BuilderPage() {
       dialogs.toast('Erst einen Weg mit mindestens einem Punkt zeichnen', 'error')
       return
     }
-    const points: Point[] = [startOf(path, store.shot.balls), ...path.segments.map((s) => s.to)]
+    // Dieselbe Frage wie beim Zeichnen, deshalb dieselbe Antwort: ein Weg
+    // ohne Ball und ohne eigenen Startpunkt hat keinen Anfang. Eine eigene
+    // Fassung rechnete hier aus der Tischecke heraus - und der Strahl kam
+    // irgendwo an, waehrend derselbe Weg ungezeichnet blieb.
+    const start = pathStart(path, store.shot.balls)
+    if (!start) {
+      dialogs.toast('Dieser Weg hat keinen Anfang', 'error')
+      return
+    }
+    const points: Point[] = [start, ...path.segments.map((s) => s.to)]
     const last = points[points.length - 1]
     const prev = points[points.length - 2]
     const hit = castToRail(last, { x: last.x - prev.x, y: last.y - prev.y })
@@ -456,14 +466,6 @@ export function BuilderPage() {
       )}
     </div>
   )
-}
-
-function startOf(path: BallPath, balls: { id: string; x: number; y: number }[]): Point {
-  if (path.ballId) {
-    const ball = balls.find((b) => b.id === path.ballId)
-    if (ball) return { x: ball.x, y: ball.y }
-  }
-  return path.from ?? { x: 0, y: 0 }
 }
 
 interface ToolProps {

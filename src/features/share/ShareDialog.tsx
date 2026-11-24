@@ -71,7 +71,12 @@ export function ShareDialog({ shot, onClose }: { shot: Shot; onClose: () => void
       </div>
       <div className="modal__body stack">
         <div ref={diagramRef}>
-          <ShotDiagram shot={shot} clothColor={settings.clothColor} railColor={settings.railColor} />
+          <ShotDiagram
+            shot={shot}
+            orientation={settings.orientation}
+            clothColor={settings.clothColor}
+            railColor={settings.railColor}
+          />
         </div>
 
         <div className="row" style={{ alignItems: 'flex-start' }}>

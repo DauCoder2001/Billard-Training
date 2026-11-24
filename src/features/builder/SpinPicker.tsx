@@ -7,10 +7,12 @@ import type { Point } from '@/domain/types'
 interface SpinPickerProps {
   value: Point
   onChange: (value: Point) => void
+  /** Beim Aufsetzen des Fingers, einmal je Zug - fuer die Historie. */
+  onStart?: () => void
   size?: number
 }
 
-export function SpinPicker({ value, onChange, size = 108 }: SpinPickerProps) {
+export function SpinPicker({ value, onChange, onStart, size = 108 }: SpinPickerProps) {
   const ref = useRef<SVGSVGElement>(null)
   const dragging = useRef(false)
 
@@ -40,6 +42,8 @@ export function SpinPicker({ value, onChange, size = 108 }: SpinPickerProps) {
       onPointerDown={(e: ReactPointerEvent<SVGSVGElement>) => {
         dragging.current = true
         e.currentTarget.setPointerCapture(e.pointerId)
+        // Vor der ersten Aenderung, sonst liegt der Schnappschuss daneben.
+        onStart?.()
         update(e)
       }}
       onPointerMove={(e) => dragging.current && update(e)}

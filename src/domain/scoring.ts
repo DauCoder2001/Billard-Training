@@ -85,6 +85,26 @@ export function sessionScore(results: Attempt[], plannedAttempts: number): numbe
   return Math.round((sum / (n * MAX_POINTS)) * 1000) / 10
 }
 
+/**
+ * Haelt die vier Schwellen in ihrer Reihenfolge: jede mindestens so hoch wie
+ * die darunter.
+ *
+ * proficiencyFor fragt von oben nach unten ab und verlaesst sich darauf, dass
+ * die Werte steigen. Verdrehte Schwellen - etwa developing 90, exemplary 50 -
+ * ergeben sonst stillschweigend Unsinn: 50 Prozent hiessen "Meisterlich", und
+ * der Wert steht hinterher in der Einheit.
+ *
+ * Begrenzt wird nach oben: wer eine untere Schwelle hochzieht, schiebt die
+ * darueberliegenden mit. Eine obere Schwelle kann nicht unter die darunter
+ * rutschen - dort bleibt die Marke stehen.
+ */
+export function orderedThresholds(t: Thresholds): Thresholds {
+  const developing = t.developing
+  const proficient = Math.max(developing, t.proficient)
+  const advanced = Math.max(proficient, t.advanced)
+  return { developing, proficient, advanced, exemplary: Math.max(advanced, t.exemplary) }
+}
+
 /** Einstufung eines Prozentwerts. */
 export function proficiencyFor(
   score: number,

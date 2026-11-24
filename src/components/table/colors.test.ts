@@ -8,9 +8,20 @@ describe('Farben lesen', () => {
     expect(parseHex('3f92d2')).toEqual([63, 146, 210])
   })
 
+  it('liest acht Stellen und verwirft den Alphawert', () => {
+    // So etwas kommt aus einer von Hand bearbeiteten Sicherung: die Pruefung
+    // dort laesst #rrggbbaa durch, weil es gueltiges CSS ist.
+    expect(parseHex('#3f92d2ff')).toEqual([63, 146, 210])
+    expect(parseHex('#3f92d200')).toEqual([63, 146, 210])
+    expect(relativeLuminance('#ffffffff')).toBeCloseTo(1, 5)
+    expect(shade('#808080ff', -0.5)).toBe('#404040')
+  })
+
   it('meldet unlesbare Eingaben', () => {
     expect(parseHex('blau')).toBeNull()
     expect(parseHex('#12345')).toBeNull()
+    expect(parseHex('#1234567')).toBeNull()
+    expect(parseHex('#123456789')).toBeNull()
     expect(parseHex('')).toBeNull()
   })
 })

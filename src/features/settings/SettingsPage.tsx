@@ -9,6 +9,7 @@ import { seedShots } from '@/data/seed/drills'
 import { exportBackup, importBackup } from '@/data/repositories/backup'
 import { createPlayer, deletePlayer, updatePlayer } from '@/data/repositories/players'
 import { TABLE } from '@/domain/geometry'
+import { orderedThresholds } from '@/domain/scoring'
 import { plural } from '@/domain/text'
 import type { Settings } from '@/domain/types'
 import { downloadText } from '@/features/share/exportImage'
@@ -179,7 +180,10 @@ export function SettingsPage() {
   const wipe = async () => {
     const ok = await dialogs.confirm({
       title: 'Alle Daten löschen?',
-      message: 'Stöße, Spieler, Einheiten und Workouts werden entfernt. Das lässt sich nicht rückgängig machen.',
+      message:
+        'Stöße, Spieler, Einheiten und Workouts werden entfernt. Das lässt sich nicht ' +
+        'rückgängig machen. Weitere offene Fenster dieser App vorher schließen – sonst ' +
+        'wartet das Löschen auf sie.',
       confirmLabel: 'Alles löschen',
       danger: true,
     })
@@ -193,7 +197,15 @@ export function SettingsPage() {
       dialogs.toast('Abgebrochen', 'error')
       return
     }
-    await db.delete()
+    // Der einzige Schreibweg, der ohne Klammer dastand. Haelt ein zweiter Tab
+    // die Datenbank offen, wartet IndexedDB - dann kommt weder Fehler noch
+    // Neuladen, und darum steht der Hinweis oben im Dialog.
+    try {
+      await db.delete()
+    } catch (err) {
+      dialogs.toast(`Nicht gelöscht: ${storageErrorText(err)}`, 'error')
+      return
+    }
     window.location.reload()
   }
 
@@ -350,10 +362,10 @@ export function SettingsPage() {
               value={settings.defaultThresholds[key]}
               onChange={(e) =>
                 void einstellen({
-                  defaultThresholds: {
+                  defaultThresholds: orderedThresholds({
                     ...settings.defaultThresholds,
                     [key]: Number(e.target.value),
-                  },
+                  }),
                 })
               }
             />

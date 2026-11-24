@@ -14,21 +14,15 @@ const BASE = [
 export interface BallStyle {
   fill: string
   striped: boolean
-  /** Farbe der Beschriftung. */
-  ink: string
 }
 
+// Eine Schriftfarbe steht hier nicht mehr: seit Befund 38 sitzt die Nummer
+// auf einer weissen Scheibe und bringt ihre Farbe selbst mit.
 export function ballStyle(number?: number): BallStyle {
   if (!number || number < 1 || number > 15) {
-    return { fill: '#f4f1e8', striped: false, ink: '#20241f' }
+    return { fill: '#f4f1e8', striped: false }
   }
-  const base = BASE[(number - 1) % 8]
-  const striped = number > 8
-  return {
-    fill: base,
-    striped,
-    ink: striped || number === 1 ? '#20241f' : '#f6f3ea',
-  }
+  return { fill: BASE[(number - 1) % 8], striped: number > 8 }
 }
 
 export const CUE_FILL = '#f7f4ea'

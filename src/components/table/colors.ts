@@ -7,9 +7,17 @@
 
 type Rgb = [number, number, number]
 
-/** Liest #abc und #aabbcc. Alles andere ergibt null. */
+/**
+ * Liest #abc, #aabbcc und #aabbccdd. Alles andere ergibt null.
+ *
+ * Die acht Stellen muessen mit: die Pruefung einer eingelesenen Sicherung
+ * laesst #rrggbbaa durch - zu Recht, es ist gueltiges CSS. Ohne sie gaebe
+ * shade die Farbe unveraendert zurueck und relativeLuminance 0, und die
+ * Bandenkante verschwaende im Tuch. Der Alphawert selbst spielt fuer die
+ * Ableitungen keine Rolle und wird verworfen.
+ */
 export function parseHex(hex: string): Rgb | null {
-  const value = hex.trim().replace(/^#/, '')
+  const value = hex.trim().replace(/^#/, '').replace(/^([0-9a-fA-F]{6})[0-9a-fA-F]{2}$/, '$1')
   if (/^[0-9a-fA-F]{3}$/.test(value)) {
     return [
       parseInt(value[0] + value[0], 16),

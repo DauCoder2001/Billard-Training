@@ -1,8 +1,8 @@
 /** Das Attribut-Panel unter dem Diagramm. */
 
-import { useState } from 'react'
+import { useRef, useState } from 'react'
 import { POCKET_BY_ID } from '@/domain/geometry'
-import { hasObjectBall } from '@/domain/scoring'
+import { hasObjectBall, orderedThresholds } from '@/domain/scoring'
 import { computeCutAngle } from '@/domain/shot'
 import {
   SHOT_TYPES,
@@ -10,7 +10,7 @@ import {
   SKILL_LABELS,
   SKILL_TAGS,
 } from '@/domain/types'
-import type { ScoringMode, ShotType, SkillTag } from '@/domain/types'
+import type { ScoringMode, Shot, ShotType, SkillTag } from '@/domain/types'
 import { useBuilder } from './store'
 import { SpinPicker, spinLabel } from './SpinPicker'
 
@@ -43,6 +43,25 @@ export function AttributesPanel() {
 
   const setAttr = <K extends keyof typeof attrs>(key: K, value: (typeof attrs)[K]) =>
     apply((s) => ({ ...s, attributes: { ...s.attributes, [key]: value } }))
+
+  /*
+   * Getippter Text in die Rueckgaengig-Historie, mit einem Eintrag je
+   * Feldbesuch. Je Tastendruck waere die Historie nach einem Satz voll; schon
+   * beim Betreten des Feldes anzulegen hiesse, ein blosses Hineinklicken
+   * macht den Stoss "geaendert" - daran haengt die Frage beim Verlassen der
+   * Seite. Also beim ersten Zeichen.
+   */
+  const frischImFeld = useRef(true)
+  const feldBetreten = () => {
+    frischImFeld.current = true
+  }
+  const tippen = (fn: (shot: Shot) => Shot) => {
+    if (frischImFeld.current) {
+      beginChange()
+      frischImFeld.current = false
+    }
+    apply(fn)
+  }
 
   const toggleSkill = (skill: SkillTag) =>
     change((s) => ({
@@ -115,6 +134,7 @@ export function AttributesPanel() {
               <div className="row">
                 <SpinPicker
                   value={attrs.spin}
+                  onStart={beginChange}
                   onChange={(spin) => apply((s) => ({ ...s, attributes: { ...s.attributes, spin } }))}
                 />
                 <div className="stack" style={{ gap: 4 }}>
@@ -258,7 +278,10 @@ export function AttributesPanel() {
                   onChange={(v) =>
                     apply((s) => ({
                       ...s,
-                      scoring: { ...s.scoring, thresholds: { ...s.scoring.thresholds, [key]: v } },
+                      scoring: {
+                        ...s.scoring,
+                        thresholds: orderedThresholds({ ...s.scoring.thresholds, [key]: v }),
+                      },
                     }))
                   }
                 />
@@ -276,7 +299,8 @@ export function AttributesPanel() {
                 className="input"
                 value={shot.description}
                 placeholder="Worum geht es bei diesem Stoß?"
-                onChange={(e) => apply((s) => ({ ...s, description: e.target.value }))}
+                onFocus={feldBetreten}
+                onChange={(e) => tippen((s) => ({ ...s, description: e.target.value }))}
               />
             </div>
             <div className="field" style={{ gridColumn: 'span 2' }}>
@@ -286,7 +310,8 @@ export function AttributesPanel() {
                 className="textarea"
                 value={shot.coachNotes}
                 placeholder="Worauf soll beim Ueben geachtet werden?"
-                onChange={(e) => apply((s) => ({ ...s, coachNotes: e.target.value }))}
+                onFocus={feldBetreten}
+                onChange={(e) => tippen((s) => ({ ...s, coachNotes: e.target.value }))}
               />
             </div>
           </div>
@@ -327,8 +352,9 @@ export function AttributesPanel() {
                 id="a-tags"
                 className="input"
                 value={shot.tags.join(', ')}
+                onFocus={feldBetreten}
                 onChange={(e) =>
-                  apply((s) => ({
+                  tippen((s) => ({
                     ...s,
                     tags: e.target.value
                       .split(',')
