@@ -6,6 +6,23 @@ Die Versionsnummer steht an genau einer Stelle — in `package.json` — und ers
 unten auf der Seite **Einstellungen** sowie auf der Fehlerseite. Schema:
 `Hauptversion.Funktion.Korrektur`.
 
+## 0.8.3 – 24.11.2026
+
+### Innen
+- **Drei von vier großen Versionssprüngen sind gemacht:** React 18 → 19,
+  Zustand 4 → 5 und dexie-react-hooks 1 → 4. Jeder einzeln, mit Tests, Linter
+  und Bau danach; nach dem React-Sprung zusätzlich eine Probe im Browser (Ball
+  ziehen, Dialoge, der Wächter beim Verlassen einer Seite). Am Programm selbst
+  ändert sich keine Zeile. Einzig sichtbare Folge: die App lädt beim allerersten
+  Aufruf eines Geräts etwa 22 Kilobyte mehr – danach liegt alles wie gehabt im
+  Offline-Vorrat.
+- **TypeScript 7 muss warten.** Der Prüfer selbst käme mit dem Projekt zurecht
+  (geprüft: keine einzige Meldung, und er ist etwa doppelt so schnell), aber der
+  Linter verweigert mit TypeScript 7 den Dienst – seine Unterstützung ist
+  angekündigt, aber noch nicht da. Der Schritt wurde deshalb wieder
+  zurückgenommen. Die Pfadangabe in der Konfiguration ist schon auf die neue
+  Schreibweise umgestellt, damit später nur noch das Paket getauscht werden muss.
+
 ## 0.8.2 – 24.11.2026
 
 ### Innen
