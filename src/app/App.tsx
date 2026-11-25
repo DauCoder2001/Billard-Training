@@ -1,7 +1,9 @@
-import { lazy, Suspense, useEffect } from 'react'
+import { Suspense, useEffect } from 'react'
 import { createHashRouter, Navigate, Outlet, RouterProvider } from 'react-router-dom'
 import { DialogsProvider } from '@/ui/Dialogs'
 import { AppShell } from './AppShell'
+import { RouteError } from './ErrorView'
+import { lazyChunk } from './lazyChunk'
 import { useApp } from './store'
 import { DashboardPage } from '@/features/dashboard/DashboardPage'
 import { LibraryPage } from '@/features/library/LibraryPage'
@@ -16,18 +18,21 @@ import { SettingsPage } from '@/features/settings/SettingsPage'
 // Erstes geoeffnet: sie kommen als eigene Buendel nach, damit der Start
 // auf einem alten Geraet leichter wird. Der Service Worker legt sie im
 // Vorrat ab, offline bleibt also alles verfuegbar.
-const BuilderPage = lazy(() =>
+//
+// lazyChunk statt lazy: nach einer Aktualisierung sind die alten Dateinamen
+// weg, und ein einziges Neuladen holt die neuen (lazyChunk.ts).
+const BuilderPage = lazyChunk(() =>
   import('@/features/builder/BuilderPage').then((m) => ({ default: m.BuilderPage })),
 )
-const TrainPage = lazy(() =>
+const TrainPage = lazyChunk(() =>
   import('@/features/training/TrainPage').then((m) => ({ default: m.TrainPage })),
 )
-const WorkoutRunPage = lazy(() =>
+const WorkoutRunPage = lazyChunk(() =>
   import('@/features/workouts/WorkoutRunPage').then((m) => ({ default: m.WorkoutRunPage })),
 )
 // Die Importseite bringt den Entpacker fuer geteilte Links mit und wird nur
 // ueber einen geteilten Link oder aus den Einstellungen geoeffnet.
-const ImportPage = lazy(() =>
+const ImportPage = lazyChunk(() =>
   import('@/features/share/ImportPage').then((m) => ({ default: m.ImportPage })),
 )
 
@@ -49,9 +54,16 @@ function Laderahmen() {
 // Ein Daten-Router, kein <HashRouter>: nur er kennt useBlocker, und nur
 // damit laeuft die Zurueck-Taste in die Rueckfrage der Seite, statt still
 // an ihr vorbei. Die Adressen bleiben dieselben.
-const router = createHashRouter([
+/*
+ * Die Routen stehen als eigenes Stueck da, damit eine Pruefung sie lesen
+ * kann, ohne den ganzen Router zu bauen.
+ */
+export const routen = [
   {
     element: <Laderahmen />,
+    // Ohne das zeigt der Router bei einem Fehler in einer Seite seine eigene
+    // englische Entwickleransicht, nicht die Fehlerseite des Programms.
+    errorElement: <RouteError />,
     children: [
       {
         element: <AppShell />,
@@ -75,7 +87,9 @@ const router = createHashRouter([
       { path: '*', element: <Navigate to="/" replace /> },
     ],
   },
-])
+]
+
+const router = createHashRouter(routen)
 
 export function App() {
   const ready = useApp((s) => s.ready)

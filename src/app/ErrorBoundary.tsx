@@ -3,9 +3,13 @@
  *  Ohne diese Grenze reisst React bei einem Fehler den gesamten Baum ab und
  *  hinterlaesst eine weisse Seite. Auf einem Tablet ohne Entwicklerkonsole
  *  waere dann nicht zu erkennen, was passiert ist.
+ *
+ *  Die Anzeige selbst steht in ErrorView.tsx - der Router braucht dieselbe
+ *  (siehe RouteError).
  */
 
 import { Component, type ErrorInfo, type ReactNode } from 'react'
+import { ErrorView } from './ErrorView'
 
 interface Props {
   children: ReactNode
@@ -30,46 +34,6 @@ export class ErrorBoundary extends Component<Props, State> {
     const { error } = this.state
     if (!error) return this.props.children
 
-    return (
-      <div className="page stack">
-        <h1>Da ist etwas schiefgegangen</h1>
-        <p className="muted">
-          Die Ansicht ließ sich nicht darstellen. Deine gespeicherten Stöße und
-          Ergebnisse sind davon nicht betroffen.
-        </p>
-        <pre
-          className="small"
-          style={{
-            whiteSpace: 'pre-wrap',
-            wordBreak: 'break-word',
-            background: 'var(--surface)',
-            border: '1px solid var(--line)',
-            borderRadius: 'var(--r-md)',
-            padding: 12,
-            margin: 0,
-          }}
-        >
-          {error.message}
-          {'\n\n'}
-          {`Billard Training ${__APP_VERSION__}`}
-          {'\n'}
-          {navigator.userAgent}
-        </pre>
-        <div className="row">
-          <button className="btn btn--primary" onClick={() => window.location.reload()}>
-            Neu laden
-          </button>
-          <button
-            className="btn"
-            onClick={() => {
-              window.location.hash = '#/'
-              window.location.reload()
-            }}
-          >
-            Zum Start
-          </button>
-        </div>
-      </div>
-    )
+    return <ErrorView error={error} />
   }
 }

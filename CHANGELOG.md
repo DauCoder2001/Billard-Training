@@ -6,6 +6,23 @@ Die Versionsnummer steht an genau einer Stelle — in `package.json` — und ers
 unten auf der Seite **Einstellungen** sowie auf der Fehlerseite. Schema:
 `Hauptversion.Funktion.Korrektur`.
 
+## 0.13.6 – 25.11.2026
+
+### Behoben
+- **Nach einer Aktualisierung stürzt die offene Seite nicht mehr ab**
+  (Befund 71). Baukasten, Training, Workout-Lauf, Importseite und der
+  Teilen-Dialog werden erst beim Öffnen nachgeholt; ihre Dateinamen tragen
+  eine Prüfsumme. Wer die Seite offen hatte, während eine neue Fassung
+  hochgeladen wurde, verlangte danach eine Datei, die es nicht mehr gibt –
+  und sah eine englische Fehlermeldung, aus der nur Strg + F5 heraushalf.
+  Jetzt lädt die Seite in diesem Fall ein einziges Mal von selbst neu und
+  macht dort weiter, wo sie war. Schlägt es ein zweites Mal fehl – dann liegt
+  es wirklich am Netz –, kommt die Fehleranzeige.
+- **Fehler in einer Seite zeigen die eigene Fehleranzeige** (Befund 72).
+  Bisher fing der Router sie vorher ab und zeigte seine englische
+  Entwickleransicht. Jetzt erscheint dieselbe deutsche Anzeige wie sonst –
+  mit Meldung, Versionsnummer und den Knöpfen „Neu laden" und „Zum Start".
+
 ## 0.13.5 – 24.11.2026
 
 ### Innen

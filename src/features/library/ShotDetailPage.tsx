@@ -1,5 +1,6 @@
-import { lazy, Suspense, useMemo, useState } from 'react'
+import { Suspense, useMemo, useState } from 'react'
 import { Link, useNavigate, useParams } from 'react-router-dom'
+import { lazyChunk } from '@/app/lazyChunk'
 import { useActivePlayer, useApp } from '@/app/store'
 import { ShotDiagram } from '@/components/table/ShotDiagram'
 import { storageErrorText } from '@/data/errors'
@@ -36,7 +37,7 @@ const FORMATS: { id: SessionFormat; label: string; attempts: number | null }[] =
 
 // Der Teilen-Dialog bringt den QR-Code-Erzeuger mit und wird nur auf Druck
 // geoeffnet: er kommt als eigenes Buendel nach.
-const ShareDialog = lazy(() =>
+const ShareDialog = lazyChunk(() =>
   import('@/features/share/ShareDialog').then((m) => ({ default: m.ShareDialog })),
 )
 

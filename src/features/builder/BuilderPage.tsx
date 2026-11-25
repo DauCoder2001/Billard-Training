@@ -1,7 +1,8 @@
 /** Der Shot Builder: Stoesse aufbauen, formen und speichern. */
 
-import { lazy, Suspense, useCallback, useEffect, useState } from 'react'
+import { Suspense, useCallback, useEffect, useState } from 'react'
 import { useLocation, useNavigate, useParams } from 'react-router-dom'
+import { lazyChunk } from '@/app/lazyChunk'
 import { useApp } from '@/app/store'
 import { useLeaveGuard } from '@/app/useLeaveGuard'
 import { pathStart } from '@/components/table/Layers'
@@ -20,7 +21,7 @@ import { useBuilder } from './store'
 
 // Der Teilen-Dialog bringt den QR-Code-Erzeuger mit und wird nur auf Druck
 // geoeffnet: er kommt als eigenes Buendel nach.
-const ShareDialog = lazy(() =>
+const ShareDialog = lazyChunk(() =>
   import('@/features/share/ShareDialog').then((m) => ({ default: m.ShareDialog })),
 )
 
