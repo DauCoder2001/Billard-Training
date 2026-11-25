@@ -150,6 +150,11 @@ export const useBuilder = create<BuilderState>((set, get) => ({
   // sie hierher ruft; ein Ersetzen findet nicht statt. Wege eines
   // entfernten Balls raeumt removeBall mit weg, sie koennen also nicht auf
   // eine tote Id zeigen.
+  //
+  // Das Werkzeug bleibt danach stehen: wer eine Aufstellung baut, setzt
+  // meist mehrere Baelle hintereinander. Zurueck zur Auswahl fuehren der
+  // Knopf und die Esc-Taste. Der Weisse ist die Ausnahme - es gibt nur
+  // einen, und sein Knopf sperrt sich danach ohnehin selbst.
   addBall: (kind, at) => {
     const id = newId()
     get().change((shot) => {
@@ -164,7 +169,7 @@ export const useBuilder = create<BuilderState>((set, get) => ({
       }
       return { ...shot, balls: [...shot.balls, ball] }
     })
-    set({ selectedBallId: id, mode: 'select' })
+    set(kind === 'cue' ? { selectedBallId: id, mode: 'select' } : { selectedBallId: id })
   },
 
   removeBall: (id) => {

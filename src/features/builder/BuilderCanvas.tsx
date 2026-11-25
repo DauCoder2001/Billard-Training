@@ -33,7 +33,7 @@ export function BuilderCanvas({ orientation, showAim }: BuilderCanvasProps) {
   const selectedBallId = useBuilder((s) => s.selectedBallId)
   const selectedPathId = useBuilder((s) => s.selectedPathId)
 
-  const { select, setDrag, beginChange, apply, change, addBall, appendPathPoint, setMode } =
+  const { select, setDrag, beginChange, apply, change, addBall, appendPathPoint } =
     useBuilder.getState()
 
   const snap = useCallback(
@@ -87,7 +87,6 @@ export function BuilderCanvas({ orientation, showAim }: BuilderCanvasProps) {
             },
           },
         }))
-        setMode('select')
         return
       case 'avoid':
         change((s) => ({
@@ -100,7 +99,6 @@ export function BuilderCanvas({ orientation, showAim }: BuilderCanvasProps) {
             },
           },
         }))
-        setMode('select')
         return
       default:
         select(null, null)

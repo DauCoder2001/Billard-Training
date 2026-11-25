@@ -6,6 +6,17 @@ Die Versionsnummer steht an genau einer Stelle — in `package.json` — und ers
 unten auf der Seite **Einstellungen** sowie auf der Fehlerseite. Schema:
 `Hauptversion.Funktion.Korrektur`.
 
+## 0.14.0 – 25.11.2026
+
+### Geändert
+- **Das gewählte Werkzeug bleibt stehen** (Befund 73). Bisher sprang der
+  Baukasten nach jedem gesetzten Ball zurück auf „Auswahl" – wer eine
+  Aufstellung baute, musste zwischen zwei Bällen jedes Mal zusätzlich auf das
+  Werkzeug tippen. Jetzt gilt für alle Setzwerkzeuge dieselbe Regel: einmal
+  wählen, beliebig oft setzen. Zurück zur Auswahl führen der Knopf „Auswahl"
+  und die Esc-Taste. Eine Ausnahme bleibt der Weiße – von ihm gibt es nur
+  einen, sein Knopf wird danach ohnehin grau.
+
 ## 0.13.6 – 25.11.2026
 
 ### Behoben
