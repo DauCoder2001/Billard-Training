@@ -74,6 +74,12 @@ export const RETIRED_IDS: Readonly<Record<string, string>> = {
   // Tor - gleicher Objektball, gleiche Tasche, gleicher Winkel. Ein Regler,
   // keine zweite Uebung. Die Variante steht jetzt im Hinweis des Originals.
   'builtin-luecke-eng': 'Engere Fassung von Durch die Lücke (0.18.2)',
+  // 0.18.3: Der Aufbau war das Spiegelbild von "Seiteneffet links" bis auf
+  // die vierte Nachkommastelle, das Effet eingeschlossen. Nur die Zielzone
+  // lag woanders - 30,81 Zoll neben dem Spiegelbild der anderen, also konnte
+  // hoechstens eine von beiden stimmen. Die verbliebene heisst jetzt
+  // "Seiteneffet ueber die Bande" und nennt die andere Seite im Hinweis.
+  'builtin-seiteneffet-rechts': 'Spiegelbild von Seiteneffet links (0.18.3)',
 }
 
 /**

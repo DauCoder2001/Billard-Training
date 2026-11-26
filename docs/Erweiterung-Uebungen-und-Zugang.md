@@ -163,11 +163,11 @@ ein Versehen.
 Damit ist auch der Namenswiderspruch weg: alle Schnittbälle heißen wieder
 „Schnittball *n* Grad", ohne Richtung.
 
-**Wo die Grenze liegt:** „Seiteneffet links" und „Seiteneffet rechts" in
-Stufe C stehen ebenfalls gespiegelt und bleiben trotzdem zwei Übungen — ihre
-Zielzonen sind verschieden, einmal soll der Weiße verlängert, einmal kurz
-gehalten werden. Gleiche Lage, andere Aufgabe. Der Test, der Spiegelpaare
-sucht, prüft deshalb die Zielzone mit.
+**Wo die Grenze liegt — zurückgenommen mit 0.18.3.** Hier stand, „Seiteneffet
+links" und „Seiteneffet rechts" in Stufe C seien trotz gespiegelter Lage zwei
+Übungen, weil ihre Zielzonen verschieden sind; der Test prüfte die Zielzone
+deshalb mit. Das war falsch, siehe 3.2.3. Der Test vergleicht jetzt nur noch
+die Lage.
 
 ### 3.2.2 Nachgezogen mit 0.18.2: keine zweite Übung für einen anderen Regler
 
@@ -195,6 +195,42 @@ nach demselben Prinzip wären das fünf Übungen mit Reglern statt dreizehn. Das
 bleibt offen, weil es an der Bewertung hängt: eine Variante, die nur im
 Hinweis steht, lässt sich nicht getrennt zählen (siehe 12).
 
+### 3.2.3 Nachgezogen mit 0.18.3: die Ausnahme war der Fehler
+
+„Seiteneffet rechts" ist raus. Nachgemessen am 26.11.2026:
+
+| | links | rechts | Spiegelbild von links |
+|---|---|---|---|
+| Weißer | (38,238 / 24,184) | (38,238 / 25,816) | **0,0000"** Abweichung |
+| Objektball | (68 / 20) | (68 / 30) | **0,0000"** |
+| Zieltasche | Ecke unten rechts | Ecke oben rechts | passt |
+| Effet | seit −0,70 | seit +0,70 | passt |
+| Schnittwinkel / Tempo / Schwierigkeit | 25° / 6 / 7 | 25° / 6 / 7 | gleich |
+| Zielzone | (25 / 12) r9 | (55 / 45) r9 | wäre (25 / 38) — **30,81" daneben** |
+
+**Der Schluss:** Ist der Aufbau das Spiegelbild — das Effet eingeschlossen —,
+dann ist der Weg des Weißen das Spiegelbild, und die Zielzone muss es sein.
+Zwei Zonen, die 30,81" auseinanderliegen, können nicht beide stimmen. Die
+Beschreibungen behaupteten „verlängern" gegen „kurz halten", aber in den
+Daten stehen bei beiden Tempo 6 und Effetstärke 0,70 — nichts macht den einen
+Weg länger als den anderen.
+
+**Dazu kommt:** Das Einzige, was die beiden inhaltlich hätte unterscheiden
+können — linkes gegen rechtes Effet —, steht nirgends auf der Übungsseite.
+Sie zeigt Art, Schwierigkeit, Tempo, Schnittwinkel, Zieltasche und
+Fähigkeiten (`ShotDetailPage.tsx`); `spin` taucht nur im Baukasten auf. Auf
+dem Gerät sah man zwei gespiegelte Bilder mit identischen Werten.
+
+**Die Regel, endgültig:** Eine abweichende Zielzone macht aus einem
+Spiegelpaar keine zweite Übung. Sie verrät einen Widerspruch. Der Test
+vergleicht nur noch die Lage; die ganze Sammlung wurde danach abgesucht,
+dieses war das einzige Spiegelpaar unter 39.
+
+**Was offen bleibt:** Welche der beiden Zonen richtig war, ist nicht
+entschieden. Die App rechnet für diese Übung keinen Weg des Weißen aus — nur
+der Weg des Objektballs ist gespeichert, die Zone ist von Hand gesetzt. Das
+klärt erst die Nachrechnung mit pooltool (5.2, Version 0.21.0).
+
 ### 3.3 Stufe B — Kontrolle des Weißen (7 heute + 18 neu)
 
 - Schnitt 40°, 50°, 60°, je links und rechts (6, davon 45° schon da → 5 neu)
@@ -205,7 +241,11 @@ Hinweis steht, lässt sich nicht getrennt zählen (siehe 12).
 - Ball an der Bande im Schnitt (1)
 - Zwei-Ball-Kette: einlochen und auf den nächsten Ball Position spielen (1)
 
-### 3.4 Stufe C — Spielsituationen (12 heute + 13 neu)
+### 3.4 Stufe C — Spielsituationen (11 heute, geplant + 13)
+
+Die Stufe hatte 12; „Seiteneffet rechts" ist mit 0.18.3 zurückgenommen worden
+(3.2.3). Die Liste unten ist der alte Plan und steht unter E6: sie wird nicht
+in einem Zug abgearbeitet.
 
 - **Banden-Systeme:** Kick über eine Bande nach dem Diamant-System, drei Lagen (3)
 - Kick über zwei Banden (2)
@@ -520,6 +560,7 @@ ausgelieferte Fassung mit Eintrag im CHANGELOG.
 | 0.18.0 ✓ | Stufe A auf 25 Übungen, 19 neue — erledigt am 26.11.2026 | 0.15.0, 0.17.0 |
 | 0.18.1 ✓ | Vier Spiegel-Übungen zurückgenommen, Hinweis statt eigener Übung; Stufe A hat 21 — erledigt am 26.11.2026 | 0.18.0 |
 | 0.18.2 ✓ | „Durch die enge Lücke" zurückgenommen, Variante statt eigener Übung; Stufe A hat 20 — erledigt am 26.11.2026 | 0.18.1 |
+| 0.18.3 ✓ | „Seiteneffet rechts" zurückgenommen, die Ausnahme im Spiegeltest aufgehoben; Stufe C hat 11, die Sammlung 38 — erledigt am 26.11.2026 | 0.18.1 |
 | — | **Die Stufen B, C und D füllt Matthias Stück für Stück selbst.** Keine Auslieferung, die eine Stufe in einem Zug auf eine Zielzahl bringt (E6, 3.2.1, 3.2.2). | — |
 | 0.19.0 | Modell für Spezialtechniken (3.6): `jump` und `masse` als Stoßart und Fähigkeit, `air` am Wegsegment — die Voraussetzung dafür, dass Stufe D überhaupt gebaut werden *kann* | — |
 | 0.20.0 | Stufenprüfungen und vier neue Erfolge (4.) | 0.19.0 |
@@ -565,6 +606,16 @@ am Server.
 - **Zahl je Stufe:** 25 ist ein Richtwert (E6), und seit 0.18.1 kein Ziel
   mehr, auf das hin gearbeitet wird. Die Aufteilung ergibt sich daraus,
   welche Übungen sinnvoll sind — nicht umgekehrt.
+- **Die Zielzone von „Seiteneffet über die Bande":** von Hand gesetzt und
+  seit 0.18.3 ohne Gegenprobe — die zweite, gespiegelte Fassung, die ihr
+  widersprach, ist weg (3.2.3). Welche Zone richtig war, klärt erst die
+  Nachrechnung mit pooltool (0.21.0). Dasselbe gilt im Grunde für jede
+  Zielzone der Sammlung; hier ist nur belegt, dass eine davon falsch war.
+- **Effet ist auf der Übungsseite unsichtbar:** `spin` steht in den
+  Eigenschaften der Übung, wird aber nur im Baukasten angezeigt. Für
+  Seiteneffet-Übungen ist das die halbe Aufgabe. Zu entscheiden, ob die
+  Übungsseite das Effet mit anzeigt — dann wäre auch belegbar, dass zwei
+  Übungen sich darin unterscheiden.
 - **Regler mit verschobenem Objektball:** Die Regel aus 3.2.2 ist nur zur
   Hälfte durchgezogen. In Stufe A stehen weiterhin `gerade-nah`/`gerade-mittel`,
   drei Stop-Shots, drei Nachläufe, drei Rückzieher und zwei

@@ -226,8 +226,8 @@ describe('mitgelieferte Uebungen', () => {
     // kein Soll: die Sammlung waechst von jetzt an Stueck fuer Stueck und
     // nicht in einem Zug auf eine Zielzahl (Entscheidung vom 26.11.2026).
     const zahl = (l: Level) => shots.filter((s) => s.level === l).length
-    expect(LEVELS.map(zahl)).toEqual([20, 7, 12, 0])
-    expect(shots).toHaveLength(39)
+    expect(LEVELS.map(zahl)).toEqual([20, 7, 11, 0])
+    expect(shots).toHaveLength(38)
   })
 
   it('haelt die Schwierigkeit der Stufe A im vorgesehenen Band', () => {
@@ -306,8 +306,7 @@ describe('mitgelieferte Uebungen', () => {
       'builtin-bande-kurz': '3c54092a',
       'builtin-kick-eine-bande': '0281cc66',
       'builtin-karambolage': 'a3d68b04',
-      'builtin-seiteneffet-links': '6ad8c396',
-      'builtin-seiteneffet-rechts': 'fa9a2856',
+      'builtin-seiteneffet-links': '47ae8045',
       'builtin-position-eng': 'e2d4f90a',
       'builtin-cluster-oeffnen': 'b0c31d03',
       'builtin-safe-hinter-ball': 'ca61c6d4',
@@ -555,14 +554,16 @@ describe('mitgelieferte Uebungen', () => {
     // ANDERE_SEITE im Hinweis.
     //
     // Gesucht wird das Spiegelpaar an den Zahlen, nicht am Namen: zwei
-    // Uebungen, deren Objektbaelle, Weisse und Zielzonen an y = 25
-    // aufeinander fallen.
+    // Uebungen, deren Objektbaelle und Weisse an y = 25 aufeinander fallen.
     //
-    // Die Zielzone gehoert dazu, und das ist keine Feinheit: "Seiteneffet
-    // links" und "Seiteneffet rechts" stehen gespiegelt, verlangen aber
-    // Verschiedenes - einmal soll der Weisse verlaengert, einmal kurz
-    // gehalten werden. Gleiche Lage, andere Aufgabe: zwei Uebungen. Ohne
-    // die Zone im Vergleich wuerde dieser Test sie faelschlich anklagen.
+    // Die Zielzone stand hier einmal mit im Vergleich, als Ausnahme fuer
+    // "Seiteneffet links" und "Seiteneffet rechts": gespiegelte Lage, aber
+    // verschiedene Zonen, also angeblich zwei Aufgaben. Die Ausnahme war
+    // der Fehler (0.18.3). Wenn zwei Aufbauten gespiegelt sind - das Effet
+    // eingeschlossen -, ist auch der Weg des Weissen gespiegelt, und die
+    // Zielzone muss es sein. Lagen die beiden Zonen 30,81 Zoll auseinander,
+    // konnte hoechstens eine stimmen. Eine abweichende Zone macht aus einem
+    // Spiegelpaar keine zweite Uebung, sondern verraet einen Widerspruch.
     const spiegel = (p: Point, q: Point) =>
       Math.abs(p.x - q.x) < 0.01 && Math.abs(p.y - (TABLE.width - q.y)) < 0.01
 
@@ -573,11 +574,7 @@ describe('mitgelieferte Uebungen', () => {
         if (a.attributes.cutAngle !== b.attributes.cutAngle) continue
         if (!spiegel(at(firstObject(a)), at(firstObject(b)))) continue
         if (!spiegel(at(cueOf(a)), at(cueOf(b)))) continue
-
-        const za = a.scoring.targetZone
-        const zb = b.scoring.targetZone
-        const zonenGleich = za && zb ? spiegel(za, zb) : za === zb
-        if (zonenGleich) paare.push(`${a.id} und ${b.id}`)
+        paare.push(`${a.id} und ${b.id}`)
       }
     }
     expect(paare).toEqual([])
@@ -632,7 +629,11 @@ describe('mitgelieferte Uebungen', () => {
       (s) => /^Schnittball \d+ Grad$/.test(s.name) && !s.coachNotes.includes(ANDERE_SEITE),
     )
     expect(ohne.map((s) => s.id)).toEqual([])
-    expect(shots.filter((s) => s.coachNotes.includes(ANDERE_SEITE)).length).toBe(7)
+    // Sieben Schnittbaelle und "Seiteneffet ueber die Bande", das seit
+    // 0.18.3 fuer sein zurueckgezogenes Spiegelbild mitsteht.
+    expect(shots.filter((s) => s.coachNotes.includes(ANDERE_SEITE)).map((s) => s.id)).toHaveLength(
+      8,
+    )
   })
 
   it('liefert keine Uebung, die zurueckgezogen wurde', () => {

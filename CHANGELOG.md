@@ -6,6 +6,49 @@ Die Versionsnummer steht an genau einer Stelle — in `package.json` — und ers
 unten auf der Seite **Einstellungen** sowie auf der Fehlerseite. Schema:
 `Hauptversion.Funktion.Korrektur`.
 
+## 0.18.3 – 26.11.2026
+
+### Entfernt
+- **„Seiteneffet rechts" ist raus.** Der Aufbau war das Spiegelbild von
+  „Seiteneffet links" bis auf die vierte Nachkommastelle — Weißer, Objektball
+  und Zieltasche fallen an der Mittellinie aufeinander (Abweichung 0,0000"),
+  und das Effet ist mitgespiegelt (seit −0,70 gegen +0,70). Damit ist auch
+  der Weg des Weißen das Spiegelbild, und die Zielzone müsste es sein. Sie
+  war es nicht: die eine lag 30,81" neben dem Spiegelbild der anderen. Es
+  konnte höchstens eine von beiden stimmen.
+- Die verbliebene heißt jetzt **„Seiteneffet über die Bande"** — ohne
+  Richtung im Namen, so wie die Schnittbälle seit 0.18.1. Der Hinweis nennt
+  beide Seiten: das Effet auf der anderen Seite der Pomeranze und den Aufbau
+  spiegelverkehrt. Stufe C hat damit 11 Übungen, die Sammlung 38.
+
+### Behoben
+- **Die Ausnahme im Spiegeltest war der Fehler.** Der Test aus 0.18.1 hat die
+  Zielzone mitverglichen, ausdrücklich damit dieses Paar durchkommt — „gleiche
+  Lage, andere Aufgabe". Das hält nicht: Tempo (6) und Effetstärke (0,70)
+  sind bei beiden gleich, es gibt nichts, was den einen Weg länger macht als
+  den anderen. Die abweichende Zone war kein zweiter Inhalt, sondern ein
+  Widerspruch. Der Test vergleicht jetzt nur noch die Lage und meldet jedes
+  Spiegelpaar.
+- Beim Schreiben nachgesehen, ob er auch anschlägt: ein wieder eingesetztes
+  Spiegelbild mit abweichender Zone wird gemeldet.
+
+### Technisches
+- Die ganze Sammlung nach Spiegelpaaren abgesucht — dieses war das einzige
+  unter 39.
+- Der Slug bleibt `seiteneffet-links`, obwohl die Übung keine Richtung mehr
+  im Namen trägt: die Id hängt am Slug, und mit ihr gespeicherte Einheiten
+  und Favoriten.
+- Sammlungsversion 6, damit Name und Hinweis die Geräte erreichen. Der
+  Fingerabdruck der Übung ändert sich dadurch — wer eine eigene Fassung
+  gespeichert hat, sieht „Vorlage überarbeitet".
+- 362 Tests in 28 Dateien.
+
+### Offen
+- **Welche der beiden Zielzonen richtig war, ist nicht entschieden.** Die App
+  rechnet für diese Übung keinen Weg des Weißen aus — gespeichert ist nur der
+  Weg des Objektballs, die Zone ist von Hand gesetzt. Die behaltene Zone
+  bleibt eine Schätzung, bis die Nachrechnung mit pooltool kommt (0.21.0).
+
 ## 0.18.2 – 26.11.2026
 
 ### Entfernt

@@ -25,8 +25,12 @@ import { transliterate } from '@/domain/text'
  *    laeuft ueber eine eigene Regel und braucht sie nicht.
  * 5: "Durch die enge Luecke" zurueckgezogen - dieselbe Uebung mit engerem
  *    Tor. Die Abstufung steht jetzt als Variante im Hinweis des Originals.
+ * 6: "Seiteneffet rechts" zurueckgezogen - Spiegelbild von "Seiteneffet
+ *    links", das Effet eingeschlossen. Die verbliebene heisst jetzt
+ *    "Seiteneffet ueber die Bande" und nennt beide Seiten im Hinweis;
+ *    Name und Hinweis erreichen ein Geraet nur ueber diese Erhoehung.
  */
-export const SEED_VERSION = 5
+export const SEED_VERSION = 6
 
 let running: Promise<void> | null = null
 

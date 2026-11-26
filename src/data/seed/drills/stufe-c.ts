@@ -116,10 +116,12 @@ export const STUFE_C: DrillSpec[] = [
     coachNotes: 'Die Abgangslinie des Weißen steht bei Stun senkrecht auf der Linie des Objektballs.',
   },
   {
+    // Der Slug heisst weiter "links", damit gespeicherte Einheiten und
+    // Favoriten an der Uebung haengen bleiben - die Id haengt am Slug.
     slug: 'seiteneffet-links',
     level: 'C',
-    name: 'Seiteneffet links',
-    description: 'Anschnitt mit linkem Effet, um den Weißen zu verlängern.',
+    name: 'Seiteneffet über die Bande',
+    description: 'Anschnitt mit Effet. Der Weiße läuft über die Bande in die Zone.',
     object: { x: 68, y: 20 },
     pocket: 'br',
     cut: 25,
@@ -131,25 +133,11 @@ export const STUFE_C: DrillSpec[] = [
     difficulty: 7,
     speed: 6,
     coachNotes:
-      'Effet verzieht den Weißen beim Abstoß. Die Ablenkung gehört einkalkuliert, nicht wegdiskutiert.',
-  },
-  {
-    slug: 'seiteneffet-rechts',
-    level: 'C',
-    name: 'Seiteneffet rechts',
-    description: 'Dasselbe mit rechtem Effet, um den Weißen kurz zu halten.',
-    object: { x: 68, y: 30 },
-    pocket: 'tr',
-    cut: 25,
-    dist: 28,
-    side: -1,
-    spin: { x: 0.7, y: 0 },
-    zone: { x: 55, y: 45, r: 9 },
-    skills: ['sidespin', 'position'],
-    shotType: 'position',
-    difficulty: 7,
-    speed: 6,
-    coachNotes: 'Rechtes Effet verkürzt den Winkel an der oberen Bande. Erst das Tempo, dann das Effet.',
+      'Effet verzieht den Weißen beim Abstoß. Die Ablenkung gehört einkalkuliert, nicht wegdiskutiert. ' +
+      'Erst das Tempo, dann das Effet. ' +
+      'Mögliche Variante: dieselbe Lage mit dem Effet auf der anderen Seite – ' +
+      'der Weiße kommt an der Bande anders heraus und läuft kürzer. ' +
+      ANDERE_SEITE,
   },
   {
     slug: 'position-eng',
