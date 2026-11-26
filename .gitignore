@@ -8,3 +8,7 @@ Thumbs.db
 *.tsbuildinfo
 # Claude Code: freigegebene Befehle (koennen Zugangsdaten enthalten) nie ins Repository
 .claude/settings.local.json
+
+# Nachrechnung mit pooltool: eigene Python-Umgebung, nicht ins Repository
+.venv-pooltool/
+scripts/pooltool/_*.log

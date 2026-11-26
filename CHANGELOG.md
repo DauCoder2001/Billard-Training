@@ -6,6 +6,62 @@ Die Versionsnummer steht an genau einer Stelle — in `package.json` — und ers
 unten auf der Seite **Einstellungen** sowie auf der Fehlerseite. Schema:
 `Hauptversion.Funktion.Korrektur`.
 
+## 0.19.0 – 26.11.2026
+
+### Neu
+- **Nachrechnung mit pooltool.** Unter `scripts/pooltool/` liegen Werkzeuge,
+  die jede mitgelieferte Übung mit einer echten Physik-Simulation
+  durchspielen und die drei Fragen aus Abschnitt 5.2 des Konzepts
+  beantworten: Geht die Übung auf? Liegt die Zielzone dort, wo der Weiße
+  hinkommt? Passt die Schwierigkeit zur Trefferquote?
+- Sie laufen **außerhalb der App** und ändern nichts an ihr. Sie schreiben
+  einen Bericht; was daraus folgt, entscheidet ein Mensch. An der App selbst
+  ist mit dieser Fassung nichts geändert.
+- Der Fahrplan hat die Nachrechnung dafür vorgezogen — sie stand als 0.21.0
+  am Ende. Nach 0.18.3 war belegt, dass mindestens eine Zielzone falsch war
+  und die App nicht sagen konnte, welche. Weitere Übungen auf diesem
+  Fundament zu bauen hätte den Fehler nur vervielfacht.
+
+### Befunde
+Vollständig in `docs/Nachrechnung-mit-pooltool.md`, die Tabellen in
+`scripts/pooltool/bericht.md` und `tempo.md`. Gerechnet wurden 8360 plus
+3800 Simulationen.
+
+- **Zwei Übungen gehen bei keiner Geschwindigkeit auf.** „Ball an der Bande"
+  verlangt den Weißen 0,027 Zoll innerhalb der Bande — dort kann kein Ball
+  stehen; der Weiße fällt in 100 von 100 Versuchen. „Kick über eine Bande"
+  zielt 5,21 Grad daneben.
+- **Bandenbälle werden an der falschen Linie gespiegelt.**
+  `build.ts:40` spiegelt die Zieltasche an der Bandenfläche; ein Ball kehrt
+  aber eine Ballbreite früher um. Fehler: 0,95 Grad über die Langbande,
+  0,16 Grad über die Kurzbande, 5,21 Grad beim Kick.
+- **13 von 25 Zielzonen liegen weiter weg, als sie Radius haben.** Die
+  Stellungshälfte der Wertung ist dort nicht zu holen. Zonen, die aus der
+  Stoßlinie gerechnet sind, liegen im Mittel 4,0 Zoll daneben, von Hand
+  gesetzte 13,7 Zoll.
+- **Die Zone von „Seiteneffet über die Bande" ist 24,3 Zoll daneben.** Damit
+  ist die Frage aus 0.18.3 beantwortet: Von den beiden widersprüchlichen
+  Zonen war keine richtig.
+- **Die Schwierigkeit trägt.** Zwischen Schwierigkeit und bester
+  Trefferquote liegt r = −0,672. Sieben Übungen sind Ausreißer.
+- **Das Tempo trägt nicht.** Zwischen der Angabe 1..10 und der gemessenen
+  Geschwindigkeit liegt r = 0,367. „Stop-Shot kurz" und „Nachlauf 20 cm"
+  stehen beide auf Tempo 4 und verlangen 3,2 gegen 0,4 m/s.
+- Der Machbarkeitstest der App meldet zu keiner dieser Übungen etwas. Er
+  prüft nicht, ob der Geisterball auf dem Tisch liegt.
+
+### Technisches
+- `aufloeser.mjs` und `haken.mjs` lassen Node die TypeScript-Quellen der App
+  direkt ausführen (Pfad-Alias `@/` und Importe ohne Endung). Das erspart
+  `tsx` oder `vite-node` als Abhängigkeit.
+- `uebungen-ausgeben.ts` liest die Anspiellinie aus der App heraus, statt sie
+  nachzubauen — bei Bandenball, Kombination und Kick aus dem gespeicherten
+  Weg der Übung.
+- Die Python-Umgebung steht in `.gitignore`. Die Einrichtung braucht zwei
+  pip-Läufe, weil pooltool `panda3d` auf eine Version festnagelt, die es für
+  Python 3.14 nicht gibt; Begründung im README.
+- An `src/` ist keine Zeile geändert. 362 Tests in 28 Dateien, unverändert.
+
 ## 0.18.3 – 26.11.2026
 
 ### Entfernt

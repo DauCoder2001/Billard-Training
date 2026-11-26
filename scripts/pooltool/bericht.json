@@ -1,0 +1,742 @@
+[
+ {
+  "id": "builtin-stop-kurz",
+  "name": "Stop-Shot kurz",
+  "stufe": "A",
+  "schwierigkeit": 2,
+  "trefferquote": 0.53,
+  "falsche_tasche": 3,
+  "abzug": 0,
+  "zonenquote": 0.22641509433962265,
+  "mitte": [
+   79.36909818437528,
+   21.71200963931642
+  ],
+  "streuung": 4.310201569174075,
+  "zone": {
+   "x": 72.7,
+   "y": 25,
+   "r": 4
+  },
+  "fehler": null
+ },
+ {
+  "id": "builtin-nachlauf-mittel",
+  "name": "Nachlauf mittel",
+  "stufe": "A",
+  "schwierigkeit": 3,
+  "trefferquote": 0.3,
+  "falsche_tasche": 16,
+  "abzug": 20,
+  "zonenquote": 0.0,
+  "mitte": [
+   58.39029800206687,
+   29.768320728111576
+  ],
+  "streuung": 19.861155819290353,
+  "zone": {
+   "x": 88,
+   "y": 44,
+   "r": 6
+  },
+  "fehler": null
+ },
+ {
+  "id": "builtin-rueckzieher-kurz",
+  "name": "Rückzieher kurz",
+  "stufe": "A",
+  "schwierigkeit": 4,
+  "trefferquote": 0.53,
+  "falsche_tasche": 8,
+  "abzug": 20,
+  "zonenquote": 0.0,
+  "mitte": [
+   24.0550048371543,
+   7.256974488642943
+  ],
+  "streuung": 8.460269244523055,
+  "zone": {
+   "x": 38,
+   "y": 25,
+   "r": 7
+  },
+  "fehler": null
+ },
+ {
+  "id": "builtin-schnitt-15",
+  "name": "Schnittball 15 Grad",
+  "stufe": "A",
+  "schwierigkeit": 3,
+  "trefferquote": 0.28,
+  "falsche_tasche": 5,
+  "abzug": 47,
+  "zonenquote": 0.0,
+  "mitte": [
+   82.68158620768114,
+   32.083586439913965
+  ],
+  "streuung": 11.937732112900347,
+  "zone": {
+   "x": 60,
+   "y": 12,
+   "r": 8
+  },
+  "fehler": null
+ },
+ {
+  "id": "builtin-schnitt-30",
+  "name": "Schnittball 30 Grad",
+  "stufe": "A",
+  "schwierigkeit": 4,
+  "trefferquote": 0.41,
+  "falsche_tasche": 2,
+  "abzug": 3,
+  "zonenquote": 0.0,
+  "mitte": [
+   13.222021269557143,
+   41.23014120957633
+  ],
+  "streuung": 6.603133363283665,
+  "zone": {
+   "x": 55,
+   "y": 18,
+   "r": 8
+  },
+  "fehler": null
+ },
+ {
+  "id": "builtin-mitteltasche-gerade",
+  "name": "Mitteltasche gerade",
+  "stufe": "A",
+  "schwierigkeit": 3,
+  "trefferquote": 0.99,
+  "falsche_tasche": 0,
+  "abzug": 0,
+  "zonenquote": 0.0,
+  "mitte": [
+   50.328568630953846,
+   9.383888003311686
+  ],
+  "streuung": 10.430473044326632,
+  "zone": {
+   "x": 50,
+   "y": 24,
+   "r": 5
+  },
+  "fehler": null
+ },
+ {
+  "id": "builtin-gerade-nah",
+  "name": "Gerader Ball nah",
+  "stufe": "A",
+  "schwierigkeit": 1,
+  "trefferquote": 1.0,
+  "falsche_tasche": 0,
+  "abzug": 0,
+  "zonenquote": 0.0,
+  "mitte": [
+   86.65188541790594,
+   11.527939169594406
+  ],
+  "streuung": 4.318795528806647,
+  "zone": null,
+  "fehler": null
+ },
+ {
+  "id": "builtin-gerade-mittel",
+  "name": "Gerader Ball mittel",
+  "stufe": "A",
+  "schwierigkeit": 2,
+  "trefferquote": 0.39,
+  "falsche_tasche": 15,
+  "abzug": 4,
+  "zonenquote": 0.0,
+  "mitte": [
+   80.58480024267148,
+   38.5207317404038
+  ],
+  "streuung": 6.576931790420152,
+  "zone": null,
+  "fehler": null
+ },
+ {
+  "id": "builtin-stop-nah",
+  "name": "Stop-Shot nah",
+  "stufe": "A",
+  "schwierigkeit": 2,
+  "trefferquote": 0.91,
+  "falsche_tasche": 0,
+  "abzug": 0,
+  "zonenquote": 0.5824175824175825,
+  "mitte": [
+   80.06654546963274,
+   24.826243310199672
+  ],
+  "streuung": 2.7023636917386193,
+  "zone": {
+   "x": 78.60914410136438,
+   "y": 26.76862089471726,
+   "r": 3.5
+  },
+  "fehler": null
+ },
+ {
+  "id": "builtin-stop-mittel",
+  "name": "Stop-Shot mittel",
+  "stufe": "A",
+  "schwierigkeit": 4,
+  "trefferquote": 0.33,
+  "falsche_tasche": 18,
+  "abzug": 5,
+  "zonenquote": 0.0,
+  "mitte": [
+   81.83340878954272,
+   36.869274207220315
+  ],
+  "streuung": 7.005135093088165,
+  "zone": {
+   "x": 68.11177724890486,
+   "y": 28.77643355625993,
+   "r": 4
+  },
+  "fehler": null
+ },
+ {
+  "id": "builtin-nachlauf-20",
+  "name": "Nachlauf 20 cm",
+  "stufe": "A",
+  "schwierigkeit": 2,
+  "trefferquote": 0.7,
+  "falsche_tasche": 2,
+  "abzug": 19,
+  "zonenquote": 0.0,
+  "mitte": [
+   77.5708625955386,
+   17.577079675832053
+  ],
+  "streuung": 10.530135352707308,
+  "zone": {
+   "x": 76.44685488084528,
+   "y": 18.56344916104787,
+   "r": 4
+  },
+  "fehler": null
+ },
+ {
+  "id": "builtin-nachlauf-50",
+  "name": "Nachlauf 50 cm",
+  "stufe": "A",
+  "schwierigkeit": 3,
+  "trefferquote": 0.36,
+  "falsche_tasche": 9,
+  "abzug": 17,
+  "zonenquote": 0.0,
+  "mitte": [
+   54.611462324082964,
+   29.15341682398542
+  ],
+  "streuung": 17.483686750002974,
+  "zone": {
+   "x": 77.56368572324,
+   "y": 12.130737854905627,
+   "r": 5
+  },
+  "fehler": null
+ },
+ {
+  "id": "builtin-rueckzieher-30",
+  "name": "Rückzieher 30 cm",
+  "stufe": "A",
+  "schwierigkeit": 2,
+  "trefferquote": 0.73,
+  "falsche_tasche": 2,
+  "abzug": 26,
+  "zonenquote": 0.0,
+  "mitte": [
+   11.081015464358925,
+   16.60639380964879
+  ],
+  "streuung": 10.55000723645045,
+  "zone": {
+   "x": 63.85238577221498,
+   "y": 34.7318819086575,
+   "r": 4.5
+  },
+  "fehler": null
+ },
+ {
+  "id": "builtin-rueckzieher-55",
+  "name": "Rückzieher 55 cm",
+  "stufe": "A",
+  "schwierigkeit": 3,
+  "trefferquote": 0.6,
+  "falsche_tasche": 8,
+  "abzug": 14,
+  "zonenquote": 0.0,
+  "mitte": [
+   29.47635928608569,
+   8.629352165123036
+  ],
+  "streuung": 11.483299591318602,
+  "zone": {
+   "x": 52.39343470964857,
+   "y": 33.667208841427225,
+   "r": 6
+  },
+  "fehler": null
+ },
+ {
+  "id": "builtin-schnitt-10-rechts",
+  "name": "Schnittball 10 Grad",
+  "stufe": "A",
+  "schwierigkeit": 2,
+  "trefferquote": 0.39,
+  "falsche_tasche": 4,
+  "abzug": 16,
+  "zonenquote": 0.0,
+  "mitte": [
+   88.05871630782343,
+   46.17840772941298
+  ],
+  "streuung": 4.8731881813990165,
+  "zone": null,
+  "fehler": null
+ },
+ {
+  "id": "builtin-schnitt-20-rechts",
+  "name": "Schnittball 20 Grad",
+  "stufe": "A",
+  "schwierigkeit": 3,
+  "trefferquote": 0.39,
+  "falsche_tasche": 10,
+  "abzug": 27,
+  "zonenquote": 0.0,
+  "mitte": [
+   67.68924674938717,
+   10.21713826251495
+  ],
+  "streuung": 13.131622382123268,
+  "zone": null,
+  "fehler": null
+ },
+ {
+  "id": "builtin-mitteltasche-weit",
+  "name": "Mitteltasche aus der Entfernung",
+  "stufe": "A",
+  "schwierigkeit": 4,
+  "trefferquote": 1.0,
+  "falsche_tasche": 0,
+  "abzug": 2,
+  "zonenquote": 0.03,
+  "mitte": [
+   54.61592640126976,
+   6.131174497583041
+  ],
+  "streuung": 15.622905436332942,
+  "zone": {
+   "x": 50,
+   "y": 16.25,
+   "r": 4
+  },
+  "fehler": null
+ },
+ {
+  "id": "builtin-bande-gerade",
+  "name": "Ball an der Bande gerade",
+  "stufe": "A",
+  "schwierigkeit": 4,
+  "trefferquote": 0.53,
+  "falsche_tasche": 5,
+  "abzug": 3,
+  "zonenquote": 0.0,
+  "mitte": [
+   76.335070242171,
+   43.55886805017356
+  ],
+  "streuung": 6.3974504179252545,
+  "zone": null,
+  "fehler": null
+ },
+ {
+  "id": "builtin-luecke-breit",
+  "name": "Durch die Lücke",
+  "stufe": "A",
+  "schwierigkeit": 3,
+  "trefferquote": 0.57,
+  "falsche_tasche": 4,
+  "abzug": 1,
+  "zonenquote": 0.0,
+  "mitte": [
+   78.22119758537444,
+   20.606196086699104
+  ],
+  "streuung": 6.243610771123719,
+  "zone": null,
+  "fehler": null
+ },
+ {
+  "id": "builtin-wachsende-linie",
+  "name": "Wachsende Linie",
+  "stufe": "A",
+  "schwierigkeit": 3,
+  "trefferquote": 0.7,
+  "falsche_tasche": 7,
+  "abzug": 0,
+  "zonenquote": 0.0,
+  "mitte": [
+   70.97088491050235,
+   7.732725374123008
+  ],
+  "streuung": 3.4765672862316874,
+  "zone": null,
+  "fehler": null
+ },
+ {
+  "id": "builtin-stop-lang",
+  "name": "Stop-Shot lang",
+  "stufe": "B",
+  "schwierigkeit": 6,
+  "trefferquote": 0.26,
+  "falsche_tasche": 10,
+  "abzug": 18,
+  "zonenquote": 0.0,
+  "mitte": [
+   93.68259164706076,
+   4.614532114296887
+  ],
+  "streuung": 5.645757764717227,
+  "zone": {
+   "x": 74,
+   "y": 13.6,
+   "r": 5
+  },
+  "fehler": null
+ },
+ {
+  "id": "builtin-schnitt-45",
+  "name": "Schnittball 45 Grad",
+  "stufe": "B",
+  "schwierigkeit": 6,
+  "trefferquote": 0.29,
+  "falsche_tasche": 10,
+  "abzug": 16,
+  "zonenquote": 0.0,
+  "mitte": [
+   13.416733934078104,
+   4.85342361120125
+  ],
+  "streuung": 4.0832196416724225,
+  "zone": {
+   "x": 40,
+   "y": 30,
+   "r": 9
+  },
+  "fehler": null
+ },
+ {
+  "id": "builtin-mitteltasche-schnitt",
+  "name": "Mitteltasche im Schnitt",
+  "stufe": "B",
+  "schwierigkeit": 6,
+  "trefferquote": 0.85,
+  "falsche_tasche": 1,
+  "abzug": 25,
+  "zonenquote": 0.023529411764705882,
+  "mitte": [
+   22.931939516407812,
+   25.624681869238085
+  ],
+  "streuung": 24.45412960366269,
+  "zone": {
+   "x": 30,
+   "y": 20,
+   "r": 9
+  },
+  "fehler": null
+ },
+ {
+  "id": "builtin-bande-lang",
+  "name": "Bandenball über die Langbande",
+  "stufe": "B",
+  "schwierigkeit": 6,
+  "trefferquote": 0.23,
+  "falsche_tasche": 12,
+  "abzug": 14,
+  "zonenquote": 0.0,
+  "mitte": [
+   56.227536436743435,
+   43.37544802568045
+  ],
+  "streuung": 6.0985296505286914,
+  "zone": null,
+  "fehler": null
+ },
+ {
+  "id": "builtin-kombination-zwei",
+  "name": "Kombination aus zwei Bällen",
+  "stufe": "B",
+  "schwierigkeit": 6,
+  "trefferquote": 0.09,
+  "falsche_tasche": 6,
+  "abzug": 7,
+  "zonenquote": 0.0,
+  "mitte": [
+   57.45365709955336,
+   26.99648653034636
+  ],
+  "streuung": 5.891565575264377,
+  "zone": null,
+  "fehler": null
+ },
+ {
+  "id": "builtin-bandenball-fest",
+  "name": "Ball an der Bande",
+  "stufe": "B",
+  "schwierigkeit": 6,
+  "trefferquote": 0.0,
+  "falsche_tasche": 0,
+  "abzug": 100,
+  "zonenquote": 0.0,
+  "mitte": null,
+  "streuung": 0.0,
+  "zone": {
+   "x": 78,
+   "y": 40,
+   "r": 8
+  },
+  "fehler": null
+ },
+ {
+  "id": "builtin-position-kitchen",
+  "name": "Position in die Kitchen",
+  "stufe": "B",
+  "schwierigkeit": 6,
+  "trefferquote": 0.37,
+  "falsche_tasche": 9,
+  "abzug": 36,
+  "zonenquote": 0.02702702702702703,
+  "mitte": [
+   35.14490014660636,
+   21.731785833534772
+  ],
+  "streuung": 12.77321136243448,
+  "zone": {
+   "x": 15,
+   "y": 25,
+   "r": 10
+  },
+  "fehler": null
+ },
+ {
+  "id": "builtin-rueckzieher-lang",
+  "name": "Rückzieher lang",
+  "stufe": "C",
+  "schwierigkeit": 8,
+  "trefferquote": 0.29,
+  "falsche_tasche": 14,
+  "abzug": 21,
+  "zonenquote": 0.0,
+  "mitte": [
+   69.30757732538505,
+   22.268550372958657
+  ],
+  "streuung": 18.850377733763157,
+  "zone": {
+   "x": 39.9,
+   "y": 30.3,
+   "r": 9
+  },
+  "fehler": null
+ },
+ {
+  "id": "builtin-schnitt-60",
+  "name": "Dünner Schnitt 60 Grad",
+  "stufe": "C",
+  "schwierigkeit": 7,
+  "trefferquote": 0.2,
+  "falsche_tasche": 19,
+  "abzug": 28,
+  "zonenquote": 0.0,
+  "mitte": [
+   46.35908614062355,
+   22.867940012250127
+  ],
+  "streuung": 8.344607510488958,
+  "zone": {
+   "x": 45,
+   "y": 40,
+   "r": 10
+  },
+  "fehler": null
+ },
+ {
+  "id": "builtin-schnitt-75",
+  "name": "Sehr dünner Schnitt 75 Grad",
+  "stufe": "C",
+  "schwierigkeit": 9,
+  "trefferquote": 0.13,
+  "falsche_tasche": 4,
+  "abzug": 17,
+  "zonenquote": 0.0,
+  "mitte": [
+   50.692783793053145,
+   42.37660233140595
+  ],
+  "streuung": 8.25158342048217,
+  "zone": null,
+  "fehler": null
+ },
+ {
+  "id": "builtin-bande-kurz",
+  "name": "Bandenball über die Kurzbande",
+  "stufe": "C",
+  "schwierigkeit": 7,
+  "trefferquote": 0.11,
+  "falsche_tasche": 42,
+  "abzug": 4,
+  "zonenquote": 0.0,
+  "mitte": [
+   81.87208778041769,
+   25.74714936991188
+  ],
+  "streuung": 5.893843012264623,
+  "zone": null,
+  "fehler": null
+ },
+ {
+  "id": "builtin-kick-eine-bande",
+  "name": "Kick über eine Bande",
+  "stufe": "C",
+  "schwierigkeit": 8,
+  "trefferquote": 0.0,
+  "falsche_tasche": 1,
+  "abzug": 28,
+  "zonenquote": 0.0,
+  "mitte": null,
+  "streuung": 0.0,
+  "zone": null,
+  "fehler": null
+ },
+ {
+  "id": "builtin-karambolage",
+  "name": "Karambolage",
+  "stufe": "C",
+  "schwierigkeit": 8,
+  "trefferquote": 0.27,
+  "falsche_tasche": 3,
+  "abzug": 18,
+  "zonenquote": 0.0,
+  "mitte": [
+   55.018377573863724,
+   35.95184026287107
+  ],
+  "streuung": 10.150734556610404,
+  "zone": null,
+  "fehler": null
+ },
+ {
+  "id": "builtin-seiteneffet-links",
+  "name": "Seiteneffet über die Bande",
+  "stufe": "C",
+  "schwierigkeit": 7,
+  "trefferquote": 0.31,
+  "falsche_tasche": 5,
+  "abzug": 3,
+  "zonenquote": 0.0,
+  "mitte": [
+   52.985737551201495,
+   21.598942319323935
+  ],
+  "streuung": 17.76016977468676,
+  "zone": {
+   "x": 25,
+   "y": 12,
+   "r": 9
+  },
+  "fehler": null
+ },
+ {
+  "id": "builtin-position-eng",
+  "name": "Enge Position",
+  "stufe": "C",
+  "schwierigkeit": 7,
+  "trefferquote": 0.39,
+  "falsche_tasche": 5,
+  "abzug": 1,
+  "zonenquote": 0.0,
+  "mitte": [
+   85.53990900245672,
+   4.774786422176704
+  ],
+  "streuung": 3.480214666342553,
+  "zone": {
+   "x": 55,
+   "y": 34,
+   "r": 4
+  },
+  "fehler": null
+ },
+ {
+  "id": "builtin-cluster-oeffnen",
+  "name": "Cluster öffnen",
+  "stufe": "C",
+  "schwierigkeit": 8,
+  "trefferquote": 0.31,
+  "falsche_tasche": 20,
+  "abzug": 11,
+  "zonenquote": 0.0,
+  "mitte": [
+   90.8052200164607,
+   11.560164052769085
+  ],
+  "streuung": 7.2350515118838805,
+  "zone": {
+   "x": 45,
+   "y": 33,
+   "r": 7
+  },
+  "fehler": null
+ },
+ {
+  "id": "builtin-safe-hinter-ball",
+  "name": "Safe hinter den Ball",
+  "stufe": "C",
+  "schwierigkeit": 8,
+  "trefferquote": 0.17,
+  "falsche_tasche": 0,
+  "abzug": 4,
+  "zonenquote": 0.0,
+  "mitte": [
+   44.295547382290756,
+   39.42145150507013
+  ],
+  "streuung": 8.26091022053896,
+  "zone": {
+   "x": 24,
+   "y": 30,
+   "r": 6
+  },
+  "fehler": null
+ },
+ {
+  "id": "builtin-lange-gerade",
+  "name": "Lange Gerade",
+  "stufe": "C",
+  "schwierigkeit": 7,
+  "trefferquote": 0.2,
+  "falsche_tasche": 9,
+  "abzug": 11,
+  "zonenquote": 0.0,
+  "mitte": [
+   87.64711510320099,
+   7.321683899079846
+  ],
+  "streuung": 12.410025641240324,
+  "zone": {
+   "x": 76.6,
+   "y": 12.3,
+   "r": 6
+  },
+  "fehler": null
+ }
+]

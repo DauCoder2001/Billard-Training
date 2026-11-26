@@ -226,10 +226,12 @@ Spiegelpaar keine zweite Übung. Sie verrät einen Widerspruch. Der Test
 vergleicht nur noch die Lage; die ganze Sammlung wurde danach abgesucht,
 dieses war das einzige Spiegelpaar unter 39.
 
-**Was offen bleibt:** Welche der beiden Zonen richtig war, ist nicht
-entschieden. Die App rechnet für diese Übung keinen Weg des Weißen aus — nur
-der Weg des Objektballs ist gespeichert, die Zone ist von Hand gesetzt. Das
-klärt erst die Nachrechnung mit pooltool (5.2, Version 0.21.0).
+**Mit 0.19.0 beantwortet:** Welche der beiden Zonen richtig war, stand hier
+als offene Frage — die App rechnet für diese Übung keinen Weg des Weißen
+aus, die Zone ist von Hand gesetzt. Die Nachrechnung sagt es jetzt: Die
+behaltene Zone liegt **24,3 Zoll** neben dem Ort, an dem der Weiße zur Ruhe
+kommt. Von den beiden widersprüchlichen Zonen war **keine** richtig
+(siehe [Nachrechnung-mit-pooltool.md](Nachrechnung-mit-pooltool.md)).
 
 ### 3.3 Stufe B — Kontrolle des Weißen (7 heute + 18 neu)
 
@@ -301,7 +303,7 @@ Alles gemessen, nicht geschätzt:
 | Quelltext | 25 Spezifikationen = 12,3 kB / 426 Zeilen, also ~490 Byte je Übung | 100 ergeben ~49 kB / ~1700 Zeilen. **Eine Datei je Stufe** (`drills/stufe-a.ts` …), nicht eine Datei mit 1700 Zeilen. **Umgesetzt mit 0.18.0:** `drills/build.ts` (Rechnung), `stufe-a.ts` bis `stufe-c.ts`, `index.ts` (Zusammenführung). |
 | Bundle | heute 537 kB im Hauptbundle (`dist/assets/index-*.js`) | +30 bis 35 kB, also etwa +6 %. Tragbar. Falls nicht: die Stufen B–D nachladen; Baukasten, Training und Teilen-Dialog kommen schon als eigene Dateien nach, das Nachladen ist eingespielt. |
 | Startzeit | `seedShots()` rechnet alle Übungen bei jedem Start | 4× so viel reine Geometrie, im Millisekundenbereich. Kein Problem. |
-| Einspielen | `SEED_VERSION` steht auf **3** (0.18.0; vorher 2) | Erhöhen, sobald neue Übungen dazukommen, sonst bleiben vorhandene Geräte bei 25. **Nicht** für die Stufen in 0.15.0: das Einspielen lässt eine eigene Fassung einer mitgelieferten Übung bewusst in Ruhe, die bekäme so nie eine Stufe. Dafür gibt es `migrateLevels()`, die beide erreicht. **Beim Erhöhen allein bleibt es nicht:** eine neue Übung fehlt im Bestand wie eine gelöschte, und gelöscht bleibt gelöscht. Deshalb trägt jede Beschreibung seit 0.18.0 die Angabe `since` (siehe `seedUpdates`). |
+| Einspielen | `SEED_VERSION` steht auf **6** (0.18.3) | Erhöhen, sobald neue Übungen dazukommen, sonst bleiben vorhandene Geräte bei 25. **Nicht** für die Stufen in 0.15.0: das Einspielen lässt eine eigene Fassung einer mitgelieferten Übung bewusst in Ruhe, die bekäme so nie eine Stufe. Dafür gibt es `migrateLevels()`, die beide erreicht. **Beim Erhöhen allein bleibt es nicht:** eine neue Übung fehlt im Bestand wie eine gelöschte, und gelöscht bleibt gelöscht. Deshalb trägt jede Beschreibung seit 0.18.0 die Angabe `since` (siehe `seedUpdates`). |
 | Fingerabdruck | `templatePart` umfasst `tags`, `attributes`, `scoring` (`src/domain/seedStamp.ts:30`) | `level` gehört **nicht** hinein — wie `favorite`. Sonst bekäme jeder, der eine eigene Fassung einer der 25 Übungen hat, den Hinweis „Vorlage überarbeitet", ohne dass sich etwas geändert hat. |
 
 ---
@@ -355,7 +357,17 @@ Angezeigt wird das **als Hinweis, nicht als Verbot**: ein Trickshot darf
 unmöglich aussehen. Farbe und Ort nach den Regeln, die für die Oberfläche
 schon gelten.
 
-### 5.2 Einmalig mit pooltool, außerhalb der App
+### 5.2 Einmalig mit pooltool, außerhalb der App ✓ 0.19.0
+
+**Gebaut und einmal gelaufen am 26.11.2026.** Die Werkzeuge liegen unter
+[`scripts/pooltool/`](../scripts/pooltool/README.md), die Befunde in
+[Nachrechnung-mit-pooltool.md](Nachrechnung-mit-pooltool.md). Kurz: Die
+Geometrie der App stimmt, die Schwierigkeitsskala trägt (r = −0,672), aber
+13 von 25 Zielzonen liegen weiter weg, als sie Radius haben, zwei Übungen
+gehen bei keiner Geschwindigkeit auf, und die Tempo-Angabe 1..10 hat keine
+Bedeutung (r = 0,367 gegen das gemessene Tempo).
+
+Der ursprüngliche Plan stand so da:
 
 Ein Skript unter `scripts/`, das alle 100 Übungen nach pooltool übersetzt,
 jede mit dem angegebenen Tempo und Treffpunkt hundertmal mit kleiner Streuung
@@ -562,10 +574,20 @@ ausgelieferte Fassung mit Eintrag im CHANGELOG.
 | 0.18.2 ✓ | „Durch die enge Lücke" zurückgenommen, Variante statt eigener Übung; Stufe A hat 20 — erledigt am 26.11.2026 | 0.18.1 |
 | 0.18.3 ✓ | „Seiteneffet rechts" zurückgenommen, die Ausnahme im Spiegeltest aufgehoben; Stufe C hat 11, die Sammlung 38 — erledigt am 26.11.2026 | 0.18.1 |
 | — | **Die Stufen B, C und D füllt Matthias Stück für Stück selbst.** Keine Auslieferung, die eine Stufe in einem Zug auf eine Zielzahl bringt (E6, 3.2.1, 3.2.2). | — |
-| 0.19.0 | Modell für Spezialtechniken (3.6): `jump` und `masse` als Stoßart und Fähigkeit, `air` am Wegsegment — die Voraussetzung dafür, dass Stufe D überhaupt gebaut werden *kann* | — |
-| 0.20.0 | Stufenprüfungen und vier neue Erfolge (4.) | 0.19.0 |
-| 0.21.0 | Nachrechnung mit pooltool, Korrekturen an Zonen und Schwierigkeiten (5.2) | 0.20.0 |
+| 0.19.0 ✓ | **Nachrechnung mit pooltool** (5.2), vorgezogen — erledigt am 26.11.2026. Werkzeuge unter `scripts/pooltool/`, Befunde in [Nachrechnung-mit-pooltool.md](Nachrechnung-mit-pooltool.md). Ändert nichts an der App | — |
+| 0.19.1 | **Korrekturen aus der Nachrechnung:** Spiegelfehler bei Bandenbällen (`build.ts:40`), „Ball an der Bande" unspielbar, Geisterball in den Machbarkeitstest | 0.19.0 |
+| 0.19.2 | **13 Zielzonen neu setzen** aus den gemessenen Ruhelagen, sieben Schwierigkeiten nachziehen | 0.19.1 |
+| 0.20.0 | Modell für Spezialtechniken (3.6): `jump` und `masse` als Stoßart und Fähigkeit, `air` am Wegsegment — die Voraussetzung dafür, dass Stufe D überhaupt gebaut werden *kann* | — |
+| 0.21.0 | Stufenprüfungen und vier neue Erfolge (4.) | 0.19.2, 0.20.0 |
 | **1.0.0** | Vier Stufen mit tragfähigem Umfang, vier Prüfungen, nachgerechnet, eigene Adresse | 0.21.0 |
+
+**Vorgezogen am 26.11.2026.** Die Nachrechnung stand als 0.21.0 am Ende. Nach
+0.18.3 war belegt, dass mindestens eine Zielzone falsch war und die App nicht
+sagen konnte, welche — aufgefallen nur, weil zufällig zwei gespiegelte
+Übungen nebeneinander standen. Weitere Übungen (Stufe D) und eine Benotung
+(Stufenprüfungen) auf diesem Fundament zu bauen hätte den Fehler
+vervielfacht. Die Rechnung hat ihn bestätigt: 13 von 25 Zielzonen liegen
+weiter weg, als sie Radius haben.
 
 **Umgestellt am 26.11.2026.** Vorher stand hier eine Zeile je Stufe, die sie
 auf 25 Übungen bringen sollte. Stufe A hat gezeigt, wohin das führt: um auf
@@ -602,15 +624,22 @@ am Server.
 - **Trickshots und die Bewertung:** Ein Trickshot hat keine sinnvolle Zielzone
   und keine Trefferquote von 60 %. Vielleicht gehören sie gar nicht ins
   Training, sondern in eine eigene Ecke „Zum Spaß", ohne Einfluss auf das
-  Profil. Vor 0.19.0 entscheiden.
+  Profil. Vor dem Modell für Spezialtechniken (0.20.0) entscheiden.
 - **Zahl je Stufe:** 25 ist ein Richtwert (E6), und seit 0.18.1 kein Ziel
   mehr, auf das hin gearbeitet wird. Die Aufteilung ergibt sich daraus,
   welche Übungen sinnvoll sind — nicht umgekehrt.
-- **Die Zielzone von „Seiteneffet über die Bande":** von Hand gesetzt und
-  seit 0.18.3 ohne Gegenprobe — die zweite, gespiegelte Fassung, die ihr
-  widersprach, ist weg (3.2.3). Welche Zone richtig war, klärt erst die
-  Nachrechnung mit pooltool (0.21.0). Dasselbe gilt im Grunde für jede
-  Zielzone der Sammlung; hier ist nur belegt, dass eine davon falsch war.
+- **Die Zielzonen der Sammlung** — mit 0.19.0 gemessen, noch nicht
+  berichtigt. 13 von 25 liegen weiter von der gemessenen Ruhelage des Weißen
+  entfernt, als sie Radius haben; die von „Seiteneffet über die Bande" um
+  24,3 Zoll. Die gemessenen Ruhelagen stehen in
+  `scripts/pooltool/tempo.json`, die Korrektur ist als 0.19.2 eingeplant.
+- **Das Tempo 1..10 hat keine Bedeutung** (0.19.0, r = 0,367 gegen das
+  gemessene Tempo). Entweder bekommt es eine Einheit, oder es gehört aus der
+  Bewertung heraus. Zu entscheiden, bevor die Stufenprüfungen kommen — die
+  benoten an diesen Zahlen.
+- **Der Machbarkeitstest prüft den Geisterball nicht.** „Ball an der Bande"
+  verlangt den Weißen 0,027 Zoll innerhalb der Bande und wird trotzdem nicht
+  beanstandet (0.19.0). Eingeplant als 0.19.1.
 - **Effet ist auf der Übungsseite unsichtbar:** `spin` steht in den
   Eigenschaften der Übung, wird aber nur im Baukasten angezeigt. Für
   Seiteneffet-Übungen ist das die halbe Aufgabe. Zu entscheiden, ob die

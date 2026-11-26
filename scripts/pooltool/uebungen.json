@@ -1,0 +1,2244 @@
+{
+ "erzeugt": "2026-11-26",
+ "tisch": {
+  "laenge": 100,
+  "breite": 50,
+  "ballradius": 1.125,
+  "eckenmaul": 4.5,
+  "mittelmaul": 5
+ },
+ "uebungen": [
+  {
+   "id": "builtin-stop-kurz",
+   "name": "Stop-Shot kurz",
+   "stufe": "A",
+   "schwierigkeit": 2,
+   "tempo": 4,
+   "stossart": "cut",
+   "schnittwinkel": 0,
+   "ueberBande": false,
+   "ueberKick": false,
+   "weisser": {
+    "x": 60.68108768097241,
+    "y": 39.31891231902759
+   },
+   "objektball": {
+    "x": 75,
+    "y": 25
+   },
+   "zielball": "obj",
+   "anspielpunkt": {
+    "x": 73.40900974233027,
+    "y": 26.59099025766973
+   },
+   "geisterball": {
+    "x": 73.40900974233027,
+    "y": 26.59099025766973
+   },
+   "objektziel": {
+    "x": 98.40900974233027,
+    "y": 1.590990257669732
+   },
+   "baelle": [
+    {
+     "id": "obj",
+     "art": "object",
+     "x": 75,
+     "y": 25
+    }
+   ],
+   "tasche": {
+    "id": "br",
+    "name": "Ecke unten rechts",
+    "punkt": {
+     "x": 98.40900974233027,
+     "y": 1.590990257669732
+    }
+   },
+   "effet": {
+    "x": 0,
+    "y": 0
+   },
+   "erhoehung": 0,
+   "zone": {
+    "x": 72.7,
+    "y": 25,
+    "r": 4
+   },
+   "wertung": "pocket+position"
+  },
+  {
+   "id": "builtin-nachlauf-mittel",
+   "name": "Nachlauf mittel",
+   "stufe": "A",
+   "schwierigkeit": 3,
+   "tempo": 5,
+   "stossart": "position",
+   "schnittwinkel": 0,
+   "ueberBande": false,
+   "ueberKick": false,
+   "weisser": {
+    "x": 38.68413320826559,
+    "y": 31.33420254207371
+   },
+   "objektball": {
+    "x": 62,
+    "y": 38
+   },
+   "zielball": "obj",
+   "anspielpunkt": {
+    "x": 59.83667215334423,
+    "y": 37.381523947202716
+   },
+   "geisterball": {
+    "x": 59.83667215334423,
+    "y": 37.381523947202716
+   },
+   "objektziel": {
+    "x": 98.40900974233027,
+    "y": 48.40900974233027
+   },
+   "baelle": [
+    {
+     "id": "obj",
+     "art": "object",
+     "x": 62,
+     "y": 38
+    }
+   ],
+   "tasche": {
+    "id": "tr",
+    "name": "Ecke oben rechts",
+    "punkt": {
+     "x": 98.40900974233027,
+     "y": 48.40900974233027
+    }
+   },
+   "effet": {
+    "x": 0,
+    "y": 0.6
+   },
+   "erhoehung": 0,
+   "zone": {
+    "x": 88,
+    "y": 44,
+    "r": 6
+   },
+   "wertung": "pocket+position"
+  },
+  {
+   "id": "builtin-rueckzieher-kurz",
+   "name": "Rückzieher kurz",
+   "stufe": "A",
+   "schwierigkeit": 4,
+   "tempo": 6,
+   "stossart": "position",
+   "schnittwinkel": 0,
+   "ueberBande": false,
+   "ueberKick": false,
+   "weisser": {
+    "x": 55.91552277480353,
+    "y": 36.60560215124238
+   },
+   "objektball": {
+    "x": 70,
+    "y": 25
+   },
+   "zielball": "obj",
+   "anspielpunkt": {
+    "x": 68.26355760237304,
+    "y": 26.430827662481935
+   },
+   "geisterball": {
+    "x": 68.26355760237304,
+    "y": 26.430827662481935
+   },
+   "objektziel": {
+    "x": 98.40900974233027,
+    "y": 1.590990257669732
+   },
+   "baelle": [
+    {
+     "id": "obj",
+     "art": "object",
+     "x": 70,
+     "y": 25
+    }
+   ],
+   "tasche": {
+    "id": "br",
+    "name": "Ecke unten rechts",
+    "punkt": {
+     "x": 98.40900974233027,
+     "y": 1.590990257669732
+    }
+   },
+   "effet": {
+    "x": 0,
+    "y": -0.7
+   },
+   "erhoehung": 0,
+   "zone": {
+    "x": 38,
+    "y": 25,
+    "r": 7
+   },
+   "wertung": "pocket+position"
+  },
+  {
+   "id": "builtin-schnitt-15",
+   "name": "Schnittball 15 Grad",
+   "stufe": "A",
+   "schwierigkeit": 3,
+   "tempo": 5,
+   "stossart": "cut",
+   "schnittwinkel": 15,
+   "ueberBande": false,
+   "ueberKick": false,
+   "weisser": {
+    "x": 48.440367084090695,
+    "y": 45.46025609566103
+   },
+   "objektball": {
+    "x": 72,
+    "y": 30
+   },
+   "zielball": "obj",
+   "anspielpunkt": {
+    "x": 70.4680752329029,
+    "y": 31.64794008020757
+   },
+   "geisterball": {
+    "x": 70.4680752329029,
+    "y": 31.64794008020757
+   },
+   "objektziel": {
+    "x": 98.40900974233027,
+    "y": 1.590990257669732
+   },
+   "baelle": [
+    {
+     "id": "obj",
+     "art": "object",
+     "x": 72,
+     "y": 30
+    }
+   ],
+   "tasche": {
+    "id": "br",
+    "name": "Ecke unten rechts",
+    "punkt": {
+     "x": 98.40900974233027,
+     "y": 1.590990257669732
+    }
+   },
+   "effet": {
+    "x": 0,
+    "y": 0
+   },
+   "erhoehung": 0,
+   "zone": {
+    "x": 60,
+    "y": 12,
+    "r": 8
+   },
+   "wertung": "pocket+position"
+  },
+  {
+   "id": "builtin-schnitt-30",
+   "name": "Schnittball 30 Grad",
+   "stufe": "A",
+   "schwierigkeit": 4,
+   "tempo": 5,
+   "stossart": "cut",
+   "schnittwinkel": 30,
+   "ueberBande": false,
+   "ueberKick": false,
+   "weisser": {
+    "x": 54.05617209128624,
+    "y": 6.623316755451292
+   },
+   "objektball": {
+    "x": 70,
+    "y": 32
+   },
+   "zielball": "obj",
+   "anspielpunkt": {
+    "x": 68.05165254486803,
+    "y": 30.87463686123955
+   },
+   "geisterball": {
+    "x": 68.05165254486803,
+    "y": 30.87463686123955
+   },
+   "objektziel": {
+    "x": 98.40900974233027,
+    "y": 48.40900974233027
+   },
+   "baelle": [
+    {
+     "id": "obj",
+     "art": "object",
+     "x": 70,
+     "y": 32
+    }
+   ],
+   "tasche": {
+    "id": "tr",
+    "name": "Ecke oben rechts",
+    "punkt": {
+     "x": 98.40900974233027,
+     "y": 48.40900974233027
+    }
+   },
+   "effet": {
+    "x": 0,
+    "y": 0
+   },
+   "erhoehung": 0,
+   "zone": {
+    "x": 55,
+    "y": 18,
+    "r": 8
+   },
+   "wertung": "pocket+position"
+  },
+  {
+   "id": "builtin-mitteltasche-gerade",
+   "name": "Mitteltasche gerade",
+   "stufe": "A",
+   "schwierigkeit": 3,
+   "tempo": 4,
+   "stossart": "cut",
+   "schnittwinkel": 0,
+   "ueberBande": false,
+   "ueberKick": false,
+   "weisser": {
+    "x": 50,
+    "y": 46.25
+   },
+   "objektball": {
+    "x": 50,
+    "y": 20
+   },
+   "zielball": "obj",
+   "anspielpunkt": {
+    "x": 50,
+    "y": 22.25
+   },
+   "geisterball": {
+    "x": 50,
+    "y": 22.25
+   },
+   "objektziel": {
+    "x": 50,
+    "y": 0
+   },
+   "baelle": [
+    {
+     "id": "obj",
+     "art": "object",
+     "x": 50,
+     "y": 20
+    }
+   ],
+   "tasche": {
+    "id": "bm",
+    "name": "Mitte unten",
+    "punkt": {
+     "x": 50,
+     "y": 0
+    }
+   },
+   "effet": {
+    "x": 0,
+    "y": 0
+   },
+   "erhoehung": 0,
+   "zone": {
+    "x": 50,
+    "y": 24,
+    "r": 5
+   },
+   "wertung": "pocket+position"
+  },
+  {
+   "id": "builtin-gerade-nah",
+   "name": "Gerader Ball nah",
+   "stufe": "A",
+   "schwierigkeit": 1,
+   "tempo": 4,
+   "stossart": "cut",
+   "schnittwinkel": 0,
+   "ueberBande": false,
+   "ueberKick": false,
+   "weisser": {
+    "x": 73.74350992835083,
+    "y": 20.738073658814265
+   },
+   "objektball": {
+    "x": 85,
+    "y": 12
+   },
+   "zielball": "obj",
+   "anspielpunkt": {
+    "x": 83.22265946237118,
+    "y": 13.379695840865411
+   },
+   "geisterball": {
+    "x": 83.22265946237118,
+    "y": 13.379695840865411
+   },
+   "objektziel": {
+    "x": 98.40900974233027,
+    "y": 1.590990257669732
+   },
+   "baelle": [
+    {
+     "id": "obj",
+     "art": "object",
+     "x": 85,
+     "y": 12
+    }
+   ],
+   "tasche": {
+    "id": "br",
+    "name": "Ecke unten rechts",
+    "punkt": {
+     "x": 98.40900974233027,
+     "y": 1.590990257669732
+    }
+   },
+   "effet": {
+    "x": 0,
+    "y": 0
+   },
+   "erhoehung": 0,
+   "zone": null,
+   "wertung": "pocket"
+  },
+  {
+   "id": "builtin-gerade-mittel",
+   "name": "Gerader Ball mittel",
+   "stufe": "A",
+   "schwierigkeit": 2,
+   "tempo": 5,
+   "stossart": "cut",
+   "schnittwinkel": 0,
+   "ueberBande": false,
+   "ueberKick": false,
+   "weisser": {
+    "x": 43.68971352698301,
+    "y": 18.553635385123403
+   },
+   "objektball": {
+    "x": 72,
+    "y": 34
+   },
+   "zielball": "obj",
+   "anspielpunkt": {
+    "x": 70.02486373444067,
+    "y": 32.92234665477605
+   },
+   "geisterball": {
+    "x": 70.02486373444067,
+    "y": 32.92234665477605
+   },
+   "objektziel": {
+    "x": 98.40900974233027,
+    "y": 48.40900974233027
+   },
+   "baelle": [
+    {
+     "id": "obj",
+     "art": "object",
+     "x": 72,
+     "y": 34
+    }
+   ],
+   "tasche": {
+    "id": "tr",
+    "name": "Ecke oben rechts",
+    "punkt": {
+     "x": 98.40900974233027,
+     "y": 48.40900974233027
+    }
+   },
+   "effet": {
+    "x": 0,
+    "y": 0
+   },
+   "erhoehung": 0,
+   "zone": null,
+   "wertung": "pocket"
+  },
+  {
+   "id": "builtin-stop-nah",
+   "name": "Stop-Shot nah",
+   "stufe": "A",
+   "schwierigkeit": 2,
+   "tempo": 4,
+   "stossart": "cut",
+   "schnittwinkel": 0,
+   "ueberBande": false,
+   "ueberKick": false,
+   "weisser": {
+    "x": 73.04572050682188,
+    "y": 33.84310447358631
+   },
+   "objektball": {
+    "x": 80,
+    "y": 25
+   },
+   "zielball": "obj",
+   "anspielpunkt": {
+    "x": 78.60914410136438,
+    "y": 26.76862089471726
+   },
+   "geisterball": {
+    "x": 78.60914410136438,
+    "y": 26.76862089471726
+   },
+   "objektziel": {
+    "x": 98.40900974233027,
+    "y": 1.590990257669732
+   },
+   "baelle": [
+    {
+     "id": "obj",
+     "art": "object",
+     "x": 80,
+     "y": 25
+    }
+   ],
+   "tasche": {
+    "id": "br",
+    "name": "Ecke unten rechts",
+    "punkt": {
+     "x": 98.40900974233027,
+     "y": 1.590990257669732
+    }
+   },
+   "effet": {
+    "x": 0,
+    "y": 0
+   },
+   "erhoehung": 0,
+   "zone": {
+    "x": 78.60914410136438,
+    "y": 26.76862089471726,
+    "r": 3.5
+   },
+   "wertung": "pocket+position"
+  },
+  {
+   "id": "builtin-stop-mittel",
+   "name": "Stop-Shot mittel",
+   "stufe": "A",
+   "schwierigkeit": 4,
+   "tempo": 5,
+   "stossart": "cut",
+   "schnittwinkel": 0,
+   "ueberBande": false,
+   "ueberKick": false,
+   "weisser": {
+    "x": 41.25705367777402,
+    "y": 11.37459968973456
+   },
+   "objektball": {
+    "x": 70,
+    "y": 30
+   },
+   "zielball": "obj",
+   "anspielpunkt": {
+    "x": 68.11177724890486,
+    "y": 28.77643355625993
+   },
+   "geisterball": {
+    "x": 68.11177724890486,
+    "y": 28.77643355625993
+   },
+   "objektziel": {
+    "x": 98.40900974233027,
+    "y": 48.40900974233027
+   },
+   "baelle": [
+    {
+     "id": "obj",
+     "art": "object",
+     "x": 70,
+     "y": 30
+    }
+   ],
+   "tasche": {
+    "id": "tr",
+    "name": "Ecke oben rechts",
+    "punkt": {
+     "x": 98.40900974233027,
+     "y": 48.40900974233027
+    }
+   },
+   "effet": {
+    "x": 0,
+    "y": 0
+   },
+   "erhoehung": 0,
+   "zone": {
+    "x": 68.11177724890486,
+    "y": 28.77643355625993,
+    "r": 4
+   },
+   "wertung": "pocket+position"
+  },
+  {
+   "id": "builtin-nachlauf-20",
+   "name": "Nachlauf 20 cm",
+   "stufe": "A",
+   "schwierigkeit": 2,
+   "tempo": 4,
+   "stossart": "position",
+   "schnittwinkel": 0,
+   "ueberBande": false,
+   "ueberKick": false,
+   "weisser": {
+    "x": 57.55959046700601,
+    "y": 33.15961793787835
+   },
+   "objektball": {
+    "x": 72,
+    "y": 22
+   },
+   "zielball": "obj",
+   "anspielpunkt": {
+    "x": 70.21967553702814,
+    "y": 23.37584330740966
+   },
+   "geisterball": {
+    "x": 70.21967553702814,
+    "y": 23.37584330740966
+   },
+   "objektziel": {
+    "x": 98.40900974233027,
+    "y": 1.590990257669732
+   },
+   "baelle": [
+    {
+     "id": "obj",
+     "art": "object",
+     "x": 72,
+     "y": 22
+    }
+   ],
+   "tasche": {
+    "id": "br",
+    "name": "Ecke unten rechts",
+    "punkt": {
+     "x": 98.40900974233027,
+     "y": 1.590990257669732
+    }
+   },
+   "effet": {
+    "x": 0,
+    "y": 0.5
+   },
+   "erhoehung": 0,
+   "zone": {
+    "x": 76.44685488084528,
+    "y": 18.56344916104787,
+    "r": 4
+   },
+   "wertung": "pocket+position"
+  },
+  {
+   "id": "builtin-nachlauf-50",
+   "name": "Nachlauf 50 cm",
+   "stufe": "A",
+   "schwierigkeit": 3,
+   "tempo": 5,
+   "stossart": "position",
+   "schnittwinkel": 0,
+   "ueberBande": false,
+   "ueberKick": false,
+   "weisser": {
+    "x": 42.14380691845814,
+    "y": 30.039626303231067
+   },
+   "objektball": {
+    "x": 62,
+    "y": 20
+   },
+   "zielball": "obj",
+   "anspielpunkt": {
+    "x": 59.99207036254071,
+    "y": 21.015243109315502
+   },
+   "geisterball": {
+    "x": 59.99207036254071,
+    "y": 21.015243109315502
+   },
+   "objektziel": {
+    "x": 98.40900974233027,
+    "y": 1.590990257669732
+   },
+   "baelle": [
+    {
+     "id": "obj",
+     "art": "object",
+     "x": 62,
+     "y": 20
+    }
+   ],
+   "tasche": {
+    "id": "br",
+    "name": "Ecke unten rechts",
+    "punkt": {
+     "x": 98.40900974233027,
+     "y": 1.590990257669732
+    }
+   },
+   "effet": {
+    "x": 0,
+    "y": 0.6
+   },
+   "erhoehung": 0,
+   "zone": {
+    "x": 77.56368572324,
+    "y": 12.130737854905627,
+    "r": 5
+   },
+   "wertung": "pocket+position"
+  },
+  {
+   "id": "builtin-rueckzieher-30",
+   "name": "Rückzieher 30 cm",
+   "stufe": "A",
+   "schwierigkeit": 2,
+   "tempo": 5,
+   "stossart": "position",
+   "schnittwinkel": 0,
+   "ueberBande": false,
+   "ueberKick": false,
+   "weisser": {
+    "x": 62.271782987090575,
+    "y": 36.247729801969015
+   },
+   "objektball": {
+    "x": 74,
+    "y": 25
+   },
+   "zielball": "obj",
+   "anspielpunkt": {
+    "x": 72.37609302898177,
+    "y": 26.557377972580326
+   },
+   "geisterball": {
+    "x": 72.37609302898177,
+    "y": 26.557377972580326
+   },
+   "objektziel": {
+    "x": 98.40900974233027,
+    "y": 1.590990257669732
+   },
+   "baelle": [
+    {
+     "id": "obj",
+     "art": "object",
+     "x": 74,
+     "y": 25
+    }
+   ],
+   "tasche": {
+    "id": "br",
+    "name": "Ecke unten rechts",
+    "punkt": {
+     "x": 98.40900974233027,
+     "y": 1.590990257669732
+    }
+   },
+   "effet": {
+    "x": 0,
+    "y": -0.6
+   },
+   "erhoehung": 0,
+   "zone": {
+    "x": 63.85238577221498,
+    "y": 34.7318819086575,
+    "r": 4.5
+   },
+   "wertung": "pocket+position"
+  },
+  {
+   "id": "builtin-rueckzieher-55",
+   "name": "Rückzieher 55 cm",
+   "stufe": "A",
+   "schwierigkeit": 3,
+   "tempo": 6,
+   "stossart": "position",
+   "schnittwinkel": 0,
+   "ueberBande": false,
+   "ueberKick": false,
+   "weisser": {
+    "x": 55.387742797924,
+    "y": 31.579957281962397
+   },
+   "objektball": {
+    "x": 72,
+    "y": 20
+   },
+   "zielball": "obj",
+   "anspielpunkt": {
+    "x": 70.15419364421378,
+    "y": 21.286661920218044
+   },
+   "geisterball": {
+    "x": 70.15419364421378,
+    "y": 21.286661920218044
+   },
+   "objektziel": {
+    "x": 98.40900974233027,
+    "y": 1.590990257669732
+   },
+   "baelle": [
+    {
+     "id": "obj",
+     "art": "object",
+     "x": 72,
+     "y": 20
+    }
+   ],
+   "tasche": {
+    "id": "br",
+    "name": "Ecke unten rechts",
+    "punkt": {
+     "x": 98.40900974233027,
+     "y": 1.590990257669732
+    }
+   },
+   "effet": {
+    "x": 0,
+    "y": -0.7
+   },
+   "erhoehung": 0,
+   "zone": {
+    "x": 52.39343470964857,
+    "y": 33.667208841427225,
+    "r": 6
+   },
+   "wertung": "pocket+position"
+  },
+  {
+   "id": "builtin-schnitt-10-rechts",
+   "name": "Schnittball 10 Grad",
+   "stufe": "A",
+   "schwierigkeit": 2,
+   "tempo": 5,
+   "stossart": "cut",
+   "schnittwinkel": 10,
+   "ueberBande": false,
+   "ueberKick": false,
+   "weisser": {
+    "x": 54.961640889323576,
+    "y": 42.96994822706921
+   },
+   "objektball": {
+    "x": 74,
+    "y": 28
+   },
+   "zielball": "obj",
+   "anspielpunkt": {
+    "x": 72.47280722346446,
+    "y": 29.6523263065441
+   },
+   "geisterball": {
+    "x": 72.47280722346446,
+    "y": 29.6523263065441
+   },
+   "objektziel": {
+    "x": 98.40900974233027,
+    "y": 1.590990257669732
+   },
+   "baelle": [
+    {
+     "id": "obj",
+     "art": "object",
+     "x": 74,
+     "y": 28
+    }
+   ],
+   "tasche": {
+    "id": "br",
+    "name": "Ecke unten rechts",
+    "punkt": {
+     "x": 98.40900974233027,
+     "y": 1.590990257669732
+    }
+   },
+   "effet": {
+    "x": 0,
+    "y": 0
+   },
+   "erhoehung": 0,
+   "zone": null,
+   "wertung": "pocket"
+  },
+  {
+   "id": "builtin-schnitt-20-rechts",
+   "name": "Schnittball 20 Grad",
+   "stufe": "A",
+   "schwierigkeit": 3,
+   "tempo": 5,
+   "stossart": "cut",
+   "schnittwinkel": 20,
+   "ueberBande": false,
+   "ueberKick": false,
+   "weisser": {
+    "x": 48.21423870991951,
+    "y": 36.80679706926093
+   },
+   "objektball": {
+    "x": 72,
+    "y": 26
+   },
+   "zielball": "obj",
+   "anspielpunkt": {
+    "x": 70.3476736934559,
+    "y": 27.52719277653554
+   },
+   "geisterball": {
+    "x": 70.3476736934559,
+    "y": 27.52719277653554
+   },
+   "objektziel": {
+    "x": 98.40900974233027,
+    "y": 1.590990257669732
+   },
+   "baelle": [
+    {
+     "id": "obj",
+     "art": "object",
+     "x": 72,
+     "y": 26
+    }
+   ],
+   "tasche": {
+    "id": "br",
+    "name": "Ecke unten rechts",
+    "punkt": {
+     "x": 98.40900974233027,
+     "y": 1.590990257669732
+    }
+   },
+   "effet": {
+    "x": 0,
+    "y": 0
+   },
+   "erhoehung": 0,
+   "zone": null,
+   "wertung": "pocket"
+  },
+  {
+   "id": "builtin-mitteltasche-weit",
+   "name": "Mitteltasche aus der Entfernung",
+   "stufe": "A",
+   "schwierigkeit": 4,
+   "tempo": 5,
+   "stossart": "cut",
+   "schnittwinkel": 0,
+   "ueberBande": false,
+   "ueberKick": false,
+   "weisser": {
+    "x": 50,
+    "y": 46.25
+   },
+   "objektball": {
+    "x": 50,
+    "y": 14
+   },
+   "zielball": "obj",
+   "anspielpunkt": {
+    "x": 50,
+    "y": 16.25
+   },
+   "geisterball": {
+    "x": 50,
+    "y": 16.25
+   },
+   "objektziel": {
+    "x": 50,
+    "y": 0
+   },
+   "baelle": [
+    {
+     "id": "obj",
+     "art": "object",
+     "x": 50,
+     "y": 14
+    }
+   ],
+   "tasche": {
+    "id": "bm",
+    "name": "Mitte unten",
+    "punkt": {
+     "x": 50,
+     "y": 0
+    }
+   },
+   "effet": {
+    "x": 0,
+    "y": 0
+   },
+   "erhoehung": 0,
+   "zone": {
+    "x": 50,
+    "y": 16.25,
+    "r": 4
+   },
+   "wertung": "pocket+position"
+  },
+  {
+   "id": "builtin-bande-gerade",
+   "name": "Ball an der Bande gerade",
+   "stufe": "A",
+   "schwierigkeit": 4,
+   "tempo": 5,
+   "stossart": "cut",
+   "schnittwinkel": 0,
+   "ueberBande": false,
+   "ueberKick": false,
+   "weisser": {
+    "x": 43.76342736739649,
+    "y": 46.66050223697677
+   },
+   "objektball": {
+    "x": 70,
+    "y": 47.5
+   },
+   "zielball": "obj",
+   "anspielpunkt": {
+    "x": 67.75115091720541,
+    "y": 47.42804304888372
+   },
+   "geisterball": {
+    "x": 67.75115091720541,
+    "y": 47.42804304888372
+   },
+   "objektziel": {
+    "x": 98.40900974233027,
+    "y": 48.40900974233027
+   },
+   "baelle": [
+    {
+     "id": "obj",
+     "art": "object",
+     "x": 70,
+     "y": 47.5
+    }
+   ],
+   "tasche": {
+    "id": "tr",
+    "name": "Ecke oben rechts",
+    "punkt": {
+     "x": 98.40900974233027,
+     "y": 48.40900974233027
+    }
+   },
+   "effet": {
+    "x": 0,
+    "y": 0
+   },
+   "erhoehung": 0,
+   "zone": null,
+   "wertung": "pocket"
+  },
+  {
+   "id": "builtin-luecke-breit",
+   "name": "Durch die Lücke",
+   "stufe": "A",
+   "schwierigkeit": 3,
+   "tempo": 5,
+   "stossart": "cut",
+   "schnittwinkel": 0,
+   "ueberBande": false,
+   "ueberKick": false,
+   "weisser": {
+    "x": 59.26687411859932,
+    "y": 40.73312588140068
+   },
+   "objektball": {
+    "x": 75,
+    "y": 25
+   },
+   "zielball": "obj",
+   "anspielpunkt": {
+    "x": 73.40900974233027,
+    "y": 26.59099025766973
+   },
+   "geisterball": {
+    "x": 73.40900974233027,
+    "y": 26.59099025766973
+   },
+   "objektziel": {
+    "x": 98.40900974233027,
+    "y": 1.590990257669732
+   },
+   "baelle": [
+    {
+     "id": "obj",
+     "art": "object",
+     "x": 75,
+     "y": 25
+    },
+    {
+     "id": "gate-0",
+     "art": "obstacle",
+     "x": 68.60068363026174,
+     "y": 35.92479976933216
+    },
+    {
+     "id": "gate-1",
+     "art": "obstacle",
+     "x": 64.07520023066785,
+     "y": 31.399316369738255
+    }
+   ],
+   "tasche": {
+    "id": "br",
+    "name": "Ecke unten rechts",
+    "punkt": {
+     "x": 98.40900974233027,
+     "y": 1.590990257669732
+    }
+   },
+   "effet": {
+    "x": 0,
+    "y": 0
+   },
+   "erhoehung": 0,
+   "zone": null,
+   "wertung": "pocket"
+  },
+  {
+   "id": "builtin-wachsende-linie",
+   "name": "Wachsende Linie",
+   "stufe": "A",
+   "schwierigkeit": 3,
+   "tempo": 5,
+   "stossart": "cut",
+   "schnittwinkel": 0,
+   "ueberBande": false,
+   "ueberKick": false,
+   "weisser": {
+    "x": 56.09934280304743,
+    "y": 11.135957508132229
+   },
+   "objektball": {
+    "x": 70,
+    "y": 8
+   },
+   "zielball": "obj",
+   "anspielpunkt": {
+    "x": 67.80515938995485,
+    "y": 8.495151185494564
+   },
+   "geisterball": {
+    "x": 67.80515938995485,
+    "y": 8.495151185494564
+   },
+   "objektziel": {
+    "x": 98.40900974233027,
+    "y": 1.590990257669732
+   },
+   "baelle": [
+    {
+     "id": "obj",
+     "art": "object",
+     "x": 70,
+     "y": 8
+    }
+   ],
+   "tasche": {
+    "id": "br",
+    "name": "Ecke unten rechts",
+    "punkt": {
+     "x": 98.40900974233027,
+     "y": 1.590990257669732
+    }
+   },
+   "effet": {
+    "x": 0,
+    "y": 0
+   },
+   "erhoehung": 0,
+   "zone": null,
+   "wertung": "pocket"
+  },
+  {
+   "id": "builtin-stop-lang",
+   "name": "Stop-Shot lang",
+   "stufe": "B",
+   "schwierigkeit": 6,
+   "tempo": 6,
+   "stossart": "cut",
+   "schnittwinkel": 0,
+   "ueberBande": false,
+   "ueberKick": false,
+   "weisser": {
+    "x": 24.615990449863958,
+    "y": 37.84373313421628
+   },
+   "objektball": {
+    "x": 76,
+    "y": 12.6
+   },
+   "zielball": "obj",
+   "anspielpunkt": {
+    "x": 73.9805411093833,
+    "y": 13.592111782567454
+   },
+   "geisterball": {
+    "x": 73.9805411093833,
+    "y": 13.592111782567454
+   },
+   "objektziel": {
+    "x": 98.40900974233027,
+    "y": 1.590990257669732
+   },
+   "baelle": [
+    {
+     "id": "obj",
+     "art": "object",
+     "x": 76,
+     "y": 12.6
+    }
+   ],
+   "tasche": {
+    "id": "br",
+    "name": "Ecke unten rechts",
+    "punkt": {
+     "x": 98.40900974233027,
+     "y": 1.590990257669732
+    }
+   },
+   "effet": {
+    "x": 0,
+    "y": 0
+   },
+   "erhoehung": 0,
+   "zone": {
+    "x": 74,
+    "y": 13.6,
+    "r": 5
+   },
+   "wertung": "pocket+position"
+  },
+  {
+   "id": "builtin-schnitt-45",
+   "name": "Schnittball 45 Grad",
+   "stufe": "B",
+   "schwierigkeit": 6,
+   "tempo": 6,
+   "stossart": "cut",
+   "schnittwinkel": 45,
+   "ueberBande": false,
+   "ueberKick": false,
+   "weisser": {
+    "x": 55.88021877802861,
+    "y": 4.783004627584752
+   },
+   "objektball": {
+    "x": 68,
+    "y": 34
+   },
+   "zielball": "obj",
+   "anspielpunkt": {
+    "x": 65.96671254636664,
+    "y": 33.03654676766479
+   },
+   "geisterball": {
+    "x": 65.96671254636664,
+    "y": 33.03654676766479
+   },
+   "objektziel": {
+    "x": 98.40900974233027,
+    "y": 48.40900974233027
+   },
+   "baelle": [
+    {
+     "id": "obj",
+     "art": "object",
+     "x": 68,
+     "y": 34
+    }
+   ],
+   "tasche": {
+    "id": "tr",
+    "name": "Ecke oben rechts",
+    "punkt": {
+     "x": 98.40900974233027,
+     "y": 48.40900974233027
+    }
+   },
+   "effet": {
+    "x": 0,
+    "y": 0
+   },
+   "erhoehung": 0,
+   "zone": {
+    "x": 40,
+    "y": 30,
+    "r": 9
+   },
+   "wertung": "pocket+position"
+  },
+  {
+   "id": "builtin-mitteltasche-schnitt",
+   "name": "Mitteltasche im Schnitt",
+   "stufe": "B",
+   "schwierigkeit": 6,
+   "tempo": 5,
+   "stossart": "cut",
+   "schnittwinkel": 35,
+   "ueberBande": false,
+   "ueberKick": false,
+   "weisser": {
+    "x": 47.78961773101972,
+    "y": 42.924221004831075
+   },
+   "objektball": {
+    "x": 55,
+    "y": 16
+   },
+   "zielball": "obj",
+   "anspielpunkt": {
+    "x": 55.67111873455588,
+    "y": 18.147579950578816
+   },
+   "geisterball": {
+    "x": 55.67111873455588,
+    "y": 18.147579950578816
+   },
+   "objektziel": {
+    "x": 50,
+    "y": 0
+   },
+   "baelle": [
+    {
+     "id": "obj",
+     "art": "object",
+     "x": 55,
+     "y": 16
+    }
+   ],
+   "tasche": {
+    "id": "bm",
+    "name": "Mitte unten",
+    "punkt": {
+     "x": 50,
+     "y": 0
+    }
+   },
+   "effet": {
+    "x": 0,
+    "y": 0
+   },
+   "erhoehung": 0,
+   "zone": {
+    "x": 30,
+    "y": 20,
+    "r": 9
+   },
+   "wertung": "pocket+position"
+  },
+  {
+   "id": "builtin-bande-lang",
+   "name": "Bandenball über die Langbande",
+   "stufe": "B",
+   "schwierigkeit": 6,
+   "tempo": 6,
+   "stossart": "bank",
+   "schnittwinkel": 0,
+   "ueberBande": true,
+   "ueberKick": false,
+   "weisser": {
+    "x": 46.241542247664135,
+    "y": 13.64452325989917
+   },
+   "objektball": {
+    "x": 60,
+    "y": 36
+   },
+   "zielball": "obj",
+   "anspielpunkt": {
+    "x": 58.820703621228354,
+    "y": 34.08381627941993
+   },
+   "geisterball": {
+    "x": 58.820703621228354,
+    "y": 34.08381627941993
+   },
+   "objektziel": {
+    "x": 68.6161619710479,
+    "y": 50
+   },
+   "baelle": [
+    {
+     "id": "obj",
+     "art": "object",
+     "x": 60,
+     "y": 36
+    }
+   ],
+   "tasche": {
+    "id": "br",
+    "name": "Ecke unten rechts",
+    "punkt": {
+     "x": 98.40900974233027,
+     "y": 1.590990257669732
+    }
+   },
+   "effet": {
+    "x": 0,
+    "y": 0
+   },
+   "erhoehung": 0,
+   "zone": null,
+   "wertung": "pocket"
+  },
+  {
+   "id": "builtin-kombination-zwei",
+   "name": "Kombination aus zwei Bällen",
+   "stufe": "B",
+   "schwierigkeit": 6,
+   "tempo": 5,
+   "stossart": "combination",
+   "schnittwinkel": 0,
+   "ueberBande": false,
+   "ueberKick": false,
+   "weisser": {
+    "x": 31.18511960415459,
+    "y": 42.44199558377396
+   },
+   "objektball": {
+    "x": 52,
+    "y": 30
+   },
+   "zielball": "obj2",
+   "anspielpunkt": {
+    "x": 50.06872243749888,
+    "y": 31.15441196138109
+   },
+   "geisterball": {
+    "x": 50.06872243749888,
+    "y": 31.15441196138109
+   },
+   "objektziel": {
+    "x": 70.08886789501643,
+    "y": 19.18746540046482
+   },
+   "baelle": [
+    {
+     "id": "obj",
+     "art": "object",
+     "x": 52,
+     "y": 30
+    },
+    {
+     "id": "obj2",
+     "art": "object",
+     "x": 72,
+     "y": 18
+    }
+   ],
+   "tasche": {
+    "id": "br",
+    "name": "Ecke unten rechts",
+    "punkt": {
+     "x": 98.40900974233027,
+     "y": 1.590990257669732
+    }
+   },
+   "effet": {
+    "x": 0,
+    "y": 0
+   },
+   "erhoehung": 0,
+   "zone": null,
+   "wertung": "pocket"
+  },
+  {
+   "id": "builtin-bandenball-fest",
+   "name": "Ball an der Bande",
+   "stufe": "B",
+   "schwierigkeit": 6,
+   "tempo": 5,
+   "stossart": "cut",
+   "schnittwinkel": 8,
+   "ueberBande": false,
+   "ueberKick": false,
+   "weisser": {
+    "x": 31.96119290189633,
+    "y": 45.596408754038514
+   },
+   "objektball": {
+    "x": 60,
+    "y": 48.875
+   },
+   "zielball": "obj",
+   "anspielpunkt": {
+    "x": 57.75016557395979,
+    "y": 48.90229570303786
+   },
+   "geisterball": {
+    "x": 57.75016557395979,
+    "y": 48.90229570303786
+   },
+   "objektziel": {
+    "x": 98.40900974233027,
+    "y": 48.40900974233027
+   },
+   "baelle": [
+    {
+     "id": "obj",
+     "art": "object",
+     "x": 60,
+     "y": 48.875
+    }
+   ],
+   "tasche": {
+    "id": "tr",
+    "name": "Ecke oben rechts",
+    "punkt": {
+     "x": 98.40900974233027,
+     "y": 48.40900974233027
+    }
+   },
+   "effet": {
+    "x": 0,
+    "y": 0
+   },
+   "erhoehung": 0,
+   "zone": {
+    "x": 78,
+    "y": 40,
+    "r": 8
+   },
+   "wertung": "pocket+position"
+  },
+  {
+   "id": "builtin-position-kitchen",
+   "name": "Position in die Kitchen",
+   "stufe": "B",
+   "schwierigkeit": 6,
+   "tempo": 6,
+   "stossart": "position",
+   "schnittwinkel": 20,
+   "ueberBande": false,
+   "ueberKick": false,
+   "weisser": {
+    "x": 52.895176076648625,
+    "y": 4.17507586334786
+   },
+   "objektball": {
+    "x": 72,
+    "y": 30
+   },
+   "zielball": "obj",
+   "anspielpunkt": {
+    "x": 70.15419364421378,
+    "y": 28.713338079781956
+   },
+   "geisterball": {
+    "x": 70.15419364421378,
+    "y": 28.713338079781956
+   },
+   "objektziel": {
+    "x": 98.40900974233027,
+    "y": 48.40900974233027
+   },
+   "baelle": [
+    {
+     "id": "obj",
+     "art": "object",
+     "x": 72,
+     "y": 30
+    }
+   ],
+   "tasche": {
+    "id": "tr",
+    "name": "Ecke oben rechts",
+    "punkt": {
+     "x": 98.40900974233027,
+     "y": 48.40900974233027
+    }
+   },
+   "effet": {
+    "x": 0,
+    "y": -0.5
+   },
+   "erhoehung": 0,
+   "zone": {
+    "x": 15,
+    "y": 25,
+    "r": 10
+   },
+   "wertung": "pocket+position"
+  },
+  {
+   "id": "builtin-rueckzieher-lang",
+   "name": "Rückzieher lang",
+   "stufe": "C",
+   "schwierigkeit": 8,
+   "tempo": 8,
+   "stossart": "position",
+   "schnittwinkel": 0,
+   "ueberBande": false,
+   "ueberKick": false,
+   "weisser": {
+    "x": 26.458112879983368,
+    "y": 37.14951643200393
+   },
+   "objektball": {
+    "x": 73.3,
+    "y": 14
+   },
+   "zielball": "obj",
+   "anspielpunkt": {
+    "x": 71.28288524363565,
+    "y": 14.996869128650886
+   },
+   "geisterball": {
+    "x": 71.28288524363565,
+    "y": 14.996869128650886
+   },
+   "objektziel": {
+    "x": 98.40900974233027,
+    "y": 1.590990257669732
+   },
+   "baelle": [
+    {
+     "id": "obj",
+     "art": "object",
+     "x": 73.3,
+     "y": 14
+    }
+   ],
+   "tasche": {
+    "id": "br",
+    "name": "Ecke unten rechts",
+    "punkt": {
+     "x": 98.40900974233027,
+     "y": 1.590990257669732
+    }
+   },
+   "effet": {
+    "x": 0,
+    "y": -0.8
+   },
+   "erhoehung": 0,
+   "zone": {
+    "x": 39.9,
+    "y": 30.3,
+    "r": 9
+   },
+   "wertung": "pocket+position"
+  },
+  {
+   "id": "builtin-schnitt-60",
+   "name": "Dünner Schnitt 60 Grad",
+   "stufe": "C",
+   "schwierigkeit": 7,
+   "tempo": 6,
+   "stossart": "cut",
+   "schnittwinkel": 60,
+   "ueberBande": false,
+   "ueberKick": false,
+   "weisser": {
+    "x": 68.89118157131972,
+    "y": 10.092447182001958
+   },
+   "objektball": {
+    "x": 78,
+    "y": 42
+   },
+   "zielball": "obj",
+   "anspielpunkt": {
+    "x": 75.853356234308,
+    "y": 41.325892780623384
+   },
+   "geisterball": {
+    "x": 75.853356234308,
+    "y": 41.325892780623384
+   },
+   "objektziel": {
+    "x": 98.40900974233027,
+    "y": 48.40900974233027
+   },
+   "baelle": [
+    {
+     "id": "obj",
+     "art": "object",
+     "x": 78,
+     "y": 42
+    }
+   ],
+   "tasche": {
+    "id": "tr",
+    "name": "Ecke oben rechts",
+    "punkt": {
+     "x": 98.40900974233027,
+     "y": 48.40900974233027
+    }
+   },
+   "effet": {
+    "x": 0,
+    "y": 0
+   },
+   "erhoehung": 0,
+   "zone": {
+    "x": 45,
+    "y": 40,
+    "r": 10
+   },
+   "wertung": "pocket+position"
+  },
+  {
+   "id": "builtin-schnitt-75",
+   "name": "Sehr dünner Schnitt 75 Grad",
+   "stufe": "C",
+   "schwierigkeit": 9,
+   "tempo": 7,
+   "stossart": "cut",
+   "schnittwinkel": 75,
+   "ueberBande": false,
+   "ueberKick": false,
+   "weisser": {
+    "x": 83.04310394942162,
+    "y": 9.362647851646152
+   },
+   "objektball": {
+    "x": 84,
+    "y": 44
+   },
+   "zielball": "obj",
+   "anspielpunkt": {
+    "x": 81.84847022370849,
+    "y": 43.341653873915085
+   },
+   "geisterball": {
+    "x": 81.84847022370849,
+    "y": 43.341653873915085
+   },
+   "objektziel": {
+    "x": 98.40900974233027,
+    "y": 48.40900974233027
+   },
+   "baelle": [
+    {
+     "id": "obj",
+     "art": "object",
+     "x": 84,
+     "y": 44
+    }
+   ],
+   "tasche": {
+    "id": "tr",
+    "name": "Ecke oben rechts",
+    "punkt": {
+     "x": 98.40900974233027,
+     "y": 48.40900974233027
+    }
+   },
+   "effet": {
+    "x": 0,
+    "y": 0
+   },
+   "erhoehung": 0,
+   "zone": null,
+   "wertung": "pocket"
+  },
+  {
+   "id": "builtin-bande-kurz",
+   "name": "Bandenball über die Kurzbande",
+   "stufe": "C",
+   "schwierigkeit": 7,
+   "tempo": 6,
+   "stossart": "bank",
+   "schnittwinkel": 0,
+   "ueberBande": true,
+   "ueberKick": false,
+   "weisser": {
+    "x": 56.00556990231952,
+    "y": 26.637330721250333
+   },
+   "objektball": {
+    "x": 78,
+    "y": 30
+   },
+   "zielball": "obj",
+   "anspielpunkt": {
+    "x": 75.77584414742557,
+    "y": 29.65995479203655
+   },
+   "geisterball": {
+    "x": 75.77584414742557,
+    "y": 29.65995479203655
+   },
+   "objektziel": {
+    "x": 100,
+    "y": 33.36352084613887
+   },
+   "baelle": [
+    {
+     "id": "obj",
+     "art": "object",
+     "x": 78,
+     "y": 30
+    }
+   ],
+   "tasche": {
+    "id": "tl",
+    "name": "Ecke oben links",
+    "punkt": {
+     "x": 1.590990257669732,
+     "y": 48.40900974233027
+    }
+   },
+   "effet": {
+    "x": 0,
+    "y": 0
+   },
+   "erhoehung": 0,
+   "zone": null,
+   "wertung": "pocket"
+  },
+  {
+   "id": "builtin-kick-eine-bande",
+   "name": "Kick über eine Bande",
+   "stufe": "C",
+   "schwierigkeit": 8,
+   "tempo": 6,
+   "stossart": "kick",
+   "schnittwinkel": 20,
+   "ueberBande": false,
+   "ueberKick": true,
+   "weisser": {
+    "x": 10.885854287295817,
+    "y": 20.226309054439216
+   },
+   "objektball": {
+    "x": 78,
+    "y": 40
+   },
+   "zielball": "obj",
+   "anspielpunkt": {
+    "x": 33.04203676610543,
+    "y": 0
+   },
+   "geisterball": {
+    "x": 75.9196645273596,
+    "y": 39.14285105070703
+   },
+   "objektziel": {
+    "x": 98.40900974233027,
+    "y": 48.40900974233027
+   },
+   "baelle": [
+    {
+     "id": "obj",
+     "art": "object",
+     "x": 78,
+     "y": 40
+    }
+   ],
+   "tasche": {
+    "id": "tr",
+    "name": "Ecke oben rechts",
+    "punkt": {
+     "x": 98.40900974233027,
+     "y": 48.40900974233027
+    }
+   },
+   "effet": {
+    "x": 0,
+    "y": 0
+   },
+   "erhoehung": 0,
+   "zone": null,
+   "wertung": "pocket"
+  },
+  {
+   "id": "builtin-karambolage",
+   "name": "Karambolage",
+   "stufe": "C",
+   "schwierigkeit": 8,
+   "tempo": 5,
+   "stossart": "carom",
+   "schnittwinkel": 40,
+   "ueberBande": false,
+   "ueberKick": false,
+   "weisser": {
+    "x": 42.025694607136934,
+    "y": 7.741008571150985
+   },
+   "objektball": {
+    "x": 55,
+    "y": 30
+   },
+   "zielball": "obj",
+   "anspielpunkt": {
+    "x": 52.92857205025394,
+    "y": 29.121543257177205
+   },
+   "geisterball": {
+    "x": 52.92857205025394,
+    "y": 29.121543257177205
+   },
+   "objektziel": {
+    "x": 98.40900974233027,
+    "y": 48.40900974233027
+   },
+   "baelle": [
+    {
+     "id": "obj",
+     "art": "object",
+     "x": 55,
+     "y": 30
+    },
+    {
+     "id": "carom",
+     "art": "obstacle",
+     "x": 44.33921723154217,
+     "y": 48.875
+    }
+   ],
+   "tasche": {
+    "id": "tr",
+    "name": "Ecke oben rechts",
+    "punkt": {
+     "x": 98.40900974233027,
+     "y": 48.40900974233027
+    }
+   },
+   "effet": {
+    "x": 0,
+    "y": 0
+   },
+   "erhoehung": 0,
+   "zone": null,
+   "wertung": "pocket"
+  },
+  {
+   "id": "builtin-seiteneffet-links",
+   "name": "Seiteneffet über die Bande",
+   "stufe": "C",
+   "schwierigkeit": 7,
+   "tempo": 6,
+   "stossart": "position",
+   "schnittwinkel": 25,
+   "ueberBande": false,
+   "ueberKick": false,
+   "weisser": {
+    "x": 38.23846380819981,
+    "y": 24.184285443272906
+   },
+   "objektball": {
+    "x": 68,
+    "y": 20
+   },
+   "zielball": "obj",
+   "anspielpunkt": {
+    "x": 66.07522454923779,
+    "y": 21.165220779141503
+   },
+   "geisterball": {
+    "x": 66.07522454923779,
+    "y": 21.165220779141503
+   },
+   "objektziel": {
+    "x": 98.40900974233027,
+    "y": 1.590990257669732
+   },
+   "baelle": [
+    {
+     "id": "obj",
+     "art": "object",
+     "x": 68,
+     "y": 20
+    }
+   ],
+   "tasche": {
+    "id": "br",
+    "name": "Ecke unten rechts",
+    "punkt": {
+     "x": 98.40900974233027,
+     "y": 1.590990257669732
+    }
+   },
+   "effet": {
+    "x": -0.7,
+    "y": 0
+   },
+   "erhoehung": 0,
+   "zone": {
+    "x": 25,
+    "y": 12,
+    "r": 9
+   },
+   "wertung": "pocket+position"
+  },
+  {
+   "id": "builtin-position-eng",
+   "name": "Enge Position",
+   "stufe": "C",
+   "schwierigkeit": 7,
+   "tempo": 4,
+   "stossart": "position",
+   "schnittwinkel": 25,
+   "ueberBande": false,
+   "ueberKick": false,
+   "weisser": {
+    "x": 33.97236127418379,
+    "y": 21.227095496834043
+   },
+   "objektball": {
+    "x": 60,
+    "y": 20
+   },
+   "zielball": "obj",
+   "anspielpunkt": {
+    "x": 57.97101054609513,
+    "y": 20.97247200265242
+   },
+   "geisterball": {
+    "x": 57.97101054609513,
+    "y": 20.97247200265242
+   },
+   "objektziel": {
+    "x": 98.40900974233027,
+    "y": 1.590990257669732
+   },
+   "baelle": [
+    {
+     "id": "obj",
+     "art": "object",
+     "x": 60,
+     "y": 20
+    }
+   ],
+   "tasche": {
+    "id": "br",
+    "name": "Ecke unten rechts",
+    "punkt": {
+     "x": 98.40900974233027,
+     "y": 1.590990257669732
+    }
+   },
+   "effet": {
+    "x": 0,
+    "y": 0
+   },
+   "erhoehung": 0,
+   "zone": {
+    "x": 55,
+    "y": 34,
+    "r": 4
+   },
+   "wertung": "pocket+position"
+  },
+  {
+   "id": "builtin-cluster-oeffnen",
+   "name": "Cluster öffnen",
+   "stufe": "C",
+   "schwierigkeit": 8,
+   "tempo": 6,
+   "stossart": "position",
+   "schnittwinkel": 20,
+   "ueberBande": false,
+   "ueberKick": false,
+   "weisser": {
+    "x": 31.93145158684977,
+    "y": 19.726292755044938
+   },
+   "objektball": {
+    "x": 58,
+    "y": 18
+   },
+   "zielball": "obj",
+   "anspielpunkt": {
+    "x": 55.91532159380653,
+    "y": 18.84653171396626
+   },
+   "geisterball": {
+    "x": 55.91532159380653,
+    "y": 18.84653171396626
+   },
+   "objektziel": {
+    "x": 98.40900974233027,
+    "y": 1.590990257669732
+   },
+   "baelle": [
+    {
+     "id": "obj",
+     "art": "object",
+     "x": 58,
+     "y": 18
+    },
+    {
+     "id": "extra-0",
+     "art": "obstacle",
+     "x": 44,
+     "y": 36
+    },
+    {
+     "id": "extra-1",
+     "art": "obstacle",
+     "x": 46.3,
+     "y": 36
+    }
+   ],
+   "tasche": {
+    "id": "br",
+    "name": "Ecke unten rechts",
+    "punkt": {
+     "x": 98.40900974233027,
+     "y": 1.590990257669732
+    }
+   },
+   "effet": {
+    "x": 0,
+    "y": 0
+   },
+   "erhoehung": 0,
+   "zone": {
+    "x": 45,
+    "y": 33,
+    "r": 7
+   },
+   "wertung": "pocket+position"
+  },
+  {
+   "id": "builtin-safe-hinter-ball",
+   "name": "Safe hinter den Ball",
+   "stufe": "C",
+   "schwierigkeit": 8,
+   "tempo": 3,
+   "stossart": "safety",
+   "schnittwinkel": 55,
+   "ueberBande": false,
+   "ueberKick": false,
+   "weisser": {
+    "x": 34.260386970167346,
+    "y": 15.745635401198982
+   },
+   "objektball": {
+    "x": 60,
+    "y": 25
+   },
+   "zielball": "obj",
+   "anspielpunkt": {
+    "x": 58.0787114426408,
+    "y": 26.170961262963306
+   },
+   "geisterball": {
+    "x": 58.0787114426408,
+    "y": 26.170961262963306
+   },
+   "objektziel": {
+    "x": 98.40900974233027,
+    "y": 1.590990257669732
+   },
+   "baelle": [
+    {
+     "id": "obj",
+     "art": "object",
+     "x": 60,
+     "y": 25
+    },
+    {
+     "id": "extra-0",
+     "art": "obstacle",
+     "x": 30,
+     "y": 30
+    }
+   ],
+   "tasche": {
+    "id": "br",
+    "name": "Ecke unten rechts",
+    "punkt": {
+     "x": 98.40900974233027,
+     "y": 1.590990257669732
+    }
+   },
+   "effet": {
+    "x": 0,
+    "y": 0
+   },
+   "erhoehung": 0,
+   "zone": {
+    "x": 24,
+    "y": 30,
+    "r": 6
+   },
+   "wertung": "position"
+  },
+  {
+   "id": "builtin-lange-gerade",
+   "name": "Lange Gerade",
+   "stufe": "C",
+   "schwierigkeit": 7,
+   "tempo": 6,
+   "stossart": "cut",
+   "schnittwinkel": 0,
+   "ueberBande": false,
+   "ueberKick": false,
+   "weisser": {
+    "x": 13.887386123283363,
+    "y": 43.227849637387706
+   },
+   "objektball": {
+    "x": 78.7,
+    "y": 11.3
+   },
+   "zielball": "obj",
+   "anspielpunkt": {
+    "x": 76.68161410072508,
+    "y": 12.294292895281973
+   },
+   "geisterball": {
+    "x": 76.68161410072508,
+    "y": 12.294292895281973
+   },
+   "objektziel": {
+    "x": 98.40900974233027,
+    "y": 1.590990257669732
+   },
+   "baelle": [
+    {
+     "id": "obj",
+     "art": "object",
+     "x": 78.7,
+     "y": 11.3
+    }
+   ],
+   "tasche": {
+    "id": "br",
+    "name": "Ecke unten rechts",
+    "punkt": {
+     "x": 98.40900974233027,
+     "y": 1.590990257669732
+    }
+   },
+   "effet": {
+    "x": 0,
+    "y": 0
+   },
+   "erhoehung": 0,
+   "zone": {
+    "x": 76.6,
+    "y": 12.3,
+    "r": 6
+   },
+   "wertung": "pocket+position"
+  }
+ ]
+}
