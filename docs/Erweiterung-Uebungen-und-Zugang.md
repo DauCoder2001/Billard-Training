@@ -125,22 +125,33 @@ eine Spielsituation, keine Spezialtechnik. Umgekehrt steht ein kleiner Massé
 in D, auch wenn er leichter ist als manches in C. **Grundsatz: das Thema
 bestimmt die Stufe, die Schwierigkeit ordnet innerhalb der Stufe.**
 
-### 3.2 Stufe A — Grundschläge (6 heute + 19 neu)
+### 3.2 Stufe A — Grundschläge (6 heute + 19 neu) ✓ 0.18.0
 
 Alles auf kurzer bis mittlerer Distanz, Treffpunkt in der Mitte oder knapp
 darüber und darunter, keine Bande im Weg. Das ist die Stufe, die jeder ohne
 Anmeldung bekommt — sie muss für sich allein ein sinnvolles Training sein.
 
-- Gerader Ball aus zwei weiteren Entfernungen (2)
-- Stop-Shot aus zwei weiteren Entfernungen (2)
-- Nachlauf: Weißer 20 und 80 cm weiterlaufen lassen (2)
-- Rückzieher: Weißer 40 und 80 cm zurückholen (2)
-- Schnitt 10°, 20° — je nach links und rechts (4)
-- Schnitt 15° und 30° nach der anderen Seite (2)
-- Mitteltasche gerade aus einer zweiten Entfernung (1)
-- Ball an der Bande, gerade (1)
-- Durch die Lücke: Weißer zwischen zwei Störbällen hindurch (2)
-- Wachsende Linie: Objektball startet nah und rückt weiter weg (1)
+**Umgesetzt am 26.11.2026 mit 0.18.0.** Die Liste wurde beim Bauen an drei
+Stellen nachgezogen; was gemessen wurde, steht dahinter.
+
+| Geplant | Gebaut | Abweichung |
+|---|---|---|
+| Gerader Ball, zwei Entfernungen (2) | `gerade-nah`, `gerade-mittel` | — |
+| Stop-Shot, zwei Entfernungen (2) | `stop-nah` (9"), `stop-mittel` (32") | — |
+| Nachlauf 20 und 80 cm (2) | `nachlauf-20`, `nachlauf-50` | **80 → 50 cm.** „Nachlauf mittel" schickt den Weißen gemessene 73 cm weiter; 80 cm wäre fast dieselbe Übung. So entsteht die Folge 20 / 50 / 73 cm. |
+| Rückzieher 40 und 80 cm (2) | `rueckzieher-30`, `rueckzieher-55` | **40/80 → 30/55 cm.** „Rückzieher kurz" holt den Weißen gemessene 77 cm zurück. Folge: 30 / 55 / 77 cm. |
+| Schnitt 10°, 20° links und rechts (4) | `schnitt-10-links/-rechts`, `schnitt-20-links/-rechts` | — |
+| Schnitt 15° und 30° andere Seite (2) | `schnitt-15-links`, `schnitt-30-links` | Als echte Spiegelung an der Mittellinie gebaut (Ecke unten rechts → oben rechts). Nur die Seite zu drehen legte den Weißen in die obere Langbande. |
+| Mitteltasche, zweite Entfernung (1) | `mitteltasche-weit` | — |
+| Ball an der Bande, gerade (1) | `bande-gerade` | **Dicht, nicht fest.** Die Mündung der Ecktasche liegt 1,6" von der Bande weg, darum zeigt die Anspiellinie eines festliegenden Balles in die Bande hinein — für den Weißen bliebe dort kein Platz. Der Objektball liegt 2,5" von der Bande. |
+| Durch die Lücke (2) | `luecke-breit`, `luecke-eng` | Lücke zwischen den Ballkanten gemessen: 4,15" und 3,15" bei 2,25" Balldurchmesser. |
+| Wachsende Linie (1) | `wachsende-linie` | Als kürzester Stand gespeichert; das Wachsen steht in den Trainerhinweisen (siehe 12, „Progressive Übungen"). |
+
+**Offen geblieben:** Die vorhandenen Schnittbälle (15°, 30° in A, 45°, 60°,
+75° in B und C) sind alle Schnitte **nach rechts**, tragen die Richtung aber
+nicht im Namen — die neuen tun es. Das anzugleichen heißt, Vorlagen
+umzubenennen und damit Fingerabdrücke zu ändern; es gehört in die
+Überarbeitung der Sammlung, nicht in eine Auslieferung, die nur erweitert.
 
 ### 3.3 Stufe B — Kontrolle des Weißen (7 heute + 18 neu)
 
@@ -205,10 +216,10 @@ Alles gemessen, nicht geschätzt:
 
 | Punkt | Messung / Rechnung | Folge |
 |---|---|---|
-| Quelltext | 25 Spezifikationen = 12,3 kB / 426 Zeilen, also ~490 Byte je Übung | 100 ergeben ~49 kB / ~1700 Zeilen. **Eine Datei je Stufe** (`drills/stufe-a.ts` …), nicht eine Datei mit 1700 Zeilen. |
+| Quelltext | 25 Spezifikationen = 12,3 kB / 426 Zeilen, also ~490 Byte je Übung | 100 ergeben ~49 kB / ~1700 Zeilen. **Eine Datei je Stufe** (`drills/stufe-a.ts` …), nicht eine Datei mit 1700 Zeilen. **Umgesetzt mit 0.18.0:** `drills/build.ts` (Rechnung), `stufe-a.ts` bis `stufe-c.ts`, `index.ts` (Zusammenführung). |
 | Bundle | heute 537 kB im Hauptbundle (`dist/assets/index-*.js`) | +30 bis 35 kB, also etwa +6 %. Tragbar. Falls nicht: die Stufen B–D nachladen; Baukasten, Training und Teilen-Dialog kommen schon als eigene Dateien nach, das Nachladen ist eingespielt. |
 | Startzeit | `seedShots()` rechnet alle Übungen bei jedem Start | 4× so viel reine Geometrie, im Millisekundenbereich. Kein Problem. |
-| Einspielen | `SEED_VERSION` steht auf 2 (`src/data/bootstrap.ts:20`) | Auf **3** erhöhen, sobald neue Übungen dazukommen, sonst bleiben vorhandene Geräte bei 25. **Nicht** für die Stufen in 0.15.0: das Einspielen lässt eine eigene Fassung einer mitgelieferten Übung bewusst in Ruhe, die bekäme so nie eine Stufe. Dafür gibt es `migrateLevels()`, die beide erreicht. |
+| Einspielen | `SEED_VERSION` steht auf **3** (0.18.0; vorher 2) | Erhöhen, sobald neue Übungen dazukommen, sonst bleiben vorhandene Geräte bei 25. **Nicht** für die Stufen in 0.15.0: das Einspielen lässt eine eigene Fassung einer mitgelieferten Übung bewusst in Ruhe, die bekäme so nie eine Stufe. Dafür gibt es `migrateLevels()`, die beide erreicht. **Beim Erhöhen allein bleibt es nicht:** eine neue Übung fehlt im Bestand wie eine gelöschte, und gelöscht bleibt gelöscht. Deshalb trägt jede Beschreibung seit 0.18.0 die Angabe `since` (siehe `seedUpdates`). |
 | Fingerabdruck | `templatePart` umfasst `tags`, `attributes`, `scoring` (`src/domain/seedStamp.ts:30`) | `level` gehört **nicht** hinein — wie `favorite`. Sonst bekäme jeder, der eine eigene Fassung einer der 25 Übungen hat, den Hinweis „Vorlage überarbeitet", ohne dass sich etwas geändert hat. |
 
 ---
@@ -464,7 +475,7 @@ ausgelieferte Fassung mit Eintrag im CHANGELOG.
 | 0.15.0 ✓ | Feld `level`, Filter und Sortierung in der Sammlung, Stufe im Baukasten, die 25 eingeordnet (6/7/12/0) — erledigt am 26.11.2026 | — |
 | 0.16.0 ✓ | Machbarkeitsprüfung im Baukasten (5.1) — erledigt am 26.11.2026 | — |
 | 0.17.0 ✓ | Reihen-Generator im Baukasten: eine Folge aus einem Muster (Schnittwinkel oder Abstand des Weißen), Anspiel-Rechnung nach `domain/aim.ts` — erledigt am 26.11.2026 | 0.16.0 |
-| 0.18.0 | Stufe A vollständig, 19 neue Übungen | 0.15.0, 0.17.0 |
+| 0.18.0 ✓ | Stufe A vollständig, 19 neue Übungen — erledigt am 26.11.2026 | 0.15.0, 0.17.0 |
 | 0.19.0 | Stufe B vollständig, 18 neue | 0.18.0 |
 | 0.20.0 | Stufe C vollständig, 13 neue mit Banden-Systemen und Safes | 0.19.0 |
 | 0.21.0 | Modell für Spezialtechniken (3.6), dann Stufe D, 25 neue | 0.20.0 |

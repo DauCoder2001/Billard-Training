@@ -6,6 +6,67 @@ Die Versionsnummer steht an genau einer Stelle — in `package.json` — und ers
 unten auf der Seite **Einstellungen** sowie auf der Fehlerseite. Schema:
 `Hauptversion.Funktion.Korrektur`.
 
+## 0.18.0 – 26.11.2026
+
+### Hinzugefügt
+- **Stufe A ist vollständig: 19 neue Übungen, zusammen 25.** Die Stufe, die
+  jeder ohne Anmeldung bekommt, ist damit für sich allein ein Training und
+  kein Querschnitt mehr. Der Weg durch die Stufe: zwei gerade Bälle nur zum
+  Lochen, zwei weitere Stop-Shots, Nachlauf über 20 und 50 cm, Rückzieher über
+  30 und 55 cm, Schnitte von 10 und 20 Grad nach **beiden** Seiten, die
+  Spiegelbilder der vorhandenen 15- und 30-Grad-Schnitte, die Mitteltasche aus
+  der Entfernung, ein Ball dicht an der Langbande, zwei Lagen „durch die
+  Lücke" und die **wachsende Linie**.
+- **Die Schwierigkeit nutzt jetzt das ganze Band der Stufe** (1 bis 4). Vorher
+  begann Stufe A bei 2; der leichteste Ball am Tisch fehlte.
+- **„Durch die Lücke":** Zwei Störbälle stehen auf dem Weg des Weißen, und er
+  muss zwischen ihnen durch. Gerechnet wird das Tor, nicht gesetzt — zwischen
+  den Ballkanten bleiben gemessene 4,15 bzw. 3,15 Zoll bei einem Ball von
+  2,25 Zoll.
+
+### Geändert
+- **Zwei Abstände stehen anders da als im Konzept vorgeschlagen.**
+  Nachgemessen an den vorhandenen Übungen: „Nachlauf mittel" schickt den
+  Weißen 73 cm weiter, „Rückzieher kurz" holt ihn 77 cm zurück. Die
+  vorgeschlagenen 80 cm wären also beide Male fast dieselbe Übung geworden.
+  Gewählt sind darum Abstände, die mit den vorhandenen eine Folge bilden:
+  **20 / 50 / 73 cm** beim Nachlauf, **30 / 55 / 77 cm** beim Rückzieher.
+- **Links und rechts stehen im Namen** — bei den neuen Schnittbällen. Welche
+  Seite das ist, war nicht zu raten: gemessen am Kreuzprodukt von Anlauf- und
+  Laufrichtung liegen die vorhandenen Schnitte alle **nach rechts**. Die
+  neuen Gegenstücke sind echte Spiegelbilder an der Mittellinie, Ecke unten
+  rechts wird Ecke oben rechts. Ohne diese Spiegelung läge der Weiße in der
+  oberen Langbande.
+
+### Behoben
+- **Eine neue mitgelieferte Übung kam auf einem benutzten Gerät nie an.** Die
+  Regel beim Einspielen lässt eine gelöschte Übung gelöscht — und am Bestand
+  allein ist eine neue Übung von einer gelöschten nicht zu unterscheiden,
+  beide fehlen. Bis 0.17.0 fiel das nicht auf, weil jede Erhöhung der
+  Sammlungsversion nur vorhandene Vorlagen korrigierte. Die Beschreibung
+  trägt jetzt die Angabe `since`: wer schon eingespielt hat, bekommt genau
+  das, was es auf seinem Gerät noch nie gab.
+
+### Technisches
+- **Eine Datei je Stufe** (`src/data/seed/drills/stufe-a.ts` bis `stufe-c.ts`),
+  die Rechnung in `build.ts`, zusammengeführt in `index.ts`. Bei 100 Übungen
+  wäre eine Datei mit 1700 Zeilen nicht mehr zu überblicken. Der Umzug hat
+  **keinen der 25 Fingerabdrücke verändert** — der Test aus 0.17.0 hält das
+  fest.
+- **Zielzonen werden gerechnet, nicht gesetzt.** Die Angabe `cueAfter` sagt,
+  wie weit der Weiße nach dem Treffer weiterläuft oder zurückkommt; die Zone
+  folgt daraus. Nur beim geraden Stoß ist das die Wahrheit — bei einem Schnitt
+  geht der Weiße auf die Tangente —, und genau das hält ein Test fest.
+- **Fünf neue Prüfungen**, jede an einer absichtlich falsch gebauten Übung
+  erprobt: die Richtung im Namen gegen die Lage der Bälle, das Tor gegen die
+  Breite eines Balls, `cueAfter` nur beim geraden Stoß, die Zielzone eines
+  Nachlaufs mit Abstand zur Tasche, und die Schwierigkeit der Stufe A im Band
+  1 bis 4.
+- **Die Gegenprobe mit der Machbarkeitsprüfung** aus 0.16.0 läuft jetzt über
+  alle 44 Übungen und wächst mit jeder Stufe von allein mit: keine einzige
+  meldet einen Hinweis.
+- 356 Tests in 28 Dateien.
+
 ## 0.17.0 – 26.11.2026
 
 ### Hinzugefügt

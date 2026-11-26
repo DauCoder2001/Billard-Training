@@ -1,7 +1,7 @@
 /** Erstbefuellung beim ersten Start. */
 
 import { db } from './db'
-import { seedShots } from './seed/drills'
+import { seedIdsSince, seedShots } from './seed/drills'
 import { PLAYER_COLORS } from './repositories/players'
 import { DEFAULT_SETTINGS, getSettings, updateSettings } from './repositories/settings'
 import { newId } from '@/domain/shot'
@@ -16,8 +16,11 @@ import { transliterate } from '@/domain/text'
  * 2: Drei gerade Stoesse lagen so, dass der Weisse an die Bande geklemmt
  *    wurde und aus dem geraden Ball ein Schnitt von 17 bis 29 Grad wurde.
  *    Dazu der Kick, dessen Weisser gespiegelt statt gerechnet wurde.
+ * 3: Stufe A vollstaendig - 19 neue Uebungen. Die erste Auslieferung, die
+ *    die Sammlung erweitert statt sie zu korrigieren; dafuer braucht die
+ *    Regel beim Einspielen die Angabe `since` (siehe seedUpdates).
  */
-export const SEED_VERSION = 2
+export const SEED_VERSION = 3
 
 let running: Promise<void> | null = null
 
@@ -65,7 +68,14 @@ async function run(): Promise<void> {
   if (settings.seededVersion < SEED_VERSION) {
     const fresh = seedShots()
     const stored = await db.shots.bulkGet(fresh.map((s) => s.id))
-    const updates = seedUpdates(fresh, stored, settings.seededVersion === 0)
+    const updates = seedUpdates(
+      fresh,
+      stored,
+      settings.seededVersion === 0,
+      // Was es auf diesem Geraet noch nie gab, kann dort auch niemand
+      // geloescht haben.
+      seedIdsSince(settings.seededVersion),
+    )
     if (updates.length > 0) await db.shots.bulkPut(updates)
     await updateSettings({ seededVersion: SEED_VERSION })
   }
@@ -89,6 +99,13 @@ async function run(): Promise<void> {
  *   ist damit die Fassung des Nutzers. Vorher gingen Name, Notizen und Aufbau
  *   beim naechsten Update verloren; nur der Favorit blieb stehen.
  *
+ * Eine neue Uebung fehlt im Bestand aber genauso wie eine geloeschte - am
+ * Bestand allein sind die zwei Faelle nicht zu unterscheiden. Bis 0.17.0 fiel
+ * das nicht auf, weil jede Erhoehung der SEED_VERSION nur vorhandene Vorlagen
+ * korrigierte. Mit 0.18.0 waechst die Sammlung zum ersten Mal, und ohne
+ * `neueIds` kaeme keine der 19 neuen Uebungen auf einem Geraet an, auf dem die
+ * App schon einmal gelaufen ist.
+ *
  * Der Preis: eine Korrektur der Vorlage - wie die gerechnete Geometrie in
  * 0.5.1 - erreicht einen uebernommenen Stoss nicht mehr. Eigene Arbeit wiegt
  * schwerer. Wer die Vorlage zurueckholen will, nimmt den ausdruecklichen Weg
@@ -101,18 +118,22 @@ async function run(): Promise<void> {
  * @param fresh Die Stoesse der Vorlage.
  * @param stored Der gespeicherte Stand zu denselben Ids, in derselben Folge.
  * @param erstlauf true, wenn auf diesem Geraet noch nie eingespielt wurde.
+ * @param neueIds Ids, die es auf diesem Geraet noch nie gab. Ohne Angabe
+ *        gilt jede fehlende Uebung als geloescht.
  */
 export function seedUpdates(
   fresh: Shot[],
   stored: (Shot | undefined)[],
   erstlauf: boolean,
+  neueIds: Set<string> = new Set(),
 ): Shot[] {
   return fresh.flatMap((neu, i) => {
     const alt = stored[i]
     // Der Favorit ist eine Entscheidung des Nutzers und steht nicht in der
     // Vorlage.
     if (erstlauf) return [{ ...neu, favorite: alt?.favorite ?? false }]
-    if (!alt || alt.builtIn !== true) return []
+    if (!alt) return neueIds.has(neu.id) ? [{ ...neu, favorite: false }] : []
+    if (alt.builtIn !== true) return []
     return [{ ...neu, favorite: alt.favorite }]
   })
 }

@@ -20,7 +20,9 @@ import {
 } from '@/domain/geometry'
 import { LEVELS } from '@/domain/types'
 import type { Ball, Level, Point, Shot, TargetZone } from '@/domain/types'
-import { seedShots } from './drills'
+import { feasibilityHints } from '@/domain/feasibility'
+import { SEED_VERSION } from '../../bootstrap'
+import { SEED_SPECS, seedIdsSince, seedShots } from './index'
 
 const R = TABLE.ballRadius
 const D = TABLE.ballDiameter
@@ -219,10 +221,30 @@ describe('mitgelieferte Uebungen', () => {
     // Stossarten und die Angabe, dass ein Ball durch die Luft fliegt.
     //
     // Die Zahlen wachsen mit der Sammlung bis auf 25 je Stufe. Wer Uebungen
-    // hinzufuegt, zieht sie hier mit.
+    // hinzufuegt, zieht sie hier mit. Stufe A ist mit 0.18.0 voll.
     const zahl = (l: Level) => shots.filter((s) => s.level === l).length
-    expect(LEVELS.map(zahl)).toEqual([6, 7, 12, 0])
-    expect(shots).toHaveLength(25)
+    expect(LEVELS.map(zahl)).toEqual([25, 7, 12, 0])
+    expect(shots).toHaveLength(44)
+  })
+
+  it('haelt die Schwierigkeit der Stufe A im vorgesehenen Band', () => {
+    // Stufe A ist 1 bis 4 (Konzept 3.1). Eine Uebung mit 7 wuerde dort
+    // niemandem helfen, auch wenn ihr Thema passt - und waere ein Zeichen,
+    // dass sie in B oder C gehoert.
+    const a = shots.filter((s) => s.level === 'A')
+    const schwer = a.filter((s) => s.attributes.difficulty > 4 || s.attributes.difficulty < 1)
+    expect(schwer.map((s) => `${s.id}: ${s.attributes.difficulty}`)).toEqual([])
+    // Und sie nutzt das Band auch aus, statt alles auf eine Zahl zu legen.
+    expect(new Set(a.map((s) => s.attributes.difficulty))).toEqual(new Set([1, 2, 3, 4]))
+  })
+
+  it('nennt keine Uebung aus der Zukunft', () => {
+    // `since` sagt, ab welcher Einspielung es eine Uebung gibt. Steht dort
+    // eine Zahl ueber SEED_VERSION, kommt sie auf keinem Geraet an, auf dem
+    // die App schon lief - der haeufigste Fehler beim Erweitern der
+    // Sammlung ist die vergessene Erhoehung.
+    const zukunft = SEED_SPECS.filter((spec) => (spec.since ?? 1) > SEED_VERSION)
+    expect(zukunft.map((spec) => spec.slug)).toEqual([])
   })
 
   it('legt keine Stufe ueber ihre geplante Groesse', () => {
@@ -249,26 +271,45 @@ describe('mitgelieferte Uebungen', () => {
     // (0.17.0), der genau das nicht tun durfte.
     const erwartet: Record<string, string | undefined> = {
       'builtin-stop-kurz': 'c1f19376',
-      'builtin-stop-lang': '9bc8d3aa',
       'builtin-nachlauf-mittel': 'db56b6ee',
       'builtin-rueckzieher-kurz': 'e33c910c',
-      'builtin-rueckzieher-lang': 'd93a5e0a',
       'builtin-schnitt-15': '2bc6aecc',
       'builtin-schnitt-30': '914bd70a',
-      'builtin-schnitt-45': '89e2593a',
-      'builtin-schnitt-60': '0d6ea302',
-      'builtin-schnitt-75': '0842916c',
       'builtin-mitteltasche-gerade': '2ac4f2f2',
+      'builtin-gerade-nah': '5d19df26',
+      'builtin-gerade-mittel': 'e2475331',
+      'builtin-stop-nah': '0fd6cdc2',
+      'builtin-stop-mittel': '1fd3f7f4',
+      'builtin-nachlauf-20': '0feddcd6',
+      'builtin-nachlauf-50': 'faf1a88b',
+      'builtin-rueckzieher-30': 'aa852b95',
+      'builtin-rueckzieher-55': 'a8535c42',
+      'builtin-schnitt-10-rechts': 'bc664d25',
+      'builtin-schnitt-10-links': '4e698862',
+      'builtin-schnitt-20-rechts': 'e01c6578',
+      'builtin-schnitt-20-links': '98d65280',
+      'builtin-schnitt-15-links': '17303b3d',
+      'builtin-schnitt-30-links': '3d97f67e',
+      'builtin-mitteltasche-weit': '26e79317',
+      'builtin-bande-gerade': '9acba1e8',
+      'builtin-luecke-breit': '58ef208f',
+      'builtin-luecke-eng': '78ad9514',
+      'builtin-wachsende-linie': '6096b7f8',
+      'builtin-stop-lang': '9bc8d3aa',
+      'builtin-schnitt-45': '89e2593a',
       'builtin-mitteltasche-schnitt': 'ea1277d7',
       'builtin-bande-lang': 'e20a9898',
+      'builtin-kombination-zwei': 'fbbdf39b',
+      'builtin-bandenball-fest': 'dbac8d85',
+      'builtin-position-kitchen': '0ae55ea8',
+      'builtin-rueckzieher-lang': 'd93a5e0a',
+      'builtin-schnitt-60': '0d6ea302',
+      'builtin-schnitt-75': '0842916c',
       'builtin-bande-kurz': '3c54092a',
       'builtin-kick-eine-bande': '0281cc66',
-      'builtin-kombination-zwei': 'fbbdf39b',
       'builtin-karambolage': 'a3d68b04',
-      'builtin-bandenball-fest': 'dbac8d85',
       'builtin-seiteneffet-links': '6ad8c396',
       'builtin-seiteneffet-rechts': 'fa9a2856',
-      'builtin-position-kitchen': '0ae55ea8',
       'builtin-position-eng': 'e2d4f90a',
       'builtin-cluster-oeffnen': 'b0c31d03',
       'builtin-safe-hinter-ball': 'ca61c6d4',
@@ -480,6 +521,98 @@ describe('mitgelieferte Uebungen', () => {
     expect(rechteck).toEqual({ minX: 45, maxX: 60, minY: 23, maxY: 29 })
 
     expect(() => zoneRahmen({ x: 1, y: 2 } as unknown as TargetZone)).toThrow(/Unbekannte Form/)
+  })
+
+  it('rechnet die Zielzone nur dort aus dem Stoss, wo das stimmt', () => {
+    // `cueAfter` legt die Zielzone auf die Stosslinie - vor oder hinter den
+    // Geisterball. Das ist nur beim geraden Stoss die Wahrheit: bei einem
+    // Schnitt geht der Weisse auf die Tangente, und die zeigt woanders hin.
+    // Eine Zone an der falschen Stelle waere schlimmer als keine, denn sie
+    // bewertet den Spieler fuer etwas, das gar nicht passieren kann.
+    const falsch = SEED_SPECS.filter((spec) => spec.cueAfter && spec.cut !== 0)
+    expect(falsch.map((spec) => `${spec.slug}: ${spec.cut} Grad`)).toEqual([])
+  })
+
+  it('schickt den Weissen beim Nachlauf nicht in die Tasche', () => {
+    // Beim geraden Stoss laeuft der Weisse hinter dem Objektball her - in
+    // dieselbe Tasche. Die Zielzone muss deutlich davor liegen, sonst
+    // verlangt die Uebung ein Eigenverschulden.
+    const zuweit: string[] = []
+    for (const spec of SEED_SPECS) {
+      if (spec.cueAfter?.along !== 'follow') continue
+      const shot = shots.find((s) => s.id === `builtin-${spec.slug}`)!
+      const zone = shot.scoring.targetZone!
+      const bis = distance({ x: zone.x, y: zone.y }, pocketAim(shot))
+      // Ein Ball Platz zwischen Zonenrand und Taschenmuendung.
+      if (bis < zone.r + D) zuweit.push(`${spec.slug}: ${bis.toFixed(1)}" bis zur Tasche`)
+    }
+    expect(zuweit).toEqual([])
+  })
+
+  it('nennt die Schnittrichtung so, wie die Baelle liegen', () => {
+    // "nach links" im Namen ist eine Ansage an den Spieler, der hinter dem
+    // Weissen steht. Nachgerechnet wird sie am Kreuzprodukt von Anlauf- und
+    // Laufrichtung: ist der Lauf des Objektballs gegen den Uhrzeigersinn
+    // gedreht, geht er aus dieser Sicht nach links.
+    const falsch: string[] = []
+    for (const shot of shots) {
+      const gesagt = /nach links/.test(shot.name)
+        ? 'links'
+        : /nach rechts/.test(shot.name)
+          ? 'rechts'
+          : null
+      if (!gesagt) continue
+
+      const objekt = at(firstObject(shot))
+      const ziel = objectAim(shot)
+      const ghost = ghostBall(objekt, ziel)
+      const von = cueApproachFrom(shot)
+      const anlauf = { x: ghost.x - von.x, y: ghost.y - von.y }
+      const lauf = { x: ziel.x - objekt.x, y: ziel.y - objekt.y }
+      const kreuz = anlauf.x * lauf.y - anlauf.y * lauf.x
+      const gemessen = kreuz > 0 ? 'links' : 'rechts'
+      if (gemessen !== gesagt) falsch.push(`${shot.id}: heisst ${gesagt}, liegt ${gemessen}`)
+    }
+    expect(falsch).toEqual([])
+    // Ohne beschriftete Uebung wuerde der Test nichts aussagen.
+    expect(shots.filter((s) => /nach (links|rechts)/.test(s.name)).length).toBeGreaterThan(0)
+  })
+
+  it('laesst den Weissen durch jede Luecke passen', () => {
+    // Zwei Stoerbaelle als Tor: zwischen ihren Kanten muss mehr als ein
+    // Ball Platz sein, sonst ist die Uebung nicht zu spielen. Knapp darf
+    // es sein - darum geht es -, aber nicht unmoeglich.
+    let geprueft = 0
+    for (const shot of shots) {
+      const tor = shot.balls.filter((b) => b.id.startsWith('gate-'))
+      if (tor.length === 0) continue
+      expect(tor, `${shot.id}: ein Tor hat zwei Pfosten`).toHaveLength(2)
+      geprueft += 1
+      const luecke = distance(at(tor[0]), at(tor[1])) - D
+      expect(luecke, `${shot.id}: Luecke nur ${luecke.toFixed(2)}" breit`).toBeGreaterThan(D)
+    }
+    expect(geprueft, 'keine Uebung mit Tor').toBeGreaterThan(0)
+  })
+
+  it('gibt zu keiner mitgelieferten Uebung einen Machbarkeitshinweis', () => {
+    // Die Gegenprobe mit der Pruefung aus dem Baukasten (0.16.0) - eine
+    // zweite, unabhaengige Rechnung ueber dieselben Aufbauten. Was sie hier
+    // meldet, ist entweder eine unspielbare Uebung oder eine Pruefung, die
+    // zu schnell warnt. Beides muss auffallen, bevor es ausgeliefert wird.
+    const auffaellig = shots
+      .map((s) => ({ id: s.id, texte: feasibilityHints(s).map((h) => h.text) }))
+      .filter((e) => e.texte.length > 0)
+    expect(auffaellig).toEqual([])
+  })
+
+  it('nennt genau die Uebungen, die nach einer Einspielung dazugekommen sind', () => {
+    // Danach entscheidet bootstrap.ts, ob eine fehlende Uebung neu oder
+    // geloescht ist.
+    expect(seedIdsSince(SEED_VERSION).size).toBe(0)
+    expect(seedIdsSince(0).size).toBe(shots.length)
+    const neuMitDrei = seedIdsSince(2)
+    expect(neuMitDrei.size).toBe(19)
+    expect([...neuMitDrei].every((id) => shots.some((s) => s.id === id))).toBe(true)
   })
 
   it('stimmt im angegebenen Schnittwinkel mit der Lage der Baelle ueberein', () => {

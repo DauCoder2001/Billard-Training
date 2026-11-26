@@ -33,6 +33,27 @@ describe('seedUpdates', () => {
     expect(updates.map((s) => s.id)).toEqual(['b'])
   })
 
+  it('spielt eine neu dazugekommene Uebung ein', () => {
+    // Der Fall, der 0.18.0 erst moeglich macht: die Sammlung waechst. Eine
+    // neue Uebung fehlt im Bestand wie eine geloeschte - nur die Liste der
+    // neuen Ids unterscheidet die beiden.
+    const neu = vorlage('c', 'Durch die Lücke')
+    const updates = seedUpdates(
+      [...sammlung, neu],
+      [{ ...sammlung[0] }, undefined, undefined],
+      false,
+      new Set(['c']),
+    )
+    expect(updates.map((s) => s.id)).toEqual(['a', 'c'])
+    // 'b' fehlt im Bestand und steht nicht in der Liste: geloescht, bleibt es.
+  })
+
+  it('laesst eine neue Uebung ohne Favoriten anlaufen', () => {
+    const neu = vorlage('c', 'Durch die Lücke')
+    const [update] = seedUpdates([neu], [undefined], false, new Set(['c']))
+    expect(update.favorite).toBe(false)
+  })
+
   it('laesst eine uebernommene Fassung unberuehrt', () => {
     // builtIn === false setzt der Baukasten beim Speichern: ab da ist es der
     // Stoss des Nutzers.

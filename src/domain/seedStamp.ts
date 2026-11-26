@@ -72,10 +72,11 @@ function stable(value: unknown): string {
 /**
  * FNV-1a, 32 Bit, als acht Hexstellen.
  *
- * Ein Zusammenstoss zweier verschiedener Vorlagen ist bei einer Handvoll
- * Ueberarbeitungen von 25 Uebungen praktisch ausgeschlossen - und haette als
- * schlimmste Folge, dass ein Hinweis ausbleibt. Also genau das Verhalten von
- * vorher, nicht schlechter.
+ * Ein Zusammenstoss zweier verschiedener Vorlagen ist praktisch
+ * ausgeschlossen: selbst bei den geplanten 100 Uebungen liegt die
+ * Wahrscheinlichkeit ueber 2^32 Werten bei etwa 1 zu 860 000 (100^2 / 2^33).
+ * Schlimmste Folge waere, dass ein Hinweis ausbleibt - also genau das
+ * Verhalten von vorher, nicht schlechter.
  */
 function fnv1a(text: string): string {
   let hash = 0x811c9dc5

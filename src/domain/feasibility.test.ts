@@ -5,8 +5,9 @@
  * der ausbleibt, kostet den Nutzer einen Versuch am Tisch. Ein Hinweis, der
  * ohne Grund kommt, kostet ihn das Vertrauen in alle anderen - wer dreimal
  * grundlos gewarnt wird, liest den vierten nicht mehr. Deshalb steht die
- * Gegenprobe an den 25 mitgelieferten Uebungen am Anfang: sie sind alle
- * spielbar, also darf dort nichts stehen.
+ * Gegenprobe an der ganzen mitgelieferten Sammlung am Anfang: die ist
+ * spielbar, also darf dort nichts stehen. Sie waechst mit jeder Stufe, und
+ * diese Pruefung waechst von allein mit.
  */
 
 import { describe, expect, it } from 'vitest'
