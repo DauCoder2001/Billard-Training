@@ -238,7 +238,7 @@ export function AttributesPanel() {
                 <p className="small muted">
                   {hatObjektball
                     ? 'Ohne Zielzone zählt nur das Einlochen. Zielzone im Werkzeug links setzen.'
-                    : 'Ohne Objektball und ohne Zielzone gibt es nichts zu bewerten – das Training nimmt diesen Stoß nicht an. Zielzone im Werkzeug links setzen.'}
+                    : 'Ohne Objektball und ohne Zielzone gibt es nichts zu bewerten – das Training nimmt diese Übung nicht an. Zielzone im Werkzeug links setzen.'}
                 </p>
               )}
 
@@ -335,7 +335,7 @@ export function AttributesPanel() {
                 id="a-desc"
                 className="input"
                 value={shot.description}
-                placeholder="Worum geht es bei diesem Stoß?"
+                placeholder="Worum geht es bei dieser Übung?"
                 onFocus={feldBetreten}
                 onChange={(e) => tippen((s) => ({ ...s, description: e.target.value }))}
               />

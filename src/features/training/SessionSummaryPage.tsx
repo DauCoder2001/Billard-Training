@@ -39,7 +39,7 @@ export function SessionSummaryPage() {
     return (
       <Fehlt
         titel="Einheit nicht gefunden"
-        text="Diese Einheit gibt es nicht mehr. Wird ein Stoß gelöscht, geht seine Trainingshistorie mit ihm."
+        text="Diese Einheit gibt es nicht mehr. Wird eine Übung gelöscht, geht ihre Trainingshistorie mit ihr."
         onBack={() => navigate('/library')}
       />
     )
@@ -48,8 +48,8 @@ export function SessionSummaryPage() {
   if (shot === null) {
     return (
       <Fehlt
-        titel="Stoß nicht gefunden"
-        text="Der Stoß dieser Einheit wurde gelöscht."
+        titel="Übung nicht gefunden"
+        text="Die Übung dieser Einheit wurde gelöscht."
         onBack={() => navigate('/library')}
       />
     )
@@ -118,7 +118,7 @@ export function SessionSummaryPage() {
 
       {history.length > 1 && (
         <div className="card stack">
-          <h3>Verlauf dieses Stoßes</h3>
+          <h3>Verlauf dieser Übung</h3>
           <Sparkline values={history.map((s) => s.score)} />
         </div>
       )}
@@ -136,7 +136,7 @@ export function SessionSummaryPage() {
           Nochmal
         </button>
         <button className="btn" onClick={() => navigate(`/shot/${shot.id}`)}>
-          Zum Stoß
+          Zur Übung
         </button>
         <button className="btn" onClick={() => navigate('/')}>
           Zum Start
@@ -170,7 +170,7 @@ function Fehlt({
       <p className="muted">{text}</p>
       <div className="row">
         <button className="btn" onClick={onBack}>
-          Zu den Stößen
+          Zu den Übungen
         </button>
       </div>
     </div>

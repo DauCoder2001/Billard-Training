@@ -1,7 +1,7 @@
 /**
  * Die Stossseite - der zweite Ort derselben Regel.
  *
- * Befund 51 war, dass Baukasten und Stossseite "Stoß löschen" nach
+ * Befund 51 war, dass Baukasten und Stossseite "Übung löschen" nach
  * verschiedenen Regeln anboten. Dieser Test haelt die Stossseite fest, der
  * Test im Baukasten die andere Seite; zusammen halten sie die Regel an beiden
  * Orten gleich.
@@ -52,14 +52,14 @@ describe('Stossseite', () => {
     zeige(<ShotDetailPage />, ORT)
 
     expect(await screen.findByRole('heading', { name: 'Bandenball' })).toBeTruthy()
-    expect(screen.queryByRole('button', { name: 'Stoß löschen' })).toBeNull()
+    expect(screen.queryByRole('button', { name: 'Übung löschen' })).toBeNull()
   })
 
   it('loescht einen eigenen Stoss nach Rueckfrage', async () => {
-    await db.shots.add(createShot({ id: 's1', name: 'Mein Stoß' }))
+    await db.shots.add(createShot({ id: 's1', name: 'Meine Übung' }))
     const { adresse } = zeige(<ShotDetailPage />, ORT)
 
-    await userEvent.click(await screen.findByRole('button', { name: 'Stoß löschen' }))
+    await userEvent.click(await screen.findByRole('button', { name: 'Übung löschen' }))
     await userEvent.click(await screen.findByRole('button', { name: 'Löschen' }))
 
     expect(await db.shots.count()).toBe(0)
@@ -69,7 +69,7 @@ describe('Stossseite', () => {
   it('sagt, wenn es den Stoss nicht gibt', async () => {
     zeige(<ShotDetailPage />, ORT)
 
-    expect(await screen.findByRole('heading', { name: 'Stoß nicht gefunden' })).toBeTruthy()
+    expect(await screen.findByRole('heading', { name: 'Übung nicht gefunden' })).toBeTruthy()
     expect(screen.queryByText(/Wird geladen/)).toBeNull()
   })
 })
@@ -236,9 +236,9 @@ describe('Das Bild der Stossseite', () => {
         },
       },
     })
-    await db.shots.add(createShot({ id: 's1', name: 'Mein Stoß' }))
+    await db.shots.add(createShot({ id: 's1', name: 'Meine Übung' }))
     zeige(<ShotDetailPage />, ORT)
-    await screen.findByRole('heading', { name: 'Mein Stoß' })
+    await screen.findByRole('heading', { name: 'Meine Übung' })
 
     // Die Einstellungen gelten dort, wo der Tisch die Arbeitsflaeche ist -
     // Baukasten und Training. Feste Diagramme behalten ihr eigenes Bild.

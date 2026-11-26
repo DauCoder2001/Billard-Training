@@ -65,9 +65,9 @@ export function ShareDialog({ shot, onClose }: { shot: Shot; onClose: () => void
   }
 
   return (
-    <Modal onClose={onClose} wide label="Stoß teilen">
+    <Modal onClose={onClose} wide label="Übung teilen">
       <div className="modal__head">
-        <h2>Stoß teilen</h2>
+        <h2>Übung teilen</h2>
       </div>
       <div className="modal__body stack">
         <div ref={diagramRef}>
@@ -83,7 +83,7 @@ export function ShareDialog({ shot, onClose }: { shot: Shot; onClose: () => void
           {qr && (
             <img
               src={qr}
-              alt="QR-Code mit dem Stoß"
+              alt="QR-Code mit der Übung"
               width={168}
               height={168}
               style={{ borderRadius: 8 }}
@@ -92,12 +92,12 @@ export function ShareDialog({ shot, onClose }: { shot: Shot; onClose: () => void
           <div className="stack" style={{ flex: '1 1 240px' }}>
             {tooLong ? (
               <p className="small muted">
-                Dieser Stoß ist zu umfangreich für einen QR-Code. Der Link funktioniert
+                Diese Übung ist zu umfangreich für einen QR-Code. Der Link funktioniert
                 trotzdem, ebenso der Export als Datei.
               </p>
             ) : (
               <p className="small muted">
-                Der Stoß steckt vollständig im Link. Wer ihn öffnet, bekommt ihn zum
+                Die Übung steckt vollständig im Link. Wer sie öffnet, bekommt sie zum
                 Übernehmen angeboten &ndash; ohne Server, ohne Konto.
               </p>
             )}

@@ -287,7 +287,7 @@ export function sanitizeShot(raw: unknown): Shot {
  * Nutzlasten, damit der Aufrufer eine verstaendliche Meldung zeigen kann.
  */
 export function decodeShot(payload: string): Shot {
-  if (payload.length > MAX_PAYLOAD) throw new Error('Der geteilte Stoß ist zu groß.')
+  if (payload.length > MAX_PAYLOAD) throw new Error('Die geteilte Übung ist zu groß.')
 
   let plain: Uint8Array
   try {
@@ -295,22 +295,22 @@ export function decodeShot(payload: string): Shot {
     // koennte sich sonst auf Hunderte Megabyte aufblaehen und den Tab toeten.
     plain = inflateSync(fromBase64Url(payload), { out: new Uint8Array(MAX_INFLATED) })
   } catch {
-    throw new Error('Der geteilte Stoß ließ sich nicht lesen.')
+    throw new Error('Die geteilte Übung ließ sich nicht lesen.')
   }
   // fflate meldet einen zu kleinen Puffer nicht, es schneidet still ab. Die
   // volle Laenge heisst also: die Nutzlast reicht mindestens bis an die
   // Grenze. Ein echter Stoss bleibt um Groessenordnungen darunter.
-  if (plain.length >= MAX_INFLATED) throw new Error('Der geteilte Stoß ist zu groß.')
+  if (plain.length >= MAX_INFLATED) throw new Error('Die geteilte Übung ist zu groß.')
 
   let envelope: Record<string, unknown>
   try {
     envelope = fields(JSON.parse(strFromU8(plain)))
   } catch {
-    throw new Error('Der geteilte Stoß ließ sich nicht lesen.')
+    throw new Error('Die geteilte Übung ließ sich nicht lesen.')
   }
-  if (!envelope.shot) throw new Error('Der geteilte Stoß ließ sich nicht lesen.')
+  if (!envelope.shot) throw new Error('Die geteilte Übung ließ sich nicht lesen.')
   if (typeof envelope.v === 'number' && envelope.v > SHARE_VERSION) {
-    throw new Error('Dieser Stoß stammt aus einer neueren Version der App.')
+    throw new Error('Diese Übung stammt aus einer neueren Version der App.')
   }
 
   const now = Date.now()

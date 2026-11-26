@@ -50,7 +50,7 @@ describe('transliterate', () => {
 describe('plural', () => {
   it('nimmt bei genau eins die Einzahl', () => {
     expect(plural(1, 'Versuch', 'Versuche')).toBe('1 Versuch')
-    expect(plural(1, 'Stoß', 'Stöße')).toBe('1 Stoß')
+    expect(plural(1, 'Übung', 'Übungen')).toBe('1 Übung')
   })
 
   it('nimmt sonst die Mehrzahl, auch bei null', () => {

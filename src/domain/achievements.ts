@@ -152,14 +152,14 @@ export const ACHIEVEMENTS: Achievement[] = [
   {
     id: 'builder-1',
     name: 'Eigenbau',
-    description: 'Einen eigenen Stoß gebaut.',
+    description: 'Eine eigene Übung gebaut.',
     icon: '🛠️',
     progress: (ctx) => ratio(ctx.shots.filter((s) => !s.builtIn).length, 1),
   },
   {
     id: 'builder-10',
     name: 'Eigene Sammlung',
-    description: 'Zehn eigene Stöße gebaut.',
+    description: 'Zehn eigene Übungen gebaut.',
     icon: '🗂️',
     progress: (ctx) => ratio(ctx.shots.filter((s) => !s.builtIn).length, 10),
   },
@@ -191,7 +191,7 @@ export const ACHIEVEMENTS: Achievement[] = [
   {
     id: 'hard-advanced',
     name: 'Schweres Kaliber',
-    description: 'Einen Stoß der Schwierigkeit 8 oder höher auf mindestens 80 Prozent gebracht.',
+    description: 'Eine Übung der Schwierigkeit 8 oder höher auf mindestens 80 Prozent gebracht.',
     icon: '⛰️',
     progress: (ctx) => {
       const byId = new Map(ctx.shots.map((s) => [s.id, s]))

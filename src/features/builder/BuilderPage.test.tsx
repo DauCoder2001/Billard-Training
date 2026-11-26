@@ -34,7 +34,7 @@ describe('Baukasten an einem mitgelieferten Stoss', () => {
     zeige(<BuilderPage />, ORT)
 
     expect(await screen.findByRole('button', { name: 'Duplizieren' })).toBeTruthy()
-    expect(screen.queryByRole('button', { name: 'Stoß löschen' })).toBeNull()
+    expect(screen.queryByRole('button', { name: 'Übung löschen' })).toBeNull()
   })
 
   it('uebernimmt ihn beim Speichern und gibt das Loeschen frei', async () => {
@@ -44,7 +44,7 @@ describe('Baukasten an einem mitgelieferten Stoss', () => {
 
     await userEvent.click(screen.getByRole('button', { name: 'Speichern' }))
 
-    expect(await screen.findByRole('button', { name: 'Stoß löschen' })).toBeTruthy()
+    expect(await screen.findByRole('button', { name: 'Übung löschen' })).toBeTruthy()
     const gespeichert = await db.shots.get('s1')
     expect(gespeichert?.builtIn).toBe(false)
     expect(gespeichert?.name).toBe('Bandenball')
@@ -55,7 +55,7 @@ describe('Hilfslinien und Raster', () => {
   const ebene = (name: string) => document.querySelector(`[data-ebene="${name}"]`)
 
   it('zeigt die Hilfslinien, die Hilfen zum Bauen aber erst auf Wunsch', async () => {
-    await db.shots.add(createShot({ id: 's1', name: 'Mein Stoß' }))
+    await db.shots.add(createShot({ id: 's1', name: 'Meine Übung' }))
     zeige(<BuilderPage />, ORT)
     await screen.findByRole('button', { name: 'Hilfslinien' })
 
@@ -72,7 +72,7 @@ describe('Hilfslinien und Raster', () => {
         markings: { ...DEFAULT_MARKINGS, breakBox: true, rackOutline: true },
       },
     })
-    await db.shots.add(createShot({ id: 's1', name: 'Mein Stoß' }))
+    await db.shots.add(createShot({ id: 's1', name: 'Meine Übung' }))
     zeige(<BuilderPage />, ORT)
     await screen.findByRole('button', { name: 'Hilfslinien' })
 
@@ -81,7 +81,7 @@ describe('Hilfslinien und Raster', () => {
   })
 
   it('merkt sich, was in der Werkzeugleiste umgelegt wird', async () => {
-    await db.shots.add(createShot({ id: 's1', name: 'Mein Stoß' }))
+    await db.shots.add(createShot({ id: 's1', name: 'Meine Übung' }))
     zeige(<BuilderPage />, ORT)
 
     await userEvent.click(await screen.findByRole('button', { name: 'Hilfslinien' }))
@@ -106,7 +106,7 @@ describe('Aufbauen mit einem Griff', () => {
   const objektbaelle = () => useBuilder.getState().shot.balls.filter((b) => b.kind === 'object')
 
   it('stellt mit "Rack 8" das volle Dreieck auf und nimmt es wieder zurueck', async () => {
-    await db.shots.add(createShot({ id: 's1', name: 'Mein Stoß' }))
+    await db.shots.add(createShot({ id: 's1', name: 'Meine Übung' }))
     zeige(<BuilderPage />, ORT)
 
     await userEvent.click(await screen.findByRole('button', { name: 'Rack 8' }))
@@ -120,7 +120,7 @@ describe('Aufbauen mit einem Griff', () => {
   })
 
   it('stellt mit "Rack 9" neun Kugeln auf', async () => {
-    await db.shots.add(createShot({ id: 's1', name: 'Mein Stoß' }))
+    await db.shots.add(createShot({ id: 's1', name: 'Meine Übung' }))
     zeige(<BuilderPage />, ORT)
 
     await userEvent.click(await screen.findByRole('button', { name: 'Rack 9' }))
@@ -129,7 +129,7 @@ describe('Aufbauen mit einem Griff', () => {
   })
 
   it('verteilt die Objektbaelle mit "Mischen" neu, ohne sie zu vertauschen', async () => {
-    await db.shots.add(createShot({ id: 's1', name: 'Mein Stoß' }))
+    await db.shots.add(createShot({ id: 's1', name: 'Meine Übung' }))
     zeige(<BuilderPage />, ORT)
     await screen.findByRole('button', { name: 'Mischen' })
     const vorher = objektbaelle()[0]
@@ -143,22 +143,22 @@ describe('Aufbauen mit einem Griff', () => {
   })
 
   it('sperrt "Mischen" sichtbar, solange es keine Objektbaelle gibt', async () => {
-    const ohne = createShot({ id: 's1', name: 'Mein Stoß' })
+    const ohne = createShot({ id: 's1', name: 'Meine Übung' })
     await db.shots.add({ ...ohne, balls: ohne.balls.filter((b) => b.kind === 'cue') })
     zeige(<BuilderPage />, ORT)
 
     const knopf = (await screen.findByRole('button', { name: 'Mischen' })) as HTMLButtonElement
     expect(knopf.disabled).toBe(true)
-    expect(knopf.title).toBe('Dieser Stoß hat keine Objektbälle')
+    expect(knopf.title).toBe('Diese Übung hat keine Objektbälle')
   })
 })
 
 describe('Baukasten an einem eigenen Stoss', () => {
   it('loescht ihn nach Rueckfrage und fuehrt zurueck zu den Stoessen', async () => {
-    await db.shots.add(createShot({ id: 's1', name: 'Mein Stoß' }))
+    await db.shots.add(createShot({ id: 's1', name: 'Meine Übung' }))
     const { adresse } = zeige(<BuilderPage />, ORT)
 
-    await userEvent.click(await screen.findByRole('button', { name: 'Stoß löschen' }))
+    await userEvent.click(await screen.findByRole('button', { name: 'Übung löschen' }))
     await userEvent.click(await screen.findByRole('button', { name: 'Löschen' }))
 
     expect(await db.shots.count()).toBe(0)
@@ -166,10 +166,10 @@ describe('Baukasten an einem eigenen Stoss', () => {
   })
 
   it('laesst ihn stehen, wenn die Rueckfrage abgebrochen wird', async () => {
-    await db.shots.add(createShot({ id: 's1', name: 'Mein Stoß' }))
+    await db.shots.add(createShot({ id: 's1', name: 'Meine Übung' }))
     zeige(<BuilderPage />, ORT)
 
-    await userEvent.click(await screen.findByRole('button', { name: 'Stoß löschen' }))
+    await userEvent.click(await screen.findByRole('button', { name: 'Übung löschen' }))
     await userEvent.click(await screen.findByRole('button', { name: 'Abbrechen' }))
 
     expect(await db.shots.count()).toBe(1)
@@ -178,7 +178,7 @@ describe('Baukasten an einem eigenen Stoss', () => {
 
 describe('Die Angaben unter dem Tischbild', () => {
   it('klappen zu und wieder auf, und der Knopf sagt jeweils, was er tut', async () => {
-    await db.shots.add(createShot({ id: 's1', name: 'Mein Stoß' }))
+    await db.shots.add(createShot({ id: 's1', name: 'Meine Übung' }))
     zeige(<BuilderPage />, ORT)
 
     // Offen beim Betreten: der Reiter "Bewertung" ist da, der Knopf bietet
@@ -205,7 +205,7 @@ describe('Die Angaben unter dem Tischbild', () => {
 
 describe('Die Sperrzone im Baukasten', () => {
   it('zeigt Radius und Entfernen, sobald der Stoss eine hat', async () => {
-    const basis = createShot({ id: 's1', name: 'Mein Stoß' })
+    const basis = createShot({ id: 's1', name: 'Meine Übung' })
     await db.shots.add({
       ...basis,
       scoring: { ...basis.scoring, avoidZone: { x: 20, y: 20, r: 6 } },
@@ -224,7 +224,7 @@ describe('Die Sperrzone im Baukasten', () => {
   })
 
   it('bietet das Werkzeug an und erklaert die Regel, solange keine da ist', async () => {
-    await db.shots.add(createShot({ id: 's1', name: 'Mein Stoß' }))
+    await db.shots.add(createShot({ id: 's1', name: 'Meine Übung' }))
     zeige(<BuilderPage />, ORT)
 
     expect(await screen.findByRole('button', { name: 'Sperrzone' })).toBeTruthy()

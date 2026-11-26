@@ -45,7 +45,7 @@ export function WorkoutsPage() {
       <div className="page__head">
         <div>
           <h1>Workouts</h1>
-          <p className="page__sub">Mehrere Stöße hintereinander als eine Einheit.</p>
+          <p className="page__sub">Mehrere Übungen hintereinander als eine Einheit.</p>
         </div>
         <button className="btn btn--primary" onClick={() => void add()}>
           Neues Workout
@@ -55,7 +55,7 @@ export function WorkoutsPage() {
       {workouts && workouts.length === 0 ? (
         <EmptyState title="Noch kein Workout angelegt">
           <span className="small muted">
-            Ein Workout bündelt Stöße in fester Reihenfolge, etwa zum Aufwärmen.
+            Ein Workout bündelt Übungen in fester Reihenfolge, etwa zum Aufwärmen.
           </span>
         </EmptyState>
       ) : (
@@ -66,14 +66,14 @@ export function WorkoutsPage() {
               <div key={workout.id} className="card stack">
                 <strong>{workout.name}</strong>
                 <span className="small muted">
-                  {plural(workout.entries.length, 'Stoß', 'Stöße')} ·{' '}
+                  {plural(workout.entries.length, 'Übung', 'Übungen')} ·{' '}
                   {plural(total, 'Versuch', 'Versuche')}
                 </span>
                 {workout.description && <span className="small">{workout.description}</span>}
                 <ol className="small muted" style={{ margin: 0, paddingLeft: 18 }}>
                   {workout.entries.slice(0, 4).map((entry, i) => (
                     <li key={i}>
-                      {shots?.find((s) => s.id === entry.shotId)?.name ?? 'Unbekannter Stoß'} ·{' '}
+                      {shots?.find((s) => s.id === entry.shotId)?.name ?? 'Unbekannte Übung'} ·{' '}
                       {entry.attempts}
                     </li>
                   ))}
@@ -81,7 +81,7 @@ export function WorkoutsPage() {
                 </ol>
                 {workout.entries.length === 0 && (
                   <span className="small muted">
-                    Noch kein Stoß hinzugefügt – über „Bearbeiten“ einen auswählen.
+                    Noch keine Übung hinzugefügt – über „Bearbeiten“ eine auswählen.
                   </span>
                 )}
                 <div className="row row--tight">
@@ -172,9 +172,9 @@ function WorkoutEditor({ workout, onClose, onSave }: EditorProps) {
         </div>
 
         <div className="stack" style={{ gap: 8 }}>
-          <span className="tiny">Stöße in dieser Reihenfolge</span>
+          <span className="tiny">Übungen in dieser Reihenfolge</span>
           {draft.entries.length === 0 && (
-            <span className="small muted">Noch kein Stoß hinzugefügt.</span>
+            <span className="small muted">Noch keine Übung hinzugefügt.</span>
           )}
           {draft.entries.map((entry, i) => (
             <div key={i} className="row row--tight">
@@ -222,7 +222,7 @@ function WorkoutEditor({ workout, onClose, onSave }: EditorProps) {
             value={pick}
             onChange={(e) => setPick(e.target.value)}
           >
-            <option value="">Stoß auswählen …</option>
+            <option value="">Übung auswählen …</option>
             {(shots ?? []).map((s) => (
               <option key={s.id} value={s.id}>
                 {s.name}

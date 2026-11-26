@@ -177,12 +177,12 @@ export function StatsPage() {
           </div>
 
           <div className="card stack">
-            <h2>Stöße, schwächste zuerst</h2>
+            <h2>Übungen, schwächste zuerst</h2>
             <div className="table-scroll">
               <table className="table">
                 <thead>
                   <tr>
-                    <th>Stoß</th>
+                    <th>Übung</th>
                     <th>Einheiten</th>
                     <th>Letztes</th>
                     <th>Bestes</th>

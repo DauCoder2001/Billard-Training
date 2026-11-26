@@ -60,9 +60,9 @@ export function TrainPage() {
   if (shot === null) {
     return (
       <div className="page">
-        <h1>Stoß nicht gefunden</h1>
+        <h1>Übung nicht gefunden</h1>
         <button className="btn" onClick={() => navigate('/library')}>
-          Zu den Stößen
+          Zu den Übungen
         </button>
       </div>
     )
@@ -74,7 +74,7 @@ export function TrainPage() {
   if (!isScorable(shot)) {
     return (
       <div className="page stack">
-        <h1>Dieser Stoß lässt sich nicht bewerten</h1>
+        <h1>Diese Übung lässt sich nicht bewerten</h1>
         <p className="muted">
           „{shot.name}" hat weder einen Objektball noch eine Zielzone. Ohne Objektball
           gibt es nichts einzulochen, ohne Zielzone nichts zu messen.
@@ -87,7 +87,7 @@ export function TrainPage() {
             Im Baukasten öffnen
           </button>
           <button className="btn" onClick={() => navigate(`/shot/${shot.id}`)}>
-            Zurück zum Stoß
+            Zurück zur Übung
           </button>
         </div>
       </div>

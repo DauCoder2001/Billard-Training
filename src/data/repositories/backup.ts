@@ -92,7 +92,7 @@ export async function importBackup(
   // genau dieser App stammt - nur vom anderen Weg.
   if (backup && backup.app === 'billard-training' && backup.kind === 'shot') {
     throw new Error(
-      'Das ist ein einzelner geteilter Stoß, keine Sicherung. Einzelne Stöße werden unter "Geteilten Stoß übernehmen" eingelesen.',
+      'Das ist eine einzelne geteilte Übung, keine Sicherung. Einzelne Übungen werden unter "Geteilte Übung übernehmen" eingelesen.',
     )
   }
   if (!backup || backup.app !== 'billard-training' || !Array.isArray(backup.shots)) {
@@ -102,7 +102,7 @@ export async function importBackup(
     throw new Error('Die Sicherung stammt aus einer neueren Version der App.')
   }
 
-  const rohShots = list<unknown>(backup.shots, 'Die Stöße')
+  const rohShots = list<unknown>(backup.shots, 'Die Übungen')
   const rohPlayers = list<unknown>(backup.players, 'Die Spieler')
   const rohSessions = list<unknown>(backup.sessions, 'Die Einheiten')
   const rohWorkouts = list<unknown>(backup.workouts, 'Die Workouts')

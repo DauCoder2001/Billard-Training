@@ -25,7 +25,7 @@ function Seite({ mitUeberschrift = true }: { mitUeberschrift?: boolean }) {
   const [weg, setWeg] = useState(false)
   return (
     <main>
-      {mitUeberschrift && <h1>Stoßseite</h1>}
+      {mitUeberschrift && <h1>Übungsseite</h1>}
       {!weg && <button onClick={() => setOffen(true)}>Öffnen</button>}
       <button onClick={() => setWeg(true)}>Auslöser entfernen</button>
       {offen && (
@@ -55,7 +55,7 @@ describe('Modal: Fokus beim Schliessen', () => {
     await userEvent.click(screen.getByRole('button', { name: 'Auslöser entfernen' }))
     await userEvent.click(screen.getByRole('button', { name: 'Schließen' }))
 
-    const ueberschrift = screen.getByRole('heading', { name: 'Stoßseite' })
+    const ueberschrift = screen.getByRole('heading', { name: 'Übungsseite' })
     expect(document.activeElement).toBe(ueberschrift)
     // Anspringbar ja, in der Tab-Reihenfolge nein.
     expect(ueberschrift.getAttribute('tabindex')).toBe('-1')

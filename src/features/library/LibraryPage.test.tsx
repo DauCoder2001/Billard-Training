@@ -99,7 +99,7 @@ describe('Die Seite Stoesse', () => {
 
     await userEvent.type(screen.getByPlaceholderText('Suchen …'), 'Querschlaeger')
 
-    expect(await screen.findByText('Kein Stoß passt zu den Filtern')).toBeTruthy()
+    expect(await screen.findByText('Keine Übung passt zu den Filtern')).toBeTruthy()
     expect(screen.queryAllByRole('link')).toEqual([])
   })
 

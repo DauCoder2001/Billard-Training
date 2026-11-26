@@ -70,9 +70,9 @@ export function ShotDetailPage() {
   if (shot === null) {
     return (
       <div className="page">
-        <h1>Stoß nicht gefunden</h1>
+        <h1>Übung nicht gefunden</h1>
         <Link className="btn" to="/library">
-          Zu den Stößen
+          Zu den Übungen
         </Link>
       </div>
     )
@@ -119,7 +119,7 @@ export function ShotDetailPage() {
   const remove = async () => {
     const ok = await dialogs.confirm({
       title: `"${shot.name}" löschen?`,
-      message: 'Der Stoß und seine Trainingshistorie werden entfernt.',
+      message: 'Die Übung und ihre Trainingshistorie werden entfernt.',
       confirmLabel: 'Löschen',
       danger: true,
     })
@@ -176,7 +176,7 @@ export function ShotDetailPage() {
       <div className="page__head">
         <div>
           <Link className="btn btn--sm btn--ghost" to="/library">
-            ← Stöße
+            ← Übungen
           </Link>
           <h1 style={{ marginTop: 6 }}>{shot.name}</h1>
           {shot.description && <p className="page__sub">{shot.description}</p>}
@@ -323,7 +323,7 @@ export function ShotDetailPage() {
           {!shot.builtIn && (
             <div className="row">
               <button className="btn btn--sm btn--danger" onClick={() => void remove()}>
-                Stoß löschen
+                Übung löschen
               </button>
             </div>
           )}

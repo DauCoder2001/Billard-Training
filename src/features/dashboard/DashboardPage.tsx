@@ -99,7 +99,7 @@ export function DashboardPage() {
           <h2>Der Coach empfiehlt</h2>
           <span className="spacer" />
           <Link className="btn btn--sm btn--ghost" to="/library">
-            Alle Stöße
+            Alle Übungen
           </Link>
         </div>
 

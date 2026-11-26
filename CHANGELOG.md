@@ -6,6 +6,27 @@ Die Versionsnummer steht an genau einer Stelle — in `package.json` — und ers
 unten auf der Seite **Einstellungen** sowie auf der Fehlerseite. Schema:
 `Hauptversion.Funktion.Korrektur`.
 
+## 0.14.1 – 26.11.2026
+
+### Geändert
+- **Ein Aufbau in der Sammlung heißt jetzt „Übung", nicht mehr „Stoß".** Im
+  Oktober war es umgekehrt festgelegt worden, mit der Regel „ein Begriff, eine
+  Sache". Genau daran scheiterte „Stoß": Ein Stoß ist ein einzelner Schlag mit
+  dem Queue – ein Eintrag in der Sammlung ist ein Aufbau, den man zwanzig Mal
+  spielt. „Zwanzig Stöße an dieser Übung" ist richtig; die Sammlung „Stöße" zu
+  nennen war der Fehler, den die Regel vermeiden wollte. Das Problem damals war
+  „Drill" (englischer Fachjargon) – „Übung" wurde mit weggeworfen.
+- Die Navigation führt zu **Übungen**, die Seite heißt **Übungen**, und
+  entsprechend überall: „Neue Übung", „Übung löschen", „Geteilte Übung
+  übernehmen", „Mitgelieferte Übungen wiederherstellen".
+- Unverändert bleiben **Versuch** (ein einzelner Durchgang), **Einheit** (alle
+  Versuche einer Sitzung) und **Stoßart** (Schnittball, Bandenball, Kick …) –
+  die beschreibt den Schlag, nicht die Übung. Auch der Reiter „Stoß" im
+  Baukasten behält seinen Namen: dort stehen die Angaben zum Schlag.
+- Die Namen der mitgelieferten Übungen und die Coach-Hinweise sind nicht
+  betroffen; wo dort „Stoß" steht, ist der Schlag gemeint („sauberer, langer
+  Stoß statt roher Kraft").
+
 ## 0.14.0 – 25.11.2026
 
 ### Geändert

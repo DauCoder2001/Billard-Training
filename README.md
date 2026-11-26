@@ -1,6 +1,6 @@
 # Billard Training
 
-Eine Trainings-App für Poolbillard: eigene Stöße am Tisch aufbauen, sie
+Eine Trainings-App für Poolbillard: eigene Übungen am Tisch aufbauen, sie
 gezielt üben, die Ergebnisse festhalten und daraus sehen, woran zu arbeiten
 ist.
 
@@ -8,7 +8,7 @@ Die App läuft vollständig im Browser. Es gibt keinen Server, kein Konto und
 keine Cloud — alle Daten liegen in der lokalen Datenbank des Browsers
 (IndexedDB) und lassen sich als JSON-Datei sichern.
 
-Die mitgelieferten Stöße sind Standard-Drills, deren Ballpositionen aus der
+Die mitgelieferten Übungen sind Standarddrills, deren Ballpositionen aus der
 Tischgeometrie berechnet werden — aus Objektball, Zieltasche und gewünschtem
 Schnittwinkel folgt die Lage des Weißen. Dadurch stimmen die Winkel exakt und
 bleiben beim Anpassen nachvollziehbar.
@@ -26,20 +26,20 @@ Undo/Redo über den gesamten Editor, Spiegeln, Duplizieren.
 Ruheposition des Weißen angetippt und dann *Eingelocht*, *Verfehlt* oder
 *Kratzer* gewählt. Bewertet wird nach Treffer und Nähe zur Zielzone.
 
-**Statistik** — Verlauf je Stoß, Fähigkeitsprofil als Netz, Tabelle aller
-Stöße mit dem schwächsten zuerst, Treffer- und Kratzerquote.
+**Statistik** — Verlauf je Übung, Fähigkeitsprofil als Netz, Tabelle aller
+Übungen mit der schwächsten zuerst, Treffer- und Kratzerquote.
 
-**Coach** — schlägt Stöße vor, die gerade am meisten bringen: nie geübte,
+**Coach** — schlägt Übungen vor, die gerade am meisten bringen: nie geübte,
 lange nicht geübte, schwache Ergebnisse, schwache Fähigkeiten, passend zum
 Niveau. Jeder Vorschlag nennt seinen Grund.
 
-**Workouts** — mehrere Stöße in fester Reihenfolge als eine Einheit.
+**Workouts** — mehrere Übungen in fester Reihenfolge als eine Einheit.
 
 **Erfolge** — 16 Meilensteine, aus der Historie berechnet.
 
-**Teilen** — ein Stoß steckt komprimiert im Link. Wer ihn öffnet, bekommt ihn
-zum Übernehmen angeboten. Dazu ein QR-Code, das Diagramm als Bild und der Stoß
-als Datei, die sich unter *Geteilten Stoß übernehmen* wieder einlesen lässt.
+**Teilen** — eine Übung steckt komprimiert im Link. Wer sie öffnet, bekommt sie
+zum Übernehmen angeboten. Dazu ein QR-Code, das Diagramm als Bild und die Übung
+als Datei, die sich unter *Geteilte Übung übernehmen* wieder einlesen lässt.
 
 ## Entwicklung
 
@@ -101,9 +101,9 @@ derselbe Stand, der auch veröffentlicht wird.
 ```
 src/
   domain/      Geometrie, Bewertung, Skill-Ratings, Coach, Erfolge, Teilen
-  data/        Dexie-Schema, Repositories, mitgelieferte Stöße
+  data/        Dexie-Schema, Repositories, mitgelieferte Übungen
   components/  Tischdiagramm als SVG
-  features/    Seiten: Start, Stöße, Builder, Training, Statistik, …
+  features/    Seiten: Start, Übungen, Builder, Training, Statistik, …
   ui/          Dialoge und kleine Anzeigebausteine
 ```
 

@@ -52,12 +52,12 @@ beforeEach(async () => {
 
 describe('Ergebnis einer Einheit', () => {
   it('zeigt Stoss und Ergebnis', async () => {
-    await db.shots.add({ ...createShot({ id: 's1', name: 'Gerader Stoß' }) })
+    await db.shots.add({ ...createShot({ id: 's1', name: 'Gerade Übung' }) })
     await db.sessions.add(einheit())
 
     zeige(<SessionSummaryPage />, ORT)
 
-    expect(await screen.findByRole('heading', { name: 'Gerader Stoß' })).toBeTruthy()
+    expect(await screen.findByRole('heading', { name: 'Gerade Übung' })).toBeTruthy()
     expect(screen.getByText('70 %')).toBeTruthy()
   })
 
@@ -75,14 +75,14 @@ describe('Ergebnis einer Einheit', () => {
 
     zeige(<SessionSummaryPage />, ORT)
 
-    expect(await screen.findByRole('heading', { name: 'Stoß nicht gefunden' })).toBeTruthy()
+    expect(await screen.findByRole('heading', { name: 'Übung nicht gefunden' })).toBeTruthy()
   })
 
   it('fuehrt aus der Sackgasse zurueck zu den Stoessen', async () => {
     const { adresse } = zeige(<SessionSummaryPage />, ORT)
     await screen.findByRole('heading', { name: 'Einheit nicht gefunden' })
 
-    await userEvent.click(screen.getByRole('button', { name: 'Zu den Stößen' }))
+    await userEvent.click(screen.getByRole('button', { name: 'Zu den Übungen' }))
 
     expect(adresse()).toBe('/library')
   })

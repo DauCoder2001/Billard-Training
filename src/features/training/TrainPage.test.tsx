@@ -26,7 +26,7 @@ import { TrainPage } from './TrainPage'
 const ORT = { pfad: '/train/s1?format=quick&attempts=2', muster: '/train/:id' }
 
 function stoss(): Shot {
-  const basis = createShot({ id: 's1', name: 'Gerader Stoß' })
+  const basis = createShot({ id: 's1', name: 'Gerade Übung' })
   return {
     ...basis,
     attributes: { ...basis.attributes, skills: ['draw'], difficulty: 10 },
@@ -106,7 +106,7 @@ describe('Markierungen beim Training', () => {
       },
     })
     zeige(<TrainPage />, ORT)
-    await screen.findByText('Gerader Stoß')
+    await screen.findByText('Gerade Übung')
 
     expect(document.querySelector('[data-ebene="hilfslinien"]')).toBeNull()
     expect(document.querySelector('[data-ebene="breakbox"]')).toBeTruthy()
@@ -121,7 +121,7 @@ describe('Eine Uebung mit Sperrzone', () => {
       scoring: { ...mitSperre.scoring, avoidZone: { x: 20, y: 20, r: 6 } },
     })
     zeige(<TrainPage />, ORT)
-    await screen.findByText('Gerader Stoß')
+    await screen.findByText('Gerade Übung')
 
     expect(document.querySelector('[data-ebene="sperrzone"]')).toBeTruthy()
     // Ohne die Lage des Weissen liesse sich die Sperre nicht pruefen.
@@ -135,7 +135,7 @@ describe('Eine Uebung mit Sperrzone', () => {
 
   it('fragt ohne Sperrzone weiterhin nicht nach der Lage', async () => {
     zeige(<TrainPage />, ORT)
-    await screen.findByText('Gerader Stoß')
+    await screen.findByText('Gerade Übung')
 
     expect(document.querySelector('[data-ebene="sperrzone"]')).toBeNull()
     expect((screen.getByRole('button', { name: 'Eingelocht' }) as HTMLButtonElement).disabled).toBe(

@@ -122,7 +122,7 @@ export function BuilderPage() {
         useBuilder.getState().dirty
           ? {
               title: 'Änderungen verwerfen?',
-              message: 'Der Stoß wurde noch nicht gespeichert.',
+              message: 'Die Übung wurde noch nicht gespeichert.',
               confirmLabel: 'Verwerfen',
               danger: true,
             }
@@ -158,7 +158,7 @@ export function BuilderPage() {
 
   const rename = async () => {
     const name = await dialogs.prompt({
-      title: 'Stoß benennen',
+      title: 'Übung benennen',
       label: 'Name',
       initial: shot.name,
     })
@@ -282,7 +282,7 @@ export function BuilderPage() {
   const remove = async () => {
     const ok = await dialogs.confirm({
       title: `"${shot.name}" löschen?`,
-      message: 'Der Stoß und seine Trainingshistorie werden entfernt.',
+      message: 'Die Übung und ihre Trainingshistorie werden entfernt.',
       confirmLabel: 'Löschen',
       danger: true,
     })
@@ -336,7 +336,7 @@ export function BuilderPage() {
     <div className="builder">
       <header className="builder__head">
         <button className="btn btn--ghost btn--sm" onClick={() => navigate('/library')}>
-          ← Stöße
+          ← Übungen
         </button>
         <button className="btn btn--ghost" onClick={() => void rename()} title="Umbenennen">
           <strong>{shot.name}</strong>
@@ -481,7 +481,7 @@ export function BuilderPage() {
               title={
                 hatObjektbaelle
                   ? 'Objektbälle zufällig über den Tisch verteilen'
-                  : 'Dieser Stoß hat keine Objektbälle'
+                  : 'Diese Übung hat keine Objektbälle'
               }
               onClick={() => useBuilder.getState().change((s) => shuffleObjectBalls(s))}
             >
@@ -512,7 +512,7 @@ export function BuilderPage() {
                   <>
                     <div className="builder__sep builder__sep--v" />
                     <button className="btn btn--sm btn--danger" onClick={() => void remove()}>
-                      Stoß löschen
+                      Übung löschen
                     </button>
                   </>
                 )}

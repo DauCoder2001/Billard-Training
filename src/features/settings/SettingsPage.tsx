@@ -166,7 +166,7 @@ export function SettingsPage() {
       await dialogs.alert({
         title: 'Sicherung eingespielt',
         message:
-          `${plural(result.shots, 'Stoß', 'Stöße')}, ` +
+          `${plural(result.shots, 'Übung', 'Übungen')}, ` +
           `${plural(result.players, 'Spieler', 'Spieler')}, ` +
           `${plural(result.sessions, 'Einheit', 'Einheiten')}, ` +
           `${plural(result.workouts, 'Workout', 'Workouts')}.` +
@@ -182,10 +182,10 @@ export function SettingsPage() {
 
   const restoreDrills = async () => {
     const ok = await dialogs.confirm({
-      title: 'Mitgelieferte Stöße wiederherstellen',
+      title: 'Mitgelieferte Übungen wiederherstellen',
       message:
-        'Die mitgelieferten Stöße werden neu eingespielt. Selbst gebaute Stöße bleiben unberührt. ' +
-        'Eigene Änderungen an mitgelieferten Stößen – Name, Notizen, Schwellen – gehen verloren, ' +
+        'Die mitgelieferten Übungen werden neu eingespielt. Selbst gebaute Übungen bleiben unberührt. ' +
+        'Eigene Änderungen an mitgelieferten Übungen – Name, Notizen, Schwellen – gehen verloren, ' +
         'Favoriten bleiben markiert.',
       confirmLabel: 'Einspielen',
     })
@@ -203,7 +203,7 @@ export function SettingsPage() {
         dialogs.toast(`Nicht gespeichert: ${fehler}`, 'error')
         return
       }
-      dialogs.toast('Stöße wiederhergestellt', 'ok')
+      dialogs.toast('Übungen wiederhergestellt', 'ok')
     } catch (err) {
       dialogs.toast(`Nicht gespeichert: ${storageErrorText(err)}`, 'error')
     }
@@ -213,7 +213,7 @@ export function SettingsPage() {
     const ok = await dialogs.confirm({
       title: 'Alle Daten löschen?',
       message:
-        'Stöße, Spieler, Einheiten und Workouts werden entfernt. Das lässt sich nicht ' +
+        'Übungen, Spieler, Einheiten und Workouts werden entfernt. Das lässt sich nicht ' +
         'rückgängig machen. Weitere offene Fenster dieser App vorher schließen – sonst ' +
         'wartet das Löschen auf sie.',
       confirmLabel: 'Alles löschen',
@@ -378,7 +378,7 @@ export function SettingsPage() {
       </section>
 
       <section className="card stack">
-        <h2>Standardwerte für neue Stöße</h2>
+        <h2>Standardwerte für neue Übungen</h2>
         <div className="field">
           <label htmlFor="s-radius">Radius der Zielzone {settings.defaultTargetRadius} Zoll</label>
           <input
@@ -450,10 +450,10 @@ export function SettingsPage() {
             }}
           />
           <button className="btn" onClick={() => void restoreDrills()}>
-            Mitgelieferte Stöße wiederherstellen
+            Mitgelieferte Übungen wiederherstellen
           </button>
           <button className="btn" onClick={() => navigate('/import')}>
-            Geteilten Stoß übernehmen
+            Geteilte Übung übernehmen
           </button>
         </div>
 
@@ -462,7 +462,7 @@ export function SettingsPage() {
             Alle Daten löschen
           </button>
           <span className="small muted">
-            Entfernt Stöße, Spieler, Einheiten und Workouts von diesem Gerät. Das lässt sich
+            Entfernt Übungen, Spieler, Einheiten und Workouts von diesem Gerät. Das lässt sich
             nicht rückgängig machen.
           </span>
         </div>

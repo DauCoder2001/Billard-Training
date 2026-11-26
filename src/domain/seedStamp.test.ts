@@ -20,7 +20,7 @@ import type { Shot } from './types'
  * verglichen die Tests zwei verschiedene Aufbauten miteinander.
  */
 function stoss(patch: Partial<Shot> = {}): Shot {
-  const base = createShot({ id: 'a', name: 'Gerader Stoß' })
+  const base = createShot({ id: 'a', name: 'Gerade Übung' })
   return {
     ...base,
     balls: base.balls.map((b, i) => ({ ...b, id: i === 0 ? 'cue' : `ball-${i}` })),

@@ -74,7 +74,7 @@ export function WorkoutRunPage() {
     return (
       <div className="page stack">
         <h1>{workout.name}</h1>
-        <p className="muted">Dieses Workout enthält keine vorhandenen Stöße mehr.</p>
+        <p className="muted">Dieses Workout enthält keine vorhandenen Übungen mehr.</p>
         <button className="btn" onClick={() => navigate('/workouts')}>
           Zurück
         </button>

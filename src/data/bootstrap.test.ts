@@ -17,7 +17,7 @@ function vorlage(id: string, name: string): Shot {
   return { ...createShot({ id, name }), builtIn: true, favorite: false, seedStamp: 'neu' }
 }
 
-const sammlung = [vorlage('a', 'Gerader Stoß'), vorlage('b', 'Bandenball')]
+const sammlung = [vorlage('a', 'Gerade Übung'), vorlage('b', 'Bandenball')]
 
 describe('seedUpdates', () => {
   it('schreibt beim ersten Lauf die ganze Sammlung', () => {
@@ -50,7 +50,7 @@ describe('seedUpdates', () => {
     const alt: Shot = { ...sammlung[0], name: 'Alter Name', favorite: true }
     const [update] = seedUpdates(sammlung, [alt, undefined], false)
     expect(update.id).toBe('a')
-    expect(update.name).toBe('Gerader Stoß')
+    expect(update.name).toBe('Gerade Übung')
     expect(update.favorite).toBe(true)
   })
 

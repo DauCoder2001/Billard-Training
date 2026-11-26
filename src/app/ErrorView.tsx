@@ -25,7 +25,7 @@ export function ErrorView({ error }: { error: unknown }) {
     <div className="page stack">
       <h1>Da ist etwas schiefgegangen</h1>
       <p className="muted">
-        Die Ansicht ließ sich nicht darstellen. Deine gespeicherten Stöße und Ergebnisse sind davon
+        Die Ansicht ließ sich nicht darstellen. Deine gespeicherten Übungen und Ergebnisse sind davon
         nicht betroffen.
       </p>
       <pre

@@ -74,7 +74,7 @@ export function LibraryPage() {
     <div className="page page--wide stack">
       <div className="page__head">
         <div>
-          <h1>Stöße</h1>
+          <h1>Übungen</h1>
           <p className="page__sub">
             {shots ? `${filtered.length} von ${shots.length}` : 'Wird geladen …'}
           </p>
@@ -90,7 +90,7 @@ export function LibraryPage() {
             Filter{activeFilters > 0 ? ` (${activeFilters})` : ''}
           </button>
           <button className="btn btn--primary" onClick={() => navigate('/builder')}>
-            Neuer Stoß
+            Neue Übung
           </button>
         </div>
       </div>
@@ -182,8 +182,8 @@ export function LibraryPage() {
       )}
 
       {shots && filtered.length === 0 ? (
-        <EmptyState title="Kein Stoß passt zu den Filtern">
-          <span className="muted small">Filter lockern oder einen neuen Stoß bauen.</span>
+        <EmptyState title="Keine Übung passt zu den Filtern">
+          <span className="muted small">Filter lockern oder eine neue Übung bauen.</span>
         </EmptyState>
       ) : (
         <div className="grid">

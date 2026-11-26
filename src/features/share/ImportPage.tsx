@@ -49,7 +49,7 @@ export function ImportPage() {
     setVonHand(
       extracted
         ? lesen(extracted)
-        : { shot: null, error: 'In der Eingabe steckt kein geteilter Stoß.' },
+        : { shot: null, error: 'In der Eingabe steckt keine geteilte Übung.' },
     )
   }
 
@@ -65,7 +65,7 @@ export function ImportPage() {
     setVonHand(
       extracted
         ? lesen(extracted)
-        : { shot: null, error: `In "${file.name}" steckt kein geteilter Stoß.` },
+        : { shot: null, error: `In "${file.name}" steckt keine geteilte Übung.` },
     )
   }
 
@@ -73,7 +73,7 @@ export function ImportPage() {
     if (!shot) return
     try {
       const saved = await saveShot(shot)
-      dialogs.toast('Stoß übernommen', 'ok')
+      dialogs.toast('Übung übernommen', 'ok')
       navigate(`/shot/${saved.id}`, { replace: true })
     } catch (err) {
       // Der Stoss steckt im Link und ist nicht verloren: die Seite bleibt
@@ -86,9 +86,9 @@ export function ImportPage() {
     <div className="page stack">
       <div className="page__head">
         <div>
-          <h1>Geteilten Stoß übernehmen</h1>
+          <h1>Geteilte Übung übernehmen</h1>
           <p className="page__sub">
-            Der Stoß steckt vollständig im Link. Er wird erst gespeichert, wenn du ihn
+            Die Übung steckt vollständig im Link. Sie wird erst gespeichert, wenn du sie
             übernimmst.
           </p>
         </div>
