@@ -205,7 +205,10 @@ function objectRoute(shot: Shot): Point[] {
  */
 function blockingBall(balls: Ball[], von: Point, nach: Point, egal: string[]): Ball | null {
   let naechster: Ball | null = null
-  let abstand = D
+  // Ausdruecklich number: TABLE steht unter "as const", damit hat D den
+  // Typ 2.25 und nicht number - ohne die Angabe liesse sich hier nichts
+  // anderes mehr zuweisen.
+  let abstand: number = D
   for (const ball of balls) {
     if (egal.includes(ball.id)) continue
     const p = at(ball)

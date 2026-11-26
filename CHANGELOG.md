@@ -6,6 +6,20 @@ Die Versionsnummer steht an genau einer Stelle — in `package.json` — und ers
 unten auf der Seite **Einstellungen** sowie auf der Fehlerseite. Schema:
 `Hauptversion.Funktion.Korrektur`.
 
+## 0.16.1 – 26.11.2026
+
+### Behoben
+- **Der Build lief nicht durch.** `TABLE` steht unter `as const`, damit hat
+  `TABLE.ballDiameter` den Typ `2.25` und nicht `number`. Eine daraus
+  abgeleitete Variable nahm keinen anderen Wert mehr an
+  (`src/domain/feasibility.ts`). Jetzt ist der Typ dort ausdrücklich
+  angegeben.
+- Der Fehler kam durch, weil die Prüfung vorher mit `npx tsc --noEmit` lief.
+  Das nimmt `tsconfig.json` — eine reine Verweisdatei ohne eigene Dateien,
+  die nichts prüft und trotzdem erfolgreich meldet. Die Prüfung des Projekts
+  ist `npm run typecheck` (`tsc -b`), und daneben `npm run lint`,
+  `npm run test` und `npm run build`.
+
 ## 0.16.0 – 26.11.2026
 
 ### Hinzugefügt
