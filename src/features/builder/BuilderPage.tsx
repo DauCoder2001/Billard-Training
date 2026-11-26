@@ -16,6 +16,7 @@ import type { BallPath, Markings, Point } from '@/domain/types'
 import { useDialogs } from '@/ui/Dialogs'
 import { useToolFit } from '@/ui/toolFit'
 import { AttributesPanel } from './AttributesPanel'
+import { FeasibilityHints } from './FeasibilityHints'
 import { BuilderCanvas } from './BuilderCanvas'
 import { useBuilder } from './store'
 
@@ -530,6 +531,8 @@ export function BuilderPage() {
           </>
         )}
       </div>
+
+      <FeasibilityHints shot={shot} />
 
       {panelOpen && <AttributesPanel />}
 

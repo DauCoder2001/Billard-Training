@@ -275,3 +275,53 @@ describe('Die Stufe im Baukasten', () => {
     await waitFor(async () => expect((await db.shots.get('s1'))?.level).toBeUndefined())
   })
 })
+
+/**
+ * Die Machbarkeitshinweise.
+ *
+ * Geprueft wird hier nur, dass sie am richtigen Ort auftauchen und wieder
+ * verschwinden - was sie melden, steht in domain/feasibility.test.ts. Der
+ * Ort ist eine Entscheidung: ausserhalb des klappbaren Angabenbereichs, denn
+ * der Nutzer schiebt die Baelle mit eingeklappten Angaben.
+ */
+describe('Hinweise zum Aufbau', () => {
+  /** Ein Aufbau, bei dem der Weisse im Objektball steckt. */
+  async function uebungMitFehler(): Promise<void> {
+    const basis = createShot({ id: 's1', name: 'Meine Übung' })
+    await db.shots.add({
+      ...basis,
+      balls: [
+        { id: 'cue', kind: 'cue', x: 40, y: 25 },
+        { id: 'obj', kind: 'object', number: 1, x: 41, y: 25, order: 1 },
+      ],
+    })
+  }
+
+  it('zeigt den Streifen nur, wenn es etwas zu sagen gibt', async () => {
+    await db.shots.add(createShot({ id: 's1', name: 'Meine Übung' }))
+    zeige(<BuilderPage />, ORT)
+
+    await screen.findByRole('button', { name: 'Speichern' })
+    // Keine Entwarnung in einem leeren Kasten: der Streifen fehlt einfach.
+    expect(screen.queryByLabelText('Hinweise zum Aufbau')).toBeNull()
+  })
+
+  it('meldet zwei Baelle, die ineinander liegen', async () => {
+    await uebungMitFehler()
+    zeige(<BuilderPage />, ORT)
+
+    expect(await screen.findByText('Der Weiße und Ball 1 liegen ineinander.')).toBeTruthy()
+  })
+
+  it('bleibt stehen, wenn die Angaben eingeklappt werden', async () => {
+    // Der eigentliche Grund fuer den Ort: wer die Angaben ausblendet, um am
+    // Tischbild zu arbeiten, soll den Hinweis weiter sehen.
+    await uebungMitFehler()
+    zeige(<BuilderPage />, ORT)
+
+    await userEvent.click(await screen.findByRole('button', { name: 'Angaben ausblenden ▾' }))
+
+    expect(screen.queryByRole('button', { name: 'Bewertung' })).toBeNull()
+    expect(screen.getByText('Der Weiße und Ball 1 liegen ineinander.')).toBeTruthy()
+  })
+})

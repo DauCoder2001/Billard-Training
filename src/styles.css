@@ -758,6 +758,41 @@ textarea {
   flex-wrap: wrap;
 }
 
+/* Die Machbarkeitshinweise liegen zwischen Werkzeugleiste und Angaben, also
+   ausserhalb des klappbaren Bereichs: ein Hinweis, den man durch Einklappen
+   der Angaben loswird, waere keiner. Der Streifen ist nur da, wenn es etwas
+   zu sagen gibt. */
+.builder__hints {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  padding: 8px 12px;
+  border-top: 1px solid var(--line);
+  background: var(--surface-2);
+}
+
+.builder__hint {
+  display: flex;
+  gap: 8px;
+  align-items: baseline;
+  margin: 0;
+  font-size: 0.86rem;
+  line-height: 1.35;
+}
+
+.builder__hint--warn {
+  color: var(--warn);
+}
+
+.builder__hint--blocker {
+  color: var(--danger);
+}
+
+.builder__hint-mark {
+  flex: none;
+  font-weight: 700;
+}
+
 .builder__panel {
   border-top: 1px solid var(--line);
   background: var(--surface);

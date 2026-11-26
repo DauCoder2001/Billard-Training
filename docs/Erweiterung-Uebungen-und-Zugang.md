@@ -251,7 +251,7 @@ testbar ohne Oberfläche.
 | Prüfung | Warnt, wenn |
 |---|---|
 | Schnittwinkel | über 85° — darüber trägt der Ball praktisch nicht mehr |
-| Sichtlinie | ein anderer Ball zwischen Weißem und Geisterball steht (außer bei `air`) |
+| Sichtlinie | ein anderer Ball zwischen Weißem und Geisterball steht (die Ausnahme `air` gibt es noch nicht — bis Stufe D meldet ein Sprungball hier einen Hinweis, der keiner ist) |
 | Ballweg | der Weg des Objektballs durch einen anderen Ball läuft |
 | Queue frei | der Weiße so an der Bande klebt, dass der nötige Stoßwinkel nicht geht |
 | Tasche erreichbar | die Linie Objektball → Taschenmündung von einem Ball verdeckt ist |
@@ -462,7 +462,7 @@ ausgelieferte Fassung mit Eintrag im CHANGELOG.
 | 0.14.1 ✓ | Oberfläche auf **Übung** umbenennen (E5), Notiz zu den Begriffen nachziehen | — |
 | 0.14.2 ✓ | **Umzug auf `training.cuedesk.de`** (6.) — erledigt am 26.11.2026 | DNS bei IONOS |
 | 0.15.0 ✓ | Feld `level`, Filter und Sortierung in der Sammlung, Stufe im Baukasten, die 25 eingeordnet (6/7/12/0) — erledigt am 26.11.2026 | — |
-| 0.16.0 | Machbarkeitsprüfung im Baukasten (5.1) | — |
+| 0.16.0 ✓ | Machbarkeitsprüfung im Baukasten (5.1) — erledigt am 26.11.2026 | — |
 | 0.17.0 | Reihen-Generator im Baukasten: eine Folge aus einem Muster (Schnitt 10° bis 60° in Schritten) | 0.16.0 |
 | 0.18.0 | Stufe A vollständig, 19 neue Übungen | 0.15.0, 0.17.0 |
 | 0.19.0 | Stufe B vollständig, 18 neue | 0.18.0 |

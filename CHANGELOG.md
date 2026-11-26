@@ -6,6 +6,42 @@ Die Versionsnummer steht an genau einer Stelle — in `package.json` — und ers
 unten auf der Seite **Einstellungen** sowie auf der Fehlerseite. Schema:
 `Hauptversion.Funktion.Korrektur`.
 
+## 0.16.0 – 26.11.2026
+
+### Hinzugefügt
+- **Machbarkeitsprüfung im Baukasten.** Während du einen Aufbau baust, sagt
+  ein Streifen über den Angaben, was am echten Tisch nicht aufgeht. Sieben
+  Prüfungen: Bälle, die ineinander liegen; der Weiße zu dicht an der Bande
+  für das Queue; ein Ball in der Sichtlinie; ein Schnittwinkel über 85°; ein
+  Ball im Weg des Objektballs; ein Ball vor der Tasche; und eine Übung ohne
+  Maßstab, die das Training ohnehin nicht annimmt.
+- **Hinweise, keine Verbote.** Ein Trickshot darf unmöglich aussehen, und wer
+  eine Übung absichtlich hart baut, soll sie bauen dürfen. Nur die Übung ohne
+  Maßstab ist rot ausgezeichnet — sie ist das Einzige, was die App selbst
+  ablehnt. Alles andere steht in Orange da, und das Zeichen davor sagt
+  dasselbe wie die Farbe, für alle, die Farben nicht unterscheiden.
+
+### Technisches
+- `src/domain/feasibility.ts`: eine reine Funktion über die Übung, keine
+  Simulation — gerechnet werden Abstände und Winkel. Dieselbe Geometrie
+  prüft seit Längerem die mitgelieferten Übungen im Test; hier steht sie für
+  die Aufbauten des Nutzers.
+- **Die Gegenprobe steht im Test:** keine der 25 mitgelieferten Übungen
+  meldet einen einzigen Hinweis. Ein Hinweis, der ohne Grund kommt, kostet
+  das Vertrauen in alle anderen — wer dreimal grundlos gewarnt wird, liest
+  den vierten nicht mehr.
+- Der Streifen liegt **außerhalb** des klappbaren Angabenbereichs. Die Lagen,
+  um die es geht, entstehen beim Schieben der Bälle, und dabei sind die
+  Angaben oft eingeklappt. Bewusst ohne `aria-live`: die Hinweise rechnen
+  sich bei jedem Ziehen neu, ein Vorleseprogramm läse ununterbrochen vor.
+- Gibt es nichts zu melden, steht dort nichts — kein leerer Kasten mit
+  „Alles in Ordnung“. Die Abwesenheit des Streifens ist die Entwarnung.
+- **Noch nicht geprüft werden kann, was das Datenmodell nicht kennt:** ein
+  Sprungball fliegt über einen Ball hinweg, aber ein Weg weiß heute nicht,
+  dass er durch die Luft geht. Bis Stufe D das Modell erweitert, meldet die
+  Sichtlinie bei einem Sprungball einen Hinweis, der keiner ist.
+- 324 Tests, davon 20 neue zur Machbarkeitsprüfung.
+
 ## 0.15.0 – 26.11.2026
 
 ### Hinzugefügt
