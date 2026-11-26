@@ -388,28 +388,9 @@ export const STUFE_A: DrillSpec[] = [
     difficulty: 3,
     speed: 5,
     coachNotes:
-      'Nicht auf die Lücke schauen, sondern auf den Geisterball. Wer das Hindernis anvisiert, spielt darauf zu.',
-  },
-  {
-    slug: 'luecke-eng',
-    level: 'A',
-    since: 3,
-    name: 'Durch die enge Lücke',
-    description: 'Dieselbe Lage, aber die Störbälle stehen dichter zusammen.',
-    object: { x: 75, y: 25 },
-    pocket: 'br',
-    cut: 0,
-    dist: 24,
-    // 2,7 Zoll je Seite: zwischen den Kanten bleiben 3,15 Zoll, knapp
-    // anderthalb Ballbreiten.
-    gate: { offset: 2.7, numbers: [4, 5] },
-    zone: null,
-    skills: ['stun'],
-    shotType: 'cut',
-    difficulty: 4,
-    speed: 5,
-    coachNotes:
-      'Hier zeigt sich jeder krumme Stoß. Geht der Weiße am Hindernis an, lag es fast nie an der Lücke, sondern am Nachlauf der Hand.',
+      'Nicht auf die Lücke schauen, sondern auf den Geisterball. Wer das Hindernis anvisiert, spielt darauf zu. ' +
+      'Mögliche Variante: Klappt das sicher, die beiden Störbälle enger zusammenstellen – ' +
+      'dann zeigt sich jeder krumme Stoß.',
   },
   {
     slug: 'wachsende-linie',

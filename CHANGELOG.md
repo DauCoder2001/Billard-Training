@@ -6,6 +6,30 @@ Die Versionsnummer steht an genau einer Stelle — in `package.json` — und ers
 unten auf der Seite **Einstellungen** sowie auf der Fehlerseite. Schema:
 `Hauptversion.Funktion.Korrektur`.
 
+## 0.18.2 – 26.11.2026
+
+### Entfernt
+- **„Durch die enge Lücke" ist raus.** Sie war „Durch die Lücke" mit einem
+  engeren Tor: gleicher Objektball, gleiche Tasche, gleicher Winkel, nur die
+  Störbälle standen dichter. Ein Regler, keine zweite Übung. Die Abstufung
+  steht jetzt als **Variante im Hinweis** des Originals — *„Klappt das
+  sicher, die beiden Störbälle enger zusammenstellen."* Stufe A hat damit 20
+  Übungen, die Sammlung 39.
+
+### Technisches
+- **Ein zweiter Wächter**, nach dem gegen Spiegelbilder aus 0.18.1: Zwei
+  Übungen mit demselben Objektball, derselben Tasche, demselben
+  Schnittwinkel, gleich vielen Bällen und gleicher Zielzone sind dieselbe
+  Übung an einem anderen Regler. Der Abstand des Weißen zählt dabei
+  ausdrücklich nicht als Unterschied — er *ist* der Regler.
+- Beim Schreiben hat der Wächter zuerst „Stop-Shot kurz" und „Durch die
+  Lücke" angeklagt: gleicher Objektball auf dem Fußpunkt, gleiche Tasche.
+  Sie sind trotzdem zwei Übungen — der einen stehen zwei Störbälle im Weg,
+  die andere hat eine Zielzone für den Weißen. Beide Bedingungen gehören
+  deshalb in den Vergleich.
+- Sammlungsversion 5, damit der erweiterte Hinweis die Geräte erreicht.
+- 362 Tests in 28 Dateien.
+
 ## 0.18.1 – 26.11.2026
 
 ### Entfernt

@@ -125,14 +125,16 @@ eine Spielsituation, keine Spezialtechnik. Umgekehrt steht ein kleiner Massé
 in D, auch wenn er leichter ist als manches in C. **Grundsatz: das Thema
 bestimmt die Stufe, die Schwierigkeit ordnet innerhalb der Stufe.**
 
-### 3.2 Stufe A — Grundschläge (6 heute + 19 neu) ✓ 0.18.0
+### 3.2 Stufe A — Grundschläge (6 + 14 = 20) ✓ 0.18.0
 
 Alles auf kurzer bis mittlerer Distanz, Treffpunkt in der Mitte oder knapp
 darüber und darunter, keine Bande im Weg. Das ist die Stufe, die jeder ohne
 Anmeldung bekommt — sie muss für sich allein ein sinnvolles Training sein.
 
 **Umgesetzt am 26.11.2026 mit 0.18.0.** Die Liste wurde beim Bauen an drei
-Stellen nachgezogen; was gemessen wurde, steht dahinter.
+Stellen nachgezogen; was gemessen wurde, steht dahinter. Danach fielen fünf
+der 19 neuen Übungen wieder weg (0.18.1 und 0.18.2, siehe unten) — geblieben
+sind 14, die Stufe hat damit 20.
 
 | Geplant | Gebaut | Abweichung |
 |---|---|---|
@@ -144,7 +146,7 @@ Stellen nachgezogen; was gemessen wurde, steht dahinter.
 | Schnitt 15° und 30° andere Seite (2) | — | **Gestrichen** (0.18.1, siehe unten). |
 | Mitteltasche, zweite Entfernung (1) | `mitteltasche-weit` | — |
 | Ball an der Bande, gerade (1) | `bande-gerade` | **Dicht, nicht fest.** Die Mündung der Ecktasche liegt 1,6" von der Bande weg, darum zeigt die Anspiellinie eines festliegenden Balles in die Bande hinein — für den Weißen bliebe dort kein Platz. Der Objektball liegt 2,5" von der Bande. |
-| Durch die Lücke (2) | `luecke-breit`, `luecke-eng` | Lücke zwischen den Ballkanten gemessen: 4,15" und 3,15" bei 2,25" Balldurchmesser. |
+| Durch die Lücke (2) | `luecke-breit` | **Nur eine** (0.18.2, siehe unten). Lücke zwischen den Ballkanten gemessen: 4,15". Die engere Fassung (3,15") steht als Variante im Hinweis. |
 | Wachsende Linie (1) | `wachsende-linie` | Als kürzester Stand gespeichert; das Wachsen steht in den Trainerhinweisen (siehe 12, „Progressive Übungen"). |
 
 ### 3.2.1 Nachgezogen mit 0.18.1: keine Spiegelbilder
@@ -166,6 +168,32 @@ Stufe C stehen ebenfalls gespiegelt und bleiben trotzdem zwei Übungen — ihre
 Zielzonen sind verschieden, einmal soll der Weiße verlängert, einmal kurz
 gehalten werden. Gleiche Lage, andere Aufgabe. Der Test, der Spiegelpaare
 sucht, prüft deshalb die Zielzone mit.
+
+### 3.2.2 Nachgezogen mit 0.18.2: keine zweite Übung für einen anderen Regler
+
+„Durch die enge Lücke" ist raus. Sie war „Durch die Lücke" mit dichter
+zusammengestellten Störbällen: gleicher Objektball, gleiche Tasche, gleicher
+Winkel, nur die Lücke 3,15" statt 4,15". Derselbe Fall wie die
+Spiegelbilder, eine Stufe allgemeiner.
+
+**Die Regel, erweitert:** Wo zwei Aufbauten sich nur in einer Zahl
+unterscheiden — Lücke, Entfernung, Zonengröße — ist das ein **Regler an
+einer Übung**, keine zweite Übung. Der Regler gehört in den Hinweis
+(„Klappt das sicher, die Störbälle enger zusammenstellen"), nicht in die
+Liste.
+
+**Der Test dazu** (`drills.test.ts`, „legt dieselbe Uebung nicht zweimal mit
+anderem Regler an") hält zwei Übungen für dieselbe, wenn Objektball, Tasche,
+Schnittwinkel, Ballzahl und Zielzone übereinstimmen. Die Entfernung des
+Weißen zählt ausdrücklich **nicht** als Unterschied — sie ist der häufigste
+Regler.
+
+**Was er nicht greift:** Übungen mit verschobenem Objektball. In Stufe A
+stehen weiterhin `gerade-nah`/`gerade-mittel`, drei Stop-Shots, drei
+Nachläufe, drei Rückzieher und zwei Mitteltaschen-Übungen nebeneinander —
+nach demselben Prinzip wären das fünf Übungen mit Reglern statt dreizehn. Das
+bleibt offen, weil es an der Bewertung hängt: eine Variante, die nur im
+Hinweis steht, lässt sich nicht getrennt zählen (siehe 12).
 
 ### 3.3 Stufe B — Kontrolle des Weißen (7 heute + 18 neu)
 
@@ -491,7 +519,8 @@ ausgelieferte Fassung mit Eintrag im CHANGELOG.
 | 0.17.0 ✓ | Reihen-Generator im Baukasten: eine Folge aus einem Muster (Schnittwinkel oder Abstand des Weißen), Anspiel-Rechnung nach `domain/aim.ts` — erledigt am 26.11.2026 | 0.16.0 |
 | 0.18.0 ✓ | Stufe A auf 25 Übungen, 19 neue — erledigt am 26.11.2026 | 0.15.0, 0.17.0 |
 | 0.18.1 ✓ | Vier Spiegel-Übungen zurückgenommen, Hinweis statt eigener Übung; Stufe A hat 21 — erledigt am 26.11.2026 | 0.18.0 |
-| — | **Die Stufen B, C und D füllt Matthias Stück für Stück selbst.** Keine Auslieferung, die eine Stufe in einem Zug auf eine Zielzahl bringt (E6, 3.2.1). | — |
+| 0.18.2 ✓ | „Durch die enge Lücke" zurückgenommen, Variante statt eigener Übung; Stufe A hat 20 — erledigt am 26.11.2026 | 0.18.1 |
+| — | **Die Stufen B, C und D füllt Matthias Stück für Stück selbst.** Keine Auslieferung, die eine Stufe in einem Zug auf eine Zielzahl bringt (E6, 3.2.1, 3.2.2). | — |
 | 0.19.0 | Modell für Spezialtechniken (3.6): `jump` und `masse` als Stoßart und Fähigkeit, `air` am Wegsegment — die Voraussetzung dafür, dass Stufe D überhaupt gebaut werden *kann* | — |
 | 0.20.0 | Stufenprüfungen und vier neue Erfolge (4.) | 0.19.0 |
 | 0.21.0 | Nachrechnung mit pooltool, Korrekturen an Zonen und Schwierigkeiten (5.2) | 0.20.0 |
@@ -536,3 +565,12 @@ am Server.
 - **Zahl je Stufe:** 25 ist ein Richtwert (E6), und seit 0.18.1 kein Ziel
   mehr, auf das hin gearbeitet wird. Die Aufteilung ergibt sich daraus,
   welche Übungen sinnvoll sind — nicht umgekehrt.
+- **Regler mit verschobenem Objektball:** Die Regel aus 3.2.2 ist nur zur
+  Hälfte durchgezogen. In Stufe A stehen weiterhin `gerade-nah`/`gerade-mittel`,
+  drei Stop-Shots, drei Nachläufe, drei Rückzieher und zwei
+  Mitteltaschen-Übungen nebeneinander, die sich je nur in einer Entfernung
+  unterscheiden. Nach der Regel wären das fünf Übungen mit Reglern statt
+  dreizehn. Dagegen steht die Bewertung: eine Variante, die nur im Hinweis
+  steht, hat keine eigene Trefferquote und keinen eigenen Verlauf — wer die
+  20-cm-Stufe und die 73-cm-Stufe getrennt verfolgen will, braucht zwei
+  Übungen. Zu entscheiden, bevor Matthias die Stufen B bis D füllt.

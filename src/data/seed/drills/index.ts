@@ -70,6 +70,10 @@ export const RETIRED_IDS: Readonly<Record<string, string>> = {
   'builtin-schnitt-20-links': 'Spiegelbild von Schnittball 20 Grad (0.18.1)',
   'builtin-schnitt-15-links': 'Spiegelbild von Schnittball 15 Grad (0.18.1)',
   'builtin-schnitt-30-links': 'Spiegelbild von Schnittball 30 Grad (0.18.1)',
+  // 0.18.2: "Durch die enge Luecke" war "Durch die Luecke" mit einem engeren
+  // Tor - gleicher Objektball, gleiche Tasche, gleicher Winkel. Ein Regler,
+  // keine zweite Uebung. Die Variante steht jetzt im Hinweis des Originals.
+  'builtin-luecke-eng': 'Engere Fassung von Durch die Lücke (0.18.2)',
 }
 
 /**

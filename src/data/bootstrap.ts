@@ -23,8 +23,10 @@ import { transliterate } from '@/domain/text'
  *    auf die andere Seite bei jedem Schnittball. Die Erhoehung gilt dem
  *    Hinweis: ein geaenderter Text erreicht ein Geraet nur so. Das Wegraeumen
  *    laeuft ueber eine eigene Regel und braucht sie nicht.
+ * 5: "Durch die enge Luecke" zurueckgezogen - dieselbe Uebung mit engerem
+ *    Tor. Die Abstufung steht jetzt als Variante im Hinweis des Originals.
  */
-export const SEED_VERSION = 4
+export const SEED_VERSION = 5
 
 let running: Promise<void> | null = null
 

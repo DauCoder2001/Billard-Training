@@ -226,8 +226,8 @@ describe('mitgelieferte Uebungen', () => {
     // kein Soll: die Sammlung waechst von jetzt an Stueck fuer Stueck und
     // nicht in einem Zug auf eine Zielzahl (Entscheidung vom 26.11.2026).
     const zahl = (l: Level) => shots.filter((s) => s.level === l).length
-    expect(LEVELS.map(zahl)).toEqual([21, 7, 12, 0])
-    expect(shots).toHaveLength(40)
+    expect(LEVELS.map(zahl)).toEqual([20, 7, 12, 0])
+    expect(shots).toHaveLength(39)
   })
 
   it('haelt die Schwierigkeit der Stufe A im vorgesehenen Band', () => {
@@ -291,8 +291,7 @@ describe('mitgelieferte Uebungen', () => {
       'builtin-schnitt-20-rechts': '77145216',
       'builtin-mitteltasche-weit': '26e79317',
       'builtin-bande-gerade': '9acba1e8',
-      'builtin-luecke-breit': '58ef208f',
-      'builtin-luecke-eng': '78ad9514',
+      'builtin-luecke-breit': 'f88284e9',
       'builtin-wachsende-linie': '6096b7f8',
       'builtin-stop-lang': '9bc8d3aa',
       'builtin-schnitt-45': '4ad32ec3',
@@ -584,6 +583,48 @@ describe('mitgelieferte Uebungen', () => {
     expect(paare).toEqual([])
   })
 
+  it('legt dieselbe Uebung nicht zweimal mit anderem Regler an', () => {
+    // Der zweite Fall nach dem Spiegelbild: gleicher Objektball, gleiche
+    // Tasche, gleicher Schnittwinkel - und der Unterschied steckt nur in
+    // einer Schraube, an der man auch am Tisch drehen kann. "Durch die enge
+    // Luecke" war "Durch die Luecke" mit zwei Stoerbaellen dichter
+    // beieinander (0.18.2); in der Sammlung standen beide nebeneinander und
+    // sahen gleich aus.
+    //
+    // Solche Abstufungen gehoeren in den Hinweis: "Klappt das sicher, stell
+    // die Stoerbaelle enger." Dort kosten sie keinen Platz in der Sammlung
+    // und niemand muss zwei fast gleiche Diagramme auseinanderhalten.
+    //
+    // Der Abstand des Weissen zaehlt ausdruecklich nicht als Unterschied -
+    // er ist die Schraube selbst.
+    //
+    // Was dagegen zaehlt: wie viele Baelle auf dem Tisch liegen und welche
+    // Zielzone gilt. "Stop-Shot kurz" und "Durch die Luecke" haben denselben
+    // Objektball auf dem Fusspunkt und dieselbe Tasche, sind aber zwei
+    // Uebungen - der eine hat zwei Stoerbaelle im Weg, der andere eine Zone,
+    // in der der Weisse liegen bleiben soll. Ohne diese zwei Bedingungen
+    // wuerde der Test sie faelschlich anklagen.
+    const zoneGleich = (a: Shot, b: Shot) => {
+      const [za, zb] = [a.scoring.targetZone, b.scoring.targetZone]
+      if (!za || !zb) return za === zb
+      return distance(za, zb) < 0.01 && za.r === zb.r
+    }
+
+    const paare: string[] = []
+    for (let i = 0; i < shots.length; i++) {
+      for (let j = i + 1; j < shots.length; j++) {
+        const [a, b] = [shots[i], shots[j]]
+        if (a.target.pocketId !== b.target.pocketId) continue
+        if (a.attributes.cutAngle !== b.attributes.cutAngle) continue
+        if (a.balls.length !== b.balls.length) continue
+        if (distance(at(firstObject(a)), at(firstObject(b))) > 0.01) continue
+        if (!zoneGleich(a, b)) continue
+        paare.push(`${a.id} und ${b.id}`)
+      }
+    }
+    expect(paare).toEqual([])
+  })
+
   it('erinnert bei jedem Schnittball an die andere Seite', () => {
     // Der Satz ersetzt vier Uebungen (0.18.1). Faellt er bei einer weg,
     // fehlt dem Spieler dort die halbe Uebung.
@@ -635,7 +676,7 @@ describe('mitgelieferte Uebungen', () => {
     expect(seedIdsSince(SEED_VERSION).size).toBe(0)
     expect(seedIdsSince(0).size).toBe(shots.length)
     const neuMitDrei = seedIdsSince(2)
-    expect(neuMitDrei.size).toBe(15)
+    expect(neuMitDrei.size).toBe(14)
     expect([...neuMitDrei].every((id) => shots.some((s) => s.id === id))).toBe(true)
   })
 
