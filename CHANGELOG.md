@@ -21,11 +21,28 @@ unten auf der Seite **Einstellungen** sowie auf der Fehlerseite. Schema:
   dass der Browserspeicher am Host hängt und vor dem Wechsel eine Sicherung
   fällig ist.
 
+### Vollzogen am 26.11.2026
+- Der CNAME `training` → `daucoder2001.github.io` steht bei IONOS und greift
+  bei Google, Cloudflare und Quad9. Die Mail-Einträge der Subdomain hat IONOS
+  dabei abgeschaltet, wie es der DNS-Standard verlangt — ein CNAME verträgt
+  keine weiteren Einträge am selben Namen. Die Mail von `cuedesk.de` hat eigene
+  MX-Einträge und ist nicht betroffen; bei `app.cuedesk.de` war es dieselbe
+  Umstellung.
+- Die Domain ist bei GitHub eingetragen, als verifiziert geführt, das
+  Zertifikat ist ausgestellt (gültig bis 24.02.2027), HTTPS wird erzwungen.
+- **Die App läuft unter `https://training.cuedesk.de`** und meldet dort 0.14.2.
+
 ### Noch offen
-- Der DNS-Eintrag bei IONOS fehlt: `training.cuedesk.de` zeigt heute auf
-  217.160.0.185, den Webspace, und antwortet von dort mit HTTP 200. Nötig ist
-  ein CNAME auf `daucoder2001.github.io`, so wie ihn `app.cuedesk.de` schon
-  hat. Erst danach darf diese Fassung ins Netz.
+- `http://training.cuedesk.de` (ohne S) antwortet noch mit einem nackten
+  nginx-404, statt auf HTTPS umzuleiten; die Zuordnung des HTTP-Ports ist bei
+  GitHub offenbar noch nicht durchgelaufen. Über HTTPS ist alles da, und wer
+  die Adresse ohne Protokoll eintippt, landet über HSTS ohnehin dort. Nach
+  einiger Zeit noch einmal prüfen.
+- Die alte Adresse liefert serverseitig eine Umleitung (301), zeigt in einem
+  Browser aber weiter die App — das ist der Offline-Vorrat des Service
+  Workers, nicht der Server. Wer dort Daten hat, zieht sie über
+  **Einstellungen → Sicherung speichern** und spielt sie unter der neuen
+  Adresse wieder ein.
 
 ## 0.14.1 – 26.11.2026
 

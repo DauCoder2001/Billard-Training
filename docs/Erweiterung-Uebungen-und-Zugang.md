@@ -295,10 +295,18 @@ neue um; die alten Daten liegen dann noch im Browser, aber keine erreichbare
 Seite kann sie mehr lesen. Je später der Umzug, desto mehr Trainingsdaten
 betrifft das.
 
-Heute: `https://daucoder2001.github.io/Billard-Training/`
-Ziel: `https://training.cuedesk.de`
+**Erledigt am 26.11.2026 mit 0.14.2.** Die App läuft unter
+`https://training.cuedesk.de`. Der CNAME steht bei IONOS und greift bei
+Google, Cloudflare und Quad9, die Domain ist bei GitHub als verifiziert
+geführt, das Zertifikat ist ausgestellt (bis 24.02.2027) und HTTPS wird
+erzwungen. Offen bleibt nur, dass `http://` (ohne S) noch mit einem nackten
+nginx-404 antwortet statt umzuleiten — die HTTP-Zuordnung bei GitHub ist noch
+nicht durchgelaufen.
 
-### 6.1 Was zu tun ist
+Von: `https://daucoder2001.github.io/Billard-Training/`
+Nach: `https://training.cuedesk.de`
+
+### 6.1 Was zu tun war
 
 | Schritt | Wo | Bemerkung |
 |---|---|---|
@@ -444,8 +452,8 @@ ausgelieferte Fassung mit Eintrag im CHANGELOG.
 
 | Version | Schritt | Abhängig von |
 |---|---|---|
-| 0.14.1 | Oberfläche auf **Übung** umbenennen (E5), Notiz zu den Begriffen nachziehen | — |
-| 0.14.2 | **Umzug auf `training.cuedesk.de`** (6.) — je früher, desto weniger Daten betroffen | DNS bei IONOS |
+| 0.14.1 ✓ | Oberfläche auf **Übung** umbenennen (E5), Notiz zu den Begriffen nachziehen | — |
+| 0.14.2 ✓ | **Umzug auf `training.cuedesk.de`** (6.) — erledigt am 26.11.2026 | DNS bei IONOS |
 | 0.15.0 | Feld `level`, Filter und Sortierung in der Sammlung, die 25 eingeordnet, `SEED_VERSION` 3 | — |
 | 0.16.0 | Machbarkeitsprüfung im Baukasten (5.1) | — |
 | 0.17.0 | Reihen-Generator im Baukasten: eine Folge aus einem Muster (Schnitt 10° bis 60° in Schritten) | 0.16.0 |
