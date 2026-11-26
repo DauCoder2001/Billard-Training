@@ -6,6 +6,27 @@ Die Versionsnummer steht an genau einer Stelle — in `package.json` — und ers
 unten auf der Seite **Einstellungen** sowie auf der Fehlerseite. Schema:
 `Hauptversion.Funktion.Korrektur`.
 
+## 0.14.2 – 26.11.2026
+
+### Hinzugefügt
+- **`public/CNAME` für die eigene Adresse `training.cuedesk.de`.** Vite kopiert
+  die Datei nach `dist/`, damit sie im Pages-Artifact liegt und jede
+  Veröffentlichung übersteht. Am Programm ändert sich nichts: `base: './'`
+  erzeugt relative Pfade, die App läuft unter jeder Adresse und in jedem
+  Unterverzeichnis.
+- Die README erklärt den Wechsel der Adresse: **zuerst der DNS-Eintrag, dann
+  diese Datei.** Ist die Domain bei GitHub eingetragen, leitet Pages die
+  `github.io`-Adresse auch dann schon dorthin um, wenn der DNS noch nicht
+  zeigt – die App wäre dann vorübergehend nicht erreichbar. Dazu der Hinweis,
+  dass der Browserspeicher am Host hängt und vor dem Wechsel eine Sicherung
+  fällig ist.
+
+### Noch offen
+- Der DNS-Eintrag bei IONOS fehlt: `training.cuedesk.de` zeigt heute auf
+  217.160.0.185, den Webspace, und antwortet von dort mit HTTP 200. Nötig ist
+  ein CNAME auf `daucoder2001.github.io`, so wie ihn `app.cuedesk.de` schon
+  hat. Erst danach darf diese Fassung ins Netz.
+
 ## 0.14.1 – 26.11.2026
 
 ### Geändert

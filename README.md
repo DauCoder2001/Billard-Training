@@ -137,6 +137,19 @@ Die App nutzt relative Pfade und einen Hash-Router und läuft daher auch unter
 einem Unterpfad wie `https://<name>.github.io/Billard-Training/`. Da Pages
 über HTTPS ausliefert, greift dort auch der Offline-Modus.
 
+**Eigene Adresse.** `public/CNAME` nennt die Domain, unter der die App laufen
+soll; Vite kopiert die Datei nach `dist/`, damit sie jede Veröffentlichung
+übersteht. Damit das greift, muss die Domain bei GitHub als Custom domain
+eingetragen sein **und** per DNS auf `<name>.github.io` zeigen. Fehlt der
+DNS-Eintrag, leitet Pages die `github.io`-Adresse trotzdem schon auf die neue
+Domain um — dann ist die App vorübergehend nicht erreichbar. Deshalb immer
+zuerst den DNS-Eintrag setzen, dann die Datei ausliefern.
+
+Zu beachten beim Wechsel der Adresse: Der Browserspeicher (IndexedDB) hängt am
+Host, nicht am Pfad. Unter einer neuen Domain fängt die App mit leerem Speicher
+an. Vorher **Einstellungen → Sicherung speichern**, danach unter der neuen Adresse
+**Sicherung einspielen**.
+
 ### Anderswo ausliefern
 
 `npm run build` erzeugt in `dist/` reine statische Dateien. Die App nutzt
