@@ -99,6 +99,19 @@ function kickPosition(
   }
 }
 
+/**
+ * Der Hinweis, der eine zweite Uebung erspart.
+ *
+ * Ein Schnittball nach links ist derselbe Schnittball, an der Mittellinie
+ * gespiegelt. Als eigene Uebung blaeht er die Sammlung auf, ohne etwas
+ * Neues zu zeigen - das Bild im Diagramm ist gespiegelt, die Aufgabe ist
+ * dieselbe. Ein Satz im Hinweis sagt dasselbe und kostet keinen Platz in
+ * der Sammlung.
+ */
+export const ANDERE_SEITE =
+  'Die Übung auch spiegelverkehrt aufbauen und von der anderen Seite spielen – ' +
+  'fast jeder trifft eine Richtung besser als die andere, und das merkt man erst im Vergleich.'
+
 export interface DrillSpec {
   slug: string
   /** Lernstufe. Pflicht, damit keine neue Uebung ohne Einstufung durchrutscht. */

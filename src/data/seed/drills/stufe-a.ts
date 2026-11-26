@@ -7,6 +7,7 @@
  * Training sein (Konzept 3.2).
  */
 
+import { ANDERE_SEITE } from './build'
 import type { DrillSpec } from './build'
 
 export const STUFE_A: DrillSpec[] = [
@@ -75,7 +76,8 @@ export const STUFE_A: DrillSpec[] = [
     shotType: 'cut',
     difficulty: 3,
     speed: 5,
-    coachNotes: 'Den Geisterball vor dem Objektball sehen, nicht den Objektball selbst anvisieren.',
+    coachNotes: 'Den Geisterball vor dem Objektball sehen, nicht den Objektball selbst anvisieren. ' +
+      ANDERE_SEITE,
   },
   {
     slug: 'schnitt-30',
@@ -92,7 +94,8 @@ export const STUFE_A: DrillSpec[] = [
     difficulty: 4,
     speed: 5,
     coachNotes:
-      'Bei Stun läuft der Weiße exakt 90 Grad zur Laufrichtung des Objektballs. Das ist die wichtigste Linie im Positionsspiel.',
+      'Bei Stun läuft der Weiße exakt 90 Grad zur Laufrichtung des Objektballs. Das ist die wichtigste Linie im Positionsspiel. ' +
+      ANDERE_SEITE,
   },
   {
     slug: 'mitteltasche-gerade',
@@ -286,12 +289,10 @@ export const STUFE_A: DrillSpec[] = [
     slug: 'schnitt-10-rechts',
     level: 'A',
     since: 3,
-    name: 'Schnittball 10 Grad nach rechts',
+    name: 'Schnittball 10 Grad',
     description: 'Der kleinste Anschnitt. Fast gerade – und doch nicht gerade.',
-    // Nach rechts heisst: aus dem Blick hinter dem Weissen laeuft der
-    // Objektball nach rechts weg. Am Tisch ist das side = 1 - nachgemessen
-    // am Kreuzprodukt von Anlauf- und Laufrichtung, nicht angenommen; ein
-    // Test haelt es fest.
+    // Der Slug traegt noch die Seite: er ist die Kennung der Uebung auf den
+    // Geraeten und wird nicht umbenannt, nur weil der Name sich aendert.
     object: { x: 74, y: 28 },
     pocket: 'br',
     cut: 10,
@@ -303,36 +304,14 @@ export const STUFE_A: DrillSpec[] = [
     difficulty: 2,
     speed: 5,
     coachNotes:
-      'Den Geisterball vor dem Objektball sehen, nicht den Objektball selbst. Bei 10 Grad liegt er noch fast dahinter.',
-  },
-  {
-    slug: 'schnitt-10-links',
-    level: 'A',
-    since: 3,
-    name: 'Schnittball 10 Grad nach links',
-    description: 'Derselbe kleine Anschnitt zur anderen Seite.',
-    // Das Spiegelbild der Uebung davor: der Tisch an der Mittellinie
-    // gespiegelt macht aus y 28 die 22 und aus der Ecke unten rechts die
-    // oben rechts. Nur so bleibt der Weisse frei - mit derselben Tasche
-    // laege er bei side = -1 in der oberen Langbande.
-    object: { x: 74, y: 22 },
-    pocket: 'tr',
-    cut: 10,
-    dist: 22,
-    side: -1,
-    zone: null,
-    skills: ['cut'],
-    shotType: 'cut',
-    difficulty: 2,
-    speed: 5,
-    coachNotes:
-      'Beide Seiten üben: fast jeder trifft eine Richtung besser als die andere, und das merkt man erst im Vergleich.',
+      'Den Geisterball vor dem Objektball sehen, nicht den Objektball selbst. Bei 10 Grad liegt er noch fast dahinter. ' +
+      ANDERE_SEITE,
   },
   {
     slug: 'schnitt-20-rechts',
     level: 'A',
     since: 3,
-    name: 'Schnittball 20 Grad nach rechts',
+    name: 'Schnittball 20 Grad',
     description: 'Ein Viertel Ball weniger. Der Objektball läuft deutlich zur Seite.',
     object: { x: 72, y: 26 },
     pocket: 'br',
@@ -345,65 +324,8 @@ export const STUFE_A: DrillSpec[] = [
     difficulty: 3,
     speed: 5,
     coachNotes:
-      'Je dünner der Anschnitt, desto weiter wandert der Geisterball zur Seite. Vom Ziel aus denken, nicht vom Ball aus.',
-  },
-  {
-    slug: 'schnitt-20-links',
-    level: 'A',
-    since: 3,
-    name: 'Schnittball 20 Grad nach links',
-    description: 'Derselbe Anschnitt zur anderen Seite.',
-    object: { x: 72, y: 24 },
-    pocket: 'tr',
-    cut: 20,
-    dist: 24,
-    side: -1,
-    zone: null,
-    skills: ['cut'],
-    shotType: 'cut',
-    difficulty: 3,
-    speed: 5,
-    coachNotes:
-      'Die Brücke wechselt mit der Seite. Wer die Hand stehen lässt und nur den Körper dreht, zieht den Stoß quer.',
-  },
-  {
-    slug: 'schnitt-15-links',
-    level: 'A',
-    since: 3,
-    name: 'Schnittball 15 Grad nach links',
-    description:
-      '„Schnittball 15 Grad“ an der Mittellinie gespiegelt: derselbe Winkel, andere Seite.',
-    object: { x: 72, y: 20 },
-    pocket: 'tr',
-    cut: 15,
-    dist: 26,
-    side: -1,
-    zone: null,
-    skills: ['cut'],
-    shotType: 'cut',
-    difficulty: 3,
-    speed: 5,
-    coachNotes:
-      'Gleicher Winkel, anderes Bild: dieselbe Übung von der anderen Seite fühlt sich fremd an, bis sie geübt ist.',
-  },
-  {
-    slug: 'schnitt-30-links',
-    level: 'A',
-    since: 3,
-    name: 'Schnittball 30 Grad nach links',
-    description: '„Schnittball 30 Grad“ gespiegelt: der halbe Ball nach der anderen Seite.',
-    object: { x: 70, y: 18 },
-    pocket: 'br',
-    cut: 30,
-    dist: 28,
-    side: -1,
-    zone: null,
-    skills: ['cut', 'stun'],
-    shotType: 'cut',
-    difficulty: 4,
-    speed: 5,
-    coachNotes:
-      'Bei 30 Grad trifft der Weiße den Objektball auf halbem Ball. Diese Lage ist die wichtigste Peilung überhaupt – nach beiden Seiten.',
+      'Je dünner der Anschnitt, desto weiter wandert der Geisterball zur Seite. Vom Ziel aus denken, nicht vom Ball aus. ' +
+      ANDERE_SEITE,
   },
   {
     slug: 'mitteltasche-weit',

@@ -22,7 +22,8 @@ import { LEVELS } from '@/domain/types'
 import type { Ball, Level, Point, Shot, TargetZone } from '@/domain/types'
 import { feasibilityHints } from '@/domain/feasibility'
 import { SEED_VERSION } from '../../bootstrap'
-import { SEED_SPECS, seedIdsSince, seedShots } from './index'
+import { ANDERE_SEITE } from './build'
+import { RETIRED_IDS, SEED_SPECS, seedIdsSince, seedShots } from './index'
 
 const R = TABLE.ballRadius
 const D = TABLE.ballDiameter
@@ -220,11 +221,13 @@ describe('mitgelieferte Uebungen', () => {
     // Masseschlaege kennt das Datenmodell noch nicht - es fehlen die
     // Stossarten und die Angabe, dass ein Ball durch die Luft fliegt.
     //
-    // Die Zahlen wachsen mit der Sammlung bis auf 25 je Stufe. Wer Uebungen
-    // hinzufuegt, zieht sie hier mit. Stufe A ist mit 0.18.0 voll.
+    // Die Zahlen wachsen mit der Sammlung. Wer Uebungen hinzufuegt, zieht
+    // sie hier mit. Die 25 je Stufe aus dem Konzept sind ein Richtwert und
+    // kein Soll: die Sammlung waechst von jetzt an Stueck fuer Stueck und
+    // nicht in einem Zug auf eine Zielzahl (Entscheidung vom 26.11.2026).
     const zahl = (l: Level) => shots.filter((s) => s.level === l).length
-    expect(LEVELS.map(zahl)).toEqual([25, 7, 12, 0])
-    expect(shots).toHaveLength(44)
+    expect(LEVELS.map(zahl)).toEqual([21, 7, 12, 0])
+    expect(shots).toHaveLength(40)
   })
 
   it('haelt die Schwierigkeit der Stufe A im vorgesehenen Band', () => {
@@ -273,8 +276,8 @@ describe('mitgelieferte Uebungen', () => {
       'builtin-stop-kurz': 'c1f19376',
       'builtin-nachlauf-mittel': 'db56b6ee',
       'builtin-rueckzieher-kurz': 'e33c910c',
-      'builtin-schnitt-15': '2bc6aecc',
-      'builtin-schnitt-30': '914bd70a',
+      'builtin-schnitt-15': '6fbecf7f',
+      'builtin-schnitt-30': '9476de53',
       'builtin-mitteltasche-gerade': '2ac4f2f2',
       'builtin-gerade-nah': '5d19df26',
       'builtin-gerade-mittel': 'e2475331',
@@ -284,27 +287,23 @@ describe('mitgelieferte Uebungen', () => {
       'builtin-nachlauf-50': 'faf1a88b',
       'builtin-rueckzieher-30': 'aa852b95',
       'builtin-rueckzieher-55': 'a8535c42',
-      'builtin-schnitt-10-rechts': 'bc664d25',
-      'builtin-schnitt-10-links': '4e698862',
-      'builtin-schnitt-20-rechts': 'e01c6578',
-      'builtin-schnitt-20-links': '98d65280',
-      'builtin-schnitt-15-links': '17303b3d',
-      'builtin-schnitt-30-links': '3d97f67e',
+      'builtin-schnitt-10-rechts': '2e99d497',
+      'builtin-schnitt-20-rechts': '77145216',
       'builtin-mitteltasche-weit': '26e79317',
       'builtin-bande-gerade': '9acba1e8',
       'builtin-luecke-breit': '58ef208f',
       'builtin-luecke-eng': '78ad9514',
       'builtin-wachsende-linie': '6096b7f8',
       'builtin-stop-lang': '9bc8d3aa',
-      'builtin-schnitt-45': '89e2593a',
+      'builtin-schnitt-45': '4ad32ec3',
       'builtin-mitteltasche-schnitt': 'ea1277d7',
       'builtin-bande-lang': 'e20a9898',
       'builtin-kombination-zwei': 'fbbdf39b',
       'builtin-bandenball-fest': 'dbac8d85',
       'builtin-position-kitchen': '0ae55ea8',
       'builtin-rueckzieher-lang': 'd93a5e0a',
-      'builtin-schnitt-60': '0d6ea302',
-      'builtin-schnitt-75': '0842916c',
+      'builtin-schnitt-60': '16d42569',
+      'builtin-schnitt-75': 'df101d79',
       'builtin-bande-kurz': '3c54092a',
       'builtin-kick-eine-bande': '0281cc66',
       'builtin-karambolage': 'a3d68b04',
@@ -549,33 +548,58 @@ describe('mitgelieferte Uebungen', () => {
     expect(zuweit).toEqual([])
   })
 
-  it('nennt die Schnittrichtung so, wie die Baelle liegen', () => {
-    // "nach links" im Namen ist eine Ansage an den Spieler, der hinter dem
-    // Weissen steht. Nachgerechnet wird sie am Kreuzprodukt von Anlauf- und
-    // Laufrichtung: ist der Lauf des Objektballs gegen den Uhrzeigersinn
-    // gedreht, geht er aus dieser Sicht nach links.
-    const falsch: string[] = []
-    for (const shot of shots) {
-      const gesagt = /nach links/.test(shot.name)
-        ? 'links'
-        : /nach rechts/.test(shot.name)
-          ? 'rechts'
-          : null
-      if (!gesagt) continue
+  it('legt keine Uebung als Spiegelbild einer anderen an', () => {
+    // Ein Schnittball nach links ist derselbe Schnittball, an der
+    // Mittellinie gespiegelt: gleiche Stoßart, gleicher Winkel, gleiche
+    // Schwierigkeit, gespiegelte Lage. Als eigene Uebung blaeht er die
+    // Sammlung auf, ohne etwas Neues zu zeigen - dafuer steht der Satz
+    // ANDERE_SEITE im Hinweis.
+    //
+    // Gesucht wird das Spiegelpaar an den Zahlen, nicht am Namen: zwei
+    // Uebungen, deren Objektbaelle, Weisse und Zielzonen an y = 25
+    // aufeinander fallen.
+    //
+    // Die Zielzone gehoert dazu, und das ist keine Feinheit: "Seiteneffet
+    // links" und "Seiteneffet rechts" stehen gespiegelt, verlangen aber
+    // Verschiedenes - einmal soll der Weisse verlaengert, einmal kurz
+    // gehalten werden. Gleiche Lage, andere Aufgabe: zwei Uebungen. Ohne
+    // die Zone im Vergleich wuerde dieser Test sie faelschlich anklagen.
+    const spiegel = (p: Point, q: Point) =>
+      Math.abs(p.x - q.x) < 0.01 && Math.abs(p.y - (TABLE.width - q.y)) < 0.01
 
-      const objekt = at(firstObject(shot))
-      const ziel = objectAim(shot)
-      const ghost = ghostBall(objekt, ziel)
-      const von = cueApproachFrom(shot)
-      const anlauf = { x: ghost.x - von.x, y: ghost.y - von.y }
-      const lauf = { x: ziel.x - objekt.x, y: ziel.y - objekt.y }
-      const kreuz = anlauf.x * lauf.y - anlauf.y * lauf.x
-      const gemessen = kreuz > 0 ? 'links' : 'rechts'
-      if (gemessen !== gesagt) falsch.push(`${shot.id}: heisst ${gesagt}, liegt ${gemessen}`)
+    const paare: string[] = []
+    for (let i = 0; i < shots.length; i++) {
+      for (let j = i + 1; j < shots.length; j++) {
+        const [a, b] = [shots[i], shots[j]]
+        if (a.attributes.cutAngle !== b.attributes.cutAngle) continue
+        if (!spiegel(at(firstObject(a)), at(firstObject(b)))) continue
+        if (!spiegel(at(cueOf(a)), at(cueOf(b)))) continue
+
+        const za = a.scoring.targetZone
+        const zb = b.scoring.targetZone
+        const zonenGleich = za && zb ? spiegel(za, zb) : za === zb
+        if (zonenGleich) paare.push(`${a.id} und ${b.id}`)
+      }
     }
-    expect(falsch).toEqual([])
-    // Ohne beschriftete Uebung wuerde der Test nichts aussagen.
-    expect(shots.filter((s) => /nach (links|rechts)/.test(s.name)).length).toBeGreaterThan(0)
+    expect(paare).toEqual([])
+  })
+
+  it('erinnert bei jedem Schnittball an die andere Seite', () => {
+    // Der Satz ersetzt vier Uebungen (0.18.1). Faellt er bei einer weg,
+    // fehlt dem Spieler dort die halbe Uebung.
+    const ohne = shots.filter(
+      (s) => /^Schnittball \d+ Grad$/.test(s.name) && !s.coachNotes.includes(ANDERE_SEITE),
+    )
+    expect(ohne.map((s) => s.id)).toEqual([])
+    expect(shots.filter((s) => s.coachNotes.includes(ANDERE_SEITE)).length).toBe(7)
+  })
+
+  it('liefert keine Uebung, die zurueckgezogen wurde', () => {
+    // Sonst kaeme sie beim Einspielen wieder herein, waehrend die Migration
+    // sie wegraeumt - und der Nutzer saehe sie bei jedem Start einmal
+    // aufblitzen.
+    const doppelt = Object.keys(RETIRED_IDS).filter((id) => shots.some((s) => s.id === id))
+    expect(doppelt).toEqual([])
   })
 
   it('laesst den Weissen durch jede Luecke passen', () => {
@@ -611,7 +635,7 @@ describe('mitgelieferte Uebungen', () => {
     expect(seedIdsSince(SEED_VERSION).size).toBe(0)
     expect(seedIdsSince(0).size).toBe(shots.length)
     const neuMitDrei = seedIdsSince(2)
-    expect(neuMitDrei.size).toBe(19)
+    expect(neuMitDrei.size).toBe(15)
     expect([...neuMitDrei].every((id) => shots.some((s) => s.id === id))).toBe(true)
   })
 

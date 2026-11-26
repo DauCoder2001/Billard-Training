@@ -5,6 +5,7 @@
  * nichts faellt (Konzept 3.4).
  */
 
+import { ANDERE_SEITE } from './build'
 import type { DrillSpec } from './build'
 
 export const STUFE_C: DrillSpec[] = [
@@ -41,7 +42,8 @@ export const STUFE_C: DrillSpec[] = [
     shotType: 'cut',
     difficulty: 7,
     speed: 6,
-    coachNotes: 'Bei dünnen Bällen zählt der Zielpunkt, nicht die Kraft. Ruhig bleiben.',
+    coachNotes: 'Bei dünnen Bällen zählt der Zielpunkt, nicht die Kraft. Ruhig bleiben. ' +
+      ANDERE_SEITE,
   },
   {
     slug: 'schnitt-75',
@@ -57,7 +59,8 @@ export const STUFE_C: DrillSpec[] = [
     shotType: 'cut',
     difficulty: 9,
     speed: 7,
-    coachNotes: 'Nur das Einlochen zählt. Ein Hauch zu voll und der Ball bleibt an der Bande liegen.',
+    coachNotes: 'Nur das Einlochen zählt. Ein Hauch zu voll und der Ball bleibt an der Bande liegen. ' +
+      ANDERE_SEITE,
   },
   {
     slug: 'bande-kurz',

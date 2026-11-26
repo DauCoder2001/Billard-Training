@@ -51,6 +51,28 @@ export function seedShotById(id: string): Shot | undefined {
 }
 
 /**
+ * Uebungen, die es einmal gab und die nicht mehr mitgeliefert werden.
+ *
+ * Eine Uebung aus der Sammlung zu nehmen genuegt nicht: wer sie schon
+ * eingespielt hat, behaelt sie fuer immer, denn die Einspielung schreibt nur
+ * und loescht nie. Was hier steht, wird beim naechsten Start entfernt -
+ * aber nur, solange es die unberuehrte Vorlage ist (`migrateRetired` in
+ * bootstrap.ts).
+ *
+ * Mit dem Grund, warum sie ging: die Liste ist auch eine Begruendung.
+ */
+export const RETIRED_IDS: Readonly<Record<string, string>> = {
+  // 0.18.1: Spiegelbilder ihrer Gegenstuecke. Dasselbe Bild, an der
+  // Mittellinie gespiegelt - als eigene Uebung blaehen sie die Sammlung auf,
+  // ohne etwas Neues zu zeigen. Der Satz steht jetzt im Hinweis des
+  // Originals (ANDERE_SEITE in build.ts).
+  'builtin-schnitt-10-links': 'Spiegelbild von Schnittball 10 Grad (0.18.1)',
+  'builtin-schnitt-20-links': 'Spiegelbild von Schnittball 20 Grad (0.18.1)',
+  'builtin-schnitt-15-links': 'Spiegelbild von Schnittball 15 Grad (0.18.1)',
+  'builtin-schnitt-30-links': 'Spiegelbild von Schnittball 30 Grad (0.18.1)',
+}
+
+/**
  * Die Uebungen, die nach `version` dazugekommen sind.
  *
  * Das Gegenstueck zur Regel "ein geloeschter Stoss bleibt geloescht": wer

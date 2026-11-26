@@ -48,7 +48,7 @@ Stop-Shot (Schwierigkeit 2).
 | E3 | Womit fangen wir an? | **Erst Sammlung und Stufen.** Läuft ohne Server, ohne CueDesk-Produktion, bringt sofort Nutzen. Konto, Trainer und CueDesk-Button danach. |
 | E4 | Wie wird Machbarkeit geprüft? | **Beides.** Der Baukasten warnt sofort bei geometrisch Unmöglichem; die 100 mitgelieferten Übungen werden einmalig außerhalb der App mit pooltool nachgerechnet. |
 | E5 | Übung oder Stoß? | **Übung** für den Aufbau in der Sammlung — in der Oberfläche und hier. Das dreht die Festlegung vom 28.10.2026 um; Begründung in 2.2. |
-| E6 | Wie viele Übungen? | **Vier Stufen à 25, zusammen 100.** Die heutigen 25 stecken darin. Die Zahl 25 ist ein Richtwert, kein Lehrplan: braucht C dreißig und A zwanzig, ist das kein Fehler. |
+| E6 | Wie viele Übungen? | **Vier Stufen à 25, zusammen 100.** Die heutigen 25 stecken darin. Die Zahl 25 ist ein Richtwert, kein Lehrplan: braucht C dreißig und A zwanzig, ist das kein Fehler. **Nachgezogen am 26.11.2026 (0.18.1):** Die Stufen werden *nicht* in einem Zug auf 25 aufgefüllt. Stufe A hat gezeigt, warum — um auf die Zahl zu kommen, entstehen Übungen, die nichts Neues zeigen (siehe 3.2). Die Sammlung wächst von hier an Stück für Stück, und jede neue Übung muss sich damit rechtfertigen, dass sie etwas übt, das keine andere übt. |
 
 ### 2.1 Ein Feld genügt
 
@@ -140,18 +140,32 @@ Stellen nachgezogen; was gemessen wurde, steht dahinter.
 | Stop-Shot, zwei Entfernungen (2) | `stop-nah` (9"), `stop-mittel` (32") | — |
 | Nachlauf 20 und 80 cm (2) | `nachlauf-20`, `nachlauf-50` | **80 → 50 cm.** „Nachlauf mittel" schickt den Weißen gemessene 73 cm weiter; 80 cm wäre fast dieselbe Übung. So entsteht die Folge 20 / 50 / 73 cm. |
 | Rückzieher 40 und 80 cm (2) | `rueckzieher-30`, `rueckzieher-55` | **40/80 → 30/55 cm.** „Rückzieher kurz" holt den Weißen gemessene 77 cm zurück. Folge: 30 / 55 / 77 cm. |
-| Schnitt 10°, 20° links und rechts (4) | `schnitt-10-links/-rechts`, `schnitt-20-links/-rechts` | — |
-| Schnitt 15° und 30° andere Seite (2) | `schnitt-15-links`, `schnitt-30-links` | Als echte Spiegelung an der Mittellinie gebaut (Ecke unten rechts → oben rechts). Nur die Seite zu drehen legte den Weißen in die obere Langbande. |
+| Schnitt 10°, 20° links und rechts (4) | `schnitt-10-rechts`, `schnitt-20-rechts` | **Nur eine Seite je Winkel** (0.18.1, siehe unten). |
+| Schnitt 15° und 30° andere Seite (2) | — | **Gestrichen** (0.18.1, siehe unten). |
 | Mitteltasche, zweite Entfernung (1) | `mitteltasche-weit` | — |
 | Ball an der Bande, gerade (1) | `bande-gerade` | **Dicht, nicht fest.** Die Mündung der Ecktasche liegt 1,6" von der Bande weg, darum zeigt die Anspiellinie eines festliegenden Balles in die Bande hinein — für den Weißen bliebe dort kein Platz. Der Objektball liegt 2,5" von der Bande. |
 | Durch die Lücke (2) | `luecke-breit`, `luecke-eng` | Lücke zwischen den Ballkanten gemessen: 4,15" und 3,15" bei 2,25" Balldurchmesser. |
 | Wachsende Linie (1) | `wachsende-linie` | Als kürzester Stand gespeichert; das Wachsen steht in den Trainerhinweisen (siehe 12, „Progressive Übungen"). |
 
-**Offen geblieben:** Die vorhandenen Schnittbälle (15°, 30° in A, 45°, 60°,
-75° in B und C) sind alle Schnitte **nach rechts**, tragen die Richtung aber
-nicht im Namen — die neuen tun es. Das anzugleichen heißt, Vorlagen
-umzubenennen und damit Fingerabdrücke zu ändern; es gehört in die
-Überarbeitung der Sammlung, nicht in eine Auslieferung, die nur erweitert.
+### 3.2.1 Nachgezogen mit 0.18.1: keine Spiegelbilder
+
+Die vier Übungen „nach links" sind wieder raus. Sie waren ihre Gegenstücke an
+der Mittellinie gespiegelt — dasselbe Bild, dieselbe Aufgabe, nur
+seitenverkehrt. In der Sammlung standen sie nebeneinander und sahen aus wie
+ein Versehen.
+
+**Die Regel, die daraus folgt:** Eine Übung muss etwas üben, das keine andere
+übt. Die andere Seite ist kein eigener Inhalt, sondern ein Hinweis — der Satz
+`ANDERE_SEITE` steht jetzt bei jedem Schnittball.
+
+Damit ist auch der Namenswiderspruch weg: alle Schnittbälle heißen wieder
+„Schnittball *n* Grad", ohne Richtung.
+
+**Wo die Grenze liegt:** „Seiteneffet links" und „Seiteneffet rechts" in
+Stufe C stehen ebenfalls gespiegelt und bleiben trotzdem zwei Übungen — ihre
+Zielzonen sind verschieden, einmal soll der Weiße verlängert, einmal kurz
+gehalten werden. Gleiche Lage, andere Aufgabe. Der Test, der Spiegelpaare
+sucht, prüft deshalb die Zielzone mit.
 
 ### 3.3 Stufe B — Kontrolle des Weißen (7 heute + 18 neu)
 
@@ -475,17 +489,23 @@ ausgelieferte Fassung mit Eintrag im CHANGELOG.
 | 0.15.0 ✓ | Feld `level`, Filter und Sortierung in der Sammlung, Stufe im Baukasten, die 25 eingeordnet (6/7/12/0) — erledigt am 26.11.2026 | — |
 | 0.16.0 ✓ | Machbarkeitsprüfung im Baukasten (5.1) — erledigt am 26.11.2026 | — |
 | 0.17.0 ✓ | Reihen-Generator im Baukasten: eine Folge aus einem Muster (Schnittwinkel oder Abstand des Weißen), Anspiel-Rechnung nach `domain/aim.ts` — erledigt am 26.11.2026 | 0.16.0 |
-| 0.18.0 ✓ | Stufe A vollständig, 19 neue Übungen — erledigt am 26.11.2026 | 0.15.0, 0.17.0 |
-| 0.19.0 | Stufe B vollständig, 18 neue | 0.18.0 |
-| 0.20.0 | Stufe C vollständig, 13 neue mit Banden-Systemen und Safes | 0.19.0 |
-| 0.21.0 | Modell für Spezialtechniken (3.6), dann Stufe D, 25 neue | 0.20.0 |
-| 0.22.0 | Stufenprüfungen und vier neue Erfolge (4.) | 0.21.0 |
-| 0.23.0 | Nachrechnung mit pooltool, Korrekturen an Zonen und Schwierigkeiten (5.2) | 0.22.0 |
-| **1.0.0** | 100 Übungen, vier Stufen, vier Prüfungen, nachgerechnet, eigene Adresse | 0.23.0 |
+| 0.18.0 ✓ | Stufe A auf 25 Übungen, 19 neue — erledigt am 26.11.2026 | 0.15.0, 0.17.0 |
+| 0.18.1 ✓ | Vier Spiegel-Übungen zurückgenommen, Hinweis statt eigener Übung; Stufe A hat 21 — erledigt am 26.11.2026 | 0.18.0 |
+| — | **Die Stufen B, C und D füllt Matthias Stück für Stück selbst.** Keine Auslieferung, die eine Stufe in einem Zug auf eine Zielzahl bringt (E6, 3.2.1). | — |
+| 0.19.0 | Modell für Spezialtechniken (3.6): `jump` und `masse` als Stoßart und Fähigkeit, `air` am Wegsegment — die Voraussetzung dafür, dass Stufe D überhaupt gebaut werden *kann* | — |
+| 0.20.0 | Stufenprüfungen und vier neue Erfolge (4.) | 0.19.0 |
+| 0.21.0 | Nachrechnung mit pooltool, Korrekturen an Zonen und Schwierigkeiten (5.2) | 0.20.0 |
+| **1.0.0** | Vier Stufen mit tragfähigem Umfang, vier Prüfungen, nachgerechnet, eigene Adresse | 0.21.0 |
 
-Der Sprung auf 1.0.0 ist hier begründet: Die Sammlung ist vollständig, die
-Übungen sind belegt, die App hat ihre Adresse und kann allein stehen. Alles
-Weitere hängt am Server.
+**Umgestellt am 26.11.2026.** Vorher stand hier eine Zeile je Stufe, die sie
+auf 25 Übungen bringen sollte. Stufe A hat gezeigt, wohin das führt: um auf
+die Zahl zu kommen, entstehen Übungen, die nichts Neues zeigen. Die Sammlung
+wächst deshalb einzeln und nach Bedarf; die Auslieferungen hier sind die
+Arbeiten, die **nicht** aus einzelnen Übungen bestehen.
+
+Der Sprung auf 1.0.0 ist hier begründet: Die Sammlung trägt, die Übungen sind
+belegt, die App hat ihre Adresse und kann allein stehen. Alles Weitere hängt
+am Server.
 
 ### Teil 2 — Konto, Verein, Trainer
 
@@ -503,7 +523,8 @@ Weitere hängt am Server.
 ## 12. Noch offen
 
 - **Coach und Stufe D:** `weakestSkills` zählt nie Geübtes als 0 und würde
-  Massé jedem Anfänger vorschlagen (3.6). Zu lösen vor 0.21.0.
+  Massé jedem Anfänger vorschlagen (3.6). Zu lösen, sobald es Übungen der
+  Stufe D gibt.
 - **Progressive Übungen:** „Objektball rückt bei jedem Treffer weiter weg"
   (Stufe A) lässt sich mit dem heutigen Modell nur als mehrere Übungen bauen.
   Eine echte progressive Übung bräuchte ein neues Element. Zurückgestellt —
@@ -511,6 +532,7 @@ Weitere hängt am Server.
 - **Trickshots und die Bewertung:** Ein Trickshot hat keine sinnvolle Zielzone
   und keine Trefferquote von 60 %. Vielleicht gehören sie gar nicht ins
   Training, sondern in eine eigene Ecke „Zum Spaß", ohne Einfluss auf das
-  Profil. Vor 0.21.0 entscheiden.
-- **Zahl je Stufe:** 25 ist ein Richtwert (E6). Die genaue Aufteilung ergibt
-  sich daraus, welche Übungen sinnvoll sind — nicht umgekehrt.
+  Profil. Vor 0.19.0 entscheiden.
+- **Zahl je Stufe:** 25 ist ein Richtwert (E6), und seit 0.18.1 kein Ziel
+  mehr, auf das hin gearbeitet wird. Die Aufteilung ergibt sich daraus,
+  welche Übungen sinnvoll sind — nicht umgekehrt.

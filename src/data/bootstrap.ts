@@ -1,7 +1,7 @@
 /** Erstbefuellung beim ersten Start. */
 
 import { db } from './db'
-import { seedIdsSince, seedShots } from './seed/drills'
+import { RETIRED_IDS, seedIdsSince, seedShots } from './seed/drills'
 import { PLAYER_COLORS } from './repositories/players'
 import { DEFAULT_SETTINGS, getSettings, updateSettings } from './repositories/settings'
 import { newId } from '@/domain/shot'
@@ -19,8 +19,12 @@ import { transliterate } from '@/domain/text'
  * 3: Stufe A vollstaendig - 19 neue Uebungen. Die erste Auslieferung, die
  *    die Sammlung erweitert statt sie zu korrigieren; dafuer braucht die
  *    Regel beim Einspielen die Angabe `since` (siehe seedUpdates).
+ * 4: Vier Spiegel-Uebungen zurueckgezogen (RETIRED_IDS), dafuer der Hinweis
+ *    auf die andere Seite bei jedem Schnittball. Die Erhoehung gilt dem
+ *    Hinweis: ein geaenderter Text erreicht ein Geraet nur so. Das Wegraeumen
+ *    laeuft ueber eine eigene Regel und braucht sie nicht.
  */
-export const SEED_VERSION = 3
+export const SEED_VERSION = 4
 
 let running: Promise<void> | null = null
 
@@ -84,6 +88,41 @@ async function run(): Promise<void> {
   await migrateDrillTexts()
   await migrateSeedStamps()
   await migrateLevels()
+  await migrateRetired()
+}
+
+/**
+ * Raeumt Uebungen weg, die nicht mehr mitgeliefert werden.
+ *
+ * Das Gegenstueck zum Einspielen: das schreibt nur und loescht nie, also
+ * bliebe eine zurueckgezogene Vorlage fuer immer auf dem Geraet stehen - auf
+ * dem des Nutzers, nicht in der Sammlung, und niemand koennte sich erklaeren,
+ * woher sie kommt.
+ *
+ * Weggeraeumt wird nur die unberuehrte Vorlage. Wer eine solche Uebung im
+ * Baukasten bearbeitet hat (builtIn === false), hat sie zu seiner gemacht;
+ * sie zu loeschen hiesse, fremde Arbeit wegzuwerfen, weil wir unsere Meinung
+ * geaendert haben. Dieselbe Abwaegung wie beim Einspielen.
+ *
+ * Einen Versionszaehler braucht es nicht: nach dem ersten Lauf findet die
+ * Regel nichts mehr.
+ */
+async function migrateRetired(): Promise<void> {
+  const ids = Object.keys(RETIRED_IDS)
+  const stored = await db.shots.bulkGet(ids)
+  const weg = retiredRemovals(ids, stored)
+  if (weg.length > 0) await db.shots.bulkDelete(weg)
+}
+
+/**
+ * Reine Form derselben Regel - ohne Datenbank pruefbar.
+ *
+ * @param ids Die zurueckgezogenen Kennungen.
+ * @param stored Der gespeicherte Stand zu denselben Ids, in derselben Folge.
+ * @returns Die Ids, die geloescht werden duerfen.
+ */
+export function retiredRemovals(ids: string[], stored: (Shot | undefined)[]): string[] {
+  return ids.filter((_id, i) => stored[i]?.builtIn === true)
 }
 
 /**

@@ -5,6 +5,7 @@
  * danach liegen bleibt (Konzept 3.3).
  */
 
+import { ANDERE_SEITE } from './build'
 import type { DrillSpec } from './build'
 
 export const STUFE_B: DrillSpec[] = [
@@ -41,7 +42,8 @@ export const STUFE_B: DrillSpec[] = [
     shotType: 'cut',
     difficulty: 6,
     speed: 6,
-    coachNotes: 'Mehr Tempo einplanen: der Objektball nimmt bei 45 Grad nur noch die Hälfte mit.',
+    coachNotes: 'Mehr Tempo einplanen: der Objektball nimmt bei 45 Grad nur noch die Hälfte mit. ' +
+      ANDERE_SEITE,
   },
   {
     slug: 'mitteltasche-schnitt',

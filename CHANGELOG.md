@@ -6,6 +6,47 @@ Die Versionsnummer steht an genau einer Stelle — in `package.json` — und ers
 unten auf der Seite **Einstellungen** sowie auf der Fehlerseite. Schema:
 `Hauptversion.Funktion.Korrektur`.
 
+## 0.18.1 – 26.11.2026
+
+### Entfernt
+- **Vier Spiegel-Übungen sind wieder raus.** „Schnittball 10/15/20/30 Grad
+  nach links" waren ihre Gegenstücke, an der Mittellinie gespiegelt: dasselbe
+  Bild, dieselbe Aufgabe, nur seitenverkehrt. Als eigene Einträge haben sie
+  die Sammlung aufgebläht, ohne etwas Neues zu zeigen. Stufe A hat damit 21
+  Übungen, die Sammlung 40.
+- **Ein Satz im Hinweis sagt dasselbe:** *„Die Übung auch spiegelverkehrt
+  aufbauen und von der anderen Seite spielen – fast jeder trifft eine
+  Richtung besser als die andere, und das merkt man erst im Vergleich."* Er
+  steht jetzt bei allen sieben Schnittbällen, auch bei 45, 60 und 75 Grad.
+- Die zwei verbliebenen heißen wieder **„Schnittball 10 Grad"** und
+  **„Schnittball 20 Grad"** – ohne Richtung im Namen, wie die übrigen. Damit
+  ist auch der offene Punkt aus 0.18.0 erledigt, dass ein Teil der
+  Schnittbälle beschriftet war und der andere nicht.
+
+### Behoben
+- **Eine zurückgezogene Übung verschwindet jetzt auch vom Gerät.** Das
+  Einspielen schreibt nur und löscht nie — die vier Spiegelbilder wären auf
+  jedem Gerät stehen geblieben, das sie schon bekommen hat, ohne dass sich
+  noch jemand erklären könnte, woher sie kommen. Weggeräumt wird nur die
+  unberührte Vorlage: wer eine davon im Baukasten bearbeitet hat, behält sie.
+
+### Geändert
+- **Die 25 Übungen je Stufe sind ein Richtwert, kein Soll.** Die Sammlung
+  wächst von hier an Stück für Stück und nicht mehr in einem Zug auf eine
+  Zielzahl. Der Fahrplan ist entsprechend umgeschrieben.
+
+### Technisches
+- **Die Sammlungsversion steht auf 4.** Der geänderte Hinweis erreicht ein
+  Gerät nur so — beim Nachsehen im Browser stand dort zuerst noch der alte
+  Text, obwohl der neue längst im Quelltext war. Das Wegräumen der vier
+  Spiegelbilder läuft über eine eigene Regel und braucht die Erhöhung nicht.
+- Ein Test findet Spiegelpaare an den Zahlen statt am Namen — und zwar erst
+  dann, wenn auch die **Zielzone** gespiegelt ist. Ohne diese Bedingung hätte
+  er „Seiteneffet links" und „Seiteneffet rechts" zu Unrecht angeklagt: die
+  stehen zwar gespiegelt, verlangen aber Verschiedenes, einmal den Weißen zu
+  verlängern und einmal ihn kurz zu halten.
+- 361 Tests in 28 Dateien.
+
 ## 0.18.0 – 26.11.2026
 
 ### Hinzugefügt

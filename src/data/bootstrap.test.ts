@@ -8,7 +8,7 @@
  */
 
 import { describe, expect, it } from 'vitest'
-import { levelUpdates, seedStampUpdates, seedUpdates } from './bootstrap'
+import { levelUpdates, retiredRemovals, seedStampUpdates, seedUpdates } from './bootstrap'
 import { createShot } from '@/domain/shot'
 import type { Shot } from '@/domain/types'
 
@@ -81,6 +81,32 @@ describe('seedUpdates', () => {
     const alt: Shot = { ...sammlung[0], favorite: true }
     const [update] = seedUpdates([sammlung[0]], [alt], true)
     expect(update.favorite).toBe(true)
+  })
+})
+
+/**
+ * Die Regel, die eine zurueckgezogene Uebung wegraeumt.
+ *
+ * Das Einspielen schreibt nur und loescht nie - ohne diese Regel bliebe eine
+ * Uebung, die nicht mehr mitgeliefert wird, fuer immer auf dem Geraet stehen.
+ * Die Grenze ist dieselbe wie ueberall: eigene Arbeit wiegt schwerer.
+ */
+describe('retiredRemovals', () => {
+  it('raeumt die unberuehrte Vorlage weg', () => {
+    const alt: Shot = { ...vorlage('alt', 'Spiegelbild') }
+    expect(retiredRemovals(['alt'], [alt])).toEqual(['alt'])
+  })
+
+  it('laesst eine uebernommene Fassung stehen', () => {
+    // builtIn === false heisst: der Nutzer hat sie bearbeitet, sie gehoert
+    // ihm. Sie zu loeschen, weil wir unsere Meinung geaendert haben, waere
+    // dasselbe wie fremde Arbeit wegzuwerfen.
+    const eigen: Shot = { ...vorlage('alt', 'Meine Fassung'), builtIn: false }
+    expect(retiredRemovals(['alt'], [eigen])).toEqual([])
+  })
+
+  it('kommt mit einer laengst geloeschten Uebung zurecht', () => {
+    expect(retiredRemovals(['alt'], [undefined])).toEqual([])
   })
 })
 
