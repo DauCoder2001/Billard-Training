@@ -6,6 +6,7 @@
  *  Anpassen einer Uebung nachvollziehen.
  */
 
+import { anspiellinie, cuePosition, norm, reichweite } from '@/domain/aim'
 import { seedStamp } from '@/domain/seedStamp'
 import {
   POCKET_BY_ID,
@@ -30,16 +31,6 @@ import type {
 
 type RailSide = 'top' | 'bottom' | 'left' | 'right'
 
-function rotate(d: Point, deg: number): Point {
-  const r = (deg * Math.PI) / 180
-  return { x: d.x * Math.cos(r) - d.y * Math.sin(r), y: d.x * Math.sin(r) + d.y * Math.cos(r) }
-}
-
-function norm(d: Point): Point {
-  const len = Math.hypot(d.x, d.y) || 1
-  return { x: d.x / len, y: d.y / len }
-}
-
 /** Spiegelt einen Punkt an einer Bande, fuer die Berechnung von Bandenwegen. */
 function mirrorAcross(p: Point, rail: RailSide): Point {
   switch (rail) {
@@ -52,21 +43,6 @@ function mirrorAcross(p: Point, rail: RailSide): Point {
     case 'right':
       return { x: 2 * TABLE.length - p.x, y: p.y }
   }
-}
-
-/**
- * Wie weit man von einem Punkt aus in eine Richtung gehen kann, ohne die
- * Spielflaeche zu verlassen - gemessen bis dorthin, wo der Ballmittelpunkt
- * noch einen Radius Abstand zur Bande hat.
- */
-function reichweite(from: Point, dir: Point): number {
-  const r = TABLE.ballRadius
-  let t = Number.POSITIVE_INFINITY
-  if (dir.x > 1e-9) t = Math.min(t, (TABLE.length - r - from.x) / dir.x)
-  if (dir.x < -1e-9) t = Math.min(t, (r - from.x) / dir.x)
-  if (dir.y > 1e-9) t = Math.min(t, (TABLE.width - r - from.y) / dir.y)
-  if (dir.y < -1e-9) t = Math.min(t, (r - from.y) / dir.y)
-  return Number.isFinite(t) ? Math.max(0, t) : 0
 }
 
 /** Weg bis zu einer bestimmten Bande, oder null, wenn sie nicht vorauskommt. */
@@ -85,40 +61,6 @@ function bisBande(from: Point, dir: Point, rail: RailSide): number | null {
 /** Richtung nach der Reflexion an einer Bande. */
 function spiegelRichtung(d: Point, rail: RailSide): Point {
   return rail === 'left' || rail === 'right' ? { x: -d.x, y: d.y } : { x: d.x, y: -d.y }
-}
-
-/** Anspiellinie: Richtung, aus der der Weisse auf den Geisterball zulaeuft. */
-function anspiellinie(
-  object: Point,
-  aim: Point,
-  cutDeg: number,
-  side: 1 | -1,
-): { ghost: Point; approach: Point; zurueck: Point } {
-  const ghost = ghostBall(object, aim)
-  const travel = norm({ x: object.x - ghost.x, y: object.y - ghost.y })
-  const approach = rotate(travel, side * cutDeg)
-  return { ghost, approach, zurueck: { x: -approach.x, y: -approach.y } }
-}
-
-/**
- * Lage des Weissen aus Objektball, Zielpunkt, Schnittwinkel und Abstand.
- * side = 1 legt den Weissen auf die eine, -1 auf die andere Seite der Linie.
- *
- * Reicht der gewuenschte Abstand ueber den Tisch hinaus, wird die Strecke
- * gekuerzt - nicht der Punkt an die Bande geschoben. Ein geklemmter Punkt
- * laege neben der Anspiellinie und machte aus einem geraden Ball einen
- * Schnitt: der Stoss sagte dann etwas anderes als seine Beschriftung.
- */
-function cuePosition(
-  object: Point,
-  aim: Point,
-  cutDeg: number,
-  dist: number,
-  side: 1 | -1,
-): Point {
-  const { ghost, zurueck } = anspiellinie(object, aim, cutDeg, side)
-  const weit = Math.min(dist, reichweite(ghost, zurueck))
-  return clampBall({ x: ghost.x + zurueck.x * weit, y: ghost.y + zurueck.y * weit })
 }
 
 /**

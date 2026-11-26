@@ -325,3 +325,60 @@ describe('Hinweise zum Aufbau', () => {
     expect(screen.getByText('Der Weiße und Ball 1 liegen ineinander.')).toBeTruthy()
   })
 })
+
+/**
+ * Der Reihen-Generator im Baukasten.
+ *
+ * Geprueft wird, dass der Dialog zeigt, was er anlegen wird, und dass er
+ * beim Anlegen genau das in die Sammlung schreibt. Die Rechnung dahinter
+ * steht in domain/series.test.ts.
+ */
+describe('Reihe erzeugen', () => {
+  it('zeigt die Reihe in der Vorschau, bevor etwas angelegt wird', async () => {
+    await db.shots.add(createShot({ id: 's1', name: 'Mein Schnitt' }))
+    zeige(<BuilderPage />, ORT)
+
+    await userEvent.click(await screen.findByRole('button', { name: 'Reihe erzeugen' }))
+
+    // Vier Übungen sind der Vorschlag beim Öffnen.
+    expect(await screen.findByLabelText('Anzahl Übungen: 4')).toBeTruthy()
+    expect(screen.getByRole('button', { name: '4 Übungen anlegen' })).toBeTruthy()
+    // Noch ist nichts angelegt: die eine Übung von vorhin.
+    expect(await db.shots.count()).toBe(1)
+  })
+
+  it('legt die Reihe an und fuehrt in die Sammlung', async () => {
+    await db.shots.add(createShot({ id: 's1', name: 'Mein Schnitt' }))
+    zeige(<BuilderPage />, ORT)
+
+    await userEvent.click(await screen.findByRole('button', { name: 'Reihe erzeugen' }))
+    await userEvent.click(await screen.findByRole('button', { name: '4 Übungen anlegen' }))
+
+    await waitFor(async () => expect(await db.shots.count()).toBe(5))
+    const namen = (await db.shots.toArray()).map((s) => s.name).sort()
+    expect(namen).toContain('Mein Schnitt')
+    expect(namen.filter((n) => n.startsWith('Mein Schnitt ('))).toHaveLength(4)
+  })
+
+  it('sagt beim Kick, warum es keine Reihe gibt', async () => {
+    // Ein eigener Weg fuer den Weissen wandert beim Verschieben nicht mit.
+    const basis = createShot({ id: 's1', name: 'Mein Kick' })
+    await db.shots.add({
+      ...basis,
+      paths: [
+        {
+          id: 'p',
+          ballId: basis.balls[0].id,
+          role: 'cue',
+          segments: [{ to: { x: 50, y: 0 }, rail: true }, { to: { x: 62.5, y: 25 } }],
+        },
+      ],
+    })
+    zeige(<BuilderPage />, ORT)
+
+    await userEvent.click(await screen.findByRole('button', { name: 'Reihe erzeugen' }))
+
+    expect(await screen.findByText(/Kick oder Karambolage/)).toBeTruthy()
+    expect(screen.queryByRole('button', { name: /anlegen/ })).toBeNull()
+  })
+})

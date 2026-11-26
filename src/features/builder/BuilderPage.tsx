@@ -12,11 +12,12 @@ import { deleteShot, saveShot } from '@/data/repositories/shots'
 import { castToRail } from '@/domain/geometry'
 import { applyRack, shuffleObjectBalls } from '@/domain/rack'
 import { createShot, duplicateShot, mirrorShot } from '@/domain/shot'
-import type { BallPath, Markings, Point } from '@/domain/types'
+import type { BallPath, Markings, Point, Shot } from '@/domain/types'
 import { useDialogs } from '@/ui/Dialogs'
 import { useToolFit } from '@/ui/toolFit'
 import { AttributesPanel } from './AttributesPanel'
 import { FeasibilityHints } from './FeasibilityHints'
+import { SeriesDialog } from './SeriesDialog'
 import { BuilderCanvas } from './BuilderCanvas'
 import { useBuilder } from './store'
 
@@ -46,6 +47,7 @@ export function BuilderPage() {
   const [loaded, setLoaded] = useState(false)
   const [showAim, setShowAim] = useState(true)
   const [shareOpen, setShareOpen] = useState(false)
+  const [seriesOpen, setSeriesOpen] = useState(false)
   const [panelOpen, setPanelOpen] = useState(true)
 
   // Haelt die Werkzeugleiste auf ganzen Knoepfen - siehe ui/toolFit.ts.
@@ -263,6 +265,27 @@ export function BuilderPage() {
             : s.scoring,
       }
     })
+  }
+
+  /**
+   * Legt die Reihe an: erst das Original sichern, dann die neuen Uebungen.
+   *
+   * Dieselbe Reihenfolge wie beim Duplizieren - sonst traegt die Reihe die
+   * Aenderungen und das Original faellt still auf seinen alten Stand
+   * zurueck. Danach in die Sammlung, denn dort liegen die neuen Uebungen;
+   * im Baukasten waere von ihnen nichts zu sehen.
+   */
+  const createSeries = async (neue: Shot[]) => {
+    if (neue.length === 0) return
+    if (dirty && !(await save())) return
+    try {
+      for (const s of neue) await saveShot(s)
+      setSeriesOpen(false)
+      dialogs.toast(`${neue.length} Übungen angelegt`, 'ok')
+      navigate('/library')
+    } catch (err) {
+      dialogs.toast(`Nicht gespeichert: ${storageErrorText(err)}`, 'error')
+    }
   }
 
   const duplicate = async () => {
@@ -498,6 +521,11 @@ export function BuilderPage() {
             <button className="btn btn--sm" onClick={() => void resetShot()}>
               Zurücksetzen
             </button>
+            {/* Gehoert zu den Aufbauhilfen: eine Reihe ist derselbe Aufbau
+                mehrfach, nicht eine Eigenschaft der einen Uebung. */}
+            <button className="btn btn--sm" onClick={() => setSeriesOpen(true)}>
+              Reihe erzeugen
+            </button>
             <span className="spacer" />
             {!isNew && (
               <>
@@ -535,6 +563,14 @@ export function BuilderPage() {
       <FeasibilityHints shot={shot} />
 
       {panelOpen && <AttributesPanel />}
+
+      {seriesOpen && (
+        <SeriesDialog
+          shot={shot}
+          onCreate={(neue) => void createSeries(neue)}
+          onClose={() => setSeriesOpen(false)}
+        />
+      )}
 
       {shareOpen && (
         <Suspense fallback={null}>

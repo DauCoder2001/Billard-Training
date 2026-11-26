@@ -6,6 +6,43 @@ Die Versionsnummer steht an genau einer Stelle — in `package.json` — und ers
 unten auf der Seite **Einstellungen** sowie auf der Fehlerseite. Schema:
 `Hauptversion.Funktion.Korrektur`.
 
+## 0.17.0 – 26.11.2026
+
+### Hinzugefügt
+- **Reihen-Generator im Baukasten.** Der Knopf *Reihe erzeugen* baut aus dem
+  aktuellen Aufbau eine Folge von Übungen: derselbe Objektball, dieselbe
+  Tasche, nur der **Schnittwinkel** oder der **Abstand des Weißen** wandert in
+  Stufen. Zwei bis zwölf Übungen, die Schwierigkeit lässt sich über die Reihe
+  verteilen.
+- **Die Vorschau zeigt die Reihe, bevor sie angelegt wird** — mit Namen,
+  Schwierigkeit und, je Übung, dem Ergebnis der Machbarkeitsprüfung aus
+  0.16.0. Wer sieht, dass zwei der acht Übungen den Weißen an die Bande
+  klemmen, zieht die Grenzen enger, statt hinterher in der Sammlung
+  aufzuräumen.
+- **Einen klaren Grund statt einer falschen Reihe:** Ist für den Weißen ein
+  eigener Weg gezeichnet (Kick, Karambolage), sagt der Dialog das und legt
+  nichts an. Der gezeichnete Weg würde beim Verschieben des Weißen nicht
+  mitwandern.
+
+### Geändert
+- Die neuen Übungen einer Reihe bekommen **keine Lernstufe mit**. Eine Reihe
+  verändert gerade das, was über die Stufe entscheidet: Der 60-Grad-Schnitt
+  aus einer Stufe-A-Übung ist in der Sammlung ein dünner Schnitt und damit
+  Stufe C. Eine geerbte Stufe wäre hier dasselbe wie eine geratene.
+
+### Technisches
+- **Die Anspiel-Rechnung ist nach `src/domain/aim.ts` umgezogen.** Sie stand
+  in `data/seed/drills.ts` und baute nur die mitgelieferten Übungen; der
+  Generator braucht dieselbe Rechnung. Gerechnet wird rückwärts — aus
+  Objektball, Zielpunkt, Winkel und Abstand folgt die Lage des Weißen. Steht
+  „30°“ im Namen, ist es ein 30-Grad-Schnitt, nicht 28.
+- **Der Umzug durfte keine Ballposition verschieben**, denn jede Änderung an
+  einer Vorlage hätte allen mit einer eigenen Fassung den Hinweis „Vorlage
+  überarbeitet“ eingebracht. Gemessen: alle 25 Fingerabdrücke identisch.
+  **Seither nagelt ein Test sie fest** (`drills.test.ts`) — schlägt er an,
+  ist das eine Frage, keine Panne: War die Änderung gewollt?
+- 346 Tests, davon 22 neue zur Reihe.
+
 ## 0.16.1 – 26.11.2026
 
 ### Behoben

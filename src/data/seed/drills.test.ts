@@ -234,6 +234,49 @@ describe('mitgelieferte Uebungen', () => {
     }
   })
 
+  it('rechnet dieselben Vorlagen wie am 26.11.2026', () => {
+    // Die Fingerabdruecke festgenagelt. Sie sind kein Selbstzweck: aendert
+    // sich einer, bekommt jeder, der eine eigene Fassung dieser Uebung
+    // gespeichert hat, beim naechsten Start den Hinweis "Vorlage
+    // ueberarbeitet" - auch wenn nur eine Rechnung umgezogen ist und sich
+    // am Aufbau nichts geaendert hat.
+    //
+    // Schlaegt diese Pruefung an, ist das eine Frage, keine Panne: war die
+    // Aenderung an der Vorlage gewollt? Dann die Zahl hier nachziehen und
+    // im CHANGELOG nennen. War sie es nicht, ist die Rechnung kaputt.
+    //
+    // Entstanden beim Umzug der Anspiel-Rechnung nach domain/aim.ts
+    // (0.17.0), der genau das nicht tun durfte.
+    const erwartet: Record<string, string | undefined> = {
+      'builtin-stop-kurz': 'c1f19376',
+      'builtin-stop-lang': '9bc8d3aa',
+      'builtin-nachlauf-mittel': 'db56b6ee',
+      'builtin-rueckzieher-kurz': 'e33c910c',
+      'builtin-rueckzieher-lang': 'd93a5e0a',
+      'builtin-schnitt-15': '2bc6aecc',
+      'builtin-schnitt-30': '914bd70a',
+      'builtin-schnitt-45': '89e2593a',
+      'builtin-schnitt-60': '0d6ea302',
+      'builtin-schnitt-75': '0842916c',
+      'builtin-mitteltasche-gerade': '2ac4f2f2',
+      'builtin-mitteltasche-schnitt': 'ea1277d7',
+      'builtin-bande-lang': 'e20a9898',
+      'builtin-bande-kurz': '3c54092a',
+      'builtin-kick-eine-bande': '0281cc66',
+      'builtin-kombination-zwei': 'fbbdf39b',
+      'builtin-karambolage': 'a3d68b04',
+      'builtin-bandenball-fest': 'dbac8d85',
+      'builtin-seiteneffet-links': '6ad8c396',
+      'builtin-seiteneffet-rechts': 'fa9a2856',
+      'builtin-position-kitchen': '0ae55ea8',
+      'builtin-position-eng': 'e2d4f90a',
+      'builtin-cluster-oeffnen': 'b0c31d03',
+      'builtin-safe-hinter-ball': 'ca61c6d4',
+      'builtin-lange-gerade': '805deed8',
+    }
+    expect(Object.fromEntries(shots.map((s) => [s.id, s.seedStamp]))).toEqual(erwartet)
+  })
+
   it('legt keinen Ball in eine Bande', () => {
     for (const shot of shots) {
       for (const ball of shot.balls) {
