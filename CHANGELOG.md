@@ -6,6 +6,57 @@ Die Versionsnummer steht an genau einer Stelle — in `package.json` — und ers
 unten auf der Seite **Einstellungen** sowie auf der Fehlerseite. Schema:
 `Hauptversion.Funktion.Korrektur`.
 
+## 0.15.0 – 26.11.2026
+
+### Hinzugefügt
+- **Lernstufen A bis D.** Jede Übung lässt sich einer Stufe zuordnen:
+  A Grundschläge, B Kontrolle des Weißen, C Spielsituationen,
+  D Spezialtechniken. Die Stufe **ordnet und filtert, sie sperrt nichts** –
+  jede Übung bleibt jederzeit trainierbar, egal auf welchem Stand der Spieler
+  ist (Entscheidung E1 im Konzept).
+- **Die 25 mitgelieferten Übungen sind eingestuft:** 6 in A, 7 in B, 12 in C.
+  Stufe D ist noch leer, und das ist kein Versehen – Sprung- und Masséschläge
+  braucht sie, und die kennt das Datenmodell noch nicht (es fehlen die
+  Stoßarten und die Angabe, dass ein Ball durch die Luft fliegt).
+  Maßgeblich ist das Thema, nicht die Schwierigkeit: der sehr dünne Schnitt
+  mit 75 Grad ist schwer, bleibt aber eine Spielsituation (C).
+- **Filter und Sortierung nach Stufe** in der Sammlung, einschließlich
+  „Ohne Stufe“ – sonst wären selbst gebaute Übungen über den Filter nicht zu
+  finden. Beim Sortieren nach Stufe ordnet die Schwierigkeit innerhalb der
+  Stufe, und Übungen ohne Stufe stehen am Ende. Die Stufe steht auch auf der
+  Karte, sonst wäre nicht zu sehen, wonach die Sortierung ordnet.
+- **Die Stufe im Baukasten**, im Reiter „Stoß“ unter der Stoßart. Ohne
+  Vorgabewert: eine geratene Stufe wäre schlechter als gar keine, denn die
+  Stufe sagt etwas über das Thema aus – und das kennt nur, wer die Übung baut.
+
+### Geändert
+- Die beiden Auswahlfelder der Filter (Stoßart, Stufe) haben jetzt einen
+  Namen für Vorleseprogramme. Vorher hing ihre Bedeutung allein an der ersten
+  Angebotszeile.
+
+### Behoben
+- **Die Stufe überlebt das Einlesen einer Sicherung und einen geteilten
+  Link.** Beide Wege gehen durch dieselbe Prüfung (`sanitizeShot`), die den
+  Stoß Feld für Feld neu aufbaut – ein nicht aufgeführtes Feld fällt dabei
+  weg. Ohne diese Ergänzung hätte das Einspielen einer Sicherung alle
+  selbst gewählten Einstufungen gelöscht.
+
+### Technisches
+- **Die Stufe steht bewusst nicht im Fingerabdruck der Vorlage**
+  (`seedStamp`). Stünde sie dort, hätte das Einstufen der 25 mitgelieferten
+  Übungen jeden Fingerabdruck geändert, und jeder, der eine eigene Fassung
+  gespeichert hat, bekäme den Hinweis auf eine überarbeitete Vorlage, ohne
+  dass sich an der Übung etwas geändert hätte. Dieselbe Begründung wie bei
+  der Sperrzone.
+- **Eine eigene Migration statt `SEED_VERSION` 3.** Das Einspielen der
+  Sammlung lässt eine eigene Fassung einer mitgelieferten Übung bewusst in
+  Ruhe – genau die bekäme über `SEED_VERSION` nie eine Stufe und fiele aus
+  jedem Filter heraus. `migrateLevels()` erreicht beide: die unberührte
+  Vorlage und die übernommene Fassung. Angefasst wird nur, wo noch keine
+  Stufe steht; eine im Baukasten gewählte bleibt stehen.
+- `DrillSpec` verlangt die Stufe als Pflichtfeld, damit keine neue Übung ohne
+  Einstufung durchrutscht. 304 Tests, davon 20 neue zu den Stufen.
+
 ## 0.14.2 – 26.11.2026
 
 ### Hinzugefügt

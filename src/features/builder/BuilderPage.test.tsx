@@ -233,3 +233,45 @@ describe('Die Sperrzone im Baukasten', () => {
     expect(document.querySelector('[data-ebene="sperrzone"]')).toBeNull()
   })
 })
+
+/**
+ * Die Stufe im Baukasten.
+ *
+ * Sie ist absichtlich ohne Vorgabewert: eine geratene Stufe waere schlechter
+ * als gar keine, denn die Stufe sagt etwas ueber das Thema der Uebung aus -
+ * und das kennt nur, wer sie baut.
+ */
+describe('Die Stufe im Baukasten', () => {
+  it('steht auf "Keine Stufe", solange keine gewaehlt ist', async () => {
+    await db.shots.add(createShot({ id: 's1', name: 'Meine Übung' }))
+    zeige(<BuilderPage />, ORT)
+
+    const feld = (await screen.findByLabelText('Stufe')) as HTMLSelectElement
+    expect(feld.value).toBe('')
+  })
+
+  it('speichert die gewaehlte Stufe an der Uebung', async () => {
+    await db.shots.add(createShot({ id: 's1', name: 'Meine Übung' }))
+    zeige(<BuilderPage />, ORT)
+
+    await userEvent.selectOptions(await screen.findByLabelText('Stufe'), 'C')
+    await userEvent.click(screen.getByRole('button', { name: 'Speichern' }))
+
+    await waitFor(async () => expect((await db.shots.get('s1'))?.level).toBe('C'))
+  })
+
+  it('nimmt die Stufe wieder weg, ohne ein leeres Feld zu hinterlassen', async () => {
+    // Das Feld muss verschwinden, nicht leer dastehen: der Filter "Ohne
+    // Stufe" fragt nach seinem Fehlen.
+    await db.shots.add({ ...createShot({ id: 's1', name: 'Meine Übung' }), level: 'B' })
+    zeige(<BuilderPage />, ORT)
+
+    const feld = (await screen.findByLabelText('Stufe')) as HTMLSelectElement
+    expect(feld.value).toBe('B')
+
+    await userEvent.selectOptions(feld, '')
+    await userEvent.click(screen.getByRole('button', { name: 'Speichern' }))
+
+    await waitFor(async () => expect((await db.shots.get('s1'))?.level).toBeUndefined())
+  })
+})

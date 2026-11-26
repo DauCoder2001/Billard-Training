@@ -18,6 +18,7 @@ import { createShot, newId } from './shot'
 import {
   BALL_KINDS,
   DEFAULT_THRESHOLDS,
+  LEVELS,
   PATH_ROLES,
   POCKET_IDS,
   SCORING_MODES,
@@ -266,9 +267,15 @@ export function sanitizeShot(raw: unknown): Shot {
   const tags = (Array.isArray(s.tags) ? s.tags.slice(0, MAX_TAGS) : [])
     .filter((t): t is string => typeof t === 'string')
     .map((t) => t.slice(0, MAX_TAG))
+  // Die Stufe kommt mit, wenn sie eine der bekannten ist. Fehlt sie oder ist
+  // sie erfunden, bleibt das Feld weg - geraten wird nicht. Ein eigener Fall
+  // statt oneOf, weil oneOf einen Rueckfallwert braucht und es hier keinen
+  // gibt: die Stufe ist absichtlich optional.
+  const level = LEVELS.find((l) => l === s.level)
 
   return {
     ...base,
+    ...(level ? { level } : {}),
     name: str(s.name, MAX_NAME, base.name).trim() || base.name,
     description: str(s.description, MAX_DESCRIPTION),
     coachNotes: str(s.coachNotes, MAX_NOTES),

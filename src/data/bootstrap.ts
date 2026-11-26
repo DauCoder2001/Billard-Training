@@ -73,6 +73,7 @@ async function run(): Promise<void> {
   await migrateTheme()
   await migrateDrillTexts()
   await migrateSeedStamps()
+  await migrateLevels()
 }
 
 /**
@@ -138,6 +139,46 @@ async function migrateSeedStamps(): Promise<void> {
   const stored = await db.shots.bulkGet(fresh.map((s) => s.id))
   const updates = seedStampUpdates(fresh, stored)
   if (updates.length > 0) await db.shots.bulkPut(updates)
+}
+
+/**
+ * Haengt die Lernstufe an mitgelieferte Uebungen, die noch keine tragen.
+ *
+ * Warum eine eigene Migration und nicht einfach SEED_VERSION hochzaehlen:
+ * Das Einspielen der Sammlung laesst eine Fassung des Nutzers bewusst in Ruhe
+ * (seedUpdates oben). Genau die bekaeme dann nie eine Stufe und fiele aus
+ * jedem Filter heraus - obwohl die Stufe nichts am Stoss aendert, sondern nur
+ * sagt, wo er in der Sammlung steht. Diese Regel hier erreicht beide: die
+ * unberuehrte Vorlage und die uebernommene Fassung.
+ *
+ * Angefasst wird nur, wo noch keine Stufe steht. Wer im Baukasten eine andere
+ * waehlt, behaelt sie.
+ *
+ * Die Stufe geht nicht in den Fingerabdruck ein (seedStamp.ts), deshalb
+ * entsteht dabei kein Hinweis auf eine ueberarbeitete Vorlage.
+ *
+ * Einen Versionszaehler braucht es nicht: nach dem ersten Lauf traegt jede
+ * betroffene Uebung eine Stufe, und die Regel findet nichts mehr.
+ */
+async function migrateLevels(): Promise<void> {
+  const fresh = seedShots()
+  const stored = await db.shots.bulkGet(fresh.map((s) => s.id))
+  const updates = levelUpdates(fresh, stored)
+  if (updates.length > 0) await db.shots.bulkPut(updates)
+}
+
+/**
+ * Reine Form derselben Regel - ohne Datenbank pruefbar.
+ *
+ * @param fresh Die Uebungen der Vorlage.
+ * @param stored Der gespeicherte Stand zu denselben Ids, in derselben Folge.
+ */
+export function levelUpdates(fresh: Shot[], stored: (Shot | undefined)[]): Shot[] {
+  return fresh.flatMap((neu, i) => {
+    const alt = stored[i]
+    if (!alt || alt.level || !neu.level) return []
+    return [{ ...alt, level: neu.level }]
+  })
 }
 
 /**

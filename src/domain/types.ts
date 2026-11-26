@@ -128,6 +128,24 @@ export const SHOT_TYPE_LABELS: Record<ShotType, string> = {
   position: 'Positionsspiel',
 }
 
+// ------------------------------------------------------------------ Stufe --
+
+export const LEVELS = ['A', 'B', 'C', 'D'] as const
+
+export type Level = (typeof LEVELS)[number]
+
+/**
+ * Was eine Stufe umfasst. Das Thema bestimmt sie, die Schwierigkeit ordnet
+ * innerhalb der Stufe: der sehr duenne Schnitt mit 75 Grad ist schwer, bleibt
+ * aber eine Spielsituation (C) und wird keine Spezialtechnik (D).
+ */
+export const LEVEL_LABELS: Record<Level, string> = {
+  A: 'Grundschläge',
+  B: 'Kontrolle des Weißen',
+  C: 'Spielsituationen',
+  D: 'Spezialtechniken',
+}
+
 export interface ShotAttributes {
   shotType: ShotType
   /** Schnittwinkel in Grad, 0 = voll. Wird beim Speichern automatisch berechnet. */
@@ -216,6 +234,18 @@ export interface Shot {
   coachNotes: string
   tags: string[]
   favorite: boolean
+  /**
+   * Lernstufe A bis D. Sie ordnet und filtert, sie sperrt nichts: jede Uebung
+   * laesst sich jederzeit trainieren, egal auf welchem Stand der Spieler ist.
+   *
+   * Fehlt bei selbst gebauten Uebungen, solange niemand eine gewaehlt hat -
+   * absichtlich kein Vorgabewert. Eine geratene Stufe waere schlechter als
+   * gar keine, denn die Stufe sagt etwas ueber das Thema aus, und das kennt
+   * nur der, der die Uebung baut.
+   *
+   * Steht bewusst nicht im Fingerabdruck der Vorlage (siehe seedStamp.ts).
+   */
+  level?: Level
   /** true bei den mitgelieferten Uebungen. */
   builtIn?: boolean
   /**

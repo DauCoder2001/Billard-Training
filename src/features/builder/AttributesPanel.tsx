@@ -5,12 +5,14 @@ import { POCKET_BY_ID } from '@/domain/geometry'
 import { hasObjectBall, orderedThresholds } from '@/domain/scoring'
 import { computeCutAngle } from '@/domain/shot'
 import {
+  LEVELS,
+  LEVEL_LABELS,
   SHOT_TYPES,
   SHOT_TYPE_LABELS,
   SKILL_LABELS,
   SKILL_TAGS,
 } from '@/domain/types'
-import type { ScoringMode, Shot, ShotType, SkillTag } from '@/domain/types'
+import type { Level, ScoringMode, Shot, ShotType, SkillTag } from '@/domain/types'
 import { useBuilder } from './store'
 import { SpinPicker, spinLabel } from './SpinPicker'
 
@@ -109,6 +111,32 @@ export function AttributesPanel() {
                     </option>
                   ))}
                 </select>
+              </div>
+
+              <div className="field">
+                <label htmlFor="a-level">Stufe</label>
+                <select
+                  id="a-level"
+                  className="select"
+                  value={shot.level ?? ''}
+                  onChange={(e) => change((s) => ({
+                    ...s,
+                    // Leere Auswahl heisst: keine Stufe. Eine geratene waere
+                    // schlechter als keine, denn die Stufe sagt etwas ueber
+                    // das Thema aus - das kennt nur, wer die Uebung baut.
+                    level: e.target.value === '' ? undefined : (e.target.value as Level),
+                  }))}
+                >
+                  <option value="">Keine Stufe</option>
+                  {LEVELS.map((l) => (
+                    <option key={l} value={l}>
+                      Stufe {l} – {LEVEL_LABELS[l]}
+                    </option>
+                  ))}
+                </select>
+                <span className="small muted">
+                  Ordnet die Übung in der Sammlung ein. Sie sperrt nichts.
+                </span>
               </div>
 
               <Range

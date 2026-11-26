@@ -208,7 +208,7 @@ Alles gemessen, nicht geschätzt:
 | Quelltext | 25 Spezifikationen = 12,3 kB / 426 Zeilen, also ~490 Byte je Übung | 100 ergeben ~49 kB / ~1700 Zeilen. **Eine Datei je Stufe** (`drills/stufe-a.ts` …), nicht eine Datei mit 1700 Zeilen. |
 | Bundle | heute 537 kB im Hauptbundle (`dist/assets/index-*.js`) | +30 bis 35 kB, also etwa +6 %. Tragbar. Falls nicht: die Stufen B–D nachladen; Baukasten, Training und Teilen-Dialog kommen schon als eigene Dateien nach, das Nachladen ist eingespielt. |
 | Startzeit | `seedShots()` rechnet alle Übungen bei jedem Start | 4× so viel reine Geometrie, im Millisekundenbereich. Kein Problem. |
-| Einspielen | `SEED_VERSION` steht auf 2 (`src/data/bootstrap.ts:20`) | Auf **3** erhöhen, sonst bleiben vorhandene Geräte bei 25. |
+| Einspielen | `SEED_VERSION` steht auf 2 (`src/data/bootstrap.ts:20`) | Auf **3** erhöhen, sobald neue Übungen dazukommen, sonst bleiben vorhandene Geräte bei 25. **Nicht** für die Stufen in 0.15.0: das Einspielen lässt eine eigene Fassung einer mitgelieferten Übung bewusst in Ruhe, die bekäme so nie eine Stufe. Dafür gibt es `migrateLevels()`, die beide erreicht. |
 | Fingerabdruck | `templatePart` umfasst `tags`, `attributes`, `scoring` (`src/domain/seedStamp.ts:30`) | `level` gehört **nicht** hinein — wie `favorite`. Sonst bekäme jeder, der eine eigene Fassung einer der 25 Übungen hat, den Hinweis „Vorlage überarbeitet", ohne dass sich etwas geändert hat. |
 
 ---
@@ -461,7 +461,7 @@ ausgelieferte Fassung mit Eintrag im CHANGELOG.
 |---|---|---|
 | 0.14.1 ✓ | Oberfläche auf **Übung** umbenennen (E5), Notiz zu den Begriffen nachziehen | — |
 | 0.14.2 ✓ | **Umzug auf `training.cuedesk.de`** (6.) — erledigt am 26.11.2026 | DNS bei IONOS |
-| 0.15.0 | Feld `level`, Filter und Sortierung in der Sammlung, die 25 eingeordnet, `SEED_VERSION` 3 | — |
+| 0.15.0 ✓ | Feld `level`, Filter und Sortierung in der Sammlung, Stufe im Baukasten, die 25 eingeordnet (6/7/12/0) — erledigt am 26.11.2026 | — |
 | 0.16.0 | Machbarkeitsprüfung im Baukasten (5.1) | — |
 | 0.17.0 | Reihen-Generator im Baukasten: eine Folge aus einem Muster (Schnitt 10° bis 60° in Schritten) | 0.16.0 |
 | 0.18.0 | Stufe A vollständig, 19 neue Übungen | 0.15.0, 0.17.0 |

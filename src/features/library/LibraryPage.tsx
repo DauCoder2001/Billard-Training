@@ -3,12 +3,31 @@ import { Link, useNavigate } from 'react-router-dom'
 import { ShotDiagram } from '@/components/table/ShotDiagram'
 import { useShotStats, useShots } from '@/data/hooks'
 import { proficiencyFor } from '@/domain/scoring'
-import { SHOT_TYPES, SHOT_TYPE_LABELS, SKILL_LABELS, SKILL_TAGS } from '@/domain/types'
-import type { Shot, ShotType, SkillTag } from '@/domain/types'
+import {
+  LEVELS,
+  LEVEL_LABELS,
+  SHOT_TYPES,
+  SHOT_TYPE_LABELS,
+  SKILL_LABELS,
+  SKILL_TAGS,
+} from '@/domain/types'
+import type { Level, Shot, ShotType, SkillTag } from '@/domain/types'
 import { useActivePlayer, useApp } from '@/app/store'
 import { DifficultyDots, EmptyState, ProficiencyBadge } from '@/ui/bits'
 
-type Sort = 'name' | 'difficulty' | 'recent' | 'weakest'
+type Sort = 'name' | 'level' | 'difficulty' | 'recent' | 'weakest'
+
+/**
+ * Filterwert fuer die Stufe. 'none' sind die Uebungen ohne Stufe - selbst
+ * gebaute, solange niemand eine gewaehlt hat. Ohne diesen Wert waeren sie
+ * ueber den Filter nicht zu finden.
+ */
+type LevelFilter = Level | 'all' | 'none'
+
+/** Ohne Stufe ans Ende, damit die Reihenfolge A, B, C, D, dann Rest ist. */
+function levelRank(shot: Shot): number {
+  return shot.level ? LEVELS.indexOf(shot.level) : LEVELS.length
+}
 
 export function LibraryPage() {
   const shots = useShots()
@@ -20,6 +39,7 @@ export function LibraryPage() {
   const [search, setSearch] = useState('')
   const [skills, setSkills] = useState<SkillTag[]>([])
   const [type, setType] = useState<ShotType | 'all'>('all')
+  const [level, setLevel] = useState<LevelFilter>('all')
   const [favoritesOnly, setFavoritesOnly] = useState(false)
   const [maxDifficulty, setMaxDifficulty] = useState(10)
   const [sort, setSort] = useState<Sort>('name')
@@ -29,6 +49,8 @@ export function LibraryPage() {
     const list = (shots ?? []).filter((shot) => {
       if (favoritesOnly && !shot.favorite) return false
       if (type !== 'all' && shot.attributes.shotType !== type) return false
+      if (level === 'none' && shot.level) return false
+      if (level !== 'all' && level !== 'none' && shot.level !== level) return false
       if (shot.attributes.difficulty > maxDifficulty) return false
       if (skills.length > 0 && !skills.every((s) => shot.attributes.skills.includes(s))) return false
       if (search.trim()) {
@@ -44,6 +66,14 @@ export function LibraryPage() {
 
     return list.sort((a, b) => {
       switch (sort) {
+        case 'level':
+          // Innerhalb einer Stufe nach Schwierigkeit: so entsteht ein Weg
+          // durch die Stufe, statt einer Liste nach Alphabet.
+          return (
+            levelRank(a) - levelRank(b) ||
+            a.attributes.difficulty - b.attributes.difficulty ||
+            a.name.localeCompare(b.name, 'de')
+          )
         case 'difficulty':
           return a.attributes.difficulty - b.attributes.difficulty || a.name.localeCompare(b.name, 'de')
         case 'recent':
@@ -62,13 +92,17 @@ export function LibraryPage() {
           return a.name.localeCompare(b.name, 'de')
       }
     })
-  }, [shots, favoritesOnly, type, maxDifficulty, skills, search, sort, stats])
+  }, [shots, favoritesOnly, type, level, maxDifficulty, skills, search, sort, stats])
 
   const toggleSkill = (s: SkillTag) =>
     setSkills((prev) => (prev.includes(s) ? prev.filter((x) => x !== s) : [...prev, s]))
 
   const activeFilters =
-    (favoritesOnly ? 1 : 0) + (type !== 'all' ? 1 : 0) + (maxDifficulty < 10 ? 1 : 0) + skills.length
+    (favoritesOnly ? 1 : 0) +
+    (type !== 'all' ? 1 : 0) +
+    (level !== 'all' ? 1 : 0) +
+    (maxDifficulty < 10 ? 1 : 0) +
+    skills.length
 
   return (
     <div className="page page--wide stack">
@@ -105,6 +139,7 @@ export function LibraryPage() {
         />
         <select className="select" style={{ width: 180 }} value={sort} onChange={(e) => setSort(e.target.value as Sort)}>
           <option value="name">Name</option>
+          <option value="level">Stufe</option>
           <option value="difficulty">Schwierigkeit</option>
           <option value="recent">Zuletzt geübt</option>
           <option value="weakest">Schwächstes zuerst</option>
@@ -122,6 +157,7 @@ export function LibraryPage() {
             </button>
             <select
               className="select"
+              aria-label="Stoßart"
               style={{ width: 200 }}
               value={type}
               onChange={(e) => setType(e.target.value as ShotType | 'all')}
@@ -132,6 +168,21 @@ export function LibraryPage() {
                   {SHOT_TYPE_LABELS[t]}
                 </option>
               ))}
+            </select>
+            <select
+              className="select"
+              aria-label="Stufe"
+              style={{ width: 230 }}
+              value={level}
+              onChange={(e) => setLevel(e.target.value as LevelFilter)}
+            >
+              <option value="all">Alle Stufen</option>
+              {LEVELS.map((l) => (
+                <option key={l} value={l}>
+                  Stufe {l} – {LEVEL_LABELS[l]}
+                </option>
+              ))}
+              <option value="none">Ohne Stufe</option>
             </select>
           </div>
 
@@ -170,6 +221,7 @@ export function LibraryPage() {
                 onClick={() => {
                   setSkills([])
                   setType('all')
+                  setLevel('all')
                   setFavoritesOnly(false)
                   setMaxDifficulty(10)
                 }}
@@ -207,6 +259,11 @@ export function LibraryPage() {
                 </div>
                 <div className="row small muted" style={{ gap: 8 }}>
                   <span>{SHOT_TYPE_LABELS[shot.attributes.shotType]}</span>
+                  {/* Ohne die Stufe auf der Karte waere nicht zu sehen, wonach
+                      die Sortierung "Stufe" ordnet. */}
+                  {shot.level && (
+                    <span title={LEVEL_LABELS[shot.level]}>· Stufe {shot.level}</span>
+                  )}
                   <span className="spacer" />
                   {st?.lastScore != null ? (
                     <ProficiencyBadge value={proficiencyFor(st.lastScore, shot.scoring.thresholds)} />

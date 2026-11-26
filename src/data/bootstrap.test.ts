@@ -8,7 +8,7 @@
  */
 
 import { describe, expect, it } from 'vitest'
-import { seedStampUpdates, seedUpdates } from './bootstrap'
+import { levelUpdates, seedStampUpdates, seedUpdates } from './bootstrap'
 import { createShot } from '@/domain/shot'
 import type { Shot } from '@/domain/types'
 
@@ -99,5 +99,65 @@ describe('seedStampUpdates', () => {
 
   it('uebergeht einen geloeschten Stoss', () => {
     expect(seedStampUpdates(sammlung, [undefined, undefined])).toEqual([])
+  })
+})
+
+/**
+ * Die Regel, die die Lernstufe nachtraegt.
+ *
+ * Sie ist der Grund, warum die Stufen nicht einfach ueber SEED_VERSION
+ * eingespielt werden: seedUpdates laesst eine eigene Fassung einer
+ * mitgelieferten Uebung bewusst in Ruhe. Genau die bekaeme dann nie eine
+ * Stufe und fiele aus jedem Filter heraus - obwohl die Stufe nichts am Stoss
+ * aendert, sondern nur sagt, wo er in der Sammlung steht.
+ */
+describe('levelUpdates', () => {
+  const eingestuft: Shot[] = [
+    { ...vorlage('a', 'Gerade Übung'), level: 'A' },
+    { ...vorlage('b', 'Bandenball'), level: 'B' },
+  ]
+
+  /** Derselbe Stoss, wie er vor dieser Neuerung gespeichert wurde. */
+  function ohneStufe(shot: Shot, patch: Partial<Shot> = {}): Shot {
+    const { level: _l, ...rest } = shot
+    return { ...(rest as Shot), ...patch }
+  }
+
+  it('traegt die Stufe nach, wo noch keine steht', () => {
+    const updates = levelUpdates(eingestuft, eingestuft.map((s) => ohneStufe(s)))
+    expect(updates.map((s) => [s.id, s.level])).toEqual([
+      ['a', 'A'],
+      ['b', 'B'],
+    ])
+  })
+
+  it('erreicht auch die eigene Fassung einer mitgelieferten Uebung', () => {
+    // Der Fall, fuer den es diese Regel gibt: builtIn === false setzt der
+    // Baukasten beim Speichern, und seedUpdates fasst das nicht mehr an.
+    const eigen = ohneStufe(eingestuft[0], { name: 'Mein eigener Name', builtIn: false })
+    const updates = levelUpdates(eingestuft, [eigen, eingestuft[1]])
+    expect(updates).toHaveLength(1)
+    expect(updates[0].level).toBe('A')
+    // Angefasst wird nur die Stufe, sonst nichts.
+    expect(updates[0].name).toBe('Mein eigener Name')
+    expect(updates[0].builtIn).toBe(false)
+  })
+
+  it('laesst eine bereits gewaehlte Stufe stehen', () => {
+    // Wer im Baukasten eine andere Stufe waehlt, behaelt sie.
+    const eigen = { ...eingestuft[0], level: 'D' as const }
+    expect(levelUpdates(eingestuft, [eigen, eingestuft[1]])).toEqual([])
+  })
+
+  it('holt einen geloeschten Stoss nicht zurueck', () => {
+    const updates = levelUpdates(eingestuft, [undefined, ohneStufe(eingestuft[1])])
+    expect(updates.map((s) => s.id)).toEqual(['b'])
+  })
+
+  it('findet beim zweiten Lauf nichts mehr', () => {
+    // Darum braucht die Regel keinen Versionszaehler.
+    const bestand = eingestuft.map((s) => ohneStufe(s))
+    const einmal = levelUpdates(eingestuft, bestand)
+    expect(levelUpdates(eingestuft, einmal)).toEqual([])
   })
 })

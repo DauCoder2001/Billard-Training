@@ -22,10 +22,18 @@ import type { Shot } from './types'
 /**
  * Die Felder, die die Vorlage bestimmt.
  *
- * Nicht dabei: id, builtIn, createdAt, updatedAt, favorite und seedStamp
- * selbst. Der Favorit ist eine Entscheidung des Nutzers, die Zeitstempel
- * sagen nichts ueber den Inhalt, und ein Fingerabdruck ueber sich selbst
- * waere nicht wiederholbar.
+ * Nicht dabei: id, builtIn, createdAt, updatedAt, favorite, level und
+ * seedStamp selbst. Der Favorit ist eine Entscheidung des Nutzers, die
+ * Zeitstempel sagen nichts ueber den Inhalt, und ein Fingerabdruck ueber sich
+ * selbst waere nicht wiederholbar.
+ *
+ * Die Stufe fehlt aus demselben Grund wie die Sperrzone weiter unten: Sie
+ * ordnet die Sammlung, sie beschreibt nicht den Stoss. Stuende sie hier,
+ * haette das Einstufen der 25 mitgelieferten Uebungen jeden Fingerabdruck
+ * geaendert - und jeder, der eine eigene Fassung einer Uebung gespeichert
+ * hat, bekaeme den Hinweis auf eine ueberarbeitete Vorlage, ohne dass sich
+ * an der Uebung etwas geaendert haette. Ein Test haelt das fest
+ * (seedStamp.test.ts).
  */
 function templatePart(shot: Shot): Record<string, unknown> {
   return {

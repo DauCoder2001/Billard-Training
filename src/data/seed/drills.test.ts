@@ -18,7 +18,8 @@ import {
   ghostBall,
   pocketAimPoint,
 } from '@/domain/geometry'
-import type { Ball, Point, Shot, TargetZone } from '@/domain/types'
+import { LEVELS } from '@/domain/types'
+import type { Ball, Level, Point, Shot, TargetZone } from '@/domain/types'
 import { seedShots } from './drills'
 
 const R = TABLE.ballRadius
@@ -200,6 +201,37 @@ describe('mitgelieferte Uebungen', () => {
     const staende = shots.map((s) => s.seedStamp)
     expect(staende.every((s) => typeof s === 'string' && s.length === 8)).toBe(true)
     expect(new Set(staende).size).toBe(shots.length)
+  })
+
+  it('stuft jede Uebung ein', () => {
+    // DrillSpec verlangt die Stufe, damit keine neue Uebung ohne Einstufung
+    // durchrutscht. Hier steht die Gegenprobe am fertigen Ergebnis.
+    expect(shots.filter((s) => !s.level).map((s) => s.id)).toEqual([])
+  })
+
+  it('verteilt die heutigen Uebungen auf A, B und C', () => {
+    // Das Thema bestimmt die Stufe, die Schwierigkeit ordnet innerhalb der
+    // Stufe. Darum liegt der sehr duenne Schnitt mit 75 Grad in C
+    // (Spielsituationen) und nicht in D.
+    //
+    // D (Spezialtechniken) ist leer, und das ist kein Versehen: Sprung- und
+    // Masseschlaege kennt das Datenmodell noch nicht - es fehlen die
+    // Stossarten und die Angabe, dass ein Ball durch die Luft fliegt.
+    //
+    // Die Zahlen wachsen mit der Sammlung bis auf 25 je Stufe. Wer Uebungen
+    // hinzufuegt, zieht sie hier mit.
+    const zahl = (l: Level) => shots.filter((s) => s.level === l).length
+    expect(LEVELS.map(zahl)).toEqual([6, 7, 12, 0])
+    expect(shots).toHaveLength(25)
+  })
+
+  it('legt keine Stufe ueber ihre geplante Groesse', () => {
+    // Vier Stufen mit je 25 Uebungen, 100 insgesamt (Entscheidung E6 im
+    // Konzept). Diese Pruefung bleibt auch dann richtig, wenn die Zahlen
+    // oben wachsen.
+    for (const l of LEVELS) {
+      expect(shots.filter((s) => s.level === l).length).toBeLessThanOrEqual(25)
+    }
   })
 
   it('legt keinen Ball in eine Bande', () => {

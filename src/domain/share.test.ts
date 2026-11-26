@@ -249,3 +249,28 @@ describe('Die Sperrzone beim Teilen', () => {
     expect(sperre!.r).toBeLessThanOrEqual(25)
   })
 })
+
+/**
+ * Die Stufe ueberlebt den Weg nach draussen und zurueck.
+ *
+ * Nicht nur das Teilen haengt daran: eine eingelesene Sicherung geht durch
+ * dasselbe sanitizeShot (data/repositories/restore.ts). Fiele die Stufe dort
+ * weg, verlaeren alle selbst eingestuften Uebungen beim Einspielen einer
+ * Sicherung ihre Einordnung.
+ */
+describe('Die Stufe beim Teilen', () => {
+  it('kommt mit', () => {
+    expect(decodeShot(encodeShot(createShot({ level: 'C' }))).level).toBe('C')
+  })
+
+  it('bleibt weg, wenn die Uebung keine hat - das Feld darf nicht entstehen', () => {
+    // Ein Feld mehr im Stoss aenderte den Fingerabdruck jeder mitgelieferten
+    // Uebung. Dieselbe Regel wie bei der Sperrzone.
+    expect('level' in decodeShot(encodeShot(createShot()))).toBe(false)
+  })
+
+  it('wirft eine erfundene Stufe weg, statt sie zu raten', () => {
+    const payload = payloadOf({ v: 1, shot: { ...createShot(), level: 'Z' } })
+    expect('level' in decodeShot(payload)).toBe(false)
+  })
+})

@@ -72,6 +72,15 @@ describe('seedStamp', () => {
     expect(seedStamp(anders)).toBe(seedStamp(stoss()))
   })
 
+  it('laesst sich von der Stufe nicht beirren', () => {
+    // Die Stufe ordnet die Sammlung, sie beschreibt nicht den Stoss. Stuende
+    // sie im Fingerabdruck, haette das Einstufen der 25 mitgelieferten
+    // Uebungen jeden Fingerabdruck geaendert - und jeder, der eine eigene
+    // Fassung gespeichert hat, bekaeme den Hinweis auf eine ueberarbeitete
+    // Vorlage, ohne dass sich an der Uebung etwas geaendert haette.
+    expect(seedStamp(stoss({ level: 'D' }))).toBe(seedStamp(stoss()))
+  })
+
   it('rechnet sich nicht in sich selbst hinein', () => {
     // Der Stand steht am Stoss. Ginge er in die Rechnung ein, kaeme beim
     // zweiten Mal etwas anderes heraus als beim ersten.
@@ -132,8 +141,14 @@ describe('templateDifferences', () => {
     expect(templateDifferences(eigen, vorlage)).toEqual(['layout', 'name', 'attributes', 'tags'])
   })
 
-  it('kuemmert sich nicht um Favorit, Marke und Zeitstempel', () => {
-    const eigen = stoss({ favorite: true, builtIn: false, updatedAt: 99, seedStamp: 'alt' })
+  it('kuemmert sich nicht um Favorit, Marke, Zeitstempel und Stufe', () => {
+    const eigen = stoss({
+      favorite: true,
+      builtIn: false,
+      updatedAt: 99,
+      seedStamp: 'alt',
+      level: 'D',
+    })
     expect(templateDifferences(eigen, vorlage)).toEqual([])
   })
 })

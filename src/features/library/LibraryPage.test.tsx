@@ -26,14 +26,18 @@ function stoss(partial: Partial<Shot>, attribute: Partial<Shot['attributes']> = 
   return { ...basis, attributes: { ...basis.attributes, ...attribute } }
 }
 
-/** Drei Stoesse, die sich in jedem Filter unterscheiden. */
+/**
+ * Drei Stoesse, die sich in jedem Filter unterscheiden. "Zentrum halten"
+ * bleibt ohne Stufe - selbst gebaute Uebungen haben keine, solange niemand
+ * eine gewaehlt hat, und genau die muessen ueber den Filter zu finden sein.
+ */
 const STOESSE: Shot[] = [
   stoss(
-    { id: 's1', name: 'Bandenball lang' },
+    { id: 's1', name: 'Bandenball lang', level: 'B' },
     { shotType: 'bank', difficulty: 8, skills: ['bank'] },
   ),
   stoss(
-    { id: 's2', name: 'Kurzer Stopper', favorite: true },
+    { id: 's2', name: 'Kurzer Stopper', favorite: true, level: 'A' },
     { shotType: 'cut', difficulty: 2, skills: ['stun'] },
   ),
   stoss(
@@ -157,5 +161,65 @@ describe('Die Seite Stoesse', () => {
     await userEvent.selectOptions(screen.getByRole('combobox'), 'difficulty')
 
     expect(namen()).toEqual(['Kurzer Stopper', 'Zentrum halten', 'Bandenball lang'])
+  })
+})
+
+describe('Die Stufen in der Sammlung', () => {
+  /** Oeffnet die Filter und gibt das Auswahlfeld fuer die Stufe. */
+  async function stufenfeld(): Promise<HTMLElement> {
+    await userEvent.click(await screen.findByRole('button', { name: 'Filter' }))
+    return screen.getByRole('combobox', { name: 'Stufe' })
+  }
+
+  it('filtert auf eine Stufe und zaehlt sie als Filter', async () => {
+    zeige(<LibraryPage />, ORT)
+
+    await userEvent.selectOptions(await stufenfeld(), 'A')
+
+    expect(await screen.findByText('1 von 3')).toBeTruthy()
+    expect(namen()).toEqual(['Kurzer Stopper'])
+    expect(screen.getByRole('button', { name: 'Filter (1)' })).toBeTruthy()
+  })
+
+  it('findet die Uebungen ohne Stufe', async () => {
+    // Ohne diesen Wert waeren selbst gebaute Uebungen ueber den Filter nicht
+    // zu erreichen.
+    zeige(<LibraryPage />, ORT)
+
+    await userEvent.selectOptions(await stufenfeld(), 'none')
+
+    expect(await screen.findByText('1 von 3')).toBeTruthy()
+    expect(namen()).toEqual(['Zentrum halten'])
+  })
+
+  it('nimmt den Stufenfilter beim Zuruecksetzen mit', async () => {
+    zeige(<LibraryPage />, ORT)
+
+    await userEvent.selectOptions(await stufenfeld(), 'B')
+    await screen.findByText('1 von 3')
+
+    await userEvent.click(screen.getByRole('button', { name: 'Filter zurücksetzen' }))
+
+    expect(await screen.findByText('3 von 3')).toBeTruthy()
+  })
+
+  it('sortiert nach Stufe und stellt die ohne Stufe ans Ende', async () => {
+    // A, dann B, dann der Rest: so entsteht ein Weg durch die Sammlung,
+    // statt einer Liste nach Alphabet.
+    zeige(<LibraryPage />, ORT)
+    await screen.findByText('3 von 3')
+
+    await userEvent.selectOptions(screen.getByRole('combobox'), 'level')
+
+    expect(namen()).toEqual(['Kurzer Stopper', 'Bandenball lang', 'Zentrum halten'])
+  })
+
+  it('zeigt die Stufe auf der Karte', async () => {
+    // Sonst waere nicht zu sehen, wonach die Sortierung "Stufe" ordnet.
+    zeige(<LibraryPage />, ORT)
+    await screen.findByText('3 von 3')
+
+    expect(screen.getByText('· Stufe A')).toBeTruthy()
+    expect(screen.getByText('· Stufe B')).toBeTruthy()
   })
 })

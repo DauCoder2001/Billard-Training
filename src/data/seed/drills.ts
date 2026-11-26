@@ -20,6 +20,7 @@ import { DEFAULT_THRESHOLDS } from '@/domain/types'
 import type {
   Ball,
   BallPath,
+  Level,
   Point,
   PocketId,
   Shot,
@@ -153,6 +154,8 @@ function kickPosition(
 
 interface DrillSpec {
   slug: string
+  /** Lernstufe. Pflicht, damit keine neue Uebung ohne Einstufung durchrutscht. */
+  level: Level
   name: string
   description: string
   /** Objektball. */
@@ -320,6 +323,7 @@ function buildDrill(spec: DrillSpec): Shot {
     },
     coachNotes: spec.coachNotes,
     tags: ['Grundübung'],
+    level: spec.level,
     favorite: false,
     builtIn: true,
     createdAt: 0,
@@ -330,6 +334,7 @@ function buildDrill(spec: DrillSpec): Shot {
 const SPECS: DrillSpec[] = [
   {
     slug: 'stop-kurz',
+    level: 'A',
     name: 'Stop-Shot kurz',
     description: 'Gerader Ball aus kurzer Distanz. Der Weiße bleibt stehen.',
     object: { x: 75, y: 25 },
@@ -346,6 +351,7 @@ const SPECS: DrillSpec[] = [
   },
   {
     slug: 'stop-lang',
+    level: 'B',
     name: 'Stop-Shot lang',
     description: 'Derselbe gerade Ball, aber über die lange Diagonale.',
     // Auf der Diagonalen zur Ecke unten rechts: nur dort ist hinter dem
@@ -364,6 +370,7 @@ const SPECS: DrillSpec[] = [
   },
   {
     slug: 'nachlauf-mittel',
+    level: 'A',
     name: 'Nachlauf mittel',
     description: 'Gerader Ball, der Weiße läuft anschließend weiter nach vorn.',
     object: { x: 62, y: 38 },
@@ -380,6 +387,7 @@ const SPECS: DrillSpec[] = [
   },
   {
     slug: 'rueckzieher-kurz',
+    level: 'A',
     name: 'Rückzieher kurz',
     description: 'Gerader Ball, der Weiße kommt zurück zur Kopfseite.',
     object: { x: 70, y: 25 },
@@ -396,6 +404,7 @@ const SPECS: DrillSpec[] = [
   },
   {
     slug: 'rueckzieher-lang',
+    level: 'C',
     name: 'Rückzieher lang',
     description: 'Rückzieher über große Distanz. Der Klassiker zum Verzweifeln.',
     object: { x: 73.3, y: 14 },
@@ -414,6 +423,7 @@ const SPECS: DrillSpec[] = [
   },
   {
     slug: 'schnitt-15',
+    level: 'A',
     name: 'Schnittball 15 Grad',
     description: 'Leichter Anschnitt in die Ecke.',
     object: { x: 72, y: 30 },
@@ -429,6 +439,7 @@ const SPECS: DrillSpec[] = [
   },
   {
     slug: 'schnitt-30',
+    level: 'A',
     name: 'Schnittball 30 Grad',
     description: 'Halber Ball. Der Weiße läuft im rechten Winkel weiter.',
     object: { x: 70, y: 32 },
@@ -445,6 +456,7 @@ const SPECS: DrillSpec[] = [
   },
   {
     slug: 'schnitt-45',
+    level: 'B',
     name: 'Schnittball 45 Grad',
     description: 'Deutlicher Anschnitt, der Objektball verliert Tempo.',
     object: { x: 68, y: 34 },
@@ -460,6 +472,7 @@ const SPECS: DrillSpec[] = [
   },
   {
     slug: 'schnitt-60',
+    level: 'C',
     name: 'Dünner Schnitt 60 Grad',
     description: 'Dünner Ball entlang der Bande.',
     object: { x: 78, y: 42 },
@@ -475,6 +488,7 @@ const SPECS: DrillSpec[] = [
   },
   {
     slug: 'schnitt-75',
+    level: 'C',
     name: 'Sehr dünner Schnitt 75 Grad',
     description: 'Der Objektball wird nur noch gestreift.',
     object: { x: 84, y: 44 },
@@ -490,6 +504,7 @@ const SPECS: DrillSpec[] = [
   },
   {
     slug: 'mitteltasche-gerade',
+    level: 'A',
     name: 'Mitteltasche gerade',
     description: 'Gerader Ball in die Mitteltasche.',
     object: { x: 50, y: 20 },
@@ -506,6 +521,7 @@ const SPECS: DrillSpec[] = [
   },
   {
     slug: 'mitteltasche-schnitt',
+    level: 'B',
     name: 'Mitteltasche im Schnitt',
     description: 'Anschnitt in die Mitteltasche. Die Backen sind gnadenlos.',
     object: { x: 55, y: 16 },
@@ -521,6 +537,7 @@ const SPECS: DrillSpec[] = [
   },
   {
     slug: 'bande-lang',
+    level: 'B',
     name: 'Bandenball über die Langbande',
     description: 'Der Objektball geht über die obere Bande in die Ecke.',
     object: { x: 60, y: 36 },
@@ -538,6 +555,7 @@ const SPECS: DrillSpec[] = [
   },
   {
     slug: 'bande-kurz',
+    level: 'C',
     name: 'Bandenball über die Kurzbande',
     description: 'Kurzer Bandenball zurück in die Ecke der Kopfseite.',
     object: { x: 78, y: 30 },
@@ -554,6 +572,7 @@ const SPECS: DrillSpec[] = [
   },
   {
     slug: 'kick-eine-bande',
+    level: 'C',
     name: 'Kick über eine Bande',
     description: 'Der Weiße geht über die Bande an den Objektball.',
     object: { x: 78, y: 40 },
@@ -572,6 +591,7 @@ const SPECS: DrillSpec[] = [
   },
   {
     slug: 'kombination-zwei',
+    level: 'B',
     name: 'Kombination aus zwei Bällen',
     description: 'Der erste Ball schiebt den zweiten in die Ecke.',
     object: { x: 52, y: 30 },
@@ -589,6 +609,7 @@ const SPECS: DrillSpec[] = [
   },
   {
     slug: 'karambolage',
+    level: 'C',
     name: 'Karambolage',
     description: 'Der Weiße springt vom ersten Ball ab und trifft den zweiten.',
     object: { x: 55, y: 30 },
@@ -605,6 +626,7 @@ const SPECS: DrillSpec[] = [
   },
   {
     slug: 'bandenball-fest',
+    level: 'B',
     name: 'Ball an der Bande',
     description: 'Der Objektball liegt an der Langbande und muss entlang laufen.',
     object: { x: 60, y: 48.9 },
@@ -621,6 +643,7 @@ const SPECS: DrillSpec[] = [
   },
   {
     slug: 'seiteneffet-links',
+    level: 'C',
     name: 'Seiteneffet links',
     description: 'Anschnitt mit linkem Effet, um den Weißen zu verlängern.',
     object: { x: 68, y: 20 },
@@ -638,6 +661,7 @@ const SPECS: DrillSpec[] = [
   },
   {
     slug: 'seiteneffet-rechts',
+    level: 'C',
     name: 'Seiteneffet rechts',
     description: 'Dasselbe mit rechtem Effet, um den Weißen kurz zu halten.',
     object: { x: 68, y: 30 },
@@ -655,6 +679,7 @@ const SPECS: DrillSpec[] = [
   },
   {
     slug: 'position-kitchen',
+    level: 'B',
     name: 'Position in die Kitchen',
     description: 'Einlochen und den Weißen kontrolliert hinter die Kopflinie bringen.',
     object: { x: 72, y: 30 },
@@ -672,6 +697,7 @@ const SPECS: DrillSpec[] = [
   },
   {
     slug: 'position-eng',
+    level: 'C',
     name: 'Enge Position',
     description: 'Einlochen und den Weißen auf einer kleinen Fläche stoppen.',
     object: { x: 60, y: 20 },
@@ -687,6 +713,7 @@ const SPECS: DrillSpec[] = [
   },
   {
     slug: 'cluster-oeffnen',
+    level: 'C',
     name: 'Cluster öffnen',
     description: 'Ball einlochen und dabei zwei zusammenliegende Bälle trennen.',
     object: { x: 58, y: 18 },
@@ -706,6 +733,7 @@ const SPECS: DrillSpec[] = [
   },
   {
     slug: 'safe-hinter-ball',
+    level: 'C',
     name: 'Safe hinter den Ball',
     description: 'Kein Einlochen: den Weißen sicher hinter einem fremden Ball ablegen.',
     object: { x: 60, y: 25 },
@@ -724,6 +752,7 @@ const SPECS: DrillSpec[] = [
   },
   {
     slug: 'lange-gerade',
+    level: 'C',
     name: 'Lange Gerade',
     description: 'Über die lange Diagonale in die Ecke.',
     object: { x: 78.7, y: 11.3 },
