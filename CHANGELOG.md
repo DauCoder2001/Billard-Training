@@ -32,17 +32,23 @@ unten auf der Seite **Einstellungen** sowie auf der Fehlerseite. Schema:
   Zertifikat ist ausgestellt (gültig bis 24.02.2027), HTTPS wird erzwungen.
 - **Die App läuft unter `https://training.cuedesk.de`** und meldet dort 0.14.2.
 
-### Noch offen
-- `http://training.cuedesk.de` (ohne S) antwortet noch mit einem nackten
-  nginx-404, statt auf HTTPS umzuleiten; die Zuordnung des HTTP-Ports ist bei
-  GitHub offenbar noch nicht durchgelaufen. Über HTTPS ist alles da, und wer
-  die Adresse ohne Protokoll eintippt, landet über HSTS ohnehin dort. Nach
-  einiger Zeit noch einmal prüfen.
-- Die alte Adresse liefert serverseitig eine Umleitung (301), zeigt in einem
-  Browser aber weiter die App — das ist der Offline-Vorrat des Service
-  Workers, nicht der Server. Wer dort Daten hat, zieht sie über
-  **Einstellungen → Sicherung speichern** und spielt sie unter der neuen
-  Adresse wieder ein.
+- Auch `http://` leitet sauber auf HTTPS um. Nachgemessen an allen acht
+  Knoten von GitHub Pages (vier über IPv4, vier über IPv6, jeweils mit
+  umgangenem DNS): jeder antwortet mit `301` und `Server: GitHub.com`.
+
+### Zwei Fallen beim Nachprüfen
+- **Ein 404 auf `http://training.cuedesk.de` kann am eigenen Rechner liegen,
+  nicht an GitHub.** Hier war es so: Der autoritative DNS, der Resolver im Netz
+  und `Resolve-DnsName` lieferten alle den richtigen CNAME, aber die
+  Verbindungsschicht von Windows hielt noch die alte IONOS-Adresse
+  (`2001:8d8:100f:f000::200`) und landete dort auf einer Fehlerseite. Hilft:
+  `ipconfig /flushdns` als Administrator. Erkennbar ist der Fall daran, dass
+  die 404-Seite ein nacktes nginx ohne GitHub-Gestaltung ist — GitHub Pages
+  liefert eine eigene.
+- **Die alte Adresse zeigt im Browser weiter die App**, obwohl der Server eine
+  301 schickt. Das ist der Offline-Vorrat des Service Workers, nicht der
+  Server. Wer dort Daten hat, zieht sie über **Einstellungen → Sicherung
+  speichern** und spielt sie unter der neuen Adresse wieder ein.
 
 ## 0.14.1 – 26.11.2026
 

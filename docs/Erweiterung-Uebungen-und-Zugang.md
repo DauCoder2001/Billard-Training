@@ -299,9 +299,16 @@ betrifft das.
 `https://training.cuedesk.de`. Der CNAME steht bei IONOS und greift bei
 Google, Cloudflare und Quad9, die Domain ist bei GitHub als verifiziert
 geführt, das Zertifikat ist ausgestellt (bis 24.02.2027) und HTTPS wird
-erzwungen. Offen bleibt nur, dass `http://` (ohne S) noch mit einem nackten
-nginx-404 antwortet statt umzuleiten — die HTTP-Zuordnung bei GitHub ist noch
-nicht durchgelaufen.
+erzwungen. Auch `http://` leitet sauber um: an allen acht Knoten von GitHub
+Pages nachgemessen, vier über IPv4 und vier über IPv6, jeder mit `301` und
+`Server: GitHub.com`.
+
+Eine Falle beim Nachprüfen: Ein 404 auf `http://training.cuedesk.de` kann am
+eigenen Rechner liegen. Hier hielt die Verbindungsschicht von Windows noch die
+alte IONOS-Adresse, obwohl DNS und Resolver längst den richtigen CNAME
+lieferten — `ipconfig /flushdns` als Administrator räumt das weg. Zu erkennen
+ist der Fall an der 404-Seite: ein nacktes nginx ohne GitHub-Gestaltung kommt
+nicht von GitHub Pages.
 
 Von: `https://daucoder2001.github.io/Billard-Training/`
 Nach: `https://training.cuedesk.de`
