@@ -41,8 +41,11 @@ import { speedFromLegacy } from '@/domain/tempo'
  *    (0.19.3). Sechs Uebungen aendern nur diese Zahl - sie wirkt auf den
  *    Vorschlag des Coaches und auf das Rating, erreicht ein Geraet aber
  *    nur ueber diese Erhoehung.
+ * 10: Der Weg des Objektballs beim Safe endet dort, wo der Ball wirklich
+ *    liegen bleibt, statt in der Ecke unten rechts (0.19.5). Das ist ein
+ *    anderes Bild auf dem Tisch und erreicht ein Geraet nur so.
  */
-export const SEED_VERSION = 9
+export const SEED_VERSION = 10
 
 let running: Promise<void> | null = null
 

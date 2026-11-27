@@ -297,6 +297,32 @@ describe('mitgelieferte Uebungen', () => {
     expect(ohne.map((s) => s.id)).toEqual(['builtin-safe-hinter-ball'])
   })
 
+  it('schickt den Objektball in keine Tasche, wo das Einlochen nicht zaehlt', () => {
+    // Bei einer Safe soll der Ball liegen bleiben. Ein gezeichneter Weg bis
+    // in die Taschenmuendung sagt das Gegenteil - und steht direkt ueber
+    // einem Hinweis, der ihn verbietet.
+    for (const shot of shots.filter((s) => !pocketCounts(s))) {
+      const weg = shot.paths.find((p) => p.role === 'object')
+      if (!weg) throw new Error(`${shot.id}: kein Weg des Objektballs`)
+      const ende = weg.segments[weg.segments.length - 1].to
+      expect(`${shot.id}: ${distance(ende, pocketAim(shot)) > D}`).toBe(`${shot.id}: true`)
+    }
+  })
+
+  it('laesst den Objektball der Safe dort liegen, wo er gemessen liegen bleibt', () => {
+    // 250 Versuche am 27.11.2026: kein einziges Mal gefallen, im Mittel
+    // 4,0 Zoll weit auf (63,5/23,0), Streuung 1,8 Zoll. Gezeichnet waren
+    // vorher 44 Zoll bis in die Ecke unten rechts.
+    const safe = shots.find((s) => s.id === 'builtin-safe-hinter-ball')
+    if (!safe) throw new Error('Safe hinter den Ball fehlt in der Sammlung')
+    const weg = safe.paths.find((p) => p.role === 'object')
+    if (!weg) throw new Error('Safe ohne Weg des Objektballs')
+    const ende = weg.segments[weg.segments.length - 1].to
+    // Die Richtung kommt aus dem Geisterball, die Strecke aus der Messung.
+    expect(distance(at(firstObject(safe)), ende)).toBeCloseTo(4.0, 6)
+    expect([Math.round(ende.x * 10) / 10, Math.round(ende.y * 10) / 10]).toEqual([63.4, 22.9])
+  })
+
   it('nennt keine Uebung aus der Zukunft', () => {
     // `since` sagt, ab welcher Einspielung es eine Uebung gibt. Steht dort
     // eine Zahl ueber SEED_VERSION, kommt sie auf keinem Geraet an, auf dem
@@ -375,7 +401,7 @@ describe('mitgelieferte Uebungen', () => {
       'builtin-seiteneffet-links': '49a276d7',
       'builtin-position-eng': 'eed07402',
       'builtin-cluster-oeffnen': '9becf14e',
-      'builtin-safe-hinter-ball': 'd2c4e0be',
+      'builtin-safe-hinter-ball': '70960842',
       'builtin-lange-gerade': '51cfaee6',
     }
     expect(Object.fromEntries(shots.map((s) => [s.id, s.seedStamp]))).toEqual(erwartet)

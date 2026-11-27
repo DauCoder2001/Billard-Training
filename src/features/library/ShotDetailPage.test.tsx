@@ -248,3 +248,32 @@ describe('Das Bild der Stossseite', () => {
     expect(document.querySelector('[data-ebene="raster"]')).toBeNull()
   })
 })
+
+describe('Die Zieltasche auf der Stossseite', () => {
+  it('nennt sie bei einer gewoehnlichen Uebung', async () => {
+    const vorlage = seedShotById('builtin-stop-kurz')
+    if (!vorlage) throw new Error('Keine Vorlage zu builtin-stop-kurz')
+    await db.shots.add({ ...vorlage, id: 's1' })
+
+    zeige(<ShotDetailPage />, ORT)
+
+    expect(await screen.findByText(/^Zieltasche:/)).toBeTruthy()
+  })
+
+  it('verschweigt sie, wo das Einlochen nicht zaehlt', async () => {
+    // Bei einer Safe soll der Objektball liegen bleiben. Eine "Zieltasche"
+    // direkt ueber dem Hinweis "Der Objektball soll leben bleiben, nicht
+    // fallen" sagt dem Spieler das Gegenteil.
+    const safe = seedShotById('builtin-safe-hinter-ball')
+    if (!safe) throw new Error('Keine Vorlage zur Safe')
+    await db.shots.add({ ...safe, id: 's1' })
+
+    zeige(<ShotDetailPage />, ORT)
+
+    expect(await screen.findByRole('heading', { name: 'Safe hinter den Ball' })).toBeTruthy()
+    expect(screen.queryByText(/^Zieltasche:/)).toBeNull()
+    // Der Schnittwinkel bleibt stehen: er ist die Ansage, die ohne Tasche
+    // sonst niemand mehr findet.
+    expect(screen.getByText('55.0°')).toBeTruthy()
+  })
+})

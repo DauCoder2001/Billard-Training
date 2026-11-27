@@ -241,6 +241,11 @@ export const STUFE_C: DrillSpec[] = [
     // beruehrt, und 90 von 100 enden in der Zone.
     extras: [{ number: 8, x: 67.7, y: 31.3 }],
     zone: { x: 71.1, y: 39.9, r: 6 },
+    // Bis 0.19.4 lief sein gezeichneter Weg 44 Zoll weit bis in die Ecke
+    // unten rechts - in eine Tasche, die er nie erreicht. In 250 Versuchen
+    // faellt er kein einziges Mal; er legt 4,0 Zoll zurueck und bleibt im
+    // Mittel auf (63,5/23,0) liegen, Streuung 1,8 Zoll.
+    objectRoll: 4,
     mode: 'position',
     skills: ['safety', 'position'],
     shotType: 'safety',

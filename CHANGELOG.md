@@ -6,6 +6,53 @@ Die Versionsnummer steht an genau einer Stelle — in `package.json` — und ers
 unten auf der Seite **Einstellungen** sowie auf der Fehlerseite. Schema:
 `Hauptversion.Funktion.Korrektur`.
 
+## 0.19.5 – 27.11.2026
+
+Das Bild einer Übung soll sagen, was die Übung verlangt. Beim „Safe hinter
+den Ball" sagte es das Gegenteil: ein bernsteinfarbener Pfeil führte den
+Objektball bis in die Ecke unten rechts, und darunter stand „Zieltasche:
+Ecke unten rechts" — direkt über dem Hinweis „Der Objektball soll leben
+bleiben, nicht fallen."
+
+Nachgemessen, 250 Versuche mit dem ausgelieferten Aufbau:
+
+| | |
+|---|---|
+| Objektball fällt | **0 von 250** |
+| Weg, den er zurücklegt | **4,0 Zoll** |
+| Mittlere Ruhelage | (63,5 / 23,0), Streuung 1,8 Zoll |
+| Gezeichneter Weg bis dahin | **rund 44 Zoll**, bis in die Tasche |
+
+### Behoben
+
+- **Der Weg des Objektballs endet dort, wo der Ball liegen bleibt.** Der
+  Bauplan einer Übung kennt dafür jetzt `objectRoll`: die Strecke in Zoll,
+  die der Ball rollt. Angegeben wird die Strecke und nicht der Punkt, weil
+  die Richtung aus dem Geisterball folgt — der Mittelwert einer Messwolke
+  liegt leicht daneben, beim Safe 0,12 Zoll, und das sind bei 4 Zoll Weg
+  schon 1,7 Grad im angesagten Schnittwinkel. Die übrigen 37 Übungen
+  bleiben unverändert.
+- **„Zieltasche" steht nicht mehr da, wo das Einlochen nicht zählt.** Der
+  Schnittwinkel von 55° bleibt stehen, und die gestrichelte Ziellinie zeigt
+  weiter die Anspielrichtung. Aus der Tasche werden Geisterball, Ziellinie
+  und Schnittwinkel gerechnet — sie ist bei einer Safe die
+  Konstruktionslinie, kein Ziel, und wird deshalb nicht mehr als eines
+  bezeichnet.
+
+### Neu
+
+- Vier Prüfungen: dass keine Übung, bei der das Einlochen nicht zählt,
+  ihren Objektball in eine Tasche schickt; dass der Safe genau die
+  gemessenen 4,0 Zoll zeichnet; und dass die Stoßseite die Zieltasche bei
+  einer gewöhnlichen Übung nennt und bei einer Safe verschweigt.
+
+### Hinweis für eigene Fassungen
+
+Der Fingerabdruck des Safes ändert sich — der Weg gehört zum Bereich
+„layout". Wer ihn abgewandelt gespeichert hat, sieht beim nächsten Start
+„Vorlage überarbeitet". An den Ballpositionen ändert sich nichts, nur an
+der gezeichneten Linie.
+
 ## 0.19.4 – 27.11.2026
 
 „Safe hinter den Ball" sagt in seinem Hinweis: „Der Objektball soll leben

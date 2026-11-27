@@ -191,6 +191,28 @@ export interface DrillSpec {
    * Test fest, dass `cueAfter` nur bei cut 0 vorkommt.
    */
   cueAfter?: { along: 'follow' | 'draw'; dist: number; r: number }
+  /**
+   * Wie weit der Objektball rollt, in Zoll - statt bis in die Tasche.
+   *
+   * Sonst endet sein gezeichneter Weg an der Taschenmuendung. Bei einer Safe
+   * ist das die falsche Auskunft: dort soll er gerade nicht fallen. Beim
+   * "Safe hinter den Ball" legt er gemessen 4,0 Zoll zurueck, gezeichnet
+   * waren 44.
+   *
+   * Angegeben wird die Strecke, nicht der Punkt. Die Richtung ist durch den
+   * Geisterball festgelegt - der Objektball verlaesst den Kontakt auf der
+   * Linie zum Zielpunkt. Ein von Hand gesetzter Punkt laege leicht daneben
+   * und wuerde den angesagten Schnittwinkel verfaelschen (der Mittelwert
+   * einer Messwolke liegt nicht genau auf der Linie: beim Safe 0,12 Zoll
+   * daneben, und das sind bei 4 Zoll Weg schon 1,7 Grad).
+   *
+   * Nur fuer den geraden Fall gedacht, nicht fuer Bandenbaelle und
+   * Kombinationen - dort fuehrt der Weg ueber einen Zwischenpunkt.
+   *
+   * Die Zieltasche bleibt unberuehrt: aus ihr werden Geisterball, Ziellinie
+   * und Schnittwinkel gerechnet.
+   */
+  objectRoll?: number
   mode?: 'pocket' | 'position' | 'pocket+position'
   skills: SkillTag[]
   shotType: ShotType
@@ -314,7 +336,8 @@ export function buildDrill(spec: DrillSpec): Shot {
   }
 
   // Weg des Objektballs: bei einem Bandenball ueber den Auftreffpunkt, bei
-  // einer Kombination nur bis zum zweiten Ball.
+  // einer Kombination nur bis zum zweiten Ball, bei einer Safe bis zu der
+  // Stelle, an der er wirklich liegen bleibt (spec.objectEnd).
   const objectSegments = []
   if (spec.bankRail) {
     const hit = castToRail(
@@ -324,7 +347,18 @@ export function buildDrill(spec: DrillSpec): Shot {
     )
     if (hit) objectSegments.push({ to: hit.point, rail: true })
   }
-  objectSegments.push({ to: second ? objectAim : pocketAim })
+  const objectZiel = second ? objectAim : pocketAim
+  if (spec.objectRoll !== undefined) {
+    const richtung = norm({ x: objectZiel.x - object.x, y: objectZiel.y - object.y })
+    objectSegments.push({
+      to: {
+        x: object.x + richtung.x * spec.objectRoll,
+        y: object.y + richtung.y * spec.objectRoll,
+      },
+    })
+  } else {
+    objectSegments.push({ to: objectZiel })
+  }
   paths.push({ id: 'path-object', ballId: objectId, role: 'object', segments: objectSegments })
 
   // Die Zielzone: entweder gesetzt (spec.zone) oder aus der Stosslinie

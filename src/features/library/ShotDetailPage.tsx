@@ -311,7 +311,15 @@ export function ShotDetailPage() {
               <span className="muted">Schnittwinkel</span>
               <strong>{shot.attributes.cutAngle.toFixed(1)}°</strong>
             </div>
-            {pocket && <div className="small muted">Zieltasche: {pocket.label}</div>}
+            {/* Wo das Einlochen nicht zaehlt, gibt es keine Zieltasche - bei
+                einer Safe soll der Ball gerade nicht fallen. Gerechnet wird
+                aus ihr weiterhin: Geisterball, Ziellinie und Schnittwinkel
+                haengen an ihr (shot.ts, computeCutAngle). Sie ist dort die
+                Anspielrichtung, kein Ziel, und hat als "Zieltasche" nichts
+                neben einem Hinweis zu suchen, der das Gegenteil sagt. */}
+            {pocket && pocketCounts(shot) && (
+              <div className="small muted">Zieltasche: {pocket.label}</div>
+            )}
             <SkillChips skills={shot.attributes.skills} />
             {last && (
               <div className="row">
