@@ -29,8 +29,12 @@ import { transliterate } from '@/domain/text'
  *    links", das Effet eingeschlossen. Die verbliebene heisst jetzt
  *    "Seiteneffet ueber die Bande" und nennt beide Seiten im Hinweis;
  *    Name und Hinweis erreichen ein Geraet nur ueber diese Erhoehung.
+ * 7: Bandenwege an der richtigen Linie gespiegelt und "Ball an der Bande"
+ *    von der Bande weggerueckt (0.19.1). Vier Uebungen aendern dadurch ihre
+ *    Lage - das sind andere Baelle auf dem Tisch, nicht nur ein anderer
+ *    Text.
  */
-export const SEED_VERSION = 6
+export const SEED_VERSION = 7
 
 let running: Promise<void> | null = null
 

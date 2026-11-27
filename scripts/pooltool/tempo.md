@@ -27,15 +27,15 @@ Rueckwaerts gerechnet: jede Uebung wird die Tempo-Leiter [0.4, 0.55, 0.7, 0.9, 1
 | Stop-Shot lang | B | 6 | 4.0 m/s | 25 % | 14.0" | 14.0" bei 4.0 m/s |
 | Schnittball 45 Grad | B | 6 | 2.6 m/s | 30 % | 22.0" | 22.0" bei 2.6 m/s |
 | Mitteltasche im Schnitt | B | 5 | 2.6 m/s | 100 % | 9.6" | 9.6" bei 2.6 m/s |
-| Bandenball über die Langbande | B | 6 | 3.2 m/s | 35 % | – | – |
+| Bandenball über die Langbande | B | 6 | 2.1 m/s | 30 % | – | – |
 | Kombination aus zwei Bällen | B | 5 | 2.6 m/s | 10 % | – | – |
-| Ball an der Bande | B | 5 | **kein Treffer auf der ganzen Leiter** | | | |
+| Ball an der Bande | B | 5 | 1.4 m/s | 50 % | 0.6" | 0.6" bei 1.4 m/s |
 | Position in die Kitchen | B | 6 | 2.6 m/s | 40 % | 2.8" | 2.8" bei 2.6 m/s |
 | Rückzieher lang | C | 8 | 3.2 m/s | 25 % | 7.4" | 7.4" bei 3.2 m/s |
 | Dünner Schnitt 60 Grad | C | 6 | 1.7 m/s | 30 % | 6.0" | 6.0" bei 1.7 m/s |
 | Sehr dünner Schnitt 75 Grad | C | 7 | 2.6 m/s | 25 % | – | – |
-| Bandenball über die Kurzbande | C | 6 | 3.2 m/s | 30 % | – | – |
-| Kick über eine Bande | C | 6 | **kein Treffer auf der ganzen Leiter** | | | |
+| Bandenball über die Kurzbande | C | 6 | 1.4 m/s | 30 % | – | – |
+| Kick über eine Bande | C | 6 | 1.7 m/s | 10 % | – | – |
 | Karambolage | C | 5 | 1.7 m/s | 35 % | – | – |
 | Seiteneffet über die Bande | C | 6 | 2.1 m/s | 40 % | 24.3" | 24.3" bei 2.1 m/s |
 | Enge Position | C | 4 | 3.2 m/s | 35 % | 7.2" | 7.2" bei 3.2 m/s |

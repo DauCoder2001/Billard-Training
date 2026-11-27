@@ -293,8 +293,15 @@ export interface RailHit {
 /**
  * Verfolgt einen Strahl bis zur naechsten Bande und liefert Auftreffpunkt
  * und reflektierte Richtung. null, wenn die Richtung entartet ist.
+ *
+ * `inset` zieht die Bande um diesen Betrag ins Feld hinein. Fuer einen
+ * blossen Strahl ist 0 richtig; verfolgt man einen **Ball**, gehoert
+ * `TABLE.ballRadius` hinein, denn seine Mitte kehrt eine Ballbreite vor der
+ * Bande um. Der Unterschied ist klein und fuer Bandenwege entscheidend:
+ * beim Kick der mitgelieferten Sammlung lagen 5,2 Grad dazwischen
+ * (Nachrechnung vom 26.11.2026).
  */
-export function castToRail(from: Point, dir: Point): RailHit | null {
+export function castToRail(from: Point, dir: Point, inset = 0): RailHit | null {
   const len = Math.hypot(dir.x, dir.y)
   if (len < 1e-9) return null
   const d = { x: dir.x / len, y: dir.y / len }
@@ -308,10 +315,10 @@ export function castToRail(from: Point, dir: Point): RailHit | null {
       rail = sideName
     }
   }
-  if (d.x > 0) consider((TABLE.length - from.x) / d.x, 'right')
-  if (d.x < 0) consider((0 - from.x) / d.x, 'left')
-  if (d.y > 0) consider((TABLE.width - from.y) / d.y, 'top')
-  if (d.y < 0) consider((0 - from.y) / d.y, 'bottom')
+  if (d.x > 0) consider((TABLE.length - inset - from.x) / d.x, 'right')
+  if (d.x < 0) consider((inset - from.x) / d.x, 'left')
+  if (d.y > 0) consider((TABLE.width - inset - from.y) / d.y, 'top')
+  if (d.y < 0) consider((inset - from.y) / d.y, 'bottom')
 
   if (rail === null || !Number.isFinite(best)) return null
   const hitRail: RailSide = rail

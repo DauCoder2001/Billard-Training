@@ -575,8 +575,8 @@ ausgelieferte Fassung mit Eintrag im CHANGELOG.
 | 0.18.3 ✓ | „Seiteneffet rechts" zurückgenommen, die Ausnahme im Spiegeltest aufgehoben; Stufe C hat 11, die Sammlung 38 — erledigt am 26.11.2026 | 0.18.1 |
 | — | **Die Stufen B, C und D füllt Matthias Stück für Stück selbst.** Keine Auslieferung, die eine Stufe in einem Zug auf eine Zielzahl bringt (E6, 3.2.1, 3.2.2). | — |
 | 0.19.0 ✓ | **Nachrechnung mit pooltool** (5.2), vorgezogen — erledigt am 26.11.2026. Werkzeuge unter `scripts/pooltool/`, Befunde in [Nachrechnung-mit-pooltool.md](Nachrechnung-mit-pooltool.md). Ändert nichts an der App | — |
-| 0.19.1 | **Korrekturen aus der Nachrechnung:** Spiegelfehler bei Bandenbällen (`build.ts:40`), „Ball an der Bande" unspielbar, Geisterball in den Machbarkeitstest | 0.19.0 |
-| 0.19.2 | **13 Zielzonen neu setzen** aus den gemessenen Ruhelagen, sieben Schwierigkeiten nachziehen | 0.19.1 |
+| 0.19.1 ✓ | **Korrekturen aus der Nachrechnung** — erledigt am 27.11.2026. Bandenwege an der Umkehrlinie gespiegelt (vier Übungen), „Ball an der Bande" von der Bande weggerückt und damit spielbar, achte Prüfung `ghostOnTable`. Gemessen im Nachtrag von [Nachrechnung-mit-pooltool.md](Nachrechnung-mit-pooltool.md) | 0.19.0 |
+| 0.19.2 | **12 Zielzonen neu setzen** aus den gemessenen Ruhelagen, sieben Schwierigkeiten nachziehen. Jeder Fall einzeln vorlegen, nicht stillschweigend verschieben | 0.19.1 |
 | 0.20.0 | Modell für Spezialtechniken (3.6): `jump` und `masse` als Stoßart und Fähigkeit, `air` am Wegsegment — die Voraussetzung dafür, dass Stufe D überhaupt gebaut werden *kann* | — |
 | 0.21.0 | Stufenprüfungen und vier neue Erfolge (4.) | 0.19.2, 0.20.0 |
 | **1.0.0** | Vier Stufen mit tragfähigem Umfang, vier Prüfungen, nachgerechnet, eigene Adresse | 0.21.0 |
@@ -629,17 +629,21 @@ am Server.
   mehr, auf das hin gearbeitet wird. Die Aufteilung ergibt sich daraus,
   welche Übungen sinnvoll sind — nicht umgekehrt.
 - **Die Zielzonen der Sammlung** — mit 0.19.0 gemessen, noch nicht
-  berichtigt. 13 von 25 liegen weiter von der gemessenen Ruhelage des Weißen
-  entfernt, als sie Radius haben; die von „Seiteneffet über die Bande" um
+  berichtigt. 12 von 25 liegen weiter von der gemessenen Ruhelage des Weißen
+  entfernt, als sie Radius haben (vor 0.19.1 waren es 13; „Ball an der Bande"
+  ist seither erreichbar); die von „Seiteneffet über die Bande" um
   24,3 Zoll. Die gemessenen Ruhelagen stehen in
   `scripts/pooltool/tempo.json`, die Korrektur ist als 0.19.2 eingeplant.
 - **Das Tempo 1..10 hat keine Bedeutung** (0.19.0, r = 0,367 gegen das
   gemessene Tempo). Entweder bekommt es eine Einheit, oder es gehört aus der
   Bewertung heraus. Zu entscheiden, bevor die Stufenprüfungen kommen — die
   benoten an diesen Zahlen.
-- **Der Machbarkeitstest prüft den Geisterball nicht.** „Ball an der Bande"
-  verlangt den Weißen 0,027 Zoll innerhalb der Bande und wird trotzdem nicht
-  beanstandet (0.19.0). Eingeplant als 0.19.1.
+- **Die Bande spiegelt nicht, sie gibt nach.** Mit 0.19.1 zielt der Kick auf
+  die richtige Linie, trifft den Objektball aber auch mit vollkommenem Stoß
+  nur bei einer von sechs Geschwindigkeiten: Der Winkel einer echten Bande
+  hängt vom Tempo ab, und die Geometrie rechnet mit einem einzigen. Entweder
+  bekommt die Bande ein Modell, oder „Kick über eine Bande" darf nicht nach
+  der Trefferquote bewertet werden. Zu entscheiden.
 - **Effet ist auf der Übungsseite unsichtbar:** `spin` steht in den
   Eigenschaften der Übung, wird aber nur im Baukasten angezeigt. Für
   Seiteneffet-Übungen ist das die halbe Aufgabe. Zu entscheiden, ob die

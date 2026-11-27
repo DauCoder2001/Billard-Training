@@ -101,6 +101,7 @@ class Ergebnis:
     tempo: int
     laeufe: int
     getroffen: int = 0
+    beruehrt: int = 0
     falsche_tasche: int = 0
     abzug: int = 0  # Weisser faellt
     in_zone: int = 0
@@ -194,7 +195,15 @@ def einmal_spielen(
 
     getroffen_in = None
     weisser_gefallen = False
+    beruehrt = False
     for ereignis in system.events:
+        if ereignis.event_type is pt.EventType.BALL_BALL:
+            # Hat der Weisse den Objektball ueberhaupt erwischt? Beim Kick
+            # ist genau das die Aufgabe, nicht das Einlochen.
+            ids = {a.id for a in ereignis.agents}
+            if "cue" in ids and "obj" in ids:
+                beruehrt = True
+            continue
         if ereignis.event_type is not pt.EventType.BALL_POCKET:
             continue
         ball, tasche = ereignis.agents[0].id, ereignis.agents[1].id
@@ -205,6 +214,7 @@ def einmal_spielen(
 
     return {
         "tasche": getroffen_in,
+        "beruehrt": beruehrt,
         "abzug": weisser_gefallen,
         "weisser": None if weisser_gefallen else nach_app(system.balls["cue"].state.rvw[0]),
     }
@@ -241,6 +251,8 @@ def uebung_rechnen(
             erg.fehler = f"{type(fehler).__name__}: {fehler}"
             continue
 
+        if lauf["beruehrt"]:
+            erg.beruehrt += 1
         if lauf["abzug"]:
             erg.abzug += 1
         if lauf["tasche"] == soll:
@@ -343,16 +355,16 @@ def bericht(ergebnisse: list[Ergebnis], laeufe: int) -> str:
     )
     zeilen.append("")
     zeilen.append(
-        "| Uebung | Stufe | Schwierigkeit | Treffer | Falsche Tasche | Weisser faellt | "
-        "In der Zone | Mittlere Ruhelage | Streuung | Zone laut App | Abstand |"
+        "| Uebung | Stufe | Schwierigkeit | Treffer | Objektball beruehrt | Falsche Tasche | "
+        "Weisser faellt | In der Zone | Mittlere Ruhelage | Streuung | Zone laut App | Abstand |"
     )
-    zeilen.append("|---|---|---|---|---|---|---|---|---|---|---|")
+    zeilen.append("|---|---|---|---|---|---|---|---|---|---|---|---|")
 
     for e in sorted(ergebnisse, key=lambda x: (x.stufe or "Z", -x.trefferquote)):
         if e.gueltig == 0:
             zeilen.append(
                 f"| {e.name} | {e.stufe} | {e.schwierigkeit} | "
-                f"**kein Versuch gerechnet: {e.fehler}** | | | | | | | |"
+                f"**kein Versuch gerechnet: {e.fehler}** | | | | | | | | |"
             )
             continue
         mitte = e.mitte
@@ -370,7 +382,8 @@ def bericht(ergebnisse: list[Ergebnis], laeufe: int) -> str:
             treffer_text += f" ({e.abstuerze} Versuche ausgefallen)"
         zeilen.append(
             f"| {e.name} | {e.stufe} | {e.schwierigkeit}/10 | "
-            f"{treffer_text} | {e.falsche_tasche} | {e.abzug} | "
+            f"{treffer_text} | {e.beruehrt / e.gueltig * 100:.0f} % | "
+            f"{e.falsche_tasche} | {e.abzug} | "
             f"{zonenquote} | {mitte_text} | {e.streuung:.1f}\" | {zone_text} | {abstand} |"
         )
 
@@ -434,6 +447,7 @@ def main() -> int:
                             {
                                 "v0": v0,
                                 "trefferquote": e.trefferquote,
+                    "beruehrt": e.beruehrt / e.gueltig if e.gueltig else 0.0,
                                 "mitte": e.mitte,
                                 "abzug": e.abzug,
                             }
@@ -466,6 +480,7 @@ def main() -> int:
                     "stufe": e.stufe,
                     "schwierigkeit": e.schwierigkeit,
                     "trefferquote": e.trefferquote,
+                    "beruehrt": e.beruehrt / e.gueltig if e.gueltig else 0.0,
                     "falsche_tasche": e.falsche_tasche,
                     "abzug": e.abzug,
                     "zonenquote": e.zonenquote,

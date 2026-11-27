@@ -101,8 +101,15 @@ export const STUFE_B: DrillSpec[] = [
     slug: 'bandenball-fest',
     level: 'B',
     name: 'Ball an der Bande',
-    description: 'Der Objektball liegt an der Langbande und muss entlang laufen.',
-    object: { x: 60, y: 48.9 },
+    description: 'Der Objektball liegt dicht an der Langbande und muss im Schnitt entlang laufen.',
+    // Bis 0.19.1 lag er auf 48,9 - weiter an der Bande, als eine Ballmitte
+    // ueberhaupt kommt (48,875). Dort war die Uebung nicht spielbar: Die
+    // Anspiellinie zur Ecke oben rechts faellt leicht ab, also haette der
+    // Weisse im Augenblick des Treffens 0,05 Zoll ausserhalb der
+    // Spielflaeche stehen muessen. Gerechnet fiel er in 100 von 100
+    // Versuchen (Nachrechnung vom 26.11.2026). Jetzt steht der Ball 2,5
+    // Zoll von der Bande, wie sein gerades Gegenstueck in Stufe A.
+    object: { x: 60, y: 47.5 },
     pocket: 'tr',
     cut: 8,
     dist: 26,

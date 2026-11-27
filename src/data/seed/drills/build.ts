@@ -36,30 +36,47 @@ import type {
 
 type RailSide = 'top' | 'bottom' | 'left' | 'right'
 
-/** Spiegelt einen Punkt an einer Bande, fuer die Berechnung von Bandenwegen. */
+/**
+ * Die Linie, an der ein Ball umkehrt: eine Ballbreite vor der Bande.
+ *
+ * **Hier lag bis 0.19.1 ein Fehler.** Gespiegelt wurde an der Bandenflaeche
+ * selbst - also an der Linie, an der ein *Punkt* reflektiert. Ein Ball
+ * kehrt aber frueher um, denn seine Mitte kommt der Bande nie naeher als
+ * einen Radius. Der Unterschied ist eine Ballbreite im gespiegelten Ziel,
+ * und was daraus an Winkelfehler wird, haengt an der Lage: beim Bandenball
+ * ueber die Langbande 0,95 Grad, ueber die Kurzbande 0,16 Grad, beim Kick
+ * 5,21 Grad. Der Kick ging deshalb bei keiner Geschwindigkeit auf
+ * (Nachrechnung vom 26.11.2026).
+ */
+const UMKEHR = TABLE.ballRadius
+
+/** Spiegelt einen Punkt an der Umkehrlinie einer Bande. */
 function mirrorAcross(p: Point, rail: RailSide): Point {
   switch (rail) {
     case 'top':
-      return { x: p.x, y: 2 * TABLE.width - p.y }
+      return { x: p.x, y: 2 * (TABLE.width - UMKEHR) - p.y }
     case 'bottom':
-      return { x: p.x, y: -p.y }
+      return { x: p.x, y: 2 * UMKEHR - p.y }
     case 'left':
-      return { x: -p.x, y: p.y }
+      return { x: 2 * UMKEHR - p.x, y: p.y }
     case 'right':
-      return { x: 2 * TABLE.length - p.x, y: p.y }
+      return { x: 2 * (TABLE.length - UMKEHR) - p.x, y: p.y }
   }
 }
 
-/** Weg bis zu einer bestimmten Bande, oder null, wenn sie nicht vorauskommt. */
+/**
+ * Weg bis zur Umkehrlinie einer bestimmten Bande, oder null, wenn sie nicht
+ * vorauskommt.
+ */
 function bisBande(from: Point, dir: Point, rail: RailSide): number | null {
   const t =
     rail === 'left'
-      ? -from.x / dir.x
+      ? (UMKEHR - from.x) / dir.x
       : rail === 'right'
-        ? (TABLE.length - from.x) / dir.x
+        ? (TABLE.length - UMKEHR - from.x) / dir.x
         : rail === 'bottom'
-          ? -from.y / dir.y
-          : (TABLE.width - from.y) / dir.y
+          ? (UMKEHR - from.y) / dir.y
+          : (TABLE.width - UMKEHR - from.y) / dir.y
   return Number.isFinite(t) && t > 1e-9 ? t : null
 }
 
@@ -300,7 +317,11 @@ export function buildDrill(spec: DrillSpec): Shot {
   // einer Kombination nur bis zum zweiten Ball.
   const objectSegments = []
   if (spec.bankRail) {
-    const hit = castToRail(object, { x: objectAim.x - object.x, y: objectAim.y - object.y })
+    const hit = castToRail(
+      object,
+      { x: objectAim.x - object.x, y: objectAim.y - object.y },
+      UMKEHR,
+    )
     if (hit) objectSegments.push({ to: hit.point, rail: true })
   }
   objectSegments.push({ to: second ? objectAim : pocketAim })

@@ -163,12 +163,20 @@ function zoneRahmen(zone: TargetZone): Rahmen {
 
 type Bande = 'left' | 'right' | 'bottom' | 'top'
 
-/** Die Bande, auf der ein Punkt liegt - oder null, wenn er frei steht. */
+/**
+ * Die Bande, an der ein Ball in diesem Punkt umkehrt - oder null.
+ *
+ * Geprueft wird die **Umkehrlinie**, nicht die Bandenflaeche: die Mitte
+ * eines Balles kommt der Bande nie naeher als einen Radius. Bis 0.19.1
+ * stand hier die Bandenflaeche, und derselbe Irrtum steckte in der
+ * Rechnung - der Test hat den Fehler also mitgetragen statt ihn zu finden.
+ */
 function bandeAn(p: Point): Bande | null {
-  if (Math.abs(p.x) < 1e-6) return 'left'
-  if (Math.abs(p.x - TABLE.length) < 1e-6) return 'right'
-  if (Math.abs(p.y) < 1e-6) return 'bottom'
-  if (Math.abs(p.y - TABLE.width) < 1e-6) return 'top'
+  const r = TABLE.ballRadius
+  if (Math.abs(p.x - r) < 1e-6) return 'left'
+  if (Math.abs(p.x - (TABLE.length - r)) < 1e-6) return 'right'
+  if (Math.abs(p.y - r) < 1e-6) return 'bottom'
+  if (Math.abs(p.y - (TABLE.width - r)) < 1e-6) return 'top'
   return null
 }
 
@@ -296,15 +304,15 @@ describe('mitgelieferte Uebungen', () => {
       'builtin-stop-lang': '9bc8d3aa',
       'builtin-schnitt-45': '4ad32ec3',
       'builtin-mitteltasche-schnitt': 'ea1277d7',
-      'builtin-bande-lang': 'e20a9898',
+      'builtin-bande-lang': '963e5440',
       'builtin-kombination-zwei': 'fbbdf39b',
-      'builtin-bandenball-fest': 'dbac8d85',
+      'builtin-bandenball-fest': 'aece12ee',
       'builtin-position-kitchen': '0ae55ea8',
       'builtin-rueckzieher-lang': 'd93a5e0a',
       'builtin-schnitt-60': '16d42569',
       'builtin-schnitt-75': 'df101d79',
-      'builtin-bande-kurz': '3c54092a',
-      'builtin-kick-eine-bande': '0281cc66',
+      'builtin-bande-kurz': '6562d0f7',
+      'builtin-kick-eine-bande': '2250773e',
       'builtin-karambolage': 'a3d68b04',
       'builtin-seiteneffet-links': '47ae8045',
       'builtin-position-eng': 'e2d4f90a',

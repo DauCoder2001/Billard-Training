@@ -6,6 +6,64 @@ Die Versionsnummer steht an genau einer Stelle — in `package.json` — und ers
 unten auf der Seite **Einstellungen** sowie auf der Fehlerseite. Schema:
 `Hauptversion.Funktion.Korrektur`.
 
+## 0.19.1 – 27.11.2026
+
+Die eindeutigen Korrekturen aus der Nachrechnung von 0.19.0 — die Fälle, in
+denen nichts zu entscheiden war, sondern etwas falsch gerechnet wurde.
+Belege im Nachtrag von `docs/Nachrechnung-mit-pooltool.md`.
+
+### Behoben
+- **Bandenwege werden an der richtigen Linie gespiegelt.** Ein Ball kehrt
+  eine Ballbreite vor der Bande um, nicht an der Bandenfläche. Der Aufbau
+  spiegelte an der Fläche und zielte dadurch daneben: 0,95 Grad über die
+  Langbande, 0,16 Grad über die Kurzbande, 5,21 Grad beim Kick. Vier
+  Übungen ändern ihre Lage: **Bandenball über die Langbande**, **Bandenball
+  über die Kurzbande**, **Kick über eine Bande**, **Ball an der Bande**.
+- **„Ball an der Bande" ist spielbar.** Der Objektball lag auf y = 48,9 —
+  weiter an der Bande, als eine Ballmitte überhaupt kommt (48,875). Der
+  Weiße hätte im Augenblick des Treffens 0,05 Zoll **außerhalb** der
+  Spielfläche stehen müssen und fiel in 100 von 100 gerechneten Versuchen. Jetzt
+  steht der Ball 2,5 Zoll von der Bande, wie sein gerades Gegenstück in
+  Stufe A. Gerechnet fallen bei 1,4 m/s 50 %, und der Weiße kommt 0,6 Zoll
+  an seiner Zielzone zur Ruhe.
+- Dass `castToRail` einen Strahl bis zur Bandenfläche verfolgt, ist für
+  einen Strahl richtig. Für einen **Ball** gehört die Ballbreite dazu, und
+  die Funktion nimmt sie jetzt als Angabe entgegen.
+
+### Neu
+- **Achte Prüfung im Machbarkeitstest: `ghostOnTable`.** Sie meldet, um wie
+  viel der Weiße im Augenblick des Treffens außerhalb der Spielfläche stehen
+  müsste. Genau der Fall von „Ball an der Bande", den die sieben bisherigen
+  Prüfungen durchgelassen haben.
+
+### Gemessen
+Alt gegen neu, beide Fassungen unter denselben Bedingungen durchgespielt
+(60 Versuche je Tempostufe, 11 Stufen, gleiche Saat), beste Trefferquote
+auf der Leiter:
+
+| Übung | alt | neu |
+|---|---|---|
+| Bandenball über die Langbande | 27 % | 22 % |
+| **Ball an der Bande** | **0 %** | **60 %** |
+| Bandenball über die Kurzbande | 33 % | 35 % |
+| Kick über eine Bande | 3 % | 7 % |
+
+Die beiden Bandenbälle liegen innerhalb des Rauschens (±5,9 Prozentpunkte
+bei 60 Versuchen) — begründet ist die Korrektur nicht durch sie, sondern
+dadurch, dass die gespiegelte Linie die falsche war. Der Kick bleibt
+unzuverlässig: Ein Lauf ohne jede Streuung trifft den Objektball nur bei
+einer von sechs Geschwindigkeiten. Der Zielfehler ist weg, die Bande selbst
+bleibt — eine echte Bande spiegelt nicht, sie gibt nach, und wie weit, hängt
+vom Tempo ab. Dafür bräuchte die Übung ein Bandenmodell.
+
+Die Berichte unter `scripts/pooltool/` sind mit der neuen Geometrie neu
+gerechnet. Übungen, die bei keinem Tempo aufgehen: 1 statt 2. Zielzonen
+außer Reichweite: 12 von 25 statt 13.
+
+### Hinweis für bestehende Installationen
+`SEED_VERSION` steht auf 7. Vier Vorlagen ändern ihre Lage; wer eine davon
+selbst bearbeitet hat, behält seine Fassung und sieht „Vorlage überarbeitet".
+
 ## 0.19.0 – 26.11.2026
 
 ### Neu

@@ -44,6 +44,7 @@ export const FEASIBILITY_CHECKS = [
   'scorable',
   'overlap',
   'cueRoom',
+  'ghostOnTable',
   'sightLine',
   'cutAngle',
   'objectPath',
@@ -249,6 +250,30 @@ function cutAngleOf(cue: Point, objekt: Point, ziel: Point): number | null {
 }
 
 /**
+ * Wie weit der Geisterball ueber den Rand der Spielflaeche hinausliegt.
+ *
+ * Null, solange er erreichbar ist. Der Geisterball ist die Stelle, an der
+ * die Mitte des Weissen im Augenblick des Treffens steht - und eine
+ * Ballmitte kommt keiner Bande naeher als einen Radius. Liegt er darueber
+ * hinaus, ist der Stoss nicht zu spielen, auch wenn das Bild harmlos
+ * aussieht.
+ *
+ * Gefunden an "Ball an der Bande": ein an der Langbande festliegender
+ * Objektball, bei dem die Anspiellinie zur Ecke den Weissen 0,05 Zoll
+ * ueber den Rand schiebt. Alle anderen Pruefungen schwiegen dazu (0.19.1).
+ */
+function ghostUeberRand(ghost: Point): number {
+  const r = TABLE.ballRadius
+  return Math.max(
+    0,
+    r - ghost.x,
+    ghost.x - (TABLE.length - r),
+    r - ghost.y,
+    ghost.y - (TABLE.width - r),
+  )
+}
+
+/**
  * Die Bande, die dem Weissen den Platz fuer das Queue nimmt - oder keine.
  *
  * Zwei Bedingungen zusammen: zu wenig Luft zwischen Ballkante und Bande,
@@ -314,6 +339,20 @@ export function feasibilityHints(shot: Shot): FeasibilityHint[] {
         check: 'cueRoom',
         level: 'warn',
         text: `Der Weiße liegt zu dicht an der ${bande}, um das Queue für diesen Stoß flach anzusetzen.`,
+      })
+    }
+  }
+
+  const zielPunkt = objectAim(shot)
+  if (objekt && zielPunkt) {
+    const ueber = ghostUeberRand(ghostBall(at(objekt), zielPunkt))
+    if (ueber > 1e-9) {
+      hints.push({
+        check: 'ghostOnTable',
+        level: 'warn',
+        text:
+          `Der Weiße müsste beim Treffen ${ueber.toFixed(2)}" außerhalb der Spielfläche stehen. ` +
+          'So ist der Ball nicht in diese Tasche zu spielen.',
       })
     }
   }

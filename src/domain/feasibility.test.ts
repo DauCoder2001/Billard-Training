@@ -224,6 +224,43 @@ describe('Platz fuer das Queue', () => {
   })
 })
 
+describe('Der Geisterball auf dem Tisch', () => {
+  it('meldet einen Objektball, der nicht in diese Tasche zu spielen ist', () => {
+    // Der Fall aus der Sammlung (0.19.1): ein an der oberen Langbande
+    // festliegender Ball, der in die Ecke oben rechts soll. Der Zielpunkt
+    // in der Muendung liegt tiefer als der Ball, also faellt die
+    // Anspiellinie leicht ab - und der Weisse muesste im Augenblick des
+    // Treffens in der Bande stehen.
+    const shot = aufbau([weisser(30, 40), objekt(60, TABLE.width - R)], {
+      target: { pocketId: 'tr', cheat: 0 },
+    })
+    expect(checks(shot)).toContain('ghostOnTable')
+    expect(text(shot, 'ghostOnTable')).toContain('außerhalb der Spielfläche')
+  })
+
+  it('schweigt, sobald der Ball von der Bande weg liegt', () => {
+    // Zweieinhalb Zoll genuegen: so steht es in der Sammlung.
+    const shot = aufbau([weisser(30, 40), objekt(60, TABLE.width - 2.5)], {
+      target: { pocketId: 'tr', cheat: 0 },
+    })
+    expect(checks(shot)).not.toContain('ghostOnTable')
+  })
+
+  it('nennt, wie weit der Weisse danebenstuende', () => {
+    const objektBall = objekt(60, TABLE.width - R)
+    const shot = aufbau([weisser(30, 40), objektBall], {
+      target: { pocketId: 'tr', cheat: 0 },
+    })
+    const ghost = ghostBall(
+      { x: objektBall.x, y: objektBall.y },
+      pocketAimPoint(POCKET_BY_ID.tr, 0),
+    )
+    const ueber = ghost.y - (TABLE.width - R)
+    expect(ueber).toBeGreaterThan(0)
+    expect(text(shot, 'ghostOnTable')).toContain(`${ueber.toFixed(2)}"`)
+  })
+})
+
 describe('Die Reihenfolge der Hinweise', () => {
   it('nennt das Hindernis vor den Hinweisen und folgt sonst dem Stoss', () => {
     // Ohne Objektball und ohne Zielzone, dazu zwei Baelle ineinander.
