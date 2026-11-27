@@ -271,11 +271,21 @@ den 65 % bereits abgezogen — die Güte multipliziert die Fehlversuche weg.
   Schwierigkeit 8 oder höher; die beste davon schließt der gerechnete
   Spieler mit 28 Punkten ab, verlangt sind 80. Der Erfolg war aber auch
   vorher nur über den Safe erreichbar — und dort nur über eine zweite
-  Eigenheit: `scoring.ts` gibt im Modus `position` nur Punkte, wenn der
+  Eigenheit: `scoring.ts` gab im Modus `position` nur Punkte, wenn der
   Objektball gefallen ist (`result.pocketed ? pos * 2 : 0`), während der
-  Safe ausdrücklich verlangt, ihn nicht zu lochen. Im Trainer gibt es dafür
-  nur „Eingelocht" oder „Verfehlt". Beides gehört zusammen entschieden, und
-  zwar nicht als Schwierigkeitsfrage.
+  Safe ausdrücklich verlangt, ihn nicht zu lochen.
+
+  **Die Wertung ist mit 0.19.4 berichtigt** (Weg B der Besprechung vom
+  27.11.2026): der Modus wertet allein die Lage, ein Versuch hält fest, ob
+  der Objektball berührt wurde, und am Tisch stehen „Ball liegt", „Ball
+  gefallen" und „Nicht getroffen". Damit erreicht der gerechnete Spieler
+  beim Safe mindestens 79 Punkte — die Zonenquote, und Ruhelagen knapp
+  daneben zählen noch mit. Genau diese Lücke hat 0.19.3 geschlossen: der
+  Safe trägt die 6 und zählt für den Erfolg nicht mehr mit.
+
+  **Der Erfolg selbst bleibt offen.** Entweder die Punktschwelle sinkt, oder
+  er hängt künftig an der Stufe statt an der Zahl. Keine
+  Schwierigkeitsfrage.
 
 Der Grundsatz aus dem Konzept (3.1) gilt weiter: **Das Thema bestimmt die
 Stufe, die Schwierigkeit ordnet innerhalb der Stufe.** Also wird nicht die

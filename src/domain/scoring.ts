@@ -62,7 +62,7 @@ export function effectiveMode(
  */
 export function attemptPoints(
   scoring: ShotScoring,
-  result: Pick<Attempt, 'pocketed' | 'scratch' | 'cueBallEnd'>,
+  result: Pick<Attempt, 'pocketed' | 'scratch' | 'cueBallEnd' | 'touched'>,
   hasObjectBall = true,
 ): number {
   if (result.scratch) return 0
@@ -80,11 +80,24 @@ export function attemptPoints(
     case 'pocket':
       return result.pocketed ? MAX_POINTS : 0
     case 'position':
-      // Mit Objektball haengt die Lage am Treffer: ohne ihn laeuft der
-      // Weisse nicht dorthin, wo er soll. Ohne Objektball gibt es nichts
-      // einzulochen - dann zaehlt allein, wo der Weisse liegen bleibt.
+      // Ohne Objektball gibt es nichts einzulochen - dann zaehlt allein, wo
+      // der Weisse liegen bleibt.
       if (!hasObjectBall) return pos * 2
-      return result.pocketed ? pos * 2 : 0
+      // Mit Objektball ist dieser Modus die Safe: "Nur Position des
+      // Weissen", wie der Baukasten ihn nennt. Bis 0.19.3 verlangte er hier
+      // trotzdem den gefallenen Objektball - und gab damit beim "Safe
+      // hinter den Ball" volle Punkte fuer genau das, was dessen Hinweis
+      // verbietet ("Der Objektball soll leben bleiben, nicht fallen"), und
+      // null fuer den gelungenen Safe.
+      //
+      // Drei Ausgaenge, drei Wertungen:
+      // * beruehrt und liegengeblieben -> die Lage zaehlt,
+      // * gefallen -> die Aufgabe war, ihn stehen zu lassen,
+      // * nicht beruehrt -> es wurde nichts gespielt. Ohne diesen Fall
+      //   braechte ein voellig verfehlter Ball volle Punkte, sobald der
+      //   Weisse zufaellig guenstig liegen bleibt.
+      if (result.touched === false) return 0
+      return result.pocketed ? 0 : pos * 2
     case 'pocket+position':
       return result.pocketed ? 5 + pos : 0
   }
@@ -156,6 +169,29 @@ export function needsCueBallEnd(shot: Shot): boolean {
   return effectiveMode(shot.scoring, hasObjectBall(shot)) !== 'pocket'
 }
 
+/**
+ * Zaehlt das Einlochen bei dieser Uebung ueberhaupt?
+ *
+ * Nein bei einer Safe und bei einer Uebung ohne Objektball. Dort ist eine
+ * Trefferquote von 0 Prozent kein schlechtes Ergebnis, sondern die Aufgabe -
+ * deshalb steht in der Statistik ein Strich statt einer Zahl.
+ */
+export function pocketCounts(shot: Shot): boolean {
+  return effectiveMode(shot.scoring, hasObjectBall(shot)) !== 'position'
+}
+
+/**
+ * Muss beim Training erfasst werden, ob der Objektball beruehrt wurde?
+ *
+ * Nur bei einer Safe: dort entscheidet es ueber die Punkte (attemptPoints,
+ * Fall `position`). Bei allen anderen Uebungen sagt der gefallene oder
+ * verfehlte Ball schon alles, was die Wertung braucht, und ein vierter
+ * Knopf am Tisch waere nur ein Knopf mehr.
+ */
+export function needsTouch(shot: Shot): boolean {
+  return hasObjectBall(shot) && effectiveMode(shot.scoring, true) === 'position'
+}
+
 /** Hat der Stoss ueberhaupt einen Ball zum Einlochen? */
 export function hasObjectBall(shot: Shot): boolean {
   return shot.balls.some((b) => b.kind === 'object')
@@ -178,13 +214,16 @@ export function isScorable(shot: Shot): boolean {
 export function buildAttempt(
   shot: Shot,
   index: number,
-  input: { pocketed: boolean; scratch: boolean; cueBallEnd: Point | null },
+  input: { pocketed: boolean; scratch: boolean; cueBallEnd: Point | null; touched?: boolean },
 ): Attempt {
   return {
     index,
     pocketed: input.pocketed,
     scratch: input.scratch,
     cueBallEnd: input.cueBallEnd,
+    // Nur mitschreiben, wo es erfasst wurde: ein `touched: undefined` im
+    // Datensatz liesse sich spaeter nicht von "nicht beruehrt" trennen.
+    ...(input.touched === undefined ? {} : { touched: input.touched }),
     points: attemptPoints(shot.scoring, input, hasObjectBall(shot)),
   }
 }

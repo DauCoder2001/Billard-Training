@@ -15,7 +15,7 @@ import { seedShotById } from '@/data/seed/drills'
 import { POCKET_BY_ID } from '@/domain/geometry'
 import { hasNewerTemplate } from '@/domain/seedStamp'
 import { speedLabel, speedName } from '@/domain/tempo'
-import { hasObjectBall, pocketRate, proficiencyFor, scratchRate } from '@/domain/scoring'
+import { hasObjectBall, pocketCounts, pocketRate, proficiencyFor, scratchRate } from '@/domain/scoring'
 import {
   MAX_ATTEMPTS,
   MIN_ATTEMPTS,
@@ -83,7 +83,12 @@ export function ShotDetailPage() {
   const best = history.reduce((a, s) => Math.max(a, s.score), 0)
   const allAttempts = history.flatMap((s) => s.results)
   // Siehe Trefferquote weiter unten: ohne Objektball ist nichts einzulochen.
-  const mitObjektball = hasObjectBall(shot)
+  // Zwei Gruende, warum bei der Trefferquote ein Strich statt einer Zahl
+  // steht - und sie lesen sich verschieden: eine Uebung aus nur dem Weissen
+  // hat nichts einzulochen, bei einer Safe soll der Ball gerade nicht
+  // fallen. In beiden Faellen waeren 0 Prozent kein schlechtes Ergebnis.
+  const zaehltEinlochen = pocketCounts(shot)
+  const grund = hasObjectBall(shot) ? 'Einlochen zählt nicht' : 'nichts einzulochen'
   const pocket = shot.target.pocketId ? POCKET_BY_ID[shot.target.pocketId] : null
   // Eine uebernommene Uebung, deren Vorlage seither ueberarbeitet wurde.
   // Siehe domain/seedStamp.ts: ohne diesen Hinweis ginge die Korrektur
@@ -268,18 +273,18 @@ export function ShotDetailPage() {
             <Stat
               label="Trefferquote"
               value={
-                mitObjektball && allAttempts.length
+                zaehltEinlochen && allAttempts.length
                   ? `${pocketRate(allAttempts).toFixed(0)} %`
                   : '–'
               }
               hint={
                 allAttempts.length
-                  ? `${mitObjektball ? '' : 'nichts einzulochen · '}Kratzer ${scratchRate(
+                  ? `${zaehltEinlochen ? '' : grund + ' · '}Kratzer ${scratchRate(
                       allAttempts,
                     ).toFixed(0)} %`
-                  : mitObjektball
+                  : zaehltEinlochen
                     ? undefined
-                    : 'nichts einzulochen'
+                    : grund
               }
             />
           </div>

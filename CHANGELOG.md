@@ -6,6 +6,78 @@ Die Versionsnummer steht an genau einer Stelle — in `package.json` — und ers
 unten auf der Seite **Einstellungen** sowie auf der Fehlerseite. Schema:
 `Hauptversion.Funktion.Korrektur`.
 
+## 0.19.4 – 27.11.2026
+
+„Safe hinter den Ball" sagt in seinem Hinweis: „Der Objektball soll leben
+bleiben, nicht fallen." Bewertet wurde bisher das Gegenteil. Nachgerechnet
+mit dem echten Aufbau, der Weiße genau im Mittelpunkt der Zielzone
+(71,1/39,9, Radius 6):
+
+| Fall | bis 0.19.3 | ab 0.19.4 |
+|---|---|---|
+| **Objektball liegt** — der gelungene Safe | 0 Punkte | **10 Punkte** |
+| **Objektball gefallen** — die Aufgabe verfehlt | 10 Punkte | **0 Punkte** |
+| Kratzer | 0 Punkte | 0 Punkte |
+
+Am Tisch gab es für den gelungenen Safe gar keinen Knopf: nur „Eingelocht",
+„Verfehlt" und „Kratzer". Wer die Übung richtig spielte, musste also
+„Eingelocht" drücken, um überhaupt gewertet zu werden.
+
+Der Widerspruch steckte seit dem ersten Commit (06.09.2026) in der Übung und
+wurde in 0.6.0 durch einen Test festgeschrieben, der den Treffer-Zwang für
+Übungen mit Objektball ausdrücklich erhalten sollte.
+
+### Behoben
+
+- **Der Modus „Nur Position des Weißen" hält jetzt, was sein Name sagt.**
+  Mit Objektball ist er die Safe: gewertet wird allein die Lage des Weißen,
+  ein gefallener Objektball ist der Fehlversuch. Betroffen ist eine der 38
+  mitgelieferten Übungen — und jede selbst gebaute, die diesen Modus wählt.
+- **Die Trefferquote steht bei einer Safe nicht mehr da wie ein schlechtes
+  Ergebnis.** Auf der Detailseite, in der Zusammenfassung einer Einheit und
+  in der Statistik über alle Übungen steht dort ein Strich mit dem Grund
+  „Einlochen zählt nicht", so wie bisher schon bei Übungen ohne Objektball
+  („nichts einzulochen"). Eine Safe zieht die Trefferquote über alle
+  Übungen damit nicht mehr nach unten.
+
+### Geändert
+
+- **Die Knöpfe am Tisch heißen bei einer Safe anders:** „Ball liegt" (der
+  gelungene Versuch, in Bernstein), „Ball gefallen", „Nicht getroffen" und
+  „Kratzer". Die beiden mittleren brauchen keine erfasste Lage — sie geben
+  ohnehin null Punkte. Bei allen anderen Übungen bleibt es bei „Eingelocht"
+  und „Verfehlt".
+
+### Neu
+
+- **Ein Versuch kann festhalten, ob der Objektball überhaupt berührt
+  wurde** (`touched`). Ohne das brächte ein völlig verfehlter Ball volle
+  Punkte, sobald der Weiße zufällig günstig liegen bleibt. Erfasst wird es
+  nur, wo es über die Punkte entscheidet — bei einer Safe. Bei den anderen
+  Übungen sagt der gefallene oder verfehlte Ball schon alles, was die
+  Wertung braucht, und ein vierter Knopf wäre nur ein Knopf mehr.
+- Sechs neue Prüfungen: die drei Ausgänge einer Safe, die alten Versuche
+  ohne das Feld, die echte Übung aus der Sammlung, und dass es bei genau
+  einer Übung bleibt, bei der das Einlochen nicht zählt.
+
+### Hinweis für bereits gespielte Einheiten
+
+Alles bleibt, wie es ist. Die Punkte eines Versuchs stehen in der Einheit
+und werden nie neu gerechnet; ein Versuch ohne das neue Feld gilt als
+„Objektball berührt" und behält damit seine Punktzahl. Auch eine eingelesene
+Sicherung aus einer älteren Fassung verliert nichts.
+
+### Offen
+
+„Schweres Kaliber" verlangt 80 Prozent auf einer Übung der Schwierigkeit 8
+oder höher und bleibt unentschieden. Mit der richtigen Wertung erreicht der
+gerechnete Spieler beim Safe mindestens 79 Punkte — die Zonenquote, und
+Ruhelagen knapp daneben zählen noch mit. Genau das war die Lücke, die
+0.19.3 geschlossen hat: der Safe trägt jetzt die 6 und zählt nicht mehr
+mit. Von den fünf Übungen, die es noch tun, schließt die beste
+(Karambolage) mit 28 Punkten ab. Entweder die Punktschwelle sinkt, oder der
+Erfolg hängt künftig an der Stufe statt an der Zahl.
+
 ## 0.19.3 – 27.11.2026
 
 Die Schwierigkeit ist keine Verzierung: sie multipliziert das Spieler-Rating

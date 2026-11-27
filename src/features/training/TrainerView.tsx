@@ -20,6 +20,7 @@ import {
   buildAttempt,
   hasObjectBall,
   needsCueBallEnd,
+  needsTouch,
   sessionScore,
 } from '@/domain/scoring'
 import { aimPoint, cueBall, objectBalls } from '@/domain/shot'
@@ -66,6 +67,10 @@ export function TrainerView({
   // Versuch - und den Kratzer, der auch hier ein Fehlversuch bleibt.
   const mitObjektball = hasObjectBall(shot)
   const needsPosition = needsCueBallEnd(shot)
+  // Eine Safe: Gewertet wird allein die Lage des Weissen, und der Objektball
+  // soll liegen bleiben. "Eingelocht" waere hier der Fehlversuch, deshalb
+  // heissen die Knoepfe anders.
+  const safe = needsTouch(shot)
   useEffect(() => {
     onProgress?.(results.length)
   }, [results.length, onProgress])
@@ -74,9 +79,12 @@ export function TrainerView({
   const done = index >= planned
   const running = sessionScore(results, Math.max(index, 1))
 
-  const record = async (pocketed: boolean, scratch: boolean) => {
+  const record = async (pocketed: boolean, scratch: boolean, touched?: boolean) => {
     if (busy || done) return
-    const next = [...results, buildAttempt(shot, index, { pocketed, scratch, cueBallEnd: end })]
+    const next = [
+      ...results,
+      buildAttempt(shot, index, { pocketed, scratch, cueBallEnd: end, touched }),
+    ]
     setResults(next)
     setEnd(null)
     if (next.length >= planned) {
@@ -193,14 +201,36 @@ export function TrainerView({
             sonst zaehlte die Trefferquote jeden erfassten Versuch als
             Treffer - auch in der Statistik ueber alle Stoesse. Auf die
             Punkte wirkt es sich nicht aus, dort zaehlt dann die Lage. */}
+        {/* Bei einer Safe heisst der Haupt-Knopf "Ball liegt": das ist der
+            gelungene Versuch. "Ball gefallen" und "Nicht getroffen" sind
+            die beiden Arten, sie zu vergeben, und brauchen keine erfasste
+            Lage - sie geben ohnehin null Punkte. */}
         <button
           className="btn btn--wide btn--primary"
           disabled={busy || done || (needsPosition && !end)}
-          onClick={() => void record(mitObjektball, false)}
+          onClick={() => void record(safe ? false : mitObjektball, false, safe ? true : undefined)}
         >
-          {mitObjektball ? 'Eingelocht' : 'Erfassen'}
+          {safe ? 'Ball liegt' : mitObjektball ? 'Eingelocht' : 'Erfassen'}
         </button>
-        {mitObjektball && (
+        {safe && (
+          <>
+            <button
+              className="btn btn--wide"
+              disabled={busy || done}
+              onClick={() => void record(true, false, true)}
+            >
+              Ball gefallen
+            </button>
+            <button
+              className="btn btn--wide"
+              disabled={busy || done}
+              onClick={() => void record(false, false, false)}
+            >
+              Nicht getroffen
+            </button>
+          </>
+        )}
+        {mitObjektball && !safe && (
           <button className="btn btn--wide" disabled={busy || done} onClick={() => void record(false, false)}>
             Verfehlt
           </button>

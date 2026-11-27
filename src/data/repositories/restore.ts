@@ -121,6 +121,10 @@ function restoreAttempt(raw: unknown, index: number): Attempt {
             x: num(ende.x, 0, TABLE.length, TABLE.centerSpot.x),
             y: num(ende.y, 0, TABLE.width, TABLE.centerSpot.y),
           },
+    // Vor 0.19.4 gab es das Feld nicht. Fehlt es, bleibt es weg: ein
+    // `touched: false` wuerde einem alten Versuch unterstellen, der
+    // Objektball sei verfehlt worden, und ihm die Punkte nehmen.
+    ...(typeof a.touched === 'boolean' ? { touched: a.touched } : {}),
     points: num(a.points, 0, MAX_POINTS, 0),
   }
 }

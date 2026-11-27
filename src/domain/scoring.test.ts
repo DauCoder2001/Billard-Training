@@ -7,7 +7,9 @@ import {
   inAvoidZone,
   isScorable,
   needsCueBallEnd,
+  needsTouch,
   orderedThresholds,
+  pocketCounts,
   pocketRate,
   positionPoints,
   proficiencyFor,
@@ -125,10 +127,23 @@ describe('Uebung ohne Objektball', () => {
     expect(effectiveMode(s, ohneBall)).toBe('pocket')
   })
 
-  it('aendert nichts an Uebungen mit Objektball', () => {
+  // Bis 0.19.3 stand hier das Gegenteil: mit Objektball verlangte der Modus
+  // `position` den gefallenen Ball. Beim "Safe hinter den Ball" gab das
+  // volle Punkte fuer genau das, was dessen Hinweis verbietet.
+  it('wertet mit Objektball die Safe, nicht das Einlochen', () => {
     const s = scoring({ mode: 'position' })
-    expect(attemptPoints(s, { pocketed: false, scratch: false, cueBallEnd: { x: 50, y: 25 } })).toBe(0)
-    expect(attemptPoints(s, { pocketed: true, scratch: false, cueBallEnd: { x: 50, y: 25 } })).toBe(10)
+    const mitte = { x: 50, y: 25 }
+    expect(attemptPoints(s, { pocketed: false, scratch: false, cueBallEnd: mitte, touched: true })).toBe(10)
+    expect(attemptPoints(s, { pocketed: true, scratch: false, cueBallEnd: mitte, touched: true })).toBe(0)
+    expect(attemptPoints(s, { pocketed: false, scratch: false, cueBallEnd: mitte, touched: false })).toBe(0)
+  })
+
+  it('laesst alten Versuchen ohne erfasste Beruehrung ihre Punkte', () => {
+    // `touched` gibt es erst ab 0.19.4. Fehlt es, gilt der Objektball als
+    // beruehrt - sonst verloere jede frueher gespielte Safe nachtraeglich
+    // ihre Punkte.
+    const s = scoring({ mode: 'position' })
+    expect(attemptPoints(s, { pocketed: false, scratch: false, cueBallEnd: { x: 50, y: 25 } })).toBe(10)
   })
 })
 
@@ -152,8 +167,14 @@ describe('Versuchsbewertung', () => {
 
   it('verdoppelt die Positionspunkte, wenn nur die Position zaehlt', () => {
     const s = scoring({ mode: 'position' })
-    expect(attemptPoints(s, { pocketed: true, scratch: false, cueBallEnd: { x: 50, y: 25 } })).toBe(10)
-    expect(attemptPoints(s, { pocketed: true, scratch: false, cueBallEnd: { x: 57, y: 25 } })).toBe(8)
+    const liegt = { pocketed: false, scratch: false, touched: true }
+    expect(attemptPoints(s, { ...liegt, cueBallEnd: { x: 50, y: 25 } })).toBe(10)
+    expect(attemptPoints(s, { ...liegt, cueBallEnd: { x: 57, y: 25 } })).toBe(8)
+  })
+
+  it('zaehlt den Kratzer auch bei der Safe als Fehlversuch', () => {
+    const s = scoring({ mode: 'position' })
+    expect(attemptPoints(s, { pocketed: false, scratch: true, cueBallEnd: { x: 50, y: 25 }, touched: true })).toBe(0)
   })
 
   it('faellt ohne Zielzone auf reines Einlochen zurueck', () => {
@@ -303,5 +324,47 @@ describe('Die Sperrzone', () => {
     const versuch = buildAttempt(stoss, 0, { pocketed: true, scratch: false, cueBallEnd: drin })
     expect(versuch.points).toBe(0)
     expect(versuch.scratch).toBe(false)
+  })
+})
+
+describe('Zaehlt das Einlochen, und muss die Beruehrung erfasst werden?', () => {
+  function safeStoss(): Shot {
+    const basis = createShot()
+    return { ...basis, scoring: { ...basis.scoring, mode: 'position', targetZone: zone } }
+  }
+
+  it('laesst das Einlochen bei der Safe aussen vor', () => {
+    expect(pocketCounts(safeStoss())).toBe(false)
+    expect(needsTouch(safeStoss())).toBe(true)
+  })
+
+  it('zaehlt es bei allen anderen Arten mit', () => {
+    for (const mode of ['pocket', 'pocket+position'] as const) {
+      const s = { ...createShot(), scoring: { ...createShot().scoring, mode, targetZone: zone } }
+      expect(pocketCounts(s)).toBe(true)
+      expect(needsTouch(s)).toBe(false)
+    }
+  })
+
+  it('fragt ohne Objektball nicht nach der Beruehrung', () => {
+    // Dort gibt es keinen Ball, den man beruehren koennte - und das
+    // Einlochen zaehlt ebenfalls nicht.
+    const s = nurWeisser({ scoring: { ...createShot().scoring, mode: 'position', targetZone: zone } })
+    expect(needsTouch(s)).toBe(false)
+    expect(pocketCounts(s)).toBe(false)
+  })
+
+  it('schreibt die Beruehrung nur mit, wo sie erfasst wurde', () => {
+    const s = safeStoss()
+    const ohne = buildAttempt(s, 0, { pocketed: false, scratch: false, cueBallEnd: zone })
+    expect('touched' in ohne).toBe(false)
+    const mit = buildAttempt(s, 0, {
+      pocketed: false,
+      scratch: false,
+      cueBallEnd: zone,
+      touched: false,
+    })
+    expect(mit.touched).toBe(false)
+    expect(mit.points).toBe(0)
   })
 })

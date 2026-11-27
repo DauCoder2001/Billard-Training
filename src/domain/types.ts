@@ -296,6 +296,16 @@ export interface Attempt {
   scratch: boolean
   /** Ruheposition des Weissen, falls erfasst. */
   cueBallEnd: Point | null
+  /**
+   * Wurde der Objektball ueberhaupt beruehrt?
+   *
+   * Nur dort erfasst, wo es die Wertung braucht: bei einer Safe zaehlt
+   * allein die Lage des Weissen, und ein voellig verfehlter Objektball
+   * duerfte sonst volle Punkte bringen, wenn der Weisse zufaellig guenstig
+   * liegen bleibt. `undefined` heisst "nicht erfasst" und gilt als beruehrt
+   * - so behalten alte Einheiten ihre Punkte.
+   */
+  touched?: boolean
   points: number
 }
 

@@ -4,7 +4,7 @@ import { useMemo } from 'react'
 import { useNavigate, useParams } from 'react-router-dom'
 import { useActivePlayer } from '@/app/store'
 import { useSession, useSessions, useShot } from '@/data/hooks'
-import { MAX_POINTS, hasObjectBall, pocketRate, scratchRate } from '@/domain/scoring'
+import { MAX_POINTS, hasObjectBall, pocketCounts, pocketRate, scratchRate } from '@/domain/scoring'
 import { plural } from '@/domain/text'
 import { SESSION_ATTEMPTS } from '@/domain/types'
 import { ProficiencyBadge, Stat } from '@/ui/bits'
@@ -55,10 +55,12 @@ export function SessionSummaryPage() {
     )
   }
 
-  // Ohne Objektball gibt es nichts einzulochen: eine Trefferquote von
-  // 0 Prozent saehe aus wie ein schlechtes Ergebnis, obwohl nichts zu treffen
-  // war. Dann steht dort ein Strich.
-  const mitObjektball = hasObjectBall(shot)
+  // Ohne Objektball gibt es nichts einzulochen, und bei einer Safe soll der
+  // Ball nicht fallen: eine Trefferquote von 0 Prozent saehe aus wie ein
+  // schlechtes Ergebnis, obwohl sie die Aufgabe ist. Dann steht dort ein
+  // Strich mit dem Grund daneben.
+  const zaehltEinlochen = pocketCounts(shot)
+  const grund = hasObjectBall(shot) ? 'Einlochen zählt nicht' : 'nichts einzulochen'
   const previous = history.filter((s) => s.id !== session.id).slice(-1)[0]
   const delta = previous ? session.score - previous.score : null
   const points = session.results.reduce((a, r) => a + r.points, 0)
@@ -92,8 +94,8 @@ export function SessionSummaryPage() {
         <Stat label="Punkte" value={`${points} / ${session.results.length * MAX_POINTS}`} />
         <Stat
           label="Trefferquote"
-          value={mitObjektball ? `${pocketRate(session.results).toFixed(0)} %` : '–'}
-          hint={mitObjektball ? undefined : 'nichts einzulochen'}
+          value={zaehltEinlochen ? `${pocketRate(session.results).toFixed(0)} %` : '–'}
+          hint={zaehltEinlochen ? undefined : grund}
         />
         <Stat label="Kratzer" value={`${scratchRate(session.results).toFixed(0)} %`} />
       </div>

@@ -21,6 +21,7 @@ import {
 import { LEVELS } from '@/domain/types'
 import type { Ball, Level, Point, Shot, TargetZone } from '@/domain/types'
 import { feasibilityHints } from '@/domain/feasibility'
+import { attemptPoints, needsTouch, pocketCounts } from '@/domain/scoring'
 import { SEED_VERSION } from '../../bootstrap'
 import { ANDERE_SEITE } from './build'
 import { RETIRED_IDS, SEED_SPECS, seedIdsSince, seedShots } from './index'
@@ -268,6 +269,32 @@ describe('mitgelieferte Uebungen', () => {
     // Uebungen die 6, obwohl ihre gemessene Guete von 65 % bis 8 % reicht.
     const b = shots.filter((s) => s.level === 'B')
     expect(new Set(b.map((s) => s.attributes.difficulty))).toEqual(new Set([4, 5, 6]))
+  })
+
+  it('wertet die Safe so, wie ihr Hinweis es verlangt', () => {
+    // "Der Objektball soll leben bleiben, nicht fallen." Bis 0.19.3 gab die
+    // App dafuer null Punkte und fuer den gefallenen Ball die volle Zahl -
+    // nachgerechnet am 27.11.2026 mit genau diesem Aufbau.
+    const safe = shots.find((s) => s.id === 'builtin-safe-hinter-ball')
+    if (!safe) throw new Error('Safe hinter den Ball fehlt in der Sammlung')
+    const zone = safe.scoring.targetZone
+    if (!zone) throw new Error('Safe ohne Zielzone')
+    const mitte = { x: zone.x, y: zone.y }
+    const punkte = (pocketed: boolean, touched: boolean) =>
+      attemptPoints(safe.scoring, { pocketed, scratch: false, cueBallEnd: mitte, touched }, true)
+    expect(punkte(false, true)).toBe(10)
+    expect(punkte(true, true)).toBe(0)
+    expect(punkte(false, false)).toBe(0)
+    expect(needsTouch(safe)).toBe(true)
+    expect(pocketCounts(safe)).toBe(false)
+  })
+
+  it('kennt genau eine Uebung, bei der das Einlochen nicht zaehlt', () => {
+    // Die Sonderwertung ist fuer Safes gedacht. Kaeme sie bei einer Uebung
+    // dazu, die eigentlich einlochen will, waere das kein neues Feld,
+    // sondern ein Fehler im Aufbau.
+    const ohne = shots.filter((s) => !pocketCounts(s))
+    expect(ohne.map((s) => s.id)).toEqual(['builtin-safe-hinter-ball'])
   })
 
   it('nennt keine Uebung aus der Zukunft', () => {

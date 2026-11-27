@@ -143,3 +143,40 @@ describe('Eine Uebung mit Sperrzone', () => {
     )
   })
 })
+
+describe('Die Knoepfe einer Safe', () => {
+  // Bei einer Safe ist der gefallene Objektball der Fehlversuch. "Eingelocht"
+  // waere dort die falsche Frage - und bis 0.19.3 der einzige Knopf, der
+  // Punkte brachte.
+  beforeEach(async () => {
+    const basis = stoss()
+    await db.shots.put({
+      ...basis,
+      scoring: {
+        ...basis.scoring,
+        mode: 'position',
+        targetZone: { x: 50, y: 25, r: 6 },
+      },
+    })
+  })
+
+  it('fragt nach dem Ball, nicht nach der Tasche', async () => {
+    zeige(<TrainPage />, ORT)
+    expect(await screen.findByRole('button', { name: 'Ball liegt' })).toBeTruthy()
+    expect(screen.getByRole('button', { name: 'Ball gefallen' })).toBeTruthy()
+    expect(screen.getByRole('button', { name: 'Nicht getroffen' })).toBeTruthy()
+    expect(screen.queryByRole('button', { name: 'Eingelocht' })).toBe(null)
+    expect(screen.queryByRole('button', { name: 'Verfehlt' })).toBe(null)
+  })
+
+  it('verlangt die Lage nur fuer den gelungenen Versuch', async () => {
+    // Ein gefallener oder verfehlter Objektball gibt ohnehin null Punkte -
+    // dafuer muss niemand erst auf den Tisch tippen.
+    zeige(<TrainPage />, ORT)
+    const knopf = async (name: string) =>
+      ((await screen.findByRole('button', { name })) as HTMLButtonElement).disabled
+    expect(await knopf('Ball liegt')).toBe(true)
+    expect(await knopf('Ball gefallen')).toBe(false)
+    expect(await knopf('Nicht getroffen')).toBe(false)
+  })
+})
