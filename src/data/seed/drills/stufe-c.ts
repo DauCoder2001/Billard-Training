@@ -18,13 +18,18 @@ export const STUFE_C: DrillSpec[] = [
     pocket: 'br',
     cut: 0,
     dist: 50,
-    // Der Weisse kommt auf der Anspiellinie zurueck, etwa 35 Zoll weit.
-    zone: { x: 39.9, y: 30.3, r: 9 },
+    // Bis 0.19.1 verlangte die Zone 35 Zoll Rueckweg. Gemessen schwankt
+    // der Rueckweg nach 50 Zoll Anlauf zwischen 3 und 49 Zoll, die Streuung
+    // betraegt 15 bis 16 Zoll gegen Radius 9 - die Stellungshaelfte war
+    // nicht zu holen, sondern zu erwuerfeln. Zuverlaessig (Streuung unter
+    // 5 Zoll) sind etwa 7 Zoll. Das ist keine Eigenheit der Simulation: Ueber
+    // diese Strecke frisst das Tuch den Rueckwaertsdrall.
+    cueAfter: { along: 'draw', dist: 7, r: 9 },
     spin: { x: 0, y: -0.8 },
     skills: ['draw'],
     shotType: 'position',
     difficulty: 8,
-    speed: 8,
+    speed: 2.25,
     coachNotes:
       'Sauberer, langer Stoß statt roher Kraft. Ein flacher Queue ist wichtiger als Tempo.',
   },
@@ -38,10 +43,16 @@ export const STUFE_C: DrillSpec[] = [
     cut: 60,
     dist: 32,
     zone: { x: 45, y: 40, r: 10 },
+    // Bis 0.19.1 stand hier kein Effet, und die Zone wurde in 46 % der
+    // gelochten Versuche getroffen. Gemessen ueber sechs Treffpunkte und
+    // fuenfzehn Tempostufen (27.11.2026): Mit -0,5 bei 2,25 Laengen sind es
+    // 75 bis 89 % (250 Versuche, drei Saaten). Der duenne Ball laeuft dem
+    // Weissen sonst zu weit nach.
+    spin: { x: 0, y: -0.5 },
     skills: ['thinCut', 'cut'],
     shotType: 'cut',
     difficulty: 7,
-    speed: 6,
+    speed: 2.25,
     coachNotes: 'Bei dünnen Bällen zählt der Zielpunkt, nicht die Kraft. Ruhig bleiben. ' +
       ANDERE_SEITE,
   },
@@ -58,7 +69,7 @@ export const STUFE_C: DrillSpec[] = [
     skills: ['thinCut'],
     shotType: 'cut',
     difficulty: 9,
-    speed: 7,
+    speed: 2.25,
     coachNotes: 'Nur das Einlochen zählt. Ein Hauch zu voll und der Ball bleibt an der Bande liegen. ' +
       ANDERE_SEITE,
   },
@@ -76,7 +87,7 @@ export const STUFE_C: DrillSpec[] = [
     skills: ['bank'],
     shotType: 'bank',
     difficulty: 7,
-    speed: 6,
+    speed: 2,
     coachNotes: 'Den Zielpunkt über das Spiegelbild der Tasche hinter der Bande suchen.',
   },
   {
@@ -94,7 +105,7 @@ export const STUFE_C: DrillSpec[] = [
     skills: ['kick', 'bank'],
     shotType: 'kick',
     difficulty: 8,
-    speed: 6,
+    speed: 2.25,
     coachNotes:
       'Zählt schon als Treffer, wenn der Objektball sauber getroffen wird. Das Diamantensystem hilft beim Zielen.',
   },
@@ -112,7 +123,7 @@ export const STUFE_C: DrillSpec[] = [
     skills: ['carom'],
     shotType: 'carom',
     difficulty: 8,
-    speed: 5,
+    speed: 2.5,
     coachNotes: 'Die Abgangslinie des Weißen steht bei Stun senkrecht auf der Linie des Objektballs.',
   },
   {
@@ -127,11 +138,17 @@ export const STUFE_C: DrillSpec[] = [
     cut: 25,
     dist: 28,
     spin: { x: -0.7, y: 0 },
-    zone: { x: 25, y: 12, r: 9 },
+    // Mit 0.18.3 blieb offen, welche der beiden gespiegelten Zonen stimmt.
+    // Die Antwort: keine. Gemessen kommt der Weisse mit diesem Effet und
+    // diesem Tempo auf (18,1/42,0) zur Ruhe, Streuung 8,9 Zoll - die alte
+    // Zone auf (25/12) wurde in 660 Versuchen nie erreicht. Unterhalb von
+    // 2,1 m/s kommt er gar nicht ueber die Bande, darueber streut er
+    // doppelt so weit (Nachrechnung vom 27.11.2026).
+    zone: { x: 18.1, y: 42, r: 9 },
     skills: ['sidespin', 'position'],
     shotType: 'position',
     difficulty: 7,
-    speed: 6,
+    speed: 3.25,
     coachNotes:
       'Effet verzieht den Weißen beim Abstoß. Die Ablenkung gehört einkalkuliert, nicht wegdiskutiert. ' +
       'Erst das Tempo, dann das Effet. ' +
@@ -148,11 +165,15 @@ export const STUFE_C: DrillSpec[] = [
     pocket: 'br',
     cut: 25,
     dist: 24,
-    zone: { x: 55, y: 34, r: 4 },
+    // Bis 0.19.1 auf (55/34) - mit keinem Effet und keinem Tempo zu
+    // erreichen. Gemessen bleibt der Weisse zuverlaessig auf (88,6/31,3)
+    // liegen, Streuung 4,7 Zoll; bei Radius 4 ist das eine enge Position,
+    // die wirklich eine ist.
+    zone: { x: 88.6, y: 31.3, r: 4 },
     skills: ['position', 'stun'],
     shotType: 'position',
     difficulty: 7,
-    speed: 4,
+    speed: 2,
     coachNotes: 'Kleine Zone heißt: leiser stoßen. Die meisten Fehler kommen aus zu viel Tempo.',
   },
   {
@@ -164,15 +185,40 @@ export const STUFE_C: DrillSpec[] = [
     pocket: 'br',
     cut: 20,
     dist: 24,
+    // Bis 0.19.1 lag der Cluster auf (44/36) und (46,3/36) - neben dem Weg
+    // des Weissen. In 540 gerechneten Versuchen ueber neun Tempostufen hat
+    // er ihn kein einziges Mal beruehrt: Die Aufgabe war nicht zu erfuellen.
+    // Jetzt liegen die beiden dort, wo der Weisse nach dem Treffen
+    // nachweislich entlanglaeuft.
+    //
+    // Das Tempo steht hier nicht auf dem Wert, den die Nachrechnung nennt:
+    // Sie zaehlt nur gelochte Baelle, und das ist bei dieser Uebung die
+    // halbe Aufgabe. Eigens gemessen (150 Versuche je Stufe, 27.11.2026),
+    // Anteil der Versuche, in denen die beiden Baelle danach mehr als zwei
+    // Ballbreiten auseinanderliegen:
+    //
+    //   bis 2,00 Laengen    0 bis 1 %
+    //   2,25 Laengen       65 %
+    //   2,50 Laengen       95 %
+    //   ab 2,75 Laengen    97 bis 100 %
+    //
+    // Unter 2,25 geht der Cluster also gar nicht auf, so sicher der Ball
+    // auch faellt. 2,50 ist die sanfteste Stufe, bei der beides zusammen
+    // gelingt (29 % gegen 33 % im Besten, bei 3,75).
     extras: [
-      { number: 6, x: 44, y: 36 },
-      { number: 7, x: 46.3, y: 36 },
+      { number: 6, x: 62, y: 31 },
+      { number: 7, x: 64.3, y: 31 },
     ],
-    zone: { x: 45, y: 33, r: 7 },
+    // Keine Zielzone mehr: Nach dem Aufbrechen des Clusters streut die
+    // Ruhelage des Weissen um 23 bis 27 Zoll, bei jedem Effet und jedem
+    // Tempo (Nachrechnung vom 27.11.2026). Eine Stellung, die niemand
+    // steuern kann, darf die App auch nicht bewerten. Die Aufgabe bleibt:
+    // lochen und den Cluster oeffnen.
+    zone: null,
     skills: ['breakout', 'position'],
     shotType: 'position',
     difficulty: 8,
-    speed: 6,
+    speed: 2.5,
     coachNotes: 'Zuerst den Ball sicher lochen, dann den Cluster. Nie umgekehrt.',
   },
   {
@@ -184,13 +230,22 @@ export const STUFE_C: DrillSpec[] = [
     pocket: 'br',
     cut: 55,
     dist: 26,
-    extras: [{ number: 8, x: 30, y: 30 }],
-    zone: { x: 24, y: 30, r: 6 },
+    // Bis 0.19.1 stand der Sperrball auf (30/30) und die Zone auf (24/30) -
+    // links vom Objektball. Nach einem Schnitt von 55 Grad nach rechts kommt
+    // der Weisse dort nie an: in 660 gerechneten Versuchen ueber elf
+    // Tempostufen kein einziger Treffer in der Zone. Gemessen bleibt er bei
+    // 0,4 m/s auf (71,1/39,9) liegen, Streuung 3,0 Zoll, waehrend der
+    // Objektball auf (64,3/22,6) zur Ruhe kommt. Der Sperrball steht jetzt
+    // zwischen beiden, 0,4 Zoll neben der Sichtlinie: Der Weisse liegt
+    // wirklich verdeckt. Gerechnet wird er dabei in 7 von 100 Versuchen
+    // beruehrt, und 90 von 100 enden in der Zone.
+    extras: [{ number: 8, x: 67.7, y: 31.3 }],
+    zone: { x: 71.1, y: 39.9, r: 6 },
     mode: 'position',
     skills: ['safety', 'position'],
     shotType: 'safety',
     difficulty: 8,
-    speed: 3,
+    speed: 0.5,
     coachNotes:
       'Bewertet wird nur die Lage des Weißen. Der Objektball soll leben bleiben, nicht fallen.',
   },
@@ -204,10 +259,14 @@ export const STUFE_C: DrillSpec[] = [
     cut: 0,
     dist: 70,
     zone: { x: 76.6, y: 12.3, r: 6 },
+    // Die Zone ist der Geisterball: stehenbleiben nach 70 Zoll Anlauf. Ohne
+    // Rueckwaertsdrall unmoeglich - gemessen 17,7 Zoll daneben, mit -0,20
+    // noch 5,4 und damit innerhalb des Radius.
+    spin: { x: 0, y: -0.2 },
     skills: ['stun', 'position'],
     shotType: 'cut',
     difficulty: 7,
-    speed: 6,
+    speed: 1,
     coachNotes:
       'Der Prüfstein für den Stoß. Wer hier daneben liegt, trifft nicht die Tasche, sondern hat eine krumme Stoßbewegung.',
   },

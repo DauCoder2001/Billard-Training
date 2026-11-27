@@ -7,6 +7,7 @@ import { DEFAULT_SETTINGS, getSettings, updateSettings } from './repositories/se
 import { newId } from '@/domain/shot'
 import type { Shot } from '@/domain/types'
 import { transliterate } from '@/domain/text'
+import { speedFromLegacy } from '@/domain/tempo'
 
 /**
  * Version der Uebungssammlung. Erhoehen, wenn neue Uebungen dazukommen oder
@@ -33,8 +34,11 @@ import { transliterate } from '@/domain/text'
  *    von der Bande weggerueckt (0.19.1). Vier Uebungen aendern dadurch ihre
  *    Lage - das sind andere Baelle auf dem Tisch, nicht nur ein anderer
  *    Text.
+ * 8: Tempo in Tischlaengen, Zielzonen aus der Nachrechnung gesetzt (0.19.2).
+ *    Alle 38 Uebungen aendern sich: jede im Tempo, zehn zusaetzlich im Drall
+ *    oder in der Zielzone.
  */
-export const SEED_VERSION = 7
+export const SEED_VERSION = 8
 
 let running: Promise<void> | null = null
 
@@ -78,6 +82,10 @@ async function run(): Promise<void> {
     }
   })
 
+  // Vor dem Einspielen: Die Sammlung bringt Tempi in Tischlaengen mit, der
+  // Bestand traegt noch die alte Zahl ohne Einheit.
+  await migrateSpeedScale()
+
   const settings = await getSettings()
   if (settings.seededVersion < SEED_VERSION) {
     const fresh = seedShots()
@@ -99,6 +107,50 @@ async function run(): Promise<void> {
   await migrateSeedStamps()
   await migrateLevels()
   await migrateRetired()
+}
+
+/**
+ * Version der Tempo-Skala.
+ *
+ * 1 (bis 0.19.1): eine Zahl von 1 bis 10 ohne Einheit. Die Nachrechnung hat
+ *   belegt, dass sie nichts bedeutete.
+ * 2 (ab 0.19.2): Tischlaengen - der Weg, den der Weisse von der Kopflinie aus
+ *   allein rollen wuerde. Siehe domain/tempo.ts.
+ */
+export const SPEED_SCALE_VERSION = 2
+
+/**
+ * Rechnet gespeicherte Tempi auf Tischlaengen um.
+ *
+ * Betrifft jede Uebung auf dem Geraet, auch die selbstgebaute: Der Wert steht
+ * im selben Feld und wird ab jetzt anders gelesen. Wer nichts umrechnet,
+ * bekaeme aus "Tempo 8" ploetzlich einen Stoss ueber acht Tischlaengen.
+ *
+ * Laeuft vor dem Einspielen der Sammlung, damit die neuen, gemessenen Tempi
+ * der mitgelieferten Uebungen nicht gleich wieder umgerechnet werden.
+ */
+async function migrateSpeedScale(): Promise<void> {
+  const settings = await getSettings()
+  if (settings.speedScaleVersion >= SPEED_SCALE_VERSION) return
+
+  const alle = await db.shots.toArray()
+  const updates = speedScaleUpdates(alle)
+  if (updates.length > 0) await db.shots.bulkPut(updates)
+  await updateSettings({ speedScaleVersion: SPEED_SCALE_VERSION })
+}
+
+/**
+ * Reine Form derselben Regel - ohne Datenbank pruefbar.
+ *
+ * @param shots Alle gespeicherten Uebungen.
+ * @returns Die Uebungen, deren Tempo sich aendert.
+ */
+export function speedScaleUpdates(shots: Shot[]): Shot[] {
+  return shots.flatMap((alt) => {
+    const speed = speedFromLegacy(alt.attributes.speed)
+    if (speed === alt.attributes.speed) return []
+    return [{ ...alt, attributes: { ...alt.attributes, speed } }]
+  })
 }
 
 /**

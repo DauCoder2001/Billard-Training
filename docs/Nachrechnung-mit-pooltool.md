@@ -294,3 +294,86 @@ daneben. Im Aufbau stand aber y = **48,9** — selbst schon 0,025 Zoll weiter
 an der Bande, als eine Ballmitte kommt. Daraus werden 0,05 Zoll statt 0,027.
 Am Befund ändert das nichts, nur an der Größe: Die Übung lag doppelt so weit
 daneben wie notiert.
+
+## Nachtrag 27.11.2026 — Tempo und Zielzonen (0.19.2)
+
+Dieser Nachtrag beschreibt, **wie** gemessen wurde. Was daraus für jede
+einzelne Übung folgte, steht Fall für Fall in
+[Zielzonen-Entscheidungen.md](Zielzonen-Entscheidungen.md).
+
+### Drei Maße, die alle in die Irre führen
+
+Die erste Frage lautete: Welches Tempo verlangt eine Übung? Drei
+naheliegende Antworten wurden ausprobiert, und jede hat sich geirrt.
+
+**Die beste Trefferquote.** Sie wählt bei einer Übung mit Zielzone das
+Tempo, bei dem der Ball am sichersten fällt, und lässt den Weißen stehen,
+wo er mag. Bei „Nachlauf 50 cm" fällt der Ball am häufigsten bei 3,25
+Tischlängen (43 %) — der Weiße kommt dann **21,9 Zoll** von seiner Zone zur
+Ruhe, bei einem Zonenradius von 5. Bei einer Tischlänge fallen 42 %, und er
+liegt in 100 % der Fälle in der Zone.
+
+**Der kleinste Abstand zur Zone.** Sie wählt bei „Mitteltasche aus der
+Entfernung" eine halbe Tischlänge: Dort erreicht der Weiße die Zone in
+100 % der gelungenen Versuche. Es fallen aber nur 26 von 100 Bällen, weil
+der Ball bei diesem Tempo kaum bis zur Tasche kommt. Ein Viertel mehr, und
+96 % fallen — bei 23 % Zonentreffer.
+
+**Der Mittelwert der Ruhelagen.** Er trügt am gründlichsten. Bei „Safe
+hinter den Ball" lag die mittlere Ruhelage in der Zielzone, und die Zone
+schien in Ordnung. Erreicht hat sie **kein einziger** von 660 Versuchen: Die
+Ruhelagen verteilten sich ringförmig um die Zone herum. Dazu kam ein zweiter
+Fehler im Prüfskript, den dieser Fall aufgedeckt hat — die Übung ist eine
+Safe, bei ihr ist der gefallene Objektball der *Fehl*versuch, und das Skript
+hatte die Ruhelagen nur für die gefallenen Bälle notiert. Es hatte also
+genau die misslungenen Versuche gemessen.
+
+Genommen wurde am Ende ein viertes Maß, die **Güte**: der Anteil der
+Versuche, in denen der Ball fällt **und** der Weiße in seiner Zielzone zur
+Ruhe kommt, mal dem Anteil ohne falsche Tasche und ohne gefallenen Weißen.
+Das ist, was die App wertet. Aus der Leiter genommen wird die **sanfteste**
+Stufe, die 85 % der besten Güte erreicht: Wer mit 1,5 Tischlängen dasselbe
+erreicht wie mit 3, hat die leichtere Aufgabe vor sich.
+
+Die Fehlversuche ziehen dabei **mal**, nicht minus. Abgezogen ergab eine
+Übung, bei der der Weiße in 28 von 100 Versuchen fällt — so „Schnittball
+45 Grad" —, auf jeder Stufe eine negative Güte und damit überhaupt keine
+Stufe, obwohl die Reihenfolge der Stufen durchaus etwas sagt.
+
+### Die Skala selbst ist gemessen
+
+Dass das Tempo in Tischlängen zählt, ist die Übereinkunft am Tisch. Wie
+viele Meter je Sekunde eine Tischlänge sind, ist dagegen eine Frage an den
+Tisch, nicht an eine Formel: `tischlaengen.py` legt den Weißen auf die
+Kopflinie, stößt ihn 48-mal mit steigender Geschwindigkeit an und zählt den
+gerollten Weg.
+
+| Tischlängen | 0,5 | 1 | 1,5 | 2 | 2,5 | 3 | 3,5 | 4 | 4,5 |
+|---|---|---|---|---|---|---|---|---|---|
+| m/s | 0,39 | 0,68 | 0,97 | 1,40 | 1,85 | 2,42 | 2,85 | 3,68 | 4,36 |
+
+Gemessen über die Ereigniszeitpunkte des Balles (`history`), nicht über die
+gleichmäßig abgetastete Bahn (`history_cts`): Letztere ist leer, bis
+`pt.continuize()` gelaufen ist, und ein erster Versuch gab deshalb für
+jedes Tempo null Zoll. Wo beide Wege vorliegen, unterscheiden sich die
+Längen um 0,04 %.
+
+### Die Schrittweite der Skala kostet etwas
+
+Die Skala läuft in Viertel-Längen. Halbe wären die runderen Zahlen. Sie
+kosten aber zu viel: Auf halbe Längen gerundet verlieren die 38 Übungen im
+Mittel **4,6 Punkte** ihrer Güte, und im schlimmsten Fall die ganze
+Aufgabe.
+
+| Übung | gemessen | auf halbe gerundet |
+|---|---|---|
+| Nachlauf 20 cm | 0,75 → 62 % | 1,00 → **0 %** |
+| Nachlauf mittel | 1,25 → 35 % | 1,00 → **0 %** |
+| Mitteltasche gerade | 2,25 → 69 % | 2,00 → 51 % |
+| Rückzieher lang | 2,25 → 17 % | 2,00 → **0 %** |
+
+„Nachlauf 20 cm" ist der klarste Fall: Bei 0,75 Längen landet der Weiße in
+100 % der gelochten Versuche in seiner Zielzone, bei 1,00 Längen in keinem
+einzigen — und die Trefferquote ist mit 62 gegen 60 Prozent praktisch
+dieselbe. Ein Viertel Tischlänge entscheidet hier über die ganze
+Stellungsaufgabe.

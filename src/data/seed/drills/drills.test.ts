@@ -267,7 +267,7 @@ describe('mitgelieferte Uebungen', () => {
     }
   })
 
-  it('rechnet dieselben Vorlagen wie am 26.11.2026', () => {
+  it('rechnet dieselben Vorlagen wie am 27.11.2026', () => {
     // Die Fingerabdruecke festgenagelt. Sie sind kein Selbstzweck: aendert
     // sich einer, bekommt jeder, der eine eigene Fassung dieser Uebung
     // gespeichert hat, beim naechsten Start den Hinweis "Vorlage
@@ -280,45 +280,50 @@ describe('mitgelieferte Uebungen', () => {
     //
     // Entstanden beim Umzug der Anspiel-Rechnung nach domain/aim.ts
     // (0.17.0), der genau das nicht tun durfte.
+    //
+    // Zu 0.19.2 haben sich alle 38 geaendert, und das war gewollt: Das Tempo
+    // steht seitdem in Tischlaengen statt auf einer Skala ohne Einheit, und
+    // bei zehn Uebungen kam der Drall dazu, den ihre Hinweise schon
+    // verlangten.
     const erwartet: Record<string, string | undefined> = {
-      'builtin-stop-kurz': 'c1f19376',
-      'builtin-nachlauf-mittel': 'db56b6ee',
-      'builtin-rueckzieher-kurz': 'e33c910c',
-      'builtin-schnitt-15': '6fbecf7f',
-      'builtin-schnitt-30': '9476de53',
-      'builtin-mitteltasche-gerade': '2ac4f2f2',
-      'builtin-gerade-nah': '5d19df26',
-      'builtin-gerade-mittel': 'e2475331',
-      'builtin-stop-nah': '0fd6cdc2',
-      'builtin-stop-mittel': '1fd3f7f4',
-      'builtin-nachlauf-20': '0feddcd6',
-      'builtin-nachlauf-50': 'faf1a88b',
-      'builtin-rueckzieher-30': 'aa852b95',
-      'builtin-rueckzieher-55': 'a8535c42',
-      'builtin-schnitt-10-rechts': '2e99d497',
-      'builtin-schnitt-20-rechts': '77145216',
-      'builtin-mitteltasche-weit': '26e79317',
-      'builtin-bande-gerade': '9acba1e8',
-      'builtin-luecke-breit': 'f88284e9',
-      'builtin-wachsende-linie': '6096b7f8',
-      'builtin-stop-lang': '9bc8d3aa',
-      'builtin-schnitt-45': '4ad32ec3',
-      'builtin-mitteltasche-schnitt': 'ea1277d7',
-      'builtin-bande-lang': '963e5440',
-      'builtin-kombination-zwei': 'fbbdf39b',
-      'builtin-bandenball-fest': 'aece12ee',
-      'builtin-position-kitchen': '0ae55ea8',
-      'builtin-rueckzieher-lang': 'd93a5e0a',
-      'builtin-schnitt-60': '16d42569',
-      'builtin-schnitt-75': 'df101d79',
-      'builtin-bande-kurz': '6562d0f7',
-      'builtin-kick-eine-bande': '2250773e',
-      'builtin-karambolage': 'a3d68b04',
-      'builtin-seiteneffet-links': '47ae8045',
-      'builtin-position-eng': 'e2d4f90a',
-      'builtin-cluster-oeffnen': 'b0c31d03',
-      'builtin-safe-hinter-ball': 'ca61c6d4',
-      'builtin-lange-gerade': '805deed8',
+      'builtin-stop-kurz': 'a0bd59ab',
+      'builtin-nachlauf-mittel': '9e61cdf5',
+      'builtin-rueckzieher-kurz': '051dd281',
+      'builtin-schnitt-15': 'c0c8899f',
+      'builtin-schnitt-30': '08228277',
+      'builtin-mitteltasche-gerade': '96c79fb6',
+      'builtin-gerade-nah': '906dccc6',
+      'builtin-gerade-mittel': 'b426eb55',
+      'builtin-stop-nah': 'c4b546ec',
+      'builtin-stop-mittel': 'beea3ada',
+      'builtin-nachlauf-20': 'e20b0852',
+      'builtin-nachlauf-50': 'b4483107',
+      'builtin-rueckzieher-30': '598fc92b',
+      'builtin-rueckzieher-55': 'ccbce956',
+      'builtin-schnitt-10-rechts': 'e5df0e63',
+      'builtin-schnitt-20-rechts': '888145ca',
+      'builtin-mitteltasche-weit': '9bc7d26d',
+      'builtin-bande-gerade': '7c62cd84',
+      'builtin-luecke-breit': 'f71ab4cd',
+      'builtin-wachsende-linie': 'cf4c4a54',
+      'builtin-stop-lang': '234b58b0',
+      'builtin-schnitt-45': 'd0bf6f9c',
+      'builtin-mitteltasche-schnitt': 'bebfa014',
+      'builtin-bande-lang': 'f73bac5b',
+      'builtin-kombination-zwei': 'fdc0d3c1',
+      'builtin-bandenball-fest': '9d647e16',
+      'builtin-position-kitchen': '82ec2dd6',
+      'builtin-rueckzieher-lang': '880edf07',
+      'builtin-schnitt-60': '144fc27c',
+      'builtin-schnitt-75': '2a73eed1',
+      'builtin-bande-kurz': 'de9d7b5b',
+      'builtin-kick-eine-bande': 'fd1c4a53',
+      'builtin-karambolage': '39f68d4c',
+      'builtin-seiteneffet-links': '49a276d7',
+      'builtin-position-eng': 'eed07402',
+      'builtin-cluster-oeffnen': '9becf14e',
+      'builtin-safe-hinter-ball': 'd8cd1068',
+      'builtin-lange-gerade': '51cfaee6',
     }
     expect(Object.fromEntries(shots.map((s) => [s.id, s.seedStamp]))).toEqual(erwartet)
   })

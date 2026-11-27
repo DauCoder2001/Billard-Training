@@ -8,7 +8,14 @@
  */
 
 import { describe, expect, it } from 'vitest'
-import { levelUpdates, retiredRemovals, seedStampUpdates, seedUpdates } from './bootstrap'
+import {
+  levelUpdates,
+  retiredRemovals,
+  seedStampUpdates,
+  seedUpdates,
+  speedScaleUpdates,
+} from './bootstrap'
+import { speedFromLegacy } from '@/domain/tempo'
 import { createShot } from '@/domain/shot'
 import type { Shot } from '@/domain/types'
 
@@ -206,5 +213,37 @@ describe('levelUpdates', () => {
     const bestand = eingestuft.map((s) => ohneStufe(s))
     const einmal = levelUpdates(eingestuft, bestand)
     expect(levelUpdates(eingestuft, einmal)).toEqual([])
+  })
+})
+
+describe('speedScaleUpdates', () => {
+  /** Eine Uebung mit einem bestimmten Tempo. */
+  function mitTempo(id: string, speed: number): Shot {
+    const s = vorlage(id, 'Übung')
+    return { ...s, attributes: { ...s.attributes, speed } }
+  }
+
+  it('rechnet jede Uebung um, auch die selbstgebaute', () => {
+    const eigen = { ...mitTempo('x', 8), builtIn: false }
+    const updates = speedScaleUpdates([mitTempo('a', 4), eigen])
+    expect(updates.map((s) => s.id)).toEqual(['a', 'x'])
+    expect(updates[0].attributes.speed).toBe(speedFromLegacy(4))
+    expect(updates[1].attributes.speed).toBe(speedFromLegacy(8))
+  })
+
+  it('laesst den Rest der Uebung in Ruhe', () => {
+    const vorher = mitTempo('a', 7)
+    const [nachher] = speedScaleUpdates([vorher])
+    expect({ ...nachher, attributes: vorher.attributes }).toEqual(vorher)
+    expect(nachher.attributes.spin).toEqual(vorher.attributes.spin)
+    expect(nachher.attributes.difficulty).toBe(vorher.attributes.difficulty)
+  })
+
+  it('schreibt nichts, wo sich nichts aendert', () => {
+    // Alt 1 ergibt 1,5 Laengen, alt 10 ergibt 4,75 - aber ein Wert, der auf
+    // sich selbst abgebildet wird, braucht keinen Schreibvorgang.
+    const unveraendert = speedScaleUpdates([mitTempo('a', 4)]).length === 0
+    const wert = speedFromLegacy(4)
+    expect(unveraendert).toBe(wert === 4)
   })
 })

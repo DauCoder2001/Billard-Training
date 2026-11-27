@@ -15,6 +15,7 @@ export const DEFAULT_SETTINGS: Settings = {
   defaultTargetRadius: 6,
   seededVersion: 0,
   themeVersion: 0,
+  speedScaleVersion: 0,
 }
 
 export async function getSettings(): Promise<Settings> {

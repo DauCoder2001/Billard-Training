@@ -1,6 +1,7 @@
 import { describe, expect, it } from 'vitest'
 import { deflateSync, strToU8 } from 'fflate'
 import { decodeShot, encodeShot, payloadFromInput, shareUrl, shotFileText } from './share'
+import { speedFromLegacy } from './tempo'
 import { createShot, mirrorShot } from './shot'
 import { computeCutAngle, duplicateShot } from './shot'
 import { DEFAULT_THRESHOLDS } from './types'
@@ -106,6 +107,21 @@ describe('Teilen', () => {
 })
 
 describe('Fremde Nutzlast pruefen', () => {
+  it('rechnet das Tempo einer alten Nutzlast in Tischlaengen um', () => {
+    // Ein Link, der vor 0.19.2 geteilt wurde, tragt v: 1 und ein speed auf
+    // der alten Skala 1..10. Ohne Umrechnung wuerde "Tempo 8" auf 5
+    // Tischlaengen gedeckelt und "Tempo 2" halb so weit gelesen, wie es
+    // gemeint war.
+    const alt = decodeShot(payloadOf({ v: 1, shot: { attributes: { speed: 8 } } }))
+    expect(alt.attributes.speed).toBe(speedFromLegacy(8))
+    expect(alt.attributes.speed).toBe(4.25)
+  })
+
+  it('nimmt das Tempo einer neuen Nutzlast, wie es dasteht', () => {
+    const neu = decodeShot(payloadOf({ v: 2, shot: { attributes: { speed: 2.25 } } }))
+    expect(neu.attributes.speed).toBe(2.25)
+  })
+
   it('ueberlebt leere Teilobjekte statt beim Zeichnen abzustuerzen', () => {
     const shot = decodeShot(payloadOf({ v: 1, shot: { attributes: {}, scoring: {}, target: {} } }))
     expect(shot.attributes.skills).toEqual([])

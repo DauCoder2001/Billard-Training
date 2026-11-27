@@ -20,13 +20,28 @@ export const STUFE_A: DrillSpec[] = [
     pocket: 'br',
     cut: 0,
     dist: 18,
-    zone: { x: 72.7, y: 25, r: 4 },
+    // Die Zielzone stand bis 0.19.1 als Zahlenpaar (72,7 / 25) da und sollte
+    // den Geisterball bezeichnen - traf ihn aber nicht: Die Stosslinie
+    // laeuft nicht waagerecht, sondern zur Ecke, und der Geisterball liegt
+    // auf (73,41 / 26,59), also 1,7 Zoll weiter. Jetzt rechnet die App die
+    // Zone selbst, wie beim grossen Geschwisterstoss "Stop-Shot mittel": wo
+    // der Weisse auf der Stosslinie stehenbleibt, Abstand 0.
+    cueAfter: { along: 'follow', dist: 0, r: 4 },
+    // Und wie dort fehlte der Rueckwaertsdrall. Mit mittigem Treffpunkt
+    // rollt der Weisse auch ueber 18 Zoll in den Vorwaertslauf und kam
+    // 6,2 Zoll hinter seiner Zielzone zur Ruhe. Gemessen ueber einen
+    // Faecher aus sechs Treffpunkten und zehn Tempostufen, je 100 Versuche
+    // (27.11.2026): Die Trefferquote bleibt bei jedem Treffpunkt 53 % - es
+    // ist ein gerader Ball -, die Zielzone dagegen haengt an beidem. Bei
+    // -0,2 und 2,25 Laengen sind es 98 % Zonentreffer, bei mittigem
+    // Treffpunkt 0 bis 8 %.
+    spin: { x: 0, y: -0.2 },
     skills: ['stun', 'position'],
     shotType: 'cut',
     difficulty: 2,
-    speed: 4,
+    speed: 2.25,
     coachNotes:
-      'Mittig treffen, mit gleichmäßigem Tempo durchstoßen. Der Weiße darf weder vor noch zurück.',
+      'Ganz leicht unter der Mitte treffen, mit gleichmäßigem Tempo durchstoßen. Der Weiße darf weder vor noch zurück.',
   },
   {
     slug: 'nachlauf-mittel',
@@ -42,7 +57,7 @@ export const STUFE_A: DrillSpec[] = [
     skills: ['follow', 'position'],
     shotType: 'position',
     difficulty: 3,
-    speed: 5,
+    speed: 1.25,
     coachNotes: 'Oberhalb der Mitte treffen. Das Tempo bestimmt, wie weit der Weiße läuft.',
   },
   {
@@ -54,12 +69,17 @@ export const STUFE_A: DrillSpec[] = [
     pocket: 'br',
     cut: 0,
     dist: 16,
-    zone: { x: 38, y: 25, r: 7 },
+    // Bis 0.19.1 stand die Zone auf (38/25) - 22 Zoll zurueck, aber auch
+    // 20 Zoll neben der Stosslinie. Ein Rueckzieher ohne Seiteneffet kommt
+    // genau auf dieser Linie zurueck, nie daneben; die Zone war mit keinem
+    // Stoss zu erreichen. Jetzt steht sie dort, wo der Weisse wirklich
+    // ankommt: 23 Zoll zurueck auf der Linie (Nachrechnung vom 27.11.2026).
+    cueAfter: { along: 'draw', dist: 23, r: 7 },
     spin: { x: 0, y: -0.7 },
     skills: ['draw', 'position'],
     shotType: 'position',
     difficulty: 4,
-    speed: 6,
+    speed: 2,
     coachNotes: 'Tief treffen und den Stoß durchziehen. Die Queuespitze bleibt waagerecht.',
   },
   {
@@ -75,7 +95,7 @@ export const STUFE_A: DrillSpec[] = [
     skills: ['cut', 'position'],
     shotType: 'cut',
     difficulty: 3,
-    speed: 5,
+    speed: 4.25,
     coachNotes: 'Den Geisterball vor dem Objektball sehen, nicht den Objektball selbst anvisieren. ' +
       ANDERE_SEITE,
   },
@@ -89,10 +109,13 @@ export const STUFE_A: DrillSpec[] = [
     cut: 30,
     dist: 28,
     zone: { x: 55, y: 18, r: 8 },
+    // Mit etwas Nachlauf laeuft der Weisse die Tangente weiter bis in die
+    // Zone: ohne Effet 8,6 Zoll daneben, mit +0,5 noch 4,6.
+    spin: { x: 0, y: 0.5 },
     skills: ['cut', 'stun', 'position'],
     shotType: 'cut',
     difficulty: 4,
-    speed: 5,
+    speed: 2,
     coachNotes:
       'Bei Stun läuft der Weiße exakt 90 Grad zur Laufrichtung des Objektballs. Das ist die wichtigste Linie im Positionsspiel. ' +
       ANDERE_SEITE,
@@ -107,10 +130,14 @@ export const STUFE_A: DrillSpec[] = [
     cut: 0,
     dist: 24,
     zone: { x: 50, y: 24, r: 5 },
+    // Die Zone liegt 1,8 Zoll hinter dem Geisterball: Der Weisse soll
+    // stehenbleiben. Ueber 24 Zoll Anlauf geht das nur mit etwas
+    // Rueckwaertsdrall - ohne ihn 8,3 Zoll daneben, mit -0,35 noch 0,5.
+    spin: { x: 0, y: -0.35 },
     skills: ['stun', 'position'],
     shotType: 'cut',
     difficulty: 3,
-    speed: 4,
+    speed: 2.25,
     coachNotes:
       'Die Mitteltasche verzeiht seitlich weniger als die Ecke. Zielpunkt exakt in die Mündungsmitte.',
   },
@@ -145,7 +172,7 @@ export const STUFE_A: DrillSpec[] = [
     skills: ['stun'],
     shotType: 'cut',
     difficulty: 1,
-    speed: 4,
+    speed: 0.75,
     coachNotes:
       'Der Grundschlag: Fuß, Brücke und Queue stehen auf einer Linie. Lieber dreimal probeschwingen als einmal zu schnell stoßen.',
   },
@@ -163,7 +190,7 @@ export const STUFE_A: DrillSpec[] = [
     skills: ['stun'],
     shotType: 'cut',
     difficulty: 2,
-    speed: 5,
+    speed: 1,
     coachNotes:
       'Mit der Entfernung wächst jeder Fehler im Stoß mit. Die Queuespitze muss gerade durchlaufen und darf nicht zur Seite ausweichen.',
   },
@@ -183,7 +210,7 @@ export const STUFE_A: DrillSpec[] = [
     skills: ['stun', 'position'],
     shotType: 'cut',
     difficulty: 2,
-    speed: 4,
+    speed: 2.75,
     coachNotes:
       'Auf kurze Entfernung genügt mittig und ohne Kraft. Je weiter der Weiße läuft, desto mehr Rückwärtsdrall braucht er zum Stehenbleiben.',
   },
@@ -198,10 +225,16 @@ export const STUFE_A: DrillSpec[] = [
     cut: 0,
     dist: 32,
     cueAfter: { along: 'follow', dist: 0, r: 4 },
+    // Bis 0.19.1 stand hier kein Effet - der Hinweis verlangte einen
+    // Treffpunkt unter der Mitte, die Uebung schrieb mittig vor. Ohne
+    // Rueckwaertsdrall rollt der Weisse ueber 32 Zoll Anlauf an und bleibt
+    // nicht stehen: gemessen 9,9 Zoll neben der Zone. Mit -0,20 sind es
+    // 1,7 Zoll (Nachrechnung vom 27.11.2026).
+    spin: { x: 0, y: -0.2 },
     skills: ['stun', 'position'],
     shotType: 'cut',
     difficulty: 4,
-    speed: 5,
+    speed: 2.75,
     coachNotes:
       'Über die Entfernung nimmt der Weiße von selbst Rolldrall an. Etwas unter der Mitte treffen, damit er beim Kontakt genau ausgerollt ist.',
   },
@@ -221,7 +254,7 @@ export const STUFE_A: DrillSpec[] = [
     skills: ['follow', 'position'],
     shotType: 'position',
     difficulty: 2,
-    speed: 4,
+    speed: 0.75,
     coachNotes:
       'Wenig ist hier schwerer als viel: oberhalb der Mitte treffen, aber sanft. Das Tempo entscheidet, nicht der Drall.',
   },
@@ -241,7 +274,7 @@ export const STUFE_A: DrillSpec[] = [
     skills: ['follow', 'position'],
     shotType: 'position',
     difficulty: 3,
-    speed: 5,
+    speed: 1,
     coachNotes:
       'Dieselbe Stelle am Ball wie eben, nur mehr Tempo. Wer stattdessen höher ansetzt, verliert die Kontrolle über die Richtung.',
   },
@@ -257,11 +290,16 @@ export const STUFE_A: DrillSpec[] = [
     dist: 14,
     // 30 cm = 11,81 Zoll zurueck auf der Anspiellinie.
     cueAfter: { along: 'draw', dist: 11.81, r: 4.5 },
-    spin: { x: 0, y: -0.6 },
+    // Bis 0.19.1 stand hier -0,6. Damit springt der Rueckweg zwischen zwei
+    // Tempostufen von 3 auf 25 Zoll - die verlangten 30 cm (11,8 Zoll)
+    // liegen genau in der Luecke und sind mit keiner Stufe zu treffen. Mit
+    // -0,5 kommt der Weisse bei zwei Tischlaengen 10,9 Zoll zurueck, also
+    // in die Zone (Nachrechnung vom 27.11.2026).
+    spin: { x: 0, y: -0.5 },
     skills: ['draw', 'position'],
     shotType: 'position',
     difficulty: 2,
-    speed: 5,
+    speed: 2,
     coachNotes:
       'Tief treffen und durchziehen, nicht stoppen. Ein kurzer, abgebremster Stoß gibt keinen Rückwärtsdrall, nur Kraft.',
   },
@@ -281,7 +319,7 @@ export const STUFE_A: DrillSpec[] = [
     skills: ['draw', 'position'],
     shotType: 'position',
     difficulty: 3,
-    speed: 6,
+    speed: 2,
     coachNotes:
       'Die Queuespitze bleibt waagerecht und geht durch den Ball hindurch. Der Weiße kommt auf derselben Linie zurück, auf der er hingelaufen ist.',
   },
@@ -302,7 +340,7 @@ export const STUFE_A: DrillSpec[] = [
     skills: ['cut'],
     shotType: 'cut',
     difficulty: 2,
-    speed: 5,
+    speed: 1,
     coachNotes:
       'Den Geisterball vor dem Objektball sehen, nicht den Objektball selbst. Bei 10 Grad liegt er noch fast dahinter. ' +
       ANDERE_SEITE,
@@ -322,7 +360,7 @@ export const STUFE_A: DrillSpec[] = [
     skills: ['cut'],
     shotType: 'cut',
     difficulty: 3,
-    speed: 5,
+    speed: 1,
     coachNotes:
       'Je dünner der Anschnitt, desto weiter wandert der Geisterball zur Seite. Vom Ziel aus denken, nicht vom Ball aus. ' +
       ANDERE_SEITE,
@@ -341,7 +379,7 @@ export const STUFE_A: DrillSpec[] = [
     skills: ['stun', 'position'],
     shotType: 'cut',
     difficulty: 4,
-    speed: 5,
+    speed: 0.5,
     coachNotes:
       'Die Mündung der Mitteltasche ist nur zwei Bälle breit und steht quer zum Stoß. Über diese Entfernung verzeiht sie seitlich fast nichts.',
   },
@@ -365,7 +403,7 @@ export const STUFE_A: DrillSpec[] = [
     skills: ['rail', 'stun'],
     shotType: 'cut',
     difficulty: 4,
-    speed: 5,
+    speed: 1,
     coachNotes:
       'Bandenbälle wirken voller, als sie sind. Hier hilft die Bande: liegt das Queue parallel zu ihr, stimmt die Richtung meist schon.',
   },
@@ -386,7 +424,7 @@ export const STUFE_A: DrillSpec[] = [
     skills: ['stun'],
     shotType: 'cut',
     difficulty: 3,
-    speed: 5,
+    speed: 1,
     coachNotes:
       'Nicht auf die Lücke schauen, sondern auf den Geisterball. Wer das Hindernis anvisiert, spielt darauf zu. ' +
       'Mögliche Variante: Klappt das sicher, die beiden Störbälle enger zusammenstellen – ' +
@@ -412,7 +450,7 @@ export const STUFE_A: DrillSpec[] = [
     skills: ['stun'],
     shotType: 'cut',
     difficulty: 3,
-    speed: 5,
+    speed: 1,
     coachNotes:
       'Fällt der Ball, den Weißen einen Diamanten (etwa 32 cm) weiter nach hinten legen – immer auf derselben Linie. Fällt er nicht, einen Diamanten zurück. Vier Diamanten sind das Ziel.',
   },

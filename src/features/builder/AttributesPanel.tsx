@@ -4,6 +4,7 @@ import { useRef, useState } from 'react'
 import { POCKET_BY_ID } from '@/domain/geometry'
 import { hasObjectBall, orderedThresholds } from '@/domain/scoring'
 import { computeCutAngle } from '@/domain/shot'
+import { SPEED_MAX, SPEED_MIN, SPEED_STEP, speedLabel, speedName } from '@/domain/tempo'
 import {
   LEVELS,
   LEVEL_LABELS,
@@ -148,10 +149,11 @@ export function AttributesPanel() {
                 onChange={(v) => setAttr('difficulty', v)}
               />
               <Range
-                label={`Tempo ${attrs.speed}`}
+                label={`Tempo ${speedLabel(attrs.speed)} — ${speedName(attrs.speed)}`}
                 value={attrs.speed}
-                min={1}
-                max={10}
+                min={SPEED_MIN}
+                max={SPEED_MAX}
+                step={SPEED_STEP}
                 onStart={beginChange}
                 onChange={(v) => setAttr('speed', v)}
               />

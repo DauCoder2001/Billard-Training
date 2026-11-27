@@ -231,7 +231,8 @@ als offene Frage — die App rechnet für diese Übung keinen Weg des Weißen
 aus, die Zone ist von Hand gesetzt. Die Nachrechnung sagt es jetzt: Die
 behaltene Zone liegt **24,3 Zoll** neben dem Ort, an dem der Weiße zur Ruhe
 kommt. Von den beiden widersprüchlichen Zonen war **keine** richtig
-(siehe [Nachrechnung-mit-pooltool.md](Nachrechnung-mit-pooltool.md)).
+(siehe [Nachrechnung-mit-pooltool.md](Nachrechnung-mit-pooltool.md)). **Mit
+0.19.2 liegt sie auf (18,1 / 42)** — am gemessenen Ort.
 
 ### 3.3 Stufe B — Kontrolle des Weißen (7 heute + 18 neu)
 
@@ -576,7 +577,7 @@ ausgelieferte Fassung mit Eintrag im CHANGELOG.
 | — | **Die Stufen B, C und D füllt Matthias Stück für Stück selbst.** Keine Auslieferung, die eine Stufe in einem Zug auf eine Zielzahl bringt (E6, 3.2.1, 3.2.2). | — |
 | 0.19.0 ✓ | **Nachrechnung mit pooltool** (5.2), vorgezogen — erledigt am 26.11.2026. Werkzeuge unter `scripts/pooltool/`, Befunde in [Nachrechnung-mit-pooltool.md](Nachrechnung-mit-pooltool.md). Ändert nichts an der App | — |
 | 0.19.1 ✓ | **Korrekturen aus der Nachrechnung** — erledigt am 27.11.2026. Bandenwege an der Umkehrlinie gespiegelt (vier Übungen), „Ball an der Bande" von der Bande weggerückt und damit spielbar, achte Prüfung `ghostOnTable`. Gemessen im Nachtrag von [Nachrechnung-mit-pooltool.md](Nachrechnung-mit-pooltool.md) | 0.19.0 |
-| 0.19.2 | **12 Zielzonen neu setzen** aus den gemessenen Ruhelagen, sieben Schwierigkeiten nachziehen. Jeder Fall einzeln vorlegen, nicht stillschweigend verschieben | 0.19.1 |
+| 0.19.2 ✓ | **Zielzonen und Tempo aus der Messung** — erledigt am 27.11.2026. Das Tempo steht in Tischlängen (gemessene Umrechnung), alle 38 Angaben neu gemessen, acht Zielzonen versetzt oder abgeschafft, acht Mal der Drall berichtigt. In 250 Versuchen je Übung wird jetzt jede Zielzone erreicht; vorher waren 20 von 25 unerreichbar. Die Fälle einzeln in [Zielzonen-Entscheidungen.md](Zielzonen-Entscheidungen.md). Die Schwierigkeiten stehen noch offen | 0.19.1 |
 | 0.20.0 | Modell für Spezialtechniken (3.6): `jump` und `masse` als Stoßart und Fähigkeit, `air` am Wegsegment — die Voraussetzung dafür, dass Stufe D überhaupt gebaut werden *kann* | — |
 | 0.21.0 | Stufenprüfungen und vier neue Erfolge (4.) | 0.19.2, 0.20.0 |
 | **1.0.0** | Vier Stufen mit tragfähigem Umfang, vier Prüfungen, nachgerechnet, eigene Adresse | 0.21.0 |
@@ -628,16 +629,13 @@ am Server.
 - **Zahl je Stufe:** 25 ist ein Richtwert (E6), und seit 0.18.1 kein Ziel
   mehr, auf das hin gearbeitet wird. Die Aufteilung ergibt sich daraus,
   welche Übungen sinnvoll sind — nicht umgekehrt.
-- **Die Zielzonen der Sammlung** — mit 0.19.0 gemessen, noch nicht
-  berichtigt. 12 von 25 liegen weiter von der gemessenen Ruhelage des Weißen
-  entfernt, als sie Radius haben (vor 0.19.1 waren es 13; „Ball an der Bande"
-  ist seither erreichbar); die von „Seiteneffet über die Bande" um
-  24,3 Zoll. Die gemessenen Ruhelagen stehen in
-  `scripts/pooltool/tempo.json`, die Korrektur ist als 0.19.2 eingeplant.
-- **Das Tempo 1..10 hat keine Bedeutung** (0.19.0, r = 0,367 gegen das
-  gemessene Tempo). Entweder bekommt es eine Einheit, oder es gehört aus der
-  Bewertung heraus. Zu entscheiden, bevor die Stufenprüfungen kommen — die
-  benoten an diesen Zahlen.
+- **Die Schwierigkeiten 1 bis 10** — mit 0.19.0 als Ausreißer erkannt, noch
+  nicht nachgezogen. Vorgelegt wird jeder Fall einzeln; die Grundlage ist
+  `scripts/pooltool/bericht.md` nach den Tempo-Korrekturen von 0.19.2.
+- ~~**Das Tempo 1..10 hat keine Bedeutung**~~ — **mit 0.19.2 erledigt.** Es
+  steht jetzt in Tischlängen, die Umrechnung in m/s ist gemessen
+  (`scripts/pooltool/tischlaengen.json`), und alle 38 Angaben der Sammlung
+  sind nachgemessen.
 - **Die Bande spiegelt nicht, sie gibt nach.** Mit 0.19.1 zielt der Kick auf
   die richtige Linie, trifft den Objektball aber auch mit vollkommenem Stoß
   nur bei einer von sechs Geschwindigkeiten: Der Winkel einer echten Bande

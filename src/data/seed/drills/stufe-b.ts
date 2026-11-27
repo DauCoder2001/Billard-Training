@@ -21,10 +21,15 @@ export const STUFE_B: DrillSpec[] = [
     cut: 0,
     dist: 55,
     zone: { x: 74, y: 13.6, r: 5 },
+    // Die Zone ist der Geisterball: Der Weisse soll stehenbleiben. Der
+    // Hinweis verlangte den Rueckwaertsdrall laengst, die Uebung schrieb
+    // bis 0.19.1 mittig vor - gemessen 9,3 Zoll daneben. Mit -0,35 sind es
+    // 3,2 (Nachrechnung vom 27.11.2026).
+    spin: { x: 0, y: -0.35 },
     skills: ['stun', 'position'],
     shotType: 'cut',
     difficulty: 6,
-    speed: 6,
+    speed: 3,
     coachNotes:
       'Über die Distanz braucht der Weiße etwas Rückwärtsdrall, damit der Rolldrall bis zum Treffer aufgebraucht ist.',
   },
@@ -37,11 +42,24 @@ export const STUFE_B: DrillSpec[] = [
     pocket: 'tr',
     cut: 45,
     dist: 30,
+    // Die Zone bleibt, wo sie war, und das ist belegt: Verschoben auf die
+    // gemessene mittlere Ruhelage (34,8 / 30,9) wird sie in 39 bis 48 %
+    // der gelochten Versuche getroffen, auf (40 / 30) in 49 % - kein
+    // Unterschied. Auch kein Effet und kein Tempo bringen sie naeher: Auf
+    // einem Faecher aus sechs Treffpunkten und fuenfzehn Tempostufen
+    // erreicht nur ein einziges Feld ueberhaupt die Zone (2,25 Laengen,
+    // mittiger bis leicht tiefer Treffpunkt).
+    //
+    // Das Problem dieser Uebung ist ein anderes und mit einer Zielzone
+    // nicht zu beheben: Der Weisse faellt in 30 von 100 Versuchen selbst.
+    // Mehr als die Haelfte der Zonenquote geht allein darauf. Das ist eine
+    // Frage an den Aufbau, nicht an die Zone - offen (Nachrechnung vom
+    // 27.11.2026).
     zone: { x: 40, y: 30, r: 9 },
     skills: ['cut'],
     shotType: 'cut',
     difficulty: 6,
-    speed: 6,
+    speed: 2.25,
     coachNotes: 'Mehr Tempo einplanen: der Objektball nimmt bei 45 Grad nur noch die Hälfte mit. ' +
       ANDERE_SEITE,
   },
@@ -54,11 +72,25 @@ export const STUFE_B: DrillSpec[] = [
     pocket: 'bm',
     cut: 35,
     dist: 26,
-    zone: { x: 30, y: 20, r: 9 },
+    // Keine Zielzone: Diese Uebung ist nicht zu stellen. Gemessen ueber
+    // sechs Treffpunkte und fuenfzehn Tempostufen, je 100 Versuche
+    // (27.11.2026): Der Ball faellt in 83 % der Versuche, bei jedem
+    // Treffpunkt und jedem Tempo - aber die Ruhelage des Weissen streut um
+    // 16 Zoll, und die beste Zonenquote auf dem ganzen Faecher sind 27 %
+    // (mittiger Treffpunkt, 2,75 Laengen). Die alte Zone (30 / 20) mit
+    // Radius 9 lag nur 5,5 Zoll von der mittleren Ruhelage entfernt und
+    // wurde trotzdem in 16 % getroffen: Es ist die Streuung, nicht die
+    // Lage. Eine Stellung, die niemand steuern kann, darf die App nicht
+    // bewerten.
+    //
+    // Bis 0.19.1 stand hier dazu "mit Rueckwaertsdrall bremst er auf der
+    // Tangente und bleibt in ihr". Das war falsch: Mit -0,5 sind es 11 %
+    // Zonenquote, mit mittigem Treffpunkt 27 %.
+    zone: null,
     skills: ['cut', 'position'],
     shotType: 'cut',
     difficulty: 6,
-    speed: 5,
+    speed: 2.75,
     coachNotes: 'Bei Schnittbällen in die Mitte wird die wirksame Taschenöffnung schnell schmal.',
   },
   {
@@ -75,7 +107,7 @@ export const STUFE_B: DrillSpec[] = [
     skills: ['bank'],
     shotType: 'bank',
     difficulty: 6,
-    speed: 6,
+    speed: 2.25,
     coachNotes:
       'Ohne Effet und mit mittlerem Tempo spiegelt die Bande sauber. Mehr Kraft lässt den Ball kürzer herauskommen.',
   },
@@ -93,7 +125,7 @@ export const STUFE_B: DrillSpec[] = [
     skills: ['combination'],
     shotType: 'combination',
     difficulty: 6,
-    speed: 5,
+    speed: 3,
     coachNotes:
       'Fehler verdoppeln sich bei jeder Berührung. Zuerst die Linie des zweiten Balls festlegen, dann rückwärts denken.',
   },
@@ -117,7 +149,7 @@ export const STUFE_B: DrillSpec[] = [
     skills: ['rail', 'cut'],
     shotType: 'cut',
     difficulty: 6,
-    speed: 5,
+    speed: 1.75,
     coachNotes:
       'Bandenbälle wirken voller, als sie sind. Lieber einen Hauch dünner anvisieren und ohne Effet spielen.',
   },
@@ -136,7 +168,12 @@ export const STUFE_B: DrillSpec[] = [
     skills: ['draw', 'position'],
     shotType: 'position',
     difficulty: 6,
-    speed: 6,
+    // Die Zone haengt hier scharf am Tempo, und das macht die Zahl
+    // empfindlich: 3,00 Laengen bringen 42 bis 47 % Zonentreffer, 3,25
+    // bringen 81 bis 83 %, 3,50 wieder 46 bis 49 % (je 250 Versuche, drei
+    // Saaten, 27.11.2026). Ein Lauf mit nur 150 Versuchen je Stufe hatte
+    // deshalb 3,00 vorgeschlagen - bei so steilen Flanken reicht das nicht.
+    speed: 3.25,
     coachNotes: 'Große Zone, aber große Distanz. Tempo üben, nicht Effet.',
   },
 ]

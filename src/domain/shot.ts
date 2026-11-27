@@ -31,7 +31,7 @@ export function createShot(partial: Partial<Shot> = {}): Shot {
       shotType: 'cut',
       cutAngle: 0,
       spin: { x: 0, y: 0 },
-      speed: 5,
+      speed: 2,
       difficulty: 5,
       elevation: 0,
       skills: [],

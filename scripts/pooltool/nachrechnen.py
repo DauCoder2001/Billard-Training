@@ -23,6 +23,7 @@ Aufruf (siehe README.md):
 from __future__ import annotations
 
 import argparse
+import functools
 import json
 import math
 import sys
@@ -51,11 +52,15 @@ ZOLL = 0.0254
 #: Sekunde bedeutet. Deshalb gibt es den zweiten Betriebsmodus `--modus
 #: tempo`: der rechnet rueckwaerts und sagt, welches V0 jede Uebung
 #: tatsaechlich verlangt. Erst danach laesst sich diese Zeile belegen.
-TEMPO_GRUND = 0.5
-TEMPO_SCHRITT = 0.45
+# Das Tempo der App steht in Tischlaengen: der Weg, den der Weisse von der
+# Kopflinie aus allein rollen wuerde. Die Umrechnung in m/s ist gemessen,
+# nicht angenommen - tischlaengen.py legt den Weissen hin und zaehlt nach.
+TISCHLAENGEN_DATEI = HIER / "tischlaengen.json"
 
-#: Welche Anfangsgeschwindigkeiten der Tempo-Modus durchprobiert (m/s).
-TEMPO_LEITER = [0.4, 0.55, 0.7, 0.9, 1.1, 1.4, 1.7, 2.1, 2.6, 3.2, 4.0]
+#: Welche Tempostufen der Tempo-Modus durchprobiert - in Tischlaengen, also
+#: in der Einheit, die auch in der Uebung steht. Viertel-Laengen von 0,5 bis
+#: 4,5: dieselben Stufen, die der Schieber in der App anbietet.
+TEMPO_LEITER = [0.5 + 0.25 * i for i in range(17)]
 
 #: Streuung eines geuebten Spielers, der dieselbe Uebung mehrfach spielt.
 STREUUNG_RICHTUNG = 0.35  # Grad
@@ -75,9 +80,32 @@ TASCHEN = {
 }
 
 
-def tempo_in_v0(tempo: int) -> float:
-    """Tempo der App in Anfangsgeschwindigkeit."""
-    return TEMPO_GRUND + TEMPO_SCHRITT * tempo
+@functools.cache
+def _tempo_kurve() -> list[tuple[float, float]]:
+    """Gemessene Paare (Tischlaengen, m/s), nach Tischlaengen sortiert."""
+    if not TISCHLAENGEN_DATEI.exists():
+        raise SystemExit(
+            f"{TISCHLAENGEN_DATEI} fehlt. Erst messen: "
+            "  ./.venv-pooltool/Scripts/python.exe scripts/pooltool/tischlaengen.py"
+        )
+    daten = json.loads(TISCHLAENGEN_DATEI.read_text(encoding="utf-8"))
+    return sorted((e["tischlaengen"], e["v0"]) for e in daten)
+
+
+def tempo_in_v0(tempo: float) -> float:
+    """Tempo der App (Tischlaengen) in Anfangsgeschwindigkeit (m/s).
+
+    Zwischen den gemessenen Stuetzstellen wird linear gerechnet; ausserhalb
+    gilt der Randwert. Die Kurve ist nicht gerade - mit jeder Bande geht
+    Energie verloren, und ab vier Laengen bringt mehr Tempo kaum mehr Weg.
+    """
+    kurve = _tempo_kurve()
+    if tempo <= kurve[0][0]:
+        return kurve[0][1]
+    for (l1, v1), (l2, v2) in zip(kurve, kurve[1:]):
+        if tempo <= l2:
+            return v1 + (tempo - l1) / (l2 - l1) * (v2 - v1)
+    return kurve[-1][1]
 
 
 def nach_pt(x: float, y: float) -> tuple[float, float]:
@@ -238,6 +266,11 @@ def uebung_rechnen(
         zone=uebung["zone"],
     )
     soll = TASCHEN[uebung["tasche"]["id"]]
+    # Bei einer Safe ist der gefallene Objektball der Fehlversuch, nicht der
+    # Treffer: "Der Objektball soll leben bleiben, nicht fallen." Wer hier
+    # nur die gefallenen Baelle auswertet, misst genau die misslungenen
+    # Versuche - und bekommt eine Zielzone, die nie erreicht wird.
+    safe = uebung.get("wertung") == "position"
 
     for _ in range(laeufe):
         try:
@@ -255,7 +288,8 @@ def uebung_rechnen(
             erg.beruehrt += 1
         if lauf["abzug"]:
             erg.abzug += 1
-        if lauf["tasche"] == soll:
+        gelungen = lauf["tasche"] is None if safe else lauf["tasche"] == soll
+        if gelungen:
             erg.getroffen += 1
             if lauf["weisser"] is not None:
                 erg.ruhelagen.append(lauf["weisser"])
@@ -269,31 +303,66 @@ def uebung_rechnen(
     return erg
 
 
+def guete(erg: Ergebnis, hat_zone: bool) -> float:
+    """Wie gut die Uebung auf dieser Tempostufe aufgeht - eine Zahl von 0 bis 1.
+
+    Gewertet wird, was die App wertet: Der Versuch zaehlt, wenn der Ball
+    faellt **und** der Weisse in der Zielzone zur Ruhe kommt. Was kein
+    Spieler hinnehmen wuerde - falsche Tasche, gefallener Weisser - zieht
+    anteilig ab.
+
+    Die drei naheliegenden einfacheren Masse taugen alle nicht, und jedes
+    hat sich am 27.11.2026 geirrt:
+
+    * Die **Trefferquote** allein waehlt bei einer Uebung mit Zielzone das
+      Tempo, bei dem der Ball am sichersten faellt, und laesst den Weissen
+      irgendwo stehen.
+    * Der **Zonenabstand** allein waehlte bei "Mitteltasche aus der
+      Entfernung" eine halbe Tischlaenge: Dort erreicht der Weisse die Zone
+      in 100 % der gelungenen Versuche - es fallen aber nur 26 von 100
+      Baellen. Ein Viertel mehr Tempo, und 96 % fallen (bei 23 % Zone).
+    * Der **Mittelwert** der Ruhelagen truegt: Bei "Safe hinter den Ball"
+      lag er in der Zone, erreicht hat sie kein einzelner Versuch.
+
+    Die Fehlversuche ziehen **mal**, nicht minus. Abgezogen ergaebe eine
+    Uebung, bei der der Weisse in 28 von 100 Versuchen faellt (so
+    "Schnittball 45 Grad"), auf jeder Stufe eine negative Guete - und damit
+    keine Stufe, obwohl die Reihenfolge der Stufen durchaus etwas sagt.
+    """
+    q = erg.trefferquote
+    if hat_zone:
+        q *= erg.zonenquote
+    return q * (1 - erg.abzug / max(erg.laeufe, 1))
+
+
+#: Wie viel Guete eine sanftere Stufe kosten darf, um vorgezogen zu werden.
+GUETE_SCHWELLE = 0.85
+
+
 def tempo_messen(
     uebung: dict, tisch: Table, laeufe: int, saat: int
 ) -> tuple[list[tuple[float, Ergebnis]], float | None]:
-    """Welches V0 die Uebung verlangt - gemessen statt angenommen.
+    """Welches Tempo die Uebung verlangt - gemessen statt angenommen.
 
-    Spielt die Uebung die ganze Tempo-Leiter hinauf und sucht die Stufe, bei
-    der der Weisse am naechsten an der Zielzone zur Ruhe kommt. Uebungen
-    ohne Zone bekommen die Stufe mit der besten Trefferquote.
+    Spielt die Uebung die ganze Tempo-Leiter hinauf und sucht die Stufe mit
+    der besten Guete. Bei gleichwertigen Stufen gewinnt die sanftere: Wer
+    mit 1,5 Tischlaengen dasselbe erreicht wie mit 3, hat die leichtere
+    Aufgabe vor sich. "Gleichwertig" heisst hier 85 % der besten Guete.
     """
     stufen: list[tuple[float, Ergebnis]] = []
-    for i, v0 in enumerate(TEMPO_LEITER):
-        stufen.append((v0, uebung_rechnen(uebung, tisch, laeufe, saat + i * 97, v0)))
+    for i, tempo in enumerate(TEMPO_LEITER):
+        stufen.append((tempo, uebung_rechnen(uebung, tisch, laeufe, saat + i * 97,
+                                             tempo_in_v0(tempo))))
 
-    zone = uebung["zone"]
-    # Nur Stufen, auf denen die Uebung ueberhaupt aufgeht: eine Ruhelage aus
-    # Fehlversuchen sagt nichts ueber die Zielzone.
-    brauchbar = [(v0, e) for v0, e in stufen if e.trefferquote >= 0.25 and e.mitte]
-    if zone is not None and brauchbar:
-        return stufen, min(
-            brauchbar, key=lambda p: math.dist(p[1].mitte, (zone["x"], zone["y"]))
-        )[0]
-    treffer = [(v0, e) for v0, e in stufen if e.trefferquote > 0]
-    if treffer:
-        return stufen, max(treffer, key=lambda p: p[1].trefferquote)[0]
-    return stufen, None
+    hat_zone = uebung["zone"] is not None
+    bewertet = [(tempo, guete(e, hat_zone)) for tempo, e in stufen]
+    beste = max(g for _, g in bewertet)
+    if beste <= 0:
+        # Faellt auf keiner Stufe ein Ball: Die Uebung ist nicht spielbar,
+        # und ein Tempo dafuer zu nennen waere Erfindung.
+        return stufen, None
+    reicht = [tempo for tempo, g in bewertet if g >= beste * GUETE_SCHWELLE]
+    return stufen, min(reicht)
 
 
 def tempo_bericht(messungen: list[tuple[dict, list[tuple[float, Ergebnis]], float | None]],
@@ -302,43 +371,37 @@ def tempo_bericht(messungen: list[tuple[dict, list[tuple[float, Ergebnis]], floa
     zeilen.append(f"# Welches Tempo die Uebungen verlangen (pooltool {pt.__version__})")
     zeilen.append("")
     zeilen.append(
-        "Rueckwaerts gerechnet: jede Uebung wird die Tempo-Leiter "
-        f"{TEMPO_LEITER} m/s hinaufgespielt, je {laeufe} Versuche. Gesucht ist die "
-        "Stufe, bei der der Weisse am naechsten an seiner Zielzone zur Ruhe kommt "
-        "(Uebungen ohne Zone: die Stufe mit der besten Trefferquote)."
+        "Rueckwaerts gerechnet: jede Uebung wird die Tempo-Leiter von "
+        f"{TEMPO_LEITER[0]} bis {TEMPO_LEITER[-1]} Tischlaengen in Vierteln "
+        f"hinaufgespielt, je {laeufe} Versuche. Gesucht ist die sanfteste Stufe, "
+        f"die mindestens {GUETE_SCHWELLE * 100:.0f} % der besten Guete erreicht - "
+        "Guete ist der Anteil der Versuche, in denen der Ball faellt und der "
+        "Weisse in der Zielzone zur Ruhe kommt, abzueglich falscher Taschen und "
+        "gefallener Weisser."
     )
     zeilen.append("")
     zeilen.append(
-        "| Uebung | Stufe | Tempo laut App | Gemessenes V0 | Treffer dort | "
-        "Abstand zur Zone | Bestes erreichbares |"
+        "| Uebung | Stufe | Tempo laut App | Gemessen | Treffer dort | "
+        "In der Zone | Guete | Beste Stufe ueberhaupt |"
     )
-    zeilen.append("|---|---|---|---|---|---|---|")
+    zeilen.append("|---|---|---|---|---|---|---|---|")
     for uebung, stufen, bestes in messungen:
-        zone = uebung["zone"]
+        hat_zone = uebung["zone"] is not None
         if bestes is None:
             zeilen.append(
                 f"| {uebung['name']} | {uebung['stufe']} | {uebung['tempo']} | "
-                "**kein Treffer auf der ganzen Leiter** | | | |"
+                "**geht auf keiner Stufe auf** | | | | |"
             )
             continue
-        erg = next(e for v0, e in stufen if v0 == bestes)
-        if zone is None:
-            abstand, naechstes = "–", "–"
-        else:
-            abstand = f"{math.dist(erg.mitte, (zone['x'], zone['y'])):.1f}\""
-            # Die beste Stufe ueberhaupt, auch wenn dort kaum etwas faellt -
-            # sie sagt, ob die Zone wenigstens erreichbar waere.
-            alle = [
-                (math.dist(e.mitte, (zone["x"], zone["y"])), v0)
-                for v0, e in stufen
-                if e.mitte and e.trefferquote >= 0.25
-            ]
-            naechstes = (
-                f"{min(alle)[0]:.1f}\" bei {min(alle)[1]} m/s" if alle else "nie getroffen"
-            )
+        erg = next(e for tempo, e in stufen if tempo == bestes)
+        bew = [(guete(e, hat_zone), tempo) for tempo, e in stufen]
+        hoechste = max(bew)
+        zone = f"{erg.zonenquote * 100:.0f} %" if hat_zone else "–"
         zeilen.append(
             f"| {uebung['name']} | {uebung['stufe']} | {uebung['tempo']} | "
-            f"{bestes} m/s | {erg.trefferquote * 100:.0f} % | {abstand} | {naechstes} |"
+            f"{bestes:g} | {erg.trefferquote * 100:.0f} % | {zone} | "
+            f"{guete(erg, hat_zone) * 100:.0f} % | "
+            f"{hoechste[0] * 100:.0f} % bei {hoechste[1]:g} |"
         )
     return "\n".join(zeilen) + "\n"
 
@@ -351,20 +414,24 @@ def bericht(ergebnisse: list[Ergebnis], laeufe: int) -> str:
         f"{len(ergebnisse)} Uebungen, je {laeufe} Versuche. "
         f"Streuung: Richtung {STREUUNG_RICHTUNG} Grad, Tempo "
         f"{STREUUNG_TEMPO * 100:.0f} %, Treffpunkt {STREUUNG_TREFFPUNKT:.2f} Ballradien. "
-        f"Tempo {{t}} der App = {TEMPO_GRUND} + {TEMPO_SCHRITT} * t m/s."
+        "Tempo in Tischlaengen, umgerechnet ueber die gemessene Kurve in "
+        "tischlaengen.json. Guete ist der Anteil der Versuche, in denen der Ball "
+        "faellt und der Weisse in der Zielzone zur Ruhe kommt, abzueglich falscher "
+        "Taschen und gefallener Weisser."
     )
     zeilen.append("")
     zeilen.append(
-        "| Uebung | Stufe | Schwierigkeit | Treffer | Objektball beruehrt | Falsche Tasche | "
-        "Weisser faellt | In der Zone | Mittlere Ruhelage | Streuung | Zone laut App | Abstand |"
+        "| Uebung | Stufe | Schwierigkeit | Tempo | Treffer | In der Zone | Guete | "
+        "Objektball beruehrt | Falsche Tasche | Weisser faellt | Mittlere Ruhelage | "
+        "Streuung | Zone laut App | Abstand |"
     )
-    zeilen.append("|---|---|---|---|---|---|---|---|---|---|---|---|")
+    zeilen.append("|---|---|---|---|---|---|---|---|---|---|---|---|---|---|")
 
     for e in sorted(ergebnisse, key=lambda x: (x.stufe or "Z", -x.trefferquote)):
         if e.gueltig == 0:
             zeilen.append(
-                f"| {e.name} | {e.stufe} | {e.schwierigkeit} | "
-                f"**kein Versuch gerechnet: {e.fehler}** | | | | | | | | |"
+                f"| {e.name} | {e.stufe} | {e.schwierigkeit} | {e.tempo:g} | "
+                f"**kein Versuch gerechnet: {e.fehler}** | | | | | | | | | |"
             )
             continue
         mitte = e.mitte
@@ -381,10 +448,12 @@ def bericht(ergebnisse: list[Ergebnis], laeufe: int) -> str:
         if e.abstuerze:
             treffer_text += f" ({e.abstuerze} Versuche ausgefallen)"
         zeilen.append(
-            f"| {e.name} | {e.stufe} | {e.schwierigkeit}/10 | "
-            f"{treffer_text} | {e.beruehrt / e.gueltig * 100:.0f} % | "
+            f"| {e.name} | {e.stufe} | {e.schwierigkeit}/10 | {e.tempo:g} | "
+            f"{treffer_text} | {zonenquote} | "
+            f"{guete(e, e.zone is not None) * 100:.0f} % | "
+            f"{e.beruehrt / e.gueltig * 100:.0f} % | "
             f"{e.falsche_tasche} | {e.abzug} | "
-            f"{zonenquote} | {mitte_text} | {e.streuung:.1f}\" | {zone_text} | {abstand} |"
+            f"{mitte_text} | {e.streuung:.1f}\" | {zone_text} | {abstand} |"
         )
 
     return "\n".join(zeilen) + "\n"
@@ -442,16 +511,20 @@ def main() -> int:
                         "id": u["id"],
                         "name": u["name"],
                         "tempo_app": u["tempo"],
-                        "v0_gemessen": b,
+                        "tempo_gemessen": b,
                         "leiter": [
                             {
-                                "v0": v0,
+                                "tempo": tempo,
                                 "trefferquote": e.trefferquote,
-                    "beruehrt": e.beruehrt / e.gueltig if e.gueltig else 0.0,
+                                "beruehrt": (
+                                    e.beruehrt / e.gueltig if e.gueltig else 0.0
+                                ),
                                 "mitte": e.mitte,
+                                "streuung": e.streuung,
+                                "zonenquote": e.zonenquote,
                                 "abzug": e.abzug,
                             }
-                            for v0, e in s
+                            for tempo, e in s
                         ],
                     }
                     for u, s, b in messungen

@@ -14,6 +14,7 @@ import {
 import { seedShotById } from '@/data/seed/drills'
 import { POCKET_BY_ID } from '@/domain/geometry'
 import { hasNewerTemplate } from '@/domain/seedStamp'
+import { speedLabel, speedName } from '@/domain/tempo'
 import { hasObjectBall, pocketRate, proficiencyFor, scratchRate } from '@/domain/scoring'
 import {
   MAX_ATTEMPTS,
@@ -299,7 +300,9 @@ export function ShotDetailPage() {
               <span className="muted">Schwierigkeit</span>
               <strong>{shot.attributes.difficulty}/10</strong>
               <span className="muted">Tempo</span>
-              <strong>{shot.attributes.speed}/10</strong>
+              <strong title="So weit würde der Weiße von der Kopflinie aus allein rollen">
+                {speedLabel(shot.attributes.speed)} · {speedName(shot.attributes.speed)}
+              </strong>
               <span className="muted">Schnittwinkel</span>
               <strong>{shot.attributes.cutAngle.toFixed(1)}°</strong>
             </div>

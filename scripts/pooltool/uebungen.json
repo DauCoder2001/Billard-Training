@@ -13,7 +13,7 @@
    "name": "Stop-Shot kurz",
    "stufe": "A",
    "schwierigkeit": 2,
-   "tempo": 4,
+   "tempo": 2.25,
    "stossart": "cut",
    "schnittwinkel": 0,
    "ueberBande": false,
@@ -57,12 +57,12 @@
    },
    "effet": {
     "x": 0,
-    "y": 0
+    "y": -0.2
    },
    "erhoehung": 0,
    "zone": {
-    "x": 72.7,
-    "y": 25,
+    "x": 73.40900974233027,
+    "y": 26.59099025766973,
     "r": 4
    },
    "wertung": "pocket+position"
@@ -72,7 +72,7 @@
    "name": "Nachlauf mittel",
    "stufe": "A",
    "schwierigkeit": 3,
-   "tempo": 5,
+   "tempo": 1.25,
    "stossart": "position",
    "schnittwinkel": 0,
    "ueberBande": false,
@@ -131,7 +131,7 @@
    "name": "Rückzieher kurz",
    "stufe": "A",
    "schwierigkeit": 4,
-   "tempo": 6,
+   "tempo": 2,
    "stossart": "position",
    "schnittwinkel": 0,
    "ueberBande": false,
@@ -179,8 +179,8 @@
    },
    "erhoehung": 0,
    "zone": {
-    "x": 38,
-    "y": 25,
+    "x": 50.51325753774187,
+    "y": 41.057065990075074,
     "r": 7
    },
    "wertung": "pocket+position"
@@ -190,7 +190,7 @@
    "name": "Schnittball 15 Grad",
    "stufe": "A",
    "schwierigkeit": 3,
-   "tempo": 5,
+   "tempo": 4.25,
    "stossart": "cut",
    "schnittwinkel": 15,
    "ueberBande": false,
@@ -249,7 +249,7 @@
    "name": "Schnittball 30 Grad",
    "stufe": "A",
    "schwierigkeit": 4,
-   "tempo": 5,
+   "tempo": 2,
    "stossart": "cut",
    "schnittwinkel": 30,
    "ueberBande": false,
@@ -293,7 +293,7 @@
    },
    "effet": {
     "x": 0,
-    "y": 0
+    "y": 0.5
    },
    "erhoehung": 0,
    "zone": {
@@ -308,7 +308,7 @@
    "name": "Mitteltasche gerade",
    "stufe": "A",
    "schwierigkeit": 3,
-   "tempo": 4,
+   "tempo": 2.25,
    "stossart": "cut",
    "schnittwinkel": 0,
    "ueberBande": false,
@@ -352,7 +352,7 @@
    },
    "effet": {
     "x": 0,
-    "y": 0
+    "y": -0.35
    },
    "erhoehung": 0,
    "zone": {
@@ -367,7 +367,7 @@
    "name": "Gerader Ball nah",
    "stufe": "A",
    "schwierigkeit": 1,
-   "tempo": 4,
+   "tempo": 0.75,
    "stossart": "cut",
    "schnittwinkel": 0,
    "ueberBande": false,
@@ -422,7 +422,7 @@
    "name": "Gerader Ball mittel",
    "stufe": "A",
    "schwierigkeit": 2,
-   "tempo": 5,
+   "tempo": 1,
    "stossart": "cut",
    "schnittwinkel": 0,
    "ueberBande": false,
@@ -477,7 +477,7 @@
    "name": "Stop-Shot nah",
    "stufe": "A",
    "schwierigkeit": 2,
-   "tempo": 4,
+   "tempo": 2.75,
    "stossart": "cut",
    "schnittwinkel": 0,
    "ueberBande": false,
@@ -536,7 +536,7 @@
    "name": "Stop-Shot mittel",
    "stufe": "A",
    "schwierigkeit": 4,
-   "tempo": 5,
+   "tempo": 2.75,
    "stossart": "cut",
    "schnittwinkel": 0,
    "ueberBande": false,
@@ -580,7 +580,7 @@
    },
    "effet": {
     "x": 0,
-    "y": 0
+    "y": -0.2
    },
    "erhoehung": 0,
    "zone": {
@@ -595,7 +595,7 @@
    "name": "Nachlauf 20 cm",
    "stufe": "A",
    "schwierigkeit": 2,
-   "tempo": 4,
+   "tempo": 0.75,
    "stossart": "position",
    "schnittwinkel": 0,
    "ueberBande": false,
@@ -654,7 +654,7 @@
    "name": "Nachlauf 50 cm",
    "stufe": "A",
    "schwierigkeit": 3,
-   "tempo": 5,
+   "tempo": 1,
    "stossart": "position",
    "schnittwinkel": 0,
    "ueberBande": false,
@@ -713,7 +713,7 @@
    "name": "Rückzieher 30 cm",
    "stufe": "A",
    "schwierigkeit": 2,
-   "tempo": 5,
+   "tempo": 2,
    "stossart": "position",
    "schnittwinkel": 0,
    "ueberBande": false,
@@ -757,7 +757,7 @@
    },
    "effet": {
     "x": 0,
-    "y": -0.6
+    "y": -0.5
    },
    "erhoehung": 0,
    "zone": {
@@ -772,7 +772,7 @@
    "name": "Rückzieher 55 cm",
    "stufe": "A",
    "schwierigkeit": 3,
-   "tempo": 6,
+   "tempo": 2,
    "stossart": "position",
    "schnittwinkel": 0,
    "ueberBande": false,
@@ -831,7 +831,7 @@
    "name": "Schnittball 10 Grad",
    "stufe": "A",
    "schwierigkeit": 2,
-   "tempo": 5,
+   "tempo": 1,
    "stossart": "cut",
    "schnittwinkel": 10,
    "ueberBande": false,
@@ -886,7 +886,7 @@
    "name": "Schnittball 20 Grad",
    "stufe": "A",
    "schwierigkeit": 3,
-   "tempo": 5,
+   "tempo": 1,
    "stossart": "cut",
    "schnittwinkel": 20,
    "ueberBande": false,
@@ -941,7 +941,7 @@
    "name": "Mitteltasche aus der Entfernung",
    "stufe": "A",
    "schwierigkeit": 4,
-   "tempo": 5,
+   "tempo": 0.5,
    "stossart": "cut",
    "schnittwinkel": 0,
    "ueberBande": false,
@@ -1000,7 +1000,7 @@
    "name": "Ball an der Bande gerade",
    "stufe": "A",
    "schwierigkeit": 4,
-   "tempo": 5,
+   "tempo": 1,
    "stossart": "cut",
    "schnittwinkel": 0,
    "ueberBande": false,
@@ -1055,7 +1055,7 @@
    "name": "Durch die Lücke",
    "stufe": "A",
    "schwierigkeit": 3,
-   "tempo": 5,
+   "tempo": 1,
    "stossart": "cut",
    "schnittwinkel": 0,
    "ueberBande": false,
@@ -1122,7 +1122,7 @@
    "name": "Wachsende Linie",
    "stufe": "A",
    "schwierigkeit": 3,
-   "tempo": 5,
+   "tempo": 1,
    "stossart": "cut",
    "schnittwinkel": 0,
    "ueberBande": false,
@@ -1177,7 +1177,7 @@
    "name": "Stop-Shot lang",
    "stufe": "B",
    "schwierigkeit": 6,
-   "tempo": 6,
+   "tempo": 3,
    "stossart": "cut",
    "schnittwinkel": 0,
    "ueberBande": false,
@@ -1221,7 +1221,7 @@
    },
    "effet": {
     "x": 0,
-    "y": 0
+    "y": -0.35
    },
    "erhoehung": 0,
    "zone": {
@@ -1236,7 +1236,7 @@
    "name": "Schnittball 45 Grad",
    "stufe": "B",
    "schwierigkeit": 6,
-   "tempo": 6,
+   "tempo": 2.25,
    "stossart": "cut",
    "schnittwinkel": 45,
    "ueberBande": false,
@@ -1295,7 +1295,7 @@
    "name": "Mitteltasche im Schnitt",
    "stufe": "B",
    "schwierigkeit": 6,
-   "tempo": 5,
+   "tempo": 2.75,
    "stossart": "cut",
    "schnittwinkel": 35,
    "ueberBande": false,
@@ -1342,19 +1342,15 @@
     "y": 0
    },
    "erhoehung": 0,
-   "zone": {
-    "x": 30,
-    "y": 20,
-    "r": 9
-   },
-   "wertung": "pocket+position"
+   "zone": null,
+   "wertung": "pocket"
   },
   {
    "id": "builtin-bande-lang",
    "name": "Bandenball über die Langbande",
    "stufe": "B",
    "schwierigkeit": 6,
-   "tempo": 6,
+   "tempo": 2.25,
    "stossart": "bank",
    "schnittwinkel": 0,
    "ueberBande": true,
@@ -1409,7 +1405,7 @@
    "name": "Kombination aus zwei Bällen",
    "stufe": "B",
    "schwierigkeit": 6,
-   "tempo": 5,
+   "tempo": 3,
    "stossart": "combination",
    "schnittwinkel": 0,
    "ueberBande": false,
@@ -1470,7 +1466,7 @@
    "name": "Ball an der Bande",
    "stufe": "B",
    "schwierigkeit": 6,
-   "tempo": 5,
+   "tempo": 1.75,
    "stossart": "cut",
    "schnittwinkel": 8,
    "ueberBande": false,
@@ -1529,7 +1525,7 @@
    "name": "Position in die Kitchen",
    "stufe": "B",
    "schwierigkeit": 6,
-   "tempo": 6,
+   "tempo": 3.25,
    "stossart": "position",
    "schnittwinkel": 20,
    "ueberBande": false,
@@ -1588,7 +1584,7 @@
    "name": "Rückzieher lang",
    "stufe": "C",
    "schwierigkeit": 8,
-   "tempo": 8,
+   "tempo": 2.25,
    "stossart": "position",
    "schnittwinkel": 0,
    "ueberBande": false,
@@ -1636,8 +1632,8 @@
    },
    "erhoehung": 0,
    "zone": {
-    "x": 39.9,
-    "y": 30.3,
+    "x": 65.00741711272433,
+    "y": 18.09823975112031,
     "r": 9
    },
    "wertung": "pocket+position"
@@ -1647,7 +1643,7 @@
    "name": "Dünner Schnitt 60 Grad",
    "stufe": "C",
    "schwierigkeit": 7,
-   "tempo": 6,
+   "tempo": 2.25,
    "stossart": "cut",
    "schnittwinkel": 60,
    "ueberBande": false,
@@ -1691,7 +1687,7 @@
    },
    "effet": {
     "x": 0,
-    "y": 0
+    "y": -0.5
    },
    "erhoehung": 0,
    "zone": {
@@ -1706,7 +1702,7 @@
    "name": "Sehr dünner Schnitt 75 Grad",
    "stufe": "C",
    "schwierigkeit": 9,
-   "tempo": 7,
+   "tempo": 2.25,
    "stossart": "cut",
    "schnittwinkel": 75,
    "ueberBande": false,
@@ -1761,7 +1757,7 @@
    "name": "Bandenball über die Kurzbande",
    "stufe": "C",
    "schwierigkeit": 7,
-   "tempo": 6,
+   "tempo": 2,
    "stossart": "bank",
    "schnittwinkel": 0,
    "ueberBande": true,
@@ -1816,7 +1812,7 @@
    "name": "Kick über eine Bande",
    "stufe": "C",
    "schwierigkeit": 8,
-   "tempo": 6,
+   "tempo": 2.25,
    "stossart": "kick",
    "schnittwinkel": 20,
    "ueberBande": false,
@@ -1871,7 +1867,7 @@
    "name": "Karambolage",
    "stufe": "C",
    "schwierigkeit": 8,
-   "tempo": 5,
+   "tempo": 2.5,
    "stossart": "carom",
    "schnittwinkel": 40,
    "ueberBande": false,
@@ -1932,7 +1928,7 @@
    "name": "Seiteneffet über die Bande",
    "stufe": "C",
    "schwierigkeit": 7,
-   "tempo": 6,
+   "tempo": 3.25,
    "stossart": "position",
    "schnittwinkel": 25,
    "ueberBande": false,
@@ -1980,8 +1976,8 @@
    },
    "erhoehung": 0,
    "zone": {
-    "x": 25,
-    "y": 12,
+    "x": 18.1,
+    "y": 42,
     "r": 9
    },
    "wertung": "pocket+position"
@@ -1991,7 +1987,7 @@
    "name": "Enge Position",
    "stufe": "C",
    "schwierigkeit": 7,
-   "tempo": 4,
+   "tempo": 2,
    "stossart": "position",
    "schnittwinkel": 25,
    "ueberBande": false,
@@ -2039,8 +2035,8 @@
    },
    "erhoehung": 0,
    "zone": {
-    "x": 55,
-    "y": 34,
+    "x": 88.6,
+    "y": 31.3,
     "r": 4
    },
    "wertung": "pocket+position"
@@ -2050,7 +2046,7 @@
    "name": "Cluster öffnen",
    "stufe": "C",
    "schwierigkeit": 8,
-   "tempo": 6,
+   "tempo": 2.5,
    "stossart": "position",
    "schnittwinkel": 20,
    "ueberBande": false,
@@ -2086,14 +2082,14 @@
     {
      "id": "extra-0",
      "art": "obstacle",
-     "x": 44,
-     "y": 36
+     "x": 62,
+     "y": 31
     },
     {
      "id": "extra-1",
      "art": "obstacle",
-     "x": 46.3,
-     "y": 36
+     "x": 64.3,
+     "y": 31
     }
    ],
    "tasche": {
@@ -2109,19 +2105,15 @@
     "y": 0
    },
    "erhoehung": 0,
-   "zone": {
-    "x": 45,
-    "y": 33,
-    "r": 7
-   },
-   "wertung": "pocket+position"
+   "zone": null,
+   "wertung": "pocket"
   },
   {
    "id": "builtin-safe-hinter-ball",
    "name": "Safe hinter den Ball",
    "stufe": "C",
    "schwierigkeit": 8,
-   "tempo": 3,
+   "tempo": 0.5,
    "stossart": "safety",
    "schnittwinkel": 55,
    "ueberBande": false,
@@ -2157,8 +2149,8 @@
     {
      "id": "extra-0",
      "art": "obstacle",
-     "x": 30,
-     "y": 30
+     "x": 67.7,
+     "y": 31.3
     }
    ],
    "tasche": {
@@ -2175,8 +2167,8 @@
    },
    "erhoehung": 0,
    "zone": {
-    "x": 24,
-    "y": 30,
+    "x": 71.1,
+    "y": 39.9,
     "r": 6
    },
    "wertung": "position"
@@ -2186,7 +2178,7 @@
    "name": "Lange Gerade",
    "stufe": "C",
    "schwierigkeit": 7,
-   "tempo": 6,
+   "tempo": 1,
    "stossart": "cut",
    "schnittwinkel": 0,
    "ueberBande": false,
@@ -2230,7 +2222,7 @@
    },
    "effet": {
     "x": 0,
-    "y": 0
+    "y": -0.2
    },
    "erhoehung": 0,
    "zone": {

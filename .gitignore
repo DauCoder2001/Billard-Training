@@ -11,4 +11,5 @@ Thumbs.db
 
 # Nachrechnung mit pooltool: eigene Python-Umgebung, nicht ins Repository
 .venv-pooltool/
+__pycache__/
 scripts/pooltool/_*.log

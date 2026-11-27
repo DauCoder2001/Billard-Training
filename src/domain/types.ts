@@ -152,7 +152,7 @@ export interface ShotAttributes {
   cutAngle: number
   /** Treffpunkt der Pomeranze auf dem Weissen, -1..1 je Achse. */
   spin: Point
-  /** 1..10 */
+  /** Tempo in Tischlaengen, 0,5..5 - siehe domain/tempo.ts. */
   speed: number
   /** 1..10 */
   difficulty: number
@@ -387,4 +387,6 @@ export interface Settings {
   seededVersion: number
   /** Version des zuletzt angewandten Farbschemas. */
   themeVersion: number
+  /** Version der Tempo-Skala - siehe SPEED_SCALE_VERSION. */
+  speedScaleVersion: number
 }

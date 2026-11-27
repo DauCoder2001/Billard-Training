@@ -14,6 +14,7 @@ import { deflateSync, inflateSync, strFromU8, strToU8 } from 'fflate'
 import { TABLE, clampBall } from './geometry'
 import { bool, fields, num, oneOf, str } from './sanitize'
 import { orderedThresholds } from './scoring'
+import { SPEED_MAX, SPEED_MIN, speedFromLegacy } from './tempo'
 import { createShot, newId } from './shot'
 import {
   BALL_KINDS,
@@ -40,7 +41,13 @@ import type {
   Thresholds,
 } from './types'
 
-export const SHARE_VERSION = 1
+/** Fassung der geteilten Nutzlast.
+ *
+ *  1: bis 0.19.1. `speed` stand dort auf der alten Skala von 1 bis 10 ohne
+ *     Einheit; beim Lesen wird es ueber speedFromLegacy() umgerechnet.
+ *  2: ab 0.19.2. `speed` ist das Tempo in Tischlaengen.
+ */
+export const SHARE_VERSION = 2
 
 /** Grenzen fuer fremde Nutzlasten.
  *
@@ -181,7 +188,11 @@ function sanitizeTarget(raw: unknown): ShotTarget {
   }
 }
 
-function sanitizeAttributes(raw: unknown, fallback: ShotAttributes): ShotAttributes {
+function sanitizeAttributes(
+  raw: unknown,
+  fallback: ShotAttributes,
+  fassung: number,
+): ShotAttributes {
   const a = fields(raw)
   const spin = fields(a.spin)
   const skills = (Array.isArray(a.skills) ? a.skills : []).filter(
@@ -191,7 +202,13 @@ function sanitizeAttributes(raw: unknown, fallback: ShotAttributes): ShotAttribu
     shotType: oneOf(a.shotType, SHOT_TYPES, fallback.shotType),
     cutAngle: num(a.cutAngle, 0, 90, 0),
     spin: { x: num(spin.x, -1, 1, 0), y: num(spin.y, -1, 1, 0) },
-    speed: num(a.speed, 1, 10, fallback.speed),
+    // Vor Fassung 2 war speed eine Zahl von 1 bis 10 ohne Einheit. Ohne
+    // diese Umrechnung wuerde aus "Tempo 8" ein Touch-Ball mit 5
+    // Tischlaengen Deckel, und aus "Tempo 2" ein Stoss halb so weit.
+    speed:
+      fassung < 2
+        ? speedFromLegacy(num(a.speed, 1, 10, 5))
+        : num(a.speed, SPEED_MIN, SPEED_MAX, fallback.speed),
     difficulty: num(a.difficulty, 1, 10, fallback.difficulty),
     elevation: num(a.elevation, 0, 90, 0),
     // Entdoppeln und Erfundenes weglassen, aber die Reihenfolge des
@@ -257,7 +274,7 @@ function sanitizeScoring(raw: unknown, fallback: ShotScoring): ShotScoring {
  * "attributes": {} haette danach keine skills mehr, und die Oberflaeche
  * stuerzte beim Zeichnen ab, statt den Stoss anzuzeigen.
  */
-export function sanitizeShot(raw: unknown): Shot {
+export function sanitizeShot(raw: unknown, fassung = SHARE_VERSION): Shot {
   const base = createShot()
   const s = fields(raw)
   const { balls, idMap } = sanitizeBalls(s.balls)
@@ -284,7 +301,7 @@ export function sanitizeShot(raw: unknown): Shot {
     balls: balls.length > 0 ? balls : base.balls,
     paths,
     target: sanitizeTarget(s.target),
-    attributes: sanitizeAttributes(s.attributes, base.attributes),
+    attributes: sanitizeAttributes(s.attributes, base.attributes, fassung),
     scoring: sanitizeScoring(s.scoring, base.scoring),
   }
 }
@@ -322,7 +339,7 @@ export function decodeShot(payload: string): Shot {
 
   const now = Date.now()
   return {
-    ...sanitizeShot(envelope.shot),
+    ...sanitizeShot(envelope.shot, typeof envelope.v === 'number' ? envelope.v : 1),
     id: newId(),
     builtIn: false,
     favorite: false,

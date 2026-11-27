@@ -2,801 +2,1459 @@
  {
   "id": "builtin-stop-kurz",
   "name": "Stop-Shot kurz",
-  "tempo_app": 4,
-  "v0_gemessen": 3.2,
+  "tempo_app": 3.75,
+  "tempo_gemessen": 3.0,
   "leiter": [
    {
-    "v0": 0.4,
+    "tempo": 0.5,
     "trefferquote": 0.0,
     "beruehrt": 1.0,
     "mitte": null,
+    "streuung": 0.0,
+    "zonenquote": 0.0,
     "abzug": 0
    },
    {
-    "v0": 0.55,
-    "trefferquote": 0.35,
+    "tempo": 0.75,
+    "trefferquote": 0.22,
     "beruehrt": 1.0,
     "mitte": [
-     78.62560207175443,
-     21.98946653077073
+     77.71097200161915,
+     22.34524292102432
     ],
+    "streuung": 0.5679810005985628,
+    "zonenquote": 0.0,
     "abzug": 0
    },
    {
-    "v0": 0.7,
-    "trefferquote": 0.65,
+    "tempo": 1.0,
+    "trefferquote": 0.6066666666666667,
     "beruehrt": 1.0,
     "mitte": [
-     81.91586551380273,
-     17.797395574648757
+     81.51270022471368,
+     18.322481412465027
     ],
+    "streuung": 1.2531904981073467,
+    "zonenquote": 0.0,
     "abzug": 0
    },
    {
-    "v0": 0.9,
-    "trefferquote": 0.65,
+    "tempo": 1.25,
+    "trefferquote": 0.68,
     "beruehrt": 1.0,
     "mitte": [
-     88.76607916496876,
-     10.417296102366576
+     86.47078296591583,
+     13.335254198563971
     ],
+    "streuung": 2.056168977518336,
+    "zonenquote": 0.0,
     "abzug": 0
    },
    {
-    "v0": 1.1,
-    "trefferquote": 0.5,
-    "beruehrt": 1.0,
-    "mitte": [
-     94.66911702229079,
-     5.183460251626213
-    ],
-    "abzug": 0
-   },
-   {
-    "v0": 1.4,
-    "trefferquote": 0.8,
-    "beruehrt": 1.0,
-    "mitte": [
-     85.85984004161618,
-     14.099413941265999
-    ],
-    "abzug": 0
-   },
-   {
-    "v0": 1.7,
-    "trefferquote": 0.7,
-    "beruehrt": 1.0,
-    "mitte": [
-     81.37264845395916,
-     18.879608992020394
-    ],
-    "abzug": 0
-   },
-   {
-    "v0": 2.1,
-    "trefferquote": 0.55,
-    "beruehrt": 1.0,
-    "mitte": [
-     78.60801403317906,
-     21.84636252998247
-    ],
-    "abzug": 0
-   },
-   {
-    "v0": 2.6,
+    "tempo": 1.5,
     "trefferquote": 0.6,
     "beruehrt": 1.0,
     "mitte": [
-     75.95564445988508,
-     19.40054748313097
+     91.35054804239678,
+     8.914615103301758
     ],
+    "streuung": 2.542569011374617,
+    "zonenquote": 0.0,
+    "abzug": 0
+   },
+   {
+    "tempo": 1.75,
+    "trefferquote": 0.6,
+    "beruehrt": 1.0,
+    "mitte": [
+     93.6923349544552,
+     6.305838358626411
+    ],
+    "streuung": 3.917268483984396,
+    "zonenquote": 0.0,
+    "abzug": 0
+   },
+   {
+    "tempo": 2.0,
+    "trefferquote": 0.6066666666666667,
+    "beruehrt": 1.0,
+    "mitte": [
+     85.27537017814923,
+     14.345471451510567
+    ],
+    "streuung": 3.9081882867154283,
+    "zonenquote": 0.0,
     "abzug": 1
    },
    {
-    "v0": 3.2,
-    "trefferquote": 0.6,
+    "tempo": 2.25,
+    "trefferquote": 0.5466666666666666,
     "beruehrt": 1.0,
     "mitte": [
-     75.10952950368777,
-     24.58650386061568
+     82.67039300241291,
+     17.30910858248292
     ],
+    "streuung": 4.939013016301069,
+    "zonenquote": 0.012195121951219513,
+    "abzug": 1
+   },
+   {
+    "tempo": 2.5,
+    "trefferquote": 0.5533333333333333,
+    "beruehrt": 1.0,
+    "mitte": [
+     80.84617985428369,
+     18.824888403450732
+    ],
+    "streuung": 4.260479492376054,
+    "zonenquote": 0.0,
     "abzug": 0
    },
    {
-    "v0": 4.0,
+    "tempo": 2.75,
+    "trefferquote": 0.56,
+    "beruehrt": 1.0,
+    "mitte": [
+     78.42919699880842,
+     21.056725471935064
+    ],
+    "streuung": 4.315682603429152,
+    "zonenquote": 0.20238095238095238,
+    "abzug": 1
+   },
+   {
+    "tempo": 3.0,
+    "trefferquote": 0.58,
+    "beruehrt": 1.0,
+    "mitte": [
+     78.05821907757401,
+     22.30342316826164
+    ],
+    "streuung": 4.75712851580696,
+    "zonenquote": 0.3793103448275862,
+    "abzug": 0
+   },
+   {
+    "tempo": 3.25,
+    "trefferquote": 0.5933333333333334,
+    "beruehrt": 1.0,
+    "mitte": [
+     77.07607298649069,
+     22.45106064004355
+    ],
+    "streuung": 4.421993349136732,
+    "zonenquote": 0.30337078651685395,
+    "abzug": 1
+   },
+   {
+    "tempo": 3.5,
+    "trefferquote": 0.56,
+    "beruehrt": 1.0,
+    "mitte": [
+     77.43827050309602,
+     22.484338587805798
+    ],
+    "streuung": 5.122996736781869,
+    "zonenquote": 0.39285714285714285,
+    "abzug": 0
+   },
+   {
+    "tempo": 3.75,
     "trefferquote": 0.6,
     "beruehrt": 1.0,
     "mitte": [
-     75.99889729915955,
-     27.3424602787068
+     76.72302836511061,
+     23.8082094706501
     ],
+    "streuung": 5.008789734990743,
+    "zonenquote": 0.36666666666666664,
     "abzug": 0
+   },
+   {
+    "tempo": 4.0,
+    "trefferquote": 0.5866666666666667,
+    "beruehrt": 1.0,
+    "mitte": [
+     76.45700937343973,
+     23.170556297240264
+    ],
+    "streuung": 6.021297253135651,
+    "zonenquote": 0.4090909090909091,
+    "abzug": 0
+   },
+   {
+    "tempo": 4.25,
+    "trefferquote": 0.5866666666666667,
+    "beruehrt": 1.0,
+    "mitte": [
+     75.75806550602789,
+     23.93233138179676
+    ],
+    "streuung": 6.7577278337021705,
+    "zonenquote": 0.3522727272727273,
+    "abzug": 5
+   },
+   {
+    "tempo": 4.5,
+    "trefferquote": 0.6266666666666667,
+    "beruehrt": 1.0,
+    "mitte": [
+     75.45550549180159,
+     24.254280395434495
+    ],
+    "streuung": 7.440297895694504,
+    "zonenquote": 0.30851063829787234,
+    "abzug": 2
    }
   ]
  },
  {
   "id": "builtin-nachlauf-mittel",
   "name": "Nachlauf mittel",
-  "tempo_app": 5,
-  "v0_gemessen": 1.7,
+  "tempo_app": 1.25,
+  "tempo_gemessen": 1.25,
   "leiter": [
    {
-    "v0": 0.4,
+    "tempo": 0.5,
     "trefferquote": 0.0,
     "beruehrt": 1.0,
     "mitte": null,
+    "streuung": 0.0,
+    "zonenquote": 0.0,
     "abzug": 0
    },
    {
-    "v0": 0.55,
-    "trefferquote": 0.4,
+    "tempo": 0.75,
+    "trefferquote": 0.35333333333333333,
     "beruehrt": 1.0,
     "mitte": [
-     70.94305544965572,
-     40.677923558067114
+     68.81657907460476,
+     39.97722502740076
     ],
+    "streuung": 0.8361041064471862,
+    "zonenquote": 0.0,
     "abzug": 0
    },
    {
-    "v0": 0.7,
-    "trefferquote": 0.55,
+    "tempo": 1.0,
+    "trefferquote": 0.35333333333333333,
     "beruehrt": 1.0,
     "mitte": [
-     79.47040892399458,
-     43.43926626899103
+     78.6832698062224,
+     42.99672350837549
     ],
+    "streuung": 1.4676322653234382,
+    "zonenquote": 0.0,
     "abzug": 0
    },
    {
-    "v0": 0.9,
-    "trefferquote": 0.45,
+    "tempo": 1.25,
+    "trefferquote": 0.36666666666666664,
     "beruehrt": 1.0,
     "mitte": [
-     92.49490575394049,
-     47.031999100097174
+     88.9715876415143,
+     45.74210153133512
     ],
+    "streuung": 2.6570517236177746,
+    "zonenquote": 0.9454545454545454,
     "abzug": 0
    },
    {
-    "v0": 1.1,
-    "trefferquote": 0.45,
+    "tempo": 1.5,
+    "trefferquote": 0.3333333333333333,
     "beruehrt": 1.0,
     "mitte": [
-     97.16219835945417,
-     47.811088539203176
+     96.82885698000578,
+     47.40513512959756
     ],
-    "abzug": 2
+    "streuung": 1.8691482698863344,
+    "zonenquote": 0.0,
+    "abzug": 8
    },
    {
-    "v0": 1.4,
-    "trefferquote": 0.35,
+    "tempo": 1.75,
+    "trefferquote": 0.36,
     "beruehrt": 1.0,
     "mitte": [
-     90.7115214726838,
-     47.373401837602955
+     96.21001146388534,
+     47.76424110560533
     ],
-    "abzug": 1
+    "streuung": 2.486887268872224,
+    "zonenquote": 0.09259259259259259,
+    "abzug": 18
    },
    {
-    "v0": 1.7,
-    "trefferquote": 0.25,
+    "tempo": 2.0,
+    "trefferquote": 0.25333333333333335,
     "beruehrt": 1.0,
     "mitte": [
-     88.01635504140734,
-     41.55191729646351
+     92.48763882686886,
+     46.03507992980087
     ],
-    "abzug": 2
+    "streuung": 4.297525533113187,
+    "zonenquote": 0.42105263157894735,
+    "abzug": 10
    },
    {
-    "v0": 2.1,
-    "trefferquote": 0.25,
+    "tempo": 2.25,
+    "trefferquote": 0.3466666666666667,
     "beruehrt": 1.0,
     "mitte": [
-     67.20643647454075,
-     43.95107941019285
+     87.63160817689625,
+     44.47639116359951
     ],
-    "abzug": 4
+    "streuung": 7.824993793271358,
+    "zonenquote": 0.21153846153846154,
+    "abzug": 10
    },
    {
-    "v0": 2.6,
-    "trefferquote": 0.25,
+    "tempo": 2.5,
+    "trefferquote": 0.24,
     "beruehrt": 1.0,
     "mitte": [
-     74.76592997450805,
-     37.693035981041085
+     81.45462888398025,
+     42.333460347715736
     ],
-    "abzug": 3
+    "streuung": 12.995374461220381,
+    "zonenquote": 0.027777777777777776,
+    "abzug": 11
    },
    {
-    "v0": 3.2,
-    "trefferquote": 0.65,
+    "tempo": 2.75,
+    "trefferquote": 0.41333333333333333,
     "beruehrt": 1.0,
     "mitte": [
-     48.90761752367565,
-     27.393299446405955
+     74.51855252630408,
+     36.106789926778255
     ],
-    "abzug": 9
+    "streuung": 15.475373859737102,
+    "zonenquote": 0.03225806451612903,
+    "abzug": 22
    },
    {
-    "v0": 4.0,
-    "trefferquote": 0.55,
+    "tempo": 3.0,
+    "trefferquote": 0.38666666666666666,
     "beruehrt": 1.0,
     "mitte": [
-     21.570538416195106,
-     27.560866406680677
+     69.52780432500714,
+     34.70479406530403
     ],
-    "abzug": 6
+    "streuung": 16.976093451399954,
+    "zonenquote": 0.034482758620689655,
+    "abzug": 23
+   },
+   {
+    "tempo": 3.25,
+    "trefferquote": 0.38666666666666666,
+    "beruehrt": 1.0,
+    "mitte": [
+     65.88745366070701,
+     28.92013789294963
+    ],
+    "streuung": 21.558780633975253,
+    "zonenquote": 0.06896551724137931,
+    "abzug": 27
+   },
+   {
+    "tempo": 3.5,
+    "trefferquote": 0.38666666666666666,
+    "beruehrt": 1.0,
+    "mitte": [
+     57.78105495721683,
+     28.634057378707062
+    ],
+    "streuung": 22.515457090346796,
+    "zonenquote": 0.017241379310344827,
+    "abzug": 31
+   },
+   {
+    "tempo": 3.75,
+    "trefferquote": 0.3466666666666667,
+    "beruehrt": 1.0,
+    "mitte": [
+     47.0040768178137,
+     30.54700510424309
+    ],
+    "streuung": 21.467283356938566,
+    "zonenquote": 0.0,
+    "abzug": 34
+   },
+   {
+    "tempo": 4.0,
+    "trefferquote": 0.42,
+    "beruehrt": 1.0,
+    "mitte": [
+     31.935225947696043,
+     32.43387803442536
+    ],
+    "streuung": 22.877536949786066,
+    "zonenquote": 0.0,
+    "abzug": 47
+   },
+   {
+    "tempo": 4.25,
+    "trefferquote": 0.26666666666666666,
+    "beruehrt": 1.0,
+    "mitte": [
+     36.04455228296918,
+     31.84074573099734
+    ],
+    "streuung": 35.79157332458812,
+    "zonenquote": 0.0,
+    "abzug": 46
+   },
+   {
+    "tempo": 4.5,
+    "trefferquote": 0.36,
+    "beruehrt": 1.0,
+    "mitte": [
+     21.250501512729823,
+     29.027300819812506
+    ],
+    "streuung": 22.439150513166457,
+    "zonenquote": 0.0,
+    "abzug": 56
    }
   ]
  },
  {
   "id": "builtin-rueckzieher-kurz",
   "name": "Rückzieher kurz",
-  "tempo_app": 6,
-  "v0_gemessen": 4.0,
+  "tempo_app": 2,
+  "tempo_gemessen": 2.0,
   "leiter": [
    {
-    "v0": 0.4,
+    "tempo": 0.5,
     "trefferquote": 0.0,
     "beruehrt": 1.0,
     "mitte": null,
+    "streuung": 0.0,
+    "zonenquote": 0.0,
     "abzug": 0
    },
    {
-    "v0": 0.55,
+    "tempo": 0.75,
     "trefferquote": 0.0,
     "beruehrt": 1.0,
     "mitte": null,
+    "streuung": 0.0,
+    "zonenquote": 0.0,
     "abzug": 0
    },
    {
-    "v0": 0.7,
-    "trefferquote": 0.1,
+    "tempo": 1.0,
+    "trefferquote": 0.013333333333333334,
     "beruehrt": 1.0,
     "mitte": [
-     73.21321523683046,
-     22.278860450844874
+     72.9472963600835,
+     22.272473229370462
     ],
+    "streuung": 0.21390911430225584,
+    "zonenquote": 0.0,
     "abzug": 0
    },
    {
-    "v0": 0.9,
-    "trefferquote": 0.75,
+    "tempo": 1.25,
+    "trefferquote": 0.6333333333333333,
     "beruehrt": 1.0,
     "mitte": [
-     69.27434124614756,
-     25.648579610293428
+     71.97114905219624,
+     23.377863237287908
     ],
+    "streuung": 2.210211567918407,
+    "zonenquote": 0.0,
     "abzug": 0
    },
    {
-    "v0": 1.1,
-    "trefferquote": 0.45,
+    "tempo": 1.5,
+    "trefferquote": 0.5866666666666667,
     "beruehrt": 1.0,
     "mitte": [
-     64.49752970512509,
-     29.577056267022513
+     68.01654084140067,
+     26.647698552004616
     ],
+    "streuung": 0.7457970076846719,
+    "zonenquote": 0.0,
     "abzug": 0
    },
    {
-    "v0": 1.4,
-    "trefferquote": 0.7,
+    "tempo": 1.75,
+    "trefferquote": 0.5266666666666666,
     "beruehrt": 1.0,
     "mitte": [
-     45.57289029744111,
-     44.426422708075776
+     63.72264285923356,
+     30.15446988699899
     ],
-    "abzug": 1
+    "streuung": 2.623764551759513,
+    "zonenquote": 0.0,
+    "abzug": 0
    },
    {
-    "v0": 1.7,
-    "trefferquote": 0.35,
+    "tempo": 2.0,
+    "trefferquote": 0.5466666666666666,
     "beruehrt": 1.0,
     "mitte": [
-     28.933385611991323,
-     41.50281600030246
+     47.63947968109984,
+     42.91696291625926
     ],
-    "abzug": 4
+    "streuung": 6.22455004629582,
+    "zonenquote": 0.5609756097560976,
+    "abzug": 13
    },
    {
-    "v0": 2.1,
-    "trefferquote": 0.75,
+    "tempo": 2.25,
+    "trefferquote": 0.5533333333333333,
     "beruehrt": 1.0,
     "mitte": [
-     9.931154756624396,
-     28.702484032346053
+     34.27049100271985,
+     44.34219850549948
     ],
-    "abzug": 2
+    "streuung": 4.9960038327241545,
+    "zonenquote": 0.012048192771084338,
+    "abzug": 13
    },
    {
-    "v0": 2.6,
+    "tempo": 2.5,
+    "trefferquote": 0.6533333333333333,
+    "beruehrt": 1.0,
+    "mitte": [
+     24.644092039821572,
+     37.761498360274366
+    ],
+    "streuung": 6.646031839373167,
+    "zonenquote": 0.0,
+    "abzug": 14
+   },
+   {
+    "tempo": 2.75,
+    "trefferquote": 0.62,
+    "beruehrt": 1.0,
+    "mitte": [
+     11.752636599137453,
+     28.353995210648247
+    ],
+    "streuung": 8.693264788077137,
+    "zonenquote": 0.0,
+    "abzug": 22
+   },
+   {
+    "tempo": 3.0,
+    "trefferquote": 0.5933333333333334,
+    "beruehrt": 1.0,
+    "mitte": [
+     6.474013186297834,
+     20.004938409021243
+    ],
+    "streuung": 6.499962866291864,
+    "zonenquote": 0.0,
+    "abzug": 20
+   },
+   {
+    "tempo": 3.25,
+    "trefferquote": 0.5933333333333334,
+    "beruehrt": 1.0,
+    "mitte": [
+     10.200945692724302,
+     14.379174703682065
+    ],
+    "streuung": 7.460935216623502,
+    "zonenquote": 0.0,
+    "abzug": 27
+   },
+   {
+    "tempo": 3.5,
+    "trefferquote": 0.4866666666666667,
+    "beruehrt": 1.0,
+    "mitte": [
+     15.098376001262817,
+     9.103389392835659
+    ],
+    "streuung": 8.782556329338812,
+    "zonenquote": 0.0,
+    "abzug": 27
+   },
+   {
+    "tempo": 3.75,
+    "trefferquote": 0.56,
+    "beruehrt": 1.0,
+    "mitte": [
+     22.01242795146619,
+     5.121917955422567
+    ],
+    "streuung": 7.118190225109633,
+    "zonenquote": 0.0,
+    "abzug": 22
+   },
+   {
+    "tempo": 4.0,
+    "trefferquote": 0.56,
+    "beruehrt": 1.0,
+    "mitte": [
+     37.1341677650102,
+     15.517037868393224
+    ],
+    "streuung": 11.848375867005803,
+    "zonenquote": 0.0,
+    "abzug": 36
+   },
+   {
+    "tempo": 4.25,
+    "trefferquote": 0.5733333333333334,
+    "beruehrt": 1.0,
+    "mitte": [
+     53.14685257094119,
+     27.070214808722618
+    ],
+    "streuung": 14.179008110237772,
+    "zonenquote": 0.0,
+    "abzug": 29
+   },
+   {
+    "tempo": 4.5,
     "trefferquote": 0.6,
     "beruehrt": 1.0,
     "mitte": [
-     10.310109258770877,
-     14.210668200703731
+     62.87246277386561,
+     33.338459021958876
     ],
-    "abzug": 2
-   },
-   {
-    "v0": 3.2,
-    "trefferquote": 0.7,
-    "beruehrt": 1.0,
-    "mitte": [
-     18.582074443915943,
-     6.936694471142971
-    ],
-    "abzug": 5
-   },
-   {
-    "v0": 4.0,
-    "trefferquote": 0.6,
-    "beruehrt": 1.0,
-    "mitte": [
-     46.23949500726901,
-     23.910991966606417
-    ],
-    "abzug": 4
+    "streuung": 14.03049887281259,
+    "zonenquote": 0.0,
+    "abzug": 39
    }
   ]
  },
  {
   "id": "builtin-schnitt-15",
   "name": "Schnittball 15 Grad",
-  "tempo_app": 5,
-  "v0_gemessen": 4.0,
+  "tempo_app": 4.25,
+  "tempo_gemessen": 4.25,
   "leiter": [
    {
-    "v0": 0.4,
+    "tempo": 0.5,
     "trefferquote": 0.0,
     "beruehrt": 1.0,
     "mitte": null,
+    "streuung": 0.0,
+    "zonenquote": 0.0,
     "abzug": 0
    },
    {
-    "v0": 0.55,
+    "tempo": 0.75,
     "trefferquote": 0.0,
     "beruehrt": 1.0,
     "mitte": null,
+    "streuung": 0.0,
+    "zonenquote": 0.0,
     "abzug": 0
    },
    {
-    "v0": 0.7,
-    "trefferquote": 0.15,
+    "tempo": 1.0,
+    "trefferquote": 0.2866666666666667,
     "beruehrt": 1.0,
     "mitte": [
-     92.40596409828417,
-     30.707533946766976
+     89.87697131727573,
+     30.614078351023906
     ],
+    "streuung": 2.1341666034402347,
+    "zonenquote": 0.0,
     "abzug": 0
    },
    {
-    "v0": 0.9,
-    "trefferquote": 0.4,
+    "tempo": 1.25,
+    "trefferquote": 0.32,
     "beruehrt": 1.0,
     "mitte": [
-     95.47460163056029,
-     30.546145907847723
+     97.4037870821171,
+     30.17890601963164
     ],
+    "streuung": 1.0028802148384,
+    "zonenquote": 0.0,
     "abzug": 0
    },
    {
-    "v0": 1.1,
-    "trefferquote": 0.65,
+    "tempo": 1.5,
+    "trefferquote": 0.42,
     "beruehrt": 1.0,
     "mitte": [
-     89.36899984408568,
-     30.244776523881246
+     94.21562911884698,
+     30.118871116814734
     ],
+    "streuung": 1.646568394074183,
+    "zonenquote": 0.0,
     "abzug": 0
    },
    {
-    "v0": 1.4,
-    "trefferquote": 0.25,
+    "tempo": 1.75,
+    "trefferquote": 0.31333333333333335,
     "beruehrt": 1.0,
     "mitte": [
-     83.37056112068043,
-     32.147379928833985
+     89.29627403433133,
+     29.997988700513417
     ],
+    "streuung": 1.8314957576686475,
+    "zonenquote": 0.0,
     "abzug": 0
    },
    {
-    "v0": 1.7,
-    "trefferquote": 0.45,
+    "tempo": 2.0,
+    "trefferquote": 0.38666666666666666,
     "beruehrt": 1.0,
     "mitte": [
-     80.74669248679734,
-     44.55782757118779
+     81.94479970208481,
+     34.17528356663989
     ],
+    "streuung": 3.572765962844235,
+    "zonenquote": 0.0,
     "abzug": 0
    },
    {
-    "v0": 2.1,
-    "trefferquote": 0.45,
+    "tempo": 2.25,
+    "trefferquote": 0.3466666666666667,
     "beruehrt": 1.0,
     "mitte": [
-     81.48419615865842,
-     46.17962660948067
+     81.10625900909326,
+     41.2566808365411
     ],
+    "streuung": 4.282114710471266,
+    "zonenquote": 0.0,
+    "abzug": 0
+   },
+   {
+    "tempo": 2.5,
+    "trefferquote": 0.35333333333333333,
+    "beruehrt": 1.0,
+    "mitte": [
+     78.71289585106827,
+     47.112230077383984
+    ],
+    "streuung": 4.23328534555334,
+    "zonenquote": 0.0,
     "abzug": 1
    },
    {
-    "v0": 2.6,
-    "trefferquote": 0.4,
+    "tempo": 2.75,
+    "trefferquote": 0.32666666666666666,
     "beruehrt": 1.0,
     "mitte": [
-     71.45595603779803,
-     38.37886588615357
+     81.26219798516163,
+     46.03226399032681
     ],
-    "abzug": 13
+    "streuung": 4.1675222852037495,
+    "zonenquote": 0.0,
+    "abzug": 8
    },
    {
-    "v0": 3.2,
-    "trefferquote": 0.35,
+    "tempo": 3.0,
+    "trefferquote": 0.35333333333333333,
     "beruehrt": 1.0,
     "mitte": [
-     80.11266620150376,
-     40.26970477351632
+     80.59020543281345,
+     41.64851638177104
     ],
-    "abzug": 9
+    "streuung": 7.752657771051294,
+    "zonenquote": 0.0,
+    "abzug": 46
    },
    {
-    "v0": 4.0,
-    "trefferquote": 0.35,
+    "tempo": 3.25,
+    "trefferquote": 0.36,
     "beruehrt": 1.0,
     "mitte": [
-     59.06765360951904,
-     11.911671255837252
+     80.96132924837232,
+     36.55893015460519
     ],
-    "abzug": 1
+    "streuung": 12.37025998077914,
+    "zonenquote": 0.0,
+    "abzug": 59
+   },
+   {
+    "tempo": 3.5,
+    "trefferquote": 0.4066666666666667,
+    "beruehrt": 1.0,
+    "mitte": [
+     77.481170325841,
+     31.643436665114997
+    ],
+    "streuung": 13.042580918494881,
+    "zonenquote": 0.0,
+    "abzug": 66
+   },
+   {
+    "tempo": 3.75,
+    "trefferquote": 0.32,
+    "beruehrt": 1.0,
+    "mitte": [
+     70.86693894165266,
+     18.674861902422265
+    ],
+    "streuung": 13.709694250636677,
+    "zonenquote": 0.020833333333333332,
+    "abzug": 43
+   },
+   {
+    "tempo": 4.0,
+    "trefferquote": 0.36666666666666664,
+    "beruehrt": 1.0,
+    "mitte": [
+     59.951146215353674,
+     9.541247017217216
+    ],
+    "streuung": 10.448312290183404,
+    "zonenquote": 0.2727272727272727,
+    "abzug": 20
+   },
+   {
+    "tempo": 4.25,
+    "trefferquote": 0.36,
+    "beruehrt": 1.0,
+    "mitte": [
+     59.77268181790173,
+     9.221935049448437
+    ],
+    "streuung": 9.630184356550881,
+    "zonenquote": 0.48148148148148145,
+    "abzug": 14
+   },
+   {
+    "tempo": 4.5,
+    "trefferquote": 0.34,
+    "beruehrt": 1.0,
+    "mitte": [
+     52.90221083977286,
+     14.553771074259737
+    ],
+    "streuung": 9.015178156922747,
+    "zonenquote": 0.5098039215686274,
+    "abzug": 8
    }
   ]
  },
  {
   "id": "builtin-schnitt-30",
   "name": "Schnittball 30 Grad",
-  "tempo_app": 5,
-  "v0_gemessen": 1.1,
+  "tempo_app": 2,
+  "tempo_gemessen": 2.0,
   "leiter": [
    {
-    "v0": 0.4,
+    "tempo": 0.5,
     "trefferquote": 0.0,
     "beruehrt": 1.0,
     "mitte": null,
+    "streuung": 0.0,
+    "zonenquote": 0.0,
     "abzug": 0
    },
    {
-    "v0": 0.55,
-    "trefferquote": 0.0,
-    "beruehrt": 1.0,
-    "mitte": null,
-    "abzug": 0
-   },
-   {
-    "v0": 0.7,
-    "trefferquote": 0.25,
+    "tempo": 0.75,
+    "trefferquote": 0.22,
     "beruehrt": 1.0,
     "mitte": [
-     66.00153806014049,
-     41.644497001679824
+     66.27868834414059,
+     44.25616743613027
     ],
+    "streuung": 1.002202768317203,
+    "zonenquote": 0.0,
     "abzug": 0
    },
    {
-    "v0": 0.9,
-    "trefferquote": 0.2,
+    "tempo": 1.0,
+    "trefferquote": 0.2866666666666667,
     "beruehrt": 1.0,
     "mitte": [
-     64.75391165446247,
-     29.275780922217002
+     65.2065294433116,
+     33.76290033466304
     ],
+    "streuung": 1.9665617155848338,
+    "zonenquote": 0.0,
     "abzug": 0
    },
    {
-    "v0": 1.1,
+    "tempo": 1.25,
+    "trefferquote": 0.36,
+    "beruehrt": 1.0,
+    "mitte": [
+     63.869244498553016,
+     20.545201171791973
+    ],
+    "streuung": 2.9412297419626685,
+    "zonenquote": 0.0,
+    "abzug": 0
+   },
+   {
+    "tempo": 1.5,
+    "trefferquote": 0.3933333333333333,
+    "beruehrt": 1.0,
+    "mitte": [
+     62.60335585428874,
+     8.604963783452144
+    ],
+    "streuung": 4.042183757239507,
+    "zonenquote": 0.0,
+    "abzug": 0
+   },
+   {
+    "tempo": 1.75,
+    "trefferquote": 0.3466666666666667,
+    "beruehrt": 1.0,
+    "mitte": [
+     61.42218689411022,
+     4.156204170148617
+    ],
+    "streuung": 1.7053149533035858,
+    "zonenquote": 0.0,
+    "abzug": 0
+   },
+   {
+    "tempo": 2.0,
+    "trefferquote": 0.36666666666666664,
+    "beruehrt": 1.0,
+    "mitte": [
+     59.220333237147265,
+     16.975429040490607
+    ],
+    "streuung": 2.9872800113583393,
+    "zonenquote": 0.9636363636363636,
+    "abzug": 3
+   },
+   {
+    "tempo": 2.25,
     "trefferquote": 0.3,
     "beruehrt": 1.0,
     "mitte": [
-     63.11155247292776,
-     13.134533752412368
+     57.05642960890968,
+     28.37460750077366
     ],
-    "abzug": 0
+    "streuung": 3.771401848380155,
+    "zonenquote": 0.26666666666666666,
+    "abzug": 3
    },
    {
-    "v0": 1.4,
-    "trefferquote": 0.25,
+    "tempo": 2.5,
+    "trefferquote": 0.28,
     "beruehrt": 1.0,
     "mitte": [
-     58.4378661651896,
-     3.3583686997614306
+     55.3436334059278,
+     36.89237765636952
     ],
-    "abzug": 0
-   },
-   {
-    "v0": 1.7,
-    "trefferquote": 0.3,
-    "beruehrt": 1.0,
-    "mitte": [
-     42.599457128526375,
-     13.08197116588567
-    ],
-    "abzug": 5
-   },
-   {
-    "v0": 2.1,
-    "trefferquote": 0.2,
-    "beruehrt": 1.0,
-    "mitte": [
-     29.2683610946648,
-     23.544999674075076
-    ],
-    "abzug": 1
-   },
-   {
-    "v0": 2.6,
-    "trefferquote": 0.25,
-    "beruehrt": 1.0,
-    "mitte": [
-     15.933767878280255,
-     39.719121184532746
-    ],
+    "streuung": 3.184278545830763,
+    "zonenquote": 0.0,
     "abzug": 2
    },
    {
-    "v0": 3.2,
-    "trefferquote": 0.45,
+    "tempo": 2.75,
+    "trefferquote": 0.37333333333333335,
     "beruehrt": 1.0,
     "mitte": [
-     16.102823715933596,
-     34.54849437522418
+     53.33464089976363,
+     45.41446860611945
     ],
-    "abzug": 2
+    "streuung": 3.582126810091902,
+    "zonenquote": 0.0,
+    "abzug": 12
    },
    {
-    "v0": 4.0,
-    "trefferquote": 0.4,
+    "tempo": 3.0,
+    "trefferquote": 0.32,
     "beruehrt": 1.0,
     "mitte": [
-     12.262032392347233,
-     8.708491168447633
+     47.917300496184914,
+     44.347967769977316
     ],
-    "abzug": 1
+    "streuung": 7.505286820436088,
+    "zonenquote": 0.0,
+    "abzug": 57
+   },
+   {
+    "tempo": 3.25,
+    "trefferquote": 0.32666666666666666,
+    "beruehrt": 1.0,
+    "mitte": [
+     38.41667520769632,
+     39.08486244379491
+    ],
+    "streuung": 20.063050236371712,
+    "zonenquote": 0.0,
+    "abzug": 76
+   },
+   {
+    "tempo": 3.5,
+    "trefferquote": 0.44666666666666666,
+    "beruehrt": 1.0,
+    "mitte": [
+     44.58775919671032,
+     38.410284126957066
+    ],
+    "streuung": 23.86981229024287,
+    "zonenquote": 0.0,
+    "abzug": 99
+   },
+   {
+    "tempo": 3.75,
+    "trefferquote": 0.35333333333333333,
+    "beruehrt": 1.0,
+    "mitte": [
+     48.64413892422036,
+     29.701058292871178
+    ],
+    "streuung": 18.69008021158408,
+    "zonenquote": 0.0,
+    "abzug": 71
+   },
+   {
+    "tempo": 4.0,
+    "trefferquote": 0.3933333333333333,
+    "beruehrt": 1.0,
+    "mitte": [
+     36.70038999454485,
+     16.150095430783797
+    ],
+    "streuung": 5.856357663833522,
+    "zonenquote": 0.0,
+    "abzug": 28
+   },
+   {
+    "tempo": 4.25,
+    "trefferquote": 0.34,
+    "beruehrt": 1.0,
+    "mitte": [
+     35.8622622087424,
+     8.195130306154972
+    ],
+    "streuung": 7.316590053462584,
+    "zonenquote": 0.0196078431372549,
+    "abzug": 8
+   },
+   {
+    "tempo": 4.5,
+    "trefferquote": 0.38666666666666666,
+    "beruehrt": 1.0,
+    "mitte": [
+     36.66411176720675,
+     15.189344750576328
+    ],
+    "streuung": 10.028272649977538,
+    "zonenquote": 0.0,
+    "abzug": 12
    }
   ]
  },
  {
   "id": "builtin-mitteltasche-gerade",
   "name": "Mitteltasche gerade",
-  "tempo_app": 4,
-  "v0_gemessen": 0.55,
+  "tempo_app": 2.25,
+  "tempo_gemessen": 2.25,
   "leiter": [
    {
-    "v0": 0.4,
-    "trefferquote": 0.05,
+    "tempo": 0.5,
+    "trefferquote": 0.0,
     "beruehrt": 1.0,
-    "mitte": [
-     49.55967356957034,
-     19.252772699440126
-    ],
+    "mitte": null,
+    "streuung": 0.0,
+    "zonenquote": 0.0,
     "abzug": 0
    },
    {
-    "v0": 0.55,
-    "trefferquote": 0.9,
+    "tempo": 0.75,
+    "trefferquote": 0.42,
     "beruehrt": 1.0,
     "mitte": [
-     50.047781924271426,
-     15.52397107217182
+     50.04280223100823,
+     18.946786770280404
     ],
+    "streuung": 0.580082276286963,
+    "zonenquote": 0.5079365079365079,
     "abzug": 0
    },
    {
-    "v0": 0.7,
-    "trefferquote": 0.9,
+    "tempo": 1.0,
+    "trefferquote": 0.94,
     "beruehrt": 1.0,
     "mitte": [
-     50.078581940664534,
-     10.149514428869669
+     50.03477251728097,
+     14.631676013862496
     ],
+    "streuung": 1.3924140056545777,
+    "zonenquote": 0.0,
     "abzug": 0
    },
    {
-    "v0": 0.9,
-    "trefferquote": 0.9,
+    "tempo": 1.25,
+    "trefferquote": 0.9133333333333333,
     "beruehrt": 1.0,
     "mitte": [
-     50.14100577034944,
-     2.618232411210524
+     50.21238468796602,
+     9.839760200672213
     ],
-    "abzug": 1
+    "streuung": 2.1728992375302707,
+    "zonenquote": 0.0,
+    "abzug": 0
    },
    {
-    "v0": 1.1,
-    "trefferquote": 0.9,
+    "tempo": 1.5,
+    "trefferquote": 0.9266666666666666,
     "beruehrt": 1.0,
     "mitte": [
-     50.55658791818548,
-     4.367251428029905
+     49.94889840379678,
+     5.083144361563511
     ],
+    "streuung": 2.8057673362158337,
+    "zonenquote": 0.0,
+    "abzug": 0
+   },
+   {
+    "tempo": 1.75,
+    "trefferquote": 0.9266666666666666,
+    "beruehrt": 1.0,
+    "mitte": [
+     50.508297696940915,
+     5.7497901221379
+    ],
+    "streuung": 5.140408106985466,
+    "zonenquote": 0.0,
+    "abzug": 22
+   },
+   {
+    "tempo": 2.0,
+    "trefferquote": 0.9266666666666666,
+    "beruehrt": 1.0,
+    "mitte": [
+     50.0525858856828,
+     19.52939792407973
+    ],
+    "streuung": 2.9801807982757995,
+    "zonenquote": 0.5539568345323741,
+    "abzug": 0
+   },
+   {
+    "tempo": 2.25,
+    "trefferquote": 0.92,
+    "beruehrt": 1.0,
+    "mitte": [
+     50.508540806714656,
+     23.03622495256872
+    ],
+    "streuung": 3.38629506101455,
+    "zonenquote": 0.7536231884057971,
+    "abzug": 0
+   },
+   {
+    "tempo": 2.5,
+    "trefferquote": 0.94,
+    "beruehrt": 1.0,
+    "mitte": [
+     50.59384805657839,
+     27.33142373005277
+    ],
+    "streuung": 5.7087500330520164,
+    "zonenquote": 0.5035460992907801,
+    "abzug": 0
+   },
+   {
+    "tempo": 2.75,
+    "trefferquote": 0.9333333333333333,
+    "beruehrt": 1.0,
+    "mitte": [
+     48.91783762552121,
+     34.69995810247083
+    ],
+    "streuung": 9.05892815647385,
+    "zonenquote": 0.11428571428571428,
+    "abzug": 0
+   },
+   {
+    "tempo": 3.0,
+    "trefferquote": 0.9266666666666666,
+    "beruehrt": 1.0,
+    "mitte": [
+     50.968116303987316,
+     42.322261034562345
+    ],
+    "streuung": 14.143783184553744,
+    "zonenquote": 0.007194244604316547,
+    "abzug": 5
+   },
+   {
+    "tempo": 3.25,
+    "trefferquote": 0.98,
+    "beruehrt": 1.0,
+    "mitte": [
+     47.76101040272059,
+     44.39166837427607
+    ],
+    "streuung": 14.17479218461201,
+    "zonenquote": 0.006802721088435374,
+    "abzug": 14
+   },
+   {
+    "tempo": 3.5,
+    "trefferquote": 0.9466666666666667,
+    "beruehrt": 1.0,
+    "mitte": [
+     51.143776140879105,
+     42.303247351810526
+    ],
+    "streuung": 14.924603832043985,
+    "zonenquote": 0.0,
+    "abzug": 10
+   },
+   {
+    "tempo": 3.75,
+    "trefferquote": 0.9466666666666667,
+    "beruehrt": 1.0,
+    "mitte": [
+     48.84119598071182,
+     36.5330747452087
+    ],
+    "streuung": 18.75849008282605,
+    "zonenquote": 0.0,
     "abzug": 12
    },
    {
-    "v0": 1.4,
-    "trefferquote": 0.95,
+    "tempo": 4.0,
+    "trefferquote": 0.94,
     "beruehrt": 1.0,
     "mitte": [
-     50.7104157364452,
-     5.489792329771743
+     52.99447912450774,
+     25.744336492433145
     ],
-    "abzug": 3
+    "streuung": 23.59700772788415,
+    "zonenquote": 0.0,
+    "abzug": 23
    },
    {
-    "v0": 1.7,
-    "trefferquote": 0.9,
+    "tempo": 4.25,
+    "trefferquote": 0.92,
     "beruehrt": 1.0,
     "mitte": [
-     49.28167264928569,
-     3.431308742989692
+     47.67603511568425,
+     16.282730212702223
     ],
-    "abzug": 4
+    "streuung": 27.682877104739603,
+    "zonenquote": 0.0,
+    "abzug": 11
    },
    {
-    "v0": 2.1,
-    "trefferquote": 0.95,
+    "tempo": 4.5,
+    "trefferquote": 0.9466666666666667,
     "beruehrt": 1.0,
     "mitte": [
-     51.97303931516246,
-     5.765210520847788
+     51.93395802371598,
+     11.74917813088327
     ],
-    "abzug": 1
-   },
-   {
-    "v0": 2.6,
-    "trefferquote": 1.0,
-    "beruehrt": 1.0,
-    "mitte": [
-     49.74940113290548,
-     10.407582801649212
-    ],
-    "abzug": 0
-   },
-   {
-    "v0": 3.2,
-    "trefferquote": 0.95,
-    "beruehrt": 1.0,
-    "mitte": [
-     47.63851945741452,
-     10.90344215747445
-    ],
-    "abzug": 0
-   },
-   {
-    "v0": 4.0,
-    "trefferquote": 1.0,
-    "beruehrt": 1.0,
-    "mitte": [
-     38.33071333968423,
-     13.186458621470365
-    ],
-    "abzug": 0
+    "streuung": 29.36116472997638,
+    "zonenquote": 0.0,
+    "abzug": 12
    }
   ]
  },
  {
   "id": "builtin-gerade-nah",
   "name": "Gerader Ball nah",
-  "tempo_app": 4,
-  "v0_gemessen": 0.9,
+  "tempo_app": 0.5,
+  "tempo_gemessen": 0.75,
   "leiter": [
    {
-    "v0": 0.4,
-    "trefferquote": 0.9,
+    "tempo": 0.5,
+    "trefferquote": 0.74,
     "beruehrt": 1.0,
     "mitte": [
-     86.01591767241183,
-     11.246025790910755
+     85.95906344647216,
+     11.349332872919302
     ],
+    "streuung": 0.42651857979272356,
+    "zonenquote": 0.0,
     "abzug": 0
    },
    {
-    "v0": 0.55,
-    "trefferquote": 0.95,
+    "tempo": 0.75,
+    "trefferquote": 0.98,
     "beruehrt": 1.0,
     "mitte": [
-     88.99599177070849,
-     8.705081882468136
+     87.86918406058028,
+     9.770221264669532
     ],
+    "streuung": 0.7765832420913041,
+    "zonenquote": 0.0,
     "abzug": 0
    },
    {
-    "v0": 0.7,
-    "trefferquote": 0.95,
+    "tempo": 1.0,
+    "trefferquote": 0.98,
     "beruehrt": 1.0,
     "mitte": [
-     93.67243328632107,
-     5.3345756728254115
+     93.12533909442415,
+     5.840973885452799
     ],
+    "streuung": 1.5214789132109903,
+    "zonenquote": 0.0,
     "abzug": 0
    },
    {
-    "v0": 0.9,
+    "tempo": 1.25,
+    "trefferquote": 0.98,
+    "beruehrt": 1.0,
+    "mitte": [
+     97.20607341579402,
+     2.7797939646216254
+    ],
+    "streuung": 1.8201235374306703,
+    "zonenquote": 0.0,
+    "abzug": 6
+   },
+   {
+    "tempo": 1.5,
+    "trefferquote": 0.9933333333333333,
+    "beruehrt": 1.0,
+    "mitte": [
+     96.10553185073397,
+     3.6519383037190085
+    ],
+    "streuung": 2.5957167890626494,
+    "zonenquote": 0.0,
+    "abzug": 11
+   },
+   {
+    "tempo": 1.75,
+    "trefferquote": 0.98,
+    "beruehrt": 1.0,
+    "mitte": [
+     93.4532437528347,
+     5.849202337466158
+    ],
+    "streuung": 3.313986629132762,
+    "zonenquote": 0.0,
+    "abzug": 0
+   },
+   {
+    "tempo": 2.0,
+    "trefferquote": 0.9666666666666667,
+    "beruehrt": 1.0,
+    "mitte": [
+     89.39359647054181,
+     8.679095797163189
+    ],
+    "streuung": 3.6144129073600415,
+    "zonenquote": 0.0,
+    "abzug": 0
+   },
+   {
+    "tempo": 2.25,
+    "trefferquote": 0.9733333333333334,
+    "beruehrt": 1.0,
+    "mitte": [
+     88.00820271505616,
+     9.868508432080068
+    ],
+    "streuung": 3.558796114475314,
+    "zonenquote": 0.0,
+    "abzug": 0
+   },
+   {
+    "tempo": 2.5,
+    "trefferquote": 0.9933333333333333,
+    "beruehrt": 1.0,
+    "mitte": [
+     87.15315583870796,
+     10.112484658133202
+    ],
+    "streuung": 3.61717185063524,
+    "zonenquote": 0.0,
+    "abzug": 0
+   },
+   {
+    "tempo": 2.75,
+    "trefferquote": 0.96,
+    "beruehrt": 1.0,
+    "mitte": [
+     86.90961635852872,
+     10.874316830892187
+    ],
+    "streuung": 4.212437286096191,
+    "zonenquote": 0.0,
+    "abzug": 0
+   },
+   {
+    "tempo": 3.0,
     "trefferquote": 1.0,
     "beruehrt": 1.0,
     "mitte": [
-     97.10569232047938,
-     2.8954043547327855
+     85.91501856634241,
+     11.211792131027913
     ],
-    "abzug": 1
+    "streuung": 4.424495652596975,
+    "zonenquote": 0.0,
+    "abzug": 0
    },
    {
-    "v0": 1.1,
+    "tempo": 3.25,
+    "trefferquote": 0.9666666666666667,
+    "beruehrt": 1.0,
+    "mitte": [
+     86.14688276949258,
+     11.477863236068268
+    ],
+    "streuung": 4.7579495605125475,
+    "zonenquote": 0.0,
+    "abzug": 0
+   },
+   {
+    "tempo": 3.5,
     "trefferquote": 1.0,
     "beruehrt": 1.0,
     "mitte": [
-     93.46779785029571,
-     6.062048383611258
+     86.13064268342696,
+     11.717040345628973
     ],
+    "streuung": 5.285898351309647,
+    "zonenquote": 0.0,
     "abzug": 0
    },
    {
-    "v0": 1.4,
-    "trefferquote": 0.95,
+    "tempo": 3.75,
+    "trefferquote": 0.98,
     "beruehrt": 1.0,
     "mitte": [
-     90.14238498326368,
-     9.105159263295086
+     85.88959187418922,
+     11.916456364930536
     ],
+    "streuung": 5.928075502860944,
+    "zonenquote": 0.0,
     "abzug": 0
    },
    {
-    "v0": 1.7,
-    "trefferquote": 0.9,
+    "tempo": 4.0,
+    "trefferquote": 0.9866666666666667,
     "beruehrt": 1.0,
     "mitte": [
-     89.24091779620633,
-     9.946448920892324
+     85.78602906260637,
+     12.946808408057223
     ],
+    "streuung": 7.481193221377981,
+    "zonenquote": 0.0,
     "abzug": 0
    },
    {
-    "v0": 2.1,
-    "trefferquote": 1.0,
+    "tempo": 4.25,
+    "trefferquote": 0.98,
     "beruehrt": 1.0,
     "mitte": [
-     86.99040024705478,
-     9.643452391383303
+     84.88078155507274,
+     12.642332308896536
     ],
+    "streuung": 8.050250934298761,
+    "zonenquote": 0.0,
     "abzug": 0
    },
    {
-    "v0": 2.6,
-    "trefferquote": 1.0,
+    "tempo": 4.5,
+    "trefferquote": 0.98,
     "beruehrt": 1.0,
     "mitte": [
-     85.10459510560874,
-     10.846353448493527
+     83.98516237041514,
+     12.595933223388494
     ],
-    "abzug": 0
-   },
-   {
-    "v0": 3.2,
-    "trefferquote": 0.9,
-    "beruehrt": 1.0,
-    "mitte": [
-     87.21373842994105,
-     13.667396330734611
-    ],
-    "abzug": 0
-   },
-   {
-    "v0": 4.0,
-    "trefferquote": 1.0,
-    "beruehrt": 1.0,
-    "mitte": [
-     83.92995024951225,
-     13.493808107783646
-    ],
+    "streuung": 8.226855031763789,
+    "zonenquote": 0.0,
     "abzug": 0
    }
   ]
@@ -804,3436 +1462,6344 @@
  {
   "id": "builtin-gerade-mittel",
   "name": "Gerader Ball mittel",
-  "tempo_app": 5,
-  "v0_gemessen": 4.0,
+  "tempo_app": 1.25,
+  "tempo_gemessen": 1.0,
   "leiter": [
    {
-    "v0": 0.4,
+    "tempo": 0.5,
     "trefferquote": 0.0,
     "beruehrt": 1.0,
     "mitte": null,
+    "streuung": 0.0,
+    "zonenquote": 0.0,
     "abzug": 0
    },
    {
-    "v0": 0.55,
-    "trefferquote": 0.15,
+    "tempo": 0.75,
+    "trefferquote": 0.05333333333333334,
     "beruehrt": 1.0,
     "mitte": [
-     75.28406003368426,
-     35.812403891782985
+     74.81989108311382,
+     35.5209304134817
     ],
+    "streuung": 0.4342696884163312,
+    "zonenquote": 0.0,
     "abzug": 0
    },
    {
-    "v0": 0.7,
-    "trefferquote": 0.3,
+    "tempo": 1.0,
+    "trefferquote": 0.3933333333333333,
     "beruehrt": 1.0,
     "mitte": [
-     80.60155795060504,
-     38.94870220988926
+     79.57063758679439,
+     38.317154692195835
     ],
+    "streuung": 1.364579243278233,
+    "zonenquote": 0.0,
     "abzug": 0
    },
    {
-    "v0": 0.9,
-    "trefferquote": 0.4,
+    "tempo": 1.25,
+    "trefferquote": 0.42,
     "beruehrt": 1.0,
     "mitte": [
-     88.57335650828566,
-     42.69697799889127
+     85.38421387961482,
+     41.08264428512698
     ],
+    "streuung": 2.0201304753088896,
+    "zonenquote": 0.0,
     "abzug": 0
    },
    {
-    "v0": 1.1,
-    "trefferquote": 0.35,
+    "tempo": 1.5,
+    "trefferquote": 0.35333333333333333,
     "beruehrt": 1.0,
     "mitte": [
-     96.73604035218227,
-     46.97619982246261
+     90.87904801888347,
+     44.208393511183736
     ],
+    "streuung": 2.7886850987528007,
+    "zonenquote": 0.0,
     "abzug": 0
    },
    {
-    "v0": 1.4,
-    "trefferquote": 0.4,
+    "tempo": 1.75,
+    "trefferquote": 0.4266666666666667,
     "beruehrt": 1.0,
     "mitte": [
-     96.86757273852437,
-     46.31829020139293
+     97.24899554068857,
+     47.13257452856092
     ],
+    "streuung": 1.8538649690461764,
+    "zonenquote": 0.0,
+    "abzug": 5
+   },
+   {
+    "tempo": 2.0,
+    "trefferquote": 0.44,
+    "beruehrt": 1.0,
+    "mitte": [
+     95.7388716899089,
+     46.8568842718031
+    ],
+    "streuung": 2.9623516463590693,
+    "zonenquote": 0.0,
+    "abzug": 24
+   },
+   {
+    "tempo": 2.25,
+    "trefferquote": 0.3933333333333333,
+    "beruehrt": 1.0,
+    "mitte": [
+     95.64758504463121,
+     46.126518464929
+    ],
+    "streuung": 3.1105201456231106,
+    "zonenquote": 0.0,
+    "abzug": 7
+   },
+   {
+    "tempo": 2.5,
+    "trefferquote": 0.36,
+    "beruehrt": 1.0,
+    "mitte": [
+     91.28739041513272,
+     44.16088932543864
+    ],
+    "streuung": 5.369567519929945,
+    "zonenquote": 0.0,
     "abzug": 4
    },
    {
-    "v0": 1.7,
-    "trefferquote": 0.35,
+    "tempo": 2.75,
+    "trefferquote": 0.35333333333333333,
     "beruehrt": 1.0,
     "mitte": [
-     96.1397239038473,
-     45.11039330725796
+     88.91926080971413,
+     42.42124858525515
     ],
-    "abzug": 0
+    "streuung": 6.318446167748784,
+    "zonenquote": 0.0,
+    "abzug": 4
    },
    {
-    "v0": 2.1,
+    "tempo": 3.0,
+    "trefferquote": 0.3933333333333333,
+    "beruehrt": 1.0,
+    "mitte": [
+     84.5678369645125,
+     40.57095255419078
+    ],
+    "streuung": 7.3962662676309066,
+    "zonenquote": 0.0,
+    "abzug": 5
+   },
+   {
+    "tempo": 3.25,
+    "trefferquote": 0.30666666666666664,
+    "beruehrt": 1.0,
+    "mitte": [
+     81.32192522415882,
+     39.671067255184234
+    ],
+    "streuung": 7.1700976997613255,
+    "zonenquote": 0.0,
+    "abzug": 7
+   },
+   {
+    "tempo": 3.5,
+    "trefferquote": 0.3933333333333333,
+    "beruehrt": 1.0,
+    "mitte": [
+     80.89071048646468,
+     38.947373065088414
+    ],
+    "streuung": 6.87561812115109,
+    "zonenquote": 0.0,
+    "abzug": 4
+   },
+   {
+    "tempo": 3.75,
     "trefferquote": 0.4,
     "beruehrt": 1.0,
     "mitte": [
-     89.52392755181938,
-     41.50690752640279
+     79.86678294869179,
+     37.731893217530875
     ],
-    "abzug": 1
+    "streuung": 8.12349825855752,
+    "zonenquote": 0.0,
+    "abzug": 8
    },
    {
-    "v0": 2.6,
-    "trefferquote": 0.15,
+    "tempo": 4.0,
+    "trefferquote": 0.38,
     "beruehrt": 1.0,
     "mitte": [
-     84.51351564429385,
-     36.44060964440201
+     77.256552144734,
+     37.58909992175404
     ],
-    "abzug": 1
+    "streuung": 6.839511994244695,
+    "zonenquote": 0.0,
+    "abzug": 11
    },
    {
-    "v0": 3.2,
-    "trefferquote": 0.35,
+    "tempo": 4.25,
+    "trefferquote": 0.36666666666666664,
     "beruehrt": 1.0,
     "mitte": [
-     83.32590052896664,
-     35.49856877634817
+     76.85850907050786,
+     36.711421823025965
     ],
-    "abzug": 2
+    "streuung": 7.961669725475533,
+    "zonenquote": 0.0,
+    "abzug": 10
    },
    {
-    "v0": 4.0,
-    "trefferquote": 0.5,
+    "tempo": 4.5,
+    "trefferquote": 0.44,
     "beruehrt": 1.0,
     "mitte": [
-     75.58336886480033,
-     38.66131539624338
+     76.46753014940015,
+     35.68957918780877
     ],
-    "abzug": 1
+    "streuung": 8.250297490603915,
+    "zonenquote": 0.0,
+    "abzug": 14
    }
   ]
  },
  {
   "id": "builtin-stop-nah",
   "name": "Stop-Shot nah",
-  "tempo_app": 4,
-  "v0_gemessen": 2.6,
+  "tempo_app": 2.75,
+  "tempo_gemessen": 2.75,
   "leiter": [
    {
-    "v0": 0.4,
+    "tempo": 0.5,
     "trefferquote": 0.0,
     "beruehrt": 1.0,
     "mitte": null,
+    "streuung": 0.0,
+    "zonenquote": 0.0,
     "abzug": 0
    },
    {
-    "v0": 0.55,
-    "trefferquote": 0.95,
+    "tempo": 0.75,
+    "trefferquote": 0.88,
     "beruehrt": 1.0,
     "mitte": [
-     83.39867945917715,
-     20.752243012740635
+     82.44463677255595,
+     21.9619658311124
     ],
+    "streuung": 0.6813864984127225,
+    "zonenquote": 0.0,
     "abzug": 0
    },
    {
-    "v0": 0.7,
-    "trefferquote": 1.0,
+    "tempo": 1.0,
+    "trefferquote": 0.9266666666666666,
     "beruehrt": 1.0,
     "mitte": [
-     87.01656014612871,
-     16.421723995783008
+     86.45719230878349,
+     16.907485587357748
     ],
+    "streuung": 1.3382685791663556,
+    "zonenquote": 0.0,
     "abzug": 0
    },
    {
-    "v0": 0.9,
-    "trefferquote": 1.0,
+    "tempo": 1.25,
+    "trefferquote": 0.98,
     "beruehrt": 1.0,
     "mitte": [
-     85.65464426182686,
-     17.558464134669936
+     86.80789755446888,
+     16.146502311338896
     ],
+    "streuung": 2.3469816311926657,
+    "zonenquote": 0.0,
     "abzug": 0
    },
    {
-    "v0": 1.1,
-    "trefferquote": 0.75,
+    "tempo": 1.5,
+    "trefferquote": 0.8866666666666667,
     "beruehrt": 1.0,
     "mitte": [
-     83.18852639134093,
-     21.05943044401169
+     84.55771199707071,
+     19.106600166009265
     ],
+    "streuung": 2.256110745858513,
+    "zonenquote": 0.0,
     "abzug": 0
    },
    {
-    "v0": 1.4,
-    "trefferquote": 0.95,
+    "tempo": 1.75,
+    "trefferquote": 0.9266666666666666,
     "beruehrt": 1.0,
     "mitte": [
-     81.17957492827196,
-     23.419479850845573
+     82.7994788813452,
+     21.560582807863362
     ],
+    "streuung": 2.295322104094758,
+    "zonenquote": 0.06474820143884892,
     "abzug": 0
    },
    {
-    "v0": 1.7,
-    "trefferquote": 1.0,
+    "tempo": 2.0,
+    "trefferquote": 0.94,
     "beruehrt": 1.0,
     "mitte": [
-     80.34810077020667,
-     23.91661278926783
+     81.27955017487677,
+     23.399225765750582
     ],
+    "streuung": 2.2682415650598897,
+    "zonenquote": 0.3617021276595745,
     "abzug": 0
    },
    {
-    "v0": 2.1,
-    "trefferquote": 0.9,
+    "tempo": 2.25,
+    "trefferquote": 0.9266666666666666,
     "beruehrt": 1.0,
     "mitte": [
-     80.21811266786437,
-     25.408721487561333
+     80.86323004492735,
+     24.014963701045943
     ],
+    "streuung": 2.5234201654287065,
+    "zonenquote": 0.48201438848920863,
     "abzug": 0
    },
    {
-    "v0": 2.6,
-    "trefferquote": 0.9,
+    "tempo": 2.5,
+    "trefferquote": 0.94,
     "beruehrt": 1.0,
     "mitte": [
-     79.70031664441827,
-     25.636777969328932
+     80.6261607205355,
+     24.411464316830607
     ],
-    "abzug": 0
-   },
-   {
-    "v0": 3.2,
-    "trefferquote": 0.95,
-    "beruehrt": 1.0,
-    "mitte": [
-     81.36993334424608,
-     24.9695062226743
-    ],
-    "abzug": 0
-   },
-   {
-    "v0": 4.0,
-    "trefferquote": 0.85,
-    "beruehrt": 1.0,
-    "mitte": [
-     82.14224860735996,
-     27.38270523975712
-    ],
+    "streuung": 2.608186642994093,
+    "zonenquote": 0.574468085106383,
     "abzug": 1
+   },
+   {
+    "tempo": 2.75,
+    "trefferquote": 0.96,
+    "beruehrt": 1.0,
+    "mitte": [
+     80.05427625056568,
+     24.175823978105413
+    ],
+    "streuung": 2.9144308051258996,
+    "zonenquote": 0.6180555555555556,
+    "abzug": 0
+   },
+   {
+    "tempo": 3.0,
+    "trefferquote": 0.94,
+    "beruehrt": 1.0,
+    "mitte": [
+     79.7741182766398,
+     25.148901239923656
+    ],
+    "streuung": 2.6910395892835837,
+    "zonenquote": 0.6737588652482269,
+    "abzug": 0
+   },
+   {
+    "tempo": 3.25,
+    "trefferquote": 0.96,
+    "beruehrt": 1.0,
+    "mitte": [
+     80.10454943053863,
+     24.959436591435296
+    ],
+    "streuung": 3.3508131314428753,
+    "zonenquote": 0.5277777777777778,
+    "abzug": 0
+   },
+   {
+    "tempo": 3.5,
+    "trefferquote": 0.9,
+    "beruehrt": 1.0,
+    "mitte": [
+     80.02517241072006,
+     25.193885013690938
+    ],
+    "streuung": 3.548862095080301,
+    "zonenquote": 0.6148148148148148,
+    "abzug": 0
+   },
+   {
+    "tempo": 3.75,
+    "trefferquote": 0.8933333333333333,
+    "beruehrt": 1.0,
+    "mitte": [
+     79.98553618027444,
+     25.327669334689208
+    ],
+    "streuung": 3.9874746902061005,
+    "zonenquote": 0.5298507462686567,
+    "abzug": 1
+   },
+   {
+    "tempo": 4.0,
+    "trefferquote": 0.8933333333333333,
+    "beruehrt": 1.0,
+    "mitte": [
+     79.5596722245649,
+     24.792963079839797
+    ],
+    "streuung": 5.231251603517365,
+    "zonenquote": 0.4626865671641791,
+    "abzug": 0
+   },
+   {
+    "tempo": 4.25,
+    "trefferquote": 0.9066666666666666,
+    "beruehrt": 1.0,
+    "mitte": [
+     79.65771753788098,
+     23.96363575942369
+    ],
+    "streuung": 6.548850685261186,
+    "zonenquote": 0.41911764705882354,
+    "abzug": 0
+   },
+   {
+    "tempo": 4.5,
+    "trefferquote": 0.9333333333333333,
+    "beruehrt": 1.0,
+    "mitte": [
+     80.07088489753485,
+     24.919279154108956
+    ],
+    "streuung": 6.859904169478111,
+    "zonenquote": 0.35,
+    "abzug": 0
    }
   ]
  },
  {
   "id": "builtin-stop-mittel",
   "name": "Stop-Shot mittel",
-  "tempo_app": 5,
-  "v0_gemessen": 4.0,
+  "tempo_app": 2.75,
+  "tempo_gemessen": 2.75,
   "leiter": [
    {
-    "v0": 0.4,
+    "tempo": 0.5,
     "trefferquote": 0.0,
     "beruehrt": 1.0,
     "mitte": null,
+    "streuung": 0.0,
+    "zonenquote": 0.0,
     "abzug": 0
    },
    {
-    "v0": 0.55,
-    "trefferquote": 0.2,
+    "tempo": 0.75,
+    "trefferquote": 0.0,
+    "beruehrt": 1.0,
+    "mitte": null,
+    "streuung": 0.0,
+    "zonenquote": 0.0,
+    "abzug": 0
+   },
+   {
+    "tempo": 1.0,
+    "trefferquote": 0.4,
     "beruehrt": 1.0,
     "mitte": [
-     73.40744101791921,
-     31.86220785172878
+     75.18468530796108,
+     33.37902496941937
     ],
+    "streuung": 1.045865169179473,
+    "zonenquote": 0.0,
     "abzug": 0
    },
    {
-    "v0": 0.7,
-    "trefferquote": 0.25,
-    "beruehrt": 1.0,
-    "mitte": [
-     77.53146489320838,
-     35.20919415905958
-    ],
-    "abzug": 0
-   },
-   {
-    "v0": 0.9,
-    "trefferquote": 0.2,
-    "beruehrt": 1.0,
-    "mitte": [
-     85.6960761524479,
-     39.4341964132731
-    ],
-    "abzug": 0
-   },
-   {
-    "v0": 1.1,
+    "tempo": 1.25,
     "trefferquote": 0.3,
     "beruehrt": 1.0,
     "mitte": [
-     95.96798979842488,
-     45.92530784172314
+     79.61418039833704,
+     35.96962215051406
     ],
+    "streuung": 1.5195615119212023,
+    "zonenquote": 0.0,
     "abzug": 0
    },
    {
-    "v0": 1.4,
-    "trefferquote": 0.2,
+    "tempo": 1.5,
+    "trefferquote": 0.36666666666666664,
     "beruehrt": 1.0,
     "mitte": [
-     97.11760209816237,
-     46.988763384225955
+     84.53989014046894,
+     39.09369814983271
     ],
-    "abzug": 2
-   },
-   {
-    "v0": 1.7,
-    "trefferquote": 0.2,
-    "beruehrt": 1.0,
-    "mitte": [
-     93.33029425631509,
-     44.15234859751281
-    ],
+    "streuung": 2.429617862358808,
+    "zonenquote": 0.0,
     "abzug": 0
    },
    {
-    "v0": 2.1,
-    "trefferquote": 0.25,
+    "tempo": 1.75,
+    "trefferquote": 0.2866666666666667,
     "beruehrt": 1.0,
     "mitte": [
-     85.629603097896,
-     41.20201493472196
+     90.7011778483432,
+     43.348044014704115
     ],
-    "abzug": 2
+    "streuung": 2.705109813440824,
+    "zonenquote": 0.0,
+    "abzug": 0
    },
    {
-    "v0": 2.6,
+    "tempo": 2.0,
+    "trefferquote": 0.26666666666666666,
+    "beruehrt": 1.0,
+    "mitte": [
+     91.4363289773752,
+     43.889927562395535
+    ],
+    "streuung": 5.622668168167053,
+    "zonenquote": 0.0,
+    "abzug": 3
+   },
+   {
+    "tempo": 2.25,
     "trefferquote": 0.3,
     "beruehrt": 1.0,
     "mitte": [
-     77.01000004037763,
-     34.5005355362452
+     78.55239137096558,
+     35.92907990358474
     ],
-    "abzug": 0
+    "streuung": 4.152368091130078,
+    "zonenquote": 0.0,
+    "abzug": 1
    },
    {
-    "v0": 3.2,
-    "trefferquote": 0.2,
+    "tempo": 2.5,
+    "trefferquote": 0.26666666666666666,
     "beruehrt": 1.0,
     "mitte": [
-     84.24138284076099,
-     40.23255359813527
+     73.52862080927203,
+     31.80840263506307
     ],
-    "abzug": 0
+    "streuung": 3.5003519232116487,
+    "zonenquote": 0.275,
+    "abzug": 2
    },
    {
-    "v0": 4.0,
-    "trefferquote": 0.25,
+    "tempo": 2.75,
+    "trefferquote": 0.32,
     "beruehrt": 1.0,
     "mitte": [
-     71.77132257173939,
-     38.25025341979961
+     69.27892636099102,
+     29.657921879038394
     ],
-    "abzug": 0
+    "streuung": 1.752715217494656,
+    "zonenquote": 0.9375,
+    "abzug": 5
+   },
+   {
+    "tempo": 3.0,
+    "trefferquote": 0.31333333333333335,
+    "beruehrt": 1.0,
+    "mitte": [
+     67.34352966831501,
+     28.51415025569316
+    ],
+    "streuung": 1.959244525095521,
+    "zonenquote": 0.9148936170212766,
+    "abzug": 5
+   },
+   {
+    "tempo": 3.25,
+    "trefferquote": 0.32666666666666666,
+    "beruehrt": 1.0,
+    "mitte": [
+     66.28132873876808,
+     28.010224029531614
+    ],
+    "streuung": 2.5044878480078943,
+    "zonenquote": 0.7551020408163265,
+    "abzug": 5
+   },
+   {
+    "tempo": 3.5,
+    "trefferquote": 0.36,
+    "beruehrt": 1.0,
+    "mitte": [
+     64.16777416753906,
+     26.452430302127325
+    ],
+    "streuung": 4.580078201381387,
+    "zonenquote": 0.5185185185185185,
+    "abzug": 3
+   },
+   {
+    "tempo": 3.75,
+    "trefferquote": 0.32666666666666666,
+    "beruehrt": 1.0,
+    "mitte": [
+     59.48499538537348,
+     22.629503640920102
+    ],
+    "streuung": 8.14220347209819,
+    "zonenquote": 0.14285714285714285,
+    "abzug": 11
+   },
+   {
+    "tempo": 4.0,
+    "trefferquote": 0.29333333333333333,
+    "beruehrt": 1.0,
+    "mitte": [
+     46.97317585503192,
+     18.315545168929898
+    ],
+    "streuung": 13.680113732420502,
+    "zonenquote": 0.022727272727272728,
+    "abzug": 6
+   },
+   {
+    "tempo": 4.25,
+    "trefferquote": 0.32666666666666666,
+    "beruehrt": 1.0,
+    "mitte": [
+     43.78990302037268,
+     15.103736632972769
+    ],
+    "streuung": 13.172188809218943,
+    "zonenquote": 0.0,
+    "abzug": 18
+   },
+   {
+    "tempo": 4.5,
+    "trefferquote": 0.30666666666666664,
+    "beruehrt": 1.0,
+    "mitte": [
+     40.559437485448704,
+     13.57243764059314
+    ],
+    "streuung": 15.410440927446016,
+    "zonenquote": 0.021739130434782608,
+    "abzug": 16
    }
   ]
  },
  {
   "id": "builtin-nachlauf-20",
   "name": "Nachlauf 20 cm",
-  "tempo_app": 4,
-  "v0_gemessen": 0.4,
+  "tempo_app": 0.75,
+  "tempo_gemessen": 0.75,
   "leiter": [
    {
-    "v0": 0.4,
-    "trefferquote": 0.35,
+    "tempo": 0.5,
+    "trefferquote": 0.12,
     "beruehrt": 1.0,
     "mitte": [
-     75.07186048091062,
-     19.594332601265336
+     74.96743141122383,
+     19.766949074397118
     ],
+    "streuung": 0.34303265653011883,
+    "zonenquote": 1.0,
     "abzug": 0
    },
    {
-    "v0": 0.55,
+    "tempo": 0.75,
+    "trefferquote": 0.62,
+    "beruehrt": 1.0,
+    "mitte": [
+     77.19901531882881,
+     17.904924354107088
+    ],
+    "streuung": 0.9970284803763804,
+    "zonenquote": 1.0,
+    "abzug": 0
+   },
+   {
+    "tempo": 1.0,
     "trefferquote": 0.6,
     "beruehrt": 1.0,
     "mitte": [
-     79.0466545904036,
-     16.14447297622579
+     85.09382072785948,
+     11.888020456115914
     ],
+    "streuung": 1.8543620591496879,
+    "zonenquote": 0.0,
     "abzug": 0
    },
    {
-    "v0": 0.7,
-    "trefferquote": 0.55,
+    "tempo": 1.25,
+    "trefferquote": 0.6133333333333333,
     "beruehrt": 1.0,
     "mitte": [
-     85.94884210402932,
-     11.095060065079698
+     93.37118025121015,
+     6.155677368326987
     ],
+    "streuung": 2.8726396426675778,
+    "zonenquote": 0.0,
     "abzug": 0
    },
    {
-    "v0": 0.9,
-    "trefferquote": 0.5,
+    "tempo": 1.5,
+    "trefferquote": 0.7133333333333334,
     "beruehrt": 1.0,
     "mitte": [
-     96.06421178041074,
-     4.376894581881848
+     97.17027004346592,
+     2.887274757824878
     ],
-    "abzug": 0
+    "streuung": 1.4160276444696336,
+    "zonenquote": 0.0,
+    "abzug": 22
    },
    {
-    "v0": 1.1,
-    "trefferquote": 0.7,
+    "tempo": 1.75,
+    "trefferquote": 0.5733333333333334,
     "beruehrt": 1.0,
     "mitte": [
-     96.58486899830469,
-     3.4423139388126742
+     96.33327388014841,
+     3.4100367849959725
     ],
-    "abzug": 4
+    "streuung": 2.7038880234629388,
+    "zonenquote": 0.0,
+    "abzug": 21
    },
    {
-    "v0": 1.4,
-    "trefferquote": 0.75,
+    "tempo": 2.0,
+    "trefferquote": 0.5733333333333334,
     "beruehrt": 1.0,
     "mitte": [
-     92.08758784531672,
-     7.794596435073167
+     92.27903146848027,
+     7.122794684781562
     ],
-    "abzug": 2
+    "streuung": 4.571319192534181,
+    "zonenquote": 0.0,
+    "abzug": 27
    },
    {
-    "v0": 1.7,
-    "trefferquote": 0.5,
+    "tempo": 2.25,
+    "trefferquote": 0.64,
     "beruehrt": 1.0,
     "mitte": [
-     90.00716972903135,
-     9.846848320140674
+     88.07739523099971,
+     10.749738630158271
     ],
-    "abzug": 1
+    "streuung": 6.5512732494831605,
+    "zonenquote": 0.0,
+    "abzug": 23
    },
    {
-    "v0": 2.1,
-    "trefferquote": 0.8,
+    "tempo": 2.5,
+    "trefferquote": 0.54,
     "beruehrt": 1.0,
     "mitte": [
-     83.34868072295701,
-     15.222253690510312
+     85.27887538402253,
+     11.939290567038443
     ],
-    "abzug": 2
+    "streuung": 8.216409219671831,
+    "zonenquote": 0.0,
+    "abzug": 32
    },
    {
-    "v0": 2.6,
-    "trefferquote": 0.7,
+    "tempo": 2.75,
+    "trefferquote": 0.6466666666666666,
     "beruehrt": 1.0,
     "mitte": [
-     74.53543847188412,
-     24.151430912615098
+     82.71432949062944,
+     15.323824309424225
     ],
-    "abzug": 6
+    "streuung": 10.565480972501682,
+    "zonenquote": 0.010309278350515464,
+    "abzug": 16
    },
    {
-    "v0": 3.2,
-    "trefferquote": 0.75,
+    "tempo": 3.0,
+    "trefferquote": 0.6266666666666667,
     "beruehrt": 1.0,
     "mitte": [
-     59.511708132705884,
-     31.914412046063987
+     78.7624940317065,
+     19.478945092995872
     ],
-    "abzug": 2
+    "streuung": 11.45721313821188,
+    "zonenquote": 0.031914893617021274,
+    "abzug": 13
    },
    {
-    "v0": 4.0,
-    "trefferquote": 0.7,
+    "tempo": 3.25,
+    "trefferquote": 0.5866666666666667,
     "beruehrt": 1.0,
     "mitte": [
-     44.097604097992686,
-     37.607822771934764
+     74.00444984279846,
+     22.65055447676139
     ],
-    "abzug": 1
+    "streuung": 14.557740534954936,
+    "zonenquote": 0.0,
+    "abzug": 21
+   },
+   {
+    "tempo": 3.5,
+    "trefferquote": 0.6733333333333333,
+    "beruehrt": 1.0,
+    "mitte": [
+     68.92232021952763,
+     26.675709601684623
+    ],
+    "streuung": 15.957614882814006,
+    "zonenquote": 0.0,
+    "abzug": 25
+   },
+   {
+    "tempo": 3.75,
+    "trefferquote": 0.6866666666666666,
+    "beruehrt": 1.0,
+    "mitte": [
+     63.084619322801295,
+     31.31678943082118
+    ],
+    "streuung": 17.67460445666877,
+    "zonenquote": 0.0,
+    "abzug": 22
+   },
+   {
+    "tempo": 4.0,
+    "trefferquote": 0.5733333333333334,
+    "beruehrt": 1.0,
+    "mitte": [
+     54.758164313774664,
+     32.87882965956434
+    ],
+    "streuung": 20.80807015485183,
+    "zonenquote": 0.0,
+    "abzug": 24
+   },
+   {
+    "tempo": 4.25,
+    "trefferquote": 0.6466666666666666,
+    "beruehrt": 1.0,
+    "mitte": [
+     46.886232435008445,
+     35.800894263770736
+    ],
+    "streuung": 20.057820950388766,
+    "zonenquote": 0.0,
+    "abzug": 20
+   },
+   {
+    "tempo": 4.5,
+    "trefferquote": 0.5733333333333334,
+    "beruehrt": 1.0,
+    "mitte": [
+     38.61395770500508,
+     33.61760591459628
+    ],
+    "streuung": 23.498933600766257,
+    "zonenquote": 0.0,
+    "abzug": 21
    }
   ]
  },
  {
   "id": "builtin-nachlauf-50",
   "name": "Nachlauf 50 cm",
-  "tempo_app": 5,
-  "v0_gemessen": 0.7,
+  "tempo_app": 1,
+  "tempo_gemessen": 1.0,
   "leiter": [
    {
-    "v0": 0.4,
+    "tempo": 0.5,
     "trefferquote": 0.0,
     "beruehrt": 1.0,
     "mitte": null,
+    "streuung": 0.0,
+    "zonenquote": 0.0,
     "abzug": 0
    },
    {
-    "v0": 0.55,
-    "trefferquote": 0.35,
+    "tempo": 0.75,
+    "trefferquote": 0.36,
     "beruehrt": 1.0,
     "mitte": [
-     70.72679436868266,
-     15.520417979107084
+     68.30638148416368,
+     16.754860365101553
     ],
+    "streuung": 0.834829639204389,
+    "zonenquote": 0.0,
     "abzug": 0
    },
    {
-    "v0": 0.7,
-    "trefferquote": 0.55,
+    "tempo": 1.0,
+    "trefferquote": 0.42,
     "beruehrt": 1.0,
     "mitte": [
-     78.06170800804401,
-     11.628021288441701
+     77.44390785336866,
+     11.953548525168689
     ],
+    "streuung": 1.6349441792312323,
+    "zonenquote": 1.0,
     "abzug": 0
    },
    {
-    "v0": 0.9,
-    "trefferquote": 0.45,
+    "tempo": 1.25,
+    "trefferquote": 0.35333333333333333,
     "beruehrt": 1.0,
     "mitte": [
-     91.93219136529171,
-     3.9663717390763398
+     87.65571167211228,
+     6.819921461026023
     ],
+    "streuung": 3.02825447256458,
+    "zonenquote": 0.018867924528301886,
     "abzug": 0
    },
    {
-    "v0": 1.1,
-    "trefferquote": 0.3,
+    "tempo": 1.5,
+    "trefferquote": 0.3933333333333333,
     "beruehrt": 1.0,
     "mitte": [
-     96.01569367659282,
-     3.2767180180181765
+     95.90949373955995,
+     3.335813885116019
     ],
-    "abzug": 2
+    "streuung": 2.663981382346925,
+    "zonenquote": 0.0,
+    "abzug": 5
    },
    {
-    "v0": 1.4,
-    "trefferquote": 0.3,
+    "tempo": 1.75,
+    "trefferquote": 0.3333333333333333,
     "beruehrt": 1.0,
     "mitte": [
-     94.26459193647698,
-     2.8092530988867948
+     97.69106438192031,
+     2.336055789211772
     ],
-    "abzug": 1
+    "streuung": 1.7067160404901789,
+    "zonenquote": 0.0,
+    "abzug": 16
    },
    {
-    "v0": 1.7,
-    "trefferquote": 0.45,
+    "tempo": 2.0,
+    "trefferquote": 0.4,
     "beruehrt": 1.0,
     "mitte": [
-     74.38243366704097,
-     3.4780351212592047
+     92.21415542660687,
+     4.777446583345927
     ],
-    "abzug": 4
+    "streuung": 4.156719093337556,
+    "zonenquote": 0.0,
+    "abzug": 16
    },
    {
-    "v0": 2.1,
-    "trefferquote": 0.55,
+    "tempo": 2.25,
+    "trefferquote": 0.4066666666666667,
     "beruehrt": 1.0,
     "mitte": [
-     68.64279932392871,
-     15.058984182045776
+     85.47117309449038,
+     8.493868511547348
     ],
-    "abzug": 1
+    "streuung": 5.374654610445094,
+    "zonenquote": 0.0,
+    "abzug": 21
    },
    {
-    "v0": 2.6,
-    "trefferquote": 0.3,
+    "tempo": 2.5,
+    "trefferquote": 0.36,
     "beruehrt": 1.0,
     "mitte": [
-     59.97652051102464,
-     17.94582013264081
+     78.86193876886934,
+     10.065291675597063
     ],
-    "abzug": 1
+    "streuung": 8.133812779586938,
+    "zonenquote": 0.14814814814814814,
+    "abzug": 12
    },
    {
-    "v0": 3.2,
-    "trefferquote": 0.15,
+    "tempo": 2.75,
+    "trefferquote": 0.4,
     "beruehrt": 1.0,
     "mitte": [
-     39.28308807587738,
-     16.774125148919225
+     71.80822910654737,
+     14.03073093927146
     ],
-    "abzug": 3
+    "streuung": 13.567158902353787,
+    "zonenquote": 0.0,
+    "abzug": 29
    },
    {
-    "v0": 4.0,
-    "trefferquote": 0.2,
+    "tempo": 3.0,
+    "trefferquote": 0.42,
     "beruehrt": 1.0,
     "mitte": [
-     43.358551689455346,
-     26.688760380274214
+     63.560710910454375,
+     17.999876031628403
     ],
-    "abzug": 3
+    "streuung": 17.76840540361013,
+    "zonenquote": 0.0,
+    "abzug": 29
+   },
+   {
+    "tempo": 3.25,
+    "trefferquote": 0.43333333333333335,
+    "beruehrt": 1.0,
+    "mitte": [
+     61.73617895068011,
+     27.228525309064818
+    ],
+    "streuung": 18.724001776906054,
+    "zonenquote": 0.0,
+    "abzug": 31
+   },
+   {
+    "tempo": 3.5,
+    "trefferquote": 0.43333333333333335,
+    "beruehrt": 1.0,
+    "mitte": [
+     54.67131844494341,
+     28.396142734131143
+    ],
+    "streuung": 17.527560854393766,
+    "zonenquote": 0.0,
+    "abzug": 24
+   },
+   {
+    "tempo": 3.75,
+    "trefferquote": 0.37333333333333335,
+    "beruehrt": 1.0,
+    "mitte": [
+     52.144116639543476,
+     30.48661315739992
+    ],
+    "streuung": 21.04599982005863,
+    "zonenquote": 0.0,
+    "abzug": 20
+   },
+   {
+    "tempo": 4.0,
+    "trefferquote": 0.4266666666666667,
+    "beruehrt": 1.0,
+    "mitte": [
+     32.58521107380773,
+     31.827507067655077
+    ],
+    "streuung": 17.453462640475596,
+    "zonenquote": 0.0,
+    "abzug": 15
+   },
+   {
+    "tempo": 4.25,
+    "trefferquote": 0.4266666666666667,
+    "beruehrt": 1.0,
+    "mitte": [
+     23.869897985891043,
+     29.322241054524707
+    ],
+    "streuung": 20.72052838138441,
+    "zonenquote": 0.0,
+    "abzug": 24
+   },
+   {
+    "tempo": 4.5,
+    "trefferquote": 0.3933333333333333,
+    "beruehrt": 1.0,
+    "mitte": [
+     21.826457543103132,
+     26.53112103497921
+    ],
+    "streuung": 17.349620867849787,
+    "zonenquote": 0.0,
+    "abzug": 33
    }
   ]
  },
  {
   "id": "builtin-rueckzieher-30",
   "name": "Rückzieher 30 cm",
-  "tempo_app": 5,
-  "v0_gemessen": 1.1,
+  "tempo_app": 2,
+  "tempo_gemessen": 2.0,
   "leiter": [
    {
-    "v0": 0.4,
+    "tempo": 0.5,
     "trefferquote": 0.0,
     "beruehrt": 1.0,
     "mitte": null,
+    "streuung": 0.0,
+    "zonenquote": 0.0,
     "abzug": 0
    },
    {
-    "v0": 0.55,
+    "tempo": 0.75,
     "trefferquote": 0.0,
     "beruehrt": 1.0,
     "mitte": null,
+    "streuung": 0.0,
+    "zonenquote": 0.0,
     "abzug": 0
    },
    {
-    "v0": 0.7,
-    "trefferquote": 0.6,
+    "tempo": 1.0,
+    "trefferquote": 0.5933333333333334,
     "beruehrt": 1.0,
     "mitte": [
-     77.09763758724625,
-     22.066799647396568
+     77.46500366023561,
+     21.762798135731536
     ],
+    "streuung": 0.7493091131997403,
+    "zonenquote": 0.0,
     "abzug": 0
    },
    {
-    "v0": 0.9,
-    "trefferquote": 0.55,
+    "tempo": 1.25,
+    "trefferquote": 0.6466666666666666,
     "beruehrt": 1.0,
     "mitte": [
-     72.70639857288117,
-     26.264261466934258
+     76.40291479234972,
+     22.731667151315104
     ],
+    "streuung": 2.3927655477500553,
+    "zonenquote": 0.0,
     "abzug": 0
    },
    {
-    "v0": 1.1,
-    "trefferquote": 0.6,
+    "tempo": 1.5,
+    "trefferquote": 0.6466666666666666,
     "beruehrt": 1.0,
     "mitte": [
-     70.3034722027234,
-     28.395722039648405
+     72.96425744959693,
+     25.99505301724627
     ],
+    "streuung": 0.9189267814217212,
+    "zonenquote": 0.0,
     "abzug": 0
    },
    {
-    "v0": 1.4,
-    "trefferquote": 0.6,
+    "tempo": 1.75,
+    "trefferquote": 0.56,
     "beruehrt": 1.0,
     "mitte": [
-     56.71626430132719,
-     43.34687118779234
+     71.46329604830551,
+     27.53356235783259
     ],
-    "abzug": 2
+    "streuung": 1.1717714444256746,
+    "zonenquote": 0.0,
+    "abzug": 0
    },
    {
-    "v0": 1.7,
-    "trefferquote": 0.6,
+    "tempo": 2.0,
+    "trefferquote": 0.68,
     "beruehrt": 1.0,
     "mitte": [
-     46.50840127546443,
-     45.826810651751224
+     64.81538465297666,
+     34.17660408199162
     ],
-    "abzug": 2
+    "streuung": 3.89310530092775,
+    "zonenquote": 0.6764705882352942,
+    "abzug": 0
    },
    {
-    "v0": 2.1,
-    "trefferquote": 0.7,
+    "tempo": 2.25,
+    "trefferquote": 0.6466666666666666,
     "beruehrt": 1.0,
     "mitte": [
-     32.09700094167174,
-     35.34831021518178
+     55.85242657165309,
+     42.12598653819751
     ],
-    "abzug": 2
+    "streuung": 5.9566202437225035,
+    "zonenquote": 0.1134020618556701,
+    "abzug": 7
    },
    {
-    "v0": 2.6,
-    "trefferquote": 0.7,
+    "tempo": 2.5,
+    "trefferquote": 0.6066666666666667,
     "beruehrt": 1.0,
     "mitte": [
-     10.5710895007157,
-     21.04324062442874
+     48.52744667926663,
+     45.44001666969054
     ],
-    "abzug": 8
+    "streuung": 5.727735041455147,
+    "zonenquote": 0.0,
+    "abzug": 26
    },
    {
-    "v0": 3.2,
-    "trefferquote": 0.7,
+    "tempo": 2.75,
+    "trefferquote": 0.5933333333333334,
     "beruehrt": 1.0,
     "mitte": [
-     9.949200007113852,
-     9.929039908731456
+     39.07628190828063,
+     41.82079068997745
     ],
-    "abzug": 6
+    "streuung": 7.352422803652775,
+    "zonenquote": 0.0,
+    "abzug": 20
    },
    {
-    "v0": 4.0,
-    "trefferquote": 0.75,
+    "tempo": 3.0,
+    "trefferquote": 0.7533333333333333,
     "beruehrt": 1.0,
     "mitte": [
-     28.791142745243118,
-     12.305828573763838
+     31.81955216963754,
+     36.00374050712642
     ],
-    "abzug": 10
+    "streuung": 10.28757810148284,
+    "zonenquote": 0.0,
+    "abzug": 27
+   },
+   {
+    "tempo": 3.25,
+    "trefferquote": 0.6066666666666667,
+    "beruehrt": 1.0,
+    "mitte": [
+     25.53973866988053,
+     29.630263014533778
+    ],
+    "streuung": 11.38056804211956,
+    "zonenquote": 0.0,
+    "abzug": 27
+   },
+   {
+    "tempo": 3.5,
+    "trefferquote": 0.7066666666666667,
+    "beruehrt": 1.0,
+    "mitte": [
+     17.6575187112575,
+     23.97046198586112
+    ],
+    "streuung": 12.56197035144748,
+    "zonenquote": 0.0,
+    "abzug": 29
+   },
+   {
+    "tempo": 3.75,
+    "trefferquote": 0.6866666666666666,
+    "beruehrt": 1.0,
+    "mitte": [
+     10.444767471665466,
+     16.275437965562407
+    ],
+    "streuung": 11.13294758569481,
+    "zonenquote": 0.0,
+    "abzug": 26
+   },
+   {
+    "tempo": 4.0,
+    "trefferquote": 0.7066666666666667,
+    "beruehrt": 1.0,
+    "mitte": [
+     10.169027596413963,
+     10.57716403461525
+    ],
+    "streuung": 8.435307924937943,
+    "zonenquote": 0.0,
+    "abzug": 18
+   },
+   {
+    "tempo": 4.25,
+    "trefferquote": 0.7066666666666667,
+    "beruehrt": 1.0,
+    "mitte": [
+     13.198110950197055,
+     8.097595405749752
+    ],
+    "streuung": 9.242690966777898,
+    "zonenquote": 0.0,
+    "abzug": 20
+   },
+   {
+    "tempo": 4.5,
+    "trefferquote": 0.72,
+    "beruehrt": 1.0,
+    "mitte": [
+     17.83526062431147,
+     8.196349867782589
+    ],
+    "streuung": 11.781789346111003,
+    "zonenquote": 0.0,
+    "abzug": 27
    }
   ]
  },
  {
   "id": "builtin-rueckzieher-55",
   "name": "Rückzieher 55 cm",
-  "tempo_app": 6,
-  "v0_gemessen": 1.4,
+  "tempo_app": 2,
+  "tempo_gemessen": 2.0,
   "leiter": [
    {
-    "v0": 0.4,
+    "tempo": 0.5,
     "trefferquote": 0.0,
     "beruehrt": 1.0,
     "mitte": null,
+    "streuung": 0.0,
+    "zonenquote": 0.0,
     "abzug": 0
    },
    {
-    "v0": 0.55,
+    "tempo": 0.75,
     "trefferquote": 0.0,
     "beruehrt": 1.0,
     "mitte": null,
+    "streuung": 0.0,
+    "zonenquote": 0.0,
     "abzug": 0
    },
    {
-    "v0": 0.7,
-    "trefferquote": 0.25,
+    "tempo": 1.0,
+    "trefferquote": 0.07333333333333333,
     "beruehrt": 1.0,
     "mitte": [
-     74.77702966159686,
-     17.987175531601466
+     74.7689976661951,
+     18.009971177728744
     ],
+    "streuung": 0.3116551148584106,
+    "zonenquote": 0.0,
     "abzug": 0
    },
    {
-    "v0": 0.9,
-    "trefferquote": 0.4,
+    "tempo": 1.25,
+    "trefferquote": 0.5866666666666667,
     "beruehrt": 1.0,
     "mitte": [
-     72.90224135690282,
-     19.25212742950915
+     76.05437607773189,
+     17.10504912320881
     ],
+    "streuung": 1.2192420013907326,
+    "zonenquote": 0.0,
     "abzug": 0
    },
    {
-    "v0": 1.1,
-    "trefferquote": 0.55,
+    "tempo": 1.5,
+    "trefferquote": 0.5466666666666666,
     "beruehrt": 1.0,
     "mitte": [
-     67.44548225140231,
-     23.29860842315445
+     70.73589934083735,
+     20.865508598766816
     ],
+    "streuung": 0.8634816665417784,
+    "zonenquote": 0.0,
     "abzug": 0
    },
    {
-    "v0": 1.4,
-    "trefferquote": 0.65,
+    "tempo": 1.75,
+    "trefferquote": 0.6333333333333333,
     "beruehrt": 1.0,
     "mitte": [
-     54.13919897124965,
-     32.125731919076
+     67.79766154791862,
+     22.993380511405604
     ],
+    "streuung": 1.8695435258914188,
+    "zonenquote": 0.0,
     "abzug": 0
    },
    {
-    "v0": 1.7,
-    "trefferquote": 0.5,
+    "tempo": 2.0,
+    "trefferquote": 0.6066666666666667,
     "beruehrt": 1.0,
     "mitte": [
-     25.796399942870558,
-     45.18726636635678
+     50.760471627579996,
+     35.19555844090441
     ],
-    "abzug": 4
+    "streuung": 6.763886868288197,
+    "zonenquote": 0.46153846153846156,
+    "abzug": 1
    },
    {
-    "v0": 2.1,
-    "trefferquote": 0.55,
+    "tempo": 2.25,
+    "trefferquote": 0.58,
     "beruehrt": 1.0,
     "mitte": [
-     8.954383757377066,
-     36.24828193767076
+     32.68513167716028,
+     44.92990954676064
     ],
-    "abzug": 3
-   },
-   {
-    "v0": 2.6,
-    "trefferquote": 0.55,
-    "beruehrt": 1.0,
-    "mitte": [
-     8.50319253068642,
-     21.55778384172925
-    ],
-    "abzug": 3
-   },
-   {
-    "v0": 3.2,
-    "trefferquote": 0.55,
-    "beruehrt": 1.0,
-    "mitte": [
-     30.232396401680266,
-     6.13153442590883
-    ],
+    "streuung": 7.346342283992191,
+    "zonenquote": 0.0,
     "abzug": 2
    },
    {
-    "v0": 4.0,
-    "trefferquote": 0.65,
+    "tempo": 2.5,
+    "trefferquote": 0.5933333333333334,
     "beruehrt": 1.0,
     "mitte": [
-     50.58776475985491,
-     22.01991726869149
+     20.592001709540977,
+     42.70302827263073
     ],
-    "abzug": 2
+    "streuung": 8.270377517719117,
+    "zonenquote": 0.0,
+    "abzug": 12
+   },
+   {
+    "tempo": 2.75,
+    "trefferquote": 0.62,
+    "beruehrt": 1.0,
+    "mitte": [
+     8.009827184375059,
+     34.96950934429061
+    ],
+    "streuung": 7.360359135374833,
+    "zonenquote": 0.0,
+    "abzug": 6
+   },
+   {
+    "tempo": 3.0,
+    "trefferquote": 0.5733333333333334,
+    "beruehrt": 1.0,
+    "mitte": [
+     8.578393462498688,
+     26.378428869538617
+    ],
+    "streuung": 6.595971921319537,
+    "zonenquote": 0.0,
+    "abzug": 15
+   },
+   {
+    "tempo": 3.25,
+    "trefferquote": 0.62,
+    "beruehrt": 1.0,
+    "mitte": [
+     12.553421850562847,
+     21.705602696184812
+    ],
+    "streuung": 7.27278543950559,
+    "zonenquote": 0.0,
+    "abzug": 21
+   },
+   {
+    "tempo": 3.5,
+    "trefferquote": 0.54,
+    "beruehrt": 1.0,
+    "mitte": [
+     19.220639758760036,
+     12.868481581191292
+    ],
+    "streuung": 10.209369455740058,
+    "zonenquote": 0.0,
+    "abzug": 14
+   },
+   {
+    "tempo": 3.75,
+    "trefferquote": 0.5866666666666667,
+    "beruehrt": 1.0,
+    "mitte": [
+     30.17251230837512,
+     6.192032892954739
+    ],
+    "streuung": 8.971116638661169,
+    "zonenquote": 0.0,
+    "abzug": 13
+   },
+   {
+    "tempo": 4.0,
+    "trefferquote": 0.64,
+    "beruehrt": 1.0,
+    "mitte": [
+     41.746921220930005,
+     13.217966840107831
+    ],
+    "streuung": 11.236345425063428,
+    "zonenquote": 0.0,
+    "abzug": 18
+   },
+   {
+    "tempo": 4.25,
+    "trefferquote": 0.62,
+    "beruehrt": 1.0,
+    "mitte": [
+     55.96464673925412,
+     23.582389938444365
+    ],
+    "streuung": 13.947549938732449,
+    "zonenquote": 0.021505376344086023,
+    "abzug": 17
+   },
+   {
+    "tempo": 4.5,
+    "trefferquote": 0.5733333333333334,
+    "beruehrt": 1.0,
+    "mitte": [
+     68.05958238572454,
+     31.92057519266394
+    ],
+    "streuung": 14.757979345123326,
+    "zonenquote": 0.03488372093023256,
+    "abzug": 32
    }
   ]
  },
  {
   "id": "builtin-schnitt-10-rechts",
   "name": "Schnittball 10 Grad",
-  "tempo_app": 5,
-  "v0_gemessen": 3.2,
+  "tempo_app": 1,
+  "tempo_gemessen": 1.0,
   "leiter": [
    {
-    "v0": 0.4,
+    "tempo": 0.5,
     "trefferquote": 0.0,
     "beruehrt": 1.0,
     "mitte": null,
+    "streuung": 0.0,
+    "zonenquote": 0.0,
     "abzug": 0
    },
    {
-    "v0": 0.55,
-    "trefferquote": 0.4,
+    "tempo": 0.75,
+    "trefferquote": 0.006666666666666667,
     "beruehrt": 1.0,
     "mitte": [
-     81.25313071841838,
-     27.243548843613667
+     79.81389910468327,
+     27.20252215631399
     ],
+    "streuung": 0.0,
+    "zonenquote": 0.0,
     "abzug": 0
    },
    {
-    "v0": 0.7,
-    "trefferquote": 0.4,
+    "tempo": 1.0,
+    "trefferquote": 0.47333333333333333,
     "beruehrt": 1.0,
     "mitte": [
-     88.8440648549557,
-     25.588032343199
+     87.3433454346886,
+     25.845753375226764
     ],
+    "streuung": 1.7043245175947326,
+    "zonenquote": 0.0,
     "abzug": 0
    },
    {
-    "v0": 0.9,
-    "trefferquote": 0.25,
+    "tempo": 1.25,
+    "trefferquote": 0.38,
     "beruehrt": 1.0,
     "mitte": [
-     96.74234659555616,
-     23.501873627959235
+     95.98304680317145,
+     23.718962273435874
     ],
+    "streuung": 2.3200266664077294,
+    "zonenquote": 0.0,
     "abzug": 0
    },
    {
-    "v0": 1.1,
-    "trefferquote": 0.4,
+    "tempo": 1.5,
+    "trefferquote": 0.4666666666666667,
     "beruehrt": 1.0,
     "mitte": [
-     93.46354017981014,
-     21.100231121623846
+     96.95912028007547,
+     22.397419497639426
     ],
+    "streuung": 1.3761865691493287,
+    "zonenquote": 0.0,
     "abzug": 0
    },
    {
-    "v0": 1.4,
-    "trefferquote": 0.5,
+    "tempo": 1.75,
+    "trefferquote": 0.47333333333333333,
     "beruehrt": 1.0,
     "mitte": [
-     93.00667767147223,
-     26.404828497801468
+     93.5355673155322,
+     21.15781953653005
     ],
+    "streuung": 1.8582611061246328,
+    "zonenquote": 0.0,
     "abzug": 0
    },
    {
-    "v0": 1.7,
-    "trefferquote": 0.35,
+    "tempo": 2.0,
+    "trefferquote": 0.37333333333333335,
     "beruehrt": 1.0,
     "mitte": [
-     92.49506220924638,
-     32.46229294134776
+     92.59040714456876,
+     27.037134204121802
     ],
+    "streuung": 3.0419545561622416,
+    "zonenquote": 0.0,
     "abzug": 0
    },
    {
-    "v0": 2.1,
-    "trefferquote": 0.3,
+    "tempo": 2.25,
+    "trefferquote": 0.3933333333333333,
     "beruehrt": 1.0,
     "mitte": [
-     91.11168220354041,
-     41.76780718921502
+     92.50788457034474,
+     32.329602385108714
     ],
+    "streuung": 3.6625568855771227,
+    "zonenquote": 0.0,
     "abzug": 0
    },
    {
-    "v0": 2.6,
-    "trefferquote": 0.35,
+    "tempo": 2.5,
+    "trefferquote": 0.4866666666666667,
     "beruehrt": 1.0,
     "mitte": [
-     84.26874856670598,
-     46.69447725835759
+     92.23306009835737,
+     37.581668893269516
     ],
+    "streuung": 4.344452539092411,
+    "zonenquote": 0.0,
+    "abzug": 0
+   },
+   {
+    "tempo": 2.75,
+    "trefferquote": 0.4266666666666667,
+    "beruehrt": 1.0,
+    "mitte": [
+     90.18175229531846,
+     41.670056802010116
+    ],
+    "streuung": 5.023808102251031,
+    "zonenquote": 0.0,
+    "abzug": 0
+   },
+   {
+    "tempo": 3.0,
+    "trefferquote": 0.4066666666666667,
+    "beruehrt": 1.0,
+    "mitte": [
+     87.53124310515031,
+     45.23138985616327
+    ],
+    "streuung": 5.42488995405815,
+    "zonenquote": 0.0,
     "abzug": 2
    },
    {
-    "v0": 3.2,
-    "trefferquote": 0.55,
+    "tempo": 3.25,
+    "trefferquote": 0.47333333333333333,
     "beruehrt": 1.0,
     "mitte": [
-     85.83467798838065,
-     43.82372654591293
+     87.06425938181711,
+     45.87482100065114
     ],
-    "abzug": 2
+    "streuung": 5.110921732953453,
+    "zonenquote": 0.0,
+    "abzug": 11
    },
    {
-    "v0": 4.0,
-    "trefferquote": 0.25,
+    "tempo": 3.5,
+    "trefferquote": 0.4666666666666667,
     "beruehrt": 1.0,
     "mitte": [
-     69.35584436497851,
-     42.363037832469516
+     86.22145628287316,
+     46.09615256253672
     ],
-    "abzug": 7
+    "streuung": 5.315329007636807,
+    "zonenquote": 0.0,
+    "abzug": 14
+   },
+   {
+    "tempo": 3.75,
+    "trefferquote": 0.42,
+    "beruehrt": 1.0,
+    "mitte": [
+     84.24616028306481,
+     43.75957756059157
+    ],
+    "streuung": 6.717945709402893,
+    "zonenquote": 0.0,
+    "abzug": 37
+   },
+   {
+    "tempo": 4.0,
+    "trefferquote": 0.44666666666666666,
+    "beruehrt": 1.0,
+    "mitte": [
+     80.4403073959837,
+     36.56667434325142
+    ],
+    "streuung": 12.038203778577326,
+    "zonenquote": 0.0,
+    "abzug": 33
+   },
+   {
+    "tempo": 4.25,
+    "trefferquote": 0.4866666666666667,
+    "beruehrt": 1.0,
+    "mitte": [
+     77.51719986659818,
+     29.95479988381347
+    ],
+    "streuung": 15.357738411119982,
+    "zonenquote": 0.0,
+    "abzug": 50
+   },
+   {
+    "tempo": 4.5,
+    "trefferquote": 0.48,
+    "beruehrt": 1.0,
+    "mitte": [
+     75.00326155959836,
+     25.37641967726251
+    ],
+    "streuung": 17.706847869978404,
+    "zonenquote": 0.0,
+    "abzug": 46
    }
   ]
  },
  {
   "id": "builtin-schnitt-20-rechts",
   "name": "Schnittball 20 Grad",
-  "tempo_app": 5,
-  "v0_gemessen": 1.4,
+  "tempo_app": 1.25,
+  "tempo_gemessen": 1.0,
   "leiter": [
    {
-    "v0": 0.4,
+    "tempo": 0.5,
     "trefferquote": 0.0,
     "beruehrt": 1.0,
     "mitte": null,
+    "streuung": 0.0,
+    "zonenquote": 0.0,
     "abzug": 0
    },
    {
-    "v0": 0.55,
-    "trefferquote": 0.05,
+    "tempo": 0.75,
+    "trefferquote": 0.0,
     "beruehrt": 1.0,
-    "mitte": [
-     88.45441160827254,
-     30.919643641387612
-    ],
+    "mitte": null,
+    "streuung": 0.0,
+    "zonenquote": 0.0,
     "abzug": 0
    },
    {
-    "v0": 0.7,
-    "trefferquote": 0.4,
+    "tempo": 1.0,
+    "trefferquote": 0.4066666666666667,
     "beruehrt": 1.0,
     "mitte": [
-     94.91550453747999,
-     31.91323967769064
+     95.54077364614342,
+     31.961248249839795
     ],
+    "streuung": 2.3896603714843145,
+    "zonenquote": 0.0,
     "abzug": 0
    },
    {
-    "v0": 0.9,
-    "trefferquote": 0.45,
+    "tempo": 1.25,
+    "trefferquote": 0.36666666666666664,
     "beruehrt": 1.0,
     "mitte": [
-     93.64950878569174,
-     33.657461499329855
+     94.92018486978594,
+     33.462742506457026
     ],
+    "streuung": 1.3143157115348285,
+    "zonenquote": 0.0,
     "abzug": 0
    },
    {
-    "v0": 1.1,
-    "trefferquote": 0.45,
+    "tempo": 1.5,
+    "trefferquote": 0.43333333333333335,
     "beruehrt": 1.0,
     "mitte": [
-     85.86527405693822,
-     35.13069386278549
+     90.31701986375315,
+     34.408014488366355
     ],
+    "streuung": 2.075036036379056,
+    "zonenquote": 0.0,
     "abzug": 0
    },
    {
-    "v0": 1.4,
-    "trefferquote": 0.5,
+    "tempo": 1.75,
+    "trefferquote": 0.4666666666666667,
     "beruehrt": 1.0,
     "mitte": [
-     75.31237800917012,
-     45.47176355806431
+     84.01487560902777,
+     35.93717499305486
     ],
+    "streuung": 2.729114466862948,
+    "zonenquote": 0.0,
     "abzug": 0
    },
    {
-    "v0": 1.7,
-    "trefferquote": 0.45,
+    "tempo": 2.0,
+    "trefferquote": 0.4066666666666667,
     "beruehrt": 1.0,
     "mitte": [
-     77.05764583416186,
-     45.74017625206385
+     74.13578276118483,
+     45.21216465986508
     ],
+    "streuung": 3.8772418271790565,
+    "zonenquote": 0.0,
     "abzug": 0
    },
    {
-    "v0": 2.1,
-    "trefferquote": 0.25,
+    "tempo": 2.25,
+    "trefferquote": 0.3466666666666667,
     "beruehrt": 1.0,
     "mitte": [
-     84.83233079250515,
-     36.30268567772625
+     77.69254471288848,
+     45.90440829845313
     ],
-    "abzug": 6
+    "streuung": 3.5287606421170112,
+    "zonenquote": 0.0,
+    "abzug": 1
    },
    {
-    "v0": 2.6,
-    "trefferquote": 0.25,
+    "tempo": 2.5,
+    "trefferquote": 0.38666666666666666,
     "beruehrt": 1.0,
     "mitte": [
-     62.52745067153535,
-     10.501534458683025
+     76.97570040637922,
+     41.42267683924325
     ],
+    "streuung": 5.31199201199781,
+    "zonenquote": 0.0,
+    "abzug": 7
+   },
+   {
+    "tempo": 2.75,
+    "trefferquote": 0.38,
+    "beruehrt": 1.0,
+    "mitte": [
+     71.98908084497435,
+     35.47276239200118
+    ],
+    "streuung": 10.561484907292426,
+    "zonenquote": 0.0,
+    "abzug": 71
+   },
+   {
+    "tempo": 3.0,
+    "trefferquote": 0.4266666666666667,
+    "beruehrt": 1.0,
+    "mitte": [
+     75.20589699400564,
+     24.90452603782115
+    ],
+    "streuung": 15.61310016749161,
+    "zonenquote": 0.0,
+    "abzug": 80
+   },
+   {
+    "tempo": 3.25,
+    "trefferquote": 0.4066666666666667,
+    "beruehrt": 1.0,
+    "mitte": [
+     66.08485804434021,
+     9.98925502172684
+    ],
+    "streuung": 10.539759044653906,
+    "zonenquote": 0.0,
+    "abzug": 62
+   },
+   {
+    "tempo": 3.5,
+    "trefferquote": 0.3933333333333333,
+    "beruehrt": 1.0,
+    "mitte": [
+     63.41482434368555,
+     9.241362060093417
+    ],
+    "streuung": 10.402367249145943,
+    "zonenquote": 0.0,
+    "abzug": 43
+   },
+   {
+    "tempo": 3.75,
+    "trefferquote": 0.44,
+    "beruehrt": 1.0,
+    "mitte": [
+     58.591907758345144,
+     11.129009706511335
+    ],
+    "streuung": 8.62952666683112,
+    "zonenquote": 0.0,
+    "abzug": 28
+   },
+   {
+    "tempo": 4.0,
+    "trefferquote": 0.3933333333333333,
+    "beruehrt": 1.0,
+    "mitte": [
+     44.99846775619606,
+     24.194237674558963
+    ],
+    "streuung": 12.254138358911558,
+    "zonenquote": 0.0,
     "abzug": 9
    },
    {
-    "v0": 3.2,
-    "trefferquote": 0.4,
+    "tempo": 4.25,
+    "trefferquote": 0.29333333333333333,
     "beruehrt": 1.0,
     "mitte": [
-     57.60692436761455,
-     12.558338686989645
+     36.62320195928529,
+     32.1664762271137
     ],
-    "abzug": 0
+    "streuung": 14.835516408233191,
+    "zonenquote": 0.0,
+    "abzug": 26
    },
    {
-    "v0": 4.0,
-    "trefferquote": 0.2,
+    "tempo": 4.5,
+    "trefferquote": 0.4066666666666667,
     "beruehrt": 1.0,
     "mitte": [
-     46.49189198100812,
-     24.628726668274833
+     26.014887703586524,
+     40.347304787229156
     ],
-    "abzug": 3
+    "streuung": 14.003619487250221,
+    "zonenquote": 0.0,
+    "abzug": 10
    }
   ]
  },
  {
   "id": "builtin-mitteltasche-weit",
   "name": "Mitteltasche aus der Entfernung",
-  "tempo_app": 5,
-  "v0_gemessen": 0.4,
+  "tempo_app": 0.5,
+  "tempo_gemessen": 0.5,
   "leiter": [
    {
-    "v0": 0.4,
-    "trefferquote": 0.65,
+    "tempo": 0.5,
+    "trefferquote": 0.26,
     "beruehrt": 1.0,
     "mitte": [
-     49.92618976929495,
-     13.929255998322303
+     50.089839586254236,
+     13.962929873422862
     ],
+    "streuung": 0.6109462842739379,
+    "zonenquote": 1.0,
     "abzug": 0
    },
    {
-    "v0": 0.55,
-    "trefferquote": 0.85,
+    "tempo": 0.75,
+    "trefferquote": 0.96,
     "beruehrt": 1.0,
     "mitte": [
-     50.37118835350854,
-     10.005131640864871
+     50.05234722186859,
+     11.761427985854853
     ],
+    "streuung": 1.1454006806607946,
+    "zonenquote": 0.22916666666666666,
     "abzug": 0
    },
    {
-    "v0": 0.7,
-    "trefferquote": 0.95,
+    "tempo": 1.0,
+    "trefferquote": 0.9733333333333334,
     "beruehrt": 1.0,
     "mitte": [
-     48.9662561826562,
-     4.430548555624788
+     49.730823773226874,
+     5.028892977214442
     ],
+    "streuung": 2.451815306072644,
+    "zonenquote": 0.0,
     "abzug": 0
    },
    {
-    "v0": 0.9,
-    "trefferquote": 1.0,
+    "tempo": 1.25,
+    "trefferquote": 0.9733333333333334,
     "beruehrt": 1.0,
     "mitte": [
-     49.03784065619513,
-     3.8706897525826336
+     49.585832917041714,
+     2.3272863431490376
     ],
+    "streuung": 4.443844574417162,
+    "zonenquote": 0.0,
+    "abzug": 67
+   },
+   {
+    "tempo": 1.5,
+    "trefferquote": 0.9333333333333333,
+    "beruehrt": 1.0,
+    "mitte": [
+     50.003180347875706,
+     4.562776687970344
+    ],
+    "streuung": 5.082807548794479,
+    "zonenquote": 0.0,
+    "abzug": 76
+   },
+   {
+    "tempo": 1.75,
+    "trefferquote": 0.9733333333333334,
+    "beruehrt": 1.0,
+    "mitte": [
+     51.62197147898948,
+     7.808780527576637
+    ],
+    "streuung": 5.795082038064245,
+    "zonenquote": 0.0,
+    "abzug": 59
+   },
+   {
+    "tempo": 2.0,
+    "trefferquote": 0.9466666666666667,
+    "beruehrt": 1.0,
+    "mitte": [
+     50.78965133732725,
+     13.460966120917023
+    ],
+    "streuung": 7.9755859080507605,
+    "zonenquote": 0.04929577464788732,
+    "abzug": 66
+   },
+   {
+    "tempo": 2.25,
+    "trefferquote": 0.96,
+    "beruehrt": 1.0,
+    "mitte": [
+     51.15084609088322,
+     9.428034890217676
+    ],
+    "streuung": 8.885630872649289,
+    "zonenquote": 0.0,
+    "abzug": 51
+   },
+   {
+    "tempo": 2.5,
+    "trefferquote": 0.9533333333333334,
+    "beruehrt": 1.0,
+    "mitte": [
+     49.16852149558028,
+     7.012518432941253
+    ],
+    "streuung": 11.335616185656383,
+    "zonenquote": 0.0,
+    "abzug": 26
+   },
+   {
+    "tempo": 2.75,
+    "trefferquote": 0.96,
+    "beruehrt": 1.0,
+    "mitte": [
+     48.81598512287462,
+     5.019710695929971
+    ],
+    "streuung": 11.413119066254877,
+    "zonenquote": 0.0,
+    "abzug": 24
+   },
+   {
+    "tempo": 3.0,
+    "trefferquote": 0.96,
+    "beruehrt": 1.0,
+    "mitte": [
+     51.92183475507667,
+     5.333063685780173
+    ],
+    "streuung": 14.837528053825169,
+    "zonenquote": 0.0,
     "abzug": 8
    },
    {
-    "v0": 1.1,
-    "trefferquote": 1.0,
+    "tempo": 3.25,
+    "trefferquote": 0.96,
     "beruehrt": 1.0,
     "mitte": [
-     47.85799040599821,
-     7.527233442613561
+     49.17457835740065,
+     6.037025236899917
     ],
-    "abzug": 9
-   },
-   {
-    "v0": 1.4,
-    "trefferquote": 0.95,
-    "beruehrt": 1.0,
-    "mitte": [
-     53.06441922294847,
-     14.514194417449556
-    ],
-    "abzug": 5
-   },
-   {
-    "v0": 1.7,
-    "trefferquote": 0.85,
-    "beruehrt": 1.0,
-    "mitte": [
-     50.668380780106695,
-     7.903843745386257
-    ],
-    "abzug": 9
-   },
-   {
-    "v0": 2.1,
-    "trefferquote": 1.0,
-    "beruehrt": 1.0,
-    "mitte": [
-     47.96160088992122,
-     4.838105169930252
-    ],
-    "abzug": 2
-   },
-   {
-    "v0": 2.6,
-    "trefferquote": 1.0,
-    "beruehrt": 1.0,
-    "mitte": [
-     48.31455804950855,
-     5.368654975486034
-    ],
+    "streuung": 13.467075248759327,
+    "zonenquote": 0.020833333333333332,
     "abzug": 3
    },
    {
-    "v0": 3.2,
-    "trefferquote": 1.0,
+    "tempo": 3.5,
+    "trefferquote": 0.96,
     "beruehrt": 1.0,
     "mitte": [
-     44.78915693479896,
-     7.374865306989915
+     49.96233424660605,
+     6.097771929192921
     ],
-    "abzug": 1
+    "streuung": 15.822454252591474,
+    "zonenquote": 0.034722222222222224,
+    "abzug": 5
    },
    {
-    "v0": 4.0,
-    "trefferquote": 0.9,
+    "tempo": 3.75,
+    "trefferquote": 0.9666666666666667,
     "beruehrt": 1.0,
     "mitte": [
-     52.48199094099255,
-     9.056489947553755
+     48.621946043819065,
+     6.6150745416769645
     ],
-    "abzug": 2
+    "streuung": 19.54378548955899,
+    "zonenquote": 0.06206896551724138,
+    "abzug": 5
+   },
+   {
+    "tempo": 4.0,
+    "trefferquote": 0.9533333333333334,
+    "beruehrt": 1.0,
+    "mitte": [
+     52.18236015444522,
+     7.993664429870285
+    ],
+    "streuung": 22.46101271205997,
+    "zonenquote": 0.09090909090909091,
+    "abzug": 6
+   },
+   {
+    "tempo": 4.25,
+    "trefferquote": 0.96,
+    "beruehrt": 1.0,
+    "mitte": [
+     54.53794494382319,
+     8.257233080046351
+    ],
+    "streuung": 22.61102800803187,
+    "zonenquote": 0.0763888888888889,
+    "abzug": 5
+   },
+   {
+    "tempo": 4.5,
+    "trefferquote": 0.94,
+    "beruehrt": 1.0,
+    "mitte": [
+     48.5581429757136,
+     8.572916781910536
+    ],
+    "streuung": 22.103855652910347,
+    "zonenquote": 0.06382978723404255,
+    "abzug": 6
    }
   ]
  },
  {
   "id": "builtin-bande-gerade",
   "name": "Ball an der Bande gerade",
-  "tempo_app": 5,
-  "v0_gemessen": 0.7,
+  "tempo_app": 1.25,
+  "tempo_gemessen": 1.0,
   "leiter": [
    {
-    "v0": 0.4,
+    "tempo": 0.5,
     "trefferquote": 0.0,
     "beruehrt": 1.0,
     "mitte": null,
+    "streuung": 0.0,
+    "zonenquote": 0.0,
     "abzug": 0
    },
    {
-    "v0": 0.55,
-    "trefferquote": 0.65,
+    "tempo": 0.75,
+    "trefferquote": 0.25333333333333335,
     "beruehrt": 1.0,
     "mitte": [
-     74.46210358448735,
-     46.776677717047285
+     73.28665575636268,
+     47.16997641228119
     ],
+    "streuung": 0.6310997065384394,
+    "zonenquote": 0.0,
     "abzug": 0
    },
    {
-    "v0": 0.7,
-    "trefferquote": 0.75,
+    "tempo": 1.0,
+    "trefferquote": 0.66,
     "beruehrt": 1.0,
     "mitte": [
-     80.31648681563796,
-     45.68800373885294
+     79.21771144784326,
+     46.41483107662535
     ],
+    "streuung": 1.850656216887195,
+    "zonenquote": 0.0,
     "abzug": 0
    },
    {
-    "v0": 0.9,
-    "trefferquote": 0.65,
+    "tempo": 1.25,
+    "trefferquote": 0.64,
     "beruehrt": 1.0,
     "mitte": [
-     88.46089380810416,
-     44.653609231609714
+     86.27229514938018,
+     45.54688514214549
     ],
+    "streuung": 2.6542898220861715,
+    "zonenquote": 0.0,
     "abzug": 0
    },
    {
-    "v0": 1.1,
-    "trefferquote": 0.7,
+    "tempo": 1.5,
+    "trefferquote": 0.6733333333333333,
     "beruehrt": 1.0,
     "mitte": [
-     98.22766041791755,
-     45.28080364645373
+     92.85288917817222,
+     45.997643640129766
     ],
-    "abzug": 2
-   },
-   {
-    "v0": 1.4,
-    "trefferquote": 0.7,
-    "beruehrt": 1.0,
-    "mitte": [
-     95.95915960853608,
-     42.757727733629544
-    ],
-    "abzug": 2
-   },
-   {
-    "v0": 1.7,
-    "trefferquote": 0.4,
-    "beruehrt": 1.0,
-    "mitte": [
-     90.47505331381458,
-     43.12640305093797
-    ],
+    "streuung": 3.220938241102603,
+    "zonenquote": 0.0,
     "abzug": 0
    },
    {
-    "v0": 2.1,
-    "trefferquote": 0.65,
+    "tempo": 1.75,
+    "trefferquote": 0.6466666666666666,
     "beruehrt": 1.0,
     "mitte": [
-     79.51373781721874,
-     44.76961363840893
+     97.52891759326626,
+     43.94481646621803
     ],
-    "abzug": 0
+    "streuung": 3.4181062892094216,
+    "zonenquote": 0.0,
+    "abzug": 21
    },
    {
-    "v0": 2.6,
-    "trefferquote": 0.4,
+    "tempo": 2.0,
+    "trefferquote": 0.52,
     "beruehrt": 1.0,
     "mitte": [
-     76.74258494651663,
-     39.87132647231594
+     96.19504406130864,
+     44.5840175007103
     ],
+    "streuung": 3.5641666071681635,
+    "zonenquote": 0.0,
+    "abzug": 14
+   },
+   {
+    "tempo": 2.25,
+    "trefferquote": 0.5133333333333333,
+    "beruehrt": 1.0,
+    "mitte": [
+     89.45396703196332,
+     44.71802064519528
+    ],
+    "streuung": 6.155990503411379,
+    "zonenquote": 0.0,
     "abzug": 1
    },
    {
-    "v0": 3.2,
-    "trefferquote": 0.65,
+    "tempo": 2.5,
+    "trefferquote": 0.4266666666666667,
     "beruehrt": 1.0,
     "mitte": [
-     76.21037999256724,
-     43.02570682032059
+     85.90484983556611,
+     44.19274011417828
     ],
+    "streuung": 6.225795635291673,
+    "zonenquote": 0.0,
     "abzug": 0
    },
    {
-    "v0": 4.0,
-    "trefferquote": 0.4,
+    "tempo": 2.75,
+    "trefferquote": 0.4866666666666667,
     "beruehrt": 1.0,
     "mitte": [
-     73.66989176980579,
-     41.968237557296554
+     81.62652167447501,
+     44.72360502590131
     ],
-    "abzug": 2
+    "streuung": 6.235624260356576,
+    "zonenquote": 0.0,
+    "abzug": 1
+   },
+   {
+    "tempo": 3.0,
+    "trefferquote": 0.48,
+    "beruehrt": 1.0,
+    "mitte": [
+     79.09003863152623,
+     43.87690404466892
+    ],
+    "streuung": 6.606996272816716,
+    "zonenquote": 0.0,
+    "abzug": 4
+   },
+   {
+    "tempo": 3.25,
+    "trefferquote": 0.49333333333333335,
+    "beruehrt": 1.0,
+    "mitte": [
+     77.59313461190321,
+     43.3347534092974
+    ],
+    "streuung": 7.156535708445697,
+    "zonenquote": 0.0,
+    "abzug": 4
+   },
+   {
+    "tempo": 3.5,
+    "trefferquote": 0.5333333333333333,
+    "beruehrt": 1.0,
+    "mitte": [
+     76.83541190120313,
+     42.87588751254184
+    ],
+    "streuung": 6.759335455292286,
+    "zonenquote": 0.0,
+    "abzug": 1
+   },
+   {
+    "tempo": 3.75,
+    "trefferquote": 0.5533333333333333,
+    "beruehrt": 1.0,
+    "mitte": [
+     75.4530297935969,
+     42.93938887778637
+    ],
+    "streuung": 7.189571952232405,
+    "zonenquote": 0.0,
+    "abzug": 5
+   },
+   {
+    "tempo": 4.0,
+    "trefferquote": 0.48,
+    "beruehrt": 1.0,
+    "mitte": [
+     75.5842663509052,
+     39.68103870571724
+    ],
+    "streuung": 9.284631138892902,
+    "zonenquote": 0.0,
+    "abzug": 3
+   },
+   {
+    "tempo": 4.25,
+    "trefferquote": 0.5533333333333333,
+    "beruehrt": 1.0,
+    "mitte": [
+     74.36480179493478,
+     37.37092121333012
+    ],
+    "streuung": 11.107506475437713,
+    "zonenquote": 0.0,
+    "abzug": 5
+   },
+   {
+    "tempo": 4.5,
+    "trefferquote": 0.48,
+    "beruehrt": 1.0,
+    "mitte": [
+     75.75396786343599,
+     37.63930023481095
+    ],
+    "streuung": 13.900851940067314,
+    "zonenquote": 0.0,
+    "abzug": 11
    }
   ]
  },
  {
   "id": "builtin-luecke-breit",
   "name": "Durch die Lücke",
-  "tempo_app": 5,
-  "v0_gemessen": 0.55,
+  "tempo_app": 0.75,
+  "tempo_gemessen": 1.0,
   "leiter": [
    {
-    "v0": 0.4,
+    "tempo": 0.5,
     "trefferquote": 0.0,
     "beruehrt": 1.0,
     "mitte": null,
+    "streuung": 0.0,
+    "zonenquote": 0.0,
     "abzug": 0
    },
    {
-    "v0": 0.55,
-    "trefferquote": 0.7,
+    "tempo": 0.75,
+    "trefferquote": 0.08,
     "beruehrt": 1.0,
     "mitte": [
-     78.1924413651581,
-     21.877726166786548
+     77.78180598543153,
+     22.36047841729891
     ],
+    "streuung": 0.5765303333677221,
+    "zonenquote": 0.0,
     "abzug": 0
    },
    {
-    "v0": 0.7,
-    "trefferquote": 0.4,
+    "tempo": 1.0,
+    "trefferquote": 0.5133333333333333,
     "beruehrt": 1.0,
     "mitte": [
-     82.1827189971184,
-     17.139066947625718
+     81.67066199121686,
+     18.085952561595928
     ],
+    "streuung": 1.2736943304902557,
+    "zonenquote": 0.0,
     "abzug": 0
    },
    {
-    "v0": 0.9,
-    "trefferquote": 0.45,
+    "tempo": 1.25,
+    "trefferquote": 0.5533333333333333,
     "beruehrt": 1.0,
     "mitte": [
-     88.33689394224155,
-     12.096554306064116
+     86.34973884874938,
+     13.85360282821749
     ],
+    "streuung": 1.9837120103091326,
+    "zonenquote": 0.0,
     "abzug": 0
    },
    {
-    "v0": 1.1,
-    "trefferquote": 0.45,
-    "beruehrt": 1.0,
-    "mitte": [
-     96.76374210479426,
-     4.447946066153633
-    ],
-    "abzug": 1
-   },
-   {
-    "v0": 1.4,
-    "trefferquote": 0.45,
-    "beruehrt": 1.0,
-    "mitte": [
-     89.33489418889897,
-     8.822677217739601
-    ],
-    "abzug": 0
-   },
-   {
-    "v0": 1.7,
-    "trefferquote": 0.7,
-    "beruehrt": 1.0,
-    "mitte": [
-     83.3664399660501,
-     17.695136377731234
-    ],
-    "abzug": 0
-   },
-   {
-    "v0": 2.1,
-    "trefferquote": 0.4,
-    "beruehrt": 1.0,
-    "mitte": [
-     79.85022821015069,
-     18.820433711231804
-    ],
-    "abzug": 0
-   },
-   {
-    "v0": 2.6,
+    "tempo": 1.5,
     "trefferquote": 0.5,
     "beruehrt": 1.0,
     "mitte": [
-     77.46496885549081,
-     22.533434586569744
+     91.15016670652057,
+     9.022782150193793
     ],
-    "abzug": 1
-   },
-   {
-    "v0": 3.2,
-    "trefferquote": 0.6,
-    "beruehrt": 1.0,
-    "mitte": [
-     77.16982775118406,
-     24.046153261432654
-    ],
+    "streuung": 2.3477411839949838,
+    "zonenquote": 0.0,
     "abzug": 0
    },
    {
-    "v0": 4.0,
-    "trefferquote": 0.3,
+    "tempo": 1.75,
+    "trefferquote": 0.47333333333333333,
     "beruehrt": 1.0,
     "mitte": [
-     75.27793749289272,
-     24.761289812341477
+     95.58280464046933,
+     4.009777996304416
     ],
-    "abzug": 2
+    "streuung": 2.63124839329545,
+    "zonenquote": 0.0,
+    "abzug": 0
+   },
+   {
+    "tempo": 2.0,
+    "trefferquote": 0.5733333333333334,
+    "beruehrt": 1.0,
+    "mitte": [
+     89.20273280018428,
+     10.739909926017155
+    ],
+    "streuung": 4.6862143575315605,
+    "zonenquote": 0.0,
+    "abzug": 0
+   },
+   {
+    "tempo": 2.25,
+    "trefferquote": 0.5,
+    "beruehrt": 1.0,
+    "mitte": [
+     84.44380343495718,
+     15.906045544558443
+    ],
+    "streuung": 4.784007645482789,
+    "zonenquote": 0.0,
+    "abzug": 0
+   },
+   {
+    "tempo": 2.5,
+    "trefferquote": 0.4866666666666667,
+    "beruehrt": 1.0,
+    "mitte": [
+     81.1182324148675,
+     18.915582620252174
+    ],
+    "streuung": 4.501980670124638,
+    "zonenquote": 0.0,
+    "abzug": 0
+   },
+   {
+    "tempo": 2.75,
+    "trefferquote": 0.5866666666666667,
+    "beruehrt": 1.0,
+    "mitte": [
+     79.9592164022123,
+     20.207306119926358
+    ],
+    "streuung": 4.801737157990764,
+    "zonenquote": 0.0,
+    "abzug": 0
+   },
+   {
+    "tempo": 3.0,
+    "trefferquote": 0.5133333333333333,
+    "beruehrt": 1.0,
+    "mitte": [
+     78.5655575198226,
+     21.534792505538153
+    ],
+    "streuung": 4.522829042887776,
+    "zonenquote": 0.0,
+    "abzug": 1
+   },
+   {
+    "tempo": 3.25,
+    "trefferquote": 0.5533333333333333,
+    "beruehrt": 1.0,
+    "mitte": [
+     78.39795618575995,
+     21.282763802534404
+    ],
+    "streuung": 5.381795203581265,
+    "zonenquote": 0.0,
+    "abzug": 1
+   },
+   {
+    "tempo": 3.5,
+    "trefferquote": 0.5133333333333333,
+    "beruehrt": 1.0,
+    "mitte": [
+     77.30967344313673,
+     22.498431343874294
+    ],
+    "streuung": 5.087797611083959,
+    "zonenquote": 0.0,
+    "abzug": 1
+   },
+   {
+    "tempo": 3.75,
+    "trefferquote": 0.5466666666666666,
+    "beruehrt": 1.0,
+    "mitte": [
+     77.95800805844102,
+     22.19145673751811
+    ],
+    "streuung": 6.410813122164383,
+    "zonenquote": 0.0,
+    "abzug": 1
+   },
+   {
+    "tempo": 4.0,
+    "trefferquote": 0.54,
+    "beruehrt": 1.0,
+    "mitte": [
+     76.65528198784344,
+     23.519754041786797
+    ],
+    "streuung": 6.35007174909792,
+    "zonenquote": 0.0,
+    "abzug": 1
+   },
+   {
+    "tempo": 4.25,
+    "trefferquote": 0.5333333333333333,
+    "beruehrt": 1.0,
+    "mitte": [
+     76.94846807352619,
+     22.94199985548
+    ],
+    "streuung": 7.311509392390365,
+    "zonenquote": 0.0,
+    "abzug": 5
+   },
+   {
+    "tempo": 4.5,
+    "trefferquote": 0.5333333333333333,
+    "beruehrt": 1.0,
+    "mitte": [
+     76.63371517639135,
+     21.87308529382642
+    ],
+    "streuung": 8.211878858177732,
+    "zonenquote": 0.0,
+    "abzug": 5
    }
   ]
  },
  {
   "id": "builtin-wachsende-linie",
   "name": "Wachsende Linie",
-  "tempo_app": 5,
-  "v0_gemessen": 0.7,
+  "tempo_app": 0.75,
+  "tempo_gemessen": 1.0,
   "leiter": [
    {
-    "v0": 0.4,
+    "tempo": 0.5,
     "trefferquote": 0.0,
     "beruehrt": 1.0,
     "mitte": null,
+    "streuung": 0.0,
+    "zonenquote": 0.0,
     "abzug": 0
    },
    {
-    "v0": 0.55,
+    "tempo": 0.75,
     "trefferquote": 0.6,
     "beruehrt": 1.0,
     "mitte": [
-     75.07236994587664,
-     6.662456063057948
+     73.66262808995528,
+     7.1412874163587885
     ],
+    "streuung": 0.6942582762027553,
+    "zonenquote": 0.0,
     "abzug": 0
    },
    {
-    "v0": 0.7,
-    "trefferquote": 0.85,
+    "tempo": 1.0,
+    "trefferquote": 0.6866666666666666,
     "beruehrt": 1.0,
     "mitte": [
-     80.24993799909663,
-     5.695281957296083
+     79.73077038099015,
+     5.647554404950106
     ],
+    "streuung": 1.223012596066718,
+    "zonenquote": 0.0,
     "abzug": 0
    },
    {
-    "v0": 0.9,
-    "trefferquote": 0.7,
+    "tempo": 1.25,
+    "trefferquote": 0.66,
     "beruehrt": 1.0,
     "mitte": [
-     86.32193558074412,
-     4.106580181692443
+     85.98841730533334,
+     4.304114675921853
     ],
+    "streuung": 1.8270724622918049,
+    "zonenquote": 0.0,
     "abzug": 0
    },
    {
-    "v0": 1.1,
-    "trefferquote": 0.75,
+    "tempo": 1.5,
+    "trefferquote": 0.74,
     "beruehrt": 1.0,
     "mitte": [
-     80.75690020669506,
-     5.542747525907694
+     84.69676149068087,
+     4.4346626400943245
     ],
+    "streuung": 3.1236921816883547,
+    "zonenquote": 0.0,
     "abzug": 0
    },
    {
-    "v0": 1.4,
-    "trefferquote": 0.6,
+    "tempo": 1.75,
+    "trefferquote": 0.6933333333333334,
     "beruehrt": 1.0,
     "mitte": [
-     75.26709232248923,
-     6.935598726817212
+     79.74023311272937,
+     5.881635451384285
     ],
+    "streuung": 2.8392335952368954,
+    "zonenquote": 0.0,
     "abzug": 1
    },
    {
-    "v0": 1.7,
-    "trefferquote": 0.7,
+    "tempo": 2.0,
+    "trefferquote": 0.66,
     "beruehrt": 1.0,
     "mitte": [
-     73.08493749624908,
-     7.303958836653861
+     75.17066133429779,
+     6.740263036302787
     ],
+    "streuung": 2.6197350977168963,
+    "zonenquote": 0.0,
+    "abzug": 2
+   },
+   {
+    "tempo": 2.25,
+    "trefferquote": 0.6133333333333333,
+    "beruehrt": 1.0,
+    "mitte": [
+     73.09008165103128,
+     7.080417263825167
+    ],
+    "streuung": 2.5439088322258807,
+    "zonenquote": 0.0,
+    "abzug": 2
+   },
+   {
+    "tempo": 2.5,
+    "trefferquote": 0.6933333333333334,
+    "beruehrt": 1.0,
+    "mitte": [
+     72.08130773205926,
+     7.004013772995439
+    ],
+    "streuung": 2.713171155990449,
+    "zonenquote": 0.0,
     "abzug": 0
    },
    {
-    "v0": 2.1,
+    "tempo": 2.75,
+    "trefferquote": 0.7133333333333334,
+    "beruehrt": 1.0,
+    "mitte": [
+     71.05394290176535,
+     7.646205151311515
+    ],
+    "streuung": 2.54196663735248,
+    "zonenquote": 0.0,
+    "abzug": 0
+   },
+   {
+    "tempo": 3.0,
+    "trefferquote": 0.6333333333333333,
+    "beruehrt": 1.0,
+    "mitte": [
+     71.02699965798476,
+     7.522878451233516
+    ],
+    "streuung": 2.988608222921884,
+    "zonenquote": 0.0,
+    "abzug": 2
+   },
+   {
+    "tempo": 3.25,
+    "trefferquote": 0.7066666666666667,
+    "beruehrt": 1.0,
+    "mitte": [
+     70.89074047567773,
+     7.667392074502266
+    ],
+    "streuung": 3.187324121539054,
+    "zonenquote": 0.0,
+    "abzug": 0
+   },
+   {
+    "tempo": 3.5,
     "trefferquote": 0.7,
     "beruehrt": 1.0,
     "mitte": [
-     71.6219356162274,
-     6.999621432161969
+     70.41364785402936,
+     7.547224532510861
     ],
+    "streuung": 3.1783078465337544,
+    "zonenquote": 0.0,
     "abzug": 1
    },
    {
-    "v0": 2.6,
-    "trefferquote": 0.65,
+    "tempo": 3.75,
+    "trefferquote": 0.6733333333333333,
     "beruehrt": 1.0,
     "mitte": [
-     70.74605249596249,
-     7.221425625899814
+     70.01333332159422,
+     7.7776224172758885
     ],
+    "streuung": 3.600751593095329,
+    "zonenquote": 0.0,
     "abzug": 0
    },
    {
-    "v0": 3.2,
-    "trefferquote": 0.7,
+    "tempo": 4.0,
+    "trefferquote": 0.6066666666666667,
     "beruehrt": 1.0,
     "mitte": [
-     70.98204346714394,
-     7.622063267112749
+     70.5087701307254,
+     8.610198239979939
     ],
-    "abzug": 0
+    "streuung": 4.99407142015074,
+    "zonenquote": 0.0,
+    "abzug": 6
    },
    {
-    "v0": 4.0,
-    "trefferquote": 0.7,
+    "tempo": 4.25,
+    "trefferquote": 0.6533333333333333,
     "beruehrt": 1.0,
     "mitte": [
-     69.83715247657605,
-     7.463594925617093
+     70.56528926252827,
+     8.580439089649202
     ],
-    "abzug": 0
+    "streuung": 5.763819632514185,
+    "zonenquote": 0.0,
+    "abzug": 1
+   },
+   {
+    "tempo": 4.5,
+    "trefferquote": 0.6266666666666667,
+    "beruehrt": 1.0,
+    "mitte": [
+     69.59494471962509,
+     8.352757398658033
+    ],
+    "streuung": 4.994290864551697,
+    "zonenquote": 0.0,
+    "abzug": 3
    }
   ]
  },
  {
   "id": "builtin-stop-lang",
   "name": "Stop-Shot lang",
-  "tempo_app": 6,
-  "v0_gemessen": 4.0,
+  "tempo_app": 3.25,
+  "tempo_gemessen": 3.0,
   "leiter": [
    {
-    "v0": 0.4,
+    "tempo": 0.5,
     "trefferquote": 0.0,
-    "beruehrt": 0.6,
+    "beruehrt": 0.0,
     "mitte": null,
+    "streuung": 0.0,
+    "zonenquote": 0.0,
     "abzug": 0
    },
    {
-    "v0": 0.55,
-    "trefferquote": 0.1,
-    "beruehrt": 1.0,
-    "mitte": [
-     78.46237635657872,
-     11.131750731751604
-    ],
+    "tempo": 0.75,
+    "trefferquote": 0.0,
+    "beruehrt": 0.68,
+    "mitte": null,
+    "streuung": 0.0,
+    "zonenquote": 0.0,
     "abzug": 0
    },
    {
-    "v0": 0.7,
-    "trefferquote": 0.2,
+    "tempo": 1.0,
+    "trefferquote": 0.14666666666666667,
     "beruehrt": 1.0,
     "mitte": [
-     82.14657603865174,
-     9.980352720289359
+     78.48316225465504,
+     11.378022398249767
     ],
+    "streuung": 0.5477718984198657,
+    "zonenquote": 0.5454545454545454,
     "abzug": 0
    },
    {
-    "v0": 0.9,
-    "trefferquote": 0.2,
+    "tempo": 1.25,
+    "trefferquote": 0.23333333333333334,
     "beruehrt": 1.0,
     "mitte": [
-     90.02653985430628,
-     4.944523013566413
+     82.43525696868821,
+     9.360212106014078
     ],
+    "streuung": 1.2198237478415226,
+    "zonenquote": 0.0,
     "abzug": 0
    },
    {
-    "v0": 1.1,
-    "trefferquote": 0.3,
+    "tempo": 1.5,
+    "trefferquote": 0.26,
     "beruehrt": 1.0,
     "mitte": [
-     97.49421955532925,
-     3.152210123209865
+     86.80519715603319,
+     7.191452372843653
     ],
-    "abzug": 3
-   },
-   {
-    "v0": 1.4,
-    "trefferquote": 0.25,
-    "beruehrt": 1.0,
-    "mitte": [
-     96.4490974241766,
-     3.461669792865139
-    ],
+    "streuung": 1.7155729601588736,
+    "zonenquote": 0.0,
     "abzug": 0
    },
    {
-    "v0": 1.7,
-    "trefferquote": 0.2,
+    "tempo": 1.75,
+    "trefferquote": 0.25333333333333335,
     "beruehrt": 1.0,
     "mitte": [
-     91.68598456163812,
-     5.040418469115082
+     91.96232512773055,
+     4.739198021709101
     ],
+    "streuung": 2.274211651595436,
+    "zonenquote": 0.0,
     "abzug": 0
    },
    {
-    "v0": 2.1,
-    "trefferquote": 0.2,
+    "tempo": 2.0,
+    "trefferquote": 0.20666666666666667,
     "beruehrt": 1.0,
     "mitte": [
-     92.77701883902026,
-     3.8681470953586805
+     97.3722253810951,
+     2.8054832034295827
     ],
-    "abzug": 3
+    "streuung": 1.3416548625437161,
+    "zonenquote": 0.0,
+    "abzug": 6
    },
    {
-    "v0": 2.6,
-    "trefferquote": 0.25,
+    "tempo": 2.25,
+    "trefferquote": 0.26666666666666666,
     "beruehrt": 1.0,
     "mitte": [
-     93.56102456484727,
-     5.901994559619695
+     95.85216570131058,
+     3.1161573012088777
     ],
-    "abzug": 1
+    "streuung": 2.6589079630303507,
+    "zonenquote": 0.0,
+    "abzug": 13
    },
    {
-    "v0": 3.2,
-    "trefferquote": 0.25,
+    "tempo": 2.5,
+    "trefferquote": 0.24,
     "beruehrt": 1.0,
     "mitte": [
-     91.33764624561294,
-     5.285704141841193
+     91.57516754121572,
+     5.475792506119963
     ],
-    "abzug": 0
+    "streuung": 5.323804018470396,
+    "zonenquote": 0.0,
+    "abzug": 7
    },
    {
-    "v0": 4.0,
-    "trefferquote": 0.25,
+    "tempo": 2.75,
+    "trefferquote": 0.22666666666666666,
     "beruehrt": 1.0,
     "mitte": [
-     87.46815196347039,
-     9.765241120242113
+     79.23730543204421,
+     10.600224517702664
     ],
-    "abzug": 1
+    "streuung": 4.452141824003107,
+    "zonenquote": 0.4411764705882353,
+    "abzug": 9
+   },
+   {
+    "tempo": 3.0,
+    "trefferquote": 0.22,
+    "beruehrt": 1.0,
+    "mitte": [
+     72.85636188530255,
+     14.514863640450839
+    ],
+    "streuung": 2.3171976559386307,
+    "zonenquote": 0.8181818181818182,
+    "abzug": 17
+   },
+   {
+    "tempo": 3.25,
+    "trefferquote": 0.26666666666666666,
+    "beruehrt": 1.0,
+    "mitte": [
+     68.37087985479943,
+     15.708653335860877
+    ],
+    "streuung": 5.359160148101912,
+    "zonenquote": 0.475,
+    "abzug": 14
+   },
+   {
+    "tempo": 3.5,
+    "trefferquote": 0.2866666666666667,
+    "beruehrt": 1.0,
+    "mitte": [
+     64.12987663958188,
+     18.08111064687625
+    ],
+    "streuung": 7.08586243272547,
+    "zonenquote": 0.09302325581395349,
+    "abzug": 21
+   },
+   {
+    "tempo": 3.75,
+    "trefferquote": 0.22666666666666666,
+    "beruehrt": 1.0,
+    "mitte": [
+     53.643869223733205,
+     23.426412625976695
+    ],
+    "streuung": 13.42093484723793,
+    "zonenquote": 0.0,
+    "abzug": 10
+   },
+   {
+    "tempo": 4.0,
+    "trefferquote": 0.32,
+    "beruehrt": 1.0,
+    "mitte": [
+     32.680753766827586,
+     35.6594410660945
+    ],
+    "streuung": 15.44948324123888,
+    "zonenquote": 0.0,
+    "abzug": 15
+   },
+   {
+    "tempo": 4.25,
+    "trefferquote": 0.19333333333333333,
+    "beruehrt": 1.0,
+    "mitte": [
+     18.323532455371378,
+     36.3182625777554
+    ],
+    "streuung": 14.76695541225571,
+    "zonenquote": 0.0,
+    "abzug": 17
+   },
+   {
+    "tempo": 4.5,
+    "trefferquote": 0.20666666666666667,
+    "beruehrt": 1.0,
+    "mitte": [
+     14.937135334099313,
+     36.070949410063484
+    ],
+    "streuung": 14.338858471529063,
+    "zonenquote": 0.0,
+    "abzug": 27
    }
   ]
  },
  {
   "id": "builtin-schnitt-45",
   "name": "Schnittball 45 Grad",
-  "tempo_app": 6,
-  "v0_gemessen": 2.6,
+  "tempo_app": 2.25,
+  "tempo_gemessen": 2.25,
   "leiter": [
    {
-    "v0": 0.4,
+    "tempo": 0.5,
     "trefferquote": 0.0,
     "beruehrt": 1.0,
     "mitte": null,
+    "streuung": 0.0,
+    "zonenquote": 0.0,
     "abzug": 0
    },
    {
-    "v0": 0.55,
+    "tempo": 0.75,
     "trefferquote": 0.0,
     "beruehrt": 1.0,
     "mitte": null,
+    "streuung": 0.0,
+    "zonenquote": 0.0,
     "abzug": 0
    },
    {
-    "v0": 0.7,
-    "trefferquote": 0.15,
+    "tempo": 1.0,
+    "trefferquote": 0.07333333333333333,
     "beruehrt": 1.0,
     "mitte": [
-     58.509088893385105,
-     27.670718767763216
+     59.15097766184669,
+     30.121620335531478
     ],
+    "streuung": 1.695131021468881,
+    "zonenquote": 0.0,
     "abzug": 0
    },
    {
-    "v0": 0.9,
-    "trefferquote": 0.15,
+    "tempo": 1.25,
+    "trefferquote": 0.17333333333333334,
     "beruehrt": 1.0,
     "mitte": [
-     54.31356483467015,
-     6.609302375284726
+     56.77259455209993,
+     17.259272947984265
     ],
+    "streuung": 3.2464735351358267,
+    "zonenquote": 0.0,
     "abzug": 0
    },
    {
-    "v0": 1.1,
-    "trefferquote": 0.25,
+    "tempo": 1.5,
+    "trefferquote": 0.22666666666666666,
     "beruehrt": 1.0,
     "mitte": [
-     52.60709079695465,
-     5.255724485608103
+     54.484622102021454,
+     7.058312861249055
     ],
-    "abzug": 6
+    "streuung": 4.150098930465492,
+    "zonenquote": 0.0,
+    "abzug": 0
    },
    {
-    "v0": 1.4,
+    "tempo": 1.75,
+    "trefferquote": 0.30666666666666664,
+    "beruehrt": 1.0,
+    "mitte": [
+     51.962621454145676,
+     5.926166757192548
+    ],
+    "streuung": 2.133446949764914,
+    "zonenquote": 0.0,
+    "abzug": 44
+   },
+   {
+    "tempo": 2.0,
+    "trefferquote": 0.26,
+    "beruehrt": 1.0,
+    "mitte": [
+     47.842226696917386,
+     18.442398264101403
+    ],
+    "streuung": 4.114556942240828,
+    "zonenquote": 0.02564102564102564,
+    "abzug": 61
+   },
+   {
+    "tempo": 2.25,
+    "trefferquote": 0.14,
+    "beruehrt": 1.0,
+    "mitte": [
+     35.45137376028256,
+     30.206791373485224
+    ],
+    "streuung": 5.7955462243946805,
+    "zonenquote": 0.6190476190476191,
+    "abzug": 34
+   },
+   {
+    "tempo": 2.5,
+    "trefferquote": 0.19333333333333333,
+    "beruehrt": 1.0,
+    "mitte": [
+     25.02860752705513,
+     43.15941490502682
+    ],
+    "streuung": 5.102899891559795,
+    "zonenquote": 0.0,
+    "abzug": 30
+   },
+   {
+    "tempo": 2.75,
+    "trefferquote": 0.28,
+    "beruehrt": 1.0,
+    "mitte": [
+     21.72057511850634,
+     43.211615987843615
+    ],
+    "streuung": 3.450969021636005,
+    "zonenquote": 0.0,
+    "abzug": 19
+   },
+   {
+    "tempo": 3.0,
+    "trefferquote": 0.21333333333333335,
+    "beruehrt": 1.0,
+    "mitte": [
+     19.907861402235106,
+     32.960321095712345
+    ],
+    "streuung": 5.161724462101232,
+    "zonenquote": 0.0,
+    "abzug": 27
+   },
+   {
+    "tempo": 3.25,
+    "trefferquote": 0.23333333333333334,
+    "beruehrt": 1.0,
+    "mitte": [
+     19.11925143386479,
+     22.13140392514324
+    ],
+    "streuung": 5.0454572740561785,
+    "zonenquote": 0.0,
+    "abzug": 26
+   },
+   {
+    "tempo": 3.5,
+    "trefferquote": 0.28,
+    "beruehrt": 0.9933333333333333,
+    "mitte": [
+     16.58569263419134,
+     13.921530253515062
+    ],
+    "streuung": 6.756457444169319,
+    "zonenquote": 0.0,
+    "abzug": 17
+   },
+   {
+    "tempo": 3.75,
+    "trefferquote": 0.31333333333333335,
+    "beruehrt": 1.0,
+    "mitte": [
+     14.220806282430088,
+     5.100778845988108
+    ],
+    "streuung": 5.917899196387035,
+    "zonenquote": 0.0,
+    "abzug": 27
+   },
+   {
+    "tempo": 4.0,
+    "trefferquote": 0.18666666666666668,
+    "beruehrt": 1.0,
+    "mitte": [
+     14.596393993070194,
+     14.47849789068835
+    ],
+    "streuung": 5.666981888287976,
+    "zonenquote": 0.0,
+    "abzug": 32
+   },
+   {
+    "tempo": 4.25,
     "trefferquote": 0.2,
     "beruehrt": 1.0,
     "mitte": [
-     48.67315497981906,
-     19.939831519501173
+     13.433957258604803,
+     26.248133338667856
     ],
-    "abzug": 10
+    "streuung": 6.492536053486503,
+    "zonenquote": 0.0,
+    "abzug": 34
    },
    {
-    "v0": 1.7,
-    "trefferquote": 0.2,
+    "tempo": 4.5,
+    "trefferquote": 0.22666666666666666,
     "beruehrt": 1.0,
     "mitte": [
-     31.16363317472864,
-     32.92549402765045
+     14.396196221739238,
+     35.92357990664809
     ],
-    "abzug": 2
-   },
-   {
-    "v0": 2.1,
-    "trefferquote": 0.2,
-    "beruehrt": 1.0,
-    "mitte": [
-     20.96905524850937,
-     43.779042485650606
-    ],
-    "abzug": 5
-   },
-   {
-    "v0": 2.6,
-    "trefferquote": 0.3,
-    "beruehrt": 1.0,
-    "mitte": [
-     18.900620663853417,
-     23.797649809256644
-    ],
-    "abzug": 3
-   },
-   {
-    "v0": 3.2,
-    "trefferquote": 0.15,
-    "beruehrt": 1.0,
-    "mitte": [
-     16.16940531338696,
-     8.844625665431108
-    ],
-    "abzug": 3
-   },
-   {
-    "v0": 4.0,
-    "trefferquote": 0.2,
-    "beruehrt": 1.0,
-    "mitte": [
-     11.605472634153045,
-     18.443818071941333
-    ],
-    "abzug": 6
+    "streuung": 7.742182561704913,
+    "zonenquote": 0.0,
+    "abzug": 23
    }
   ]
  },
  {
   "id": "builtin-mitteltasche-schnitt",
   "name": "Mitteltasche im Schnitt",
-  "tempo_app": 5,
-  "v0_gemessen": 2.6,
+  "tempo_app": 2.75,
+  "tempo_gemessen": 2.75,
   "leiter": [
    {
-    "v0": 0.4,
+    "tempo": 0.5,
+    "trefferquote": 0.0,
+    "beruehrt": 0.9066666666666666,
+    "mitte": null,
+    "streuung": 0.0,
+    "zonenquote": 0.0,
+    "abzug": 0
+   },
+   {
+    "tempo": 0.75,
     "trefferquote": 0.0,
     "beruehrt": 1.0,
     "mitte": null,
+    "streuung": 0.0,
+    "zonenquote": 0.0,
     "abzug": 0
    },
    {
-    "v0": 0.55,
-    "trefferquote": 0.95,
+    "tempo": 1.0,
+    "trefferquote": 0.8933333333333333,
     "beruehrt": 1.0,
     "mitte": [
-     77.1711037934557,
-     2.4752306196102976
+     75.11434695309687,
+     3.2985162629442453
     ],
+    "streuung": 2.88699131715439,
+    "zonenquote": 0.0,
     "abzug": 0
    },
    {
-    "v0": 0.7,
-    "trefferquote": 1.0,
+    "tempo": 1.25,
+    "trefferquote": 0.8666666666666667,
     "beruehrt": 1.0,
     "mitte": [
-     83.78658264782982,
-     5.915568636400385
+     82.9059566197258,
+     5.600507616585158
     ],
+    "streuung": 2.6914347139819066,
+    "zonenquote": 0.0,
     "abzug": 0
    },
    {
-    "v0": 0.9,
-    "trefferquote": 0.85,
+    "tempo": 1.5,
+    "trefferquote": 0.9333333333333333,
     "beruehrt": 1.0,
     "mitte": [
-     97.39492297357504,
-     16.74792557186917
+     88.57088472202578,
+     9.356169346700437
     ],
+    "streuung": 3.5440092378248207,
+    "zonenquote": 0.0,
     "abzug": 0
    },
    {
-    "v0": 1.1,
-    "trefferquote": 0.85,
+    "tempo": 1.75,
+    "trefferquote": 0.9066666666666666,
     "beruehrt": 1.0,
     "mitte": [
-     93.3573998093781,
-     20.811712950247596
+     95.49694990645793,
+     11.55710666009075
     ],
+    "streuung": 4.131839585413478,
+    "zonenquote": 0.0,
     "abzug": 0
    },
    {
-    "v0": 1.4,
+    "tempo": 2.0,
+    "trefferquote": 0.8466666666666667,
+    "beruehrt": 1.0,
+    "mitte": [
+     83.53862726622093,
+     5.123949256295992
+    ],
+    "streuung": 6.196238119290062,
+    "zonenquote": 0.0,
+    "abzug": 23
+   },
+   {
+    "tempo": 2.25,
+    "trefferquote": 0.8533333333333334,
+    "beruehrt": 1.0,
+    "mitte": [
+     64.95125508672956,
+     7.426246169111222
+    ],
+    "streuung": 8.282560196521416,
+    "zonenquote": 0.0,
+    "abzug": 15
+   },
+   {
+    "tempo": 2.5,
+    "trefferquote": 0.9266666666666666,
+    "beruehrt": 1.0,
+    "mitte": [
+     47.39844697172639,
+     11.498055820382524
+    ],
+    "streuung": 11.971015907130319,
+    "zonenquote": 0.0,
+    "abzug": 21
+   },
+   {
+    "tempo": 2.75,
+    "trefferquote": 0.86,
+    "beruehrt": 1.0,
+    "mitte": [
+     25.770849087626807,
+     17.996253545602233
+    ],
+    "streuung": 15.642127896850512,
+    "zonenquote": 0.16279069767441862,
+    "abzug": 25
+   },
+   {
+    "tempo": 3.0,
+    "trefferquote": 0.9066666666666666,
+    "beruehrt": 1.0,
+    "mitte": [
+     10.149951473293912,
+     22.07327582615364
+    ],
+    "streuung": 12.633221379925468,
+    "zonenquote": 0.029411764705882353,
+    "abzug": 42
+   },
+   {
+    "tempo": 3.25,
+    "trefferquote": 0.8333333333333334,
+    "beruehrt": 1.0,
+    "mitte": [
+     19.291303341500747,
+     22.082322795532548
+    ],
+    "streuung": 18.503800338911578,
+    "zonenquote": 0.064,
+    "abzug": 27
+   },
+   {
+    "tempo": 3.5,
+    "trefferquote": 0.8666666666666667,
+    "beruehrt": 1.0,
+    "mitte": [
+     37.800216132883456,
+     25.264131204956186
+    ],
+    "streuung": 25.736648620194753,
+    "zonenquote": 0.06923076923076923,
+    "abzug": 29
+   },
+   {
+    "tempo": 3.75,
+    "trefferquote": 0.8933333333333333,
+    "beruehrt": 1.0,
+    "mitte": [
+     69.18576395650031,
+     29.95267203633623
+    ],
+    "streuung": 25.57813470642093,
+    "zonenquote": 0.007462686567164179,
+    "abzug": 23
+   },
+   {
+    "tempo": 4.0,
     "trefferquote": 0.9,
     "beruehrt": 1.0,
     "mitte": [
-     79.36423900066897,
-     34.36712493374079
+     77.13836678290521,
+     33.4804778195991
     ],
-    "abzug": 0
+    "streuung": 15.658585685979906,
+    "zonenquote": 0.0,
+    "abzug": 29
    },
    {
-    "v0": 1.7,
-    "trefferquote": 0.75,
+    "tempo": 4.25,
+    "trefferquote": 0.8933333333333333,
     "beruehrt": 1.0,
     "mitte": [
-     61.35405898857155,
-     40.370441065747485
+     78.9285532772799,
+     23.13845832217236
     ],
-    "abzug": 1
+    "streuung": 21.108932514086458,
+    "zonenquote": 0.007462686567164179,
+    "abzug": 32
    },
    {
-    "v0": 2.1,
-    "trefferquote": 0.7,
+    "tempo": 4.5,
+    "trefferquote": 0.9066666666666666,
     "beruehrt": 1.0,
     "mitte": [
-     38.94677810972615,
-     29.849325499080805
+     72.09618109064837,
+     24.604717543984318
     ],
-    "abzug": 5
-   },
-   {
-    "v0": 2.6,
-    "trefferquote": 1.0,
-    "beruehrt": 1.0,
-    "mitte": [
-     20.534657655039346,
-     21.29094322624569
-    ],
-    "abzug": 9
-   },
-   {
-    "v0": 3.2,
-    "trefferquote": 0.8,
-    "beruehrt": 1.0,
-    "mitte": [
-     28.87567685350511,
-     35.61358460470695
-    ],
-    "abzug": 2
-   },
-   {
-    "v0": 4.0,
-    "trefferquote": 0.8,
-    "beruehrt": 1.0,
-    "mitte": [
-     74.79071488747343,
-     24.321577673714593
-    ],
-    "abzug": 3
+    "streuung": 23.477269656129636,
+    "zonenquote": 0.007352941176470588,
+    "abzug": 49
    }
   ]
  },
  {
   "id": "builtin-bande-lang",
   "name": "Bandenball über die Langbande",
-  "tempo_app": 6,
-  "v0_gemessen": 2.1,
+  "tempo_app": 2,
+  "tempo_gemessen": 2.25,
   "leiter": [
    {
-    "v0": 0.4,
+    "tempo": 0.5,
     "trefferquote": 0.0,
     "beruehrt": 1.0,
     "mitte": null,
+    "streuung": 0.0,
+    "zonenquote": 0.0,
     "abzug": 0
    },
    {
-    "v0": 0.55,
+    "tempo": 0.75,
     "trefferquote": 0.0,
     "beruehrt": 1.0,
     "mitte": null,
+    "streuung": 0.0,
+    "zonenquote": 0.0,
     "abzug": 0
    },
    {
-    "v0": 0.7,
+    "tempo": 1.0,
     "trefferquote": 0.0,
     "beruehrt": 1.0,
     "mitte": null,
+    "streuung": 0.0,
+    "zonenquote": 0.0,
     "abzug": 0
    },
    {
-    "v0": 0.9,
+    "tempo": 1.25,
     "trefferquote": 0.0,
     "beruehrt": 1.0,
     "mitte": null,
+    "streuung": 0.0,
+    "zonenquote": 0.0,
     "abzug": 0
    },
    {
-    "v0": 1.1,
-    "trefferquote": 0.1,
+    "tempo": 1.5,
+    "trefferquote": 0.0,
     "beruehrt": 1.0,
-    "mitte": [
-     77.05076114020909,
-     45.50633501866375
-    ],
+    "mitte": null,
+    "streuung": 0.0,
+    "zonenquote": 0.0,
     "abzug": 0
    },
    {
-    "v0": 1.4,
-    "trefferquote": 0.25,
+    "tempo": 1.75,
+    "trefferquote": 0.07333333333333333,
     "beruehrt": 1.0,
     "mitte": [
-     74.38862178613535,
-     44.31077502087254
+     76.7984487030294,
+     45.06484019265691
     ],
+    "streuung": 0.8885168016606241,
+    "zonenquote": 0.0,
     "abzug": 0
    },
    {
-    "v0": 1.7,
-    "trefferquote": 0.25,
+    "tempo": 2.0,
+    "trefferquote": 0.16666666666666666,
     "beruehrt": 1.0,
     "mitte": [
-     66.63503396861219,
-     46.56214639120081
+     73.90218774669954,
+     45.09277317807488
     ],
+    "streuung": 3.15100552309243,
+    "zonenquote": 0.0,
     "abzug": 0
    },
    {
-    "v0": 2.1,
-    "trefferquote": 0.3,
+    "tempo": 2.25,
+    "trefferquote": 0.18666666666666668,
     "beruehrt": 1.0,
     "mitte": [
-     61.67313929331411,
-     46.220043768542304
+     66.92087666426313,
+     46.63845540324206
     ],
-    "abzug": 1
-   },
-   {
-    "v0": 2.6,
-    "trefferquote": 0.3,
-    "beruehrt": 1.0,
-    "mitte": [
-     58.08383548603634,
-     45.629960456973265
-    ],
+    "streuung": 2.055695048016159,
+    "zonenquote": 0.0,
     "abzug": 0
    },
    {
-    "v0": 3.2,
-    "trefferquote": 0.25,
+    "tempo": 2.5,
+    "trefferquote": 0.16666666666666666,
     "beruehrt": 1.0,
     "mitte": [
-     55.44089229274859,
-     44.784289931218225
+     62.88708676581327,
+     46.80873248548963
     ],
-    "abzug": 4
+    "streuung": 2.2755705881097787,
+    "zonenquote": 0.0,
+    "abzug": 2
    },
    {
-    "v0": 4.0,
-    "trefferquote": 0.25,
+    "tempo": 2.75,
+    "trefferquote": 0.18666666666666668,
     "beruehrt": 1.0,
     "mitte": [
-     54.59708040329205,
-     40.51840156890668
+     59.90060013880321,
+     45.75472143101248
     ],
-    "abzug": 1
+    "streuung": 2.635174358195967,
+    "zonenquote": 0.0,
+    "abzug": 7
+   },
+   {
+    "tempo": 3.0,
+    "trefferquote": 0.18666666666666668,
+    "beruehrt": 1.0,
+    "mitte": [
+     57.947168988591784,
+     45.6054542316208
+    ],
+    "streuung": 2.875291879042677,
+    "zonenquote": 0.0,
+    "abzug": 7
+   },
+   {
+    "tempo": 3.25,
+    "trefferquote": 0.16,
+    "beruehrt": 1.0,
+    "mitte": [
+     58.155987108555216,
+     46.58600311185656
+    ],
+    "streuung": 2.690353677044328,
+    "zonenquote": 0.0,
+    "abzug": 15
+   },
+   {
+    "tempo": 3.5,
+    "trefferquote": 0.14,
+    "beruehrt": 1.0,
+    "mitte": [
+     58.53891708724059,
+     44.10745850660194
+    ],
+    "streuung": 5.001665091697829,
+    "zonenquote": 0.0,
+    "abzug": 19
+   },
+   {
+    "tempo": 3.75,
+    "trefferquote": 0.16,
+    "beruehrt": 1.0,
+    "mitte": [
+     58.928961742201714,
+     43.20018510786482
+    ],
+    "streuung": 5.699075932677842,
+    "zonenquote": 0.0,
+    "abzug": 16
+   },
+   {
+    "tempo": 4.0,
+    "trefferquote": 0.24666666666666667,
+    "beruehrt": 1.0,
+    "mitte": [
+     60.43151321240566,
+     39.37096153174054
+    ],
+    "streuung": 8.598956334592943,
+    "zonenquote": 0.0,
+    "abzug": 17
+   },
+   {
+    "tempo": 4.25,
+    "trefferquote": 0.2,
+    "beruehrt": 1.0,
+    "mitte": [
+     58.45433631683465,
+     38.190239374237905
+    ],
+    "streuung": 7.558640638509528,
+    "zonenquote": 0.0,
+    "abzug": 13
+   },
+   {
+    "tempo": 4.5,
+    "trefferquote": 0.22,
+    "beruehrt": 1.0,
+    "mitte": [
+     61.510430673748246,
+     38.465512516407365
+    ],
+    "streuung": 10.858120216850036,
+    "zonenquote": 0.0,
+    "abzug": 14
    }
   ]
  },
  {
   "id": "builtin-kombination-zwei",
   "name": "Kombination aus zwei Bällen",
-  "tempo_app": 5,
-  "v0_gemessen": 2.6,
+  "tempo_app": 1.75,
+  "tempo_gemessen": 3.0,
   "leiter": [
    {
-    "v0": 0.4,
+    "tempo": 0.5,
     "trefferquote": 0.0,
     "beruehrt": 1.0,
     "mitte": null,
+    "streuung": 0.0,
+    "zonenquote": 0.0,
     "abzug": 0
    },
    {
-    "v0": 0.55,
+    "tempo": 0.75,
     "trefferquote": 0.0,
     "beruehrt": 1.0,
     "mitte": null,
+    "streuung": 0.0,
+    "zonenquote": 0.0,
     "abzug": 0
    },
    {
-    "v0": 0.7,
-    "trefferquote": 0.0,
-    "beruehrt": 1.0,
-    "mitte": null,
-    "abzug": 0
-   },
-   {
-    "v0": 0.9,
-    "trefferquote": 0.05,
+    "tempo": 1.0,
+    "trefferquote": 0.006666666666666667,
     "beruehrt": 1.0,
     "mitte": [
-     67.9194102933823,
-     20.44638303394152
+     61.66169786736957,
+     24.293985490492606
     ],
+    "streuung": 0.0,
+    "zonenquote": 0.0,
     "abzug": 0
    },
    {
-    "v0": 1.1,
-    "trefferquote": 0.0,
-    "beruehrt": 1.0,
-    "mitte": null,
-    "abzug": 0
-   },
-   {
-    "v0": 1.4,
-    "trefferquote": 0.0,
-    "beruehrt": 1.0,
-    "mitte": null,
-    "abzug": 0
-   },
-   {
-    "v0": 1.7,
-    "trefferquote": 0.0,
-    "beruehrt": 1.0,
-    "mitte": null,
-    "abzug": 0
-   },
-   {
-    "v0": 2.1,
-    "trefferquote": 0.05,
+    "tempo": 1.25,
+    "trefferquote": 0.04666666666666667,
     "beruehrt": 1.0,
     "mitte": [
-     60.80582683868723,
-     24.817215209204015
+     65.93832264857967,
+     21.76447224899533
     ],
+    "streuung": 1.5135630622866432,
+    "zonenquote": 0.0,
     "abzug": 0
    },
    {
-    "v0": 2.6,
-    "trefferquote": 0.1,
+    "tempo": 1.5,
+    "trefferquote": 0.04666666666666667,
     "beruehrt": 1.0,
     "mitte": [
-     55.415893449936895,
-     27.74022436213197
+     71.72205806990827,
+     18.321462621563445
     ],
+    "streuung": 1.2690307295673222,
+    "zonenquote": 0.0,
+    "abzug": 0
+   },
+   {
+    "tempo": 1.75,
+    "trefferquote": 0.08,
+    "beruehrt": 1.0,
+    "mitte": [
+     79.41589900656851,
+     13.600960473023875
+    ],
+    "streuung": 2.3781654278137334,
+    "zonenquote": 0.0,
+    "abzug": 0
+   },
+   {
+    "tempo": 2.0,
+    "trefferquote": 0.05333333333333334,
+    "beruehrt": 1.0,
+    "mitte": [
+     68.27109600971148,
+     20.44256133021962
+    ],
+    "streuung": 3.696969824835342,
+    "zonenquote": 0.0,
     "abzug": 1
    },
    {
-    "v0": 3.2,
-    "trefferquote": 0.05,
+    "tempo": 2.25,
+    "trefferquote": 0.04666666666666667,
     "beruehrt": 1.0,
     "mitte": [
-     52.35762919518552,
-     29.743854212544086
+     66.04766299910315,
+     21.58978210884713
     ],
+    "streuung": 3.2784461451973046,
+    "zonenquote": 0.0,
+    "abzug": 1
+   },
+   {
+    "tempo": 2.5,
+    "trefferquote": 0.08,
+    "beruehrt": 1.0,
+    "mitte": [
+     60.65790149950163,
+     25.029517054584556
+    ],
+    "streuung": 1.6443884705804799,
+    "zonenquote": 0.0,
     "abzug": 2
    },
    {
-    "v0": 4.0,
-    "trefferquote": 0.05,
+    "tempo": 2.75,
+    "trefferquote": 0.03333333333333333,
     "beruehrt": 1.0,
     "mitte": [
-     50.279757422003094,
-     30.92658759247457
+     59.11676165179491,
+     22.17328279859452
     ],
+    "streuung": 7.057697009325297,
+    "zonenquote": 0.0,
+    "abzug": 0
+   },
+   {
+    "tempo": 3.0,
+    "trefferquote": 0.09333333333333334,
+    "beruehrt": 1.0,
+    "mitte": [
+     57.93965026523365,
+     26.548774164154082
+    ],
+    "streuung": 4.8859196287033075,
+    "zonenquote": 0.0,
     "abzug": 1
+   },
+   {
+    "tempo": 3.25,
+    "trefferquote": 0.1,
+    "beruehrt": 1.0,
+    "mitte": [
+     56.732791851904366,
+     27.20093247940099
+    ],
+    "streuung": 4.937321447773773,
+    "zonenquote": 0.0,
+    "abzug": 0
+   },
+   {
+    "tempo": 3.5,
+    "trefferquote": 0.05333333333333334,
+    "beruehrt": 1.0,
+    "mitte": [
+     55.80707378629147,
+     21.622793044550352
+    ],
+    "streuung": 9.122961888012734,
+    "zonenquote": 0.0,
+    "abzug": 5
+   },
+   {
+    "tempo": 3.75,
+    "trefferquote": 0.05333333333333334,
+    "beruehrt": 1.0,
+    "mitte": [
+     51.08390337495082,
+     25.5323824891966
+    ],
+    "streuung": 7.712321245186774,
+    "zonenquote": 0.0,
+    "abzug": 9
+   },
+   {
+    "tempo": 4.0,
+    "trefferquote": 0.06,
+    "beruehrt": 1.0,
+    "mitte": [
+     62.08528357035215,
+     24.440309804578384
+    ],
+    "streuung": 13.695928867987925,
+    "zonenquote": 0.0,
+    "abzug": 6
+   },
+   {
+    "tempo": 4.25,
+    "trefferquote": 0.06,
+    "beruehrt": 1.0,
+    "mitte": [
+     55.135481553686766,
+     30.680790645915117
+    ],
+    "streuung": 6.367058860477902,
+    "zonenquote": 0.0,
+    "abzug": 9
+   },
+   {
+    "tempo": 4.5,
+    "trefferquote": 0.09333333333333334,
+    "beruehrt": 1.0,
+    "mitte": [
+     50.08081456747076,
+     23.69304638847367
+    ],
+    "streuung": 11.831557765232345,
+    "zonenquote": 0.0,
+    "abzug": 14
    }
   ]
  },
  {
   "id": "builtin-bandenball-fest",
   "name": "Ball an der Bande",
-  "tempo_app": 5,
-  "v0_gemessen": 1.4,
+  "tempo_app": 1.75,
+  "tempo_gemessen": 1.75,
   "leiter": [
    {
-    "v0": 0.4,
+    "tempo": 0.5,
     "trefferquote": 0.0,
     "beruehrt": 1.0,
     "mitte": null,
+    "streuung": 0.0,
+    "zonenquote": 0.0,
     "abzug": 0
    },
    {
-    "v0": 0.55,
-    "trefferquote": 0.3,
+    "tempo": 0.75,
+    "trefferquote": 0.0,
     "beruehrt": 1.0,
-    "mitte": [
-     63.186831057394215,
-     48.304758880956484
-    ],
+    "mitte": null,
+    "streuung": 0.0,
+    "zonenquote": 0.0,
     "abzug": 0
    },
    {
-    "v0": 0.7,
-    "trefferquote": 0.65,
+    "tempo": 1.0,
+    "trefferquote": 0.54,
     "beruehrt": 1.0,
     "mitte": [
-     65.22761496245147,
-     47.65078469884608
+     64.81981522875786,
+     47.54428802949963
     ],
+    "streuung": 1.1072169665894809,
+    "zonenquote": 0.0,
     "abzug": 0
    },
    {
-    "v0": 0.9,
-    "trefferquote": 0.7,
+    "tempo": 1.25,
+    "trefferquote": 0.5533333333333333,
     "beruehrt": 1.0,
     "mitte": [
-     69.24611351268506,
-     46.28086969293171
+     68.34031013660613,
+     46.733991030727594
     ],
+    "streuung": 2.0850805293726458,
+    "zonenquote": 0.0,
     "abzug": 0
    },
    {
-    "v0": 1.1,
-    "trefferquote": 0.95,
+    "tempo": 1.5,
+    "trefferquote": 0.6133333333333333,
     "beruehrt": 1.0,
     "mitte": [
-     73.00154720670218,
-     43.64052437192745
+     70.67953142942005,
+     45.154441173509575
     ],
+    "streuung": 1.8846513991125011,
+    "zonenquote": 0.10869565217391304,
     "abzug": 0
    },
    {
-    "v0": 1.4,
-    "trefferquote": 0.5,
+    "tempo": 1.75,
+    "trefferquote": 0.54,
     "beruehrt": 1.0,
     "mitte": [
-     78.56147650915685,
-     40.31477705127425
+     75.39934276085673,
+     43.98952534500063
     ],
+    "streuung": 3.354166711406949,
+    "zonenquote": 0.8888888888888888,
     "abzug": 0
    },
    {
-    "v0": 1.7,
-    "trefferquote": 0.5,
+    "tempo": 2.0,
+    "trefferquote": 0.47333333333333333,
     "beruehrt": 1.0,
     "mitte": [
-     73.43996781301753,
-     38.28596229369287
+     78.01603478973797,
+     40.66113666025721
     ],
-    "abzug": 0
-   },
-   {
-    "v0": 2.1,
-    "trefferquote": 0.35,
-    "beruehrt": 1.0,
-    "mitte": [
-     67.50252501554273,
-     38.5430054116671
-    ],
-    "abzug": 0
-   },
-   {
-    "v0": 2.6,
-    "trefferquote": 0.35,
-    "beruehrt": 1.0,
-    "mitte": [
-     64.20478267028251,
-     33.39216420756297
-    ],
-    "abzug": 0
-   },
-   {
-    "v0": 3.2,
-    "trefferquote": 0.45,
-    "beruehrt": 1.0,
-    "mitte": [
-     66.20580248164225,
-     24.378386706699487
-    ],
+    "streuung": 3.2390055729183933,
+    "zonenquote": 0.9859154929577465,
     "abzug": 1
    },
    {
-    "v0": 4.0,
-    "trefferquote": 0.55,
+    "tempo": 2.25,
+    "trefferquote": 0.43333333333333335,
     "beruehrt": 1.0,
     "mitte": [
-     65.42763753761913,
-     13.290310080539655
+     71.76775970192426,
+     40.22441667939255
     ],
+    "streuung": 3.912262540760507,
+    "zonenquote": 0.6,
     "abzug": 0
+   },
+   {
+    "tempo": 2.5,
+    "trefferquote": 0.3933333333333333,
+    "beruehrt": 1.0,
+    "mitte": [
+     69.79946050534085,
+     39.12615902983814
+    ],
+    "streuung": 4.047422492129639,
+    "zonenquote": 0.423728813559322,
+    "abzug": 0
+   },
+   {
+    "tempo": 2.75,
+    "trefferquote": 0.46,
+    "beruehrt": 1.0,
+    "mitte": [
+     67.9896580329992,
+     37.88702704267466
+    ],
+    "streuung": 5.33561683024868,
+    "zonenquote": 0.15942028985507245,
+    "abzug": 1
+   },
+   {
+    "tempo": 3.0,
+    "trefferquote": 0.37333333333333335,
+    "beruehrt": 1.0,
+    "mitte": [
+     66.45157272880823,
+     35.28144333285733
+    ],
+    "streuung": 6.3350524476076036,
+    "zonenquote": 0.03571428571428571,
+    "abzug": 0
+   },
+   {
+    "tempo": 3.25,
+    "trefferquote": 0.3933333333333333,
+    "beruehrt": 1.0,
+    "mitte": [
+     65.49097375287144,
+     33.84797096008076
+    ],
+    "streuung": 7.4025230807818385,
+    "zonenquote": 0.01694915254237288,
+    "abzug": 2
+   },
+   {
+    "tempo": 3.5,
+    "trefferquote": 0.4066666666666667,
+    "beruehrt": 1.0,
+    "mitte": [
+     66.73018460310365,
+     28.93019434873533
+    ],
+    "streuung": 9.503592026146586,
+    "zonenquote": 0.01639344262295082,
+    "abzug": 3
+   },
+   {
+    "tempo": 3.75,
+    "trefferquote": 0.4,
+    "beruehrt": 1.0,
+    "mitte": [
+     66.67153310607681,
+     24.85998609268493
+    ],
+    "streuung": 11.066718306825816,
+    "zonenquote": 0.0,
+    "abzug": 1
+   },
+   {
+    "tempo": 4.0,
+    "trefferquote": 0.37333333333333335,
+    "beruehrt": 1.0,
+    "mitte": [
+     66.13435336075844,
+     16.22456200215549
+    ],
+    "streuung": 13.613605141467337,
+    "zonenquote": 0.0,
+    "abzug": 1
+   },
+   {
+    "tempo": 4.25,
+    "trefferquote": 0.38,
+    "beruehrt": 1.0,
+    "mitte": [
+     66.31212392621187,
+     10.677940114060819
+    ],
+    "streuung": 10.134557081985772,
+    "zonenquote": 0.0,
+    "abzug": 5
+   },
+   {
+    "tempo": 4.5,
+    "trefferquote": 0.4066666666666667,
+    "beruehrt": 1.0,
+    "mitte": [
+     64.35343723441976,
+     14.242284488313599
+    ],
+    "streuung": 13.165933856181624,
+    "zonenquote": 0.0,
+    "abzug": 6
    }
   ]
  },
  {
   "id": "builtin-position-kitchen",
   "name": "Position in die Kitchen",
-  "tempo_app": 6,
-  "v0_gemessen": 2.6,
+  "tempo_app": 3.25,
+  "tempo_gemessen": 3.0,
   "leiter": [
    {
-    "v0": 0.4,
+    "tempo": 0.5,
     "trefferquote": 0.0,
-    "beruehrt": 0.85,
+    "beruehrt": 0.44,
     "mitte": null,
+    "streuung": 0.0,
+    "zonenquote": 0.0,
     "abzug": 0
    },
    {
-    "v0": 0.55,
+    "tempo": 0.75,
     "trefferquote": 0.0,
     "beruehrt": 1.0,
     "mitte": null,
+    "streuung": 0.0,
+    "zonenquote": 0.0,
     "abzug": 0
    },
    {
-    "v0": 0.7,
-    "trefferquote": 0.15,
+    "tempo": 1.0,
+    "trefferquote": 0.12,
     "beruehrt": 1.0,
     "mitte": [
-     70.91426363504857,
-     44.19692990449453
+     70.86477728615517,
+     43.428419487454086
     ],
+    "streuung": 1.0465039842638781,
+    "zonenquote": 0.0,
     "abzug": 0
    },
    {
-    "v0": 0.9,
-    "trefferquote": 0.45,
+    "tempo": 1.25,
+    "trefferquote": 0.3333333333333333,
     "beruehrt": 1.0,
     "mitte": [
-     71.23519458530764,
-     47.23187716139622
+     71.018761127517,
+     47.77725444874546
     ],
+    "streuung": 0.8508612257625052,
+    "zonenquote": 0.0,
     "abzug": 0
    },
    {
-    "v0": 1.1,
-    "trefferquote": 0.2,
+    "tempo": 1.5,
+    "trefferquote": 0.32666666666666666,
     "beruehrt": 1.0,
     "mitte": [
-     71.38044013385444,
-     43.00817876049369
+     71.19935363319652,
+     45.51118364656932
     ],
+    "streuung": 1.1543888681626095,
+    "zonenquote": 0.0,
     "abzug": 0
    },
    {
-    "v0": 1.4,
-    "trefferquote": 0.35,
+    "tempo": 1.75,
+    "trefferquote": 0.32,
     "beruehrt": 1.0,
     "mitte": [
-     55.178137212899976,
-     42.15931886464415
+     71.13118815184586,
+     41.46517761505633
     ],
+    "streuung": 1.600570039751923,
+    "zonenquote": 0.0,
     "abzug": 0
    },
    {
-    "v0": 1.7,
+    "tempo": 2.0,
     "trefferquote": 0.3,
     "beruehrt": 1.0,
     "mitte": [
-     34.96418487650451,
-     40.891333698006534
+     55.528860734751674,
+     42.44411221393979
     ],
-    "abzug": 4
+    "streuung": 3.811170004383586,
+    "zonenquote": 0.0,
+    "abzug": 5
    },
    {
-    "v0": 2.1,
+    "tempo": 2.25,
+    "trefferquote": 0.36666666666666664,
+    "beruehrt": 1.0,
+    "mitte": [
+     40.166641075766236,
+     40.13267791132743
+    ],
+    "streuung": 7.078345468420182,
+    "zonenquote": 0.0,
+    "abzug": 44
+   },
+   {
+    "tempo": 2.5,
+    "trefferquote": 0.29333333333333333,
+    "beruehrt": 1.0,
+    "mitte": [
+     23.747809172309818,
+     38.6222403950302
+    ],
+    "streuung": 6.2897861819488,
+    "zonenquote": 0.022727272727272728,
+    "abzug": 35
+   },
+   {
+    "tempo": 2.75,
     "trefferquote": 0.4,
     "beruehrt": 1.0,
     "mitte": [
-     8.02561091542345,
-     34.087787862932636
+     5.964498345541987,
+     33.29390071449645
     ],
-    "abzug": 2
+    "streuung": 6.575712139295838,
+    "zonenquote": 0.16666666666666666,
+    "abzug": 27
    },
    {
-    "v0": 2.6,
-    "trefferquote": 0.4,
+    "tempo": 3.0,
+    "trefferquote": 0.38666666666666666,
     "beruehrt": 1.0,
     "mitte": [
-     13.398307121581443,
-     27.309804177118245
+     9.512988378182198,
+     31.861701295007897
     ],
-    "abzug": 3
+    "streuung": 5.405501398175818,
+    "zonenquote": 0.5,
+    "abzug": 20
    },
    {
-    "v0": 3.2,
-    "trefferquote": 0.45,
+    "tempo": 3.25,
+    "trefferquote": 0.2866666666666667,
     "beruehrt": 1.0,
     "mitte": [
-     24.386929656014754,
-     26.977181104249336
+     13.80551844939821,
+     26.456667208248252
     ],
-    "abzug": 7
+    "streuung": 7.549029426569971,
+    "zonenquote": 0.7441860465116279,
+    "abzug": 39
    },
    {
-    "v0": 4.0,
-    "trefferquote": 0.55,
+    "tempo": 3.5,
+    "trefferquote": 0.36,
     "beruehrt": 1.0,
     "mitte": [
-     37.22823166684325,
-     30.530587941478412
+     21.729141594274523,
+     24.276253796842546
     ],
-    "abzug": 11
+    "streuung": 7.723589448670892,
+    "zonenquote": 0.5,
+    "abzug": 38
+   },
+   {
+    "tempo": 3.75,
+    "trefferquote": 0.43333333333333335,
+    "beruehrt": 1.0,
+    "mitte": [
+     31.596804751427392,
+     17.728749354911844
+    ],
+    "streuung": 6.9699625547088315,
+    "zonenquote": 0.015384615384615385,
+    "abzug": 56
+   },
+   {
+    "tempo": 4.0,
+    "trefferquote": 0.3466666666666667,
+    "beruehrt": 1.0,
+    "mitte": [
+     47.73142779586933,
+     35.66170674440665
+    ],
+    "streuung": 27.707142317762344,
+    "zonenquote": 0.038461538461538464,
+    "abzug": 56
+   },
+   {
+    "tempo": 4.25,
+    "trefferquote": 0.36,
+    "beruehrt": 1.0,
+    "mitte": [
+     56.41017309979618,
+     39.71862262242112
+    ],
+    "streuung": 31.898939466506995,
+    "zonenquote": 0.0,
+    "abzug": 56
+   },
+   {
+    "tempo": 4.5,
+    "trefferquote": 0.3,
+    "beruehrt": 1.0,
+    "mitte": [
+     57.53979442955814,
+     38.27620978716822
+    ],
+    "streuung": 33.529758947285856,
+    "zonenquote": 0.0,
+    "abzug": 49
    }
   ]
  },
  {
   "id": "builtin-rueckzieher-lang",
   "name": "Rückzieher lang",
-  "tempo_app": 8,
-  "v0_gemessen": 3.2,
+  "tempo_app": 2.25,
+  "tempo_gemessen": 2.25,
   "leiter": [
    {
-    "v0": 0.4,
+    "tempo": 0.5,
     "trefferquote": 0.0,
     "beruehrt": 0.0,
     "mitte": null,
+    "streuung": 0.0,
+    "zonenquote": 0.0,
     "abzug": 0
    },
    {
-    "v0": 0.55,
+    "tempo": 0.75,
     "trefferquote": 0.0,
     "beruehrt": 0.0,
     "mitte": null,
+    "streuung": 0.0,
+    "zonenquote": 0.0,
     "abzug": 0
    },
    {
-    "v0": 0.7,
+    "tempo": 1.0,
     "trefferquote": 0.0,
     "beruehrt": 1.0,
     "mitte": null,
+    "streuung": 0.0,
+    "zonenquote": 0.0,
     "abzug": 0
    },
    {
-    "v0": 0.9,
-    "trefferquote": 0.15,
+    "tempo": 1.25,
+    "trefferquote": 0.04,
     "beruehrt": 1.0,
     "mitte": [
-     76.16673257559198,
-     12.593890248476441
+     76.08062228515449,
+     12.586565213106523
     ],
+    "streuung": 0.5167222518705484,
+    "zonenquote": 0.0,
     "abzug": 0
    },
    {
-    "v0": 1.1,
-    "trefferquote": 0.2,
+    "tempo": 1.5,
+    "trefferquote": 0.18666666666666668,
     "beruehrt": 1.0,
     "mitte": [
-     80.9344506374193,
-     10.024734476131757
+     77.3095158163693,
+     11.834147505352075
     ],
+    "streuung": 1.111549114587986,
+    "zonenquote": 0.0,
     "abzug": 0
    },
    {
-    "v0": 1.4,
-    "trefferquote": 0.35,
+    "tempo": 1.75,
+    "trefferquote": 0.26666666666666666,
     "beruehrt": 1.0,
     "mitte": [
-     84.5753368564457,
-     8.010537361098333
+     80.66231730320975,
+     10.147508040363137
     ],
+    "streuung": 1.6847247332639408,
+    "zonenquote": 0.0,
     "abzug": 0
    },
    {
-    "v0": 1.7,
-    "trefferquote": 0.2,
+    "tempo": 2.0,
+    "trefferquote": 0.22666666666666666,
     "beruehrt": 1.0,
     "mitte": [
-     66.52380189132118,
-     16.71488165723996
+     84.94142589462409,
+     8.157334111114361
     ],
+    "streuung": 3.955219892590472,
+    "zonenquote": 0.0,
     "abzug": 0
    },
    {
-    "v0": 2.1,
-    "trefferquote": 0.15,
+    "tempo": 2.25,
+    "trefferquote": 0.19333333333333333,
     "beruehrt": 1.0,
     "mitte": [
-     20.85394679444308,
-     36.516128870392464
+     70.6729638002179,
+     15.241931941325914
     ],
+    "streuung": 2.3786000817760096,
+    "zonenquote": 0.896551724137931,
     "abzug": 1
    },
    {
-    "v0": 2.6,
-    "trefferquote": 0.2,
+    "tempo": 2.5,
+    "trefferquote": 0.14666666666666667,
     "beruehrt": 1.0,
     "mitte": [
-     7.466191386504344,
-     40.26744914586503
+     55.39649897195936,
+     22.673686200197736
     ],
-    "abzug": 5
+    "streuung": 7.941757667170261,
+    "zonenquote": 0.45454545454545453,
+    "abzug": 4
    },
    {
-    "v0": 3.2,
-    "trefferquote": 0.25,
+    "tempo": 2.75,
+    "trefferquote": 0.24666666666666667,
     "beruehrt": 1.0,
     "mitte": [
-     47.148555750384475,
-     28.77001396769559
+     22.08409699671372,
+     38.66791724139654
     ],
-    "abzug": 2
+    "streuung": 10.561684721502706,
+    "zonenquote": 0.0,
+    "abzug": 12
    },
    {
-    "v0": 4.0,
-    "trefferquote": 0.15,
+    "tempo": 3.0,
+    "trefferquote": 0.22666666666666666,
     "beruehrt": 1.0,
     "mitte": [
-     52.90397031051284,
-     15.072757043479347
+     7.163515591600981,
+     41.09321513939646
     ],
-    "abzug": 5
+    "streuung": 6.7104875300371685,
+    "zonenquote": 0.0,
+    "abzug": 21
+   },
+   {
+    "tempo": 3.25,
+    "trefferquote": 0.21333333333333335,
+    "beruehrt": 1.0,
+    "mitte": [
+     17.439116201083017,
+     36.392974219569695
+    ],
+    "streuung": 11.958924746277418,
+    "zonenquote": 0.0,
+    "abzug": 19
+   },
+   {
+    "tempo": 3.5,
+    "trefferquote": 0.32,
+    "beruehrt": 1.0,
+    "mitte": [
+     24.405896701597552,
+     33.27545725912609
+    ],
+    "streuung": 13.416306976620625,
+    "zonenquote": 0.0,
+    "abzug": 23
+   },
+   {
+    "tempo": 3.75,
+    "trefferquote": 0.29333333333333333,
+    "beruehrt": 1.0,
+    "mitte": [
+     42.41524418501747,
+     20.99943532384656
+    ],
+    "streuung": 19.294736560146706,
+    "zonenquote": 0.022727272727272728,
+    "abzug": 21
+   },
+   {
+    "tempo": 4.0,
+    "trefferquote": 0.21333333333333335,
+    "beruehrt": 1.0,
+    "mitte": [
+     61.56208827055263,
+     20.778135719110256
+    ],
+    "streuung": 22.8455759313468,
+    "zonenquote": 0.125,
+    "abzug": 33
+   },
+   {
+    "tempo": 4.25,
+    "trefferquote": 0.2866666666666667,
+    "beruehrt": 1.0,
+    "mitte": [
+     74.99053071310065,
+     23.007849960299634
+    ],
+    "streuung": 18.3290168760933,
+    "zonenquote": 0.11627906976744186,
+    "abzug": 35
+   },
+   {
+    "tempo": 4.5,
+    "trefferquote": 0.28,
+    "beruehrt": 1.0,
+    "mitte": [
+     77.39270315766593,
+     25.602464830542537
+    ],
+    "streuung": 16.377879466416573,
+    "zonenquote": 0.14285714285714285,
+    "abzug": 31
    }
   ]
  },
  {
   "id": "builtin-schnitt-60",
   "name": "Dünner Schnitt 60 Grad",
-  "tempo_app": 6,
-  "v0_gemessen": 1.7,
+  "tempo_app": 2.25,
+  "tempo_gemessen": 2.25,
   "leiter": [
    {
-    "v0": 0.4,
+    "tempo": 0.5,
     "trefferquote": 0.0,
-    "beruehrt": 0.95,
+    "beruehrt": 0.9333333333333333,
     "mitte": null,
+    "streuung": 0.0,
+    "zonenquote": 0.0,
     "abzug": 0
    },
    {
-    "v0": 0.55,
-    "trefferquote": 0.0,
-    "beruehrt": 1.0,
-    "mitte": null,
-    "abzug": 0
-   },
-   {
-    "v0": 0.7,
+    "tempo": 0.75,
     "trefferquote": 0.0,
     "beruehrt": 1.0,
     "mitte": null,
+    "streuung": 0.0,
+    "zonenquote": 0.0,
     "abzug": 0
    },
    {
-    "v0": 0.9,
-    "trefferquote": 0.25,
-    "beruehrt": 1.0,
-    "mitte": [
-     66.21223274878805,
-     4.031314889453003
-    ],
-    "abzug": 0
-   },
-   {
-    "v0": 1.1,
-    "trefferquote": 0.2,
-    "beruehrt": 1.0,
-    "mitte": [
-     64.46534345234856,
-     16.02027050181741
-    ],
-    "abzug": 0
-   },
-   {
-    "v0": 1.4,
-    "trefferquote": 0.3,
-    "beruehrt": 1.0,
-    "mitte": [
-     60.72988313589773,
-     36.49289383801725
-    ],
-    "abzug": 0
-   },
-   {
-    "v0": 1.7,
-    "trefferquote": 0.3,
-    "beruehrt": 1.0,
-    "mitte": [
-     50.454775360927854,
-     42.38632812169602
-    ],
-    "abzug": 3
-   },
-   {
-    "v0": 2.1,
-    "trefferquote": 0.25,
-    "beruehrt": 1.0,
-    "mitte": [
-     51.27520337687262,
-     28.282945843160714
-    ],
-    "abzug": 3
-   },
-   {
-    "v0": 2.6,
-    "trefferquote": 0.1,
-    "beruehrt": 1.0,
-    "mitte": [
-     23.247770771264584,
-     7.872063051261678
-    ],
-    "abzug": 4
-   },
-   {
-    "v0": 3.2,
-    "trefferquote": 0.2,
-    "beruehrt": 1.0,
-    "mitte": [
-     43.14708705948423,
-     17.676197036089295
-    ],
-    "abzug": 9
-   },
-   {
-    "v0": 4.0,
-    "trefferquote": 0.3,
+    "tempo": 1.0,
+    "trefferquote": 0.0,
     "beruehrt": 1.0,
     "mitte": null,
+    "streuung": 0.0,
+    "zonenquote": 0.0,
+    "abzug": 0
+   },
+   {
+    "tempo": 1.25,
+    "trefferquote": 0.17333333333333334,
+    "beruehrt": 1.0,
+    "mitte": [
+     65.96000210002082,
+     3.251340860473069
+    ],
+    "streuung": 1.8164172446947928,
+    "zonenquote": 0.0,
+    "abzug": 0
+   },
+   {
+    "tempo": 1.5,
+    "trefferquote": 0.21333333333333335,
+    "beruehrt": 1.0,
+    "mitte": [
+     65.5616153670284,
+     7.512327896925017
+    ],
+    "streuung": 2.351862269830856,
+    "zonenquote": 0.0,
+    "abzug": 0
+   },
+   {
+    "tempo": 1.75,
+    "trefferquote": 0.17333333333333334,
+    "beruehrt": 1.0,
+    "mitte": [
+     63.393901858701305,
+     16.424920681799236
+    ],
+    "streuung": 2.5253033907558824,
+    "zonenquote": 0.0,
+    "abzug": 0
+   },
+   {
+    "tempo": 2.0,
+    "trefferquote": 0.22,
+    "beruehrt": 1.0,
+    "mitte": [
+     59.3402690883726,
+     35.81770026022363
+    ],
+    "streuung": 3.957790207497862,
+    "zonenquote": 0.0,
+    "abzug": 0
+   },
+   {
+    "tempo": 2.25,
+    "trefferquote": 0.17333333333333334,
+    "beruehrt": 1.0,
+    "mitte": [
+     51.169622988569856,
+     45.86252776715149
+    ],
+    "streuung": 4.516082297423318,
+    "zonenquote": 0.46153846153846156,
     "abzug": 11
+   },
+   {
+    "tempo": 2.5,
+    "trefferquote": 0.18666666666666668,
+    "beruehrt": 1.0,
+    "mitte": [
+     49.28379658769451,
+     37.88485399545712
+    ],
+    "streuung": 5.256003640512329,
+    "zonenquote": 0.39285714285714285,
+    "abzug": 24
+   },
+   {
+    "tempo": 2.75,
+    "trefferquote": 0.21333333333333335,
+    "beruehrt": 1.0,
+    "mitte": [
+     48.30150710767372,
+     20.97266368384023
+    ],
+    "streuung": 4.72565924390665,
+    "zonenquote": 0.0,
+    "abzug": 30
+   },
+   {
+    "tempo": 3.0,
+    "trefferquote": 0.22666666666666666,
+    "beruehrt": 1.0,
+    "mitte": [
+     43.54029935440879,
+     5.8103458777343455
+    ],
+    "streuung": 4.384380785583843,
+    "zonenquote": 0.0,
+    "abzug": 52
+   },
+   {
+    "tempo": 3.25,
+    "trefferquote": 0.21333333333333335,
+    "beruehrt": 1.0,
+    "mitte": [
+     44.8183480738654,
+     6.518254750065438
+    ],
+    "streuung": 3.207416597790409,
+    "zonenquote": 0.0,
+    "abzug": 50
+   },
+   {
+    "tempo": 3.5,
+    "trefferquote": 0.16666666666666666,
+    "beruehrt": 1.0,
+    "mitte": [
+     42.446950096290706,
+     11.517268375329932
+    ],
+    "streuung": 13.170470038490121,
+    "zonenquote": 0.0,
+    "abzug": 44
+   },
+   {
+    "tempo": 3.75,
+    "trefferquote": 0.21333333333333335,
+    "beruehrt": 1.0,
+    "mitte": [
+     46.6810116947704,
+     22.901121713623812
+    ],
+    "streuung": 10.301932520567686,
+    "zonenquote": 0.0,
+    "abzug": 53
+   },
+   {
+    "tempo": 4.0,
+    "trefferquote": 0.20666666666666667,
+    "beruehrt": 1.0,
+    "mitte": [
+     40.456235708146046,
+     39.0007544948788
+    ],
+    "streuung": 25.6209022595644,
+    "zonenquote": 0.0967741935483871,
+    "abzug": 67
+   },
+   {
+    "tempo": 4.25,
+    "trefferquote": 0.21333333333333335,
+    "beruehrt": 1.0,
+    "mitte": [
+     34.771864206628194,
+     39.89343665497182
+    ],
+    "streuung": 10.424191052335848,
+    "zonenquote": 0.09375,
+    "abzug": 55
+   },
+   {
+    "tempo": 4.5,
+    "trefferquote": 0.20666666666666667,
+    "beruehrt": 1.0,
+    "mitte": [
+     22.242925296365797,
+     40.2211769985031
+    ],
+    "streuung": 7.163483778892509,
+    "zonenquote": 0.0,
+    "abzug": 69
    }
   ]
  },
  {
   "id": "builtin-schnitt-75",
   "name": "Sehr dünner Schnitt 75 Grad",
-  "tempo_app": 7,
-  "v0_gemessen": 2.6,
+  "tempo_app": 2.75,
+  "tempo_gemessen": 2.25,
   "leiter": [
    {
-    "v0": 0.4,
+    "tempo": 0.5,
     "trefferquote": 0.0,
-    "beruehrt": 0.85,
+    "beruehrt": 0.5866666666666667,
     "mitte": null,
+    "streuung": 0.0,
+    "zonenquote": 0.0,
     "abzug": 0
    },
    {
-    "v0": 0.55,
+    "tempo": 0.75,
     "trefferquote": 0.0,
-    "beruehrt": 0.75,
+    "beruehrt": 0.6866666666666666,
     "mitte": null,
+    "streuung": 0.0,
+    "zonenquote": 0.0,
     "abzug": 0
    },
    {
-    "v0": 0.7,
+    "tempo": 1.0,
     "trefferquote": 0.0,
-    "beruehrt": 0.75,
+    "beruehrt": 0.62,
     "mitte": null,
+    "streuung": 0.0,
+    "zonenquote": 0.0,
     "abzug": 0
    },
    {
-    "v0": 0.9,
+    "tempo": 1.25,
     "trefferquote": 0.0,
-    "beruehrt": 0.5,
+    "beruehrt": 0.6,
     "mitte": null,
+    "streuung": 0.0,
+    "zonenquote": 0.0,
     "abzug": 0
    },
    {
-    "v0": 1.1,
-    "trefferquote": 0.05,
-    "beruehrt": 0.55,
-    "mitte": [
-     58.76768062394882,
-     21.179455580404774
-    ],
-    "abzug": 1
+    "tempo": 1.5,
+    "trefferquote": 0.0,
+    "beruehrt": 0.58,
+    "mitte": null,
+    "streuung": 0.0,
+    "zonenquote": 0.0,
+    "abzug": 6
    },
    {
-    "v0": 1.4,
-    "trefferquote": 0.15,
-    "beruehrt": 0.45,
+    "tempo": 1.75,
+    "trefferquote": 0.04,
+    "beruehrt": 0.6333333333333333,
     "mitte": [
-     50.15012261508631,
-     47.20449718378706
+     58.40163445022548,
+     21.661397757925666
     ],
-    "abzug": 1
+    "streuung": 3.8318368551733832,
+    "zonenquote": 0.0,
+    "abzug": 6
    },
    {
-    "v0": 1.7,
-    "trefferquote": 0.1,
-    "beruehrt": 0.7,
+    "tempo": 2.0,
+    "trefferquote": 0.08666666666666667,
+    "beruehrt": 0.64,
     "mitte": [
-     51.51311899791641,
-     37.7648272765554
+     53.114873354817526,
+     44.29590470123329
     ],
-    "abzug": 1
+    "streuung": 3.677869851004317,
+    "zonenquote": 0.0,
+    "abzug": 7
    },
    {
-    "v0": 2.1,
-    "trefferquote": 0.2,
-    "beruehrt": 0.55,
+    "tempo": 2.25,
+    "trefferquote": 0.18666666666666668,
+    "beruehrt": 0.6733333333333333,
     "mitte": [
-     48.050522676490026,
-     15.219612089692534
+     53.06314844563143,
+     39.74036610128872
     ],
-    "abzug": 2
+    "streuung": 3.7245920136293638,
+    "zonenquote": 0.0,
+    "abzug": 30
    },
    {
-    "v0": 2.6,
-    "trefferquote": 0.25,
-    "beruehrt": 0.8,
+    "tempo": 2.5,
+    "trefferquote": 0.18,
+    "beruehrt": 0.7133333333333334,
     "mitte": [
-     45.42456396366871,
-     10.823211761022298
+     51.32671745738741,
+     29.749428649543233
     ],
-    "abzug": 5
+    "streuung": 4.582025406060059,
+    "zonenquote": 0.0,
+    "abzug": 26
    },
    {
-    "v0": 3.2,
-    "trefferquote": 0.25,
-    "beruehrt": 0.65,
-    "mitte": [
-     48.70242782214743,
-     37.524623004514844
-    ],
-    "abzug": 3
-   },
-   {
-    "v0": 4.0,
-    "trefferquote": 0.25,
+    "tempo": 2.75,
+    "trefferquote": 0.12,
     "beruehrt": 0.6,
     "mitte": [
-     44.24014236271114,
-     41.18562058832071
+     47.811278131414596,
+     15.846507056453607
     ],
-    "abzug": 5
+    "streuung": 5.843352570600663,
+    "zonenquote": 0.0,
+    "abzug": 21
+   },
+   {
+    "tempo": 3.0,
+    "trefferquote": 0.17333333333333334,
+    "beruehrt": 0.62,
+    "mitte": [
+     47.81123521417624,
+     6.8085007602693794
+    ],
+    "streuung": 5.431045488094182,
+    "zonenquote": 0.0,
+    "abzug": 27
+   },
+   {
+    "tempo": 3.25,
+    "trefferquote": 0.16,
+    "beruehrt": 0.6066666666666667,
+    "mitte": [
+     48.12283786265394,
+     13.273322329222538
+    ],
+    "streuung": 6.259307191594744,
+    "zonenquote": 0.0,
+    "abzug": 25
+   },
+   {
+    "tempo": 3.5,
+    "trefferquote": 0.21333333333333335,
+    "beruehrt": 0.6866666666666666,
+    "mitte": [
+     48.970047979083425,
+     20.495884467200167
+    ],
+    "streuung": 7.174079581518232,
+    "zonenquote": 0.0,
+    "abzug": 46
+   },
+   {
+    "tempo": 3.75,
+    "trefferquote": 0.13333333333333333,
+    "beruehrt": 0.6066666666666667,
+    "mitte": [
+     49.953322722127915,
+     39.78872101086284
+    ],
+    "streuung": 6.767851742864812,
+    "zonenquote": 0.0,
+    "abzug": 37
+   },
+   {
+    "tempo": 4.0,
+    "trefferquote": 0.16,
+    "beruehrt": 0.5933333333333334,
+    "mitte": [
+     48.66714732560231,
+     41.220619690693404
+    ],
+    "streuung": 8.145361977993657,
+    "zonenquote": 0.0,
+    "abzug": 41
+   },
+   {
+    "tempo": 4.25,
+    "trefferquote": 0.14,
+    "beruehrt": 0.6866666666666666,
+    "mitte": [
+     46.42130845765258,
+     28.313453906594727
+    ],
+    "streuung": 15.233965210825602,
+    "zonenquote": 0.0,
+    "abzug": 52
+   },
+   {
+    "tempo": 4.5,
+    "trefferquote": 0.18666666666666668,
+    "beruehrt": 0.6866666666666666,
+    "mitte": [
+     50.1561313192753,
+     16.291222127016358
+    ],
+    "streuung": 7.89178454787699,
+    "zonenquote": 0.0,
+    "abzug": 46
    }
   ]
  },
  {
   "id": "builtin-bande-kurz",
   "name": "Bandenball über die Kurzbande",
-  "tempo_app": 6,
-  "v0_gemessen": 1.4,
+  "tempo_app": 2.75,
+  "tempo_gemessen": 2.0,
   "leiter": [
    {
-    "v0": 0.4,
+    "tempo": 0.5,
     "trefferquote": 0.0,
     "beruehrt": 1.0,
     "mitte": null,
+    "streuung": 0.0,
+    "zonenquote": 0.0,
     "abzug": 0
    },
    {
-    "v0": 0.55,
+    "tempo": 0.75,
     "trefferquote": 0.0,
     "beruehrt": 1.0,
     "mitte": null,
+    "streuung": 0.0,
+    "zonenquote": 0.0,
     "abzug": 0
    },
    {
-    "v0": 0.7,
+    "tempo": 1.0,
     "trefferquote": 0.0,
     "beruehrt": 1.0,
     "mitte": null,
+    "streuung": 0.0,
+    "zonenquote": 0.0,
     "abzug": 0
    },
    {
-    "v0": 0.9,
+    "tempo": 1.25,
     "trefferquote": 0.0,
     "beruehrt": 1.0,
     "mitte": null,
+    "streuung": 0.0,
+    "zonenquote": 0.0,
     "abzug": 0
    },
    {
-    "v0": 1.1,
+    "tempo": 1.5,
     "trefferquote": 0.0,
     "beruehrt": 1.0,
     "mitte": null,
+    "streuung": 0.0,
+    "zonenquote": 0.0,
     "abzug": 0
    },
    {
-    "v0": 1.4,
-    "trefferquote": 0.3,
+    "tempo": 1.75,
+    "trefferquote": 0.0,
     "beruehrt": 1.0,
-    "mitte": [
-     95.65723506619895,
-     34.62352071867135
-    ],
+    "mitte": null,
+    "streuung": 0.0,
+    "zonenquote": 0.0,
     "abzug": 0
    },
    {
-    "v0": 1.7,
-    "trefferquote": 0.15,
+    "tempo": 2.0,
+    "trefferquote": 0.26666666666666666,
     "beruehrt": 1.0,
     "mitte": [
-     90.99556330542316,
-     30.030316128458242
+     95.52461320327095,
+     33.32057691618273
     ],
+    "streuung": 2.9925337179778118,
+    "zonenquote": 0.0,
+    "abzug": 2
+   },
+   {
+    "tempo": 2.25,
+    "trefferquote": 0.26,
+    "beruehrt": 1.0,
+    "mitte": [
+     90.9119296572802,
+     30.691508683465383
+    ],
+    "streuung": 4.5903611742047765,
+    "zonenquote": 0.0,
+    "abzug": 1
+   },
+   {
+    "tempo": 2.5,
+    "trefferquote": 0.26,
+    "beruehrt": 1.0,
+    "mitte": [
+     89.74792985141993,
+     28.42879804910993
+    ],
+    "streuung": 4.5902647350451575,
+    "zonenquote": 0.0,
+    "abzug": 3
+   },
+   {
+    "tempo": 2.75,
+    "trefferquote": 0.29333333333333333,
+    "beruehrt": 1.0,
+    "mitte": [
+     84.98794837923468,
+     27.75222127421628
+    ],
+    "streuung": 4.415694556364783,
+    "zonenquote": 0.0,
     "abzug": 0
    },
    {
-    "v0": 2.1,
-    "trefferquote": 0.15,
+    "tempo": 3.0,
+    "trefferquote": 0.20666666666666667,
     "beruehrt": 1.0,
     "mitte": [
-     83.25627934678887,
-     27.180145214735276
+     83.8074803745793,
+     27.56575315189548
     ],
-    "abzug": 0
+    "streuung": 3.5363717217841955,
+    "zonenquote": 0.0,
+    "abzug": 9
    },
    {
-    "v0": 2.6,
-    "trefferquote": 0.15,
+    "tempo": 3.25,
+    "trefferquote": 0.16666666666666666,
     "beruehrt": 1.0,
     "mitte": [
-     86.63596922749355,
-     25.110376941529584
+     83.7444893120784,
+     27.244504615136126
     ],
-    "abzug": 0
+    "streuung": 4.221235295754333,
+    "zonenquote": 0.0,
+    "abzug": 1
    },
    {
-    "v0": 3.2,
-    "trefferquote": 0.3,
+    "tempo": 3.5,
+    "trefferquote": 0.14666666666666667,
     "beruehrt": 1.0,
     "mitte": [
-     83.74615053499251,
-     23.822180581990086
+     83.92786659797027,
+     26.499806045693937
     ],
-    "abzug": 0
+    "streuung": 3.9600629728251033,
+    "zonenquote": 0.0,
+    "abzug": 1
    },
    {
-    "v0": 4.0,
-    "trefferquote": 0.05,
+    "tempo": 3.75,
+    "trefferquote": 0.22,
     "beruehrt": 1.0,
     "mitte": [
-     96.96978554869355,
-     23.26710044061218
+     80.69067418058846,
+     26.769409199124425
     ],
-    "abzug": 0
+    "streuung": 4.334948233814107,
+    "zonenquote": 0.0,
+    "abzug": 6
+   },
+   {
+    "tempo": 4.0,
+    "trefferquote": 0.14666666666666667,
+    "beruehrt": 1.0,
+    "mitte": [
+     81.40462832111442,
+     26.89438592741159
+    ],
+    "streuung": 5.718635157465192,
+    "zonenquote": 0.0,
+    "abzug": 6
+   },
+   {
+    "tempo": 4.25,
+    "trefferquote": 0.14666666666666667,
+    "beruehrt": 1.0,
+    "mitte": [
+     81.49308514923393,
+     24.94300215015039
+    ],
+    "streuung": 6.905084674984584,
+    "zonenquote": 0.0,
+    "abzug": 10
+   },
+   {
+    "tempo": 4.5,
+    "trefferquote": 0.17333333333333334,
+    "beruehrt": 1.0,
+    "mitte": [
+     80.83315087975087,
+     27.576972061449855
+    ],
+    "streuung": 4.855600756576026,
+    "zonenquote": 0.0,
+    "abzug": 5
    }
   ]
  },
  {
   "id": "builtin-kick-eine-bande",
   "name": "Kick über eine Bande",
-  "tempo_app": 6,
-  "v0_gemessen": 1.7,
+  "tempo_app": 2.25,
+  "tempo_gemessen": 2.25,
   "leiter": [
    {
-    "v0": 0.4,
+    "tempo": 0.5,
     "trefferquote": 0.0,
     "beruehrt": 0.0,
     "mitte": null,
+    "streuung": 0.0,
+    "zonenquote": 0.0,
     "abzug": 0
    },
    {
-    "v0": 0.55,
+    "tempo": 0.75,
     "trefferquote": 0.0,
     "beruehrt": 0.0,
     "mitte": null,
+    "streuung": 0.0,
+    "zonenquote": 0.0,
     "abzug": 0
    },
    {
-    "v0": 0.7,
+    "tempo": 1.0,
     "trefferquote": 0.0,
     "beruehrt": 0.0,
     "mitte": null,
+    "streuung": 0.0,
+    "zonenquote": 0.0,
     "abzug": 0
    },
    {
-    "v0": 0.9,
+    "tempo": 1.25,
     "trefferquote": 0.0,
     "beruehrt": 0.0,
     "mitte": null,
-    "abzug": 10
+    "streuung": 0.0,
+    "zonenquote": 0.0,
+    "abzug": 33
    },
    {
-    "v0": 1.1,
+    "tempo": 1.5,
     "trefferquote": 0.0,
     "beruehrt": 0.0,
     "mitte": null,
-    "abzug": 8
+    "streuung": 0.0,
+    "zonenquote": 0.0,
+    "abzug": 72
    },
    {
-    "v0": 1.4,
+    "tempo": 1.75,
     "trefferquote": 0.0,
-    "beruehrt": 0.15,
+    "beruehrt": 0.0,
     "mitte": null,
-    "abzug": 3
+    "streuung": 0.0,
+    "zonenquote": 0.0,
+    "abzug": 57
    },
    {
-    "v0": 1.7,
-    "trefferquote": 0.1,
-    "beruehrt": 0.75,
+    "tempo": 2.0,
+    "trefferquote": 0.0,
+    "beruehrt": 0.20666666666666667,
+    "mitte": null,
+    "streuung": 0.0,
+    "zonenquote": 0.0,
+    "abzug": 22
+   },
+   {
+    "tempo": 2.25,
+    "trefferquote": 0.06,
+    "beruehrt": 0.9133333333333333,
     "mitte": [
-     69.16146517873764,
-     31.899979233230404
+     70.07681860800817,
+     31.97544012195884
     ],
+    "streuung": 4.0918452697884495,
+    "zonenquote": 0.0,
+    "abzug": 7
+   },
+   {
+    "tempo": 2.5,
+    "trefferquote": 0.06,
+    "beruehrt": 0.6,
+    "mitte": [
+     64.93432129970988,
+     25.179903451757067
+    ],
+    "streuung": 2.5422475400121414,
+    "zonenquote": 0.0,
+    "abzug": 2
+   },
+   {
+    "tempo": 2.75,
+    "trefferquote": 0.013333333333333334,
+    "beruehrt": 0.18666666666666668,
+    "mitte": [
+     51.21066612244943,
+     5.274468488531025
+    ],
+    "streuung": 2.7911948274804796,
+    "zonenquote": 0.0,
+    "abzug": 1
+   },
+   {
+    "tempo": 3.0,
+    "trefferquote": 0.0,
+    "beruehrt": 0.05333333333333334,
+    "mitte": null,
+    "streuung": 0.0,
+    "zonenquote": 0.0,
+    "abzug": 1
+   },
+   {
+    "tempo": 3.25,
+    "trefferquote": 0.0,
+    "beruehrt": 0.08,
+    "mitte": null,
+    "streuung": 0.0,
+    "zonenquote": 0.0,
     "abzug": 0
    },
    {
-    "v0": 2.1,
+    "tempo": 3.5,
     "trefferquote": 0.0,
-    "beruehrt": 0.15,
+    "beruehrt": 0.1,
     "mitte": null,
-    "abzug": 0
+    "streuung": 0.0,
+    "zonenquote": 0.0,
+    "abzug": 4
    },
    {
-    "v0": 2.6,
-    "trefferquote": 0.0,
-    "beruehrt": 0.0,
-    "mitte": null,
-    "abzug": 0
+    "tempo": 3.75,
+    "trefferquote": 0.006666666666666667,
+    "beruehrt": 0.14666666666666667,
+    "mitte": [
+     16.43614418921038,
+     23.17960977628487
+    ],
+    "streuung": 0.0,
+    "zonenquote": 0.0,
+    "abzug": 52
    },
    {
-    "v0": 3.2,
-    "trefferquote": 0.0,
-    "beruehrt": 0.15,
-    "mitte": null,
-    "abzug": 6
+    "tempo": 4.0,
+    "trefferquote": 0.013333333333333334,
+    "beruehrt": 0.3333333333333333,
+    "mitte": [
+     11.548092721657143,
+     35.92943006981466
+    ],
+    "streuung": 1.8996140839914895,
+    "zonenquote": 0.0,
+    "abzug": 73
    },
    {
-    "v0": 4.0,
-    "trefferquote": 0.0,
-    "beruehrt": 0.5,
-    "mitte": null,
-    "abzug": 8
+    "tempo": 4.25,
+    "trefferquote": 0.05333333333333334,
+    "beruehrt": 0.41333333333333333,
+    "mitte": [
+     17.142723640103995,
+     40.46357241127686
+    ],
+    "streuung": 6.84922593542219,
+    "zonenquote": 0.0,
+    "abzug": 54
+   },
+   {
+    "tempo": 4.5,
+    "trefferquote": 0.02666666666666667,
+    "beruehrt": 0.38666666666666666,
+    "mitte": [
+     35.13222342219042,
+     36.4549506067318
+    ],
+    "streuung": 29.26967499855639,
+    "zonenquote": 0.0,
+    "abzug": 63
    }
   ]
  },
  {
   "id": "builtin-karambolage",
   "name": "Karambolage",
-  "tempo_app": 5,
-  "v0_gemessen": 1.7,
+  "tempo_app": 3.25,
+  "tempo_gemessen": 2.5,
   "leiter": [
    {
-    "v0": 0.4,
+    "tempo": 0.5,
     "trefferquote": 0.0,
     "beruehrt": 1.0,
     "mitte": null,
-    "abzug": 1
+    "streuung": 0.0,
+    "zonenquote": 0.0,
+    "abzug": 0
    },
    {
-    "v0": 0.55,
+    "tempo": 0.75,
     "trefferquote": 0.0,
     "beruehrt": 1.0,
     "mitte": null,
-    "abzug": 18
+    "streuung": 0.0,
+    "zonenquote": 0.0,
+    "abzug": 123
    },
    {
-    "v0": 0.7,
-    "trefferquote": 0.0,
+    "tempo": 1.0,
+    "trefferquote": 0.02,
     "beruehrt": 1.0,
     "mitte": null,
-    "abzug": 19
+    "streuung": 0.0,
+    "zonenquote": 0.0,
+    "abzug": 141
    },
    {
-    "v0": 0.9,
-    "trefferquote": 0.25,
+    "tempo": 1.25,
+    "trefferquote": 0.26,
     "beruehrt": 1.0,
     "mitte": null,
+    "streuung": 0.0,
+    "zonenquote": 0.0,
+    "abzug": 142
+   },
+   {
+    "tempo": 1.5,
+    "trefferquote": 0.23333333333333334,
+    "beruehrt": 1.0,
+    "mitte": null,
+    "streuung": 0.0,
+    "zonenquote": 0.0,
+    "abzug": 145
+   },
+   {
+    "tempo": 1.75,
+    "trefferquote": 0.24666666666666667,
+    "beruehrt": 1.0,
+    "mitte": null,
+    "streuung": 0.0,
+    "zonenquote": 0.0,
+    "abzug": 149
+   },
+   {
+    "tempo": 2.0,
+    "trefferquote": 0.2866666666666667,
+    "beruehrt": 1.0,
+    "mitte": null,
+    "streuung": 0.0,
+    "zonenquote": 0.0,
+    "abzug": 146
+   },
+   {
+    "tempo": 2.25,
+    "trefferquote": 0.15333333333333332,
+    "beruehrt": 1.0,
+    "mitte": [
+     58.458261287647524,
+     22.323551897138433
+    ],
+    "streuung": 20.608917519735694,
+    "zonenquote": 0.0,
+    "abzug": 73
+   },
+   {
+    "tempo": 2.5,
+    "trefferquote": 0.25333333333333335,
+    "beruehrt": 1.0,
+    "mitte": [
+     40.48547841574441,
+     24.033345496344328
+    ],
+    "streuung": 18.553793743591516,
+    "zonenquote": 0.0,
+    "abzug": 39
+   },
+   {
+    "tempo": 2.75,
+    "trefferquote": 0.23333333333333334,
+    "beruehrt": 1.0,
+    "mitte": [
+     63.60889696895029,
+     14.670835266516722
+    ],
+    "streuung": 10.13076742321584,
+    "zonenquote": 0.0,
+    "abzug": 29
+   },
+   {
+    "tempo": 3.0,
+    "trefferquote": 0.20666666666666667,
+    "beruehrt": 1.0,
+    "mitte": [
+     64.20132219138894,
+     26.278141856113475
+    ],
+    "streuung": 15.220461540100372,
+    "zonenquote": 0.0,
     "abzug": 20
    },
    {
-    "v0": 1.1,
+    "tempo": 3.25,
+    "trefferquote": 0.23333333333333334,
+    "beruehrt": 1.0,
+    "mitte": [
+     63.41023503955518,
+     30.216666451383112
+    ],
+    "streuung": 15.200022161310757,
+    "zonenquote": 0.0,
+    "abzug": 28
+   },
+   {
+    "tempo": 3.5,
     "trefferquote": 0.2,
     "beruehrt": 1.0,
-    "mitte": null,
-    "abzug": 20
+    "mitte": [
+     53.8278756053114,
+     36.133234959191206
+    ],
+    "streuung": 12.692751091082966,
+    "zonenquote": 0.0,
+    "abzug": 36
    },
    {
-    "v0": 1.4,
-    "trefferquote": 0.2,
-    "beruehrt": 1.0,
-    "mitte": null,
-    "abzug": 16
-   },
-   {
-    "v0": 1.7,
-    "trefferquote": 0.35,
+    "tempo": 3.75,
+    "trefferquote": 0.2733333333333333,
     "beruehrt": 1.0,
     "mitte": [
-     37.32987751322479,
-     19.95523787771295
+     48.559735397685365,
+     38.40839600600661
     ],
-    "abzug": 9
+    "streuung": 5.981644723799832,
+    "zonenquote": 0.0,
+    "abzug": 35
    },
    {
-    "v0": 2.1,
-    "trefferquote": 0.15,
+    "tempo": 4.0,
+    "trefferquote": 0.26,
     "beruehrt": 1.0,
     "mitte": [
-     67.06676401870378,
-     3.469465578749428
+     49.385560473075955,
+     40.00120335911496
     ],
-    "abzug": 3
+    "streuung": 9.690364760653662,
+    "zonenquote": 0.0,
+    "abzug": 45
    },
    {
-    "v0": 2.6,
-    "trefferquote": 0.25,
+    "tempo": 4.25,
+    "trefferquote": 0.22,
     "beruehrt": 1.0,
     "mitte": [
-     98.5734547548902,
-     10.890544783787911
+     40.245247773758,
+     42.54668058290555
     ],
-    "abzug": 6
+    "streuung": 12.79097226875837,
+    "zonenquote": 0.0,
+    "abzug": 51
    },
    {
-    "v0": 3.2,
-    "trefferquote": 0.15,
+    "tempo": 4.5,
+    "trefferquote": 0.21333333333333335,
     "beruehrt": 1.0,
     "mitte": [
-     43.94245606891032,
-     40.2938051449049
+     39.10326306979898,
+     42.56498408395578
     ],
-    "abzug": 7
-   },
-   {
-    "v0": 4.0,
-    "trefferquote": 0.35,
-    "beruehrt": 1.0,
-    "mitte": [
-     71.6624439925349,
-     33.79466834480652
-    ],
-    "abzug": 9
+    "streuung": 11.400717876766288,
+    "zonenquote": 0.0,
+    "abzug": 56
    }
   ]
  },
  {
   "id": "builtin-seiteneffet-links",
   "name": "Seiteneffet über die Bande",
-  "tempo_app": 6,
-  "v0_gemessen": 2.1,
+  "tempo_app": 3.25,
+  "tempo_gemessen": 3.0,
   "leiter": [
    {
-    "v0": 0.4,
+    "tempo": 0.5,
     "trefferquote": 0.0,
     "beruehrt": 1.0,
     "mitte": null,
+    "streuung": 0.0,
+    "zonenquote": 0.0,
     "abzug": 0
    },
    {
-    "v0": 0.55,
+    "tempo": 0.75,
     "trefferquote": 0.0,
     "beruehrt": 1.0,
     "mitte": null,
+    "streuung": 0.0,
+    "zonenquote": 0.0,
     "abzug": 0
    },
    {
-    "v0": 0.7,
-    "trefferquote": 0.3,
+    "tempo": 1.0,
+    "trefferquote": 0.3466666666666667,
     "beruehrt": 1.0,
     "mitte": [
-     95.24149805440118,
-     36.61367229417872
+     94.6200886626512,
+     36.408232397687904
     ],
+    "streuung": 3.0725505310538805,
+    "zonenquote": 0.0,
     "abzug": 0
    },
    {
-    "v0": 0.9,
-    "trefferquote": 0.4,
+    "tempo": 1.25,
+    "trefferquote": 0.30666666666666664,
     "beruehrt": 1.0,
     "mitte": [
-     93.07358240657904,
-     37.736115217699115
+     95.1700082742934,
+     38.76329098085266
     ],
+    "streuung": 1.4662816126209315,
+    "zonenquote": 0.0,
     "abzug": 0
    },
    {
-    "v0": 1.1,
-    "trefferquote": 0.3,
+    "tempo": 1.5,
+    "trefferquote": 0.4066666666666667,
     "beruehrt": 1.0,
     "mitte": [
-     81.55659602792703,
-     33.33877081013262
+     89.20329787445567,
+     36.24128544526155
     ],
+    "streuung": 2.0319826387305135,
+    "zonenquote": 0.0,
     "abzug": 0
    },
    {
-    "v0": 1.4,
-    "trefferquote": 0.3,
+    "tempo": 1.75,
+    "trefferquote": 0.22,
     "beruehrt": 1.0,
     "mitte": [
-     66.7174273507794,
-     25.9194748426498
+     82.99521519980166,
+     32.88714183126319
     ],
+    "streuung": 2.7945368215718203,
+    "zonenquote": 0.0,
     "abzug": 0
    },
    {
-    "v0": 1.7,
-    "trefferquote": 0.35,
+    "tempo": 2.0,
+    "trefferquote": 0.31333333333333335,
     "beruehrt": 1.0,
     "mitte": [
-     61.95198916770027,
-     35.07897818589979
+     67.63516470876408,
+     26.89070506741926
     ],
-    "abzug": 10
-   },
-   {
-    "v0": 2.1,
-    "trefferquote": 0.4,
-    "beruehrt": 1.0,
-    "mitte": [
-     7.875052744991793,
-     29.28478005477234
-    ],
-    "abzug": 3
-   },
-   {
-    "v0": 2.6,
-    "trefferquote": 0.35,
-    "beruehrt": 1.0,
-    "mitte": [
-     21.543915228628723,
-     42.135485697314685
-    ],
+    "streuung": 4.915706309307678,
+    "zonenquote": 0.0,
     "abzug": 1
    },
    {
-    "v0": 3.2,
-    "trefferquote": 0.2,
+    "tempo": 2.25,
+    "trefferquote": 0.31333333333333335,
     "beruehrt": 1.0,
     "mitte": [
-     47.15304548706768,
-     25.6771368279346
+     68.5147562432103,
+     33.99270019619634
     ],
-    "abzug": 0
+    "streuung": 12.147265122421988,
+    "zonenquote": 0.02127659574468085,
+    "abzug": 61
    },
    {
-    "v0": 4.0,
-    "trefferquote": 0.35,
+    "tempo": 2.5,
+    "trefferquote": 0.31333333333333335,
     "beruehrt": 1.0,
     "mitte": [
-     93.44490230885869,
-     9.005743711672453
+     33.067189723830694,
+     21.175123605412423
     ],
-    "abzug": 0
+    "streuung": 30.639644027308442,
+    "zonenquote": 0.02127659574468085,
+    "abzug": 62
+   },
+   {
+    "tempo": 2.75,
+    "trefferquote": 0.26666666666666666,
+    "beruehrt": 1.0,
+    "mitte": [
+     6.090284450683793,
+     36.12459009906309
+    ],
+    "streuung": 6.660085841351821,
+    "zonenquote": 0.05,
+    "abzug": 40
+   },
+   {
+    "tempo": 3.0,
+    "trefferquote": 0.32666666666666666,
+    "beruehrt": 1.0,
+    "mitte": [
+     12.65634486658597,
+     44.37854167526255
+    ],
+    "streuung": 5.472238610500185,
+    "zonenquote": 0.673469387755102,
+    "abzug": 17
+   },
+   {
+    "tempo": 3.25,
+    "trefferquote": 0.2866666666666667,
+    "beruehrt": 1.0,
+    "mitte": [
+     21.202283287342816,
+     42.22468716040346
+    ],
+    "streuung": 7.662357278263801,
+    "zonenquote": 0.6744186046511628,
+    "abzug": 10
+   },
+   {
+    "tempo": 3.5,
+    "trefferquote": 0.3466666666666667,
+    "beruehrt": 1.0,
+    "mitte": [
+     32.4363858759715,
+     35.26247259283463
+    ],
+    "streuung": 10.874421271178191,
+    "zonenquote": 0.34615384615384615,
+    "abzug": 8
+   },
+   {
+    "tempo": 3.75,
+    "trefferquote": 0.38,
+    "beruehrt": 1.0,
+    "mitte": [
+     48.21417231427616,
+     25.13751045599782
+    ],
+    "streuung": 16.9841049225815,
+    "zonenquote": 0.14035087719298245,
+    "abzug": 3
+   },
+   {
+    "tempo": 4.0,
+    "trefferquote": 0.32666666666666666,
+    "beruehrt": 1.0,
+    "mitte": [
+     82.68404738167177,
+     8.999156463483374
+    ],
+    "streuung": 15.38629575522741,
+    "zonenquote": 0.0,
+    "abzug": 1
+   },
+   {
+    "tempo": 4.25,
+    "trefferquote": 0.34,
+    "beruehrt": 1.0,
+    "mitte": [
+     94.24896459982786,
+     11.998579583770516
+    ],
+    "streuung": 5.152124169337888,
+    "zonenquote": 0.0,
+    "abzug": 2
+   },
+   {
+    "tempo": 4.5,
+    "trefferquote": 0.38666666666666666,
+    "beruehrt": 1.0,
+    "mitte": [
+     93.23121284227413,
+     16.536012932757732
+    ],
+    "streuung": 4.5135829230457425,
+    "zonenquote": 0.0,
+    "abzug": 3
    }
   ]
  },
  {
   "id": "builtin-position-eng",
   "name": "Enge Position",
-  "tempo_app": 4,
-  "v0_gemessen": 3.2,
+  "tempo_app": 2,
+  "tempo_gemessen": 2.0,
   "leiter": [
    {
-    "v0": 0.4,
+    "tempo": 0.5,
     "trefferquote": 0.0,
     "beruehrt": 1.0,
     "mitte": null,
+    "streuung": 0.0,
+    "zonenquote": 0.0,
     "abzug": 0
    },
    {
-    "v0": 0.55,
+    "tempo": 0.75,
     "trefferquote": 0.0,
     "beruehrt": 1.0,
     "mitte": null,
+    "streuung": 0.0,
+    "zonenquote": 0.0,
     "abzug": 0
    },
    {
-    "v0": 0.7,
-    "trefferquote": 0.6,
+    "tempo": 1.0,
+    "trefferquote": 0.35333333333333333,
     "beruehrt": 1.0,
     "mitte": [
-     88.37081408640057,
-     41.12280456927202
+     85.54698212713538,
+     39.221876637087156
     ],
-    "abzug": 0
-   },
-   {
-    "v0": 0.9,
-    "trefferquote": 0.4,
-    "beruehrt": 1.0,
-    "mitte": [
-     99.95043121743255,
-     48.633055237689234
-    ],
-    "abzug": 12
-   },
-   {
-    "v0": 1.1,
-    "trefferquote": 0.5,
-    "beruehrt": 1.0,
-    "mitte": null,
-    "abzug": 17
-   },
-   {
-    "v0": 1.4,
-    "trefferquote": 0.2,
-    "beruehrt": 1.0,
-    "mitte": [
-     89.35321150440637,
-     31.317244400433516
-    ],
+    "streuung": 2.9871412821641923,
+    "zonenquote": 0.0,
     "abzug": 2
    },
    {
-    "v0": 1.7,
-    "trefferquote": 0.15,
+    "tempo": 1.25,
+    "trefferquote": 0.41333333333333333,
     "beruehrt": 1.0,
     "mitte": [
-     88.10039652194185,
-     21.554809725369875
+     97.1152019578829,
+     46.7545510354738
     ],
+    "streuung": 2.198776258622694,
+    "zonenquote": 0.0,
+    "abzug": 93
+   },
+   {
+    "tempo": 1.5,
+    "trefferquote": 0.36,
+    "beruehrt": 1.0,
+    "mitte": null,
+    "streuung": 0.0,
+    "zonenquote": 0.0,
+    "abzug": 119
+   },
+   {
+    "tempo": 1.75,
+    "trefferquote": 0.30666666666666664,
+    "beruehrt": 1.0,
+    "mitte": null,
+    "streuung": 0.0,
+    "zonenquote": 0.0,
+    "abzug": 123
+   },
+   {
+    "tempo": 2.0,
+    "trefferquote": 0.30666666666666664,
+    "beruehrt": 1.0,
+    "mitte": [
+     89.24788187278358,
+     31.78801060256768
+    ],
+    "streuung": 3.86023809947792,
+    "zonenquote": 0.6086956521739131,
+    "abzug": 9
+   },
+   {
+    "tempo": 2.25,
+    "trefferquote": 0.26666666666666666,
+    "beruehrt": 1.0,
+    "mitte": [
+     89.14885375321086,
+     23.0667355023482
+    ],
+    "streuung": 4.012585617146429,
+    "zonenquote": 0.075,
     "abzug": 0
    },
    {
-    "v0": 2.1,
-    "trefferquote": 0.3,
+    "tempo": 2.5,
+    "trefferquote": 0.24,
     "beruehrt": 1.0,
     "mitte": [
-     87.57712500033536,
-     7.497869220080731
+     87.25673540447006,
+     13.469447495407588
     ],
+    "streuung": 4.9060296849194955,
+    "zonenquote": 0.0,
     "abzug": 0
    },
    {
-    "v0": 2.6,
-    "trefferquote": 0.45,
+    "tempo": 2.75,
+    "trefferquote": 0.29333333333333333,
     "beruehrt": 1.0,
     "mitte": [
-     75.22708838803726,
-     14.593451799961409
+     85.04122134357564,
+     4.3055009790434875
     ],
+    "streuung": 3.708776271885206,
+    "zonenquote": 0.0,
     "abzug": 0
    },
    {
-    "v0": 3.2,
-    "trefferquote": 0.35,
+    "tempo": 3.0,
+    "trefferquote": 0.35333333333333333,
     "beruehrt": 1.0,
     "mitte": [
-     60.92292537872311,
-     29.994657989423644
+     84.34747958000597,
+     6.129436160240767
     ],
-    "abzug": 4
+    "streuung": 4.053817670171551,
+    "zonenquote": 0.0,
+    "abzug": 0
    },
    {
-    "v0": 4.0,
-    "trefferquote": 0.5,
+    "tempo": 3.25,
+    "trefferquote": 0.29333333333333333,
     "beruehrt": 1.0,
     "mitte": [
-     90.67893988362574,
-     39.71667561622773
+     79.36429673422205,
+     12.278211957298026
     ],
-    "abzug": 6
+    "streuung": 6.379405241206057,
+    "zonenquote": 0.0,
+    "abzug": 3
+   },
+   {
+    "tempo": 3.5,
+    "trefferquote": 0.30666666666666664,
+    "beruehrt": 1.0,
+    "mitte": [
+     73.18180786742099,
+     18.71555261988834
+    ],
+    "streuung": 8.139220785542276,
+    "zonenquote": 0.0,
+    "abzug": 12
+   },
+   {
+    "tempo": 3.75,
+    "trefferquote": 0.3333333333333333,
+    "beruehrt": 1.0,
+    "mitte": [
+     64.77601504162747,
+     28.405942369194143
+    ],
+    "streuung": 12.457972684510134,
+    "zonenquote": 0.0,
+    "abzug": 12
+   },
+   {
+    "tempo": 4.0,
+    "trefferquote": 0.38,
+    "beruehrt": 1.0,
+    "mitte": [
+     58.06528934099309,
+     39.99568242335281
+    ],
+    "streuung": 22.684199484020525,
+    "zonenquote": 0.0,
+    "abzug": 23
+   },
+   {
+    "tempo": 4.25,
+    "trefferquote": 0.34,
+    "beruehrt": 1.0,
+    "mitte": [
+     76.35624175125004,
+     37.50842764497817
+    ],
+    "streuung": 21.693968922758447,
+    "zonenquote": 0.0196078431372549,
+    "abzug": 40
+   },
+   {
+    "tempo": 4.5,
+    "trefferquote": 0.36,
+    "beruehrt": 1.0,
+    "mitte": [
+     77.9923586859681,
+     36.15193988793399
+    ],
+    "streuung": 18.396830686479046,
+    "zonenquote": 0.0,
+    "abzug": 33
    }
   ]
  },
  {
   "id": "builtin-cluster-oeffnen",
   "name": "Cluster öffnen",
-  "tempo_app": 6,
-  "v0_gemessen": 4.0,
+  "tempo_app": 2.25,
+  "tempo_gemessen": 1.0,
   "leiter": [
    {
-    "v0": 0.4,
+    "tempo": 0.5,
     "trefferquote": 0.0,
     "beruehrt": 1.0,
     "mitte": null,
+    "streuung": 0.0,
+    "zonenquote": 0.0,
     "abzug": 0
    },
    {
-    "v0": 0.55,
+    "tempo": 0.75,
     "trefferquote": 0.0,
     "beruehrt": 1.0,
     "mitte": null,
+    "streuung": 0.0,
+    "zonenquote": 0.0,
     "abzug": 0
    },
    {
-    "v0": 0.7,
-    "trefferquote": 0.2,
+    "tempo": 1.0,
+    "trefferquote": 0.34,
     "beruehrt": 1.0,
     "mitte": [
-     77.70270338919399,
-     31.54163311803661
+     78.50337275289299,
+     32.250647057426846
     ],
+    "streuung": 2.277829731603304,
+    "zonenquote": 0.0,
     "abzug": 0
    },
    {
-    "v0": 0.9,
-    "trefferquote": 0.05,
+    "tempo": 1.25,
+    "trefferquote": 0.34,
     "beruehrt": 1.0,
     "mitte": [
-     94.46715956233876,
-     41.40892213783827
+     90.88767917003702,
+     39.56316005406755
     ],
+    "streuung": 2.981119394829335,
+    "zonenquote": 0.0,
     "abzug": 0
    },
    {
-    "v0": 1.1,
-    "trefferquote": 0.35,
+    "tempo": 1.5,
+    "trefferquote": 0.2866666666666667,
     "beruehrt": 1.0,
     "mitte": [
-     92.61962457834757,
-     48.34951410470307
+     96.88112690529887,
+     45.527073281182126
     ],
-    "abzug": 0
+    "streuung": 1.5180236534974527,
+    "zonenquote": 0.0,
+    "abzug": 5
    },
    {
-    "v0": 1.4,
-    "trefferquote": 0.15,
+    "tempo": 1.75,
+    "trefferquote": 0.26666666666666666,
     "beruehrt": 1.0,
     "mitte": [
-     92.05038476693872,
-     42.69399013716887
+     92.43361290778503,
+     48.128118311416976
     ],
-    "abzug": 9
+    "streuung": 0.8723910748263174,
+    "zonenquote": 0.0,
+    "abzug": 12
    },
    {
-    "v0": 1.7,
-    "trefferquote": 0.45,
+    "tempo": 2.0,
+    "trefferquote": 0.2866666666666667,
     "beruehrt": 1.0,
     "mitte": [
-     95.80045090277706,
-     31.951057850065297
+     94.07173319781104,
+     40.152564548394466
     ],
-    "abzug": 0
+    "streuung": 3.868455740454767,
+    "zonenquote": 0.0,
+    "abzug": 19
    },
    {
-    "v0": 2.1,
-    "trefferquote": 0.4,
+    "tempo": 2.25,
+    "trefferquote": 0.32,
     "beruehrt": 1.0,
     "mitte": [
-     94.09719788881338,
-     19.32006333479842
+     91.20405310741455,
+     40.04091458644827
     ],
-    "abzug": 0
+    "streuung": 6.080962497363175,
+    "zonenquote": 0.0,
+    "abzug": 6
    },
    {
-    "v0": 2.6,
-    "trefferquote": 0.45,
+    "tempo": 2.5,
+    "trefferquote": 0.3,
     "beruehrt": 1.0,
     "mitte": [
-     91.86990017465844,
-     3.6791598202533695
+     88.88498194661443,
+     33.76737244015433
     ],
-    "abzug": 0
+    "streuung": 8.161456725079319,
+    "zonenquote": 0.0,
+    "abzug": 1
    },
    {
-    "v0": 3.2,
-    "trefferquote": 0.25,
+    "tempo": 2.75,
+    "trefferquote": 0.3,
     "beruehrt": 1.0,
     "mitte": [
-     88.91741311268821,
-     12.503515703832312
+     87.71294818876147,
+     29.235726676284347
     ],
+    "streuung": 9.518656606511653,
+    "zonenquote": 0.0,
+    "abzug": 1
+   },
+   {
+    "tempo": 3.0,
+    "trefferquote": 0.26666666666666666,
+    "beruehrt": 1.0,
+    "mitte": [
+     77.33495714770584,
+     34.599719593895095
+    ],
+    "streuung": 10.47752051369342,
+    "zonenquote": 0.0,
     "abzug": 2
    },
    {
-    "v0": 4.0,
-    "trefferquote": 0.25,
+    "tempo": 3.25,
+    "trefferquote": 0.30666666666666664,
     "beruehrt": 1.0,
     "mitte": [
-     84.51571638630006,
-     32.72997411368075
+     73.71220696910954,
+     42.35462341719971
     ],
-    "abzug": 1
+    "streuung": 11.809094771207187,
+    "zonenquote": 0.0,
+    "abzug": 3
+   },
+   {
+    "tempo": 3.5,
+    "trefferquote": 0.26666666666666666,
+    "beruehrt": 1.0,
+    "mitte": [
+     67.04812619004808,
+     41.520247923670475
+    ],
+    "streuung": 12.089124436692664,
+    "zonenquote": 0.0,
+    "abzug": 4
+   },
+   {
+    "tempo": 3.75,
+    "trefferquote": 0.24,
+    "beruehrt": 1.0,
+    "mitte": [
+     57.29213680540771,
+     37.861954099136405
+    ],
+    "streuung": 9.547548583694294,
+    "zonenquote": 0.0,
+    "abzug": 3
+   },
+   {
+    "tempo": 4.0,
+    "trefferquote": 0.23333333333333334,
+    "beruehrt": 1.0,
+    "mitte": [
+     51.93498329682271,
+     35.147386635500055
+    ],
+    "streuung": 9.177948102002198,
+    "zonenquote": 0.0,
+    "abzug": 24
+   },
+   {
+    "tempo": 4.25,
+    "trefferquote": 0.3,
+    "beruehrt": 1.0,
+    "mitte": [
+     46.67996361784785,
+     31.416369054327212
+    ],
+    "streuung": 15.873239948183679,
+    "zonenquote": 0.0,
+    "abzug": 43
+   },
+   {
+    "tempo": 4.5,
+    "trefferquote": 0.2733333333333333,
+    "beruehrt": 1.0,
+    "mitte": [
+     39.02078720883347,
+     25.3645552115287
+    ],
+    "streuung": 18.664401320622154,
+    "zonenquote": 0.0,
+    "abzug": 44
    }
   ]
  },
  {
   "id": "builtin-safe-hinter-ball",
   "name": "Safe hinter den Ball",
-  "tempo_app": 3,
-  "v0_gemessen": 1.1,
+  "tempo_app": 0.5,
+  "tempo_gemessen": 0.5,
   "leiter": [
    {
-    "v0": 0.4,
-    "trefferquote": 0.0,
+    "tempo": 0.5,
+    "trefferquote": 1.0,
     "beruehrt": 1.0,
-    "mitte": null,
+    "mitte": [
+     69.17338717560945,
+     38.1027121503018
+    ],
+    "streuung": 3.2586327057470172,
+    "zonenquote": 0.7666666666666667,
     "abzug": 0
    },
    {
-    "v0": 0.55,
-    "trefferquote": 0.0,
-    "beruehrt": 1.0,
-    "mitte": null,
+    "tempo": 0.75,
+    "trefferquote": 1.0,
+    "beruehrt": 0.9933333333333333,
+    "mitte": [
+     80.9282085969158,
+     46.56049884013099
+    ],
+    "streuung": 3.9214944585092644,
+    "zonenquote": 0.013333333333333334,
     "abzug": 0
    },
    {
-    "v0": 0.7,
-    "trefferquote": 0.0,
-    "beruehrt": 1.0,
-    "mitte": null,
+    "tempo": 1.0,
+    "trefferquote": 1.0,
+    "beruehrt": 0.9933333333333333,
+    "mitte": [
+     93.54079082751802,
+     34.13492191085491
+    ],
+    "streuung": 4.827097438076558,
+    "zonenquote": 0.0,
     "abzug": 0
    },
    {
-    "v0": 0.9,
-    "trefferquote": 0.05,
+    "tempo": 1.25,
+    "trefferquote": 0.9933333333333333,
     "beruehrt": 1.0,
     "mitte": [
-     90.32489405150852,
-     19.558338643197935
+     92.97922885971214,
+     25.476241616237843
     ],
+    "streuung": 4.398249302179227,
+    "zonenquote": 0.0,
     "abzug": 0
    },
    {
-    "v0": 1.1,
-    "trefferquote": 0.3,
+    "tempo": 1.5,
+    "trefferquote": 0.88,
     "beruehrt": 1.0,
     "mitte": [
-     81.36224741516433,
-     5.434280577931837
+     87.56874827833947,
+     16.31407307836917
     ],
+    "streuung": 7.755944672486572,
+    "zonenquote": 0.015151515151515152,
     "abzug": 0
    },
    {
-    "v0": 1.4,
-    "trefferquote": 0.1,
-    "beruehrt": 0.95,
+    "tempo": 1.75,
+    "trefferquote": 0.82,
+    "beruehrt": 0.98,
     "mitte": [
-     69.77031191278495,
-     13.213561452296055
+     80.59066094046199,
+     7.623028145853982
     ],
+    "streuung": 9.172549149932948,
+    "zonenquote": 0.0,
     "abzug": 0
    },
    {
-    "v0": 1.7,
-    "trefferquote": 0.2,
-    "beruehrt": 1.0,
+    "tempo": 2.0,
+    "trefferquote": 0.84,
+    "beruehrt": 0.9933333333333333,
     "mitte": [
-     51.44919623622806,
-     32.70105572003777
+     70.28789670269224,
+     12.777818918935202
     ],
+    "streuung": 12.246589732030433,
+    "zonenquote": 0.0,
     "abzug": 0
    },
    {
-    "v0": 2.1,
-    "trefferquote": 0.15,
-    "beruehrt": 1.0,
+    "tempo": 2.25,
+    "trefferquote": 0.8066666666666666,
+    "beruehrt": 0.9933333333333333,
     "mitte": [
-     29.983883360498393,
-     45.294784200519686
+     52.72830612143971,
+     28.390100719075775
     ],
-    "abzug": 3
-   },
-   {
-    "v0": 2.6,
-    "trefferquote": 0.2,
-    "beruehrt": 1.0,
-    "mitte": [
-     47.05685200474709,
-     15.738777174952784
-    ],
-    "abzug": 5
-   },
-   {
-    "v0": 3.2,
-    "trefferquote": 0.15,
-    "beruehrt": 1.0,
-    "mitte": [
-     55.266548483189624,
-     11.189585335679826
-    ],
+    "streuung": 20.25251992021647,
+    "zonenquote": 0.0,
     "abzug": 2
    },
    {
-    "v0": 4.0,
-    "trefferquote": 0.15,
+    "tempo": 2.5,
+    "trefferquote": 0.8266666666666667,
+    "beruehrt": 0.98,
+    "mitte": [
+     43.0396118404631,
+     38.65212710519149
+    ],
+    "streuung": 21.265233002009147,
+    "zonenquote": 0.016129032258064516,
+    "abzug": 10
+   },
+   {
+    "tempo": 2.75,
+    "trefferquote": 0.8133333333333334,
     "beruehrt": 1.0,
     "mitte": [
-     45.2700524357194,
-     9.799472130838
+     35.36101555080387,
+     37.477649790073414
     ],
-    "abzug": 4
+    "streuung": 26.75324251717137,
+    "zonenquote": 0.00819672131147541,
+    "abzug": 10
+   },
+   {
+    "tempo": 3.0,
+    "trefferquote": 0.78,
+    "beruehrt": 0.9866666666666667,
+    "mitte": [
+     44.60559921784673,
+     28.921135169588084
+    ],
+    "streuung": 37.29308956721853,
+    "zonenquote": 0.0,
+    "abzug": 23
+   },
+   {
+    "tempo": 3.25,
+    "trefferquote": 0.78,
+    "beruehrt": 1.0,
+    "mitte": [
+     44.583516417328696,
+     24.86116500838968
+    ],
+    "streuung": 38.43754106355515,
+    "zonenquote": 0.008547008547008548,
+    "abzug": 13
+   },
+   {
+    "tempo": 3.5,
+    "trefferquote": 0.7133333333333334,
+    "beruehrt": 1.0,
+    "mitte": [
+     49.365890211177046,
+     20.616791477696367
+    ],
+    "streuung": 36.83128054714086,
+    "zonenquote": 0.028037383177570093,
+    "abzug": 27
+   },
+   {
+    "tempo": 3.75,
+    "trefferquote": 0.7466666666666667,
+    "beruehrt": 0.98,
+    "mitte": [
+     54.500585555912096,
+     13.50046862079601
+    ],
+    "streuung": 29.16507008908472,
+    "zonenquote": 0.008928571428571428,
+    "abzug": 36
+   },
+   {
+    "tempo": 4.0,
+    "trefferquote": 0.7466666666666667,
+    "beruehrt": 1.0,
+    "mitte": [
+     51.06433821963709,
+     13.544500463674714
+    ],
+    "streuung": 29.14088869564672,
+    "zonenquote": 0.0,
+    "abzug": 35
+   },
+   {
+    "tempo": 4.25,
+    "trefferquote": 0.7533333333333333,
+    "beruehrt": 1.0,
+    "mitte": [
+     51.19124873308531,
+     22.320428584911394
+    ],
+    "streuung": 25.687603207414046,
+    "zonenquote": 0.0,
+    "abzug": 39
+   },
+   {
+    "tempo": 4.5,
+    "trefferquote": 0.6666666666666666,
+    "beruehrt": 0.9866666666666667,
+    "mitte": [
+     46.266492468533684,
+     29.454624283073354
+    ],
+    "streuung": 25.990074347580347,
+    "zonenquote": 0.01,
+    "abzug": 45
    }
   ]
  },
  {
   "id": "builtin-lange-gerade",
   "name": "Lange Gerade",
-  "tempo_app": 6,
-  "v0_gemessen": 2.1,
+  "tempo_app": 1,
+  "tempo_gemessen": 1.0,
   "leiter": [
    {
-    "v0": 0.4,
+    "tempo": 0.5,
     "trefferquote": 0.0,
     "beruehrt": 0.0,
     "mitte": null,
+    "streuung": 0.0,
+    "zonenquote": 0.0,
     "abzug": 0
    },
    {
-    "v0": 0.55,
+    "tempo": 0.75,
     "trefferquote": 0.0,
-    "beruehrt": 1.0,
+    "beruehrt": 0.20666666666666667,
     "mitte": null,
+    "streuung": 0.0,
+    "zonenquote": 0.0,
     "abzug": 0
    },
    {
-    "v0": 0.7,
-    "trefferquote": 0.3,
+    "tempo": 1.0,
+    "trefferquote": 0.16,
     "beruehrt": 1.0,
     "mitte": [
-     84.73668373382712,
-     8.503439979690123
+     81.48265638399256,
+     9.985393706639243
     ],
+    "streuung": 0.9717335135659978,
+    "zonenquote": 0.7916666666666666,
     "abzug": 0
    },
    {
-    "v0": 0.9,
-    "trefferquote": 0.1,
+    "tempo": 1.25,
+    "trefferquote": 0.26,
     "beruehrt": 1.0,
     "mitte": [
-     91.46831243294037,
-     3.4656609950493573
+     86.38942738928169,
+     7.391261540032719
     ],
+    "streuung": 1.498116942894195,
+    "zonenquote": 0.0,
     "abzug": 0
    },
    {
-    "v0": 1.1,
-    "trefferquote": 0.25,
+    "tempo": 1.5,
+    "trefferquote": 0.36,
     "beruehrt": 1.0,
     "mitte": [
-     97.7886506443217,
-     1.3478490649016481
+     91.39892756599765,
+     5.169998703144533
     ],
-    "abzug": 1
-   },
-   {
-    "v0": 1.4,
-    "trefferquote": 0.05,
-    "beruehrt": 1.0,
-    "mitte": [
-     97.4776604534744,
-     1.558454192134246
-    ],
+    "streuung": 2.1905746636927974,
+    "zonenquote": 0.0,
     "abzug": 0
    },
    {
-    "v0": 1.7,
-    "trefferquote": 0.4,
+    "tempo": 1.75,
+    "trefferquote": 0.18666666666666668,
     "beruehrt": 1.0,
     "mitte": [
-     80.56589117102956,
-     4.327699055711859
+     97.0323320604644,
+     3.2354136099396014
     ],
-    "abzug": 1
-   },
-   {
-    "v0": 2.1,
-    "trefferquote": 0.3,
-    "beruehrt": 1.0,
-    "mitte": [
-     82.06381724331654,
-     11.352742237280852
-    ],
-    "abzug": 3
-   },
-   {
-    "v0": 2.6,
-    "trefferquote": 0.15,
-    "beruehrt": 1.0,
-    "mitte": [
-     90.21914201938887,
-     7.412289088150036
-    ],
+    "streuung": 1.8964227770565616,
+    "zonenquote": 0.0,
     "abzug": 2
    },
    {
-    "v0": 3.2,
-    "trefferquote": 0.3,
+    "tempo": 2.0,
+    "trefferquote": 0.22,
     "beruehrt": 1.0,
     "mitte": [
-     95.08875375389631,
-     7.921005054534504
+     96.0592114302044,
+     2.551198375993254
     ],
-    "abzug": 3
+    "streuung": 2.6435908950863265,
+    "zonenquote": 0.0,
+    "abzug": 12
    },
    {
-    "v0": 4.0,
+    "tempo": 2.25,
+    "trefferquote": 0.22666666666666666,
+    "beruehrt": 1.0,
+    "mitte": [
+     93.88600698494461,
+     3.540736721802037
+    ],
+    "streuung": 3.406488851633966,
+    "zonenquote": 0.0,
+    "abzug": 13
+   },
+   {
+    "tempo": 2.5,
     "trefferquote": 0.2,
     "beruehrt": 1.0,
     "mitte": [
-     94.14674374252513,
-     7.206978109643449
+     90.30461398783335,
+     4.977689368483564
     ],
-    "abzug": 3
+    "streuung": 4.940094935020864,
+    "zonenquote": 0.0,
+    "abzug": 9
+   },
+   {
+    "tempo": 2.75,
+    "trefferquote": 0.19333333333333333,
+    "beruehrt": 1.0,
+    "mitte": [
+     93.27610820683088,
+     4.6759512666608325
+    ],
+    "streuung": 3.827992631001866,
+    "zonenquote": 0.0,
+    "abzug": 17
+   },
+   {
+    "tempo": 3.0,
+    "trefferquote": 0.2866666666666667,
+    "beruehrt": 1.0,
+    "mitte": [
+     92.68155641491177,
+     5.9327740987664175
+    ],
+    "streuung": 5.2769231580192715,
+    "zonenquote": 0.023255813953488372,
+    "abzug": 13
+   },
+   {
+    "tempo": 3.25,
+    "trefferquote": 0.2733333333333333,
+    "beruehrt": 1.0,
+    "mitte": [
+     89.2808020518804,
+     7.176848872601511
+    ],
+    "streuung": 6.35451888948079,
+    "zonenquote": 0.07317073170731707,
+    "abzug": 10
+   },
+   {
+    "tempo": 3.5,
+    "trefferquote": 0.13333333333333333,
+    "beruehrt": 1.0,
+    "mitte": [
+     84.3171993967754,
+     7.06246927430453
+    ],
+    "streuung": 6.192387611550382,
+    "zonenquote": 0.25,
+    "abzug": 10
+   },
+   {
+    "tempo": 3.75,
+    "trefferquote": 0.22666666666666666,
+    "beruehrt": 1.0,
+    "mitte": [
+     79.53642481854541,
+     11.985930789950427
+    ],
+    "streuung": 7.760594978096664,
+    "zonenquote": 0.5,
+    "abzug": 16
+   },
+   {
+    "tempo": 4.0,
+    "trefferquote": 0.23333333333333334,
+    "beruehrt": 1.0,
+    "mitte": [
+     75.3362223165998,
+     12.990734530275317
+    ],
+    "streuung": 5.5943551948168615,
+    "zonenquote": 0.6285714285714286,
+    "abzug": 25
+   },
+   {
+    "tempo": 4.25,
+    "trefferquote": 0.18666666666666668,
+    "beruehrt": 1.0,
+    "mitte": [
+     66.49852863754892,
+     17.87345721559286
+    ],
+    "streuung": 12.458517206387773,
+    "zonenquote": 0.17857142857142858,
+    "abzug": 26
+   },
+   {
+    "tempo": 4.5,
+    "trefferquote": 0.26666666666666666,
+    "beruehrt": 1.0,
+    "mitte": [
+     65.70902330456582,
+     20.70362419996008
+    ],
+    "streuung": 15.200891976666018,
+    "zonenquote": 0.15,
+    "abzug": 23
    }
   ]
  }

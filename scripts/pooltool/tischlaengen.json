@@ -1,0 +1,331 @@
+[
+  {
+    "v0": 0.3,
+    "weg_zoll": 29.722259272230016,
+    "tischlaengen": 0.29722259272230017,
+    "gefallen": false,
+    "auf_der_leiter": false
+  },
+  {
+    "v0": 0.4,
+    "weg_zoll": 52.839572039520085,
+    "tischlaengen": 0.5283957203952009,
+    "gefallen": false,
+    "auf_der_leiter": true
+  },
+  {
+    "v0": 0.5,
+    "weg_zoll": 76.67446881237615,
+    "tischlaengen": 0.7667446881237615,
+    "gefallen": false,
+    "auf_der_leiter": false
+  },
+  {
+    "v0": 0.55,
+    "weg_zoll": 82.26190870031606,
+    "tischlaengen": 0.8226190870031606,
+    "gefallen": false,
+    "auf_der_leiter": true
+  },
+  {
+    "v0": 0.6,
+    "weg_zoll": 88.38148572044078,
+    "tischlaengen": 0.8838148572044078,
+    "gefallen": false,
+    "auf_der_leiter": false
+  },
+  {
+    "v0": 0.7,
+    "weg_zoll": 102.21705115724438,
+    "tischlaengen": 1.0221705115724438,
+    "gefallen": false,
+    "auf_der_leiter": true
+  },
+  {
+    "v0": 0.8,
+    "weg_zoll": 118.18116512278695,
+    "tischlaengen": 1.1818116512278696,
+    "gefallen": false,
+    "auf_der_leiter": false
+  },
+  {
+    "v0": 0.9,
+    "weg_zoll": 136.27382761706863,
+    "tischlaengen": 1.3627382761706863,
+    "gefallen": false,
+    "auf_der_leiter": true
+  },
+  {
+    "v0": 1.0,
+    "weg_zoll": 156.49503864008923,
+    "tischlaengen": 1.5649503864008922,
+    "gefallen": false,
+    "auf_der_leiter": false
+  },
+  {
+    "v0": 1.1,
+    "weg_zoll": 173.95169412160251,
+    "tischlaengen": 1.7395169412160252,
+    "gefallen": false,
+    "auf_der_leiter": true
+  },
+  {
+    "v0": 1.2,
+    "weg_zoll": 181.8402162484353,
+    "tischlaengen": 1.818402162484353,
+    "gefallen": false,
+    "auf_der_leiter": false
+  },
+  {
+    "v0": 1.3,
+    "weg_zoll": 190.41469682107953,
+    "tischlaengen": 1.9041469682107952,
+    "gefallen": false,
+    "auf_der_leiter": false
+  },
+  {
+    "v0": 1.4,
+    "weg_zoll": 199.6751358395354,
+    "tischlaengen": 1.9967513583953538,
+    "gefallen": false,
+    "auf_der_leiter": true
+  },
+  {
+    "v0": 1.5,
+    "weg_zoll": 209.62153330380264,
+    "tischlaengen": 2.0962153330380264,
+    "gefallen": false,
+    "auf_der_leiter": false
+  },
+  {
+    "v0": 1.6,
+    "weg_zoll": 220.25388921388154,
+    "tischlaengen": 2.2025388921388154,
+    "gefallen": false,
+    "auf_der_leiter": false
+  },
+  {
+    "v0": 1.7,
+    "weg_zoll": 231.5722035697721,
+    "tischlaengen": 2.3157220356977213,
+    "gefallen": false,
+    "auf_der_leiter": true
+  },
+  {
+    "v0": 1.8,
+    "weg_zoll": 243.57647637147392,
+    "tischlaengen": 2.4357647637147393,
+    "gefallen": false,
+    "auf_der_leiter": false
+  },
+  {
+    "v0": 1.9,
+    "weg_zoll": 256.2667076189875,
+    "tischlaengen": 2.5626670761898747,
+    "gefallen": false,
+    "auf_der_leiter": false
+  },
+  {
+    "v0": 2.0,
+    "weg_zoll": 269.46133400203433,
+    "tischlaengen": 2.6946133400203434,
+    "gefallen": false,
+    "auf_der_leiter": false
+  },
+  {
+    "v0": 2.1,
+    "weg_zoll": 273.99308376111003,
+    "tischlaengen": 2.7399308376111002,
+    "gefallen": false,
+    "auf_der_leiter": true
+  },
+  {
+    "v0": 2.2,
+    "weg_zoll": 278.7458944840431,
+    "tischlaengen": 2.787458944840431,
+    "gefallen": false,
+    "auf_der_leiter": false
+  },
+  {
+    "v0": 2.3,
+    "weg_zoll": 288.06411731061274,
+    "tischlaengen": 2.8806411731061274,
+    "gefallen": false,
+    "auf_der_leiter": false
+  },
+  {
+    "v0": 2.4,
+    "weg_zoll": 298.30855589921885,
+    "tischlaengen": 2.9830855589921885,
+    "gefallen": false,
+    "auf_der_leiter": false
+  },
+  {
+    "v0": 2.5,
+    "weg_zoll": 309.0051436336975,
+    "tischlaengen": 3.0900514363369753,
+    "gefallen": false,
+    "auf_der_leiter": false
+  },
+  {
+    "v0": 2.6,
+    "weg_zoll": 320.1509969051365,
+    "tischlaengen": 3.2015099690513646,
+    "gefallen": false,
+    "auf_der_leiter": true
+  },
+  {
+    "v0": 2.7,
+    "weg_zoll": 331.74403725461696,
+    "tischlaengen": 3.3174403725461694,
+    "gefallen": false,
+    "auf_der_leiter": false
+  },
+  {
+    "v0": 2.8,
+    "weg_zoll": 343.78272520724136,
+    "tischlaengen": 3.4378272520724136,
+    "gefallen": false,
+    "auf_der_leiter": false
+  },
+  {
+    "v0": 2.9,
+    "weg_zoll": 356.265894464315,
+    "tischlaengen": 3.5626589446431502,
+    "gefallen": false,
+    "auf_der_leiter": false
+  },
+  {
+    "v0": 3.0,
+    "weg_zoll": 367.79133093957387,
+    "tischlaengen": 3.6779133093957386,
+    "gefallen": false,
+    "auf_der_leiter": false
+  },
+  {
+    "v0": 3.1,
+    "weg_zoll": 372.09990378061354,
+    "tischlaengen": 3.7209990378061355,
+    "gefallen": false,
+    "auf_der_leiter": false
+  },
+  {
+    "v0": 3.2,
+    "weg_zoll": 376.55101837937076,
+    "tischlaengen": 3.7655101837937077,
+    "gefallen": false,
+    "auf_der_leiter": true
+  },
+  {
+    "v0": 3.3,
+    "weg_zoll": 381.1445285579832,
+    "tischlaengen": 3.811445285579832,
+    "gefallen": false,
+    "auf_der_leiter": false
+  },
+  {
+    "v0": 3.4,
+    "weg_zoll": 385.8803151851915,
+    "tischlaengen": 3.8588031518519146,
+    "gefallen": false,
+    "auf_der_leiter": false
+  },
+  {
+    "v0": 3.5,
+    "weg_zoll": 390.7582802140579,
+    "tischlaengen": 3.907582802140579,
+    "gefallen": false,
+    "auf_der_leiter": false
+  },
+  {
+    "v0": 3.6,
+    "weg_zoll": 395.7783422352745,
+    "tischlaengen": 3.9577834223527453,
+    "gefallen": false,
+    "auf_der_leiter": false
+  },
+  {
+    "v0": 3.7,
+    "weg_zoll": 400.9404331125031,
+    "tischlaengen": 4.009404331125031,
+    "gefallen": false,
+    "auf_der_leiter": false
+  },
+  {
+    "v0": 3.8,
+    "weg_zoll": 406.24449540318875,
+    "tischlaengen": 4.062444954031887,
+    "gefallen": false,
+    "auf_der_leiter": false
+  },
+  {
+    "v0": 3.9,
+    "weg_zoll": 411.69048035814757,
+    "tischlaengen": 4.116904803581476,
+    "gefallen": false,
+    "auf_der_leiter": false
+  },
+  {
+    "v0": 4.0,
+    "weg_zoll": 417.27834635343675,
+    "tischlaengen": 4.172783463534367,
+    "gefallen": false,
+    "auf_der_leiter": true
+  },
+  {
+    "v0": 4.1,
+    "weg_zoll": 424.90148257741083,
+    "tischlaengen": 4.2490148257741085,
+    "gefallen": false,
+    "auf_der_leiter": false
+  },
+  {
+    "v0": 4.2,
+    "weg_zoll": 434.3500692276764,
+    "tischlaengen": 4.343500692276764,
+    "gefallen": false,
+    "auf_der_leiter": false
+  },
+  {
+    "v0": 4.3,
+    "weg_zoll": 444.0313881518937,
+    "tischlaengen": 4.440313881518937,
+    "gefallen": false,
+    "auf_der_leiter": false
+  },
+  {
+    "v0": 4.4,
+    "weg_zoll": 453.944749428813,
+    "tischlaengen": 4.5394474942881295,
+    "gefallen": false,
+    "auf_der_leiter": false
+  },
+  {
+    "v0": 4.5,
+    "weg_zoll": 464.0896030177345,
+    "tischlaengen": 4.640896030177345,
+    "gefallen": false,
+    "auf_der_leiter": false
+  },
+  {
+    "v0": 4.6,
+    "weg_zoll": 467.96569181805046,
+    "tischlaengen": 4.6796569181805046,
+    "gefallen": false,
+    "auf_der_leiter": false
+  },
+  {
+    "v0": 4.7,
+    "weg_zoll": 471.38383301469463,
+    "tischlaengen": 4.713838330146946,
+    "gefallen": false,
+    "auf_der_leiter": false
+  },
+  {
+    "v0": 4.8,
+    "weg_zoll": 474.8762208245025,
+    "tischlaengen": 4.748762208245025,
+    "gefallen": false,
+    "auf_der_leiter": false
+  }
+]

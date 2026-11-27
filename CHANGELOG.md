@@ -6,6 +6,144 @@ Die Versionsnummer steht an genau einer Stelle — in `package.json` — und ers
 unten auf der Seite **Einstellungen** sowie auf der Fehlerseite. Schema:
 `Hauptversion.Funktion.Korrektur`.
 
+## 0.19.2 – 27.11.2026
+
+Die Nachrechnung von 0.19.0 hat zwölf Zielzonen als unerreichbar gemeldet.
+Nachgemessen wurde dann **warum** — und die Antwort war meist nicht „die Zone
+liegt falsch", sondern „die Übung beschreibt den Stoß nicht, der dorthin
+führt". Acht Zonen sitzen jetzt anders, sieben Übungen haben den Drall
+bekommen, den ihr eigener Hinweis schon verlangte, und das Tempo bedeutet
+endlich etwas. In 250 gerechneten Versuchen je Übung wird jetzt **jede**
+Zielzone erreicht; vorher waren 20 von 25 unerreichbar. Die Fälle einzeln in
+[Zielzonen-Entscheidungen.md](docs/Zielzonen-Entscheidungen.md).
+
+### Geändert
+- **Das Tempo steht in Tischlängen.** Bisher war es eine Zahl von 1 bis 10
+  ohne Einheit — belegt bedeutungslos: „Stop-Shot kurz" und „Nachlauf 20 cm"
+  standen beide auf 4 und verlangten gemessen 3,2 gegen 0,4 m/s. Jetzt ist
+  Tempo die Strecke, die der Weiße von der Kopflinie aus **allein** über den
+  Tisch rollen würde: 1 ist eine Tischlänge (sanft), 2 zwei
+  (Stellungsspiel), 3 drei (langer Rückzieher), 4 und mehr ist Break-Tempo,
+  0,5 der Touch-Ball. Das ist die Skala, die am Tisch ohnehin gezählt wird.
+  Der Schieber im Baukasten läuft von 0,5 bis 5 in Viertel-Längen; die
+  Übungsseite schreibt „2,25 Tischlängen · mittel".
+- **Alle 38 Tempo-Angaben neu gemessen.** Jede Übung wurde die Leiter von
+  0,5 bis 4,5 Tischlängen in Vierteln hinaufgespielt, 150 Versuche je
+  Stufe. Genommen wurde die **sanfteste** Stufe, die an die beste Güte
+  heranreicht — Güte ist der Anteil der Versuche, in denen der Ball fällt
+  **und** der Weiße in seiner Zielzone zur Ruhe kommt. Neun knappe Fälle
+  wurden mit 250 Versuchen und drei Saaten nachgeprüft; acht bestätigten
+  die Wahl, bei **Position in die Kitchen** hatte das Rauschen eine
+  Viertel-Länge daneben gelegen (3,00 bringt 42 bis 47 % Zonentreffer,
+  3,25 bringt 81 bis 83 %).
+- **Sieben Übungen haben den Drall bekommen, den ihr Hinweis schon
+  verlangte.** Sie standen auf mittigem Treffpunkt — und ein Stop-Shot über
+  18, 32 oder 55 Zoll Anlauf kann mit mittigem Treffpunkt nicht
+  stehenbleiben, er rollt in den Vorwärtslauf: **Stop-Shot kurz** (−0,2),
+  **Stop-Shot mittel** (−0,2), **Stop-Shot lang** (−0,35), **Mitteltasche
+  gerade** (−0,35), **Lange Gerade** (−0,2) und **Dünner Schnitt 60 Grad**
+  (−0,5) bekommen Rückwärtsdrall, **Schnittball 30 Grad** Nachlauf (+0,5).
+  Bei einer achten, **Rückzieher 30 cm**, war der Drall mit −0,6 zu stark
+  und steht jetzt auf −0,5.
+- **Acht Zielzonen sitzen anders:**
+  - **Rückzieher kurz** und **Rückzieher lang** verlangten 30 bzw. 35 Zoll
+    Rückweg. Beide rechnen ihre Zone jetzt aus der Stoßlinie (`cueAfter`),
+    über 23 bzw. 7 Zoll — das, was messbar erreichbar ist.
+  - **Stop-Shot kurz** hatte seine Zone als Zahlenpaar (72,7 / 25) und
+    sollte damit den Geisterball bezeichnen. Die Stoßlinie läuft aber nicht
+    waagerecht, sondern zur Ecke, und der Geisterball liegt auf
+    (73,41 / 26,59) — 1,7 Zoll weiter. Jetzt rechnet die App die Zone
+    selbst, wie beim großen Geschwisterstoß.
+  - **Mitteltasche im Schnitt** wird nur noch nach dem Loch gewertet. Der
+    Ball fällt in 88 % der Versuche, bei jedem Treffpunkt und jedem Tempo —
+    aber die Ruhelage des Weißen streut um 16 Zoll, und mehr als 27 %
+    Zonentreffer waren auf dem ganzen Fächer aus sechs Treffpunkten und
+    fünfzehn Tempostufen nicht zu holen.
+  - **Seiteneffet über die Bande**: (25 / 12) → (18,1 / 42).
+  - **Enge Position**: (55 / 34) → (88,6 / 31,3).
+  - **Safe hinter den Ball**: Der Sperrball lag auf (30 / 30), die Zone auf
+    (24 / 30) — der Weiße kam dort in 660 gerechneten Versuchen nie an.
+    Sperrball und Zone sind mitgewandert, auf (67,7 / 31,3) und
+    (71,1 / 39,9).
+  - **Cluster öffnen** wird nur noch nach dem Loch gewertet
+    (`mode: 'pocket'`): Nach dem Aufbrechen ist der Weg des Weißen nicht zu
+    steuern — 27 Zoll Streuung. Außerdem lag der Cluster gar nicht auf
+    seinem Weg; in 540 Versuchen wurde er nicht einmal berührt. Er liegt
+    jetzt auf (62 / 31) und (64,3 / 31). Sein Tempo steht als einziges
+    nicht auf dem Wert, den die Nachrechnung nennt: Die zählt nur gelochte
+    Bälle, und das ist hier die halbe Aufgabe. Eigens gemessen geht der
+    Cluster unter 2,25 Tischlängen **gar nicht** auf (0 bis 1 %), bei 2,25
+    in 65 % und ab 2,50 in 95 bis 100 % der Versuche — bei über die ganze
+    Leiter gleicher Trefferquote. Gesetzt sind 2,50.
+
+### Neu
+- **`src/domain/tempo.ts`** — eine Stelle für alles, was das Tempo angeht:
+  Grenzen, Schrittweite, die Texte („2,25 Tischlängen", „mittel") und die
+  Überführung alter Werte.
+- **`scripts/pooltool/tischlaengen.py`** — misst die Umrechnung
+  Tischlängen ↔ m/s, statt sie anzunehmen: legt den Weißen auf die
+  Kopflinie, stößt ihn 48-mal mit steigender Geschwindigkeit an und zählt
+  den gerollten Weg. Eine Länge braucht 0,68 m/s, zwei 1,40, drei 2,42,
+  vier 3,68.
+
+### Behoben
+- **Eigene Übungen behalten ihr Tempo.** Wer eine Fassung selbst gespeichert
+  hat, hat dort noch einen Wert der alten Skala stehen. Eine Migration
+  rechnet ihn beim nächsten Start über die gemessene Kurve um (alt 1 → 1,5
+  Längen, alt 5 → 3,25, alt 10 → 4,75). Sie hängt an einem Zähler
+  (`speedScaleVersion`) und nicht an einer Prüfung des Werts, denn am Wert
+  allein ist nicht zu erkennen, ob schon gerechnet wurde: alt 2 ergibt
+  genau 2 Längen.
+- **Geteilte Links von früher werden mitgerechnet.** Die Nutzlast hat jetzt
+  die Fassung 2; eine Übung aus Fassung 1 trägt ein Tempo der alten Skala,
+  und das wird beim Einlesen umgerechnet. Ohne das wäre aus „Tempo 8" ein
+  auf 5 Tischlängen gedeckelter Wert geworden und aus „Tempo 2" ein Stoß
+  halb so weit, wie der Absender ihn meinte.
+- Die Übungsseite rundete das Tempo auf eine Nachkommastelle und zeigte
+  damit „2,3 Tischlängen" — einen Wert, den der Schieber nicht annimmt.
+- Die Namen der Stöße saßen schief: „sanft" reichte bis 1,75 Tischlängen,
+  obwohl 1,75 näher an zwei Längen („mittel") liegt. Die Grenzen liegen
+  jetzt in der Mitte zwischen den ganzen Längen.
+
+### Gemessen
+Alle 38 Übungen vorher und nachher durchgerechnet, mit derselben Streuung
+eines geübten Spielers (0,35 Grad in der Richtung, 4 % im Tempo, 0,04
+Ballradien im Treffpunkt). „Güte" ist der Anteil der Versuche, in denen der
+Ball fällt **und** der Weiße in seiner Zielzone zur Ruhe kommt, abzüglich
+falscher Taschen und gefallener Weißer — also das, was die App wertet.
+
+| | 0.19.1 | 0.19.2 |
+|---|---|---|
+| Zielzonen in der Sammlung | 25 | 23 |
+| davon in der Nachrechnung **nie** getroffen | **20** | **0** |
+| mittlere Zonenquote | 4 % | **79 %** |
+| mittlerer Abstand Ruhelage ↔ Zone | 24,5" | **2,6"** |
+| Zonen weiter entfernt, als sie Radius haben | 23 von 25 | **0 von 23** |
+| Trefferquote im Mittel | 43 % | 45 % |
+| **Güte im Mittel** | 14 % | **37 %** |
+| falsche Tasche oder Weißer gefallen | 12,9 % | **4,4 %** |
+| Schwierigkeit ↔ Trefferquote | r = −0,650 | r = −0,511 |
+| Schwierigkeit ↔ Güte | r = −0,452 | r = −0,538 |
+
+Die Trefferquote bleibt also praktisch gleich: Die Zielzonen sind erreichbar
+geworden, ohne dass das Einlochen schwerer wurde. Einzelne Übungen in
+`scripts/pooltool/bericht.md`, die Tempo-Leiter in `tempo.md`.
+
+Die vier deutlichsten Einzelfälle:
+
+| Übung | Zonenquote vorher | nachher | was fehlte |
+|---|---|---|---|
+| Stop-Shot kurz | 23 % | **99 %** | Drall, und die Zone saß 1,7" neben dem Geisterball |
+| Nachlauf 20 cm | 0 % | **100 %** | Tempo (0,75 statt 4 ohne Einheit) |
+| Dünner Schnitt 60 Grad | 0 % | **86 %** | Rückwärtsdrall |
+| Position in die Kitchen | 3 % | **87 %** | Tempo, auf ein Viertel genau |
+
+### Hinweis für eigene Fassungen
+Alle 38 Fingerabdrücke der Vorlagen ändern sich. Wer eine eigene Fassung
+einer mitgelieferten Übung gespeichert hat, sieht beim nächsten Start
+„Vorlage überarbeitet" — zu Recht: Tempo, Drall oder Zielzone sind andere
+geworden. Die eigene Fassung bleibt unangetastet.
+
 ## 0.19.1 – 27.11.2026
 
 Die eindeutigen Korrekturen aus der Nachrechnung von 0.19.0 — die Fälle, in
