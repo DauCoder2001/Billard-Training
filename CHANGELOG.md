@@ -6,6 +6,73 @@ Die Versionsnummer steht an genau einer Stelle — in `package.json` — und ers
 unten auf der Seite **Einstellungen** sowie auf der Fehlerseite. Schema:
 `Hauptversion.Funktion.Korrektur`.
 
+## 0.19.3 – 27.11.2026
+
+Die Schwierigkeit ist keine Verzierung: sie multipliziert das Spieler-Rating
+(`skills.ts`, Faktor 0,5 + 0,05 × Schwierigkeit) und sagt dem Coach, für
+welches Niveau eine Übung gedacht ist (`coach.ts`, Schwierigkeit × 10). Gegen
+die gemessene Güte aus 0.19.2 gehalten, trug die Zahl in Stufe B gar keine
+Information und in Stufe C fast keine. Geändert wurden nur die Ausreißer.
+
+### Geändert
+
+- **Stufe B aufgefächert.** Alle sieben Übungen trugen die 6, obwohl ihre
+  gemessene Güte von 65 % bis 8 % reicht — Faktor acht. Jetzt nach Güte
+  geordnet im vorgesehenen Band 4 bis 6: Mitteltasche im Schnitt (65 %) und
+  Ball an der Bande (47 %) auf **4**, Position in die Kitchen (24 %),
+  Stop-Shot lang (21 %) und Bandenball Langbande (19 %) auf **5**,
+  Schnittball 45 Grad und Kombination (je 8 %) bleiben auf **6**.
+- **Safe hinter den Ball von 8 auf 6.** Mit 79 % Güte geht er von allen
+  C-Übungen am leichtesten auf — dreimal so leicht wie die nächste (Cluster
+  öffnen, 27 %). Mit der 8 hob gerade die leichteste Übung der Sammlung das
+  Rating am stärksten. Dass ein Safe Urteil verlangt, trägt die Stufe C,
+  nicht die Schwierigkeit (Konzept 3.1: das Thema bestimmt die Stufe, die
+  Schwierigkeit ordnet innerhalb der Stufe).
+
+### Neu
+
+- Eine Prüfung hält die Stufen B und C in ihren Bändern (4–6 und 6–8) und
+  verlangt, dass B sein Band ausnutzt. Die eine gewollte Ausnahme ist
+  festgeschrieben: der sehr dünne Schnitt mit 75 Grad behält seine 9.
+
+### Gemessen
+
+| Stufe | Rangkorrelation Schwierigkeit/Güte | |
+|---|---|---|
+| A | −0,54 | unverändert gelassen |
+| B | nicht berechenbar (alle sieben auf 6) | → jetzt geordnet |
+| C | −0,07 | nur der Safe geändert |
+
+### Offen, bewusst nicht angefasst
+
+- **Die Reihenfolge innerhalb der Stufe C.** Von Cluster öffnen (27 %) bis
+  Kick (7 %) tragen zehn Übungen die 7, 8 oder 9, ohne Bezug zur Messung.
+  Zwei dieser Zahlen stehen aber selbst in Frage: beim Cluster sieht die
+  Nachrechnung nur das Einlochen, nicht ob der Cluster aufgeht, und der Kick
+  mit 7 % Treffern ist eher falsch aufgebaut als schwer.
+- **Schnittball 15 Grad** ist mit 16 % Güte die schwerste Übung der Stufe A,
+  behält aber seine 3. Das Problem ist dort nicht die Schwierigkeit, sondern
+  das Tempo: ein 15-Grad-Anschnitt braucht 4,25 Tischlängen — Anstoßtempo —
+  weil die Zielzone auf (60/12) liegt. Das ist eine Frage an den Aufbau.
+- **„Schweres Kaliber"** verlangt 80 Prozent auf einer Übung der
+  Schwierigkeit 8 oder höher. Nach dem Umzug des Safes sind das fünf
+  Übungen, deren beste der gerechnete Spieler mit 28 Punkten abschließt.
+  Der Erfolg war auch vorher nur über den Safe erreichbar — und dort nur,
+  weil die Wertung eines Safes Punkte an das Einlochen bindet, was die
+  Übung ausdrücklich nicht will (`scoring.ts`, Fall `position`). Beides
+  gehört zusammen entschieden.
+- **Der Weiße fällt zu oft** bei Schnittball 45 Grad (27 %), Mitteltasche im
+  Schnitt (26 %), Karambolage (24 %) und Position in die Kitchen (21 %).
+  Aufbaufehler, keine Schwierigkeit.
+
+### Hinweis für eigene Fassungen
+
+Sechs Vorlagen ändern ihren Fingerabdruck. Wer eine davon abgewandelt
+gespeichert hat, sieht beim nächsten Start „Vorlage überarbeitet". Am Aufbau
+ändert sich nichts — nur die Schwierigkeit. Bereits erspielte Ratings bleiben,
+wie sie sind: sie werden am Ende einer Einheit geschrieben und nie neu
+gerechnet. Die neue Schwierigkeit wirkt also erst auf die nächste Einheit.
+
 ## 0.19.2 – 27.11.2026
 
 Die Nachrechnung von 0.19.0 hat zwölf Zielzonen als unerreichbar gemeldet.

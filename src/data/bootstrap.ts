@@ -37,8 +37,12 @@ import { speedFromLegacy } from '@/domain/tempo'
  * 8: Tempo in Tischlaengen, Zielzonen aus der Nachrechnung gesetzt (0.19.2).
  *    Alle 38 Uebungen aendern sich: jede im Tempo, zehn zusaetzlich im Drall
  *    oder in der Zielzone.
+ * 9: Schwierigkeiten der Stufe B aufgefaechert und der Safe von 8 auf 6
+ *    (0.19.3). Sechs Uebungen aendern nur diese Zahl - sie wirkt auf den
+ *    Vorschlag des Coaches und auf das Rating, erreicht ein Geraet aber
+ *    nur ueber diese Erhoehung.
  */
-export const SEED_VERSION = 8
+export const SEED_VERSION = 9
 
 let running: Promise<void> | null = null
 

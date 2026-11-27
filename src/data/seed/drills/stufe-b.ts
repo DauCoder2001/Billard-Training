@@ -3,6 +3,20 @@
  *
  * Der Ball fallen zu lassen genuegt nicht mehr: hier zaehlt, wo der Weisse
  * danach liegen bleibt (Konzept 3.3).
+ *
+ * Die Schwierigkeiten ordnen die sieben Uebungen im Band 4 bis 6 nach der
+ * gemessenen Guete (je 250 Versuche, scripts/pooltool/bericht.md vom
+ * 27.11.2026). Bis 0.19.2 trugen alle sieben die 6, obwohl die Guete von
+ * 65 % bis 8 % reicht - Faktor acht. Der Coach schlug sie damit gleich
+ * bereitwillig vor (coach.ts), und jede hob das Rating gleich stark
+ * (skills.ts). Jetzt: Mitteltasche im Schnitt 65 % und Ball an der Bande
+ * 47 % auf 4, Position in die Kitchen 24 %, Stop-Shot lang 21 % und
+ * Bandenball Langbande 19 % auf 5, Schnittball 45 Grad und Kombination je
+ * 8 % auf 6.
+ *
+ * Die 4 der Mitteltasche im Schnitt steht an der Grenze zur Stufe A. Das
+ * ist gewollt: die Baender ueberlappen (Konzept 3.1). Dass der Weisse dort
+ * in 26 von 100 Versuchen faellt, ist in den 65 % schon abgezogen.
  */
 
 import { ANDERE_SEITE } from './build'
@@ -28,7 +42,7 @@ export const STUFE_B: DrillSpec[] = [
     spin: { x: 0, y: -0.35 },
     skills: ['stun', 'position'],
     shotType: 'cut',
-    difficulty: 6,
+    difficulty: 5,
     speed: 3,
     coachNotes:
       'Über die Distanz braucht der Weiße etwas Rückwärtsdrall, damit der Rolldrall bis zum Treffer aufgebraucht ist.',
@@ -89,7 +103,7 @@ export const STUFE_B: DrillSpec[] = [
     zone: null,
     skills: ['cut', 'position'],
     shotType: 'cut',
-    difficulty: 6,
+    difficulty: 4,
     speed: 2.75,
     coachNotes: 'Bei Schnittbällen in die Mitte wird die wirksame Taschenöffnung schnell schmal.',
   },
@@ -106,7 +120,7 @@ export const STUFE_B: DrillSpec[] = [
     zone: null,
     skills: ['bank'],
     shotType: 'bank',
-    difficulty: 6,
+    difficulty: 5,
     speed: 2.25,
     coachNotes:
       'Ohne Effet und mit mittlerem Tempo spiegelt die Bande sauber. Mehr Kraft lässt den Ball kürzer herauskommen.',
@@ -148,7 +162,7 @@ export const STUFE_B: DrillSpec[] = [
     zone: { x: 78, y: 40, r: 8 },
     skills: ['rail', 'cut'],
     shotType: 'cut',
-    difficulty: 6,
+    difficulty: 4,
     speed: 1.75,
     coachNotes:
       'Bandenbälle wirken voller, als sie sind. Lieber einen Hauch dünner anvisieren und ohne Effet spielen.',
@@ -167,7 +181,7 @@ export const STUFE_B: DrillSpec[] = [
     mode: 'pocket+position',
     skills: ['draw', 'position'],
     shotType: 'position',
-    difficulty: 6,
+    difficulty: 5,
     // Die Zone haengt hier scharf am Tempo, und das macht die Zahl
     // empfindlich: 3,00 Laengen bringen 42 bis 47 % Zonentreffer, 3,25
     // bringen 81 bis 83 %, 3,50 wieder 46 bis 49 % (je 250 Versuche, drei

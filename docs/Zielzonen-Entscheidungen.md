@@ -1,4 +1,4 @@
-# Zielzonen und Stoß — die Fälle für 0.19.2
+# Zielzonen, Tempo und Schwierigkeit — die Fälle für 0.19.2 und 0.19.3
 
 Stand 27.11.2026. Grundlage: Messungen mit pooltool über die ganze
 Tempo-Leiter — zuerst grob (0,4 bis 4,0 m/s, 11 Stufen, 40 bis 60 Versuche
@@ -198,17 +198,100 @@ bis 49 % (je 250 Versuche, drei Saaten). Der Lauf mit 150 Versuchen hatte
 Unterschied. Neun knappe Fälle wurden deshalb mit 250 Versuchen und drei
 Saaten nachgeprüft; acht bestätigten die Wahl, dieser eine nicht.
 
-## Noch offen: die Schwierigkeiten
+## Die Schwierigkeiten — besprochen und entschieden (0.19.3)
 
-Mit 0.19.2 nicht angefasst — sie werden einzeln vorgelegt. Die Grundlage
-steht jetzt aber fest: `scripts/pooltool/bericht.md` mit 250 Versuchen je
-Übung.
+Mit 0.19.2 nicht angefasst, am 27.11.2026 besprochen und in 0.19.3
+entschieden: **nur die Ausreißer.** Grundlage ist
+`scripts/pooltool/bericht.md` mit 250 Versuchen je Übung.
+
+### Warum die Zahl zählt
+
+Fünf Stellen lesen sie, und die beiden ersten waren bei der Besprechung der
+Grund, überhaupt etwas zu ändern:
+
+| Stelle | Was sie tut |
+|---|---|
+| `skills.ts:12` | `0.5 + 0.05 × Schwierigkeit` multipliziert den Score zum Rating-Ziel. 80 Punkte auf 8 ziehen das Rating in Richtung 72, dieselben 80 auf 4 nur in Richtung 56. |
+| `coach.ts:149` | `abs(Schwierigkeit × 10 − Rating)`, davon ein Viertel als Abzug. Die Zahl wird als Niveau gelesen: 8 heißt „passt zu einem Spieler bei 80". |
+| `achievements.ts:199` | „Schweres Kaliber": 80 Punkte auf einer Übung mit Schwierigkeit 8 oder höher. |
+| `series.ts:185` | Serien interpolieren eine Leiter zwischen zwei Schwierigkeiten. |
+| `LibraryPage.tsx:54` | Schieber „höchstens Schwierigkeit X" und Sortierung. |
+
+Das Rating wird einmal am Ende einer Einheit geschrieben
+(`repositories/sessions.ts:53`) und nie aus der Historie neu gerechnet. Eine
+geänderte Schwierigkeit wirkt also nur vorwärts.
+
+### Wie weit die Zahl von der Messung weg war
+
+Rangkorrelation (Spearman) zwischen Schwierigkeit und Güte:
+
+| Stufe | Spearman | |
+|---|---|---|
+| A | −0,54 | richtiges Vorzeichen, mäßig — bleibt |
+| B | nicht berechenbar | alle sieben Übungen tragen die 6 |
+| C | −0,07 | kein Zusammenhang |
+
+### Gesetzt wurde
+
+| Übung | Stufe | alt | neu | Güte |
+|---|---|---|---|---|
+| Mitteltasche im Schnitt | B | 6 | **4** | 65 % |
+| Ball an der Bande | B | 6 | **4** | 47 % |
+| Position in die Kitchen | B | 6 | **5** | 24 % |
+| Stop-Shot lang | B | 6 | **5** | 21 % |
+| Bandenball Langbande | B | 6 | **5** | 19 % |
+| Schnittball 45 Grad | B | 6 | 6 | 8 % |
+| Kombination | B | 6 | 6 | 8 % |
+| Safe hinter den Ball | C | 8 | **6** | 79 % |
+
+Sechs Übungen, sechs neue Fingerabdrücke. Die 4 der Mitteltasche im Schnitt
+steht an der Grenze zur Stufe A; die Bänder überlappen mit Absicht
+(Konzept 3.1). Dass der Weiße dort in 26 von 100 Versuchen fällt, ist in
+den 65 % bereits abgezogen — die Güte multipliziert die Fehlversuche weg.
+
+### Bewusst nicht gesetzt
+
+- **Die Reihenfolge innerhalb der Stufe C.** Zehn Übungen von 27 % bis 7 %
+  tragen 7, 8 oder 9 ohne Bezug zur Messung. Zwei dieser Zahlen stehen aber
+  selbst in Frage: beim Cluster sieht die Nachrechnung nur das Einlochen,
+  nicht ob der Cluster aufgeht, und der Kick mit 7 % Treffern ist eher
+  falsch aufgebaut als schwer. Eine Reihenfolge auf einer Messung, die man
+  gerade anzweifelt, ist keine Verbesserung.
+- **Schnittball 15 Grad** behält seine 3, obwohl er mit 16 % Güte die
+  schwerste Übung der Stufe A ist. Dort ist nicht die Schwierigkeit das
+  Problem, sondern das Tempo: 4,25 Tischlängen — Anstoßtempo — für einen
+  15-Grad-Anschnitt, weil die Zielzone auf (60/12) liegt. Frage an den
+  Aufbau, eigene Messung.
+- **Der sehr dünne Schnitt mit 75 Grad** behält seine 9, obwohl das Band der
+  Stufe C bei 8 endet. Das Konzept nennt ihn namentlich als die gewollte
+  Ausnahme, und gemessen ist er dort auch die zweitschwerste Übung (12 %
+  Güte, nur der Kick liegt darunter). Die Prüfung schreibt die Ausnahme
+  jetzt fest, damit sie nicht aus Versehen verschwindet.
+- **„Schweres Kaliber".** Nach dem Umzug des Safes gibt es fünf Übungen mit
+  Schwierigkeit 8 oder höher; die beste davon schließt der gerechnete
+  Spieler mit 28 Punkten ab, verlangt sind 80. Der Erfolg war aber auch
+  vorher nur über den Safe erreichbar — und dort nur über eine zweite
+  Eigenheit: `scoring.ts` gibt im Modus `position` nur Punkte, wenn der
+  Objektball gefallen ist (`result.pocketed ? pos * 2 : 0`), während der
+  Safe ausdrücklich verlangt, ihn nicht zu lochen. Im Trainer gibt es dafür
+  nur „Eingelocht" oder „Verfehlt". Beides gehört zusammen entschieden, und
+  zwar nicht als Schwierigkeitsfrage.
 
 Der Grundsatz aus dem Konzept (3.1) gilt weiter: **Das Thema bestimmt die
 Stufe, die Schwierigkeit ordnet innerhalb der Stufe.** Also wird nicht die
 Güte in eine Zahl von 1 bis 10 umgerechnet, sondern innerhalb jeder Stufe
 nach Güte sortiert und über das Band der Stufe verteilt (A 1–4, B 4–6,
 C 6–8).
+
+### Die Rangfolgen, wie sie bei der Besprechung vorlagen
+
+Die drei Tabellen sind der Stand, mit dem die Besprechung geführt wurde. Die
+Spalte **nach Rang** ist die mechanische Aufteilung: Rangliste nach Güte, zu
+gleichen Teilen über das Band der Stufe verteilt. Gesetzt wurde sie so nicht
+— 0.19.3 folgt stattdessen den Sprüngen in der Güte. In Stufe B liegt der
+größte bei 47 % → 24 %, weshalb „Position in die Kitchen" auf 5 steht und
+nicht, wie die Tabelle vorschlägt, auf 4. Was entschieden wurde, steht oben
+unter „Gesetzt wurde" und „Bewusst nicht gesetzt".
 
 ### Stufe A, Band 1–4
 
@@ -281,7 +364,8 @@ Alle sieben stehen heute auf 6 — die Stufe ist in sich gar nicht geordnet.
    eine Frage der Stufe als der Zahl.
 5. **Sehr dünner Schnitt 75 Grad** steht auf 9, über dem Band der Stufe C.
    Das Konzept nennt sie ausdrücklich als Ausnahme — zu entscheiden, ob die
-   Ausnahme bleibt.
+   Ausnahme bleibt. **Entschieden: sie bleibt**, und eine Prüfung schreibt
+   sie fest.
 6. **Stufe B ist in sich ungeordnet:** alle sieben Übungen stehen auf 6,
    obwohl zwischen der leichtesten (65 %) und der schwersten (8 %) der
    Faktor acht liegt.

@@ -244,7 +244,14 @@ export const STUFE_C: DrillSpec[] = [
     mode: 'position',
     skills: ['safety', 'position'],
     shotType: 'safety',
-    difficulty: 8,
+    // Bis 0.19.2 stand hier 8. Gemessen ist der Safe mit 79 % Guete die am
+    // leichtesten aufgehende Uebung der Stufe C - dreimal die der naechsten
+    // (Cluster oeffnen, 27 %). Mit der 8 hob gerade sie das Rating am
+    // staerksten (skills.ts: Faktor 0,5 + 0,05 mal Schwierigkeit) und galt
+    // dem Coach als Uebung fuer ein Niveau von 80 (coach.ts). Dass ein Safe
+    // Urteil verlangt, traegt die Stufe C - nicht die Schwierigkeit
+    // (Konzept 3.1: das Thema bestimmt die Stufe).
+    difficulty: 6,
     speed: 0.5,
     coachNotes:
       'Bewertet wird nur die Lage des Weißen. Der Objektball soll leben bleiben, nicht fallen.',

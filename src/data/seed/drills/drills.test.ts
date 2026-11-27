@@ -249,6 +249,27 @@ describe('mitgelieferte Uebungen', () => {
     expect(new Set(a.map((s) => s.attributes.difficulty))).toEqual(new Set([1, 2, 3, 4]))
   })
 
+  it('haelt die Schwierigkeit der Stufen B und C in ihren Baendern', () => {
+    // B ist 4 bis 6, C ist 6 bis 8 (Konzept 3.1). Die Baender ueberlappen
+    // mit Absicht: eine 4 kann in A wie in B stehen, eine 6 in B wie in C.
+    const ausserhalb = (stufe: Level, von: number, bis: number) =>
+      shots
+        .filter((s) => s.level === stufe)
+        .filter((s) => s.attributes.difficulty < von || s.attributes.difficulty > bis)
+        .map((s) => `${s.id}: ${s.attributes.difficulty}`)
+    expect(ausserhalb('B', 4, 6)).toEqual([])
+    // Die eine gewollte Ausnahme: der sehr duenne Schnitt mit 75 Grad hat 9,
+    // gehoert thematisch aber nach C - ein duenner Schnitt ist eine
+    // Spielsituation, keine Spezialtechnik (Konzept 3.1, dort namentlich
+    // genannt). Gemessen ist er in C auch die zweitschwerste Uebung: 12 %
+    // Guete, nur der Kick liegt darunter.
+    expect(ausserhalb('C', 6, 8)).toEqual(['builtin-schnitt-75: 9'])
+    // Und die Stufe B nutzt ihr Band aus: bis 0.19.2 trugen alle sieben
+    // Uebungen die 6, obwohl ihre gemessene Guete von 65 % bis 8 % reicht.
+    const b = shots.filter((s) => s.level === 'B')
+    expect(new Set(b.map((s) => s.attributes.difficulty))).toEqual(new Set([4, 5, 6]))
+  })
+
   it('nennt keine Uebung aus der Zukunft', () => {
     // `since` sagt, ab welcher Einspielung es eine Uebung gibt. Steht dort
     // eine Zahl ueber SEED_VERSION, kommt sie auf keinem Geraet an, auf dem
@@ -285,6 +306,11 @@ describe('mitgelieferte Uebungen', () => {
     // steht seitdem in Tischlaengen statt auf einer Skala ohne Einheit, und
     // bei zehn Uebungen kam der Drall dazu, den ihre Hinweise schon
     // verlangten.
+
+    // Zu 0.19.3 haben sich sechs geaendert, und das war auch gewollt: die
+    // fuenf neuen Schwierigkeiten der Stufe B und die des Safes. Am Aufbau
+    // aendert sich dort nichts - nur die Zahl, mit der der Coach die Uebung
+    // einem Niveau zuordnet und mit der sie das Rating hebt.
     const erwartet: Record<string, string | undefined> = {
       'builtin-stop-kurz': 'a0bd59ab',
       'builtin-nachlauf-mittel': '9e61cdf5',
@@ -306,13 +332,13 @@ describe('mitgelieferte Uebungen', () => {
       'builtin-bande-gerade': '7c62cd84',
       'builtin-luecke-breit': 'f71ab4cd',
       'builtin-wachsende-linie': 'cf4c4a54',
-      'builtin-stop-lang': '234b58b0',
+      'builtin-stop-lang': '0b1e6a69',
       'builtin-schnitt-45': 'd0bf6f9c',
-      'builtin-mitteltasche-schnitt': 'bebfa014',
-      'builtin-bande-lang': 'f73bac5b',
+      'builtin-mitteltasche-schnitt': 'd35dc63a',
+      'builtin-bande-lang': '485c73b8',
       'builtin-kombination-zwei': 'fdc0d3c1',
-      'builtin-bandenball-fest': '9d647e16',
-      'builtin-position-kitchen': '82ec2dd6',
+      'builtin-bandenball-fest': '048d5cac',
+      'builtin-position-kitchen': 'c1860cc1',
       'builtin-rueckzieher-lang': '880edf07',
       'builtin-schnitt-60': '144fc27c',
       'builtin-schnitt-75': '2a73eed1',
@@ -322,7 +348,7 @@ describe('mitgelieferte Uebungen', () => {
       'builtin-seiteneffet-links': '49a276d7',
       'builtin-position-eng': 'eed07402',
       'builtin-cluster-oeffnen': '9becf14e',
-      'builtin-safe-hinter-ball': 'd8cd1068',
+      'builtin-safe-hinter-ball': 'd2c4e0be',
       'builtin-lange-gerade': '51cfaee6',
     }
     expect(Object.fromEntries(shots.map((s) => [s.id, s.seedStamp]))).toEqual(erwartet)
